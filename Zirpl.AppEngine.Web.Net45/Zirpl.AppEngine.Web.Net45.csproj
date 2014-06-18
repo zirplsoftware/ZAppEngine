@@ -39,14 +39,55 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\packages\Autofac.Mvc5.3.3.0\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage">
+      <HintPath>..\packages\WindowsAzure.Storage.4.0.1\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -81,53 +122,65 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Zirpl.AppEngine.Web\Membership\AspNetMembershipService.cs">
-      <Link>Membership\AspNetMembershipService.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Logging\Log4Net\WebRollingFileAppender.cs">
+      <Link>Logging\Log4Net\WebRollingFileAppender.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Membership\CurrentUserKeyProvider.cs">
-      <Link>Membership\CurrentUserKeyProvider.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Elmah\Azure\TableErrorEntity.cs">
+      <Link>Web\Elmah\Azure\TableErrorEntity.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Membership\RegisterUserException.cs">
-      <Link>Membership\RegisterUserException.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Elmah\Azure\TableErrorLog.cs">
+      <Link>Web\Elmah\Azure\TableErrorLog.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\AjaxOnlyAttribute.cs">
-      <Link>Mvc\AjaxOnlyAttribute.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Elmah\Log4Net\ElmahAppender.cs">
+      <Link>Web\Elmah\Log4Net\ElmahAppender.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\Html\HtmlUtilities.cs">
-      <Link>Mvc\Html\HtmlUtilities.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Membership\AspNetMembershipService.cs">
+      <Link>Web\Membership\AspNetMembershipService.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\Html\LinkUtilities.cs">
-      <Link>Mvc\Html\LinkUtilities.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Membership\CurrentUserKeyProvider.cs">
+      <Link>Web\Membership\CurrentUserKeyProvider.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\Ioc\Autofac\IAutofacWebMvcDependencyResolver.cs">
-      <Link>Mvc\Ioc\Autofac\IAutofacWebMvcDependencyResolver.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Membership\RegisterUserException.cs">
+      <Link>Web\Membership\RegisterUserException.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\Ioc\Autofac\IocUtils.cs">
-      <Link>Mvc\Ioc\Autofac\IocUtils.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\AjaxOnlyAttribute.cs">
+      <Link>Web\Mvc\AjaxOnlyAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\Ioc\Autofac\WebDependencyResolver.cs">
-      <Link>Mvc\Ioc\Autofac\WebDependencyResolver.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\Html\HtmlUtilities.cs">
+      <Link>Web\Mvc\Html\HtmlUtilities.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\Ioc\IWebMvcDependencyResolver.cs">
-      <Link>Mvc\Ioc\IWebMvcDependencyResolver.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\Html\LinkUtilities.cs">
+      <Link>Web\Mvc\Html\LinkUtilities.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\LogErrorAttribute.cs">
-      <Link>Mvc\LogErrorAttribute.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\Ioc\Autofac\IAutofacWebMvcDependencyResolver.cs">
+      <Link>Web\Mvc\Ioc\Autofac\IAutofacWebMvcDependencyResolver.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\RequiredIf.cs">
-      <Link>Mvc\RequiredIf.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\Ioc\Autofac\IocUtils.cs">
+      <Link>Web\Mvc\Ioc\Autofac\IocUtils.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\Validation\RequiredTrueValidation.cs">
-      <Link>Mvc\Validation\RequiredTrueValidation.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\Ioc\Autofac\WebDependencyResolver.cs">
+      <Link>Web\Mvc\Ioc\Autofac\WebDependencyResolver.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Mvc\ViewUtilities.cs">
-      <Link>Mvc\ViewUtilities.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\Ioc\IWebMvcDependencyResolver.cs">
+      <Link>Web\Mvc\Ioc\IWebMvcDependencyResolver.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\WebContextDataProvider.cs">
-      <Link>WebContextDataProvider.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\LogErrorAttribute.cs">
+      <Link>Web\Mvc\LogErrorAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\WebUtilities.cs">
-      <Link>WebUtilities.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\RequiredIf.cs">
+      <Link>Web\Mvc\RequiredIf.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\Validation\RequiredTrueValidation.cs">
+      <Link>Web\Mvc\Validation\RequiredTrueValidation.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\Mvc\ViewUtilities.cs">
+      <Link>Web\Mvc\ViewUtilities.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\WebContextDataProvider.cs">
+      <Link>Web\WebContextDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Web\Web\WebUtilities.cs">
+      <Link>Web\WebUtilities.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,10 +196,13 @@
       <Name>Zirpl.AppEngine.Net45</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Readme\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="9b6c4dba-94a5-4871-8fc5-a2bb2e91cc04" />
+      <UserProperties ProjectLinkReference="9b6c4dba-94a5-4871-8fc5-a2bb2e91cc04" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
