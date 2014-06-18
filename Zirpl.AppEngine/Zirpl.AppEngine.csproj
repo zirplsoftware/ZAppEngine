@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DD9BCB12-748C-4395-9A8E-A599A60A0CAA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zirpl.AppEngine</RootNamespace>
+    <AssemblyName>Zirpl.AppEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionExtensions.cs" />
+    <Compile Include="Collections\ICollectionExtensions.cs" />
+    <Compile Include="Collections\IDictionaryExtensions.cs" />
+    <Compile Include="Collections\IListExtensions.cs" />
+    <Compile Include="DataService\ICompleteDataService.cs" />
+    <Compile Include="DataService\IDataService.cs" />
+    <Compile Include="DataService\IDataService_generic.cs" />
+    <Compile Include="DataService\IReadOnlyDataService.cs" />
+    <Compile Include="DataService\ISequenceValueProvider.cs" />
+    <Compile Include="DataService\SqlServer\SqlAzure\SqlDatabaseTransientErrorDetectionRetryPolicyFactory.cs" />
+    <Compile Include="Data\Excel\ExcelFileReader.cs" />
+    <Compile Include="Data\Excel\ExcelFileReaderException.cs" />
+    <Compile Include="Data\IRowMapper.cs" />
+    <Compile Include="Data\RowMapperBase.cs" />
+    <Compile Include="Data\StringReflectedRowMapper.cs" />
+    <Compile Include="DateTimeUtilities.cs" />
+    <Compile Include="EntityToCsv\EntityExporter.cs" />
+    <Compile Include="EntityToCsv\EntityPropertyDefinition.cs" />
+    <Compile Include="EntityToCsv\PropertyType.cs" />
+    <Compile Include="Ioc\Autofac\DependencyResolverBase.cs" />
+    <Compile Include="Ioc\Autofac\IAutofacDependencyResolver.cs" />
+    <Compile Include="Ioc\DependencyResolverBase.cs" />
+    <Compile Include="Ioc\IDependencyResolver.cs" />
+    <Compile Include="IO\PathUtilities.cs" />
+    <Compile Include="IO\StreamExtensions.cs" />
+    <Compile Include="Linq\Dynamic.cs" />
+    <Compile Include="Logging\Common\CommonLogFactory.cs" />
+    <Compile Include="Logging\Common\CommonLogWrapper.cs" />
+    <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Logging\ILogFactory.cs" />
+    <Compile Include="Logging\Log4Net\AsyncAppender.cs" />
+    <Compile Include="Logging\LogManager.cs" />
+    <Compile Include="Logging\NullLog.cs" />
+    <Compile Include="Mapping\AutoMapper\EntityReferenceResolver.cs" />
+    <Compile Include="Mapping\AutoMapper\MappingBootstrapper.cs" />
+    <Compile Include="Mapping\AutoMapper\MappingModuleBase.cs" />
+    <Compile Include="Mapping\AutoMapper\MappingUtils.cs" />
+    <Compile Include="Mapping\AutoMapper\ValueResolverBase.cs" />
+    <Compile Include="Mapping\InvalidMappingDataException.cs" />
+    <Compile Include="Model\AuditableBase.cs" />
+    <Compile Include="Model\BatchProcessing\BatchItemResult.cs" />
+    <Compile Include="Model\BatchProcessing\BatchStatus.cs" />
+    <Compile Include="Model\BatchProcessing\CoreBatchItemErrorCode.cs" />
+    <Compile Include="Model\BatchProcessing\IBatch.cs" />
+    <Compile Include="Model\BatchProcessing\IBatchItem.cs" />
+    <Compile Include="Model\BatchProcessing\IBatchItemError.cs" />
+    <Compile Include="Model\DateOnlyWrapper.cs" />
+    <Compile Include="Model\DefaultSearchCriteria.cs" />
+    <Compile Include="Model\FixupCollection.cs" />
+    <Compile Include="Model\IAuditable.cs" />
+    <Compile Include="Model\IAuthenticatedUser.cs" />
+    <Compile Include="Model\IDeletable.cs" />
+    <Compile Include="Model\IKeyedEntity.cs" />
+    <Compile Include="Model\InvalidRangeException.cs" />
+    <Compile Include="Model\IPersistable.cs" />
+    <Compile Include="Model\IPersistable.gen.cs" />
+    <Compile Include="Model\IRange.cs" />
+    <Compile Include="Model\IRange.gen.cs" />
+    <Compile Include="Model\ISearchCriteria.cs" />
+    <Compile Include="Model\IVersionable.cs" />
+    <Compile Include="Model\Membership\ChangePasswordRequest.cs" />
+    <Compile Include="Model\Membership\ChangeUserNameRequest.cs" />
+    <Compile Include="Model\Membership\IChangePasswordRequest.cs" />
+    <Compile Include="Model\Membership\IChangeUserNameRequest.cs" />
+    <Compile Include="Model\Membership\ILogInRequest.cs" />
+    <Compile Include="Model\Membership\IResetLostPasswordRequest.cs" />
+    <Compile Include="Model\Membership\IUserRegistrationRequest.cs" />
+    <Compile Include="Model\NonPersistedObjectException.cs" />
+    <Compile Include="Model\PersistableBase.cs" />
+    <Compile Include="Model\PersistableExtensions.cs" />
+    <Compile Include="Model\PersistedObjectException.cs" />
+    <Compile Include="Model\Range.cs" />
+    <Compile Include="Model\ReferenceValue.cs" />
+    <Compile Include="Model\SearchResults.cs" />
+    <Compile Include="Model\TimeAgo.cs" />
+    <Compile Include="Model\TimeAgoType.cs" />
+    <Compile Include="Model\TimeOnlyWrapper.cs" />
+    <Compile Include="Model\UserBase.cs" />
+    <Compile Include="NumberExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\AssemblyExtensions.cs" />
+    <Compile Include="Reflection\DynamicAccessor.cs" />
+    <Compile Include="Reflection\DynamicAccessorFactory.cs" />
+    <Compile Include="Reflection\IDynamicAccessor.cs" />
+    <Compile Include="Reflection\ReflectionUtilities.cs" />
+    <Compile Include="Reflection\TypeExtensions.cs" />
+    <Compile Include="RetryPolicyFactory.cs" />
+    <Compile Include="Service\AbstractedSupportsImplService.cs" />
+    <Compile Include="Service\BatchProcessing\ExcelFileBatchImportService.cs" />
+    <Compile Include="Service\BatchProcessing\IBatchImportService.cs" />
+    <Compile Include="Service\BatchProcessing\IBatchImportStrategy.cs" />
+    <Compile Include="Service\BatchProcessing\ImportValidationException.cs" />
+    <Compile Include="Service\BusinessRuleException.cs" />
+    <Compile Include="Service\CachingServiceBase.cs" />
+    <Compile Include="Service\ICompleteService.cs" />
+    <Compile Include="Service\IReadOnlyService.cs" />
+    <Compile Include="Service\IService.cs" />
+    <Compile Include="Service\IServiceFactory.cs" />
+    <Compile Include="Service\IService_generic.cs" />
+    <Compile Include="Service\ISupports.cs" />
+    <Compile Include="Service\ISupportsCreate.cs" />
+    <Compile Include="Service\ISupportsDelete.cs" />
+    <Compile Include="Service\ISupportsDeleteById.cs" />
+    <Compile Include="Service\ISupportsDeleteList.cs" />
+    <Compile Include="Service\ISupportsDeleteListByIds.cs" />
+    <Compile Include="Service\ISupportsDeleteSearch.cs" />
+    <Compile Include="Service\ISupportsExists.cs" />
+    <Compile Include="Service\ISupportsGetAll.cs" />
+    <Compile Include="Service\ISupportsGetById.cs" />
+    <Compile Include="Service\ISupportsGetTotalCount.cs" />
+    <Compile Include="Service\ISupportsInsert.cs" />
+    <Compile Include="Service\ISupportsInsertList.cs" />
+    <Compile Include="Service\ISupportsQueryable.cs" />
+    <Compile Include="Service\ISupportsReload.cs" />
+    <Compile Include="Service\ISupportsRiaServiceActions.cs" />
+    <Compile Include="Service\ISupportsSave.cs" />
+    <Compile Include="Service\ISupportsSaveList.cs" />
+    <Compile Include="Service\ISupportsSearch.cs" />
+    <Compile Include="Service\ISupportsSearchUnique.cs" />
+    <Compile Include="Service\ISupportsUpdate.cs" />
+    <Compile Include="Service\ISupportsUpdateList.cs" />
+    <Compile Include="Service\ITransactionalUnitOfWorkFactory.cs" />
+    <Compile Include="Service\IUnitOfWork.cs" />
+    <Compile Include="Service\IUnitOfWorkFactory.cs" />
+    <Compile Include="Service\Membership\ChangePasswordException.cs" />
+    <Compile Include="Service\Membership\ChangeUserNameError.cs" />
+    <Compile Include="Service\Membership\ChangeUserNameException.cs" />
+    <Compile Include="Service\Membership\IMembershipService.cs" />
+    <Compile Include="Service\ReadOnlyService.cs" />
+    <Compile Include="Service\ServiceAction.cs" />
+    <Compile Include="Service\TransactionalAbstractedSupportsImplService.cs" />
+    <Compile Include="Service\TransactionalUnitOfWorkFactoryBase.cs" />
+    <Compile Include="Service\UnitOfWorkFactoryBase.cs" />
+    <Compile Include="Session\ICurrentUserKeyProvider.cs" />
+    <Compile Include="Stats\EloRating\EloMatch.cs" />
+    <Compile Include="Stats\EloRating\EloMatchResult.cs" />
+    <Compile Include="Stats\EloRating\EloRatingEngine.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Text\StringBuilderExtensions.cs" />
+    <Compile Include="Text\TextCrawling\TextCrawler.cs" />
+    <Compile Include="Text\TextCrawling\TextPosition.cs" />
+    <Compile Include="Text\TextCrawling\TextPositionType.cs" />
+    <Compile Include="UnexpectedCaseException.cs" />
+    <Compile Include="Validation\EntityValidationError.cs" />
+    <Compile Include="Validation\IValidationHelper.cs" />
+    <Compile Include="Validation\ValidationError.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
+    <Compile Include="Validation\ValidationUtils.cs" />
+    <Compile Include="Xml\Serialization\SerializationUtilities.cs" />
+    <Compile Include="_elsewhere\TextExtensions.cs" />
+    <Compile Include="ActionRunner.cs" />
+    <Compile Include="_old\ChangedValueDelegate.cs" />
+    <Compile Include="_old\ChangedValueEventArgs.cs" />
+    <Compile Include="_old\Singleton.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Linq\Dynamic Expressions.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Transactions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

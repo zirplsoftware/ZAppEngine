@@ -3,9 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Core.35Client", "Zirpl.AppEngine.Core.35Client\Zirpl.AppEngine.Core.35Client.csproj", "{DD9BCB12-748C-4395-9A8E-A599A60A0CAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine", "Zirpl.AppEngine\Zirpl.AppEngine.csproj", "{DD9BCB12-748C-4395-9A8E-A599A60A0CAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Core.35", "Zirpl.AppEngine.Core.35\Zirpl.AppEngine.Core.35.csproj", "{BADFDA5B-3F90-4F15-8434-61B7F44137C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Net35", "Zirpl.AppEngine.Net35\Zirpl.AppEngine.Net35.csproj", "{BADFDA5B-3F90-4F15-8434-61B7F44137C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Net40", "Zirpl.AppEngine.Net40\Zirpl.AppEngine.Net40.csproj", "{630E8AEF-A35B-482D-B2FB-D181F1BED6FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Net45", "Zirpl.AppEngine.Net45\Zirpl.AppEngine.Net45.csproj", "{DEAFE47A-1239-4766-9A9E-EF7D318BE0F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Net35Client", "Zirpl.AppEngine.Net35Client\Zirpl.AppEngine.Net35Client.csproj", "{64637985-17AD-4913-AC41-930569FE2FAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Net40Client", "Zirpl.AppEngine.Net40Client\Zirpl.AppEngine.Net40Client.csproj", "{A05BA02D-8472-4340-B5A8-A7A19C0DD747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Web.Net45", "Zirpl.AppEngine.Web.Net45\Zirpl.AppEngine.Web.Net45.csproj", "{B758DAF8-A998-4482-B522-F48B4E83879E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Web", "Zirpl.AppEngine.Web\Zirpl.AppEngine.Web.csproj", "{9B6C4DBA-94A5-4871-8FC5-A2BB2E91CC04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +33,35 @@ Global
 		{BADFDA5B-3F90-4F15-8434-61B7F44137C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BADFDA5B-3F90-4F15-8434-61B7F44137C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BADFDA5B-3F90-4F15-8434-61B7F44137C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{630E8AEF-A35B-482D-B2FB-D181F1BED6FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630E8AEF-A35B-482D-B2FB-D181F1BED6FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630E8AEF-A35B-482D-B2FB-D181F1BED6FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630E8AEF-A35B-482D-B2FB-D181F1BED6FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEAFE47A-1239-4766-9A9E-EF7D318BE0F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEAFE47A-1239-4766-9A9E-EF7D318BE0F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEAFE47A-1239-4766-9A9E-EF7D318BE0F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEAFE47A-1239-4766-9A9E-EF7D318BE0F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64637985-17AD-4913-AC41-930569FE2FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64637985-17AD-4913-AC41-930569FE2FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64637985-17AD-4913-AC41-930569FE2FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64637985-17AD-4913-AC41-930569FE2FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A05BA02D-8472-4340-B5A8-A7A19C0DD747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05BA02D-8472-4340-B5A8-A7A19C0DD747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05BA02D-8472-4340-B5A8-A7A19C0DD747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05BA02D-8472-4340-B5A8-A7A19C0DD747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B758DAF8-A998-4482-B522-F48B4E83879E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B758DAF8-A998-4482-B522-F48B4E83879E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B758DAF8-A998-4482-B522-F48B4E83879E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B758DAF8-A998-4482-B522-F48B4E83879E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B6C4DBA-94A5-4871-8FC5-A2BB2E91CC04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B6C4DBA-94A5-4871-8FC5-A2BB2E91CC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B6C4DBA-94A5-4871-8FC5-A2BB2E91CC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B6C4DBA-94A5-4871-8FC5-A2BB2E91CC04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
 	EndGlobalSection
 EndGlobal
