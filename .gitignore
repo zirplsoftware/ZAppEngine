@@ -1,5 +1,9 @@
 /Zirpl.AppEngine/obj
 /Zirpl.AppEngine/bin
+/Zirpl.AppEngine.EntityFramework/obj
+/Zirpl.AppEngine.EntityFramework/bin
+/Zirpl.AppEngine.EntityFramework.Net45/obj
+/Zirpl.AppEngine.EntityFramework.Net45/bin
 /Zirpl.AppEngine.Net35/obj
 /Zirpl.AppEngine.Net35/bin
 /Zirpl.AppEngine.Net35Client/obj

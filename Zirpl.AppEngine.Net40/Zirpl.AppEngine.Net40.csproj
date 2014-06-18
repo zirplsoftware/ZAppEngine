@@ -488,6 +488,9 @@
     <Compile Include="..\Zirpl.AppEngine\Text\TextCrawling\TextPositionType.cs">
       <Link>Text\TextCrawling\TextPositionType.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Text\TextUtilities.cs">
+      <Link>Text\TextUtilities.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\UnexpectedCaseException.cs">
       <Link>UnexpectedCaseException.cs</Link>
     </Compile>
@@ -509,9 +512,6 @@
     <Compile Include="..\Zirpl.AppEngine\Xml\Serialization\SerializationUtilities.cs">
       <Link>Xml\Serialization\SerializationUtilities.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\_elsewhere\TextExtensions.cs">
-      <Link>_elsewhere\TextExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\_old\ChangedValueDelegate.cs">
       <Link>_old\ChangedValueDelegate.cs</Link>
     </Compile>
@@ -530,6 +530,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Transactions\" />
+    <Folder Include="_elsewhere\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -537,7 +538,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

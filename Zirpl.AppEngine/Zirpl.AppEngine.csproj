@@ -225,7 +225,7 @@
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\ValidationUtils.cs" />
     <Compile Include="Xml\Serialization\SerializationUtilities.cs" />
-    <Compile Include="_elsewhere\TextExtensions.cs" />
+    <Compile Include="Text\TextUtilities.cs" />
     <Compile Include="ActionRunner.cs" />
     <Compile Include="_old\ChangedValueDelegate.cs" />
     <Compile Include="_old\ChangedValueEventArgs.cs" />
@@ -236,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Transactions\" />
+    <Folder Include="_elsewhere\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

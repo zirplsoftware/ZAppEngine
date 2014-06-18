@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Zirpl.AppEngine.Service;
 
 namespace Zirpl.AppEngine.Model
@@ -420,6 +421,49 @@ namespace Zirpl.AppEngine.Model
             {
                 return idInt.ToString();
             }
+        }
+
+
+        public static List<Int16> ParseToInt16List(this String ids, char tokenizer)
+        {
+            List<Int16> idList = new List<Int16>();
+            if (!String.IsNullOrEmpty(ids))
+            {
+                String[] tokens = ids.Split(tokenizer);
+                foreach (String token in tokens)
+                {
+                    idList.Add(Int16.Parse(token));
+                }
+            }
+            return idList;
+        }
+
+        public static List<int> ParseToInt32List(String ids, char tokenizer)
+        {
+            List<int> idList = new List<int>();
+            if (!String.IsNullOrEmpty(ids))
+            {
+                String[] tokens = ids.Split(tokenizer);
+                foreach (String token in tokens)
+                {
+                    idList.Add(Int32.Parse(token));
+                }
+            }
+            return idList;
+        }
+
+        public static List<Int64> ParseToInt64List(String ids, char tokenizer)
+        {
+            List<Int64> idList = new List<Int64>();
+            if (!String.IsNullOrEmpty(ids))
+            {
+                String[] tokens = ids.Split(tokenizer);
+                foreach (String token in tokens)
+                {
+                    idList.Add(Int64.Parse(token));
+                }
+            }
+            return idList;
         }
     }
 }

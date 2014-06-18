@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B23590EC-7C8D-4BD4-BFEE-77C0F0D821A7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zirpl.AppEngine</RootNamespace>
+    <AssemblyName>Zirpl.AppEngine.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.3.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataService\EntityFramework\DbContextBase.cs" />
+    <Compile Include="DataService\EntityFramework\DbContextCudHandler.cs" />
+    <Compile Include="DataService\EntityFramework\DbContextDataService.cs" />
+    <Compile Include="DataService\EntityFramework\EntityMappingBase.cs" />
+    <Compile Include="DataService\EntityFramework\IDbContextCudHandler.cs" />
+    <Compile Include="DataService\EntityFramework\IEntityMapping.cs" />
+    <Compile Include="DataService\EntityFramework\ISearchCriteriaTranslator.cs" />
+    <Compile Include="DataService\EntityFramework\Mapping\MappingUtils.cs" />
+    <Compile Include="DataService\EntityFramework\Migrations\AspNetMembershipMigratorBase.cs" />
+    <Compile Include="DataService\EntityFramework\Migrations\DbMigrationProvider.cs" />
+    <Compile Include="DataService\EntityFramework\Migrations\DbMigrationStrategyBase.cs" />
+    <Compile Include="DataService\EntityFramework\Migrations\IAspNetMembershipMigrator.cs" />
+    <Compile Include="DataService\EntityFramework\Migrations\IDbMigrationStrategy.cs" />
+    <Compile Include="DataService\EntityFramework\Migrations\MigrationUtils.cs" />
+    <Compile Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\SqlAzureAspNetMembershipMigrator.cs" />
+    <Compile Include="DataService\EntityFramework\Migrations\SqlServer\SqlServerAspNetMembershipMigrator.cs" />
+    <Compile Include="DataService\EntityFramework\ReadOnlyDbContextDataServiceBase.cs" />
+    <Compile Include="DataService\EntityFramework\SearchExtensions.cs" />
+    <Compile Include="DataService\EntityFramework\SequenceValueProviderBase.cs" />
+    <Compile Include="DataService\EntityFramework\TableBasedSequenceValueProviderBase.cs" />
+    <Compile Include="Model\EntityFramework\LinqExpressionSearchCriteria.cs" />
+    <Compile Include="Model\EntityFramework\PersistableEntityBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\EntityFramework\DbContextServiceBase.cs" />
+    <Compile Include="Service\EntityFramework\DbContextUnitOfWork.cs" />
+    <Compile Include="Service\EntityFramework\DbContextUnitOfWorkFactory.cs" />
+    <Compile Include="Service\EntityFramework\ReadOnlyDbContextServiceBase.cs" />
+    <Compile Include="Validation\EntityFramework\FluentValidationHelper.cs" />
+    <Compile Include="Validation\EntityFramework\ValidatorFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Scripts\CreateAspNetMembershipHelperObjects.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Scripts\CreateTableBasedSequenceObjects1.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Scripts\CreateTableBasedSequenceObjects2.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Scripts\CreateTableBasedSequenceObjects3.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Scripts\DropAspNetMembershipHelperObjects.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Scripts\DropTableBasedSequenceObjects.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Scripts\FinalizeRunAspNetRegSqlUnregister.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Scripts\PrepareRunAspNetRegSqlUnregister.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Scripts\FinalizeRunAspNetRegSqlUnregister.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Scripts\PrepareRunAspNetRegSqlUnregister.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\aspnet_regsqlazure.exe" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallCommon.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallMembership.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallPersistSqlState.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallPersonalization.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallProfile.SQL" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallRoles.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallSqlState.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallSqlStateTemplate.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\InstallWebEventSqlProvider.sql" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\Tools\aspnet_regsql.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
+      <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
+      <Name>Zirpl.AppEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
