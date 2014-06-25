@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace Zirpl.AppEngine.Data
+namespace Zirpl.AppEngine.DataService
 {
     /// <summary>
     /// Base class for a RowMapper

@@ -19,3 +19,7 @@
 /Zirpl.AppEngine.Web.Net45/obj
 /Zirpl.AppEngine.Web.Net45/bin
 /packages
+/Zirpl.AppEngine.Net35/Zirpl.AppEngine.Net35.csproj.user
+/Zirpl.AppEngine.Silverlight/Bin
+/Zirpl.AppEngine.Silverlight/obj
+/Zirpl.AppEngine.v12.suo

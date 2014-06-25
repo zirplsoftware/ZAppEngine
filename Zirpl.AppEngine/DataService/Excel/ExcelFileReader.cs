@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using Zirpl.AppEngine.Mapping;
 
-namespace Zirpl.AppEngine.Data.Excel
+namespace Zirpl.AppEngine.DataService.Excel
 {
     /// <summary>
     /// This class can be used to import data from an Excel file (either .xls or .xlsx)

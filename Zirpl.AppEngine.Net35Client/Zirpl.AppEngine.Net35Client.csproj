@@ -57,6 +57,24 @@
     <Compile Include="..\Zirpl.AppEngine\Collections\IListExtensions.cs">
       <Link>Collections\IListExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Csv\EntityExporter.cs">
+      <Link>DataService\Csv\EntityExporter.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Csv\EntityPropertyDefinition.cs">
+      <Link>DataService\Csv\EntityPropertyDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Csv\PropertyType.cs">
+      <Link>DataService\Csv\PropertyType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Excel\ExcelExporter.cs">
+      <Link>DataService\Excel\ExcelExporter.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Excel\ExcelFileReader.cs">
+      <Link>DataService\Excel\ExcelFileReader.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Excel\ExcelFileReaderException.cs">
+      <Link>DataService\Excel\ExcelFileReaderException.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\DataService\ICompleteDataService.cs">
       <Link>DataService\ICompleteDataService.cs</Link>
     </Compile>
@@ -69,38 +87,23 @@
     <Compile Include="..\Zirpl.AppEngine\DataService\IReadOnlyDataService.cs">
       <Link>DataService\IReadOnlyDataService.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\IRowMapper.cs">
+      <Link>DataService\IRowMapper.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\DataService\ISequenceValueProvider.cs">
       <Link>DataService\ISequenceValueProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\RowMapperBase.cs">
+      <Link>DataService\RowMapperBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\DataService\SqlServer\SqlAzure\SqlDatabaseTransientErrorDetectionRetryPolicyFactory.cs">
       <Link>DataService\SqlServer\SqlAzure\SqlDatabaseTransientErrorDetectionRetryPolicyFactory.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Data\Excel\ExcelFileReader.cs">
-      <Link>Data\Excel\ExcelFileReader.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Data\Excel\ExcelFileReaderException.cs">
-      <Link>Data\Excel\ExcelFileReaderException.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Data\IRowMapper.cs">
-      <Link>Data\IRowMapper.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Data\RowMapperBase.cs">
-      <Link>Data\RowMapperBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Data\StringReflectedRowMapper.cs">
-      <Link>Data\StringReflectedRowMapper.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\DataService\StringReflectedRowMapper.cs">
+      <Link>DataService\StringReflectedRowMapper.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\DateTimeUtilities.cs">
       <Link>DateTimeUtilities.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\EntityToCsv\EntityExporter.cs">
-      <Link>EntityToCsv\EntityExporter.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\EntityToCsv\EntityPropertyDefinition.cs">
-      <Link>EntityToCsv\EntityPropertyDefinition.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\EntityToCsv\PropertyType.cs">
-      <Link>EntityToCsv\PropertyType.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Ioc\Autofac\DependencyResolverBase.cs">
       <Link>Ioc\Autofac\DependencyResolverBase.cs</Link>
@@ -509,13 +512,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Transactions\" />
     <Folder Include="_elsewhere\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

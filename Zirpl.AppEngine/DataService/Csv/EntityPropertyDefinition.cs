@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.EntityToCsv
+namespace Zirpl.AppEngine.DataService.Csv
 {
     public class EntityPropertyDefinition<TObject>
     {

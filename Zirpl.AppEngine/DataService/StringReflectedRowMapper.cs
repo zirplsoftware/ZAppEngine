@@ -4,7 +4,7 @@ using System.Data;
 using System.Reflection;
 using Zirpl.AppEngine.Mapping;
 
-namespace Zirpl.AppEngine.Data
+namespace Zirpl.AppEngine.DataService
 {
     /// <summary>
     /// This row mapper takes a Dictionary that maps columns from a datareader

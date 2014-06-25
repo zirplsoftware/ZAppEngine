@@ -1,5 +1,5 @@
 ﻿
-namespace Zirpl.AppEngine.EntityToCsv
+namespace Zirpl.AppEngine.DataService.Csv
 {
     public enum PropertyType
     {

@@ -80,21 +80,22 @@
     <Compile Include="Collections\ICollectionExtensions.cs" />
     <Compile Include="Collections\IDictionaryExtensions.cs" />
     <Compile Include="Collections\IListExtensions.cs" />
+    <Compile Include="DataService\Excel\ExcelExporter.cs" />
     <Compile Include="DataService\ICompleteDataService.cs" />
     <Compile Include="DataService\IDataService.cs" />
     <Compile Include="DataService\IDataService_generic.cs" />
     <Compile Include="DataService\IReadOnlyDataService.cs" />
     <Compile Include="DataService\ISequenceValueProvider.cs" />
     <Compile Include="DataService\SqlServer\SqlAzure\SqlDatabaseTransientErrorDetectionRetryPolicyFactory.cs" />
-    <Compile Include="Data\Excel\ExcelFileReader.cs" />
-    <Compile Include="Data\Excel\ExcelFileReaderException.cs" />
-    <Compile Include="Data\IRowMapper.cs" />
-    <Compile Include="Data\RowMapperBase.cs" />
-    <Compile Include="Data\StringReflectedRowMapper.cs" />
+    <Compile Include="DataService\Excel\ExcelFileReader.cs" />
+    <Compile Include="DataService\Excel\ExcelFileReaderException.cs" />
+    <Compile Include="DataService\IRowMapper.cs" />
+    <Compile Include="DataService\RowMapperBase.cs" />
+    <Compile Include="DataService\StringReflectedRowMapper.cs" />
     <Compile Include="DateTimeUtilities.cs" />
-    <Compile Include="EntityToCsv\EntityExporter.cs" />
-    <Compile Include="EntityToCsv\EntityPropertyDefinition.cs" />
-    <Compile Include="EntityToCsv\PropertyType.cs" />
+    <Compile Include="DataService\Csv\EntityExporter.cs" />
+    <Compile Include="DataService\Csv\EntityPropertyDefinition.cs" />
+    <Compile Include="DataService\Csv\PropertyType.cs" />
     <Compile Include="Ioc\Autofac\DependencyResolverBase.cs" />
     <Compile Include="Ioc\Autofac\IAutofacDependencyResolver.cs" />
     <Compile Include="Ioc\DependencyResolverBase.cs" />
@@ -235,7 +236,6 @@
     <Content Include="Linq\Dynamic Expressions.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Transactions\" />
     <Folder Include="_elsewhere\" />
   </ItemGroup>
   <ItemGroup>

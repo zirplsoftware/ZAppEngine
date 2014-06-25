@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Zirpl.AppEngine.Data.Excel
+namespace Zirpl.AppEngine.DataService.Excel
 {
     /// <summary>
     /// Denotes an exception that occurs within the ExcelFileReader
