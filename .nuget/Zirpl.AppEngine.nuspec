@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Zirpl.AppEngine</id>
+    <version>$version$</version>
+    <title>ZAppEngine</title>
+    <authors>Zirpl Software</authors>
+    <owners>Zirpl Software</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides functionality to quickly create and deploy data-driven applications.</description>
+    <language>en-US</language>
+    <copyright>Copyright 2014</copyright>
+    <tags></tags>
+    <projectUrl>https://github.com/nlafratta/ZAppEngine</projectUrl>
+    <licenseUrl>https://github.com/nlafratta/ZAppEngine/blob/master/LICENSE</licenseUrl>
+    <releaseNotes>
+      <![CDATA[
+            For full release notes see https://github.com/nlafratta/ZAppEngine/blob/master/releasenotes.md
+            ]]>
+    </releaseNotes>
+    <dependencies>
+      <group targetFramework="net451">
+        <dependency id="Autofac" version="3.5.0"  />
+        <dependency id="AutoMapper" version="3.2.1"  />
+        <dependency id="Common.Logging" version="2.0.0"  />
+        <dependency id="Common.Logging.Log4Net" version="2.0.1"  />
+        <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
+        <dependency id="EnterpriseLibrary.TransientFaultHandling.Data" version="6.0.1304.1"  />
+        <dependency id="log4net" version="1.2.10"  />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Autofac" version="3.5.0"  />
+        <dependency id="AutoMapper" version="3.2.1"  />
+        <dependency id="Common.Logging" version="2.0.0"  />
+        <dependency id="Common.Logging.Log4Net" version="2.0.1"  />
+        <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
+        <dependency id="EnterpriseLibrary.TransientFaultHandling.Data" version="6.0.1304.1"  />
+        <dependency id="log4net" version="1.2.10"  />
+      </group>
+      <group targetFramework="net40">
+        <dependency id="Autofac" version="3.5.0"  />
+        <dependency id="AutoMapper" version="3.2.1"  />
+        <dependency id="Common.Logging" version="2.0.0"  />
+        <dependency id="Common.Logging.Log4Net" version="2.0.1"  />
+        <dependency id="log4net" version="1.2.10"  />
+      </group>
+      <group targetFramework="net40-Client">
+        <dependency id="Autofac" version="3.5.0"  />
+        <dependency id="AutoMapper" version="3.2.1"  />
+      </group>
+      <group targetFramework="net35">
+        <dependency id="Common.Logging" version="2.0.0"  />
+        <dependency id="Common.Logging.Log4Net" version="2.0.1"  />
+        <dependency id="log4net" version="1.2.10"  />
+      </group>
+      <group targetFramework="net35-Client">
+      </group>
+      <group targetFramework="sl50">
+        <dependency id="Autofac" version="3.5.0"  />
+        <dependency id="AutoMapper" version="3.2.1"  />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\Zirpl.AppEngine\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net451\" />
+    <file src="..\Zirpl.AppEngine.Net45\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net45\" />
+    <file src="..\Zirpl.AppEngine.Net40\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net40\" />
+    <file src="..\Zirpl.AppEngine.Net40Client\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net40-client\" />
+    <file src="..\Zirpl.AppEngine.Net35\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net35\" />
+    <file src="..\Zirpl.AppEngine.Net35Client\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net35-client\" />
+    <file src="..\Zirpl.AppEngine.Silverlight\bin\$configuration$\Zirpl.AppEngine.Silverlight.dll" target="lib\sl50\" />
+  </files>
+</package>

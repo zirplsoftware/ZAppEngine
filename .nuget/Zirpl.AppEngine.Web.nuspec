@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Zirpl.AppEngine.Web</id>
+    <version>$version$</version>
+    <title>ZAppEngine- Web</title>
+    <authors>Zirpl Software</authors>
+    <owners>Zirpl Software</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extends ZAppEngine providing functionality to quickly create and deployweb-based  data-driven applications.</description>
+    <language>en-US</language>
+    <copyright>Copyright 2014</copyright>
+    <tags></tags>
+    <projectUrl>https://github.com/nlafratta/ZAppEngine</projectUrl>
+    <licenseUrl>https://github.com/nlafratta/ZAppEngine/blob/master/LICENSE</licenseUrl>
+    <releaseNotes>
+      <![CDATA[
+            For full release notes see https://github.com/nlafratta/ZAppEngine/blob/master/releasenotes.md
+            ]]>
+    </releaseNotes>
+    <dependencies>
+      <group targetFramework="net451">
+        <dependency id="Autofac" version="3.5.0" />
+        <dependency id="Autofac.Mvc5" version="3.3.0" />
+        <dependency id="Common.Logging" version="2.0.0" />
+        <dependency id="Common.Logging.Log4Net" version="2.0.1" />
+        <dependency id="elmah" version="1.2.2" />
+        <dependency id="elmah.corelibrary" version="1.2.2" />
+        <dependency id="log4net" version="1.2.10" />
+        <dependency id="Microsoft.AspNet.Mvc" version="5.1.0" />
+        <dependency id="Microsoft.AspNet.Razor" version="3.1.0" />
+        <dependency id="Microsoft.AspNet.WebPages" version="3.1.0" />
+        <dependency id="Microsoft.Data.Edm" version="5.6.0" />
+        <dependency id="Microsoft.Data.OData" version="5.6.0" />
+        <dependency id="Microsoft.Data.Services.Client" version="5.6.0" />
+        <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+        <dependency id="Microsoft.WindowsAzure.ConfigurationManager" version="1.8.0.0" />
+        <dependency id="Newtonsoft.Json" version="5.0.6" />
+        <dependency id="System.Spatial" version="5.6.0" />
+        <dependency id="WindowsAzure.Storage" version="4.0.1" />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Autofac" version="3.5.0" />
+        <dependency id="Autofac.Mvc5" version="3.3.0" />
+        <dependency id="Common.Logging" version="2.0.0" />
+        <dependency id="Common.Logging.Log4Net" version="2.0.1" />
+        <dependency id="elmah" version="1.2.2" />
+        <dependency id="elmah.corelibrary" version="1.2.2" />
+        <dependency id="log4net" version="1.2.10" />
+        <dependency id="Microsoft.AspNet.Mvc" version="5.1.0" />
+        <dependency id="Microsoft.AspNet.Razor" version="3.1.0" />
+        <dependency id="Microsoft.AspNet.WebPages" version="3.1.0" />
+        <dependency id="Microsoft.Data.Edm" version="5.6.0" />
+        <dependency id="Microsoft.Data.OData" version="5.6.0" />
+        <dependency id="Microsoft.Data.Services.Client" version="5.6.0" />
+        <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+        <dependency id="Microsoft.WindowsAzure.ConfigurationManager" version="1.8.0.0" />
+        <dependency id="Newtonsoft.Json" version="5.0.6" />
+        <dependency id="System.Spatial" version="5.6.0" />
+        <dependency id="WindowsAzure.Storage" version="4.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\Zirpl.AppEngine.Web\bin\$configuration$\Zirpl.AppEngine.Web.dll" target="lib\net451\" />
+    <file src="..\Zirpl.AppEngine.Web.Net45\bin\$configuration$\Zirpl.AppEngine.Web.dll" target="lib\net45\" />
+  </files>
+</package>
