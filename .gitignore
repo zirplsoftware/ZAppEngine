@@ -24,3 +24,9 @@
 /Zirpl.AppEngine.Silverlight/obj
 /Zirpl.AppEngine.v12.suo
 /Zirpl.AppEngine.Silverlight/Zirpl.AppEngine.Silverlight.csproj.user
+/Zirpl.AppEngine.Testing/bin
+/Zirpl.AppEngine.Testing/obj
+/Zirpl.AppEngine.Tests/obj
+/Zirpl.AppEngine.Tests/bin
+/Zirpl.AppEngine.EntityFramework.Tests/obj
+/Zirpl.AppEngine.EntityFramework.Tests/bin

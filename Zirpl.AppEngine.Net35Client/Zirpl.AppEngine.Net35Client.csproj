@@ -511,13 +511,11 @@
       <Link>Linq\Dynamic Expressions.html</Link>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_elsewhere\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
+      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
