@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Zirpl.AppEngine
 {
     /// <summary>
     /// Denotes an exception due to an unexpected data case
     /// </summary>
+#if !SILVERLIGHT
+    [Serializable]
+#endif
     public class UnexpectedCaseException : System.Exception
     {
         public UnexpectedCaseException()
@@ -40,6 +44,13 @@ namespace Zirpl.AppEngine
         {
             this.CaseData = caseData;
         }
+
+#if !SILVERLIGHT
+        protected UnexpectedCaseException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+#endif
 
         public object CaseData { get; set; }
     }

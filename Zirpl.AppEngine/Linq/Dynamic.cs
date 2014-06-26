@@ -1,4 +1,5 @@
-﻿//Copyright (C) Microsoft Corporation.  All rights reserved.
+﻿#if !SILVERLIGHT
+//Copyright (C) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -2025,3 +2026,4 @@ namespace Zirpl.AppEngine.Linq
         public const string IdentifierExpected = "Identifier expected";
     }
 }
+#endif

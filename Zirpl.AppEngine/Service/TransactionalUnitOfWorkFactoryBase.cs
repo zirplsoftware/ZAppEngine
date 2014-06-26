@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿#if !SILVERLIGHT
+using System.Transactions;
 
 namespace Zirpl.AppEngine.Service
 {
@@ -31,3 +32,4 @@ namespace Zirpl.AppEngine.Service
         }
     }
 }
+#endif

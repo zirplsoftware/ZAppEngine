@@ -9,7 +9,7 @@ namespace Zirpl.AppEngine.Logging
     {
         private static ILogFactory _logFactory;
 
-#if !NET35CLIENT && !NET40CLIENT
+#if !NET35CLIENT && !NET40CLIENT && !SILVERLIGHT
         /// <summary>
         /// Initializes the LogManager
         /// </summary>

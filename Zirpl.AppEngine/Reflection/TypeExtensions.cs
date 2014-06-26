@@ -35,10 +35,13 @@ namespace Zirpl.AppEngine.Reflection
             return propertyInfo;
         }
 
+
+#if !SILVERLIGHT
         public static IDynamicAccessor GetDynamicAccessor(this Type type)
         {
             return DynamicAccessorFactory.GetDynamicAccessor(type);
         }
+#endif
 
         public static bool HasDefaultConstructor(this Type type)
         {
@@ -51,6 +54,7 @@ namespace Zirpl.AppEngine.Reflection
 
             return hasDefaultConstructor;
         }
+#if !SILVERLIGHT
         public static PropertyDescriptor GetPropertyDescriptorFromPath(this Type rootType, string propertyPath)
         {
             string propertyName;
@@ -76,5 +80,6 @@ namespace Zirpl.AppEngine.Reflection
             else
                 return propertyDescriptor;
         }
+#endif
     }
 }

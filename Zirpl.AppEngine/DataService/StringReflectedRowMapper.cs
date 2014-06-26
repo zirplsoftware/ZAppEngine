@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !SILVERLIGHT
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
@@ -46,3 +47,4 @@ namespace Zirpl.AppEngine.DataService
         public IDictionary<string, string> ColumnPropertyMap { get; set; }
     }
 }
+#endif

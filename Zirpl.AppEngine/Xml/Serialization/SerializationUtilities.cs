@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 
 namespace Zirpl.AppEngine.Xml.Serialization
 {
+#if !SILVERLIGHT
     public static class SerializationUtilities
     {
         public static void SerializeToFile<T>(this T entity, String filePath, String rootNodeName = null)
@@ -106,4 +107,5 @@ namespace Zirpl.AppEngine.Xml.Serialization
             return entity;
         }
     }
+#endif
 }

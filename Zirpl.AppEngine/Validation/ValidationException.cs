@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Zirpl.AppEngine.Validation
 {
+#if !SILVERLIGHT
+    [Serializable]
+#endif
     public class ValidationException : Exception
     {
         private ICollection<ValidationError> validationErrors;
@@ -48,10 +51,12 @@ namespace Zirpl.AppEngine.Validation
             this.ValidationErrors = validationErrors;
         }
 
+#if !SILVERLIGHT
         protected ValidationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
+#endif
 
         public override string Message
         {

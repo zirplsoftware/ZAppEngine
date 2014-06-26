@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace Zirpl.AppEngine.Service
 {
+#if !SILVERLIGHT
+    [Serializable]
+#endif
     public class BusinessRuleException<TEnum> : Exception where TEnum : struct, IComparable, IConvertible, IFormattable
     {
         public TEnum BusinessRule { get; set; }
@@ -46,11 +49,13 @@ namespace Zirpl.AppEngine.Service
             this.BusinessRule = businessRule;
         }
 
+#if !SILVERLIGHT
         protected BusinessRuleException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             this.AssertTEnumIsEnum();
         }
+#endif
 
         protected void AssertTEnumIsEnum()
         {

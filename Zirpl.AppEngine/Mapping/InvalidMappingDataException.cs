@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Zirpl.AppEngine.Mapping
 {    
     /// <summary>
     /// Denotes an exception due to data being mapped incorrectly
     /// </summary>
+#if !SILVERLIGHT
     [Serializable]
+#endif
     public class InvalidMappingDataException : System.Exception
     {
         public InvalidMappingDataException()
@@ -22,6 +25,13 @@ namespace Zirpl.AppEngine.Mapping
         {
 
         }
+
+#if !SILVERLIGHT
+        public InvalidMappingDataException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+#endif
 
         public string MappingField { get; set; }
     }

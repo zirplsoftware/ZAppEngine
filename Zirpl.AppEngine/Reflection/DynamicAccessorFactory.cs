@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !SILVERLIGHT
+using System;
 using System.Collections.Generic;
 
 namespace Zirpl.AppEngine.Reflection
@@ -31,3 +32,4 @@ namespace Zirpl.AppEngine.Reflection
         }
     }
 }
+#endif

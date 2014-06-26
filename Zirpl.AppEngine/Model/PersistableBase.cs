@@ -8,7 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Zirpl.AppEngine.Model
 {
+#if !SILVERLIGHT
     [Serializable]
+#endif
     public abstract class PersistableBase<TId> : IPersistable<TId>
         where TId : IEquatable<TId>
     {
@@ -32,7 +34,7 @@ namespace Zirpl.AppEngine.Model
         }
 
         //[ScaffoldColumn(false)]
-#if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT
+#if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT && !SILVERLIGHT
         [NotMapped]
 #endif
         public virtual bool IsPersisted

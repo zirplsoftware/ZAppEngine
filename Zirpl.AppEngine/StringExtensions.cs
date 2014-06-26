@@ -77,7 +77,7 @@ namespace Zirpl.AppEngine
             //    s.Append(b.ToString("x2").ToLower());
             //}
 
-            return encoding.GetString(bs);
+            return encoding.GetString(bs, 0, text.Length);
         }
     }
 }

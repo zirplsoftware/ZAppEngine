@@ -29,7 +29,12 @@ namespace Zirpl.AppEngine.Ioc.Autofac
 
         protected virtual Assembly[] GetModuleAssemblies()
         {
+            
+#if !SILVERLIGHT
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(o => o.GetName().Name.StartsWith("Zirpl")).ToArray();
+#else
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(o => o.FullName.StartsWith("Zirpl")).ToArray();
+#endif
             return assemblies;
         }
     }

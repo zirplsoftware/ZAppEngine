@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !SILVERLIGHT
+using System;
 using System.Data;
 
 namespace Zirpl.AppEngine.DataService
@@ -36,3 +37,4 @@ namespace Zirpl.AppEngine.DataService
         #endregion
     }
 }
+#endif

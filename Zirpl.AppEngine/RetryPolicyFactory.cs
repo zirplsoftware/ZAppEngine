@@ -1,4 +1,4 @@
-﻿#if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT
+﻿#if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT && !SILVERLIGHT
 using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
 
 namespace Zirpl.AppEngine

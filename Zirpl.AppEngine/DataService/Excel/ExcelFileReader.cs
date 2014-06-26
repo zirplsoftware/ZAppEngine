@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !SILVERLIGHT
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
@@ -287,3 +288,4 @@ namespace Zirpl.AppEngine.DataService.Excel
         #endregion
     }
 }
+#endif

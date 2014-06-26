@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !SILVERLIGHT
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -261,3 +262,4 @@ namespace Zirpl.AppEngine.Service.BatchProcessing
         }
     }
 }
+#endif

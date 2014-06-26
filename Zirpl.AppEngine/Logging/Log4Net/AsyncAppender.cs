@@ -1,4 +1,4 @@
-﻿#if !NET35CLIENT && !NET40CLIENT
+﻿#if !NET35CLIENT && !NET40CLIENT && !SILVERLIGHT
 using System;
 using System.Threading;
 using log4net.Appender;

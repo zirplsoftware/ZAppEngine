@@ -6,6 +6,9 @@ namespace Zirpl.AppEngine.Model
     /// <summary>
     /// An exception thrown when an <see cref="IRange"/> object is not valid
     /// </summary>
+#if !SILVERLIGHT
+    [Serializable]
+#endif
     public class InvalidRangeException :Exception
     {
         /// <summary>
@@ -32,6 +35,7 @@ namespace Zirpl.AppEngine.Model
         {
         }
 
+#if !SILVERLIGHT
         /// <summary>
         /// Instantiates a new InvalidRangeException
         /// </summary>
@@ -39,6 +43,7 @@ namespace Zirpl.AppEngine.Model
             : base(info, context)
         {
         }
+#endif
     }
 }
 /* $Log: InvalidRangeException.cs,v $

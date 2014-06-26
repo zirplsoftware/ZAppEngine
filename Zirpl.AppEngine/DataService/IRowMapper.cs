@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#if !SILVERLIGHT
+using System.Data;
 
 namespace Zirpl.AppEngine.DataService
 {
@@ -7,3 +8,4 @@ namespace Zirpl.AppEngine.DataService
         TEntity MapRow(IDataReader reader, int rowNum);
     }
 }
+#endif
