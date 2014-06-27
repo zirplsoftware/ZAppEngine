@@ -312,6 +312,12 @@
     <Compile Include="..\Zirpl.AppEngine\NumberExtensions.cs">
       <Link>NumberExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo_common.cs">
+      <Link>Properties\AssemblyInfo_common.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Reflection\AssemblyExtensions.cs">
       <Link>Reflection\AssemblyExtensions.cs</Link>
     </Compile>
@@ -531,7 +537,6 @@
     <Compile Include="..\Zirpl.AppEngine\_old\Singleton.cs">
       <Link>_old\Singleton.cs</Link>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\Zirpl.AppEngine\Linq\Dynamic Expressions.html">
@@ -547,7 +552,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
+      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
