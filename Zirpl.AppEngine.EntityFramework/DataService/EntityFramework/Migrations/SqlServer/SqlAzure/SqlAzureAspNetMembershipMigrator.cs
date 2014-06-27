@@ -41,8 +41,8 @@ namespace Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAz
 
         protected override void OnDrop()
         {
-            MigrationUtils.ExecuteEmbeddedResourceAsSqlScript(this.SqlExecutionAction, Assembly.GetExecutingAssembly(), "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Scripts.PrepareRunAspNetRegSqlUnregister.sql");
-            MigrationUtils.ExecuteEmbeddedResourceAsSqlScript(this.SqlExecutionAction, Assembly.GetExecutingAssembly(), "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Scripts.FinalizeRunAspNetRegSqlUnregister.sql");
+            MigrationUtils.ExecuteEmbeddedResourceAsSqlScript(this.SqlExecutionAction, Assembly.GetExecutingAssembly(), "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Scripts.PrepareRunAspNetRegSqlUnregister.sql");
+            MigrationUtils.ExecuteEmbeddedResourceAsSqlScript(this.SqlExecutionAction, Assembly.GetExecutingAssembly(), "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Scripts.FinalizeRunAspNetRegSqlUnregister.sql");
         }
 
         protected override Dictionary<ManifestResourceInfo, String> ResourcesToExtract
@@ -52,19 +52,19 @@ namespace Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAz
                 var dictionary = new Dictionary<ManifestResourceInfo, String>();
                 var assembly = Assembly.GetExecutingAssembly();
 
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallCommon.sql", ResourceLocation.Embedded), "InstallCommon.sql");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallCommon.sql", ResourceLocation.Embedded), "InstallCommon.sql");
 
 
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallMembership.sql", ResourceLocation.Embedded), "InstallMembership.sql");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallPersistSqlState.sql", ResourceLocation.Embedded), "InstallPersistSqlState.sql");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallPersonalization.sql", ResourceLocation.Embedded), "InstallPersonalization.sql");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallProfile.SQL", ResourceLocation.Embedded), "InstallProfile.sql");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallRoles.sql", ResourceLocation.Embedded), "InstallRoles.SQL");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallSqlState.sql", ResourceLocation.Embedded), "InstallSqlState.sql");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallSqlStateTemplate.sql", ResourceLocation.Embedded), "InstallSqlStateTemplate.sql");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallWebEventSqlProvider.sql", ResourceLocation.Embedded), "InstallWebEventSqlProvider.sql");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.app.config", ResourceLocation.Embedded), "app.config");
-                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.aspnet_regsqlazure.exe", ResourceLocation.Embedded), "aspnet_regsqlazure.exe");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallMembership.sql", ResourceLocation.Embedded), "InstallMembership.sql");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallPersistSqlState.sql", ResourceLocation.Embedded), "InstallPersistSqlState.sql");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallPersonalization.sql", ResourceLocation.Embedded), "InstallPersonalization.sql");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallProfile.SQL", ResourceLocation.Embedded), "InstallProfile.sql");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallRoles.sql", ResourceLocation.Embedded), "InstallRoles.SQL");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallSqlState.sql", ResourceLocation.Embedded), "InstallSqlState.sql");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallSqlStateTemplate.sql", ResourceLocation.Embedded), "InstallSqlStateTemplate.sql");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.InstallWebEventSqlProvider.sql", ResourceLocation.Embedded), "InstallWebEventSqlProvider.sql");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.app.config", ResourceLocation.Embedded), "app.config");
+                dictionary.Add(new ManifestResourceInfo(assembly, "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.SqlAzure.Tools.aspnet_regsqlazure.exe", ResourceLocation.Embedded), "aspnet_regsqlazure.exe");
                 return dictionary;
             }
         }

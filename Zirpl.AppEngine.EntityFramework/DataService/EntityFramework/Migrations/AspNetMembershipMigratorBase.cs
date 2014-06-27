@@ -47,7 +47,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework.Migrations
             this.ExtractFiles();
             this.OnCreate();
 
-            MigrationUtils.ExecuteEmbeddedResourceAsSqlScript(this.SqlExecutionAction, Assembly.GetExecutingAssembly(), "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.Scripts.CreateAspNetMembershipHelperObjects.sql");
+            MigrationUtils.ExecuteEmbeddedResourceAsSqlScript(this.SqlExecutionAction, Assembly.GetExecutingAssembly(), "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.Scripts.CreateAspNetMembershipHelperObjects.sql");
             MigrationUtils.GrantExecutePermission(this.SqlExecutionAction, "dbo.usp_ChangeUsername", "[aspnet_Membership_FullAccess]");
         }
 
@@ -57,7 +57,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework.Migrations
         {
             this.ExtractFiles();
 
-            MigrationUtils.ExecuteEmbeddedResourceAsSqlScript(this.SqlExecutionAction, Assembly.GetExecutingAssembly(), "Zirpl.AppFramework.DataService.EntityFramework.Migrations.SqlServer.Scripts.DropAspNetMembershipHelperObjects.sql");
+            MigrationUtils.ExecuteEmbeddedResourceAsSqlScript(this.SqlExecutionAction, Assembly.GetExecutingAssembly(), "Zirpl.AppEngine.DataService.EntityFramework.Migrations.SqlServer.Scripts.DropAspNetMembershipHelperObjects.sql");
 
             this.OnDrop();
         }
