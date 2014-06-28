@@ -46,10 +46,6 @@
   <files>
     <file src="..\Zirpl.AppEngine\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net451\" />
     <file src="..\Zirpl.AppEngine.Net45\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net45\" />
-    <file src="..\Zirpl.AppEngine.Net40\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net40\" />
-    <file src="..\Zirpl.AppEngine.Net40Client\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net40-client\" />
-    <file src="..\Zirpl.AppEngine.Net35\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net35\" />
-    <file src="..\Zirpl.AppEngine.Net35Client\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net35-client\" />
     <file src="..\Zirpl.AppEngine.Silverlight5\bin\$configuration$\Zirpl.AppEngine.Silverlight.dll" target="lib\sl50\" />
   </files>
 </package>
