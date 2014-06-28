@@ -53,21 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Zirpl.AppEngine\ActionExtensions.cs">
-      <Link>ActionExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\ActionRunner.cs">
-      <Link>ActionRunner.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Collections\ICollectionExtensions.cs">
-      <Link>Collections\ICollectionExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Collections\IDictionaryExtensions.cs">
-      <Link>Collections\IDictionaryExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Collections\IListExtensions.cs">
-      <Link>Collections\IListExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\DataService\Csv\EntityExporter.cs">
       <Link>DataService\Csv\EntityExporter.cs</Link>
     </Compile>
@@ -113,9 +98,6 @@
     <Compile Include="..\Zirpl.AppEngine\DataService\StringReflectedRowMapper.cs">
       <Link>DataService\StringReflectedRowMapper.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\DateTimeUtilities.cs">
-      <Link>DateTimeUtilities.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Ioc\Autofac\DependencyResolverBase.cs">
       <Link>Ioc\Autofac\DependencyResolverBase.cs</Link>
     </Compile>
@@ -127,15 +109,6 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Ioc\IDependencyResolver.cs">
       <Link>Ioc\IDependencyResolver.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\IO\PathUtilities.cs">
-      <Link>IO\PathUtilities.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\IO\StreamExtensions.cs">
-      <Link>IO\StreamExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Linq\Dynamic.cs">
-      <Link>Linq\Dynamic.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Logging\Common\CommonLogFactory.cs">
       <Link>Logging\Common\CommonLogFactory.cs</Link>
@@ -293,32 +266,11 @@
     <Compile Include="..\Zirpl.AppEngine\Model\UserBase.cs">
       <Link>Model\UserBase.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\NumberExtensions.cs">
-      <Link>NumberExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo_common.cs">
       <Link>Properties\AssemblyInfo_common.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Reflection\AssemblyExtensions.cs">
-      <Link>Reflection\AssemblyExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Reflection\DynamicAccessor.cs">
-      <Link>Reflection\DynamicAccessor.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Reflection\DynamicAccessorFactory.cs">
-      <Link>Reflection\DynamicAccessorFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Reflection\IDynamicAccessor.cs">
-      <Link>Reflection\IDynamicAccessor.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Reflection\ReflectionUtilities.cs">
-      <Link>Reflection\ReflectionUtilities.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Reflection\TypeExtensions.cs">
-      <Link>Reflection\TypeExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\RetryPolicyFactory.cs">
       <Link>RetryPolicyFactory.cs</Link>
@@ -464,33 +416,6 @@
     <Compile Include="..\Zirpl.AppEngine\Session\ICurrentUserKeyProvider.cs">
       <Link>Session\ICurrentUserKeyProvider.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Stats\EloRating\EloMatch.cs">
-      <Link>Stats\EloRating\EloMatch.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Stats\EloRating\EloMatchResult.cs">
-      <Link>Stats\EloRating\EloMatchResult.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Stats\EloRating\EloRatingEngine.cs">
-      <Link>Stats\EloRating\EloRatingEngine.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\StringExtensions.cs">
-      <Link>StringExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Text\StringBuilderExtensions.cs">
-      <Link>Text\StringBuilderExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Text\TextCrawling\TextCrawler.cs">
-      <Link>Text\TextCrawling\TextCrawler.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Text\TextCrawling\TextPosition.cs">
-      <Link>Text\TextCrawling\TextPosition.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Text\TextCrawling\TextPositionType.cs">
-      <Link>Text\TextCrawling\TextPositionType.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Text\TextUtilities.cs">
-      <Link>Text\TextUtilities.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\UnexpectedCaseException.cs">
       <Link>UnexpectedCaseException.cs</Link>
     </Compile>
@@ -509,9 +434,6 @@
     <Compile Include="..\Zirpl.AppEngine\Validation\ValidationUtils.cs">
       <Link>Validation\ValidationUtils.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Xml\Serialization\SerializationUtilities.cs">
-      <Link>Xml\Serialization\SerializationUtilities.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\_old\ChangedValueDelegate.cs">
       <Link>_old\ChangedValueDelegate.cs</Link>
     </Compile>
@@ -521,11 +443,6 @@
     <Compile Include="..\Zirpl.AppEngine\_old\Singleton.cs">
       <Link>_old\Singleton.cs</Link>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\Zirpl.AppEngine\Linq\Dynamic Expressions.html">
-      <Link>Linq\Dynamic Expressions.html</Link>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

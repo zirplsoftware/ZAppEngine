@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Zirpl.AppEngine.Linq;
 using Zirpl.AppEngine.Model;
 using Zirpl.AppEngine.Model.EntityFramework;
+using Zirpl.Linq;
 
 namespace Zirpl.AppEngine.DataService.EntityFramework
 {

@@ -32,3 +32,17 @@
 /Zirpl.AppEngine.EntityFramework.Tests/bin
 /Download
 /Zirpl.AppEngine.sln.DotSettings.user
+/Zirpl.Common.Tests/obj
+/Zirpl.Common.Tests/bin
+/Zirpl.Common.Silverlight5/obj
+/Zirpl.Common.Silverlight5/Bin
+/Zirpl.Common.Portable/obj
+/Zirpl.Common.Portable/bin
+/Zirpl.Common.Net45/obj
+/Zirpl.Common.Net45/bin
+/Zirpl.Common/obj
+/Zirpl.Common/bin
+/Zirpl.AppEngine.Silverlight5/obj
+/Zirpl.AppEngine.Silverlight5/Bin
+/Zirpl.AppEngine.Silverlight5/Zirpl.AppEngine.Silverlight5.csproj.user
+/Zirpl.Common.Silverlight5/Zirpl.Common.Silverlight5.csproj.user

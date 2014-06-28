@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
-using Zirpl.AppEngine.Reflection;
+using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.DataService.EntityFramework.Migrations
 {

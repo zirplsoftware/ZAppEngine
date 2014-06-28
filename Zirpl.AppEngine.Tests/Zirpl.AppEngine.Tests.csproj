@@ -55,21 +55,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Reflection\AssemblyExtensionsTests.cs" />
-    <Compile Include="IO\StreamExtensionsTests.cs" />
     <Compile Include="Model\RangeTest.cs" />
-    <Compile Include="NumberExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AbstractedSupportsImplServiceTests.cs" />
-    <Compile Include="StringUtilitiesTests.cs" />
-    <Compile Include="Text\TextUtilitiesTests.cs" />
-    <Compile Include="Text\TextCrawling\TextCrawlerTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="IO\example_embedded.txt" />
-    <Content Include="IO\example_content.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Compile Include="Validation\ValidationUtilitiesTests.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

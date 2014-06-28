@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{373F2A7C-B29D-44FA-B096-031E70DEB2A2}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zirpl.AppEngine</RootNamespace>
+    <AssemblyName>Zirpl.AppEngine.Silverlight</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.0\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\sl5\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.SL5">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\sl5\AutoMapper.SL5.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=5.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Csv\EntityExporter.cs">
+      <Link>DataService\Csv\EntityExporter.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Csv\EntityPropertyDefinition.cs">
+      <Link>DataService\Csv\EntityPropertyDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Csv\PropertyType.cs">
+      <Link>DataService\Csv\PropertyType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Excel\ExcelExporter.cs">
+      <Link>DataService\Excel\ExcelExporter.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Excel\ExcelFileReader.cs">
+      <Link>DataService\Excel\ExcelFileReader.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\Excel\ExcelFileReaderException.cs">
+      <Link>DataService\Excel\ExcelFileReaderException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\ICompleteDataService.cs">
+      <Link>DataService\ICompleteDataService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\IDataService.cs">
+      <Link>DataService\IDataService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\IDataService_generic.cs">
+      <Link>DataService\IDataService_generic.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\IReadOnlyDataService.cs">
+      <Link>DataService\IReadOnlyDataService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\IRowMapper.cs">
+      <Link>DataService\IRowMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\ISequenceValueProvider.cs">
+      <Link>DataService\ISequenceValueProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\RowMapperBase.cs">
+      <Link>DataService\RowMapperBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\SqlServer\SqlAzure\SqlDatabaseTransientErrorDetectionRetryPolicyFactory.cs">
+      <Link>DataService\SqlServer\SqlAzure\SqlDatabaseTransientErrorDetectionRetryPolicyFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\DataService\StringReflectedRowMapper.cs">
+      <Link>DataService\StringReflectedRowMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Ioc\Autofac\DependencyResolverBase.cs">
+      <Link>Ioc\Autofac\DependencyResolverBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Ioc\Autofac\IAutofacDependencyResolver.cs">
+      <Link>Ioc\Autofac\IAutofacDependencyResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Ioc\DependencyResolverBase.cs">
+      <Link>Ioc\DependencyResolverBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Ioc\IDependencyResolver.cs">
+      <Link>Ioc\IDependencyResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Logging\Common\CommonLogFactory.cs">
+      <Link>Logging\Common\CommonLogFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Logging\Common\CommonLogWrapper.cs">
+      <Link>Logging\Common\CommonLogWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Logging\ILog.cs">
+      <Link>Logging\ILog.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Logging\ILogFactory.cs">
+      <Link>Logging\ILogFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Logging\Log4Net\AsyncAppender.cs">
+      <Link>Logging\Log4Net\AsyncAppender.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Logging\LogManager.cs">
+      <Link>Logging\LogManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Logging\NullLog.cs">
+      <Link>Logging\NullLog.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Mapping\AutoMapper\EntityReferenceResolver.cs">
+      <Link>Mapping\AutoMapper\EntityReferenceResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Mapping\AutoMapper\MappingBootstrapper.cs">
+      <Link>Mapping\AutoMapper\MappingBootstrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Mapping\AutoMapper\MappingModuleBase.cs">
+      <Link>Mapping\AutoMapper\MappingModuleBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Mapping\AutoMapper\MappingUtils.cs">
+      <Link>Mapping\AutoMapper\MappingUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Mapping\AutoMapper\ValueResolverBase.cs">
+      <Link>Mapping\AutoMapper\ValueResolverBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Mapping\InvalidMappingDataException.cs">
+      <Link>Mapping\InvalidMappingDataException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\AuditableBase.cs">
+      <Link>Model\AuditableBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\BatchItemResult.cs">
+      <Link>Model\BatchProcessing\BatchItemResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\BatchStatus.cs">
+      <Link>Model\BatchProcessing\BatchStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\CoreBatchItemErrorCode.cs">
+      <Link>Model\BatchProcessing\CoreBatchItemErrorCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\IBatch.cs">
+      <Link>Model\BatchProcessing\IBatch.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\IBatchItem.cs">
+      <Link>Model\BatchProcessing\IBatchItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\IBatchItemError.cs">
+      <Link>Model\BatchProcessing\IBatchItemError.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\DateOnlyWrapper.cs">
+      <Link>Model\DateOnlyWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\DefaultSearchCriteria.cs">
+      <Link>Model\DefaultSearchCriteria.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\FixupCollection.cs">
+      <Link>Model\FixupCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IAuditable.cs">
+      <Link>Model\IAuditable.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IAuthenticatedUser.cs">
+      <Link>Model\IAuthenticatedUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IDeletable.cs">
+      <Link>Model\IDeletable.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IKeyedEntity.cs">
+      <Link>Model\IKeyedEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\InvalidRangeException.cs">
+      <Link>Model\InvalidRangeException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IPersistable.cs">
+      <Link>Model\IPersistable.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IPersistable.gen.cs">
+      <Link>Model\IPersistable.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IRange.cs">
+      <Link>Model\IRange.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IRange.gen.cs">
+      <Link>Model\IRange.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\ISearchCriteria.cs">
+      <Link>Model\ISearchCriteria.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IVersionable.cs">
+      <Link>Model\IVersionable.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Membership\ChangePasswordRequest.cs">
+      <Link>Model\Membership\ChangePasswordRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Membership\ChangeUserNameRequest.cs">
+      <Link>Model\Membership\ChangeUserNameRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Membership\IChangePasswordRequest.cs">
+      <Link>Model\Membership\IChangePasswordRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Membership\IChangeUserNameRequest.cs">
+      <Link>Model\Membership\IChangeUserNameRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Membership\ILogInRequest.cs">
+      <Link>Model\Membership\ILogInRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Membership\IResetLostPasswordRequest.cs">
+      <Link>Model\Membership\IResetLostPasswordRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Membership\IUserRegistrationRequest.cs">
+      <Link>Model\Membership\IUserRegistrationRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\NonPersistedObjectException.cs">
+      <Link>Model\NonPersistedObjectException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\PersistableBase.cs">
+      <Link>Model\PersistableBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\PersistableExtensions.cs">
+      <Link>Model\PersistableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\PersistedObjectException.cs">
+      <Link>Model\PersistedObjectException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Range.cs">
+      <Link>Model\Range.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\ReferenceValue.cs">
+      <Link>Model\ReferenceValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\SearchResults.cs">
+      <Link>Model\SearchResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\TimeAgo.cs">
+      <Link>Model\TimeAgo.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\TimeAgoType.cs">
+      <Link>Model\TimeAgoType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\TimeOnlyWrapper.cs">
+      <Link>Model\TimeOnlyWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\UserBase.cs">
+      <Link>Model\UserBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo_common.cs">
+      <Link>Properties\AssemblyInfo_common.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\RetryPolicyFactory.cs">
+      <Link>RetryPolicyFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\AbstractedSupportsImplService.cs">
+      <Link>Service\AbstractedSupportsImplService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\BatchProcessing\ExcelFileBatchImportService.cs">
+      <Link>Service\BatchProcessing\ExcelFileBatchImportService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\BatchProcessing\IBatchImportService.cs">
+      <Link>Service\BatchProcessing\IBatchImportService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\BatchProcessing\IBatchImportStrategy.cs">
+      <Link>Service\BatchProcessing\IBatchImportStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\BatchProcessing\ImportValidationException.cs">
+      <Link>Service\BatchProcessing\ImportValidationException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\BusinessRuleException.cs">
+      <Link>Service\BusinessRuleException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\CachingServiceBase.cs">
+      <Link>Service\CachingServiceBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ICompleteService.cs">
+      <Link>Service\ICompleteService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\IReadOnlyService.cs">
+      <Link>Service\IReadOnlyService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\IService.cs">
+      <Link>Service\IService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\IServiceFactory.cs">
+      <Link>Service\IServiceFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\IService_generic.cs">
+      <Link>Service\IService_generic.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupports.cs">
+      <Link>Service\ISupports.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsCreate.cs">
+      <Link>Service\ISupportsCreate.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsDelete.cs">
+      <Link>Service\ISupportsDelete.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsDeleteById.cs">
+      <Link>Service\ISupportsDeleteById.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsDeleteList.cs">
+      <Link>Service\ISupportsDeleteList.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsDeleteListByIds.cs">
+      <Link>Service\ISupportsDeleteListByIds.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsDeleteSearch.cs">
+      <Link>Service\ISupportsDeleteSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsExists.cs">
+      <Link>Service\ISupportsExists.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsGetAll.cs">
+      <Link>Service\ISupportsGetAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsGetById.cs">
+      <Link>Service\ISupportsGetById.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsGetTotalCount.cs">
+      <Link>Service\ISupportsGetTotalCount.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsInsert.cs">
+      <Link>Service\ISupportsInsert.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsInsertList.cs">
+      <Link>Service\ISupportsInsertList.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsQueryable.cs">
+      <Link>Service\ISupportsQueryable.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsReload.cs">
+      <Link>Service\ISupportsReload.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsRiaServiceActions.cs">
+      <Link>Service\ISupportsRiaServiceActions.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsSave.cs">
+      <Link>Service\ISupportsSave.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsSaveList.cs">
+      <Link>Service\ISupportsSaveList.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsSearch.cs">
+      <Link>Service\ISupportsSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsSearchUnique.cs">
+      <Link>Service\ISupportsSearchUnique.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsUpdate.cs">
+      <Link>Service\ISupportsUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsUpdateList.cs">
+      <Link>Service\ISupportsUpdateList.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ITransactionalUnitOfWorkFactory.cs">
+      <Link>Service\ITransactionalUnitOfWorkFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\IUnitOfWork.cs">
+      <Link>Service\IUnitOfWork.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\IUnitOfWorkFactory.cs">
+      <Link>Service\IUnitOfWorkFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\Membership\ChangePasswordException.cs">
+      <Link>Service\Membership\ChangePasswordException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\Membership\ChangeUserNameError.cs">
+      <Link>Service\Membership\ChangeUserNameError.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\Membership\ChangeUserNameException.cs">
+      <Link>Service\Membership\ChangeUserNameException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\Membership\IMembershipService.cs">
+      <Link>Service\Membership\IMembershipService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ReadOnlyService.cs">
+      <Link>Service\ReadOnlyService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ServiceAction.cs">
+      <Link>Service\ServiceAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\TransactionalAbstractedSupportsImplService.cs">
+      <Link>Service\TransactionalAbstractedSupportsImplService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\TransactionalUnitOfWorkFactoryBase.cs">
+      <Link>Service\TransactionalUnitOfWorkFactoryBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\UnitOfWorkFactoryBase.cs">
+      <Link>Service\UnitOfWorkFactoryBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Session\ICurrentUserKeyProvider.cs">
+      <Link>Session\ICurrentUserKeyProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\UnexpectedCaseException.cs">
+      <Link>UnexpectedCaseException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Validation\EntityValidationError.cs">
+      <Link>Validation\EntityValidationError.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Validation\IValidationHelper.cs">
+      <Link>Validation\IValidationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Validation\ValidationError.cs">
+      <Link>Validation\ValidationError.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Validation\ValidationException.cs">
+      <Link>Validation\ValidationException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Validation\ValidationUtils.cs">
+      <Link>Validation\ValidationUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\_old\ChangedValueDelegate.cs">
+      <Link>_old\ChangedValueDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\_old\ChangedValueEventArgs.cs">
+      <Link>_old\ChangedValueEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\_old\Singleton.cs">
+      <Link>_old\Singleton.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

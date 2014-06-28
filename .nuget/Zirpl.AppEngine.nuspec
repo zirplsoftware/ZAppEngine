@@ -37,24 +37,6 @@
         <dependency id="EnterpriseLibrary.TransientFaultHandling.Data" version="6.0.1304.1"  />
         <dependency id="log4net" version="1.2.10"  />
       </group>
-      <group targetFramework="net40">
-        <dependency id="Autofac" version="3.5.0"  />
-        <dependency id="AutoMapper" version="3.2.1"  />
-        <dependency id="Common.Logging" version="2.0.0"  />
-        <dependency id="Common.Logging.Log4Net" version="2.0.1"  />
-        <dependency id="log4net" version="1.2.10"  />
-      </group>
-      <group targetFramework="net40-Client">
-        <dependency id="Autofac" version="3.5.0"  />
-        <dependency id="AutoMapper" version="3.2.1"  />
-      </group>
-      <group targetFramework="net35">
-        <dependency id="Common.Logging" version="2.0.0"  />
-        <dependency id="Common.Logging.Log4Net" version="2.0.1"  />
-        <dependency id="log4net" version="1.2.10"  />
-      </group>
-      <group targetFramework="net35-Client">
-      </group>
       <group targetFramework="sl50">
         <dependency id="Autofac" version="3.5.0"  />
         <dependency id="AutoMapper" version="3.2.1"  />
@@ -68,6 +50,6 @@
     <file src="..\Zirpl.AppEngine.Net40Client\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net40-client\" />
     <file src="..\Zirpl.AppEngine.Net35\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net35\" />
     <file src="..\Zirpl.AppEngine.Net35Client\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net35-client\" />
-    <file src="..\Zirpl.AppEngine.Silverlight\bin\$configuration$\Zirpl.AppEngine.Silverlight.dll" target="lib\sl50\" />
+    <file src="..\Zirpl.AppEngine.Silverlight5\bin\$configuration$\Zirpl.AppEngine.Silverlight.dll" target="lib\sl50\" />
   </files>
 </package>

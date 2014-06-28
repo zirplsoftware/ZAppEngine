@@ -78,10 +78,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionExtensions.cs" />
-    <Compile Include="Collections\ICollectionExtensions.cs" />
-    <Compile Include="Collections\IDictionaryExtensions.cs" />
-    <Compile Include="Collections\IListExtensions.cs" />
     <Compile Include="DataService\Excel\ExcelExporter.cs" />
     <Compile Include="DataService\ICompleteDataService.cs" />
     <Compile Include="DataService\IDataService.cs" />
@@ -94,7 +90,6 @@
     <Compile Include="DataService\IRowMapper.cs" />
     <Compile Include="DataService\RowMapperBase.cs" />
     <Compile Include="DataService\StringReflectedRowMapper.cs" />
-    <Compile Include="DateTimeUtilities.cs" />
     <Compile Include="DataService\Csv\EntityExporter.cs" />
     <Compile Include="DataService\Csv\EntityPropertyDefinition.cs" />
     <Compile Include="DataService\Csv\PropertyType.cs" />
@@ -102,9 +97,6 @@
     <Compile Include="Ioc\Autofac\IAutofacDependencyResolver.cs" />
     <Compile Include="Ioc\DependencyResolverBase.cs" />
     <Compile Include="Ioc\IDependencyResolver.cs" />
-    <Compile Include="IO\PathUtilities.cs" />
-    <Compile Include="IO\StreamExtensions.cs" />
-    <Compile Include="Linq\Dynamic.cs" />
     <Compile Include="Logging\Common\CommonLogFactory.cs" />
     <Compile Include="Logging\Common\CommonLogWrapper.cs" />
     <Compile Include="Logging\ILog.cs" />
@@ -157,15 +149,8 @@
     <Compile Include="Model\TimeAgoType.cs" />
     <Compile Include="Model\TimeOnlyWrapper.cs" />
     <Compile Include="Model\UserBase.cs" />
-    <Compile Include="NumberExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo_common.cs" />
-    <Compile Include="Reflection\AssemblyExtensions.cs" />
-    <Compile Include="Reflection\DynamicAccessor.cs" />
-    <Compile Include="Reflection\DynamicAccessorFactory.cs" />
-    <Compile Include="Reflection\IDynamicAccessor.cs" />
-    <Compile Include="Reflection\ReflectionUtilities.cs" />
-    <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="RetryPolicyFactory.cs" />
     <Compile Include="Service\AbstractedSupportsImplService.cs" />
     <Compile Include="Service\BatchProcessing\ExcelFileBatchImportService.cs" />
@@ -214,31 +199,16 @@
     <Compile Include="Service\TransactionalUnitOfWorkFactoryBase.cs" />
     <Compile Include="Service\UnitOfWorkFactoryBase.cs" />
     <Compile Include="Session\ICurrentUserKeyProvider.cs" />
-    <Compile Include="Stats\EloRating\EloMatch.cs" />
-    <Compile Include="Stats\EloRating\EloMatchResult.cs" />
-    <Compile Include="Stats\EloRating\EloRatingEngine.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="Text\StringBuilderExtensions.cs" />
-    <Compile Include="Text\TextCrawling\TextCrawler.cs" />
-    <Compile Include="Text\TextCrawling\TextPosition.cs" />
-    <Compile Include="Text\TextCrawling\TextPositionType.cs" />
     <Compile Include="UnexpectedCaseException.cs" />
     <Compile Include="Validation\EntityValidationError.cs" />
     <Compile Include="Validation\IValidationHelper.cs" />
     <Compile Include="Validation\ValidationError.cs" />
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\ValidationUtils.cs" />
-    <Compile Include="Xml\Serialization\SerializationUtilities.cs" />
-    <Compile Include="Text\TextUtilities.cs" />
-    <Compile Include="ActionRunner.cs" />
     <Compile Include="_old\ChangedValueDelegate.cs" />
     <Compile Include="_old\ChangedValueEventArgs.cs" />
     <Compile Include="_old\Singleton.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Linq\Dynamic Expressions.html" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
