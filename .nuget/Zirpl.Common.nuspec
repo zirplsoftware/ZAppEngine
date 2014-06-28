@@ -22,7 +22,7 @@
   <files>
     <file src="..\Zirpl.Common\bin\$configuration$\Zirpl.Common.dll" target="lib\net451\" />
     <file src="..\Zirpl.Common.Net45\bin\$configuration$\Zirpl.Common.dll" target="lib\net45\" />
-    <file src="..\Zirpl.Common.Portable\bin\$configuration$\Zirpl.Common.Portable.dll" target="lib\portable-net45+sl5+windows8+wpa+windowsphone8\" />
+    <file src="..\Zirpl.Common.Portable\bin\$configuration$\Zirpl.Common.Portable.dll" target="lib\portable-net45+sl5+win8+wpa81+wp8\" />
     <file src="..\Zirpl.Common.Silverlight5\bin\$configuration$\Zirpl.Common.Silverlight.dll" target="lib\sl50\" />
   </files>
 </package>
