@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Zirpl.AppEngine.Testing</id>
+    <id>Zirpl.Common.Testing</id>
     <version>$version$</version>
-    <title>ZAppEngine- Testing</title>
+    <title>ZCommon- Testing</title>
     <authors>Zirpl Software</authors>
     <owners>Zirpl Software</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Extends ZAppEngine providing functionality to quickly test applications.</description>
+    <description>ZCommon- Testing functionality</description>
     <language>en-US</language>
     <copyright>Copyright 2014</copyright>
     <tags></tags>
@@ -24,9 +24,21 @@
         <dependency id="JustMock" version="2014.2.609.3" />
         <dependency id="NUnit" version="2.6.3" />
       </group>
+      <group targetFramework="net45">
+        <dependency id="FluentAssertions" version="3.0.107" />
+        <dependency id="JustMock" version="2014.2.609.3" />
+        <dependency id="NUnit" version="2.6.3" />
+      </group>
+      <group targetFramework="net4">
+        <dependency id="FluentAssertions" version="3.0.107" />
+        <dependency id="JustMock" version="2014.2.609.3" />
+        <dependency id="NUnit" version="2.6.3" />
+      </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\Zirpl.AppEngine.Testing\bin\$configuration$\Zirpl.AppEngine.Testing.dll" target="lib\net451\" />
+    <file src="..\Zirpl.AppEngine.Testing\bin\$configuration$\Zirpl.Common.Testing.dll" target="lib\net451\" />
+    <file src="..\Zirpl.Common.Testing.Net45\bin\$configuration$\Zirpl.Common.Testing.dll" target="lib\net45\" />
+    <file src="..\Zirpl.Common.Testing.Net4\bin\$configuration$\Zirpl.Common.Testing.dll" target="lib\net4\" />
   </files>
 </package>

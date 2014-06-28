@@ -40,6 +40,10 @@
 /Zirpl.Common.Portable/bin
 /Zirpl.Common.Net45/obj
 /Zirpl.Common.Net45/bin
+/Zirpl.Common.Testing.Net45/obj
+/Zirpl.Common.Testing.Net45/bin
+/Zirpl.Common.Testing.Net4/obj
+/Zirpl.Common.Testing.Net4/bin
 /Zirpl.Common/obj
 /Zirpl.Common/bin
 /Zirpl.AppEngine.Silverlight5/obj

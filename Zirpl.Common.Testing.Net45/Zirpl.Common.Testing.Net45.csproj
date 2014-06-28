@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E0DF6DA8-8BB5-4DE4-B5E3-B9C2BB00B119}</ProjectGuid>
+    <ProjectGuid>{15590AA5-04CE-4ADD-AEB3-8ED12BF3C1CA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zirpl.AppEngine.Tests</RootNamespace>
-    <AssemblyName>Zirpl.AppEngine.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>Zirpl.Testing</RootNamespace>
+    <AssemblyName>Zirpl.Common.Testing</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -39,8 +38,7 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -55,22 +53,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\RangeTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\AbstractedSupportsImplServiceTests.cs" />
-    <Compile Include="Validation\ValidationUtilitiesTests.cs" />
+    <Compile Include="..\Zirpl.AppEngine.Testing\AssertionUtilities.cs">
+      <Link>AssertionUtilities.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Testing\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Testing\Properties\AssemblyInfo_common.cs">
+      <Link>Properties\AssemblyInfo_common.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Testing\UnitTestUtilities.cs">
+      <Link>UnitTestUtilities.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\Zirpl.AppEngine.Testing\Zirpl.Common.Testing.csproj">
-      <Project>{366c5119-60f8-4c0b-9d03-fd423bd5b6c5}</Project>
-      <Name>Zirpl.Common.Testing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
-      <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
-      <Name>Zirpl.AppEngine</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -82,6 +78,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties ProjectLinkReference="366c5119-60f8-4c0b-9d03-fd423bd5b6c5" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+    </VisualStudio>
+  </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
