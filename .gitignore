@@ -50,3 +50,6 @@
 /Zirpl.AppEngine.Silverlight5/Bin
 /Zirpl.AppEngine.Silverlight5/Zirpl.AppEngine.Silverlight5.csproj.user
 /Zirpl.Common.Silverlight5/Zirpl.Common.Silverlight5.csproj.user
+/Zirpl.AppEngine.CodeGeneration.VS2013/obj
+/Zirpl.AppEngine.CodeGeneration.VS2013/bin
+/Zirpl.AppEngine.CodeGeneration.VS2013/Zirpl.AppEngine.CodeGeneration.VS2013.csproj.user

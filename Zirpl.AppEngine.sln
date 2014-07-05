@@ -35,7 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{516549
 		.nuget\Zirpl.AppEngine.nuspec = .nuget\Zirpl.AppEngine.nuspec
 		.nuget\Zirpl.AppEngine.Web.nuspec = .nuget\Zirpl.AppEngine.Web.nuspec
 		.nuget\Zirpl.Common.nuspec = .nuget\Zirpl.Common.nuspec
-		.nuget\Zirpl.Common.Testing.nuspec = .nuget\Zirpl.Common.Testing.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{6C941E8E-85B6-4988-9854-AABEF704FCB5}"
@@ -68,6 +67,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Common.Testing.Net45", "Zirpl.Common.Testing.Net45\Zirpl.Common.Testing.Net45.csproj", "{15590AA5-04CE-4ADD-AEB3-8ED12BF3C1CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Common.Testing.Net4", "Zirpl.Common.Testing.Net4\Zirpl.Common.Testing.Net4.csproj", "{B1007897-ED7D-4647-BA6E-C35E12CE7D03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.CodeGeneration.VS2013", "Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.CodeGeneration.VS2013.csproj", "{F8855F9A-35D1-4C30-BB53-1FD89A984989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,6 +144,10 @@ Global
 		{B1007897-ED7D-4647-BA6E-C35E12CE7D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1007897-ED7D-4647-BA6E-C35E12CE7D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1007897-ED7D-4647-BA6E-C35E12CE7D03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8855F9A-35D1-4C30-BB53-1FD89A984989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8855F9A-35D1-4C30-BB53-1FD89A984989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8855F9A-35D1-4C30-BB53-1FD89A984989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8855F9A-35D1-4C30-BB53-1FD89A984989}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
