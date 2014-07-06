@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Zirpl.AppEngine.CodeGeneration.Transformation
 {
@@ -15,5 +16,6 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         public string ProjectName { get; set; }
         public string FolderName { get; set; }
         public OutputFileProperties FileProperties { get; private set; }
+        public StringBuilder GenerationEnvironment { get; set; }
     }
 }

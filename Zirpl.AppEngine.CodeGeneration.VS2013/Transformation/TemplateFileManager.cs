@@ -59,6 +59,24 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         public DynamicTextTransformation TextTransformation { get { return this._textTransformation; } }
         public ProjectItem TemplateProjectItem { get; private set; }
         public DTE Studio { get; private set; }
+
+        /// <summary>
+        /// If set to false, existing files are not overwritten
+        /// </summary>
+        /// <returns></returns>
+        public bool CanOverrideExistingFile { get; set; }
+
+        /// <summary>
+        /// If set to true, output files (c#, vb) are formatted based on the vs settings.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAutoIndentEnabled { get; set; }
+
+        /// <summary>
+        /// Defines Encoding format for generated output file. (Default UTF8)
+        /// </summary>
+        /// <returns></returns>
+        public Encoding Encoding { get; set; }
         
         ///// <summary>
         ///// Creates files with VS sync
@@ -110,24 +128,6 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         }
 
         /// <summary>
-        /// If set to false, existing files are not overwritten
-        /// </summary>
-        /// <returns></returns>
-        public bool CanOverrideExistingFile { get; set; }
-
-        /// <summary>
-        /// If set to true, output files (c#, vb) are formatted based on the vs settings.
-        /// </summary>
-        /// <returns></returns>
-        public bool IsAutoIndentEnabled { get; set; }
-
-        /// <summary>
-        /// Defines Encoding format for generated output file. (Default UTF8)
-        /// </summary>
-        /// <returns></returns>
-        public Encoding Encoding { get; set; }
-
-        /// <summary>
         /// Marks the end of the last file if there was one, and starts a new
         /// and marks this point in generation as a new file.
         /// </summary>
@@ -135,7 +135,8 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         /// <param name="projectName">Name of the target project for the new file.</param>
         /// <param name="folderName">Name of the target folder for the new file.</param>
         /// <param name="fileProperties">File property settings in vs for the new File</param>
-        public void StartNewFile(string name, string projectName = "", string folderName = "", OutputFileProperties fileProperties = null)
+        public void StartNewFile(//StringBuilder generationEnvironment, 
+            string name, string projectName = "", string folderName = "", OutputFileProperties fileProperties = null)
         {
             if (String.IsNullOrWhiteSpace(name) == true)
             {
@@ -158,7 +159,8 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         /// <param name="projectName">Name of the target project for the new file.</param>
         /// <param name="folderName">Name of the target folder for the new file.</param>
         /// <param name="fileProperties">File property settings in vs for the new File</param>
-        public void StartNewFile(string name, Project project, string folderName = "", OutputFileProperties fileProperties = null)
+        public void StartNewFile(//StringBuilder generationEnvironment, 
+            string name, Project project, string folderName = "", OutputFileProperties fileProperties = null)
         {
             this.StartNewFile(name, project.Name, folderName, fileProperties);
         }
