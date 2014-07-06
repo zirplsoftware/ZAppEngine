@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration
+namespace Zirpl.AppEngine.CodeGeneration.Templates
 {
     using System;
     using System.Collections;
@@ -21,9 +21,9 @@ namespace Zirpl.AppEngine.CodeGeneration
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ModelEnumTransform : ModelEnumTransformBase
+    public partial class ModelEnumTemplate : ModelEnumTemplateBase
     {
 #line hidden
         /// <summary>
@@ -32,45 +32,45 @@ namespace Zirpl.AppEngine.CodeGeneration
         public virtual string TransformText()
         {
             
-            #line 15 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+            #line 15 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
 
-var helper = new AppGenerator(this);
+//var helper = new AppGenerator(this);
 
 // now we create the dictionary enums
 //
-foreach (DomainType domainType in helper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
+foreach (DomainType domainType in this.TemplateHelper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
 {
-	helper.StartEnumFile(domainType);
+	this.TemplateHelper.StartEnumFile(domainType);
 	
 
             
             #line default
             #line hidden
             this.Write("using System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nusin" +
-                    "g Zirpl.AppFramework.Model;\r\n\r\nnamespace ");
+                    "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(helper.NamingProvider.GetModelNamespace(domainType)));
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TemplateHelper.NamingProvider.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public enum ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Enum : ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(helper.TypeProvider.GetIdClass(domainType)));
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TemplateHelper.TypeProvider.GetIdClass(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
 
 	if (domainType.EnumValueEntries != null)
 	{
@@ -84,27 +84,27 @@ foreach (DomainType domainType in helper.DomainTypeFilters.DomainTypesToGenerate
             #line hidden
             this.Write("        ");
             
-            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValueEntry.Key));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValueEntry.Value));
             
             #line default
             #line hidden
             
-            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(totalRemaining > 0 ? "," : ""));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
 
 					
 		}
@@ -115,11 +115,11 @@ foreach (DomainType domainType in helper.DomainTypeFilters.DomainTypesToGenerate
             #line hidden
             this.Write("\t}\r\n}\r\n");
             
-            #line 50 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelEnumTransform.tt"
+            #line 50 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelEnumTemplate.tt"
 
 }
 
-helper.End();
+//this.TemplateHelper.End();
 
             
             #line default
@@ -150,7 +150,7 @@ helper.End();
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class ModelEnumTransformBase
+    public class ModelEnumTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

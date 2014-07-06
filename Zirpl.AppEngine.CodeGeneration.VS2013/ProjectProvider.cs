@@ -11,11 +11,11 @@ namespace Zirpl.AppEngine.CodeGeneration
 {
     public class ProjectProvider
     {
-        public AppGenerator appGenerator;
+        private TemplateHelper templateHelper;
 
-        public ProjectProvider(AppGenerator appGenerator)
+        public ProjectProvider(TemplateHelper templateHelper)
         {
-            this.appGenerator = appGenerator;
+            this.templateHelper = templateHelper;
         }
 
 
@@ -23,7 +23,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return appGenerator.FileManager.Studio;
+                return templateHelper.FileManager.Studio;
             }
         }
 
@@ -31,7 +31,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return appGenerator.FileManager.TemplateProjectItem.ContainingProject;
+                return templateHelper.FileManager.TemplateProjectItem.ContainingProject;
             }
         }
 
@@ -39,7 +39,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return this.Studio.GetProject(appGenerator.AppDefinition.ModelProjectName);
+                return this.Studio.GetProject(templateHelper.AppDefinition.ModelProjectName);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return this.Studio.GetProject(appGenerator.AppDefinition.DataServiceProjectName);
+                return this.Studio.GetProject(templateHelper.AppDefinition.DataServiceProjectName);
             }
         }
 
@@ -55,7 +55,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return this.Studio.GetProject(appGenerator.AppDefinition.DataServiceTestsProjectName);
+                return this.Studio.GetProject(templateHelper.AppDefinition.DataServiceTestsProjectName);
             }
         }
 
@@ -63,7 +63,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return this.Studio.GetProject(appGenerator.AppDefinition.ServiceProjectName);
+                return this.Studio.GetProject(templateHelper.AppDefinition.ServiceProjectName);
             }
         }
 
@@ -71,7 +71,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return this.Studio.GetProject(appGenerator.AppDefinition.WebProjectName);
+                return this.Studio.GetProject(templateHelper.AppDefinition.WebProjectName);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return this.Studio.GetProject(appGenerator.AppDefinition.WebCoreProjectName);
+                return this.Studio.GetProject(templateHelper.AppDefinition.WebCoreProjectName);
             }
         }
 
@@ -87,7 +87,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return this.Studio.GetProject(appGenerator.AppDefinition.ServiceTestsProjectName);
+                return this.Studio.GetProject(templateHelper.AppDefinition.ServiceTestsProjectName);
             }
         }
 
@@ -95,14 +95,14 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             get
             {
-                return this.Studio.GetProject(appGenerator.AppDefinition.TestingProjectName);
+                return this.Studio.GetProject(templateHelper.AppDefinition.TestingProjectName);
             }
         }
 
 
         public string GetGeneratedCodeFolder(DomainType domainType)
         {
-            return appGenerator.AppDefinition.GeneratedCodeRootFolderName + domainType.SubNamespace.Replace(".", @"\");
+            return templateHelper.AppDefinition.GeneratedCodeRootFolderName + domainType.SubNamespace.Replace(".", @"\");
         }
     }
 }

@@ -25,10 +25,17 @@ namespace Zirpl.Reflection
         /// <returns><see cref="DynamicAccessor"/></returns>
         public static IDynamicAccessor GetDynamicAccessor(Type type)
         {
+            // TODO: not thread safe
             if (!_DynamicAccessors.ContainsKey(type))
                 _DynamicAccessors.Add(type, new DynamicAccessor(type));
 
             return _DynamicAccessors[type];
+        }
+
+        public static IDynamicAccessorWrapper GetDynamicAccessorWrapper<T>(T context)
+        {
+            var dynamicAccessor = GetDynamicAccessor(context.GetType());
+            return new DynamicAccessorWrapper(context, dynamicAccessor);
         }
     }
 }

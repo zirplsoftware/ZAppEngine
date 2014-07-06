@@ -4,6 +4,7 @@ namespace Zirpl.Reflection
 {
     public static class ReflectionUtilities
     {
+#if !SILVERLIGHT && !PORTABLE
         public static IDynamicAccessor GetDynamicAccessorForDeclaredType<T>(this T obj)
         {
             return typeof (T).GetDynamicAccessor();
@@ -16,5 +17,10 @@ namespace Zirpl.Reflection
             }
             return typeof(Object).GetDynamicAccessor();
         }
+        public static IDynamicAccessorWrapper GetDynamicAccessorWrapper<T>(this T obj)
+        {
+            return Zirpl.Reflection.DynamicAccessorFactory.GetDynamicAccessorWrapper(obj);
+        }
+#endif
     }
 }

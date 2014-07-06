@@ -13,12 +13,12 @@
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
 <#
-	this.AppGenerator = new Zirpl.AppEngine.CodeGeneration.AppGenerator(this);
+	//this.TemplateHelper = new Zirpl.AppEngine.CodeGeneration.TemplateHelper(this);
 // Generate Model classes
 //
-foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainTypesToGenerateModelFor)
+foreach (DomainType domainType in this.TemplateHelper.DomainTypeFilters.DomainTypesToGenerateModelFor)
 {
-	this.AppGenerator.StartModelFile(domainType);
+	this.TemplateHelper.StartModelFile(domainType);
 		
 #>
 using System;
@@ -26,9 +26,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Zirpl.AppEngine.Model;
 
-namespace <#= this.AppGenerator.NamingProvider.GetModelNamespace(domainType) #>
+namespace <#= this.TemplateHelper.NamingProvider.GetModelNamespace(domainType) #>
 {
-    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= domainType.Name #> : <#= this.AppGenerator.TypeProvider.GetModelBaseClass(domainType) #>
+    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= domainType.Name #> : <#= this.TemplateHelper.TypeProvider.GetModelBaseClass(domainType) #>
     {
 <#
 	if (domainType.Properties != null)
@@ -90,7 +90,7 @@ namespace <#= this.AppGenerator.NamingProvider.GetModelNamespace(domainType) #>
 				if (property.IsRelationship
 					&& property.GenerateIdProperty)
 				{
-					var relationshipModel = this.AppGenerator.DomainTypeFilters.GetDomainTypeByFullTypeName(property.Type);
+					var relationshipModel = this.TemplateHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(property.Type);
 					string relationshipIdTypeString = !String.IsNullOrEmpty(relationshipModel.IdTypeOverride)
 													? relationshipModel.IdTypeOverride
 													: (relationshipModel.IsDictionary ? "byte" : "int");
@@ -110,5 +110,5 @@ namespace <#= this.AppGenerator.NamingProvider.GetModelNamespace(domainType) #>
 <#
 }
 
-this.AppGenerator.End();
+//this.TemplateHelper.End();
 #>

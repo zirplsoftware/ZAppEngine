@@ -84,8 +84,14 @@
     <Compile Include="..\Zirpl.Common\Reflection\DynamicAccessorFactory.cs">
       <Link>Reflection\DynamicAccessorFactory.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\DynamicAccessorWrapper.cs">
+      <Link>Reflection\DynamicAccessorWrapper.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\IDynamicAccessor.cs">
       <Link>Reflection\IDynamicAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\IDynamicAccessorWrapper.cs">
+      <Link>Reflection\IDynamicAccessorWrapper.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\ReflectionUtilities.cs">
       <Link>Reflection\ReflectionUtilities.cs</Link>

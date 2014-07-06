@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 #if !PORTABLE
@@ -95,8 +96,45 @@ namespace Zirpl
         /// <returns></returns>
         public static string ToCamelCase(this String source)
         {
-            return source.First().ToString().ToLower() + String.Join("", source.Skip(1));
+            if (String.IsNullOrEmpty(source))
+            {
+                return source;
+            }
+            else if (source.Length == 1)
+            {
+                return source.ToLower();
+            }
+            else
+            {
+                return source[0].ToString().ToLower() + String.Join("", source.Substring(1));    
+            }
         }
+        
+#if !PORTABLE
+        /// <summary>
+        /// Converts to Camel casing.
+        /// "FooBar" becomes "fooBar"
+        /// "Foobar becomes "foobar"
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string ToCamelCase(this String source, CultureInfo cultureInfo)
+        {
+            if (String.IsNullOrEmpty(source))
+            {
+                return source;
+            }
+            else if (source.Length == 1)
+            {
+                return source.ToLower(cultureInfo);
+            }
+            else
+            {
+                return source[0].ToString().ToLower(cultureInfo) + String.Join("", source.Substring(1));
+            }
+        }
+
+#endif
         /// <summary>
         /// Converts to pascal casing.
         /// "fooBar" becomes "FooBar"
@@ -106,9 +144,44 @@ namespace Zirpl
         /// <returns></returns>
         public static string ToPascalCase(this String source)
         {
-            return source.First().ToString().ToUpper() + String.Join("", source.Skip(1));
+            if (String.IsNullOrEmpty(source))
+            {
+                return source;
+            }
+            else if (source.Length == 1)
+            {
+                return source.ToUpper();
+            }
+            else
+            {
+                return source[0].ToString().ToUpper() + String.Join("", source.Substring(1));
+            }
         }
 
+#if !PORTABLE
+        /// <summary>
+        /// Converts to pascal casing.
+        /// "fooBar" becomes "FooBar"
+        /// "foobar" becomes "Foobar"
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string ToPascalCase(this String source, CultureInfo cultureInfo)
+        {
+            if (String.IsNullOrEmpty(source))
+            {
+                return source;
+            }
+            else if (source.Length == 1)
+            {
+                return source.ToUpper(cultureInfo);
+            }
+            else
+            {
+                return source[0].ToString().ToUpper(cultureInfo) + String.Join("", source.Substring(1));
+            }
+        }
+#endif
         /// <summary>
         /// Parses a camel cased or pascal cased string and returns an array of the words within the string.
         /// </summary>
@@ -125,7 +198,7 @@ namespace Zirpl
             if (source.Length == 0)
                 return new string[] { "" };
 
-            StringCollection words = new StringCollection();
+            List<String> words = new List<String>();
             int wordStartIndex = 0;
 
             char[] letters = source.ToCharArray();

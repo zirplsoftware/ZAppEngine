@@ -54,7 +54,9 @@
     <Compile Include="Reflection\AssemblyExtensions.cs" />
     <Compile Include="Reflection\DynamicAccessor.cs" />
     <Compile Include="Reflection\DynamicAccessorFactory.cs" />
+    <Compile Include="Reflection\DynamicAccessorWrapper.cs" />
     <Compile Include="Reflection\IDynamicAccessor.cs" />
+    <Compile Include="Reflection\IDynamicAccessorWrapper.cs" />
     <Compile Include="Reflection\ReflectionUtilities.cs" />
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Stats\EloRating\EloMatch.cs" />

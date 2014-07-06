@@ -46,13 +46,20 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
     /// <author>R. Leupold</author>
     public class TemplateFileManager
     {
+        private readonly Action<string> checkOutAction;
+        private readonly Action<IEnumerable<OutputFile>> projectSyncAction;
+        private readonly List<string> templatePlaceholderList = new List<string>();
+        private readonly List<TextBlock> files = new List<TextBlock>();
+        private readonly TextBlock footer = new TextBlock();
+        private readonly TextBlock header = new TextBlock();
+        private readonly DynamicTextTransformation _textTransformation;
+        private readonly StringBuilder _generationEnvironment; // reference to the GenerationEnvironment StringBuilder on the TextTransformation object
+        private TextBlock currentBlock;
+        
+        public DynamicTextTransformation TextTransformation { get { return this._textTransformation; } }
         public ProjectItem TemplateProjectItem { get; private set; }
         public DTE Studio { get; private set; }
-
-        private Action<string> checkOutAction;
-        private Action<IEnumerable<OutputFile>> projectSyncAction;
-        private List<string> templatePlaceholderList = new List<string>();
-
+        
         ///// <summary>
         ///// Creates files with VS sync
         ///// </summary>
@@ -62,19 +69,6 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         //    IDynamicHost host = transformation.Host;
         //    return new TemplateFileManager(transformation);
         //}
-
-        private readonly List<TextBlock> files = new List<TextBlock>();
-        private readonly TextBlock footer = new TextBlock();
-        private readonly TextBlock header = new TextBlock();
-        private readonly DynamicTextTransformation _textTransformation;
-        public DynamicTextTransformation TextTransformation { get { return this._textTransformation; } }
-
-
-        // reference to the GenerationEnvironment StringBuilder on the
-        // TextTransformation object
-        private readonly StringBuilder _generationEnvironment;
-
-        private TextBlock currentBlock;
 
         /// <summary>
         /// Initializes an TemplateFileManager Instance  with the
@@ -96,8 +90,13 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
                 throw new ArgumentNullException("Could not obtain hostServiceProvider");
             }
 
-            Studio = (EnvDTE.DTE)hostServiceProvider.GetService(typeof(EnvDTE.DTE));
-            if (Studio == null)
+            // Get an instance of the currently running Visual Studio IDE.
+            //EnvDTE80.DTE2 dte2;
+            //dte2 = (EnvDTE80.DTE2)System.Runtime.InteropServices.Marshal.
+            //GetActiveObject("VisualStudio.DTE.12.0");
+
+            this.Studio = (EnvDTE.DTE)hostServiceProvider.GetService(typeof(EnvDTE.DTE));
+            if (this.Studio == null)
             {
                 throw new ArgumentNullException("Could not obtain DTE from host");
             }
@@ -106,8 +105,8 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             this.CanOverrideExistingFile = true;
             this.IsAutoIndentEnabled = false;
             this.Encoding = System.Text.Encoding.UTF8;
-            checkOutAction = fileName => Studio.SourceControl.CheckOutItem(fileName);
-            projectSyncAction = keepFileNames => ProjectSync(TemplateProjectItem, keepFileNames);
+            this.checkOutAction = fileName => Studio.SourceControl.CheckOutItem(fileName);
+            this.projectSyncAction = keepFileNames => ProjectSync(TemplateProjectItem, keepFileNames);
         }
 
         /// <summary>

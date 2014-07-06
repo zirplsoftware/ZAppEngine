@@ -13,8 +13,10 @@ using Zirpl.AppEngine.CodeGeneration.Transformation;
 
 namespace Zirpl.AppEngine.CodeGeneration
 {
-    public class AppGenerator
+    public class TemplateHelper
     {
+        //private static TemplateHelper instance;
+
         public TemplateFileManager FileManager { get; private set; }
         public AppDefinition AppDefinition { get; private set; }
         public NamingProvider NamingProvider { get; private set; }
@@ -32,10 +34,10 @@ namespace Zirpl.AppEngine.CodeGeneration
 
 
 
-        public AppGenerator(Object textTransformation)
+        private TemplateHelper(TextTransformation callingTemplate)
         {
             //this.TextTransformation = textTransformation;
-            this.FileManager = new TemplateFileManager(textTransformation);
+            this.FileManager = new TemplateFileManager(callingTemplate);
             this.NamingProvider = new NamingProvider(this);
             this.DomainTypeFilters = new DomainTypeFilters(this);
             this.TypeProvider = new TypeProvider(this);
@@ -78,14 +80,14 @@ namespace Zirpl.AppEngine.CodeGeneration
             //var vsProject = project.Object as VSLangProj.VSProject;
         }
 
-        public void GenerateApp(global::Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost host)
-        {
-            var modelTransform = new Zirpl.AppEngine.CodeGeneration.ModelTransform(host, this);
-            this.FileManager.TextTransformation.Write(modelTransform.TransformText());
-            var modelMetadataTransform = new Zirpl.AppEngine.CodeGeneration.ModelMetadataTransform(host, this);
-            this.FileManager.TextTransformation.Write(modelMetadataTransform.TransformText());
-            this.End();
-        }
+        //public void GenerateApp(global::Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost host)
+        //{
+        //    var modelTransform = new Zirpl.AppEngine.CodeGeneration.ModelTransform(host, this);
+        //    this.FileManager.TextTransformation.Write(modelTransform.TransformText());
+        //    var modelMetadataTransform = new Zirpl.AppEngine.CodeGeneration.ModelMetadataTransform(host, this);
+        //    this.FileManager.TextTransformation.Write(modelMetadataTransform.TransformText());
+        //    this.End();
+        //}
 
         public void StartModelFile(DomainType domainType)
         {

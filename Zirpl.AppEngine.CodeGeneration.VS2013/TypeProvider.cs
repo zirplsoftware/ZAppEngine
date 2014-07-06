@@ -9,11 +9,11 @@ namespace Zirpl.AppEngine.CodeGeneration
 {
     public class TypeProvider
     {
-        public AppGenerator appGenerator;
+        private TemplateHelper templateHelper;
 
-        public TypeProvider(AppGenerator appGenerator)
+        public TypeProvider(TemplateHelper templateHelper)
         {
-            this.appGenerator = appGenerator;
+            this.templateHelper = templateHelper;
         }
 
         public string GetModelBaseClass(DomainType domainType)
@@ -42,7 +42,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             return domainType.IsDictionary
                 ? string.Format("DictionaryEntityDataService<{0}, {1}, {0}Enum>, I{0}DataService", domainType.Name, this.GetIdClass(domainType))
-                : string.Format("DbContextDataServiceBase<{2}, {0}, {1}>, I{0}DataService", domainType.Name, this.GetIdClass(domainType), appGenerator.AppDefinition.DataContextName);
+                : string.Format("DbContextDataServiceBase<{2}, {0}, {1}>, I{0}DataService", domainType.Name, this.GetIdClass(domainType), templateHelper.AppDefinition.DataContextName);
         }
         public string GetDataServiceTestsBaseClass(DomainType domainType)
         {
@@ -71,7 +71,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             return domainType.IsDictionary
                 ? string.Format("DictionaryEntityService<{0}, {1}, {0}Enum>, I{0}Service", domainType.Name, this.GetIdClass(domainType))
-                : string.Format("DbContextServiceBase<{2}, {0}, {1}>, I{0}Service", domainType.Name, this.GetIdClass(domainType), appGenerator.AppDefinition.DataContextName);
+                : string.Format("DbContextServiceBase<{2}, {0}, {1}>, I{0}Service", domainType.Name, this.GetIdClass(domainType), templateHelper.AppDefinition.DataContextName);
         }
         public string GetServiceTestsBaseClass(DomainType domainType)
         {
@@ -82,7 +82,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         public string GetSupportViewModelBaseClass(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
-                    ? appGenerator.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name + "Model"
+                    ? templateHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name + "Model"
                     : domainType.IsDictionary
                         ? string.Format("DictionaryEntityModelBase<{0}>", this.GetIdClass(domainType))
                         : string.Format("AuditableModelBase<{0}>", this.GetIdClass(domainType));
@@ -90,7 +90,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         public string GetSupportViewModelMetadataBaseClass(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
-                    ? appGenerator.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name + "ModelMetadata"
+                    ? templateHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name + "ModelMetadata"
                     : domainType.IsDictionary
                         ? ""
                         : "AuditableModelBaseMetadata";
@@ -98,7 +98,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         public string GetValidatorBaseClass(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
-                    ? string.Format("{0}Validator<{1}>", appGenerator.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name, domainType.Name)
+                    ? string.Format("{0}Validator<{1}>", templateHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name, domainType.Name)
                     : domainType.IsAbstract
                         ? string.Format("DbEntityValidatorBase<T> where T: {0}", domainType.Name)
                         : string.Format("DbEntityValidatorBase<{0}>", domainType.Name);

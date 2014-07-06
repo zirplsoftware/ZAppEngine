@@ -74,20 +74,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppGenerator.cs" />
+    <Compile Include="TemplateHelper.cs" />
     <Compile Include="CodeGenerationHelper.cs" />
     <Compile Include="ConfigModel\XmlModelBase.cs" />
-    <Compile Include="ModelMetadataTransform.cs">
-      <DependentUpon>ModelMetadataTransform.tt</DependentUpon>
+    <Compile Include="Templates\IPreprocessedTextTransformation.cs" />
+    <Compile Include="Templates\ModelMetadataTemplate.cs">
+      <DependentUpon>ModelMetadataTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ModelTransform.cs">
-      <DependentUpon>ModelTransform.tt</DependentUpon>
+    <Compile Include="Templates\ModelTemplate.cs">
+      <DependentUpon>ModelTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ModelTransform_partial.cs" />
+    <Compile Include="Templates\Templates_partial.cs" />
     <Compile Include="TypeProvider.cs" />
     <Compile Include="ConfigModel\AppDefinition.cs" />
     <Compile Include="ConfigModel\DataServiceOptions.cs" />
@@ -98,10 +99,10 @@
     <Compile Include="ConfigModel\ServiceOptions.cs" />
     <Compile Include="ConfigModel\WebOptions.cs" />
     <Compile Include="DomainTypeFilters.cs" />
-    <Compile Include="ModelEnumTransform.cs">
+    <Compile Include="Templates\ModelEnumTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEnumTransform.tt</DependentUpon>
+      <DependentUpon>ModelEnumTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="NamingProvider.cs" />
     <Compile Include="ProjectProvider.cs" />
@@ -125,17 +126,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ModelMetadataTransform.tt">
+    <None Include="Templates\ModelMetadataTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelMetadataTransform.cs</LastGenOutput>
+      <LastGenOutput>ModelMetadataTemplate.cs</LastGenOutput>
     </None>
-    <None Include="ModelTransform.tt">
+    <None Include="Templates\ModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelTransform.cs</LastGenOutput>
+      <LastGenOutput>ModelTemplate.cs</LastGenOutput>
     </None>
-    <None Include="ModelEnumTransform.tt">
+    <None Include="Templates\ModelEnumTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelEnumTransform.cs</LastGenOutput>
+      <LastGenOutput>ModelEnumTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

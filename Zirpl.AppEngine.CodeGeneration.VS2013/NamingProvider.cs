@@ -10,48 +10,48 @@ namespace Zirpl.AppEngine.CodeGeneration
 {
     public class NamingProvider
     {
-        private AppGenerator appGenerator;
+        private TemplateHelper templateHelper;
 
-        public NamingProvider(AppGenerator appGenerator)
+        public NamingProvider(TemplateHelper templateHelper)
         {
-            this.appGenerator = appGenerator;
+            this.templateHelper = templateHelper;
         }
 
         #region namespaces
 
         public string GetModelNamespace(DomainType domainType)
         {
-            return appGenerator.ProjectProvider.ModelProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+            return templateHelper.ProjectProvider.ModelProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public string GetDataServiceNamespace(DomainType domainType)
         {
-            return appGenerator.ProjectProvider.DataServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+            return templateHelper.ProjectProvider.DataServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public string GetDataServiceTestsNamespace(DomainType domainType)
         {
-            return appGenerator.ProjectProvider.DataServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+            return templateHelper.ProjectProvider.DataServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public string GetServiceNamespace(DomainType domainType)
         {
-            return appGenerator.ProjectProvider.ServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+            return templateHelper.ProjectProvider.ServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public string GetTestingNamespace(DomainType domainType)
         {
-            return appGenerator.ProjectProvider.TestingProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+            return templateHelper.ProjectProvider.TestingProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public string GetServiceTestsNamespace(DomainType domainType)
         {
-            return appGenerator.ProjectProvider.ServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+            return templateHelper.ProjectProvider.ServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public string GetSupportViewModelNamespace(DomainType domainType)
         {
             return domainType.IsDictionary
-                ? appGenerator.ProjectProvider.WebProject.GetDefaultNamespace() + ".Models" // + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace)
-                : appGenerator.ProjectProvider.ModelProject.GetDefaultNamespace() + ".Areas.Support.Models"; // + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+                ? templateHelper.ProjectProvider.WebProject.GetDefaultNamespace() + ".Models" // + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace)
+                : templateHelper.ProjectProvider.ModelProject.GetDefaultNamespace() + ".Areas.Support.Models"; // + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public string GetSupportControllerNamespace(DomainType domainType)
         {
-            return appGenerator.ProjectProvider.ModelProject.GetDefaultNamespace() + ".Areas.Support.Controllers";
+            return templateHelper.ProjectProvider.ModelProject.GetDefaultNamespace() + ".Areas.Support.Controllers";
         }
         #endregion
 

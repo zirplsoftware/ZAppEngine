@@ -13,23 +13,23 @@
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
 <#
-var helper = new AppGenerator(this);
+//var helper = new AppGenerator(this);
 
 // now we create the dictionary enums
 //
-foreach (DomainType domainType in helper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
+foreach (DomainType domainType in this.TemplateHelper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
 {
-	helper.StartEnumFile(domainType);
+	this.TemplateHelper.StartEnumFile(domainType);
 	
 #>
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Zirpl.AppFramework.Model;
+using Zirpl.AppEngine.Model;
 
-namespace <#= helper.NamingProvider.GetModelNamespace(domainType) #>
+namespace <#= this.TemplateHelper.NamingProvider.GetModelNamespace(domainType) #>
 {
-    public enum <#= domainType.Name #>Enum : <#= helper.TypeProvider.GetIdClass(domainType) #>
+    public enum <#= domainType.Name #>Enum : <#= this.TemplateHelper.TypeProvider.GetIdClass(domainType) #>
     {
 <#
 	if (domainType.EnumValueEntries != null)
@@ -50,5 +50,5 @@ namespace <#= helper.NamingProvider.GetModelNamespace(domainType) #>
 <#
 }
 
-helper.End();
+//this.TemplateHelper.End();
 #>

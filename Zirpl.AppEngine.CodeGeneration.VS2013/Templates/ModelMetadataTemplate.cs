@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration
+namespace Zirpl.AppEngine.CodeGeneration.Templates
 {
     using System;
     using System.Collections;
@@ -21,9 +21,9 @@ namespace Zirpl.AppEngine.CodeGeneration
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ModelMetadataTransform : ModelMetadataTransformBase
+    public partial class ModelMetadataTemplate : ModelMetadataTemplateBase
     {
 #line hidden
         /// <summary>
@@ -32,13 +32,13 @@ namespace Zirpl.AppEngine.CodeGeneration
         public virtual string TransformText()
         {
             
-            #line 15 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 15 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
 // now we create the metadata classes
 //
-foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainTypesToGenerateMetadataFor)
+foreach (DomainType domainType in this.TemplateHelper.DomainTypeFilters.DomainTypesToGenerateMetadataFor)
 {
-	this.AppGenerator.StartMetadataFile(domainType);
+	this.TemplateHelper.StartMetadataFile(domainType);
 	
 
             
@@ -47,35 +47,35 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             this.Write("using System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nusin" +
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.AppGenerator.NamingProvider.GetModelNamespace(domainType)));
+            #line 28 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TemplateHelper.NamingProvider.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.IsAbstract ? " abstract" : ""));
             
             #line default
             #line hidden
             this.Write(" partial class ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata : ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.AppGenerator.TypeProvider.GetMetadataBaseClass(domainType)));
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TemplateHelper.TypeProvider.GetMetadataBaseClass(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
 	if (domainType.Properties != null)
 	{
@@ -87,35 +87,35 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             #line hidden
             this.Write("        public const string ");
             
-            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_Name = \"");
             
-            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("\";\r\n\t\tpublic const bool ");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsRequired = ");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired.ToString().ToLowerInvariant()));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
 			if (!property.IsCollection
 				&& property.Type.ToLowerInvariant() == "string")
@@ -126,49 +126,49 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             #line hidden
             this.Write("\t\tpublic const bool ");
             
-            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsMaxLength = ");
             
-            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.IsMaxLength.ToString().ToLowerInvariant()));
             
             #line default
             #line hidden
             this.Write(";\r\n        public const int ");
             
-            #line 46 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 46 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MinLength = ");
             
-            #line 46 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 46 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinLength) ? property.MinLength : (property.IsRequired ? "1" : "0")));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\tpublic const int ");
             
-            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxLength = ");
             
-            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxLength) ? property.MaxLength : "MetadataBase.MaxLength"));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
 			}
 			if (!property.IsCollection
@@ -180,35 +180,35 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             #line hidden
             this.Write("\t\tpublic const int ");
             
-            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MinValue = ");
             
-            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "int.MinValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n        public const int ");
             
-            #line 55 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 55 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxValue = ");
             
-            #line 55 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 55 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "int.MaxValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
 			}
 			if (!property.IsCollection
@@ -221,63 +221,63 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             #line hidden
             this.Write("\t\tpublic const decimal ");
             
-            #line 63 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 63 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MinValue = ");
             
-            #line 63 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 63 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n        public const decimal ");
             
-            #line 64 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 64 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxValue = ");
             
-            #line 64 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 64 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\tpublic const double ");
             
-            #line 65 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 65 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MinValue_Double = ");
             
-            #line 65 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 65 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n        public const double ");
             
-            #line 66 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 66 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxValue_Double = ");
             
-            #line 66 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 66 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 67 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 67 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
 			}
 			if (!property.IsCollection
@@ -289,63 +289,63 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             #line hidden
             this.Write("\t\tpublic const double ");
             
-            #line 73 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 73 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MinValue = ");
             
-            #line 73 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 73 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n        public const double ");
             
-            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxValue = ");
             
-            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\tpublic const decimal ");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MinValue_Decimal = ");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n        public const decimal ");
             
-            #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxValue_Decimal = ");
             
-            #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue"));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 77 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 77 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
             }
 
@@ -354,7 +354,7 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             #line hidden
             this.Write("\r\n");
             
-            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
 			if (!property.IsCollection
 				&& property.IsRelationship
@@ -367,35 +367,35 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             #line hidden
             this.Write("\t\tpublic const string ");
             
-            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id_Name = \"");
             
-            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id\";\r\n\t\tpublic const bool ");
             
-            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id_IsRequired = ");
             
-            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired.ToString().ToLowerInvariant()));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n");
             
-            #line 91 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 91 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
             }
 		}
@@ -406,7 +406,7 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
             #line hidden
             this.Write("\t}\r\n}\r\n");
             
-            #line 98 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\ModelMetadataTransform.tt"
+            #line 98 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\Templates\ModelMetadataTemplate.tt"
 
 }
 
@@ -440,7 +440,7 @@ foreach (DomainType domainType in this.AppGenerator.DomainTypeFilters.DomainType
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class ModelMetadataTransformBase
+    public class ModelMetadataTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

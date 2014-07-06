@@ -9,18 +9,18 @@ namespace Zirpl.AppEngine.CodeGeneration
 {
     public class CodeGenerationHelper
     {
-        public AppGenerator appGenerator;
+        private TemplateHelper templateHelper;
 
-        public CodeGenerationHelper(AppGenerator appGenerator)
+        public CodeGenerationHelper(TemplateHelper templateHelper)
         {
-            this.appGenerator = appGenerator;
+            this.templateHelper = templateHelper;
         }
 
         public string GetKendoUIModelDeclarationForProperty(Property property, string returnValue = "")
         {
             if (property.IsRelationship)
             {
-                var type = this.appGenerator.DomainTypeFilters.GetDomainTypeByFullTypeName(property.Type);
+                var type = this.templateHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(property.Type);
                 if (type.WebOptions.GenerateSupportIndexView)
                 {
                     returnValue = String.Format("{0}{1}: {{   }}", returnValue, property.Name);
