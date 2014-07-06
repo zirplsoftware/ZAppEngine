@@ -34,7 +34,7 @@ namespace Zirpl.AppEngine.CodeGeneration
 
 
 
-        private TemplateHelper(TextTransformation callingTemplate)
+        public TemplateHelper(TextTransformation callingTemplate)
         {
             //this.TextTransformation = textTransformation;
             this.FileManager = new TemplateFileManager(callingTemplate);
