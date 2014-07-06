@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppModel
+namespace Zirpl.AppEngine.CodeGeneration.ConfigModel
 {
-    public class ModelOptions
+    public class ModelOptions : XmlModelBase
     {
         public ModelOptions()
         {
@@ -15,9 +16,13 @@ namespace Zirpl.AppEngine.CodeGeneration.AppModel
             this.GenerateEnum = true;
             this.GenerateSupportViewModel = true;
         }
+        [XmlAttribute]
         public bool GenerateModel { get; set; }
+        [XmlAttribute]
         public bool GenerateMetadata { get; set; }
+        [XmlAttribute]
         public bool GenerateEnum { get; set; }
+        [XmlAttribute]
         public bool GenerateSupportViewModel { get; set; }
     }
 }

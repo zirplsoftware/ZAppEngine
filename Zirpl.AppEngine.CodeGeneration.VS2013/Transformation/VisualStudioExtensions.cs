@@ -103,7 +103,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             else if (String.IsNullOrEmpty(block.FolderName) == false)
             {
                 //var items =GetAllProjectItemsRecursive(
-                //	dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).ToList();
+                //	Studio.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).ToList();
                 //item = items.Where(i=>i.Name == block.FolderName).First();
                 item = EnsureProjectFolderExists(block.FolderName, dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems);
             }
@@ -126,6 +126,11 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
                 }
             }
             return null;
+        }
+
+        public static String GetDefaultNamespace(this Project project)
+        {
+            return project.Properties.Item("DefaultNamespace").Value.ToString();
         }
 
         private static ProjectItem EnsureProjectFolderExists(string projectPath, ProjectItems projectItems, bool isFullPath = true)
@@ -202,7 +207,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             else if (String.IsNullOrEmpty(file.FolderName) == false)
             {
                 //item = GetAllProjectItemsRecursive(
-                //	dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
+                //	Studio.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
                 //	Where(i=>i.Name == file.FolderName).First();
                 item = EnsureProjectFolderExists(file.FolderName, dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems);
             }

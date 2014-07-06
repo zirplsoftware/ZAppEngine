@@ -75,14 +75,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppGenerator.cs" />
-    <Compile Include="AppModel\AppDefinition.cs" />
-    <Compile Include="AppModel\DataServiceOptions.cs" />
-    <Compile Include="AppModel\DomainType.cs" />
-    <Compile Include="AppModel\DomainTypeProperty.cs" />
-    <Compile Include="AppModel\EnumValueEntry.cs" />
-    <Compile Include="AppModel\ModelOptions.cs" />
-    <Compile Include="AppModel\ServiceOptions.cs" />
-    <Compile Include="AppModel\WebOptions.cs" />
+    <Compile Include="CodeGenerationHelper.cs" />
+    <Compile Include="ConfigModel\XmlModelBase.cs" />
+    <Compile Include="ModelMetadataTransform.cs">
+      <DependentUpon>ModelMetadataTransform.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ModelTransform.cs">
+      <DependentUpon>ModelTransform.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ModelTransform_partial.cs" />
+    <Compile Include="TypeProvider.cs" />
+    <Compile Include="ConfigModel\AppDefinition.cs" />
+    <Compile Include="ConfigModel\DataServiceOptions.cs" />
+    <Compile Include="ConfigModel\DomainType.cs" />
+    <Compile Include="ConfigModel\Property.cs" />
+    <Compile Include="ConfigModel\Entry.cs" />
+    <Compile Include="ConfigModel\ModelOptions.cs" />
+    <Compile Include="ConfigModel\ServiceOptions.cs" />
+    <Compile Include="ConfigModel\WebOptions.cs" />
+    <Compile Include="DomainTypeFilters.cs" />
+    <Compile Include="ModelEnumTransform.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelEnumTransform.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NamingProvider.cs" />
+    <Compile Include="ProjectProvider.cs" />
     <Compile Include="Transformation\OutputFileProperties.cs" />
     <Compile Include="Transformation\ParamTextTemplate.cs">
       <SubType>Code</SubType>
@@ -102,7 +124,26 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ModelMetadataTransform.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ModelMetadataTransform.cs</LastGenOutput>
+    </None>
+    <None Include="ModelTransform.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ModelTransform.cs</LastGenOutput>
+    </None>
+    <None Include="ModelEnumTransform.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ModelEnumTransform.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.Common\Zirpl.Common.csproj">
+      <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
+      <Name>Zirpl.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

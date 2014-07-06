@@ -46,26 +46,29 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
     /// <author>R. Leupold</author>
     public class TemplateFileManager
     {
-        private EnvDTE.ProjectItem templateProjectItem;
+        public ProjectItem TemplateProjectItem { get; private set; }
+        public DTE Studio { get; private set; }
+
         private Action<string> checkOutAction;
         private Action<IEnumerable<OutputFile>> projectSyncAction;
-        private EnvDTE.DTE dte;
         private List<string> templatePlaceholderList = new List<string>();
 
-        /// <summary>
-        /// Creates files with VS sync
-        /// </summary>
-        public static TemplateFileManager Create(object textTransformation)
-        {
-            DynamicTextTransformation transformation = DynamicTextTransformation.Create(textTransformation);
-            IDynamicHost host = transformation.Host;
-            return new TemplateFileManager(transformation);
-        }
+        ///// <summary>
+        ///// Creates files with VS sync
+        ///// </summary>
+        //public static TemplateFileManager Create(object textTransformation)
+        //{
+        //    DynamicTextTransformation transformation = DynamicTextTransformation.Create(textTransformation);
+        //    IDynamicHost host = transformation.Host;
+        //    return new TemplateFileManager(transformation);
+        //}
 
         private readonly List<TextBlock> files = new List<TextBlock>();
         private readonly TextBlock footer = new TextBlock();
         private readonly TextBlock header = new TextBlock();
         private readonly DynamicTextTransformation _textTransformation;
+        public DynamicTextTransformation TextTransformation { get { return this._textTransformation; } }
+
 
         // reference to the GenerationEnvironment StringBuilder on the
         // TextTransformation object
@@ -77,7 +80,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         /// Initializes an TemplateFileManager Instance  with the
         /// TextTransformation (T4 generated class) that is currently running
         /// </summary>
-        private TemplateFileManager(object textTransformation)
+        public TemplateFileManager(object textTransformation)
         {
             if (textTransformation == null)
             {
@@ -93,18 +96,18 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
                 throw new ArgumentNullException("Could not obtain hostServiceProvider");
             }
 
-            dte = (EnvDTE.DTE)hostServiceProvider.GetService(typeof(EnvDTE.DTE));
-            if (dte == null)
+            Studio = (EnvDTE.DTE)hostServiceProvider.GetService(typeof(EnvDTE.DTE));
+            if (Studio == null)
             {
                 throw new ArgumentNullException("Could not obtain DTE from host");
             }
 
-            this.templateProjectItem = dte.Solution.FindProjectItem(_textTransformation.Host.TemplateFile);
+            this.TemplateProjectItem = Studio.Solution.FindProjectItem(_textTransformation.Host.TemplateFile);
             this.CanOverrideExistingFile = true;
             this.IsAutoIndentEnabled = false;
             this.Encoding = System.Text.Encoding.UTF8;
-            checkOutAction = fileName => dte.SourceControl.CheckOutItem(fileName);
-            projectSyncAction = keepFileNames => ProjectSync(templateProjectItem, keepFileNames);
+            checkOutAction = fileName => Studio.SourceControl.CheckOutItem(fileName);
+            projectSyncAction = keepFileNames => ProjectSync(TemplateProjectItem, keepFileNames);
         }
 
         /// <summary>
@@ -123,7 +126,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         /// Defines Encoding format for generated output file. (Default UTF8)
         /// </summary>
         /// <returns></returns>
-        public System.Text.Encoding Encoding { get; set; }
+        public Encoding Encoding { get; set; }
 
         /// <summary>
         /// Marks the end of the last file if there was one, and starts a new
@@ -133,8 +136,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         /// <param name="projectName">Name of the target project for the new file.</param>
         /// <param name="folderName">Name of the target folder for the new file.</param>
         /// <param name="fileProperties">File property settings in vs for the new File</param>
-        public void StartNewFile(string name
-            , string projectName = "", string folderName = "", OutputFileProperties fileProperties = null)
+        public void StartNewFile(string name, string projectName = "", string folderName = "", OutputFileProperties fileProperties = null)
         {
             if (String.IsNullOrWhiteSpace(name) == true)
             {
@@ -147,6 +149,19 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
                 ProjectName = projectName,
                 FolderName = folderName
             };
+        }
+
+        /// <summary>
+        /// Marks the end of the last file if there was one, and starts a new
+        /// and marks this point in generation as a new file.
+        /// </summary>
+        /// <param name="name">Filename</param>
+        /// <param name="projectName">Name of the target project for the new file.</param>
+        /// <param name="folderName">Name of the target folder for the new file.</param>
+        /// <param name="fileProperties">File property settings in vs for the new File</param>
+        public void StartNewFile(string name, Project project, string folderName = "", OutputFileProperties fileProperties = null)
+        {
+            this.StartNewFile(name, project.Name, folderName, fileProperties);
         }
 
         public void StartFooter()
@@ -193,7 +208,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
 
                 foreach (var block in files)
                 {
-                    var outputPath = dte.GetOutputPath(block, Path.GetDirectoryName(_textTransformation.Host.TemplateFile));
+                    var outputPath = Studio.GetOutputPath(block, Path.GetDirectoryName(_textTransformation.Host.TemplateFile));
                     var fileName = Path.Combine(outputPath, block.Name);
                     var content = this.ReplaceParameter(headerText, block) +
                     _generationEnvironment.ToString(block.Start, block.Length) +
@@ -216,7 +231,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
 
             projectSyncAction.EndInvoke(projectSyncAction.BeginInvoke(list, null, null));
             this.CleanUpTemplatePlaceholders();
-            var items = this.dte.GetOutputFilesAsProjectItems(list);
+            var items = this.Studio.GetOutputFilesAsProjectItems(list);
             this.WriteVsProperties(items, list);
 
             if (this.IsAutoIndentEnabled == true && split == true)
@@ -234,7 +249,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             foreach (var item in items)
             {
                 this._textTransformation.WriteLine(
-                this.dte.ExecuteVsCommand(item, "Edit.FormatDocument")); //, "Edit.RemoveAndSort"));
+                this.Studio.ExecuteVsCommand(item, "Edit.FormatDocument")); //, "Edit.RemoveAndSort"));
                 this._textTransformation.WriteLine("//-> " + item.Name);
             }
         }
@@ -299,14 +314,14 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         private void CleanUpTemplatePlaceholders()
         {
             string[] activeTemplateFullNames = this.templatePlaceholderList.ToArray();
-            string[] allHelperTemplateFullNames = this.dte.GetAllProjectItemsRecursive()
-                .Where(p => p.Name == this.templateProjectItem.GetTemplatePlaceholderName())
+            string[] allHelperTemplateFullNames = this.Studio.GetAllProjectItemsRecursive()
+                .Where(p => p.Name == this.TemplateProjectItem.GetTemplatePlaceholderName())
                 .Select(p => p.GetFullPath())
                 .ToArray();
 
             var delta = allHelperTemplateFullNames.Except(activeTemplateFullNames).ToArray();
 
-            var dirtyHelperTemplates = this.dte.GetAllProjectItemsRecursive()
+            var dirtyHelperTemplates = this.Studio.GetAllProjectItemsRecursive()
                 .Where(p => delta.Contains(p.GetFullPath()));
 
             foreach (ProjectItem item in dirtyHelperTemplates)
@@ -323,29 +338,29 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             }
         }
 
-        /// <summary>
-        /// Gets a list of helper templates from the log.
-        /// </summary>
-        /// <returns>List of generated helper templates.</returns>
-        private string[] GetPreviousTemplatePlaceholdersFromLog()
-        {
-            string path = Path.GetDirectoryName(this._textTransformation.Host.ResolvePath(this._textTransformation.Host.TemplateFile));
-            string file1 = Path.GetFileNameWithoutExtension(this._textTransformation.Host.TemplateFile) + ".txt";
-            string contentPrevious = File.ReadAllText(Path.Combine(path, file1));
+        ///// <summary>
+        ///// Gets a list of helper templates from the log.
+        ///// </summary>
+        ///// <returns>List of generated helper templates.</returns>
+        //private string[] GetPreviousTemplatePlaceholdersFromLog()
+        //{
+        //    string path = Path.GetDirectoryName(this._textTransformation.Host.ResolvePath(this._textTransformation.Host.TemplateFile));
+        //    string file1 = Path.GetFileNameWithoutExtension(this._textTransformation.Host.TemplateFile) + ".txt";
+        //    string contentPrevious = File.ReadAllText(Path.Combine(path, file1));
 
-            var result = contentPrevious
-                  .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
-                  .Select(x => x.Split(new[] { "=>" }, StringSplitOptions.RemoveEmptyEntries).First())
-                  .Select(x => Regex.Replace(x, "//", String.Empty).Trim())
-                  .Where(x => x.EndsWith(this.templateProjectItem.GetTemplatePlaceholderName()))
-                  .ToArray();
+        //    var result = contentPrevious
+        //          .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+        //          .Select(x => x.Split(new[] { "=>" }, StringSplitOptions.RemoveEmptyEntries).First())
+        //          .Select(x => Regex.Replace(x, "//", String.Empty).Trim())
+        //          .Where(x => x.EndsWith(this.TemplateProjectItem.GetTemplatePlaceholderName()))
+        //          .ToArray();
 
-            return result;
-        }
+        //    return result;
+        //}
 
         private string GetDirectorySolutionRelative(string fullName)
         {
-            int slnPos = fullName.IndexOf(Path.GetFileNameWithoutExtension(this.dte.Solution.FileName));
+            int slnPos = fullName.IndexOf(Path.GetFileNameWithoutExtension(this.Studio.Solution.FileName));
             if (slnPos < 0)
             {
                 slnPos = 0;
@@ -392,7 +407,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             }
         }
 
-        private void ProjectSync(EnvDTE.ProjectItem templateProjectItem, IEnumerable<OutputFile> keepFileNames)
+        private void ProjectSync(ProjectItem templateProjectItem, IEnumerable<OutputFile> keepFileNames)
         {
             var groupedFileNames = from f in keepFileNames
                                    group f by new { f.ProjectName, f.FolderName }
@@ -424,7 +439,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             }
         }
 
-        private static void ProjectSyncPart(EnvDTE.ProjectItem templateProjectItem, IEnumerable<OutputFile> keepFileNames)
+        private static void ProjectSyncPart(ProjectItem templateProjectItem, IEnumerable<OutputFile> keepFileNames)
         {
             var keepFileNameSet = new HashSet<OutputFile>(keepFileNames);
             var projectFiles = new Dictionary<string, EnvDTE.ProjectItem>();
@@ -458,9 +473,9 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
 
         private void CheckoutFileIfRequired(string fileName)
         {
-            if (dte.SourceControl == null
-                || !dte.SourceControl.IsItemUnderSCC(fileName)
-                    || dte.SourceControl.IsItemCheckedOut(fileName))
+            if (Studio.SourceControl == null
+                || !Studio.SourceControl.IsItemUnderSCC(fileName)
+                    || Studio.SourceControl.IsItemCheckedOut(fileName))
             {
                 return;
             }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 #if !PORTABLE
 using System.Security.Cryptography;
 #endif
@@ -83,5 +85,81 @@ namespace Zirpl
             return encoding.GetString(bs, 0, text.Length);
         }
 #endif
+
+        /// <summary>
+        /// Converts to Camel casing.
+        /// "FooBar" becomes "fooBar"
+        /// "Foobar becomes "foobar"
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string ToCamelCase(this String source)
+        {
+            return source.First().ToString().ToLower() + String.Join("", source.Skip(1));
+        }
+        /// <summary>
+        /// Converts to pascal casing.
+        /// "fooBar" becomes "FooBar"
+        /// "foobar" becomes "Foobar"
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string ToPascalCase(this String source)
+        {
+            return source.First().ToString().ToUpper() + String.Join("", source.Skip(1));
+        }
+
+        /// <summary>
+        /// Parses a camel cased or pascal cased string and returns an array of the words within the string.
+        /// </summary>
+        /// <example>
+        /// The string "PascalCasing" will return an array with two elements, "Pascal" and "Casing".
+        /// </example>
+        /// <param name="source">The string that is camel cased that needs to be split</param>
+        /// <returns>An arry of each word part</returns>
+        public static string[] SplitCamelOrPascalCase(this string source)
+        {
+            if (source == null)
+                return new string[] { }; //Return empty array.
+
+            if (source.Length == 0)
+                return new string[] { "" };
+
+            StringCollection words = new StringCollection();
+            int wordStartIndex = 0;
+
+            char[] letters = source.ToCharArray();
+            // Skip the first letter. we don't care what case it is.
+            for (int i = 1; i < letters.Length; i++)
+            {
+                if (char.IsUpper(letters[i]))
+                {
+                    //Grab everything before the current index.
+                    words.Add(new String(letters, wordStartIndex, i - wordStartIndex));
+                    wordStartIndex = i;
+                }
+            }
+
+            //We need to have the last word.
+            words.Add(new String(letters, wordStartIndex, letters.Length - wordStartIndex));
+
+            //Copy to a string array.
+            string[] wordArray = new string[words.Count];
+            words.CopyTo(wordArray, 0);
+            return wordArray;
+        }
+
+        ///// <summary>
+        ///// Parses a camel cased or pascal cased string and returns a new string with spaces between the words in the string.
+        ///// </summary>
+        ///// <example>
+        ///// The string "PascalCasing" will return an array with two elements, "Pascal" and "Casing".
+        ///// </example>
+        ///// <param name="source">The string that is camel cased that needs to be split</param>
+        ///// <returns>A string with spaces between each word part</returns>
+        //public static string ToCamelCase(this string[] source)
+        //{
+        //    return string.Join("", SplitCamelOrPascalCase(source));
+        //}
     }
 }
