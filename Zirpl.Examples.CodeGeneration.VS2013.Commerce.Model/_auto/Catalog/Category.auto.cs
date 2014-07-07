@@ -7,6 +7,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 {
     public partial class Category : AuditableBase<int>
     {
+		public virtual string Name { get; set; }
 		public virtual string SeoId { get; set; }
 		public virtual string Description { get; set; }
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.Category Parent { get; set; }

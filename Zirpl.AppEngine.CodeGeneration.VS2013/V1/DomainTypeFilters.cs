@@ -164,7 +164,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         public DomainType GetDomainTypeByFullTypeName(string fullTypeName)
         {
             return (from dt in transformationHelper.AppDefinition.DomainTypes
-                    where transformationHelper.CodeHelper.GetModelClassFullName(dt) == fullTypeName
+                    where transformationHelper.CodeHelper.GetModelTypeFullName(dt) == fullTypeName
                     select dt).SingleOrDefault();
         }
 

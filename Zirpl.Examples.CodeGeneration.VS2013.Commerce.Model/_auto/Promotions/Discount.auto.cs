@@ -15,6 +15,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions
 			}
 		}
 
+		public virtual string Name { get; set; }
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.PromoCode PromoCode { get; set; }
 		public virtual int PromoCodeId { get; set; }
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.DiscountApplicabilityType DiscountApplicabilityType { get; set; }

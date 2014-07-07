@@ -19,32 +19,72 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
         public void StartModelFile(DomainType domainType)
         {
-            this.transformationHelper.FileManager.StartNewFile(this.transformationHelper.CodeHelper.GetModelClassName(domainType) + ".auto.cs", this.transformationHelper.ProjectProvider.ModelProject, this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+            this.transformationHelper.FileManager.StartNewFile(
+                this.transformationHelper.CodeHelper.GetModelTypeName(domainType) + ".auto.cs", 
+                this.transformationHelper.ProjectProvider.ModelProject, 
+                this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
-        public void StartMetadataFile(DomainType domainType)
+        public void StartModelMetadataFile(DomainType domainType)
         {
-            this.transformationHelper.FileManager.StartNewFile(this.transformationHelper.CodeHelper.GetModelMetadataClassName(domainType) + ".auto.cs", this.transformationHelper.ProjectProvider.ModelProject, this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+            this.transformationHelper.FileManager.StartNewFile(
+                this.transformationHelper.CodeHelper.GetModelMetadataTypeName(domainType) + ".auto.cs", 
+                this.transformationHelper.ProjectProvider.ModelProject, 
+                this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
-        public void StartEnumFile(DomainType domainType)
+        public void StartModelEnumFile(DomainType domainType)
         {
-            this.transformationHelper.FileManager.StartNewFile(domainType.Name + "Enum.auto.cs", this.transformationHelper.ProjectProvider.ModelProject, this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+            this.transformationHelper.FileManager.StartNewFile(
+                this.transformationHelper.CodeHelper.GetModelEnumTypeName(domainType) + ".auto.cs", 
+                this.transformationHelper.ProjectProvider.ModelProject, 
+                this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
         public void StartDataServiceInterfaceFile(DomainType domainType)
         {
-            this.transformationHelper.FileManager.StartNewFile("I" + domainType.Name + "DataService.auto.cs", this.transformationHelper.ProjectProvider.DataServiceProject, this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+            this.transformationHelper.FileManager.StartNewFile(
+                this.transformationHelper.CodeHelper.GetDataServiceInterfaceTypeName(domainType) + ".auto.cs", 
+                this.transformationHelper.ProjectProvider.DataServiceProject, 
+                this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
         public void StartDataServiceFile(DomainType domainType)
         {
-            this.transformationHelper.FileManager.StartNewFile(domainType.Name + "DataService.auto.cs", this.transformationHelper.ProjectProvider.DataServiceProject, this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+            this.transformationHelper.FileManager.StartNewFile(
+                this.transformationHelper.CodeHelper.GetDataServiceTypeName(domainType) + ".auto.cs", 
+                this.transformationHelper.ProjectProvider.DataServiceProject, 
+                this.transformationHelper.ProjectProvider.GetGeneratedCodeFolder(domainType), 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
-        public void StartEntityFrameworkFile(DomainType domainType)
+        public void StartEntityFrameworkMappingFile(DomainType domainType)
         {
-            this.transformationHelper.FileManager.StartNewFile(domainType.Name + "Mapping.auto.cs", this.transformationHelper.ProjectProvider.DataServiceProject, this.transformationHelper.AppDefinition.GeneratedCodeRootFolderName + @"Mapping", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+            this.transformationHelper.FileManager.StartNewFile(
+                this.transformationHelper.CodeHelper.GetEntityFrameworkMappingTypeName(domainType) + ".auto.cs", 
+                this.transformationHelper.ProjectProvider.DataServiceProject, 
+                this.transformationHelper.AppDefinition.GeneratedCodeRootFolderName + @"Mapping", 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
         public void StartDataContextFile()
         {
-            this.transformationHelper.FileManager.StartNewFile(this.transformationHelper.AppDefinition.DataContextName + ".auto.cs", this.transformationHelper.ProjectProvider.DataServiceProject, this.transformationHelper.AppDefinition.GeneratedCodeRootFolderName, new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+            this.transformationHelper.FileManager.StartNewFile(
+                this.transformationHelper.CodeHelper.GetDataContextTypeName() + ".auto.cs", 
+                this.transformationHelper.ProjectProvider.DataServiceProject, 
+                this.transformationHelper.AppDefinition.GeneratedCodeRootFolderName, 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
+
+
+
+
+
+
+
+
+
+
+
+
         public void StartDataServiceTestsDataServicesProviderFile()
         {
             this.transformationHelper.FileManager.StartNewFile("DataServicesProvider.auto.cs", this.transformationHelper.ProjectProvider.DataServiceTestsProject, this.transformationHelper.AppDefinition.GeneratedCodeRootFolderName, new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });

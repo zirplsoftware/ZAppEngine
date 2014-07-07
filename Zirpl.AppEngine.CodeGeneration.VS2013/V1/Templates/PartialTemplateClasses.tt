@@ -1,0 +1,86 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.Interop.8.0" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="EnvDTE80" #>
+<#@ assembly name="VSLangProj" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Microsoft.VisualStudio.Shell.Interop" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="EnvDTE80" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#
+
+var hostServiceProvider = (IServiceProvider)this.Host;
+var dte = (DTE)hostServiceProvider.GetService(typeof(DTE));
+var projectItem = dte.Solution.FindProjectItem(this.Host.TemplateFile);
+var templateFilePaths = new List<string>();
+var projectItems = GetAllProjectItemsRecursive(projectItem.ContainingProject.ProjectItems);
+foreach (var po in projectItems)
+{
+	var fullPath = GetFullPath(po);
+	if (fullPath.EndsWith("Template.tt")
+		&& fullPath.Contains("V1"))
+	{
+		templateFilePaths.Add(fullPath);
+	}
+}
+
+#>
+using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
+{
+<#
+
+foreach (var filePath in templateFilePaths)
+{
+	var fileName = System.IO.Path.GetFileNameWithoutExtension(filePath);
+#>
+	public partial class <#=  fileName #>: IPreprocessedTextTransformation
+    {
+        public <#=  fileName #>(TransformationHelper transformationHelper)
+        {
+            this.TransformationHelper = transformationHelper;
+            this.Host = this.TransformationHelper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public TransformationHelper TransformationHelper { get; private set; }
+    }
+<#
+}
+
+#>
+}
+<#
+#>
+<#+
+public IEnumerable<ProjectItem> GetAllProjectItemsRecursive(ProjectItems projectItems)
+{
+    foreach (ProjectItem projectItem in projectItems)
+    {
+        if (projectItem.ProjectItems == null) continue;
+
+        foreach (ProjectItem subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
+        {
+            yield return subItem;
+        }
+
+        yield return projectItem;
+    }
+}
+public string GetFullPath(ProjectItem item)
+{
+    if (item != null
+        && item.Properties != null
+        && item.Properties.Item("FullPath") != null
+        && item.Properties.Item("FullPath").Value != null)
+    {
+        return item.Properties.Item("FullPath").Value.ToString();
+    }
+    return "";
+}
+#>

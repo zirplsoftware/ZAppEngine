@@ -16,7 +16,7 @@ namespace Zirpl.AppEngine.Model
             if (dictionaryEntity != null
                 && dictionaryEntity.IsPersisted)
             {
-                value = (TEnum?)Enum.Parse(typeof(TEnum), Enum.GetName(typeof(TEnum), dictionaryEntity.GetId()));
+                value = (TEnum?)Enum.Parse(typeof(TEnum), Enum.GetName(typeof(TEnum), dictionaryEntity.GetId()), true);
             }
             return value;
         }

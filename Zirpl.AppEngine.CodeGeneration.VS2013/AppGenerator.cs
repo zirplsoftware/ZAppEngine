@@ -18,6 +18,10 @@ namespace Zirpl.AppEngine.CodeGeneration
                 new ModelTemplate(transformationHelper).TransformText();
                 new ModelMetadataTemplate(transformationHelper).TransformText();
                 new ModelEnumTemplate(transformationHelper).TransformText();
+                new DataServiceInterfaceTemplate(transformationHelper).TransformText();
+                new DataServiceTemplate(transformationHelper).TransformText();
+                new DataContextTemplate(transformationHelper).TransformText();
+                new EntityFrameworkMappingTemplate(transformationHelper).TransformText();
             }
         }
     }

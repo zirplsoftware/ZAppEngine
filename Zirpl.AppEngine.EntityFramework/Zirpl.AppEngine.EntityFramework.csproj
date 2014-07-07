@@ -35,11 +35,11 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.5.3.0.0\lib\Net40\FluentValidation.dll</HintPath>
@@ -69,6 +69,8 @@
     <Compile Include="DataService\EntityFramework\IDbContextCudHandler.cs" />
     <Compile Include="DataService\EntityFramework\IEntityMapping.cs" />
     <Compile Include="DataService\EntityFramework\ISearchCriteriaTranslator.cs" />
+    <Compile Include="DataService\EntityFramework\Mapping\CoreEntityMappingBase.cs" />
+    <Compile Include="DataService\EntityFramework\Mapping\DictionaryEntityMapping.cs" />
     <Compile Include="DataService\EntityFramework\Mapping\MappingUtils.cs" />
     <Compile Include="DataService\EntityFramework\Migrations\AspNetMembershipMigratorBase.cs" />
     <Compile Include="DataService\EntityFramework\Migrations\DbMigrationProvider.cs" />

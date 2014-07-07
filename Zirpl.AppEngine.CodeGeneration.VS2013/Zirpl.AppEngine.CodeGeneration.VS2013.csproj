@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppGenerator.cs" />
+    <Compile Include="TextTemplating\DefaultTransformationHelper.cs" />
     <Compile Include="TextTemplating\IPreprocessedTextTransformation.cs" />
     <Compile Include="TextTemplating\ITextTransformation.cs" />
     <Compile Include="TextTemplating\TextTransformationWrapper.cs" />
@@ -124,6 +125,26 @@
     <Compile Include="V1\ProjectProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="V1\Templates\DataContextTemplate.cs">
+      <DependentUpon>DataContextTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\EntityFrameworkMappingTemplate.cs">
+      <DependentUpon>EntityFrameworkMappingTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\DataServiceTemplate.cs">
+      <DependentUpon>DataServiceTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\PartialTemplateClasses.cs">
+      <DependentUpon>PartialTemplateClasses.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="V1\Templates\ModelEnumTemplate.cs">
       <DependentUpon>ModelEnumTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
@@ -136,14 +157,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="V1\Templates\DataServiceInterfaceTemplate.cs">
+      <DependentUpon>DataServiceInterfaceTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="V1\Templates\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="V1\Templates\Templates_partial.cs">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="V1\TransformationHelper.cs">
       <SubType>Code</SubType>
@@ -159,6 +182,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="V1\Templates\DataContextTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataContextTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\EntityFrameworkMappingTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EntityFrameworkMappingTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\DataServiceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataServiceTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\PartialTemplateClasses.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PartialTemplateClasses.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
+    </None>
     <None Include="V1\Templates\ModelEnumTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ModelEnumTemplate.cs</LastGenOutput>
@@ -166,6 +206,10 @@
     <None Include="V1\Templates\ModelMetadataTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ModelMetadataTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\DataServiceInterfaceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataServiceInterfaceTemplate.cs</LastGenOutput>
     </None>
     <None Include="V1\Templates\ModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

@@ -19,7 +19,7 @@
 //
 foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
 {
-	this.TransformationHelper.FileHelper.StartEnumFile(domainType);	
+	this.TransformationHelper.FileHelper.StartModelEnumFile(domainType);	
 #>
 using System;
 using System.Collections;
@@ -28,7 +28,7 @@ using Zirpl.AppEngine.Model;
 
 namespace <#= this.TransformationHelper.CodeHelper.GetModelEnumNamespace(domainType) #>
 {
-    public enum <#= this.TransformationHelper.CodeHelper.GetModelEnumClassName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetModelEnumBaseClassName(domainType) #>
+    public enum <#= this.TransformationHelper.CodeHelper.GetModelEnumTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetModelEnumBaseDeclaration(domainType) #>
     {
 <#
 	if (domainType.EnumValueEntries != null)

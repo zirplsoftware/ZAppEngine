@@ -64,14 +64,14 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write(" partial class ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelClassName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" : ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelBaseClassName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelBaseDeclaration(domainType)));
             
             #line default
             #line hidden
@@ -97,7 +97,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write("\t\tpublic ");
             
             #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelClassName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelTypeName(domainType)));
             
             #line default
             #line hidden
@@ -179,7 +179,8 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
 			else
 			{
 				// the base class already has "Name" property, so skip that one
-				if (property.Name != "Name")
+				if (!(property.Name == "Name"
+					&& domainType.IsDictionary))
                 {
 
             
@@ -187,21 +188,21 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             #line hidden
             this.Write("\t\tpublic virtual ");
             
-            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetPropertyClassNameString(property)));
+            #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetPropertyTypeName(property)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 83 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
 					// handle the Id property of the relationship IE: "Parent" may need a "ParentId" property
 					if (property.IsRelationship
@@ -213,21 +214,21 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             #line hidden
             this.Write("\t\tpublic virtual ");
             
-            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetRelationshipIdPropertyClassNameString(property)));
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetRelationshipIdPropertyTypeName(property)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id { get; set; }\r\n");
             
-            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
 					}
                 }
@@ -240,7 +241,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             #line hidden
             this.Write("    }\r\n}\r\n\r\n");
             
-            #line 99 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 100 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
 }
 

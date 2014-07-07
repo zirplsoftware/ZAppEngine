@@ -18,23 +18,23 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             return transformationHelper.ProjectProvider.ModelProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
-        public String GetModelClassName(DomainType domainType)
+        public String GetModelTypeName(DomainType domainType)
         {
             return domainType.Name;
         }
-        public string GetModelClassFullName(DomainType domainType)
+        public string GetModelTypeFullName(DomainType domainType)
         {
-            return String.Format("{0}.{1}", this.GetModelNamespace(domainType), this.GetModelClassName(domainType));
+            return String.Format("{0}.{1}", this.GetModelNamespace(domainType), this.GetModelTypeName(domainType));
         }
-        public string GetModelBaseClassName(DomainType domainType)
+        public string GetModelBaseDeclaration(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
                     ? domainType.BaseClassOverride
                     : domainType.IsDictionary
-                        ? string.Format("DictionaryEntityBase<{0}, {1}Enum>", this.GetModelIdClassName(domainType), domainType.Name)
-                        : string.Format("AuditableBase<{0}>", this.GetModelIdClassName(domainType));
+                        ? string.Format("DictionaryEntityBase<{0}, {1}>", this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
+                        : string.Format("AuditableBase<{0}>", this.GetModelIdTypeName(domainType));
         }
-        public string GetModelIdClassName(DomainType domainType)
+        public string GetModelIdTypeName(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.IdTypeOverride)
                                     ? domainType.IdTypeOverride
@@ -50,15 +50,15 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             // use the same
             return this.GetModelNamespace(domainType);
         }
-        public String GetModelMetadataClassName(DomainType domainType)
+        public String GetModelMetadataTypeName(DomainType domainType)
         {
             return domainType.Name + "Metadata";
         }
-        public String GetModelMetadataClassFullName(DomainType domainType)
+        public String GetModelMetadataTypeFullName(DomainType domainType)
         {
-            return String.Format("{0}.{1}", this.GetModelMetadataNamespace(domainType), this.GetModelMetadataClassName(domainType));
+            return String.Format("{0}.{1}", this.GetModelMetadataNamespace(domainType), this.GetModelMetadataTypeName(domainType));
         }
-        public string GetModelMetadataBaseClassName(DomainType domainType)
+        public string GetModelMetadataBaseDeclaration(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
                 ? domainType.BaseClassOverride + "Metadata"
@@ -74,23 +74,101 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             // use the same
             return this.GetModelNamespace(domainType);
         }
-        public String GetModelEnumClassName(DomainType domainType)
+        public String GetModelEnumTypeName(DomainType domainType)
         {
             return domainType.Name + "Enum";
         }
-        public String GetModelEnumClassFullName(DomainType domainType)
+        public String GetModelEnumTypeFullName(DomainType domainType)
         {
-            return String.Format("{0}.{1}", this.GetModelEnumNamespace(domainType), this.GetModelEnumClassName(domainType));
+            return String.Format("{0}.{1}", this.GetModelEnumNamespace(domainType), this.GetModelEnumTypeName(domainType));
         }
-        public string GetModelEnumBaseClassName(DomainType domainType)
+        public string GetModelEnumBaseDeclaration(DomainType domainType)
         {
             // it should match the Model's ID type
-            return this.GetModelIdClassName(domainType);
+            return this.GetModelIdTypeName(domainType);
+        }
+        #endregion
+
+        #region DataServiceInterface related methods
+        public string GetDataServiceInterfaceNamespace(DomainType domainType)
+        {
+            return transformationHelper.ProjectProvider.DataServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public String GetDataServiceInterfaceTypeName(DomainType domainType)
+        {
+            return "I" + domainType.Name + "DataService";
+        }
+        public String GetDataServiceInterfaceTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetDataServiceInterfaceNamespace(domainType), this.GetDataServiceInterfaceTypeName(domainType));
+        }
+        public string GetDataServiceInterfaceBaseDeclaration(DomainType domainType)
+        {
+            return domainType.IsDictionary
+                ? string.Format("IDictionaryEntityDataService<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
+                : string.Format("ICompleteDataService<{0}, {1}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType));
+        }
+        #endregion
+
+        #region DataService related methods
+        public string GetDataServiceNamespace(DomainType domainType)
+        {
+            return transformationHelper.ProjectProvider.DataServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public String GetDataServiceTypeName(DomainType domainType)
+        {
+            return domainType.Name + "DataService";
+        }
+        public String GetDataServiceTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetDataServiceNamespace(domainType), this.GetDataServiceTypeName(domainType));
+        }
+        public string GetDataServiceBaseDeclaration(DomainType domainType)
+        {
+            return domainType.IsDictionary
+                ? string.Format("ReadOnlyDbContextDataServiceBase<{0}, {1}, {2}>, {3}", transformationHelper.AppDefinition.DataContextName, this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetDataServiceInterfaceTypeName(domainType))
+                : string.Format("DbContextDataServiceBase<{0}, {1}, {2}>, {3}", transformationHelper.AppDefinition.DataContextName, this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetDataServiceInterfaceTypeName(domainType));
+        }
+        #endregion
+
+        #region DataContext related methods
+        public string GetDataContextNamespace()
+        {
+            return transformationHelper.ProjectProvider.DataServiceProject.GetDefaultNamespace();
+        }
+        public String GetDataContextTypeName()
+        {
+            return this.transformationHelper.AppDefinition.DataContextName;
+        }
+        public String GetDataContextTypeFullName()
+        {
+            return String.Format("{0}.{1}", this.GetDataContextNamespace(), this.GetDataContextTypeName());
+        }
+        #endregion
+
+        #region Entity Framework mapping related methods
+        public string GetEntityFrameworkMappingNamespace(DomainType domainType)
+        {
+            return transformationHelper.ProjectProvider.DataServiceProject.GetDefaultNamespace() + ".Mapping" +(String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public String GetEntityFrameworkMappingTypeName(DomainType domainType)
+        {
+            return domainType.Name + "Mapping";
+        }
+        public String GetEntityFrameworkMappingTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetEntityFrameworkMappingNamespace(domainType), this.GetEntityFrameworkMappingTypeName(domainType));
+        }
+        public string GetEntityFrameworkMappingBaseDeclaration(DomainType domainType)
+        {
+            return domainType.IsDictionary
+                ? string.Format("DictionaryEntityMapping<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
+                : string.Format("CoreEntityMappingBase<{0}, {1}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType));
         }
         #endregion
 
         #region Property-related methods
-        public String GetPropertyClassNameString(Property property)
+        public String GetPropertyTypeName(Property property)
         {
             string propertyType = property.Type;
             propertyType = propertyType.ToLowerInvariant() == "currency" ? "decimal" : propertyType;
@@ -107,10 +185,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             }
             return propertyType;
         }
-        public String GetRelationshipIdPropertyClassNameString(Property property)
+        public String GetRelationshipIdPropertyTypeName(Property property)
         {
             var relationshipModel = this.transformationHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(property.Type);
-            string relationshipIdTypeString = this.GetModelIdClassName(relationshipModel);
+            string relationshipIdTypeString = this.GetModelIdTypeName(relationshipModel);
             relationshipIdTypeString += (property.IsRequired ? "" : "?");
             return relationshipIdTypeString;
         }
@@ -140,10 +218,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
 
 
-        public string GetDataServiceNamespace(DomainType domainType)
-        {
-            return transformationHelper.ProjectProvider.DataServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
-        }
         public string GetDataServiceTestsNamespace(DomainType domainType)
         {
             return transformationHelper.ProjectProvider.DataServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
@@ -184,60 +258,48 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
 
 
-        public string GetDataServiceInterfaceBaseInterface(DomainType domainType)
-        {
-            return domainType.IsDictionary
-                ? string.Format("IDictionaryEntityDataService<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdClassName(domainType))
-                : string.Format("ICompleteDataService<{0}, {1}>", domainType.Name, this.GetModelIdClassName(domainType));
-        }
-        public string GetDataServiceBaseClass(DomainType domainType)
-        {
-            return domainType.IsDictionary
-                ? string.Format("DictionaryEntityDataService<{0}, {1}, {0}Enum>, I{0}DataService", domainType.Name, this.GetModelIdClassName(domainType))
-                : string.Format("DbContextDataServiceBase<{2}, {0}, {1}>, I{0}DataService", domainType.Name, this.GetModelIdClassName(domainType), transformationHelper.AppDefinition.DataContextName);
-        }
         public string GetDataServiceTestsBaseClass(DomainType domainType)
         {
             return domainType.IsDictionary
-                ? string.Format("DictionaryEntityLayerTestFixtureBase<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdClassName(domainType))
-                : string.Format("EntityLayerTestFixtureBase<{0}, {1}, {0}EntityWrapper, {0}TestsStrategy>", domainType.Name, this.GetModelIdClassName(domainType));
+                ? string.Format("DictionaryEntityLayerTestFixtureBase<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdTypeName(domainType))
+                : string.Format("EntityLayerTestFixtureBase<{0}, {1}, {0}EntityWrapper, {0}TestsStrategy>", domainType.Name, this.GetModelIdTypeName(domainType));
         }
         public string GetDataServiceTestsStrategyBaseClass(DomainType domainType)
         {
-            return string.Format("IEntityLayerTestsStrategy<{0}, {1}, {0}EntityWrapper>", domainType.Name, this.GetModelIdClassName(domainType));
+            return string.Format("IEntityLayerTestsStrategy<{0}, {1}, {0}EntityWrapper>", domainType.Name, this.GetModelIdTypeName(domainType));
         }
         //IEntityLayerTestFixtureStrategy<TEntity, TId, TEntityWrapper>
         public string GetEntityFrameworkMappingBaseClass(DomainType domainType)
         {
             return domainType.IsDictionary
-                ? string.Format("DictionaryEntityMapping<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdClassName(domainType))
-                : string.Format("CoreEntityMappingBase<{0}, {1}>", domainType.Name, this.GetModelIdClassName(domainType));
+                ? string.Format("DictionaryEntityMapping<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdTypeName(domainType))
+                : string.Format("CoreEntityMappingBase<{0}, {1}>", domainType.Name, this.GetModelIdTypeName(domainType));
         }
         public string GetServiceInterfaceBaseInterface(DomainType domainType)
         {
             return domainType.IsDictionary
-                ? string.Format("IDictionaryEntityService<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdClassName(domainType))
-                : string.Format("ICompleteService<{0}, {1}>", domainType.Name, this.GetModelIdClassName(domainType));
+                ? string.Format("IDictionaryEntityService<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdTypeName(domainType))
+                : string.Format("ICompleteService<{0}, {1}>", domainType.Name, this.GetModelIdTypeName(domainType));
         }
         public string GetServiceBaseClass(DomainType domainType)
         {
             return domainType.IsDictionary
-                ? string.Format("DictionaryEntityService<{0}, {1}, {0}Enum>, I{0}Service", domainType.Name, this.GetModelIdClassName(domainType))
-                : string.Format("DbContextServiceBase<{2}, {0}, {1}>, I{0}Service", domainType.Name, this.GetModelIdClassName(domainType), transformationHelper.AppDefinition.DataContextName);
+                ? string.Format("DictionaryEntityService<{0}, {1}, {0}Enum>, I{0}Service", domainType.Name, this.GetModelIdTypeName(domainType))
+                : string.Format("DbContextServiceBase<{2}, {0}, {1}>, I{0}Service", domainType.Name, this.GetModelIdTypeName(domainType), transformationHelper.AppDefinition.DataContextName);
         }
         public string GetServiceTestsBaseClass(DomainType domainType)
         {
             return domainType.IsDictionary
-                ? string.Format("DictionaryEntityLayerTestFixtureBase<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdClassName(domainType))
-                : string.Format("EntityLayerTestFixtureBase<{0}, {1}, {0}EntityWrapper, {0}TestsStrategy>", domainType.Name, this.GetModelIdClassName(domainType));
+                ? string.Format("DictionaryEntityLayerTestFixtureBase<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdTypeName(domainType))
+                : string.Format("EntityLayerTestFixtureBase<{0}, {1}, {0}EntityWrapper, {0}TestsStrategy>", domainType.Name, this.GetModelIdTypeName(domainType));
         }
         public string GetSupportViewModelBaseClass(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
                     ? transformationHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name + "Model"
                     : domainType.IsDictionary
-                        ? string.Format("DictionaryEntityModelBase<{0}>", this.GetModelIdClassName(domainType))
-                        : string.Format("AuditableModelBase<{0}>", this.GetModelIdClassName(domainType));
+                        ? string.Format("DictionaryEntityModelBase<{0}>", this.GetModelIdTypeName(domainType))
+                        : string.Format("AuditableModelBase<{0}>", this.GetModelIdTypeName(domainType));
         }
         public string GetSupportViewModelMetadataBaseClass(DomainType domainType)
         {

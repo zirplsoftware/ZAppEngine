@@ -40,7 +40,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 //
 foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateMetadataFor)
 {
-	this.TransformationHelper.FileHelper.StartMetadataFile(domainType);
+	this.TransformationHelper.FileHelper.StartModelMetadataFile(domainType);
 	
 
             
@@ -64,14 +64,14 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write(" partial class ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
-            this.Write("Metadata : ");
+            this.Write(" : ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelMetadataBaseClassName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelMetadataBaseDeclaration(domainType)));
             
             #line default
             #line hidden

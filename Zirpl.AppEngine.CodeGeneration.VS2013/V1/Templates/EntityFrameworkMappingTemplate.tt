@@ -1,0 +1,138 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".log" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1.ConfigModel" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="VSLangProj" #>
+<#@ assembly name="VSLangProj80" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Serialization" #>
+<#@ assembly name="System.Xml.Serialization" #>
+<#
+
+	// Generate Mapping classes
+	//
+	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEntityFrameworkMappingFor)
+	{
+		this.TransformationHelper.FileHelper.StartEntityFrameworkMappingFile(domainType);
+	
+#>
+using System;
+using System.Linq;
+using Zirpl.AppEngine.DataService;
+using Zirpl.AppEngine.DataService.EntityFramework;
+using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
+using <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>;
+
+namespace <#= this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingNamespace(domainType) #>
+{
+    public partial class <#= this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingBaseDeclaration(domainType) #>
+    {
+		protected override void MapProperties()
+        {
+
+<#
+		foreach (Property property in domainType.Properties)
+		{	
+			if (property.IsCollection
+				|| !property.MapProperty)
+			{
+				// ignore if collection or not supposed to map
+			}
+			else if (property.IsRelationship)
+			{
+				if (property.GenerateIdProperty)
+                {
+					var navigationPropertyString = String.IsNullOrEmpty(property.NavigationProperty) ? "" : ",\r\n										o => o." + property.NavigationProperty;
+#>
+
+            this.HasNavigationProperty(o => o.<#= property.Name #>,
+                                        o => o.<#= property.Name #>Id,
+                                        <#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired,
+                                        CascadeOnDeleteOption.<#= property.CascadeOnDelete ? "Yes" : "No" #><#= navigationPropertyString #>);
+<#				
+                }
+			}
+			else 
+			{
+				if (property.Type.ToLowerInvariant() == "string")
+                {
+#>
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired).HasMaxLength(<#= domainType.Name #>Metadata.<#= property.Name #>_MaxLength, <#= domainType.Name #>Metadata.<#= property.Name #>_IsMaxLength);
+<#				}
+				else if (property.Type.ToLowerInvariant() == "decimal"
+						|| property.Type.ToLowerInvariant() == "double")
+                {
+					 var precisionString = String.IsNullOrEmpty(property.Precision) ? "" : ".HasPrecision(" + property.Precision + ")";
+#>
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired)<#= precisionString #>;
+<#				
+                }
+				else if (property.Type.ToLowerInvariant() == "datetime")
+                {
+#>
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired).IsDateTime();
+<#				
+                }
+				else if (property.Type.ToLowerInvariant() == "currency")
+                {
+#>
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired).IsCurrency();
+<#				
+                }
+				else if (property.Type.ToLowerInvariant() == "bool"
+						|| property.Type.ToLowerInvariant() == "guid"
+						|| property.Type.ToLowerInvariant() == "int"
+						|| property.Type.ToLowerInvariant() == "byte")
+                {
+#>
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired);
+<#				
+                }
+				else 
+				{
+					throw new NotImplementedException("Unexpected property type: " + property.Type);
+                }
+			}
+		}
+#>
+
+			this.MapCustomProperties();
+
+            base.MapProperties();
+        }
+		
+		partial void MapCustomProperties();
+		
+<#				
+		// if the base class is one of the domain types, then we need to NOT map the core entity properties
+		//
+        if (!String.IsNullOrEmpty(domainType.BaseClassOverride)
+			&& this.TransformationHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride) != null)
+        {
+#>
+        protected override bool MapCoreEntityBaseProperties
+        {
+            get
+            {
+                return false;
+            }
+        }
+<#
+        }
+#>
+    }
+}
+<#
+
+	}
+
+
+#>

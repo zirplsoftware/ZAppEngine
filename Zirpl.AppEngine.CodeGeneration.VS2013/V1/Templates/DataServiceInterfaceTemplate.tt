@@ -1,0 +1,37 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".log" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1.ConfigModel" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="VSLangProj" #>
+<#@ assembly name="VSLangProj80" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Serialization" #>
+<#@ assembly name="System.Xml.Serialization" #>
+<#
+// Generate DataService interfaces
+//
+foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateDataServiceInterfaceFor)
+{
+	this.TransformationHelper.FileHelper.StartDataServiceInterfaceFile(domainType);
+#>
+using System;
+using Zirpl.AppEngine.DataService;
+using <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>;
+
+namespace <#= this.TransformationHelper.CodeHelper.GetDataServiceInterfaceNamespace(domainType) #>
+{
+    public partial interface <#= this.TransformationHelper.CodeHelper.GetDataServiceInterfaceTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetDataServiceInterfaceBaseDeclaration(domainType) #>
+    {
+    }
+}
+<#
+}
+#>

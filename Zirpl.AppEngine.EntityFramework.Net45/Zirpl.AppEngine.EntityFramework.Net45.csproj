@@ -34,11 +34,10 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.5.3.0.0\lib\Net40\FluentValidation.dll</HintPath>
@@ -81,6 +80,12 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\ISearchCriteriaTranslator.cs">
       <Link>DataService\EntityFramework\ISearchCriteriaTranslator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\Mapping\CoreEntityMappingBase.cs">
+      <Link>DataService\EntityFramework\Mapping\CoreEntityMappingBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\Mapping\DictionaryEntityMapping.cs">
+      <Link>DataService\EntityFramework\Mapping\DictionaryEntityMapping.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\Mapping\MappingUtils.cs">
       <Link>DataService\EntityFramework\Mapping\MappingUtils.cs</Link>
@@ -239,7 +244,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="b23590ec-7c8d-4bd4-bfee-77c0f0d821a7" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="b23590ec-7c8d-4bd4-bfee-77c0f0d821a7" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
