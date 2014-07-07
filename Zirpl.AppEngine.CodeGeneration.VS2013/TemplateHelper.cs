@@ -23,6 +23,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         public DomainTypeFilters DomainTypeFilters { get; private set; }
         public TypeProvider TypeProvider { get; private set; }
         public ProjectProvider ProjectProvider { get; private set; }
+        public ITextTransformationWrapper CallingTemplate { get; private set; }
 
 
 
@@ -36,8 +37,9 @@ namespace Zirpl.AppEngine.CodeGeneration
 
         public TemplateHelper(TextTransformation callingTemplate)
         {
+            this.CallingTemplate = callingTemplate.GetWrapper();
             //this.TextTransformation = textTransformation;
-            this.FileManager = new TemplateFileManager(callingTemplate);
+            this.FileManager = new TemplateFileManager(this.CallingTemplate);
             this.NamingProvider = new NamingProvider(this);
             this.DomainTypeFilters = new DomainTypeFilters(this);
             this.TypeProvider = new TypeProvider(this);

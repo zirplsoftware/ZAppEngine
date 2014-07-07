@@ -12,53 +12,35 @@ namespace Zirpl.AppEngine.CodeGeneration.Templates
 {
     public partial class ModelTemplate : IPreprocessedTextTransformation
     {
-        public ModelTemplate(TextTransformation callingTemplate, TemplateHelper templateHelper)
+        public ModelTemplate(TemplateHelper templateHelper)
         {
-            this.Host = callingTemplate.GetDynamicAccessorWrapper().GetPropertyValue<ITextTemplatingEngineHost>("Host");
-            this.GenerationEnvironment = (StringBuilder)callingTemplate.GetType()
-                .GetProperty("GenerationEnvironment",
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy)
-                .GetValue(callingTemplate);
-            //this.GenerationEnvironment = callingTemplate.GetDynamicAccessorWrapper().GetPropertyValue<StringBuilder>("GenerationEnvironment");
-            this.CallingTemplate = callingTemplate;
             this.TemplateHelper = templateHelper;
+            this.Host = this.TemplateHelper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.TemplateHelper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TextTransformation CallingTemplate { get; private set; }
         public TemplateHelper TemplateHelper { get; private set; }
     }
     public partial class ModelMetadataTemplate: IPreprocessedTextTransformation
     {
-        public ModelMetadataTemplate(TextTransformation callingTemplate, TemplateHelper templateHelper)
+        public ModelMetadataTemplate(TemplateHelper templateHelper)
         {
-            this.Host = callingTemplate.GetDynamicAccessorWrapper().GetPropertyValue<ITextTemplatingEngineHost>("Host");
-            this.GenerationEnvironment= (StringBuilder)callingTemplate.GetType()
-                .GetProperty("GenerationEnvironment",
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy)
-                .GetValue(callingTemplate);
-            //this.GenerationEnvironment = callingTemplate.GetDynamicAccessorWrapper().GetPropertyValue<StringBuilder>("GenerationEnvironment");
-            this.CallingTemplate = callingTemplate;
             this.TemplateHelper = templateHelper;
+            this.Host = this.TemplateHelper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.TemplateHelper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TextTransformation CallingTemplate { get; private set; }
         public TemplateHelper TemplateHelper { get; private set; }
     }
     public partial class ModelEnumTemplate : IPreprocessedTextTransformation
     {
-        public ModelEnumTemplate(TextTransformation callingTemplate, TemplateHelper templateHelper)
+        public ModelEnumTemplate(TemplateHelper templateHelper)
         {
-            this.Host = callingTemplate.GetDynamicAccessorWrapper().GetPropertyValue<ITextTemplatingEngineHost>("Host");
-            this.GenerationEnvironment = (StringBuilder)callingTemplate.GetType()
-                .GetProperty("GenerationEnvironment",
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy)
-                .GetValue(callingTemplate);
-            //this.GenerationEnvironment = callingTemplate.GetDynamicAccessorWrapper().GetPropertyValue<StringBuilder>("GenerationEnvironment");
-            this.CallingTemplate = callingTemplate;
             this.TemplateHelper = templateHelper;
+            this.Host = this.TemplateHelper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.TemplateHelper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TextTransformation CallingTemplate { get; private set; }
         public TemplateHelper TemplateHelper { get; private set; }
     }
 }

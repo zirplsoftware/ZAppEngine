@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
+using EnvDTE80;
 using Zirpl.AppEngine.CodeGeneration.ConfigModel;
 using Zirpl.AppEngine.CodeGeneration.Transformation;
 
@@ -19,7 +20,7 @@ namespace Zirpl.AppEngine.CodeGeneration
         }
 
 
-        public DTE Studio
+        public DTE2 Studio
         {
             get
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EnvDTE;
+using EnvDTE80;
 
 namespace Zirpl.AppEngine.CodeGeneration.Transformation
 {
@@ -14,7 +15,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         /// <param name="item">The current project item.</param>
         /// <param name="command">The vs command as string.</param>
         /// <returns>An error message if the command fails.</returns>
-        public static string ExecuteVsCommand(this DTE dte, ProjectItem item, params string[] command)
+        public static string ExecuteVsCommand(this DTE2 dte, ProjectItem item, params string[] command)
         {
             if (item == null)
             {
@@ -35,8 +36,8 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
                         continue;
                     }
 
-                    EnvDTE80.DTE2 dte2 = dte as EnvDTE80.DTE2;
-                    dte2.ExecuteCommand(cmd, String.Empty);
+                    //EnvDTE80.DTE2 dte2 = dte as EnvDTE80.DTE2;
+                    dte.ExecuteCommand(cmd, String.Empty);
                 }
 
                 item.Save();
@@ -51,7 +52,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             return error;
         }
 
-        public static IEnumerable<ProjectItem> GetOutputFilesAsProjectItems(this DTE dte, IEnumerable<OutputFile> outputFiles)
+        public static IEnumerable<ProjectItem> GetOutputFilesAsProjectItems(this DTE2 dte, IEnumerable<OutputFile> outputFiles)
         {
             var fileNames = (from o in outputFiles
                              select Path.GetFileName(o.FileName)).ToArray();
@@ -76,7 +77,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
         }
 
 
-        public static string GetOutputPath(this DTE dte, TextBlock block, string defaultPath)
+        public static string GetOutputPath(this DTE2 dte, TextBlock block, string defaultPath)
         {
             if (String.IsNullOrEmpty(block.ProjectName) == true && String.IsNullOrEmpty(block.FolderName) == true)
             {
@@ -177,7 +178,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             return String.Format("{0}.txt4", Path.GetFileNameWithoutExtension(item.Name));
         }
 
-        public static ProjectItem GetTemplateProjectItem(this DTE dte, OutputFile file, ProjectItem defaultItem)
+        public static ProjectItem GetTemplateProjectItem(this DTE2 dte, OutputFile file, ProjectItem defaultItem)
         {
             if (String.IsNullOrEmpty(file.ProjectName) == true && String.IsNullOrEmpty(file.FolderName) == true)
             {
@@ -234,12 +235,12 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             return item;
         }
 
-        public static Project GetProject(this DTE dte, string projectName)
+        public static Project GetProject(this DTE2 dte, string projectName)
         {
             return dte.GetAllProjects().First(p => p.Name == projectName);
         }
 
-        public static IEnumerable<Project> GetAllProjects(this DTE dte)
+        public static IEnumerable<Project> GetAllProjects(this DTE2 dte)
         {
             List<Project> projectList = new List<Project>();
 
@@ -281,7 +282,7 @@ namespace Zirpl.AppEngine.CodeGeneration.Transformation
             return "";
         }
 
-        public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this DTE dte)
+        public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this DTE2 dte)
         {
             List<ProjectItem> itemList = new List<ProjectItem>();
 

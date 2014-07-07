@@ -78,10 +78,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppGenerator.cs" />
     <Compile Include="TemplateHelper.cs" />
     <Compile Include="CodeGenerationHelper.cs" />
     <Compile Include="ConfigModel\XmlModelBase.cs" />
-    <Compile Include="Templates\IPreprocessedTextTransformation.cs" />
+    <Compile Include="Transformation\IPreprocessedTextTransformation.cs" />
     <Compile Include="Templates\ModelMetadataTemplate.cs">
       <DependentUpon>ModelMetadataTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -93,6 +94,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Templates\Templates_partial.cs" />
+    <Compile Include="Transformation\ITextTransformationWrapper.cs" />
+    <Compile Include="Transformation\PreprocessedTextTransformationWrapper.cs" />
+    <Compile Include="Transformation\TextTransformationWrapper.cs" />
+    <Compile Include="Transformation\TextTransformationWrapperFactory.cs" />
     <Compile Include="TypeProvider.cs" />
     <Compile Include="ConfigModel\AppDefinition.cs" />
     <Compile Include="ConfigModel\DataServiceOptions.cs" />
