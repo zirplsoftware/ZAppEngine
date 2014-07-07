@@ -7,7 +7,6 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
     public partial class DiscountUsageRestrictionType : DictionaryEntityBase<byte, DiscountUsageRestrictionTypeEnum>
     {
-		public override string Name { get; set; }
     }
 }
 

@@ -58,11 +58,11 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         //private readonly StringBuilder _generationEnvironment; // reference to the GenerationEnvironment StringBuilder on the TextTransformation object
         private TextBlock currentBlock;
         private readonly ProjectItem _templateProjectItem;
-        private readonly DTE2 _studio;
+        private readonly DTE2 _visualStudio;
 
         public ITextTransformation CallingTemplate { get { return this._callingTemplate; } }
         public ProjectItem TemplateProjectItem { get { return this._templateProjectItem; }}
-        public DTE2 Studio { get { return this._studio; } }
+        public DTE2 VisualStudio { get { return this._visualStudio; } }
 
         /// <summary>
         /// If set to false, existing files are not overwritten
@@ -104,17 +104,17 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
             this._callingTemplate = callingTemplate;
 
-            // Get an instance of the currently running Visual Studio IDE.
-            //this._studio = (DTE2)System.Runtime.InteropServices.Marshal.GetActiveObject(String.Format("!VisualStudio.DTE.12.0:{0}", System.Diagnostics.Process.GetCurrentProcess().Id));
-            this._studio = VisualStudioExtensions.GetCurrentVisualStudioInstance();
-            if (this.Studio == null)
+            // Get an instance of the currently running Visual VisualStudio IDE.
+            //this._visualStudio = (DTE2)System.Runtime.InteropServices.Marshal.GetActiveObject(String.Format("!VisualStudio.DTE.12.0:{0}", System.Diagnostics.Process.GetCurrentProcess().Id));
+            this._visualStudio = VisualStudioExtensions.GetCurrentVisualStudioInstance();
+            if (this.VisualStudio == null)
             {
                 throw new Exception("Could not obtain DTE2");
             }
 
             var templateFile = this.CallingTemplate.Host.TemplateFile;
-            this.CallingTemplate.Host.LogLineToBuildPane("Visual Studio Solution Name: " + this.Studio.Solution.FullName);
-            this._templateProjectItem = this.Studio.FindProjectItem(templateFile);
+            this.CallingTemplate.Host.LogLineToBuildPane("Visual VisualStudio Solution Name: " + this.VisualStudio.Solution.FullName);
+            this._templateProjectItem = this.VisualStudio.FindProjectItem(templateFile);
             if (this.TemplateProjectItem == null)
             {
                 throw new Exception("Could not obtain TemplateProjectItem from " + templateFile);
@@ -122,7 +122,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             this.CanOverrideExistingFile = true;
             this.IsAutoIndentEnabled = false;
             this.Encoding = System.Text.Encoding.UTF8;
-            this.checkOutAction = fileName => Studio.SourceControl.CheckOutItem(fileName);
+            this.checkOutAction = fileName => VisualStudio.SourceControl.CheckOutItem(fileName);
             this.projectSyncAction = keepFileNames => ProjectSync(TemplateProjectItem, keepFileNames);
         }
 
@@ -206,7 +206,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
                 foreach (var block in files)
                 {
-                    var outputPath = Studio.GetOutputPath(block, Path.GetDirectoryName(this.CallingTemplate.Host.TemplateFile));
+                    var outputPath = VisualStudio.GetOutputPath(block, Path.GetDirectoryName(this.CallingTemplate.Host.TemplateFile));
                     var fileName = Path.Combine(outputPath, block.Name);
                     var content = this.ReplaceParameter(headerText, block) +
                     this.CallingTemplate.GenerationEnvironment.ToString(block.Start, block.Length) +
@@ -229,7 +229,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
             projectSyncAction.EndInvoke(projectSyncAction.BeginInvoke(list, null, null));
             this.CleanUpTemplatePlaceholders();
-            var items = this.Studio.GetOutputFilesAsProjectItems(list);
+            var items = this.VisualStudio.GetOutputFilesAsProjectItems(list);
             this.WriteVsProperties(items, list);
 
             if (this.IsAutoIndentEnabled == true && split == true)
@@ -247,7 +247,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             foreach (var item in items)
             {
                 this.CallingTemplate.WriteLine(
-                this.Studio.ExecuteVsCommand(item, "Edit.FormatDocument")); //, "Edit.RemoveAndSort"));
+                this.VisualStudio.ExecuteVsCommand(item, "Edit.FormatDocument")); //, "Edit.RemoveAndSort"));
                 this.CallingTemplate.WriteLine("//-> " + item.Name);
             }
         }
@@ -312,14 +312,14 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         private void CleanUpTemplatePlaceholders()
         {
             string[] activeTemplateFullNames = this.templatePlaceholderList.ToArray();
-            string[] allHelperTemplateFullNames = this.Studio.GetAllProjectItemsRecursive()
+            string[] allHelperTemplateFullNames = this.VisualStudio.GetAllProjectItemsRecursive()
                 .Where(p => p.Name == this.TemplateProjectItem.GetTemplatePlaceholderName())
                 .Select(p => p.GetFullPath())
                 .ToArray();
 
             var delta = allHelperTemplateFullNames.Except(activeTemplateFullNames).ToArray();
 
-            var dirtyHelperTemplates = this.Studio.GetAllProjectItemsRecursive()
+            var dirtyHelperTemplates = this.VisualStudio.GetAllProjectItemsRecursive()
                 .Where(p => delta.Contains(p.GetFullPath()));
 
             foreach (ProjectItem item in dirtyHelperTemplates)
@@ -338,7 +338,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         private string GetDirectorySolutionRelative(string fullName)
         {
-            int slnPos = fullName.IndexOf(Path.GetFileNameWithoutExtension(this.Studio.Solution.FileName));
+            int slnPos = fullName.IndexOf(Path.GetFileNameWithoutExtension(this.VisualStudio.Solution.FileName));
             if (slnPos < 0)
             {
                 slnPos = 0;
@@ -451,9 +451,9 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         private void CheckoutFileIfRequired(string fileName)
         {
-            if (Studio.SourceControl == null
-                || !Studio.SourceControl.IsItemUnderSCC(fileName)
-                    || Studio.SourceControl.IsItemCheckedOut(fileName))
+            if (VisualStudio.SourceControl == null
+                || !VisualStudio.SourceControl.IsItemUnderSCC(fileName)
+                    || VisualStudio.SourceControl.IsItemCheckedOut(fileName))
             {
                 return;
             }

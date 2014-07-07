@@ -7,7 +7,6 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
     public partial class OrderChargeStatusType : DictionaryEntityBase<byte, OrderChargeStatusTypeEnum>
     {
-		public override string Name { get; set; }
     }
 }
 

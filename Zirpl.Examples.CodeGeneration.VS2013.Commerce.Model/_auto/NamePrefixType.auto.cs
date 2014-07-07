@@ -7,7 +7,6 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
 {
     public partial class NamePrefixType : DictionaryEntityBase<byte, NamePrefixTypeEnum>
     {
-		public override string Name { get; set; }
     }
 }
 

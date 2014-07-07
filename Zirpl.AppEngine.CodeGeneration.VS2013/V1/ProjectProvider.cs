@@ -7,19 +7,19 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 {
     public class ProjectProvider
     {
-        private TransformationHelper templateHelper;
+        private TransformationHelper transformationHelper;
 
-        public ProjectProvider(TransformationHelper templateHelper)
+        public ProjectProvider(TransformationHelper transformationHelper)
         {
-            this.templateHelper = templateHelper;
+            this.transformationHelper = transformationHelper;
         }
 
 
-        public DTE2 Studio
+        public DTE2 VisualStudio
         {
             get
             {
-                return templateHelper.FileManager.Studio;
+                return transformationHelper.FileManager.VisualStudio;
             }
         }
 
@@ -27,7 +27,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return templateHelper.FileManager.TemplateProjectItem.ContainingProject;
+                return transformationHelper.FileManager.TemplateProjectItem.ContainingProject;
             }
         }
 
@@ -35,7 +35,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return this.Studio.GetProject(templateHelper.AppDefinition.ModelProjectName);
+                return this.VisualStudio.GetProject(transformationHelper.AppDefinition.ModelProjectName);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return this.Studio.GetProject(templateHelper.AppDefinition.DataServiceProjectName);
+                return this.VisualStudio.GetProject(transformationHelper.AppDefinition.DataServiceProjectName);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return this.Studio.GetProject(templateHelper.AppDefinition.DataServiceTestsProjectName);
+                return this.VisualStudio.GetProject(transformationHelper.AppDefinition.DataServiceTestsProjectName);
             }
         }
 
@@ -59,7 +59,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return this.Studio.GetProject(templateHelper.AppDefinition.ServiceProjectName);
+                return this.VisualStudio.GetProject(transformationHelper.AppDefinition.ServiceProjectName);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return this.Studio.GetProject(templateHelper.AppDefinition.WebProjectName);
+                return this.VisualStudio.GetProject(transformationHelper.AppDefinition.WebProjectName);
             }
         }
 
@@ -75,7 +75,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return this.Studio.GetProject(templateHelper.AppDefinition.WebCoreProjectName);
+                return this.VisualStudio.GetProject(transformationHelper.AppDefinition.WebCoreProjectName);
             }
         }
 
@@ -83,7 +83,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return this.Studio.GetProject(templateHelper.AppDefinition.ServiceTestsProjectName);
+                return this.VisualStudio.GetProject(transformationHelper.AppDefinition.ServiceTestsProjectName);
             }
         }
 
@@ -91,14 +91,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return this.Studio.GetProject(templateHelper.AppDefinition.TestingProjectName);
+                return this.VisualStudio.GetProject(transformationHelper.AppDefinition.TestingProjectName);
             }
         }
 
 
         public string GetGeneratedCodeFolder(DomainType domainType)
         {
-            return templateHelper.AppDefinition.GeneratedCodeRootFolderName + domainType.SubNamespace.Replace(".", @"\");
+            return transformationHelper.AppDefinition.GeneratedCodeRootFolderName + domainType.SubNamespace.Replace(".", @"\");
         }
     }
 }

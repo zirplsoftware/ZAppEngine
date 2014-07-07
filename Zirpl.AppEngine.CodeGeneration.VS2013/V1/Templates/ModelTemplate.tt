@@ -19,7 +19,7 @@
 //
 foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateModelFor)
 {
-	this.TransformationHelper.StartModelFile(domainType);
+	this.TransformationHelper.FileHelper.StartModelFile(domainType);
 		
 #>
 using System;
@@ -27,9 +27,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Zirpl.AppEngine.Model;
 
-namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainType) #>
+namespace <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>
 {
-    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= domainType.Name #> : <#= this.TransformationHelper.TypeProvider.GetModelBaseClass(domainType) #>
+    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= this.TransformationHelper.CodeHelper.GetModelClassName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetModelBaseClassName(domainType) #>
     {
 <#
 	if (domainType.Properties != null)
@@ -42,10 +42,12 @@ namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainT
 									select p;
 		if (collectionProperties.Count() > 0)
 		{
+			// handle the constructor
 #>
-		public <#= domainType.Name #>()
+		public <#= this.TransformationHelper.CodeHelper.GetModelClassName(domainType) #>()
 		{
 <#
+			// initialize any collection properties (everything defaults to IList<T>
 			foreach (var collectionProperty in collectionProperties)
 			{
 #>
@@ -61,7 +63,7 @@ namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainT
 <#
 		}
 
-		// now go through ALL p
+		// now go through ALL properties
 		foreach (var property in domainType.Properties)
 		{
 			if (property.IsCollection)
@@ -72,35 +74,21 @@ namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainT
 			}
 			else
 			{
-				string propertyType = property.Type;
-				propertyType = propertyType.ToLowerInvariant() == "currency" ? "decimal" : propertyType;
-				if (!property.IsRequired
-					&& (propertyType.ToLowerInvariant() == "datetime"
-						||propertyType.ToLowerInvariant() == "byte"
-						||propertyType.ToLowerInvariant() == "bool"
-						||propertyType.ToLowerInvariant() == "int"
-						||propertyType.ToLowerInvariant() == "decimal"
-						||propertyType.ToLowerInvariant() == "double"
-						||propertyType.ToLowerInvariant() == "guid"))
+				// the base class already has "Name" property, so skip that one
+				if (property.Name != "Name")
                 {
-					propertyType += "?";
+#>
+		public virtual <#= this.TransformationHelper.CodeHelper.GetPropertyClassNameString(property) #> <#= property.Name #> { get; set; }
+<#
+					// handle the Id property of the relationship IE: "Parent" may need a "ParentId" property
+					if (property.IsRelationship
+						&& property.GenerateIdProperty)
+					{
+#>
+		public virtual <#= this.TransformationHelper.CodeHelper.GetRelationshipIdPropertyClassNameString(property) #> <#= property.Name #>Id { get; set; }
+<#
+					}
                 }
-#>
-		public <#= ((domainType.IsDictionary && property.Name == "Name") ? "override" : "virtual") #> <#= propertyType #> <#= property.Name #> { get; set; }
-<#
-				if (property.IsRelationship
-					&& property.GenerateIdProperty)
-				{
-					var relationshipModel = this.TransformationHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(property.Type);
-					string relationshipIdTypeString = !String.IsNullOrEmpty(relationshipModel.IdTypeOverride)
-													? relationshipModel.IdTypeOverride
-													: (relationshipModel.IsDictionary ? "byte" : "int");
-					relationshipIdTypeString += (property.IsRequired ? "" : "?");
-					
-#>
-		public virtual <#= relationshipIdTypeString #> <#= property.Name #>Id { get; set; }
-<#
-				}
 			}
 		}
 	}

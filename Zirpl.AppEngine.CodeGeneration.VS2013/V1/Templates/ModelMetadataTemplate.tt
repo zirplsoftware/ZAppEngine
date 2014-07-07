@@ -19,7 +19,7 @@
 //
 foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateMetadataFor)
 {
-	this.TransformationHelper.StartMetadataFile(domainType);
+	this.TransformationHelper.FileHelper.StartMetadataFile(domainType);
 	
 #>
 using System;
@@ -27,9 +27,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Zirpl.AppEngine.Model;
 
-namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainType) #>
+namespace <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>
 {
-    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= domainType.Name #>Metadata : <#= this.TransformationHelper.TypeProvider.GetMetadataBaseClass(domainType) #>
+    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= domainType.Name #>Metadata : <#= this.TransformationHelper.CodeHelper.GetModelMetadataBaseClassName(domainType) #>
     {
 <#
 	if (domainType.Properties != null)
@@ -85,7 +85,6 @@ namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainT
 				&& property.IsRelationship
 				&& property.GenerateIdProperty)
 			{
-
 #>
 		public const string <#= property.Name #>Id_Name = "<#= property.Name #>Id";
 		public const bool <#= property.Name #>Id_IsRequired = <#= property.IsRequired.ToString().ToLowerInvariant() #>;
@@ -99,5 +98,4 @@ namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainT
 }
 <#
 }
-
 #>

@@ -44,7 +44,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         }
 
         /// <summary>
-        /// Execute Visual Studio commands against the project item.
+        /// Execute Visual VisualStudio commands against the project item.
         /// </summary>
         /// <param name="item">The current project item.</param>
         /// <param name="command">The vs command as string.</param>
@@ -138,7 +138,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             else if (String.IsNullOrEmpty(block.FolderName) == false)
             {
                 //var items =GetAllProjectItemsRecursive(
-                //	Studio.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).ToList();
+                //	VisualStudio.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).ToList();
                 //item = items.Where(i=>i.Name == block.FolderName).First();
                 item = EnsureProjectFolderExists(block.FolderName, dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems);
             }
@@ -242,7 +242,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             else if (String.IsNullOrEmpty(file.FolderName) == false)
             {
                 //item = GetAllProjectItemsRecursive(
-                //	Studio.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
+                //	VisualStudio.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
                 //	Where(i=>i.Name == file.FolderName).First();
                 item = EnsureProjectFolderExists(file.FolderName, dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems);
             }

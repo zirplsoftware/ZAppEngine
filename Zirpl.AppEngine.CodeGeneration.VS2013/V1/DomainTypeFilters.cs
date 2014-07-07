@@ -6,18 +6,18 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 {
     public class DomainTypeFilters
     {
-        private TransformationHelper templateHelper;
+        private TransformationHelper transformationHelper;
 
-        public DomainTypeFilters(TransformationHelper templateHelper)
+        public DomainTypeFilters(TransformationHelper transformationHelper)
         {
-            this.templateHelper = templateHelper;
+            this.transformationHelper = transformationHelper;
         }
 
         public IEnumerable<DomainType> DomainTypesToGenerateModelFor
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.ModelOptions.GenerateModel
                     select dt;
             }
@@ -27,7 +27,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.ModelOptions.GenerateMetadata
                     select dt;
             }
@@ -37,7 +37,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.IsDictionary
                           && dt.ModelOptions.GenerateEnum
                     select dt;
@@ -48,7 +48,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.DataServiceOptions.GenerateDataServiceInterface
                     select dt;
             }
@@ -58,7 +58,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.DataServiceOptions.GenerateDataService
                     select dt;
             }
@@ -68,7 +68,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.DataServiceOptions.GenerateDataContextProperty
                     select dt;
             }
@@ -78,7 +78,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.DataServiceOptions.GenerateEntityFrameworkMapping
                     select dt;
             }
@@ -88,7 +88,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.ServiceOptions.GenerateServiceInterface
                     select dt;
             }
@@ -98,7 +98,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.ServiceOptions.GenerateService
                     select dt;
             }
@@ -108,7 +108,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.ServiceOptions.GenerateValidator
                           && !dt.IsDictionary
                           && dt.ModelOptions.GenerateModel
@@ -120,7 +120,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.WebOptions.GenerateSupportViewModel
                     //&& dt.IsDictionary
                     select dt;
@@ -131,7 +131,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.WebOptions.GenerateSupportController
                           && !dt.IsDictionary
                     select dt;
@@ -142,7 +142,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.WebOptions.GenerateSupportIndexView
                           && !dt.IsDictionary
                     select dt;
@@ -153,7 +153,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             get
             {
-                return from dt in templateHelper.AppDefinition.DomainTypes
+                return from dt in transformationHelper.AppDefinition.DomainTypes
                     where dt.WebOptions.GenerateLookupsController
                           && dt.IsDictionary
                     select dt;
@@ -163,8 +163,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
         public DomainType GetDomainTypeByFullTypeName(string fullTypeName)
         {
-            return (from dt in templateHelper.AppDefinition.DomainTypes
-                    where templateHelper.NamingProvider.GetModelFullTypeName(dt) == fullTypeName
+            return (from dt in transformationHelper.AppDefinition.DomainTypes
+                    where transformationHelper.CodeHelper.GetModelClassFullName(dt) == fullTypeName
                     select dt).SingleOrDefault();
         }
 

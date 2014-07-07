@@ -40,7 +40,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 //
 foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
 {
-	this.TransformationHelper.StartEnumFile(domainType);	
+	this.TransformationHelper.FileHelper.StartEnumFile(domainType);	
 
             
             #line default
@@ -49,21 +49,21 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
             #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelEnumTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.NamingProvider.GetModelNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelEnumNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public enum ");
             
             #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelEnumTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelEnumClassName(domainType)));
             
             #line default
             #line hidden
-            this.Write("Enum : ");
+            this.Write(" : ");
             
             #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelEnumTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.TypeProvider.GetIdClass(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelEnumBaseClassName(domainType)));
             
             #line default
             #line hidden

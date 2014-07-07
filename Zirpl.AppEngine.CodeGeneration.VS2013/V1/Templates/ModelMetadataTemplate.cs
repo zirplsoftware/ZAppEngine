@@ -40,7 +40,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 //
 foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateMetadataFor)
 {
-	this.TransformationHelper.StartMetadataFile(domainType);
+	this.TransformationHelper.FileHelper.StartMetadataFile(domainType);
 	
 
             
@@ -50,7 +50,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
             #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.NamingProvider.GetModelNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
@@ -71,7 +71,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write("Metadata : ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.TypeProvider.GetMetadataBaseClass(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelMetadataBaseClassName(domainType)));
             
             #line default
             #line hidden
@@ -363,41 +363,40 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
 				&& property.GenerateIdProperty)
 			{
 
-
             
             #line default
             #line hidden
             this.Write("\t\tpublic const string ");
             
-            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id_Name = \"");
             
-            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id\";\r\n\t\tpublic const bool ");
             
-            #line 91 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id_IsRequired = ");
             
-            #line 91 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired.ToString().ToLowerInvariant()));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n");
             
-            #line 93 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 92 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
 
             }
 		}
@@ -408,10 +407,9 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             #line hidden
             this.Write("\t}\r\n}\r\n");
             
-            #line 100 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 99 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
 
 }
-
 
             
             #line default

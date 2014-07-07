@@ -40,7 +40,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 //
 foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateModelFor)
 {
-	this.TransformationHelper.StartModelFile(domainType);
+	this.TransformationHelper.FileHelper.StartModelFile(domainType);
 		
 
             
@@ -50,7 +50,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
             #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.NamingProvider.GetModelNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
@@ -64,14 +64,14 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write(" partial class ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelClassName(domainType)));
             
             #line default
             #line hidden
             this.Write(" : ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.TypeProvider.GetModelBaseClass(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelBaseClassName(domainType)));
             
             #line default
             #line hidden
@@ -89,21 +89,23 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
 									select p;
 		if (collectionProperties.Count() > 0)
 		{
+			// handle the constructor
 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 46 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
+            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelClassName(domainType)));
             
             #line default
             #line hidden
             this.Write("()\r\n\t\t{\r\n");
             
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
+			// initialize any collection properties (everything defaults to IList<T>
 			foreach (var collectionProperty in collectionProperties)
 			{
 
@@ -112,28 +114,28 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             #line hidden
             this.Write("\t\t\tif (this.");
             
-            #line 52 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.Name));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t\t{\r\n\t\t\t\tthis.");
             
-            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.Name));
             
             #line default
             #line hidden
             this.Write(" = new List<");
             
-            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.CollectionOfType));
             
             #line default
             #line hidden
             this.Write(">();\r\n\t\t\t}\r\n");
             
-            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
 			}
 
@@ -142,11 +144,11 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             #line hidden
             this.Write("\t\t}\r\n\r\n");
             
-            #line 61 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 63 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
 		}
 
-		// now go through ALL p
+		// now go through ALL properties
 		foreach (var property in domainType.Properties)
 		{
 			if (property.IsCollection)
@@ -157,99 +159,78 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             #line hidden
             this.Write("\t\tpublic virtual IList<");
             
-            #line 70 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 72 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.CollectionOfType));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 70 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 72 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 71 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 73 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
 			}
 			else
 			{
-				string propertyType = property.Type;
-				propertyType = propertyType.ToLowerInvariant() == "currency" ? "decimal" : propertyType;
-				if (!property.IsRequired
-					&& (propertyType.ToLowerInvariant() == "datetime"
-						||propertyType.ToLowerInvariant() == "byte"
-						||propertyType.ToLowerInvariant() == "bool"
-						||propertyType.ToLowerInvariant() == "int"
-						||propertyType.ToLowerInvariant() == "decimal"
-						||propertyType.ToLowerInvariant() == "double"
-						||propertyType.ToLowerInvariant() == "guid"))
+				// the base class already has "Name" property, so skip that one
+				if (property.Name != "Name")
                 {
-					propertyType += "?";
-                }
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\tpublic ");
-            
-            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(((domainType.IsDictionary && property.Name == "Name") ? "override" : "virtual")));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(propertyType));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" { get; set; }\r\n");
-            
-            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-
-				if (property.IsRelationship
-					&& property.GenerateIdProperty)
-				{
-					var relationshipModel = this.TransformationHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(property.Type);
-					string relationshipIdTypeString = !String.IsNullOrEmpty(relationshipModel.IdTypeOverride)
-													? relationshipModel.IdTypeOverride
-													: (relationshipModel.IsDictionary ? "byte" : "int");
-					relationshipIdTypeString += (property.IsRequired ? "" : "?");
-					
 
             
             #line default
             #line hidden
             this.Write("\t\tpublic virtual ");
             
-            #line 101 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relationshipIdTypeString));
+            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetPropertyClassNameString(property)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 101 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" { get; set; }\r\n");
+            
+            #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+
+					// handle the Id property of the relationship IE: "Parent" may need a "ParentId" property
+					if (property.IsRelationship
+						&& property.GenerateIdProperty)
+					{
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic virtual ");
+            
+            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetRelationshipIdPropertyClassNameString(property)));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id { get; set; }\r\n");
             
-            #line 102 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
-				}
+					}
+                }
 			}
 		}
 	}
@@ -259,7 +240,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             #line hidden
             this.Write("    }\r\n}\r\n\r\n");
             
-            #line 111 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
+            #line 99 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
 
 }
 
