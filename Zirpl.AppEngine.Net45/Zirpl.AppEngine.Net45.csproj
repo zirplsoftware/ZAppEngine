@@ -192,6 +192,9 @@
     <Compile Include="..\Zirpl.AppEngine\Model\DefaultSearchCriteria.cs">
       <Link>Model\DefaultSearchCriteria.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\DictionaryEntityBase.cs">
+      <Link>Model\DictionaryEntityBase.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\FixupCollection.cs">
       <Link>Model\FixupCollection.cs</Link>
     </Compile>
@@ -203,6 +206,12 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IDeletable.cs">
       <Link>Model\IDeletable.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IDictionaryEntity.cs">
+      <Link>Model\IDictionaryEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IDictionaryEntityExtensions.cs">
+      <Link>Model\IDictionaryEntityExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IKeyedEntity.cs">
       <Link>Model\IKeyedEntity.cs</Link>
@@ -248,6 +257,9 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Membership\IUserRegistrationRequest.cs">
       <Link>Model\Membership\IUserRegistrationRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\MetadataBase.cs">
+      <Link>Model\MetadataBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\NonPersistedObjectException.cs">
       <Link>Model\NonPersistedObjectException.cs</Link>
@@ -468,7 +480,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.Templates;
+using Zirpl.AppEngine.CodeGeneration;
+using Zirpl.AppEngine.CodeGeneration.V1.Templates;
 
 namespace Zirpl.AppEngine.CodeGeneration
 {
     public static class AppGenerator
     {
-        public static void GenerateApp(TextTransformation callingTemplate)
+        public static void GenerateApp(this TextTransformation callingTemplate)
         {
-            var templateHelper = new TemplateHelper(callingTemplate);
-            new ModelTemplate(templateHelper).TransformText();
-            new ModelMetadataTemplate(templateHelper).TransformText();
-            new ModelEnumTemplate(templateHelper).TransformText();
-            templateHelper.End();
+            using (var transformationHelper = new V1.TransformationHelper(callingTemplate))
+            {
+                new ModelTemplate(transformationHelper).TransformText();
+                new ModelMetadataTemplate(transformationHelper).TransformText();
+                new ModelEnumTemplate(transformationHelper).TransformText();
+            }
         }
     }
 }

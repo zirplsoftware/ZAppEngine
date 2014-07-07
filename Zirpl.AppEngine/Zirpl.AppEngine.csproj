@@ -119,11 +119,14 @@
     <Compile Include="Model\BatchProcessing\IBatchItemError.cs" />
     <Compile Include="Model\DateOnlyWrapper.cs" />
     <Compile Include="Model\DefaultSearchCriteria.cs" />
+    <Compile Include="Model\DictionaryEntityBase.cs" />
     <Compile Include="Model\FixupCollection.cs" />
     <Compile Include="Model\IAuditable.cs" />
     <Compile Include="Model\IAuthenticatedUser.cs" />
     <Compile Include="Model\IDeletable.cs" />
+    <Compile Include="Model\IDictionaryEntityExtensions.cs" />
     <Compile Include="Model\IKeyedEntity.cs" />
+    <Compile Include="Model\IDictionaryEntity.cs" />
     <Compile Include="Model\InvalidRangeException.cs" />
     <Compile Include="Model\IPersistable.cs" />
     <Compile Include="Model\IPersistable.gen.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="Model\Membership\ILogInRequest.cs" />
     <Compile Include="Model\Membership\IResetLostPasswordRequest.cs" />
     <Compile Include="Model\Membership\IUserRegistrationRequest.cs" />
+    <Compile Include="Model\MetadataBase.cs" />
     <Compile Include="Model\NonPersistedObjectException.cs" />
     <Compile Include="Model\PersistableBase.cs" />
     <Compile Include="Model\PersistableExtensions.cs" />
