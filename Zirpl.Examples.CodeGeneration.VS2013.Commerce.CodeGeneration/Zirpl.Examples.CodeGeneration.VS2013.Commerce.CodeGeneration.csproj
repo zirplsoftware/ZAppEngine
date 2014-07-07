@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA7ECD8B-603B-44FC-8F9E-71B5A9D26059}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zirpl.Examples.CodeGeneration.VS2013.Commerce.CodeGeneration</RootNamespace>
+    <AssemblyName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.CodeGeneration</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppTransform.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppTransform.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.CodeGeneration.VS2013.csproj">
+      <Project>{f8855f9a-35d1-4c30-bb53-1fd89a984989}</Project>
+      <Name>Zirpl.AppEngine.CodeGeneration.VS2013</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_config\AppDefinition.app.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="_config\Model\Address.model.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="_config\Model\Catalog\Brand.model.xml" />
+    <Content Include="_config\Model\Catalog\Category.model.xml" />
+    <Content Include="_config\Model\Catalog\DisplayProduct.model.xml" />
+    <Content Include="_config\Model\Catalog\ProductReview.model.xml" />
+    <Content Include="_config\Model\Catalog\SubscriptionChoice.model.xml" />
+    <Content Include="_config\Model\Catalog\SubscriptionChoiceTierPriceCombination.model.xml" />
+    <Content Include="_config\Model\Catalog\TierPrice.model.xml" />
+    <Content Include="_config\Model\Catalog\TierShipment.model.xml" />
+    <Content Include="_config\Model\Customers\Customer.model.xml" />
+    <Content Include="_config\Model\Customers\CustomerChargeOption.model.xml" />
+    <Content Include="_config\Model\Customers\CustomerReferral.model.xml" />
+    <Content Include="_config\Model\Customers\CustomerTag.model.xml" />
+    <Content Include="_config\Model\Membership\PasswordResetLink.model.xml" />
+    <Content Include="_config\Model\Membership\User.model.xml" />
+    <Content Include="_config\Model\Membership\Visitor.model.xml" />
+    <Content Include="_config\Model\NamePrefixType.model.xml" />
+    <Content Include="_config\Model\NameSuffixType.model.xml" />
+    <Content Include="_config\Model\Notifications\EmailEvent.model.xml" />
+    <Content Include="_config\Model\Notifications\EmailEventType.model.xml" />
+    <Content Include="_config\Model\Orders\Charge.model.xml" />
+    <Content Include="_config\Model\Orders\ChargeMethodType.model.xml" />
+    <Content Include="_config\Model\Orders\ChargeStatusType.model.xml" />
+    <Content Include="_config\Model\Orders\ChargeType.model.xml" />
+    <Content Include="_config\Model\Orders\DiscountUsage.model.xml" />
+    <Content Include="_config\Model\Orders\DiscountUsageRestrictionType.model.xml" />
+    <Content Include="_config\Model\Orders\Order.model.xml" />
+    <Content Include="_config\Model\Orders\OrderChargeStatusType.model.xml" />
+    <Content Include="_config\Model\Orders\OrderItem.model.xml" />
+    <Content Include="_config\Model\Orders\OrderStatusType.model.xml" />
+    <Content Include="_config\Model\Orders\ShoppingCartItem.model.xml" />
+    <Content Include="_config\Model\Orders\StripeCharge.model.xml" />
+    <Content Include="_config\Model\Orders\StripeCustomerChargeOption.model.xml" />
+    <Content Include="_config\Model\Orders\SubscriptionOrderItem.model.xml" />
+    <Content Include="_config\Model\Orders\SubscriptionOrderItemType.model.xml" />
+    <Content Include="_config\Model\Partners\Partner.model.xml" />
+    <Content Include="_config\Model\Partners\PartnerReferral.model.xml" />
+    <Content Include="_config\Model\Partners\PartnerReferralCouponRequest.model.xml" />
+    <Content Include="_config\Model\Partners\PartnerReferralCouponRequestStatusType.model.xml" />
+    <Content Include="_config\Model\Partners\PartnerReferralPlan.model.xml" />
+    <Content Include="_config\Model\Promotions\Discount.model.xml" />
+    <Content Include="_config\Model\Promotions\DiscountAmountType.model.xml" />
+    <Content Include="_config\Model\Promotions\DiscountApplicabilityType.model.xml" />
+    <Content Include="_config\Model\Promotions\PromoCode.model.xml" />
+    <Content Include="_config\Model\Promotions\Referral.model.xml" />
+    <Content Include="_config\Model\Settings\StateProvinceType.model.xml" />
+    <Content Include="_config\Model\Settings\SystemSetting.model.xml" />
+    <Content Include="_config\Model\Settings\TaxRule.model.xml" />
+    <Content Include="_config\Model\Subscriptions\PendingSubscriptionChange.model.xml" />
+    <Content Include="_config\Model\Subscriptions\Subscription.model.xml" />
+    <Content Include="_config\Model\Subscriptions\SubscriptionInstance.model.xml" />
+    <Content Include="_config\Model\Subscriptions\SubscriptionPeriod.model.xml" />
+    <Content Include="_config\Model\Subscriptions\SubscriptionPeriodType.model.xml" />
+    <Content Include="_config\Model\Subscriptions\SubscriptionStatusType.model.xml" />
+    <Content Include="_config\Model\Tag.model.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AppTransform.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AppTransform.cs</LastGenOutput>
+    </None>
+    <None Include="_config\Model\Orders\ShipBatch.model.xml.exclude" />
+    <None Include="_config\Model\Orders\ShipBatchItem.model.xml.exclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

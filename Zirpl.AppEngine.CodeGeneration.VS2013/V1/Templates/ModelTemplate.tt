@@ -1,0 +1,113 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".log" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1.ConfigModel" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="VSLangProj" #>
+<#@ assembly name="VSLangProj80" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Serialization" #>
+<#
+// Generate Model classes
+//
+foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateModelFor)
+{
+	this.TransformationHelper.StartModelFile(domainType);
+		
+#>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Zirpl.AppEngine.Model;
+
+namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainType) #>
+{
+    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= domainType.Name #> : <#= this.TransformationHelper.TypeProvider.GetModelBaseClass(domainType) #>
+    {
+<#
+	if (domainType.Properties != null)
+	{
+		// grab all the collection properties now so we
+		// can add initializers in the Constructor
+		//
+		var collectionProperties = from p in domainType.Properties
+									where p.IsCollection
+									select p;
+		if (collectionProperties.Count() > 0)
+		{
+#>
+		public <#= domainType.Name #>()
+		{
+<#
+			foreach (var collectionProperty in collectionProperties)
+			{
+#>
+			if (this.<#= collectionProperty.Name #> == null)
+			{
+				this.<#= collectionProperty.Name #> = new List<<#= collectionProperty.CollectionOfType #>>();
+			}
+<#
+			}
+#>
+		}
+
+<#
+		}
+
+		// now go through ALL p
+		foreach (var property in domainType.Properties)
+		{
+			if (property.IsCollection)
+			{
+#>
+		public virtual IList<<#= property.CollectionOfType #>> <#= property.Name #> { get; set; }
+<#
+			}
+			else
+			{
+				string propertyType = property.Type;
+				propertyType = propertyType.ToLowerInvariant() == "currency" ? "decimal" : propertyType;
+				if (!property.IsRequired
+					&& (propertyType.ToLowerInvariant() == "datetime"
+						||propertyType.ToLowerInvariant() == "byte"
+						||propertyType.ToLowerInvariant() == "bool"
+						||propertyType.ToLowerInvariant() == "int"
+						||propertyType.ToLowerInvariant() == "decimal"
+						||propertyType.ToLowerInvariant() == "double"
+						||propertyType.ToLowerInvariant() == "guid"))
+                {
+					propertyType += "?";
+                }
+#>
+		public <#= ((domainType.IsDictionary && property.Name == "Name") ? "override" : "virtual") #> <#= propertyType #> <#= property.Name #> { get; set; }
+<#
+				if (property.IsRelationship
+					&& property.GenerateIdProperty)
+				{
+					var relationshipModel = this.TransformationHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(property.Type);
+					string relationshipIdTypeString = !String.IsNullOrEmpty(relationshipModel.IdTypeOverride)
+													? relationshipModel.IdTypeOverride
+													: (relationshipModel.IsDictionary ? "byte" : "int");
+					relationshipIdTypeString += (property.IsRequired ? "" : "?");
+					
+#>
+		public virtual <#= relationshipIdTypeString #> <#= property.Name #>Id { get; set; }
+<#
+				}
+			}
+		}
+	}
+#>
+    }
+}
+
+<#
+}
+#>

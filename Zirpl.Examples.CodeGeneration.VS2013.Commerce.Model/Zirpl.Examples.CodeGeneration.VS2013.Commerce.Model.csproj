@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E28C3BE3-44D0-4787-872F-8B2CDC62FB96}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model</RootNamespace>
+    <AssemblyName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Membership\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_auto\Address.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\AddressMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\Brand.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\BrandMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\Category.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\CategoryMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\DisplayProduct.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\DisplayProductMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\ProductReview.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\ProductReviewMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoice.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceTierPriceCombination.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceTierPriceCombinationMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierPrice.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierPriceMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierShipment.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierShipmentMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\Customer.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerChargeOption.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerChargeOptionMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerReferral.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerReferralMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerTag.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerTagMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\PasswordResetLink.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\PasswordResetLinkMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\Visitor.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\VisitorMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\NamePrefixType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\NamePrefixTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\NamePrefixTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\NameSuffixType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\NameSuffixTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\NameSuffixTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEvent.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEventMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEventType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEventTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEventTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\Charge.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeMethodType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeMethodTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeMethodTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeStatusType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeStatusTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeStatusTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsage.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsageMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsageRestrictionType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsageRestrictionTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsageRestrictionTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\Order.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderChargeStatusType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderChargeStatusTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderChargeStatusTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderItem.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderItemMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderStatusType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderStatusTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderStatusTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ShoppingCartItem.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ShoppingCartItemMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeCharge.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeChargeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeCustomerChargeOption.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeCustomerChargeOptionMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItem.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItemMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItemType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItemTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItemTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\Partner.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferral.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequest.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequestMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequestStatusType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequestStatusTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequestStatusTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralPlan.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralPlanMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\Discount.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountAmountType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountAmountTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountAmountTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountApplicabilityType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountApplicabilityTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountApplicabilityTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\PromoCode.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\PromoCodeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\Referral.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\ReferralMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\StateProvinceType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\StateProvinceTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\StateProvinceTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\SystemSetting.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\SystemSettingMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\TaxRule.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\TaxRuleMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\PendingSubscriptionChange.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\PendingSubscriptionChangeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\Subscription.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionInstance.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionInstanceMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriod.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriodMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriodType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriodTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriodTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionStatusType.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionStatusTypeEnum.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionStatusTypeMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Tag.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\TagMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
+      <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
+      <Name>Zirpl.AppEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_auto\AppTransform.txt4" />
+    <None Include="_auto\Catalog\AppTransform.txt4" />
+    <None Include="_auto\Customers\AppTransform.txt4" />
+    <None Include="_auto\Membership\AppTransform.txt4" />
+    <None Include="_auto\Notifications\AppTransform.txt4" />
+    <None Include="_auto\Orders\AppTransform.txt4" />
+    <None Include="_auto\Partners\AppTransform.txt4" />
+    <None Include="_auto\Promotions\AppTransform.txt4" />
+    <None Include="_auto\Settings\AppTransform.txt4" />
+    <None Include="_auto\Subscriptions\AppTransform.txt4" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

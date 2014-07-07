@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="NameSuffixType" IsDictionary="true" BaseClassOverride="" SubNamespace="">
+			<EnumValueEntries>
+				<Entry Key="DMD" Value="1" />
+				<Entry Key="DDS" Value="2" />
+				<Entry Key="DO" Value="3" />
+        <Entry Key="MD" Value="4" />
+        <Entry Key="PhD" Value="5" />
+        <Entry Key="Jr" Value="6" />
+        <Entry Key="Sr" Value="7" />
+        <Entry Key="II" Value="8" />
+        <Entry Key="III" Value="9" />
+        <Entry Key="IV" Value="10" />
+			</EnumValueEntries>
+			<Properties>
+        <Property Name="Name" DisplayText="Suffix" Type="string" IsRequired="true" MaxLength="100" />
+			</Properties>
+</Type>

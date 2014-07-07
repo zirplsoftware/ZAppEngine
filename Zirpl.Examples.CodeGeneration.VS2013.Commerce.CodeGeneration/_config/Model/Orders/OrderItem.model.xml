@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="OrderItem" BaseClassOverride="" SubNamespace="Orders">
+  <Properties>
+    <Property Name="Quantity" Type="int" IsRequired="true" MinValue="1" />
+    <Property Name="ItemName" Type="string" IsRequired="true" MinLength="1" MaxLength="512" />
+    <Property Name="ItemAmountBeforeDiscount" Type="currency" IsRequired="true" MinValue="0" />
+    <Property Name="OriginalItemAmount" Type="currency" IsRequired="true" MinValue="0" />
+    <Property Name="Cancelled" Type="bool" IsRequired="true" />
+    <Property Name="Order" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.Order" IsRelationship="true" IsRequired="true" NavigationProperty="OrderItems" />
+    <Property Name="DisplayProduct" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.DisplayProduct" IsRelationship="true" IsRequired="true" />
+    <Property Name="DiscountUsages" CollectionOfType="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.DiscountUsage" IsCollection="true" />
+  </Properties>
+  <ServiceOptions GenerateValidator="false" />
+</Type>

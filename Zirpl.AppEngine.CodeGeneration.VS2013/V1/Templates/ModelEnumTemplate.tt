@@ -1,0 +1,50 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".log" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1.ConfigModel" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="VSLangProj" #>
+<#@ assembly name="VSLangProj80" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Serialization" #>
+<#
+// now we create the dictionary enums
+//
+foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
+{
+	this.TransformationHelper.StartEnumFile(domainType);	
+#>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Zirpl.AppEngine.Model;
+
+namespace <#= this.TransformationHelper.NamingProvider.GetModelNamespace(domainType) #>
+{
+    public enum <#= domainType.Name #>Enum : <#= this.TransformationHelper.TypeProvider.GetIdClass(domainType) #>
+    {
+<#
+	if (domainType.EnumValueEntries != null)
+	{
+		var totalRemaining = domainType.EnumValueEntries.Count();
+		foreach (var enumValueEntry in domainType.EnumValueEntries)
+		{
+			totalRemaining--;
+#>
+        <#= enumValueEntry.Key #> = <#= enumValueEntry.Value #><#= totalRemaining > 0 ? "," : "" #>
+<#					
+		}
+	}
+#>
+	}
+}
+<#
+}
+#>

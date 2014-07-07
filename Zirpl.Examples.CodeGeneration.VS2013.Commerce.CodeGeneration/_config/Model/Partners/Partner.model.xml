@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="Partner" BaseClassOverride="" SubNamespace="Partners">
+  <Properties>
+    <Property Name="Visitor" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership.Visitor" IsRelationship="true" IsRequired="true" />
+    <!--<Property Name="Contact" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Address" IsRelationship="true" IsRequired="true" />-->
+    <Property Name="Address" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Address" IsRelationship="true" IsRequired="true" CreateOnNullPost="true" />
+    <!--<Property Name="ShippingAddress" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Address" IsRelationship="true" IsRequired="true" />-->
+    <Property Name="ReferralPlan" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners.PartnerReferralPlan" IsRelationship="true" IsRequired="false" />
+    <Property Name="PromoCode" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.PromoCode" IsRelationship="true" IsRequired="true" CreateOnNullPost="true" />
+    <!--<Property Name="Website" Type="string" IsRequired="false" MaxLength="256" />
+    <Property Name="FacebookPage" Type="string" IsRequired="false" MaxLength="256" />
+    <Property Name="TwitterHandle" Type="string" IsRequired="false" MaxLength="256" />-->
+    <Property Name="CrmUrl" Type="string" IsRequired="false" MaxLength="256" />
+    <!--<Property Name="QuantityDentists" Type="int" IsRequired="false" MinValue="0" />
+    <Property Name="ExpectedDailyCouponUse" Type="int" IsRequired="false" MinValue="0" />-->
+  </Properties>
+</Type>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="SubscriptionOrderItemType" IsDictionary="true" BaseClassOverride="" SubNamespace="Orders">
+	
+		
+			<EnumValueEntries>
+				<Entry Key="Initial" Value="1" />
+				<Entry Key="Shipment" Value="2" />
+				<Entry Key="MidCycleChange" Value="3" />
+				<Entry Key="Renewal" Value="4" />
+			</EnumValueEntries>
+			<Properties>
+        <Property Name="Name" DisplayText="Type" Type="string" IsRequired="true" MaxLength="100" />
+			</Properties>
+		
+	
+</Type>

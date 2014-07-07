@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="Address" BaseClassOverride="" SubNamespace="">
+  <Properties>
+    <Property Name="Prefix" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.NamePrefixType" IsRelationship="true" IsRequired="false" />
+    <Property Name="FirstName" Type="string" IsRequired="false" MaxLength="150" />
+    <Property Name="MiddleName" Type="string" IsRequired="false" MaxLength="150" />
+    <Property Name="LastName" Type="string" IsRequired="false" MaxLength="150" />
+    <Property Name="Suffix" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.NameSuffixType" IsRelationship="true" IsRequired="false" />
+    <Property Name="Position" Type="string" IsRequired="false" MaxLength="150" />
+    <Property Name="CompanyName" Type="string" IsRequired="false" MaxLength="150" />
+    <Property Name="StreetLine1" Type="string" IsRequired="false" MaxLength="150" />
+    <Property Name="StreetLine2" Type="string" IsRequired="false" MaxLength="150" />
+    <Property Name="City" Type="string" IsRequired="false" MaxLength="150" />
+    <Property Name="PostalCode" Type="string" IsRequired="false" MaxLength="10" />
+    <Property Name="PhoneNumber" Type="string" IsRequired="false" MaxLength="20" />
+    <Property Name="StateProvinceType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings.StateProvinceType" IsRelationship="true" IsRequired="false" />
+  </Properties>
+</Type>

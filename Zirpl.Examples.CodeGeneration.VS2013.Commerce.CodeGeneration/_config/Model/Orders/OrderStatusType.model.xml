@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="OrderStatusType" IsDictionary="true" BaseClassOverride="" SubNamespace="Orders">
+	
+		
+			<EnumValueEntries>
+				<Entry Key="PaymentProcessing" Value="1" />
+				<Entry Key="PaymentFailed" Value="2" />
+				<Entry Key="ShipmentPending" Value="3" />
+				<Entry Key="ShipmentProcessing" Value="4" />
+				<Entry Key="Shipped" Value="5" />
+				<Entry Key="Cancelled" Value="6" />
+				<Entry Key="CompleteNoShipment" Value="7" />
+			</EnumValueEntries>
+			<Properties>
+        <Property Name="Name" DisplayText="Status" Type="string" IsRequired="true" MaxLength="100" />
+				<Property Name="CustomerFacingName" DisplayText="Status" Type="string" IsRequired="true" MinLength="1" MaxLength="100" />
+			</Properties>
+		
+	
+</Type>

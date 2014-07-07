@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="PendingSubscriptionChange" BaseClassOverride="" SubNamespace="Subscriptions">
+	
+		
+			<Properties>
+				<Property Name="Quantity" Type="int" IsRequired="true" MinValue="1" />
+				<Property Name="SubscriptionChoice" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.SubscriptionChoice" IsRelationship="true" IsRequired="true" />
+			</Properties>
+		
+	
+</Type>

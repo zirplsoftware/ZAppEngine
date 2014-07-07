@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="ProductReview" BaseClassOverride="" SubNamespace="Catalog">
+  <Properties>
+    <Property Name="DisplayProduct" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.DisplayProduct" IsRelationship="true" IsRequired="true" />
+    <Property Name="ReviewerName" Type="string" IsRequired="true" MinLength="1" MaxLength="512" />
+    <Property Name="ReviewerLocation" Type="string" IsRequired="false" MaxLength="256" />
+    <Property Name="Date" Type="DateTime" IsRequired="true" />
+    <Property Name="Text" Type="string" IsRequired="false" IsMaxLength="true" />
+    <Property Name="Stars" Type="int" IsRequired="true" MinValue="1" MaxValue="5" IsDefaultSort="true" />
+  </Properties>
+</Type>

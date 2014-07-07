@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="EmailEventType" IsDictionary="true" BaseClassOverride="" SubNamespace="Notifications">
+  <EnumValueEntries>
+    <Entry Key="WelcomePartner" Value="1" />
+    <Entry Key="WelcomeCustomer" Value="2" />
+    <Entry Key="InitialSubscriptionOrderPlaced" Value="3" />
+    <Entry Key="PasswordReset" Value="4" />
+    <Entry Key="CustomerContactUs" Value="5" />
+  </EnumValueEntries>
+  <Properties>
+    <Property Name="Name" DisplayText="Type" Type="string" IsRequired="true" MaxLength="100" />
+  </Properties>
+</Type>

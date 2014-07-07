@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="SystemSetting" BaseClassOverride="" SubNamespace="Settings">
+  <Properties>
+    <Property Name="Name" Type="string" IsRequired="true" MinLength="1" MaxLength="512" />
+    <Property Name="Value" Type="string" IsRequired="false" IsMaxLength="true" />
+  </Properties>
+  <WebOptions GenerateSupportController="false" />
+</Type>

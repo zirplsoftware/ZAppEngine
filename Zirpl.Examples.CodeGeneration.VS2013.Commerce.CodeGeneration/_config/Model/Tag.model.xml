@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="Tag" BaseClassOverride="" SubNamespace="">
+  <Properties>
+    <Property Name="Name" Type="string" IsRequired="true" MinLength="1" MaxLength="512" />
+    <Property Name="SeoId" Type="string" IsRequired="false" MaxLength="512" />
+    <Property Name="Description" Type="string" IsRequired="false" IsMaxLength="true" />
+  </Properties>
+</Type>

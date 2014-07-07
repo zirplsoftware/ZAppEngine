@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="SubscriptionStatusType" IsDictionary="true" BaseClassOverride="" SubNamespace="Subscriptions">
+	
+		
+			<EnumValueEntries>
+				<Entry Key="Active" Value="1" />
+				<Entry Key="Cancelled" Value="2" />
+				<Entry Key="RenewalFailed" Value="3" />
+			</EnumValueEntries>
+			<Properties>
+        <Property Name="Name" DisplayText="Status" Type="string" IsRequired="true" MaxLength="100" />
+			</Properties>
+		
+	
+</Type>
