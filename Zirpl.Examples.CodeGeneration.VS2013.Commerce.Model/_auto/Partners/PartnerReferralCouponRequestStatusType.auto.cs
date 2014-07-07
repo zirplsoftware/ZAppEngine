@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 {
-    public partial class PartnerReferralCouponRequestStatusType : DictionaryEntityBase<byte, PartnerReferralCouponRequestStatusTypeEnum>
+    public partial class PartnerReferralCouponRequestStatusType  : DictionaryEntityBase<byte, PartnerReferralCouponRequestStatusTypeEnum>
     {
     }
 }

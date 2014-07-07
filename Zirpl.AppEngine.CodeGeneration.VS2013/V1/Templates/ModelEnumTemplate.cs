@@ -38,9 +38,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 // now we create the dictionary enums
 //
-foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateEnumFor)
 {
-	this.TransformationHelper.FileHelper.StartModelEnumFile(domainType);	
+	this.Helper.StartModelEnumFile(domainType);	
 
             
             #line default
@@ -49,21 +49,20 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
             #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelEnumTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelEnumNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelEnumNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public enum ");
             
             #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelEnumTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelEnumTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelEnumTypeName(domainType)));
             
             #line default
             #line hidden
-            this.Write(" : ");
             
             #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelEnumTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelEnumBaseDeclaration(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelEnumBaseDeclaration(domainType)));
             
             #line default
             #line hidden

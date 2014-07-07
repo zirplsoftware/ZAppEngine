@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 {
-    public partial class Partner : AuditableBase<int>
+    public partial class Partner  : AuditableBase<int>
     {
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership.Visitor Visitor { get; set; }
 		public virtual int VisitorId { get; set; }

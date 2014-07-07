@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions
 {
-    public partial class SubscriptionPeriod : AuditableBase<int>
+    public partial class SubscriptionPeriod  : AuditableBase<int>
     {
 		public virtual int ChargePeriod { get; set; }
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionPeriodType ChargePeriodType { get; set; }

@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers
 {
-    public partial class CustomerReferral : Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.Referral
+    public partial class CustomerReferral  : Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.Referral
     {
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.Customer ReferringCustomer { get; set; }
 		public virtual int ReferringCustomerId { get; set; }

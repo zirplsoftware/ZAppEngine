@@ -38,9 +38,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 	// Generate DataService classes
 	//
-	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateDataServiceFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)
 	{
-		this.TransformationHelper.FileHelper.StartDataServiceFile(domainType);
+		this.Helper.StartDataServiceFile(domainType);
 	
 
             
@@ -50,28 +50,27 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
                     "l.AppEngine.DataService.EntityFramework;\r\nusing ");
             
             #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetDataServiceNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
             #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetDataServiceTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTypeName(domainType)));
             
             #line default
             #line hidden
-            this.Write(" : ");
             
             #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetDataServiceBaseDeclaration(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceBaseDeclaration(domainType)));
             
             #line default
             #line hidden
@@ -98,7 +97,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("> ApplyDefaultSort(IQueryable<");
             
             #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeName(domainType)));
             
             #line default
             #line hidden

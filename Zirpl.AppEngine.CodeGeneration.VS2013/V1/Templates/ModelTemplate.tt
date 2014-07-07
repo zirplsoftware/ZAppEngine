@@ -17,9 +17,9 @@
 <#
 // Generate Model classes
 //
-foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateModelFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
 {
-	this.TransformationHelper.FileHelper.StartModelFile(domainType);
+	this.Helper.StartModelFile(domainType);
 		
 #>
 using System;
@@ -27,9 +27,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Zirpl.AppEngine.Model;
 
-namespace <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>
+namespace <#= this.Helper.GetModelNamespace(domainType) #>
 {
-    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= this.TransformationHelper.CodeHelper.GetModelTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetModelBaseDeclaration(domainType) #>
+    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= this.Helper.GetModelTypeName(domainType) #> <#= this.Helper.GetModelBaseDeclaration(domainType) #>
     {
 <#
 	if (domainType.Properties != null)
@@ -44,7 +44,7 @@ namespace <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)
 		{
 			// handle the constructor
 #>
-		public <#= this.TransformationHelper.CodeHelper.GetModelTypeName(domainType) #>()
+		public <#= this.Helper.GetModelTypeName(domainType) #>()
 		{
 <#
 			// initialize any collection properties (everything defaults to IList<T>
@@ -79,14 +79,14 @@ namespace <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)
 					&& domainType.IsDictionary))
                 {
 #>
-		public virtual <#= this.TransformationHelper.CodeHelper.GetPropertyTypeName(property) #> <#= property.Name #> { get; set; }
+		public virtual <#= this.Helper.GetPropertyTypeName(property) #> <#= property.Name #> { get; set; }
 <#
 					// handle the Id property of the relationship IE: "Parent" may need a "ParentId" property
 					if (property.IsRelationship
 						&& property.GenerateIdProperty)
 					{
 #>
-		public virtual <#= this.TransformationHelper.CodeHelper.GetRelationshipIdPropertyTypeName(property) #> <#= property.Name #>Id { get; set; }
+		public virtual <#= this.Helper.GetRelationshipIdPropertyTypeName(property) #> <#= property.Name #>Id { get; set; }
 <#
 					}
                 }

@@ -38,7 +38,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 	// Generate DataContext class
 	//
-	this.TransformationHelper.FileHelper.StartDataContextFile();
+	this.Helper.StartDataContextFile();
 
             
             #line default
@@ -47,22 +47,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
                     "ne.DataService.EntityFramework;\r\n\r\nnamespace ");
             
             #line 28 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetDataContextNamespace()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextNamespace()));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
             #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetDataContextTypeName()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextTypeName()));
             
             #line default
             #line hidden
-            this.Write(" : DbContextBase\r\n    {\r\n");
+            
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextBaseDeclaration()));
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n    {\r\n");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
 
-	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateDataContextPropertyFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataContextPropertyFor)
 	{
 	
 
@@ -72,14 +78,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("\t\tpublic DbSet<");
             
             #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelTypeFullName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeFullName(domainType)));
             
             #line default
             #line hidden
             this.Write("> ");
             
             #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetPluralPropertyName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPluralPropertyName(domainType)));
             
             #line default
             #line hidden
@@ -97,7 +103,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             
             #line 44 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
 
-	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEntityFrameworkMappingFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateEntityFrameworkMappingFor)
 	{
 	
 
@@ -107,7 +113,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("\t\t\tmodelBuilder.Configurations.Add(new ");
             
             #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingTypeFullName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetEntityFrameworkMappingTypeFullName(domainType)));
             
             #line default
             #line hidden

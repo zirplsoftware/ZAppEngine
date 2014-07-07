@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 {
-    public partial class SubscriptionChoiceTierPriceCombination : AuditableBase<int>
+    public partial class SubscriptionChoiceTierPriceCombination  : AuditableBase<int>
     {
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.DisplayProduct DisplayProduct { get; set; }
 		public virtual int DisplayProductId { get; set; }

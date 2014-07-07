@@ -17,9 +17,9 @@
 <#
 // now we create the metadata classes
 //
-foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateMetadataFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateMetadataFor)
 {
-	this.TransformationHelper.FileHelper.StartModelMetadataFile(domainType);
+	this.Helper.StartModelMetadataFile(domainType);
 	
 #>
 using System;
@@ -27,9 +27,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Zirpl.AppEngine.Model;
 
-namespace <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>
+namespace <#= this.Helper.GetModelNamespace(domainType) #>
 {
-    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= this.TransformationHelper.CodeHelper.GetModelMetadataTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetModelMetadataBaseDeclaration(domainType) #>
+    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= this.Helper.GetModelMetadataTypeName(domainType) #><#= this.Helper.GetModelMetadataBaseDeclaration(domainType) #>
     {
 <#
 	if (domainType.Properties != null)

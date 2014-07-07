@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Notifications
 {
-    public partial class EmailEvent : AuditableBase<int>
+    public partial class EmailEvent  : AuditableBase<int>
     {
 		public virtual DateTime SentDate { get; set; }
 		public virtual bool SentSucceeded { get; set; }

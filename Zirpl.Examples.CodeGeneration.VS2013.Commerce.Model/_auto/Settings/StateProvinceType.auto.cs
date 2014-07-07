@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings
 {
-    public partial class StateProvinceType : DictionaryEntityBase<int, StateProvinceTypeEnum>
+    public partial class StateProvinceType  : DictionaryEntityBase<int, StateProvinceTypeEnum>
     {
 		public virtual string Abbreviation { get; set; }
     }

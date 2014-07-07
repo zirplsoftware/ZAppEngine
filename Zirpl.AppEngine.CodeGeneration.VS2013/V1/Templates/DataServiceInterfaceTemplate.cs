@@ -38,9 +38,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 // Generate DataService interfaces
 //
-foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateDataServiceInterfaceFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceInterfaceFor)
 {
-	this.TransformationHelper.FileHelper.StartDataServiceInterfaceFile(domainType);
+	this.Helper.StartDataServiceInterfaceFile(domainType);
 
             
             #line default
@@ -48,28 +48,27 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write("using System;\r\nusing Zirpl.AppEngine.DataService;\r\nusing ");
             
             #line 27 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
             #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetDataServiceInterfaceNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial interface ");
             
             #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetDataServiceInterfaceTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeName(domainType)));
             
             #line default
             #line hidden
-            this.Write(" : ");
             
             #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetDataServiceInterfaceBaseDeclaration(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceBaseDeclaration(domainType)));
             
             #line default
             #line hidden

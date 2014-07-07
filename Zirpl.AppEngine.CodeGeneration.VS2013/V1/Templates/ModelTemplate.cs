@@ -38,9 +38,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 // Generate Model classes
 //
-foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateModelFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
 {
-	this.TransformationHelper.FileHelper.StartModelFile(domainType);
+	this.Helper.StartModelFile(domainType);
 		
 
             
@@ -50,7 +50,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
             #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
@@ -64,14 +64,14 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write(" partial class ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeName(domainType)));
             
             #line default
             #line hidden
-            this.Write(" : ");
+            this.Write(" ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelBaseDeclaration(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelBaseDeclaration(domainType)));
             
             #line default
             #line hidden
@@ -97,7 +97,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write("\t\tpublic ");
             
             #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeName(domainType)));
             
             #line default
             #line hidden
@@ -189,7 +189,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write("\t\tpublic virtual ");
             
             #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetPropertyTypeName(property)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPropertyTypeName(property)));
             
             #line default
             #line hidden
@@ -215,7 +215,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write("\t\tpublic virtual ");
             
             #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetRelationshipIdPropertyTypeName(property)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetRelationshipIdPropertyTypeName(property)));
             
             #line default
             #line hidden

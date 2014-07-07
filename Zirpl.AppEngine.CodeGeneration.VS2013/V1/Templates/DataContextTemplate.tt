@@ -18,23 +18,23 @@
 <#
 	// Generate DataContext class
 	//
-	this.TransformationHelper.FileHelper.StartDataContextFile();
+	this.Helper.StartDataContextFile();
 #>
 using System;
 using System.Data.Entity;
 using System.Linq;
 using Zirpl.AppEngine.DataService.EntityFramework;
 
-namespace <#= this.TransformationHelper.CodeHelper.GetDataContextNamespace() #>
+namespace <#= this.Helper.GetDataContextNamespace() #>
 {
-    public partial class <#= this.TransformationHelper.CodeHelper.GetDataContextTypeName() #> : DbContextBase
+    public partial class <#= this.Helper.GetDataContextTypeName() #><#= this.Helper.GetDataContextBaseDeclaration() #> 
     {
 <#
-	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateDataContextPropertyFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataContextPropertyFor)
 	{
 	
 #>
-		public DbSet<<#= this.TransformationHelper.CodeHelper.GetModelTypeFullName(domainType) #>> <#= this.TransformationHelper.CodeHelper.GetPluralPropertyName(domainType) #> {get; set;}
+		public DbSet<<#= this.Helper.GetModelTypeFullName(domainType) #>> <#= this.Helper.GetPluralPropertyName(domainType) #> {get; set;}
 <#
 	}
 #>
@@ -42,10 +42,10 @@ namespace <#= this.TransformationHelper.CodeHelper.GetDataContextNamespace() #>
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {		
 <#
-	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEntityFrameworkMappingFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateEntityFrameworkMappingFor)
 	{
 	
-#>			modelBuilder.Configurations.Add(new <#= this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingTypeFullName(domainType) #>());
+#>			modelBuilder.Configurations.Add(new <#= this.Helper.GetEntityFrameworkMappingTypeFullName(domainType) #>());
 <#
 	}
 #>

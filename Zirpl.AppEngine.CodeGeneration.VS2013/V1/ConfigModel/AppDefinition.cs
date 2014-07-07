@@ -11,9 +11,11 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
         {
             this.DomainTypes = new List<DomainType>();
             this.GeneratedCodeRootFolderName = @"_auto\";
+            this.GeneratedCSFileExtension = ".auto.cs";
         }
 
         public String GeneratedCodeRootFolderName { get; set; }
+        public String GeneratedCSFileExtension { get; set; }
         public String ModelProjectName { get; set; }
         public String DataServiceProjectName { get; set; }
         public String ServiceProjectName { get; set; }

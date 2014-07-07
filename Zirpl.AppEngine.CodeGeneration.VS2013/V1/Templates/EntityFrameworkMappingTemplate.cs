@@ -39,9 +39,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 	// Generate Mapping classes
 	//
-	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEntityFrameworkMappingFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateEntityFrameworkMappingFor)
 	{
-		this.TransformationHelper.FileHelper.StartEntityFrameworkMappingFile(domainType);
+		this.Helper.StartEntityFrameworkMappingFile(domainType);
 	
 
             
@@ -52,28 +52,27 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
                     "tyFramework.Mapping;\r\nusing ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
             #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetEntityFrameworkMappingNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
             #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetEntityFrameworkMappingTypeName(domainType)));
             
             #line default
             #line hidden
-            this.Write(" : ");
             
             #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingBaseDeclaration(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetEntityFrameworkMappingBaseDeclaration(domainType)));
             
             #line default
             #line hidden
@@ -363,7 +362,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 		// if the base class is one of the domain types, then we need to NOT map the core entity properties
 		//
         if (!String.IsNullOrEmpty(domainType.BaseClassOverride)
-			&& this.TransformationHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride) != null)
+			&& this.Helper.GetDomainTypeByFullTypeName(domainType.BaseClassOverride) != null)
         {
 
             

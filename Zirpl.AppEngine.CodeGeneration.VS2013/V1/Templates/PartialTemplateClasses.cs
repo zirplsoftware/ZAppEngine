@@ -4,79 +4,79 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 {
 	public partial class DataContextTemplate: IPreprocessedTextTransformation
     {
-        public DataContextTemplate(TransformationHelper transformationHelper)
+        public DataContextTemplate(V1Helper helper)
         {
-            this.TransformationHelper = transformationHelper;
-            this.Host = this.TransformationHelper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TransformationHelper TransformationHelper { get; private set; }
+        public V1Helper Helper { get; private set; }
     }
 	public partial class DataServiceInterfaceTemplate: IPreprocessedTextTransformation
     {
-        public DataServiceInterfaceTemplate(TransformationHelper transformationHelper)
+        public DataServiceInterfaceTemplate(V1Helper helper)
         {
-            this.TransformationHelper = transformationHelper;
-            this.Host = this.TransformationHelper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TransformationHelper TransformationHelper { get; private set; }
+        public V1Helper Helper { get; private set; }
     }
 	public partial class DataServiceTemplate: IPreprocessedTextTransformation
     {
-        public DataServiceTemplate(TransformationHelper transformationHelper)
+        public DataServiceTemplate(V1Helper helper)
         {
-            this.TransformationHelper = transformationHelper;
-            this.Host = this.TransformationHelper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TransformationHelper TransformationHelper { get; private set; }
+        public V1Helper Helper { get; private set; }
     }
 	public partial class EntityFrameworkMappingTemplate: IPreprocessedTextTransformation
     {
-        public EntityFrameworkMappingTemplate(TransformationHelper transformationHelper)
+        public EntityFrameworkMappingTemplate(V1Helper helper)
         {
-            this.TransformationHelper = transformationHelper;
-            this.Host = this.TransformationHelper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TransformationHelper TransformationHelper { get; private set; }
+        public V1Helper Helper { get; private set; }
     }
 	public partial class ModelEnumTemplate: IPreprocessedTextTransformation
     {
-        public ModelEnumTemplate(TransformationHelper transformationHelper)
+        public ModelEnumTemplate(V1Helper helper)
         {
-            this.TransformationHelper = transformationHelper;
-            this.Host = this.TransformationHelper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TransformationHelper TransformationHelper { get; private set; }
+        public V1Helper Helper { get; private set; }
     }
 	public partial class ModelMetadataTemplate: IPreprocessedTextTransformation
     {
-        public ModelMetadataTemplate(TransformationHelper transformationHelper)
+        public ModelMetadataTemplate(V1Helper helper)
         {
-            this.TransformationHelper = transformationHelper;
-            this.Host = this.TransformationHelper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TransformationHelper TransformationHelper { get; private set; }
+        public V1Helper Helper { get; private set; }
     }
 	public partial class ModelTemplate: IPreprocessedTextTransformation
     {
-        public ModelTemplate(TransformationHelper transformationHelper)
+        public ModelTemplate(V1Helper helper)
         {
-            this.TransformationHelper = transformationHelper;
-            this.Host = this.TransformationHelper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TransformationHelper TransformationHelper { get; private set; }
+        public V1Helper Helper { get; private set; }
     }
 }

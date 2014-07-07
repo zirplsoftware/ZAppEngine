@@ -17,18 +17,18 @@
 <#
 // now we create the dictionary enums
 //
-foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEnumFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateEnumFor)
 {
-	this.TransformationHelper.FileHelper.StartModelEnumFile(domainType);	
+	this.Helper.StartModelEnumFile(domainType);	
 #>
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Zirpl.AppEngine.Model;
 
-namespace <#= this.TransformationHelper.CodeHelper.GetModelEnumNamespace(domainType) #>
+namespace <#= this.Helper.GetModelEnumNamespace(domainType) #>
 {
-    public enum <#= this.TransformationHelper.CodeHelper.GetModelEnumTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetModelEnumBaseDeclaration(domainType) #>
+    public enum <#= this.Helper.GetModelEnumTypeName(domainType) #><#= this.Helper.GetModelEnumBaseDeclaration(domainType) #>
     {
 <#
 	if (domainType.EnumValueEntries != null)

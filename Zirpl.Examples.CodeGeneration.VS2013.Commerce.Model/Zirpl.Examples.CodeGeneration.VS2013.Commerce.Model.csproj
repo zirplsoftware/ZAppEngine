@@ -421,6 +421,7 @@
       <Name>Zirpl.AppEngine</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="_auto\AppTransform.txt4" />
     <None Include="_auto\Catalog\AppTransform.txt4" />

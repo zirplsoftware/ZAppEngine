@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 {
-    public partial class PartnerReferralCouponRequest : AuditableBase<int>
+    public partial class PartnerReferralCouponRequest  : AuditableBase<int>
     {
 		public virtual DateTime RequestDate { get; set; }
 		public virtual int Quantity { get; set; }

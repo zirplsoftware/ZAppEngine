@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
-    public partial class ChargeMethodType : DictionaryEntityBase<byte, ChargeMethodTypeEnum>
+    public partial class ChargeMethodType  : DictionaryEntityBase<byte, ChargeMethodTypeEnum>
     {
     }
 }

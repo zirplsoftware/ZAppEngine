@@ -18,17 +18,17 @@
 <#
 // Generate DataService interfaces
 //
-foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateDataServiceInterfaceFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceInterfaceFor)
 {
-	this.TransformationHelper.FileHelper.StartDataServiceInterfaceFile(domainType);
+	this.Helper.StartDataServiceInterfaceFile(domainType);
 #>
 using System;
 using Zirpl.AppEngine.DataService;
-using <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>;
+using <#= this.Helper.GetModelNamespace(domainType) #>;
 
-namespace <#= this.TransformationHelper.CodeHelper.GetDataServiceInterfaceNamespace(domainType) #>
+namespace <#= this.Helper.GetDataServiceInterfaceNamespace(domainType) #>
 {
-    public partial interface <#= this.TransformationHelper.CodeHelper.GetDataServiceInterfaceTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetDataServiceInterfaceBaseDeclaration(domainType) #>
+    public partial interface <#= this.Helper.GetDataServiceInterfaceTypeName(domainType) #><#= this.Helper.GetDataServiceInterfaceBaseDeclaration(domainType) #>
     {
     }
 }

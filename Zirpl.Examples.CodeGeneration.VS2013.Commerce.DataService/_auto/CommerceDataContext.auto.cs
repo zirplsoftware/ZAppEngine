@@ -5,7 +5,7 @@ using Zirpl.AppEngine.DataService.EntityFramework;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService
 {
-    public partial class CommerceDataContext : DbContextBase
+    public partial class CommerceDataContext : DbContextBase 
     {
 		public DbSet<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Address> Addresses {get; set;}
 		public DbSet<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.Brand> Brands {get; set;}

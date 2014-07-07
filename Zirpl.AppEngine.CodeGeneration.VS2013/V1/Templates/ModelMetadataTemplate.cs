@@ -38,9 +38,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 // now we create the metadata classes
 //
-foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateMetadataFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateMetadataFor)
 {
-	this.TransformationHelper.FileHelper.StartModelMetadataFile(domainType);
+	this.Helper.StartModelMetadataFile(domainType);
 	
 
             
@@ -50,7 +50,7 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
             #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelNamespace(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
@@ -64,14 +64,13 @@ foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.Do
             this.Write(" partial class ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
-            this.Write(" : ");
             
             #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TransformationHelper.CodeHelper.GetModelMetadataBaseDeclaration(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataBaseDeclaration(domainType)));
             
             #line default
             #line hidden

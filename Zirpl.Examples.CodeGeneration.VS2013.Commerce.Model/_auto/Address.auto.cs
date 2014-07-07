@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
 {
-    public partial class Address : AuditableBase<int>
+    public partial class Address  : AuditableBase<int>
     {
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.NamePrefixType Prefix { get; set; }
 		public virtual byte? PrefixId { get; set; }

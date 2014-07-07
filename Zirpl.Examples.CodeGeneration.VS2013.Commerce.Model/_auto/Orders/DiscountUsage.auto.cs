@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
-    public partial class DiscountUsage : AuditableBase<int>
+    public partial class DiscountUsage  : AuditableBase<int>
     {
 		public virtual DateTime DateUsed { get; set; }
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.Discount Discount { get; set; }

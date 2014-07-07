@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
-    public partial class SubscriptionOrderItem : Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.OrderItem
+    public partial class SubscriptionOrderItem  : Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.OrderItem
     {
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.SubscriptionOrderItemType SubscriptionOrderItemType { get; set; }
 		public virtual byte SubscriptionOrderItemTypeId { get; set; }

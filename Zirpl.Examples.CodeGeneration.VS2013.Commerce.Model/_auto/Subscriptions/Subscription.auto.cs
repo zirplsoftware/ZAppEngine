@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions
 {
-    public partial class Subscription : AuditableBase<int>
+    public partial class Subscription  : AuditableBase<int>
     {
 		public virtual DateTime StartDate { get; set; }
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionStatusType StatusType { get; set; }

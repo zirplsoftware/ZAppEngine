@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 {
-    public partial class DisplayProduct : AuditableBase<int>
+    public partial class DisplayProduct  : AuditableBase<int>
     {
 		public DisplayProduct()
 		{

@@ -18,20 +18,20 @@
 <#
 	// Generate DataService classes
 	//
-	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateDataServiceFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)
 	{
-		this.TransformationHelper.FileHelper.StartDataServiceFile(domainType);
+		this.Helper.StartDataServiceFile(domainType);
 	
 #>
 using System;
 using System.Linq;
 using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
-using <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>;
+using <#= this.Helper.GetModelNamespace(domainType) #>;
 
-namespace <#= this.TransformationHelper.CodeHelper.GetDataServiceNamespace(domainType) #>
+namespace <#= this.Helper.GetDataServiceNamespace(domainType) #>
 {
-    public partial class <#= this.TransformationHelper.CodeHelper.GetDataServiceTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetDataServiceBaseDeclaration(domainType) #>
+    public partial class <#= this.Helper.GetDataServiceTypeName(domainType) #><#= this.Helper.GetDataServiceBaseDeclaration(domainType) #>
     {
 <#
 		var defaultSortProperty = (from p in domainType.Properties
@@ -40,7 +40,7 @@ namespace <#= this.TransformationHelper.CodeHelper.GetDataServiceNamespace(domai
 		if (defaultSortProperty != null)
 		{
 #>
-		protected override IQueryable<<#= domainType.Name #>> ApplyDefaultSort(IQueryable<<#= this.TransformationHelper.CodeHelper.GetModelTypeName(domainType) #>> query)
+		protected override IQueryable<<#= domainType.Name #>> ApplyDefaultSort(IQueryable<<#= this.Helper.GetModelTypeName(domainType) #>> query)
         {
             return from o in query
                    orderby o.<#= defaultSortProperty.Name #>

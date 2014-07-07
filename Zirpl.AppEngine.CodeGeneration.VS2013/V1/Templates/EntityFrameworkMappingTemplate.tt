@@ -19,9 +19,9 @@
 
 	// Generate Mapping classes
 	//
-	foreach (DomainType domainType in this.TransformationHelper.DomainTypeFilters.DomainTypesToGenerateEntityFrameworkMappingFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateEntityFrameworkMappingFor)
 	{
-		this.TransformationHelper.FileHelper.StartEntityFrameworkMappingFile(domainType);
+		this.Helper.StartEntityFrameworkMappingFile(domainType);
 	
 #>
 using System;
@@ -29,11 +29,11 @@ using System.Linq;
 using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
-using <#= this.TransformationHelper.CodeHelper.GetModelNamespace(domainType) #>;
+using <#= this.Helper.GetModelNamespace(domainType) #>;
 
-namespace <#= this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingNamespace(domainType) #>
+namespace <#= this.Helper.GetEntityFrameworkMappingNamespace(domainType) #>
 {
-    public partial class <#= this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingTypeName(domainType) #> : <#= this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingBaseDeclaration(domainType) #>
+    public partial class <#= this.Helper.GetEntityFrameworkMappingTypeName(domainType) #><#= this.Helper.GetEntityFrameworkMappingBaseDeclaration(domainType) #>
     {
 		protected override void MapProperties()
         {
@@ -115,7 +115,7 @@ namespace <#= this.TransformationHelper.CodeHelper.GetEntityFrameworkMappingName
 		// if the base class is one of the domain types, then we need to NOT map the core entity properties
 		//
         if (!String.IsNullOrEmpty(domainType.BaseClassOverride)
-			&& this.TransformationHelper.DomainTypeFilters.GetDomainTypeByFullTypeName(domainType.BaseClassOverride) != null)
+			&& this.Helper.GetDomainTypeByFullTypeName(domainType.BaseClassOverride) != null)
         {
 #>
         protected override bool MapCoreEntityBaseProperties

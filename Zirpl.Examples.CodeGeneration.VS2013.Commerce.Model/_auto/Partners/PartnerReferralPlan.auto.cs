@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 {
-    public partial class PartnerReferralPlan : AuditableBase<int>
+    public partial class PartnerReferralPlan  : AuditableBase<int>
     {
 		public virtual string Name { get; set; }
 		public virtual decimal Amount { get; set; }

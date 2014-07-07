@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
-    public partial class ShoppingCartItem : AuditableBase<int>
+    public partial class ShoppingCartItem  : AuditableBase<int>
     {
 		public virtual int Quantity { get; set; }
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.DisplayProduct DisplayProduct { get; set; }

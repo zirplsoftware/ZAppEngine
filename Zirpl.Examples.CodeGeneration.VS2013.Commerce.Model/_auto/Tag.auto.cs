@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
 {
-    public partial class Tag : AuditableBase<int>
+    public partial class Tag  : AuditableBase<int>
     {
 		public virtual string Name { get; set; }
 		public virtual string SeoId { get; set; }

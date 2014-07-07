@@ -41,14 +41,14 @@ foreach (var filePath in templateFilePaths)
 #>
 	public partial class <#=  fileName #>: IPreprocessedTextTransformation
     {
-        public <#=  fileName #>(TransformationHelper transformationHelper)
+        public <#=  fileName #>(V1Helper helper)
         {
-            this.TransformationHelper = transformationHelper;
-            this.Host = this.TransformationHelper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.TransformationHelper.CallingTemplate.GenerationEnvironment;
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
         }
 
-        public TransformationHelper TransformationHelper { get; private set; }
+        public V1Helper Helper { get; private set; }
     }
 <#
 }

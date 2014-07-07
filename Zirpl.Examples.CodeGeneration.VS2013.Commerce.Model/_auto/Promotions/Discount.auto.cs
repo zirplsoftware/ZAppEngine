@@ -5,7 +5,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions
 {
-    public partial class Discount : AuditableBase<int>
+    public partial class Discount  : AuditableBase<int>
     {
 		public Discount()
 		{
