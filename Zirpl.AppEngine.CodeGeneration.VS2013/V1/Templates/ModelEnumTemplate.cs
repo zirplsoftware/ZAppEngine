@@ -38,7 +38,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 // now we create the dictionary enums
 //
-foreach (DomainType domainType in this.Helper.DomainTypesToGenerateEnumFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelEnumFor)
 {
 	this.Helper.StartModelEnumFile(domainType);	
 

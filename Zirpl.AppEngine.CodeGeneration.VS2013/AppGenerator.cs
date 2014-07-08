@@ -23,6 +23,8 @@ namespace Zirpl.AppEngine.CodeGeneration
                 new DataServiceTemplate(helper).TransformText();
                 new DataContextTemplate(helper).TransformText();
                 new EntityFrameworkMappingTemplate(helper).TransformText();
+                new ServiceInterfaceTemplate(helper).TransformText();
+                new ServiceTemplate(helper).TransformText();
             }
         }
     }

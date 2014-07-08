@@ -38,7 +38,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
 // now we create the metadata classes
 //
-foreach (DomainType domainType in this.Helper.DomainTypesToGenerateMetadataFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelMetadataFor)
 {
 	this.Helper.StartModelMetadataFile(domainType);
 	

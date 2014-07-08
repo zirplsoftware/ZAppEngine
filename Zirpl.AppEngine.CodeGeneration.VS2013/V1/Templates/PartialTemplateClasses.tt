@@ -1,5 +1,7 @@
 ﻿<#@ template  debug="true" hostSpecific="true" #>
 <#@ output extension=".cs" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.12.0" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.Interop" #>
 <#@ assembly name="Microsoft.VisualStudio.Shell.Interop.8.0" #>
 <#@ assembly name="EnvDTE" #>
 <#@ assembly name="EnvDTE80" #>
@@ -10,7 +12,7 @@
 <#@ import namespace="Microsoft.VisualStudio.Shell.Interop" #>
 <#@ import namespace="EnvDTE" #>
 <#@ import namespace="EnvDTE80" #>
-<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+
 <#
 
 var hostServiceProvider = (IServiceProvider)this.Host;
@@ -21,9 +23,11 @@ var projectItems = GetAllProjectItemsRecursive(projectItem.ContainingProject.Pro
 foreach (var po in projectItems)
 {
 	var fullPath = GetFullPath(po);
+		this.LogLineToBuildPane(fullPath);
 	if (fullPath.EndsWith("Template.tt")
 		&& fullPath.Contains("V1"))
 	{
+		//this.LogLineToBuildPane(fullPath);
 		templateFilePaths.Add(fullPath);
 	}
 }
@@ -82,5 +86,15 @@ public string GetFullPath(ProjectItem item)
         return item.Properties.Item("FullPath").Value.ToString();
     }
     return "";
+}
+public void LogLineToBuildPane(string message)
+{
+    IVsOutputWindow outWindow = (this.Host as IServiceProvider).GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+    Guid generalPaneGuid = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.BuildOutputPane_guid;
+    // P.S. There's also the GUID_OutWindowDebugPane available.
+    IVsOutputWindowPane generalPane;
+    outWindow.GetPane(ref generalPaneGuid, out generalPane);
+    generalPane.OutputString(message + "\r\n");
+    generalPane.Activate(); // Brings this pane into view
 }
 #>

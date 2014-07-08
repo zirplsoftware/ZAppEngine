@@ -78,6 +78,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGenerati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.csproj", "{FEE3855E-8246-434F-A8CB-0B256E756E65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.csproj", "{1F8F5A09-CC96-46D9-99E3-8680C816B286}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -168,6 +170,10 @@ Global
 		{FEE3855E-8246-434F-A8CB-0B256E756E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEE3855E-8246-434F-A8CB-0B256E756E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEE3855E-8246-434F-A8CB-0B256E756E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F8F5A09-CC96-46D9-99E3-8680C816B286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F8F5A09-CC96-46D9-99E3-8680C816B286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F8F5A09-CC96-46D9-99E3-8680C816B286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F8F5A09-CC96-46D9-99E3-8680C816B286}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +194,7 @@ Global
 		{DA7ECD8B-603B-44FC-8F9E-71B5A9D26059} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{E28C3BE3-44D0-4787-872F-8B2CDC62FB96} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{FEE3855E-8246-434F-A8CB-0B256E756E65} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
+		{1F8F5A09-CC96-46D9-99E3-8680C816B286} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45

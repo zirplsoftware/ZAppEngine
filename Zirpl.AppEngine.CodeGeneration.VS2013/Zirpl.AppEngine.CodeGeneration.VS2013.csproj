@@ -120,6 +120,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="V1\Templates\ServiceTemplate.cs">
+      <DependentUpon>ServiceTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\ServiceInterfaceTemplate.cs">
+      <DependentUpon>ServiceInterfaceTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="V1\Templates\EntityFrameworkMappingTemplate.cs">
       <DependentUpon>EntityFrameworkMappingTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -173,6 +183,14 @@
     <None Include="V1\Templates\DataContextTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataContextTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\ServiceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ServiceTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\ServiceInterfaceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ServiceInterfaceTemplate.cs</LastGenOutput>
     </None>
     <None Include="V1\Templates\EntityFrameworkMappingTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

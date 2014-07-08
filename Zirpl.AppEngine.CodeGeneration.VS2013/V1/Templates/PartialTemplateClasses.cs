@@ -1,4 +1,5 @@
-﻿using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+﻿
+using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 {
@@ -71,6 +72,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 	public partial class ModelTemplate: IPreprocessedTextTransformation
     {
         public ModelTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+	public partial class ServiceInterfaceTemplate: IPreprocessedTextTransformation
+    {
+        public ServiceInterfaceTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+	public partial class ServiceTemplate: IPreprocessedTextTransformation
+    {
+        public ServiceTemplate(V1Helper helper)
         {
 			this.Helper = helper;
             this.Host = this.Helper.CallingTemplate.Host;

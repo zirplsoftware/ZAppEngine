@@ -165,6 +165,7 @@
     <Compile Include="Service\BusinessRuleException.cs" />
     <Compile Include="Service\CachingServiceBase.cs" />
     <Compile Include="Service\ICompleteService.cs" />
+    <Compile Include="Service\IDictionaryEntityService.cs" />
     <Compile Include="Service\IReadOnlyService.cs" />
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\IServiceFactory.cs" />

@@ -330,6 +330,9 @@
     <Compile Include="..\Zirpl.AppEngine\Service\ICompleteService.cs">
       <Link>Service\ICompleteService.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\IDictionaryEntityService.cs">
+      <Link>Service\IDictionaryEntityService.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Service\IReadOnlyService.cs">
       <Link>Service\IReadOnlyService.cs</Link>
     </Compile>
@@ -483,7 +486,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

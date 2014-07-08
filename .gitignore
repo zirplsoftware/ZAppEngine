@@ -64,3 +64,6 @@
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService/bin
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService/obj
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService/Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.csproj.DotSettings
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service/bin
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service/obj
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.csproj.DotSettings

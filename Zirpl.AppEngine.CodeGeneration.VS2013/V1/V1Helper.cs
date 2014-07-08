@@ -203,6 +203,22 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                 this.AppDefinition.GeneratedCodeRootFolderName,
                 new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
+        public void StartServiceInterfaceFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(
+                this.GetServiceInterfaceTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+                this.ServiceProject, 
+                this.GetGeneratedCodeFolder(domainType), 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartServiceFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(
+                this.GetServiceTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+                this.ServiceProject, 
+                this.GetGeneratedCodeFolder(domainType), 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
 
 
 
@@ -226,14 +242,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         public void StartTestsStrategyFile(DomainType domainType)
         {
             this.FileManager.StartNewFile(domainType.Name + "TestsStrategy.auto.cs", this.TestingProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartServiceInterfaceFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile("I" + domainType.Name + "Service.auto.cs", this.ServiceProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartServiceFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "Service.auto.cs", this.ServiceProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
         public void StartValidatorFile(DomainType domainType)
         {
@@ -307,7 +315,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                        select dt;
             }
         }
-        public virtual IEnumerable<DomainType> DomainTypesToGenerateMetadataFor
+        public virtual IEnumerable<DomainType> DomainTypesToGenerateModelMetadataFor
         {
             get
             {
@@ -316,7 +324,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                        select dt;
             }
         }
-        public virtual IEnumerable<DomainType> DomainTypesToGenerateEnumFor
+        public virtual IEnumerable<DomainType> DomainTypesToGenerateModelEnumFor
         {
             get
             {
@@ -592,6 +600,48 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         }
         #endregion
 
+        #region ServiceInterface-related methods
+        public virtual string GetServiceInterfaceNamespace(DomainType domainType)
+        {
+            return this.ServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public virtual String GetServiceInterfaceTypeName(DomainType domainType)
+        {
+            return "I" + domainType.Name + "Service";
+        }
+        public virtual string GetServiceInterfaceTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetServiceInterfaceNamespace(domainType), this.GetServiceInterfaceTypeName(domainType));
+        }
+        public virtual string GetServiceInterfaceBaseDeclaration(DomainType domainType)
+        {
+            return domainType.IsDictionary
+                ? string.Format(" : IDictionaryEntityService<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
+                : string.Format(" : ICompleteService<{0}, {1}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType));
+        }
+        #endregion
+
+        #region ServiceInterface-related methods
+        public virtual string GetServiceNamespace(DomainType domainType)
+        {
+            return this.ServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public virtual String GetServiceTypeName(DomainType domainType)
+        {
+            return domainType.Name + "Service";
+        }
+        public virtual string GetServiceTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetServiceNamespace(domainType), this.GetServiceTypeName(domainType));
+        }
+        public virtual string GetServiceBaseDeclaration(DomainType domainType)
+        {
+            return domainType.IsDictionary
+                ? string.Format(" : DictionaryEntityService<{4}, {0}, {1}, {2}>, {3}", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType), this.GetServiceInterfaceTypeName(domainType), this.GetDataContextTypeName())
+                : string.Format(" : DbContextServiceBase<{2}, {0}, {1}>, {3}", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetDataContextTypeName(), this.GetServiceInterfaceTypeName(domainType));
+        }
+        #endregion
+
         #region Property-related methods
         public String GetPropertyTypeName(Property property)
         {
@@ -647,10 +697,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             return this.DataServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
-        public string GetServiceNamespace(DomainType domainType)
-        {
-            return this.ServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
-        }
         public string GetTestingNamespace(DomainType domainType)
         {
             return this.TestingProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
@@ -692,25 +738,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         public string GetDataServiceTestsStrategyBaseClass(DomainType domainType)
         {
             return string.Format("IEntityLayerTestsStrategy<{0}, {1}, {0}EntityWrapper>", domainType.Name, this.GetModelIdTypeName(domainType));
-        }
-        //IEntityLayerTestFixtureStrategy<TEntity, TId, TEntityWrapper>
-        public string GetEntityFrameworkMappingBaseClass(DomainType domainType)
-        {
-            return domainType.IsDictionary
-                ? string.Format("DictionaryEntityMapping<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdTypeName(domainType))
-                : string.Format("CoreEntityMappingBase<{0}, {1}>", domainType.Name, this.GetModelIdTypeName(domainType));
-        }
-        public string GetServiceInterfaceBaseInterface(DomainType domainType)
-        {
-            return domainType.IsDictionary
-                ? string.Format("IDictionaryEntityService<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdTypeName(domainType))
-                : string.Format("ICompleteService<{0}, {1}>", domainType.Name, this.GetModelIdTypeName(domainType));
-        }
-        public string GetServiceBaseClass(DomainType domainType)
-        {
-            return domainType.IsDictionary
-                ? string.Format("DictionaryEntityService<{0}, {1}, {0}Enum>, I{0}Service", domainType.Name, this.GetModelIdTypeName(domainType))
-                : string.Format("DbContextServiceBase<{2}, {0}, {1}>, I{0}Service", domainType.Name, this.GetModelIdTypeName(domainType), this.AppDefinition.DataContextName);
         }
         public string GetServiceTestsBaseClass(DomainType domainType)
         {
