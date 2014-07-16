@@ -139,9 +139,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         }
 
 
-        public string GetGeneratedCodeFolder(DomainType domainType)
+        public string GetGeneratedCodeFolder(DomainType domainType, bool includeGeneratedCodeRootFolderName = true)
         {
-            return this.AppDefinition.GeneratedCodeRootFolderName + domainType.SubNamespace.Replace(".", @"\");
+            return (includeGeneratedCodeRootFolderName ? this.AppDefinition.GeneratedCodeRootFolderName : "") + domainType.SubNamespace.Replace(".", @"\");
         }
         #endregion
 
@@ -219,6 +219,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                 this.GetGeneratedCodeFolder(domainType), 
                 new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
+        public void StartValidatorFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(
+                this.GetValidatorFileName(domainType),
+                this.ServiceProject, 
+                this.AppDefinition.GeneratedCodeRootFolderName + @"Validation\" + this.GetGeneratedCodeFolder(domainType, false), 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
 
 
 
@@ -242,10 +250,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         public void StartTestsStrategyFile(DomainType domainType)
         {
             this.FileManager.StartNewFile(domainType.Name + "TestsStrategy.auto.cs", this.TestingProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartValidatorFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "Validator.auto.cs", this.ServiceProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Validation", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
         public void StartServiceTestsServicesProviderFile()
         {
@@ -621,7 +625,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         }
         #endregion
 
-        #region ServiceInterface-related methods
+        #region Service-related methods
         public virtual string GetServiceNamespace(DomainType domainType)
         {
             return this.ServiceProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
@@ -639,6 +643,46 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             return domainType.IsDictionary
                 ? string.Format(" : DictionaryEntityService<{4}, {0}, {1}, {2}>, {3}", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType), this.GetServiceInterfaceTypeName(domainType), this.GetDataContextTypeName())
                 : string.Format(" : DbContextServiceBase<{2}, {0}, {1}>, {3}", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetDataContextTypeName(), this.GetServiceInterfaceTypeName(domainType));
+        }
+        #endregion
+
+        #region Validator-related methods
+        public virtual string GetValidatorNamespace(DomainType domainType)
+        {
+            return this.ServiceProject.GetDefaultNamespace() + ".Validation" + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public virtual String GetValidatorTypeName(DomainType domainType)
+        {
+            return domainType.IsAbstract
+                ? domainType.Name + "Validator<T>"
+                : domainType.Name + "Validator";
+        }
+
+        public virtual String GetValidatorContructorMemberName(DomainType domainType)
+        {
+            return domainType.Name + "Validator";
+        }
+        public virtual String GetValidatorGenericConstraintDeclaration(DomainType domainType)
+        {
+            return domainType.IsAbstract
+                ? "where T : " + this.GetModelTypeName(domainType)
+                : "";
+        }
+        public virtual String GetValidatorFileName(DomainType domainType)
+        {
+            return domainType.Name + "Validator" + this.AppDefinition.GeneratedCSFileExtension;
+        }
+        public virtual string GetValidatorTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetValidatorNamespace(domainType), this.GetValidatorTypeName(domainType));
+        }
+        public virtual string GetValidatorBaseDeclaration(DomainType domainType)
+        {
+            return !String.IsNullOrEmpty(domainType.BaseClassOverride)
+                    ? string.Format(" : {0}", this.GetValidatorTypeFullName(this.GetDomainTypeByFullTypeName(domainType.BaseClassOverride)).Replace("<T>", String.Format("<{0}>",this.GetModelTypeName(domainType))))
+                    : domainType.IsAbstract
+                        ? " : DbEntityValidatorBase<T>"
+                        : string.Format(" : DbEntityValidatorBase<{0}>", this.GetModelTypeName(domainType));
         }
         #endregion
 
@@ -760,14 +804,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                     : domainType.IsDictionary
                         ? ""
                         : "AuditableModelBaseMetadata";
-        }
-        public string GetValidatorBaseClass(DomainType domainType)
-        {
-            return !String.IsNullOrEmpty(domainType.BaseClassOverride)
-                    ? string.Format("{0}Validator<{1}>", this.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name, domainType.Name)
-                    : domainType.IsAbstract
-                        ? string.Format("DbEntityValidatorBase<T> where T: {0}", domainType.Name)
-                        : string.Format("DbEntityValidatorBase<{0}>", domainType.Name);
         }
 
 

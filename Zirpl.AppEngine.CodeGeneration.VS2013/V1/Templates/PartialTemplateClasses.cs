@@ -102,4 +102,15 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
         public V1Helper Helper { get; private set; }
     }
+	public partial class ValidatorTemplate: IPreprocessedTextTransformation
+    {
+        public ValidatorTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
 }

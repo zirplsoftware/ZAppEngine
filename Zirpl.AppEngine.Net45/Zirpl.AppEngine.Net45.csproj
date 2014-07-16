@@ -47,6 +47,9 @@
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.3.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -456,6 +459,12 @@
     <Compile Include="..\Zirpl.AppEngine\Validation\EntityValidationError.cs">
       <Link>Validation\EntityValidationError.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Validation\FluentValidation\AbstractValidatorExtensions.cs">
+      <Link>Validation\FluentValidation\AbstractValidatorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Validation\FluentValidation\RuleBuilderExtensions.cs">
+      <Link>Validation\FluentValidation\RuleBuilderExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Validation\IValidationHelper.cs">
       <Link>Validation\IValidationHelper.cs</Link>
     </Compile>
@@ -483,10 +492,16 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.Common.Net45\Zirpl.Common.Net45.csproj">
+      <Project>{af50ac6e-a51d-4df7-8f8a-8dfb79030f5c}</Project>
+      <Name>Zirpl.Common.Net45</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
+      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

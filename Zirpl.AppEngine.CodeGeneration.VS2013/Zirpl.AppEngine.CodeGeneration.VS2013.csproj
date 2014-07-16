@@ -120,6 +120,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="V1\Templates\ValidatorTemplate.cs">
+      <DependentUpon>ValidatorTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="V1\Templates\ServiceTemplate.cs">
       <DependentUpon>ServiceTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -183,6 +188,10 @@
     <None Include="V1\Templates\DataContextTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataContextTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\ValidatorTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ValidatorTemplate.cs</LastGenOutput>
     </None>
     <None Include="V1\Templates\ServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

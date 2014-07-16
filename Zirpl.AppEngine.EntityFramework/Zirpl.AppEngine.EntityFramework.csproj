@@ -93,7 +93,8 @@
     <Compile Include="Service\EntityFramework\DbContextUnitOfWorkFactory.cs" />
     <Compile Include="Service\EntityFramework\DictionaryEntityService.cs" />
     <Compile Include="Service\EntityFramework\ReadOnlyDbContextServiceBase.cs" />
-    <Compile Include="Validation\EntityFramework\FluentValidationHelper.cs" />
+    <Compile Include="Validation\EntityFramework\FluentValidation\DbEntityValidatorBase.cs" />
+    <Compile Include="Validation\EntityFramework\FluentValidation\FluentValidationHelper.cs" />
     <Compile Include="Validation\EntityFramework\ValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>

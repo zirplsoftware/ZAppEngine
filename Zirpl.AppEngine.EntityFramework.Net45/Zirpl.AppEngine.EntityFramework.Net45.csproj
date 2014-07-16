@@ -153,8 +153,11 @@
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\Service\EntityFramework\ReadOnlyDbContextServiceBase.cs">
       <Link>Service\EntityFramework\ReadOnlyDbContextServiceBase.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.EntityFramework\Validation\EntityFramework\FluentValidationHelper.cs">
-      <Link>Validation\EntityFramework\FluentValidationHelper.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine.EntityFramework\Validation\EntityFramework\FluentValidation\DbEntityValidatorBase.cs">
+      <Link>Validation\EntityFramework\FluentValidation\DbEntityValidatorBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.EntityFramework\Validation\EntityFramework\FluentValidation\FluentValidationHelper.cs">
+      <Link>Validation\EntityFramework\FluentValidation\FluentValidationHelper.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\Validation\EntityFramework\ValidatorFactory.cs">
       <Link>Validation\EntityFramework\ValidatorFactory.cs</Link>
@@ -247,7 +250,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="b23590ec-7c8d-4bd4-bfee-77c0f0d821a7" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="b23590ec-7c8d-4bd4-bfee-77c0f0d821a7" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

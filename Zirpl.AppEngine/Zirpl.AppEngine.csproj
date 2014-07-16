@@ -56,6 +56,9 @@
       <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.3.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -207,10 +210,12 @@
     <Compile Include="Session\ICurrentUserKeyProvider.cs" />
     <Compile Include="UnexpectedCaseException.cs" />
     <Compile Include="Validation\EntityValidationError.cs" />
+    <Compile Include="Validation\FluentValidation\RuleBuilderExtensions.cs" />
     <Compile Include="Validation\IValidationHelper.cs" />
     <Compile Include="Validation\ValidationError.cs" />
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\ValidationUtils.cs" />
+    <Compile Include="Validation\FluentValidation\AbstractValidatorExtensions.cs" />
     <Compile Include="_old\ChangedValueDelegate.cs" />
     <Compile Include="_old\ChangedValueEventArgs.cs" />
     <Compile Include="_old\Singleton.cs" />
@@ -219,6 +224,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.Common\Zirpl.Common.csproj">
+      <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
+      <Name>Zirpl.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

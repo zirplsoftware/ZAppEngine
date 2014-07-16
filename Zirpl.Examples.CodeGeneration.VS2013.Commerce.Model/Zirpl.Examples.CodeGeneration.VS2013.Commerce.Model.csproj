@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Membership\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subscriptions\SubscriptionInstance.cs" />
     <Compile Include="_auto\Address.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>

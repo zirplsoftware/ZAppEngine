@@ -25,6 +25,7 @@ namespace Zirpl.AppEngine.CodeGeneration
                 new EntityFrameworkMappingTemplate(helper).TransformText();
                 new ServiceInterfaceTemplate(helper).TransformText();
                 new ServiceTemplate(helper).TransformText();
+                new ValidatorTemplate(helper).TransformText();
             }
         }
     }
