@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework.Mapping
 {
     using System;
     using System.Collections;
@@ -23,9 +23,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class EntityFrameworkMappingTemplate : EntityFrameworkMappingTemplateBase
+    public partial class MappingTemplate : MappingTemplateBase
     {
 #line hidden
         /// <summary>
@@ -34,7 +34,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 
 
 	// Generate Mapping classes
@@ -51,34 +51,34 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
                     "l.AppEngine.DataService.EntityFramework;\r\nusing Zirpl.AppEngine.DataService.Enti" +
                     "tyFramework.Mapping;\r\nusing ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetEntityFrameworkMappingNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetEntityFrameworkMappingTypeName(domainType)));
             
             #line default
             #line hidden
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetEntityFrameworkMappingBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n\t\tprotected override void MapProperties()\r\n        {\r\n\r\n");
             
-            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 
 		foreach (Property property in domainType.Properties)
 		{	
@@ -98,48 +98,48 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\r\n            this.HasNavigationProperty(o => o.");
             
-            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(",\r\n                                        o => o.");
             
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id,\r\n                                        ");
             
-            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata.");
             
-            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsRequired,\r\n                                        CascadeOnDeleteOption.");
             
-            #line 59 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 59 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.CascadeOnDelete ? "Yes" : "No"));
             
             #line default
             #line hidden
             
-            #line 59 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 59 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigationPropertyString));
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 60 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 60 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 				
                 }
 			}
@@ -153,56 +153,56 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.Property(o => o.");
             
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(").IsRequired(");
             
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata.");
             
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsRequired).HasMaxLength(");
             
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata.");
             
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxLength, ");
             
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata.");
             
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsMaxLength);\r\n");
             
-            #line 69 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 69 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 				}
 				else if (property.Type.ToLowerInvariant() == "decimal"
 						|| property.Type.ToLowerInvariant() == "double")
@@ -214,35 +214,35 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.Property(o => o.");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(").IsRequired(");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata.");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsRequired)");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(precisionString));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 				
                 }
 				else if (property.Type.ToLowerInvariant() == "datetime")
@@ -253,28 +253,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.Property(o => o.");
             
-            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(").IsRequired(");
             
-            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata.");
             
-            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 81 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsRequired).IsDateTime();\r\n");
             
-            #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 				
                 }
 				else if (property.Type.ToLowerInvariant() == "currency")
@@ -285,28 +285,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.Property(o => o.");
             
-            #line 87 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 87 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(").IsRequired(");
             
-            #line 87 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 87 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata.");
             
-            #line 87 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 87 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsRequired).IsCurrency();\r\n");
             
-            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 88 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 				
                 }
 				else if (property.Type.ToLowerInvariant() == "bool"
@@ -320,28 +320,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.Property(o => o.");
             
-            #line 96 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 96 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(").IsRequired(");
             
-            #line 96 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 96 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("Metadata.");
             
-            #line 96 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 96 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_IsRequired);\r\n");
             
-            #line 97 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 97 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 				
                 }
 				else 
@@ -357,7 +357,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("\r\n\t\t\tthis.MapCustomProperties();\r\n\r\n            base.MapProperties();\r\n        }\r" +
                     "\n\t\t\r\n\t\tpartial void MapCustomProperties();\r\n\t\t\r\n");
             
-            #line 114 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 114 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 				
 		// if the base class is one of the domain types, then we need to NOT map the core entity properties
 		//
@@ -372,7 +372,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
                     "   get\r\n            {\r\n                return false;\r\n            }\r\n        }\r\n" +
                     "");
             
-            #line 128 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 128 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 
         }
 
@@ -381,7 +381,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("    }\r\n}\r\n");
             
-            #line 133 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\EntityFrameworkMappingTemplate.tt"
+            #line 133 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt"
 
 
 	}
@@ -417,7 +417,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class EntityFrameworkMappingTemplateBase
+    public class MappingTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

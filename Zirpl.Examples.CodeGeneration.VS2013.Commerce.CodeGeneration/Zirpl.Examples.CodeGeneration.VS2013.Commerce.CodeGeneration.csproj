@@ -74,6 +74,7 @@
     <Content Include="_config\Model\Customers\CustomerTag.model.xml" />
     <Content Include="_config\Model\Membership\PasswordResetLink.model.xml" />
     <Content Include="_config\Model\Membership\User.model.xml" />
+    <Content Include="_config\Model\Membership\UserRegistrationRequestBase.model.xml" />
     <Content Include="_config\Model\Membership\Visitor.model.xml" />
     <Content Include="_config\Model\NamePrefixType.model.xml" />
     <Content Include="_config\Model\NameSuffixType.model.xml" />
@@ -119,6 +120,7 @@
     <None Include="AppTransform.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AppTransform.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
     <None Include="_config\Model\Orders\ShipBatch.model.xml.exclude" />
     <None Include="_config\Model\Orders\ShipBatchItem.model.xml.exclude" />

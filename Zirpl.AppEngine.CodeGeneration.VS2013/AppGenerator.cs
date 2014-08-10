@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration;
 using Zirpl.AppEngine.CodeGeneration.V1;
-using Zirpl.AppEngine.CodeGeneration.V1.Templates;
 
 namespace Zirpl.AppEngine.CodeGeneration
 {
@@ -16,16 +15,17 @@ namespace Zirpl.AppEngine.CodeGeneration
         {
             using (helper = helper ?? new V1Helper(callingTemplate))
             {
-                new ModelTemplate(helper).TransformText();
-                new ModelMetadataTemplate(helper).TransformText();
-                new ModelEnumTemplate(helper).TransformText();
-                new DataServiceInterfaceTemplate(helper).TransformText();
-                new DataServiceTemplate(helper).TransformText();
-                new DataContextTemplate(helper).TransformText();
-                new EntityFrameworkMappingTemplate(helper).TransformText();
-                new ServiceInterfaceTemplate(helper).TransformText();
-                new ServiceTemplate(helper).TransformText();
-                new ValidatorTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.ModelTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.MetadataTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.EnumTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.DataServiceInterfaceTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework.DataServiceTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework.DataContextTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework.Mapping.MappingTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Service.ServiceInterfaceTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Service.EntityFramework.ServiceTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework.FluentValidation.ValidatorTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.DataServicesProviderTemplate(helper).TransformText();
             }
         }
     }

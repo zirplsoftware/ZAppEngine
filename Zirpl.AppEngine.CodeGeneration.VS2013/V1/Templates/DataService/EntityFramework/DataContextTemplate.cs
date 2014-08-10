@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework
 {
     using System;
     using System.Collections;
@@ -23,7 +23,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class DataContextTemplate : DataContextTemplateBase
     {
@@ -34,7 +34,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
 
 	// Generate DataContext class
 	//
@@ -46,27 +46,27 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("using System;\r\nusing System.Data.Entity;\r\nusing System.Linq;\r\nusing Zirpl.AppEngi" +
                     "ne.DataService.EntityFramework;\r\n\r\nnamespace ");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 28 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextNamespace()));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextTypeName()));
             
             #line default
             #line hidden
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextBaseDeclaration()));
             
             #line default
             #line hidden
             this.Write(" \r\n    {\r\n");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
 
 	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataContextPropertyFor)
 	{
@@ -77,21 +77,21 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\tpublic DbSet<");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeFullName(domainType)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPluralPropertyName(domainType)));
             
             #line default
             #line hidden
             this.Write(" {get; set;}\r\n");
             
-            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
 
 	}
 
@@ -101,7 +101,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("\r\n\t\tprotected override void OnModelCreating(DbModelBuilder modelBuilder)\r\n       " +
                     " {\t\t\r\n");
             
-            #line 44 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 44 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
 
 	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateEntityFrameworkMappingFor)
 	{
@@ -112,14 +112,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tmodelBuilder.Configurations.Add(new ");
             
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetEntityFrameworkMappingTypeFullName(domainType)));
             
             #line default
             #line hidden
             this.Write("());\r\n");
             
-            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
 
 	}
 
@@ -130,7 +130,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
                     "ting(modelBuilder);\r\n\t\t}\r\n\r\n\t\tpartial void OnCustomModelCreating(DbModelBuilder " +
                     "modelBuilder);\r\n    }\r\n}\r\n");
             
-            #line 61 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataContextTemplate.tt"
+            #line 61 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataContextTemplate.tt"
 
 
 

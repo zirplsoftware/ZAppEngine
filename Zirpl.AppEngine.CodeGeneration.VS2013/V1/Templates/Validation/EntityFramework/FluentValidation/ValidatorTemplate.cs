@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework.FluentValidation
 {
     using System;
     using System.Collections;
@@ -23,7 +23,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class ValidatorTemplate : ValidatorTemplateBase
     {
@@ -34,7 +34,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
 
 	// Generate Validation classes
@@ -50,63 +50,63 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("\r\nusing System;\r\nusing FluentValidation;\r\nusing Zirpl.AppEngine.Validation;\r\nusin" +
                     "g Zirpl.AppEngine.Validation.EntityFramework;\r\nusing ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetValidatorNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.IsAbstract ? " abstract" : ""));
             
             #line default
             #line hidden
             this.Write(" partial class ");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetValidatorTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetValidatorBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetValidatorGenericConstraintDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        ");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.IsAbstract ? "protected" : "public"));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetValidatorContructorMemberName(domainType)));
             
             #line default
             #line hidden
             this.Write("()\r\n        {\r\n");
             
-            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
 		foreach (var property in domainType.Properties)
 		{
@@ -119,14 +119,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("\t\t\t// unsure how to follow this for validation or even if it should with EF- Coll" +
                     "ection property: ");
             
-            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
 			}
 			else
@@ -141,49 +141,49 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.RuleFor(o => o.");
             
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(")");
             
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired ? ".Cascade(CascadeMode.StopOnFirstFailure).NotEmpty()" : ""));
             
             #line default
             #line hidden
             this.Write(".Length(");
             
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MinLength, ");
             
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxLength);\r\n");
             
-            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
 
                 }
@@ -205,49 +205,49 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.RuleFor(o => o.");
             
-            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(")");
             
-            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired ? ".Cascade(CascadeMode.StopOnFirstFailure).NotNull()" : ""));
             
             #line default
             #line hidden
             this.Write(".InclusiveBetween(");
             
-            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MinValue, ");
             
-            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 74 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_MaxValue);\r\n");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
                 }
 				else if (propertyType.ToLowerInvariant() == "datetime"
@@ -262,14 +262,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.RuleFor(o => o.");
             
-            #line 84 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 84 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(").NotEmpty();\r\n");
             
-            #line 85 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 85 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
 					}
 					else
@@ -280,21 +280,21 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.When(o =>  o.");
             
-            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(".HasValue, () => {\r\n\t\t\t\tthis.RuleFor(o => o.");
             
-            #line 91 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 91 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(").NotEmpty();\r\n\t\t\t});\r\n");
             
-            #line 93 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 93 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
                     }
                 }
@@ -306,21 +306,21 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("\t\t\tthis.RuleFor(o => o.");
             
-            #line 99 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 99 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(")");
             
-            #line 99 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 99 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired ? ".NotNull()" : ""));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 100 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 100 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
                 }
 				else if (property.IsRelationship)
@@ -333,49 +333,49 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("            this.ForeignEntityNotNullAndIdMatches(o => o.");
             
-            #line 107 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 107 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(", o => o.");
             
-            #line 107 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 107 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id,\r\n                ");
             
-            #line 108 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 108 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 108 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 108 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_Name, ");
             
-            #line 108 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 108 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 108 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 108 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id_Name);\r\n");
             
-            #line 109 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 109 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
                     }
 					else
@@ -386,49 +386,49 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             #line hidden
             this.Write("            this.ForeignEntityAndIdMatchIfNotNull(o => o.");
             
-            #line 114 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 114 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(", o => o.");
             
-            #line 114 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 114 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id,\r\n                ");
             
-            #line 115 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 115 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 115 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 115 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("_Name, ");
             
-            #line 115 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 115 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 115 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 115 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("Id_Name);\r\n");
             
-            #line 116 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 116 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
                     }
                 }
@@ -441,7 +441,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
             this.Write("\r\n\t\t\tthis.OnCustomValidation();\r\n        }\r\n\r\n\t\tpartial void OnCustomValidation()" +
                     ";\r\n    }\r\n}\r\n\r\n");
             
-            #line 130 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ValidatorTemplate.tt"
+            #line 130 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
 
 	}
 

@@ -12,6 +12,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
             this.DataServiceOptions = new DataServiceOptions();
             this.ServiceOptions = new ServiceOptions();
             this.WebOptions = new WebOptions();
+            this.IsPersistable = true;
         }
 
         [XmlAttribute]
@@ -24,6 +25,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
         public String SubNamespace { get; set; }
         [XmlAttribute]
         public bool IsDictionary { get; set; }
+        [XmlAttribute]
+        public bool IsPersistable { get; set; }
         [XmlAttribute]
         public bool IsAbstract { get; set; }
         [XmlAttribute]

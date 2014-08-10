@@ -80,6 +80,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGenerati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.csproj", "{1F8F5A09-CC96-46D9-99E3-8680C816B286}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Web.Core", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Web.Core\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Web.Core.csproj", "{9BF853C3-9D13-40CC-8C55-DB7E362D978F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService.csproj", "{CE83AE31-23F9-4D04-8395-F22E46B43545}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -174,6 +178,14 @@ Global
 		{1F8F5A09-CC96-46D9-99E3-8680C816B286}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F8F5A09-CC96-46D9-99E3-8680C816B286}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F8F5A09-CC96-46D9-99E3-8680C816B286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF853C3-9D13-40CC-8C55-DB7E362D978F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF853C3-9D13-40CC-8C55-DB7E362D978F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF853C3-9D13-40CC-8C55-DB7E362D978F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF853C3-9D13-40CC-8C55-DB7E362D978F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE83AE31-23F9-4D04-8395-F22E46B43545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE83AE31-23F9-4D04-8395-F22E46B43545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE83AE31-23F9-4D04-8395-F22E46B43545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE83AE31-23F9-4D04-8395-F22E46B43545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,6 +207,8 @@ Global
 		{E28C3BE3-44D0-4787-872F-8B2CDC62FB96} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{FEE3855E-8246-434F-A8CB-0B256E756E65} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{1F8F5A09-CC96-46D9-99E3-8680C816B286} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
+		{9BF853C3-9D13-40CC-8C55-DB7E362D978F} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
+		{CE83AE31-23F9-4D04-8395-F22E46B43545} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45

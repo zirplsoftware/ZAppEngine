@@ -115,59 +115,64 @@
     <Compile Include="V1\ConfigModel\XmlModelBase.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="V1\Templates\DataContextTemplate.cs">
+    <Compile Include="V1\Templates\Tests\DataService\DataServicesProviderTemplate.cs">
+      <DependentUpon>DataServicesProviderTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\DataService\EntityFramework\DataContextTemplate.cs">
       <DependentUpon>DataContextTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\ValidatorTemplate.cs">
+    <Compile Include="V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.cs">
       <DependentUpon>ValidatorTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\ServiceTemplate.cs">
+    <Compile Include="V1\Templates\Service\EntityFramework\ServiceTemplate.cs">
       <DependentUpon>ServiceTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\ServiceInterfaceTemplate.cs">
+    <Compile Include="V1\Templates\Service\ServiceInterfaceTemplate.cs">
       <DependentUpon>ServiceInterfaceTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\EntityFrameworkMappingTemplate.cs">
-      <DependentUpon>EntityFrameworkMappingTemplate.tt</DependentUpon>
+    <Compile Include="V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.cs">
+      <DependentUpon>MappingTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\DataServiceTemplate.cs">
+    <Compile Include="V1\Templates\DataService\EntityFramework\DataServiceTemplate.cs">
       <DependentUpon>DataServiceTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\PartialTemplateClasses.cs">
+    <Compile Include="PartialTemplateClasses.cs">
       <DependentUpon>PartialTemplateClasses.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\ModelEnumTemplate.cs">
-      <DependentUpon>ModelEnumTemplate.tt</DependentUpon>
+    <Compile Include="V1\Templates\Model\EnumTemplate.cs">
+      <DependentUpon>EnumTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="V1\Templates\ModelMetadataTemplate.cs">
-      <DependentUpon>ModelMetadataTemplate.tt</DependentUpon>
+    <Compile Include="V1\Templates\Model\MetadataTemplate.cs">
+      <DependentUpon>MetadataTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="V1\Templates\DataServiceInterfaceTemplate.cs">
+    <Compile Include="V1\Templates\DataService\DataServiceInterfaceTemplate.cs">
       <DependentUpon>DataServiceInterfaceTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\ModelTemplate.cs">
+    <Compile Include="V1\Templates\Model\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
@@ -185,50 +190,65 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="V1\Templates\DataContextTemplate.tt">
+    <None Include="V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataServicesProviderTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
+    </None>
+    <None Include="V1\Templates\DataService\EntityFramework\DataContextTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataContextTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\ValidatorTemplate.tt">
+    <None Include="V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ValidatorTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\ServiceTemplate.tt">
+    <None Include="V1\Templates\Service\EntityFramework\ServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ServiceTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\ServiceInterfaceTemplate.tt">
+    <None Include="V1\Templates\Service\ServiceInterfaceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ServiceInterfaceTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\EntityFrameworkMappingTemplate.tt">
+    <None Include="V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EntityFrameworkMappingTemplate.cs</LastGenOutput>
+      <LastGenOutput>MappingTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\DataServiceTemplate.tt">
+    <None Include="V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataServiceTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\PartialTemplateClasses.tt">
+    <None Include="PartialTemplateClasses.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PartialTemplateClasses.cs</LastGenOutput>
       <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\ModelEnumTemplate.tt">
+    <None Include="V1\Templates\Model\EnumTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelEnumTemplate.cs</LastGenOutput>
+      <LastGenOutput>EnumTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\ModelMetadataTemplate.tt">
+    <None Include="V1\Templates\Model\MetadataTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelMetadataTemplate.cs</LastGenOutput>
+      <LastGenOutput>MetadataTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\DataServiceInterfaceTemplate.tt">
+    <None Include="V1\Templates\DataService\DataServiceInterfaceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataServiceInterfaceTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\ModelTemplate.tt">
+    <None Include="V1\Templates\Model\ModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ModelTemplate.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

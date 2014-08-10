@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService
 {
     using System;
     using System.Collections;
@@ -23,7 +23,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\DataServiceInterfaceTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class DataServiceInterfaceTemplate : DataServiceInterfaceTemplateBase
     {
@@ -34,7 +34,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
+            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\DataServiceInterfaceTemplate.tt"
 
 // Generate DataService interfaces
 //
@@ -47,34 +47,34 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceIn
             #line hidden
             this.Write("using System;\r\nusing Zirpl.AppEngine.DataService;\r\nusing ");
             
-            #line 27 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
+            #line 27 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\DataServiceInterfaceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
+            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\DataServiceInterfaceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial interface ");
             
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
+            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\DataServiceInterfaceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeName(domainType)));
             
             #line default
             #line hidden
             
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
+            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\DataServiceInterfaceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n    }\r\n}\r\n");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataServiceInterfaceTemplate.tt"
+            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\DataServiceInterfaceTemplate.tt"
 
 }
 

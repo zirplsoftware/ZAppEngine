@@ -1,4 +1,6 @@
 ﻿// Generated helper templates
+// E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService\_auto\AppTransform.txt4
+// E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\_auto\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Subscriptions\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Settings\AppTransform.txt4
@@ -20,7 +22,6 @@
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Customers\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Catalog\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\_auto\Mapping\AppTransform.txt4
-// E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\_auto\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\_auto\Subscriptions\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\_auto\Settings\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\_auto\Promotions\AppTransform.txt4
@@ -41,6 +42,8 @@
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Customers\AppTransform.txt4
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Catalog\AppTransform.txt4
 // Generated items
+// E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService\_auto\DataServiceProvider.auto.cs
+// E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\_auto\CommerceDataContext.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\TagValidator.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Subscriptions\SubscriptionPeriodValidator.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Subscriptions\SubscriptionInstanceValidator.auto.cs
@@ -63,6 +66,7 @@
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Orders\ChargeValidator.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Notifications\EmailEventValidator.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Membership\VisitorValidator.auto.cs
+// E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Membership\UserRegistrationRequestBaseValidator.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Membership\PasswordResetLinkValidator.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Customers\CustomerTagValidator.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\_auto\Validation\Customers\CustomerReferralValidator.auto.cs
@@ -404,6 +408,7 @@
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\NameSuffixTypeMetadata.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\NamePrefixTypeMetadata.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Membership\VisitorMetadata.auto.cs
+// E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Membership\UserRegistrationRequestBaseMetadata.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Membership\PasswordResetLinkMetadata.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Customers\CustomerTagMetadata.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Customers\CustomerReferralMetadata.auto.cs
@@ -458,6 +463,7 @@
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\NameSuffixType.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\NamePrefixType.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Membership\Visitor.auto.cs
+// E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Membership\UserRegistrationRequestBase.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Membership\PasswordResetLink.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Customers\CustomerTag.auto.cs
 // E:\projects\ZAppEngine\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\_auto\Customers\CustomerReferral.auto.cs

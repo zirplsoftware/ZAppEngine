@@ -127,6 +127,12 @@
     <Compile Include="_auto\Membership\PasswordResetLinkMetadata.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
+    <Compile Include="_auto\Membership\UserRegistrationRequestBase.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\UserRegistrationRequestBaseMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
     <Compile Include="_auto\Membership\Visitor.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>

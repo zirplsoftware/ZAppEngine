@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework
 {
     using System;
     using System.Collections;
@@ -23,9 +23,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ServiceTemplate : ServiceTemplateBase
+    public partial class DataServiceTemplate : DataServiceTemplateBase
     {
 #line hidden
         /// <summary>
@@ -34,64 +34,93 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
+            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
 
-	// Generate DataService interfaces
+	// Generate DataService classes
 	//
-	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateServiceFor)
+	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)
 	{
-		this.Helper.StartServiceFile(domainType);
+		this.Helper.StartDataServiceFile(domainType);
 	
 
             
             #line default
             #line hidden
-            this.Write("using System;\r\nusing Zirpl.AppEngine.Service;\r\nusing Zirpl.AppEngine.Service.Enti" +
-                    "tyFramework;\r\nusing ");
+            this.Write("using System;\r\nusing System.Linq;\r\nusing Zirpl.AppEngine.DataService;\r\nusing Zirp" +
+                    "l.AppEngine.DataService.EntityFramework;\r\nusing ");
             
-            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceNamespace(domainType)));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\nusing ");
-            
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextNamespace()));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\nusing ");
-            
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceNamespace(domainType)));
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceTypeName(domainType)));
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTypeName(domainType)));
             
             #line default
             #line hidden
-            this.Write(" ");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceBaseDeclaration(domainType)));
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceBaseDeclaration(domainType)));
             
             #line default
             #line hidden
-            this.Write("\r\n    {\r\n    }\r\n}\r\n");
+            this.Write("\r\n    {\r\n");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ServiceTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+
+		var defaultSortProperty = (from p in domainType.Properties
+									where p.IsDefaultSort
+									select p).SingleOrDefault();
+		if (defaultSortProperty != null)
+		{
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\tprotected override IQueryable<");
+            
+            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
+            
+            #line default
+            #line hidden
+            this.Write("> ApplyDefaultSort(IQueryable<");
+            
+            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeName(domainType)));
+            
+            #line default
+            #line hidden
+            this.Write("> query)\r\n        {\r\n            return from o in query\r\n                   order" +
+                    "by o.");
+            
+            #line 46 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(defaultSortProperty.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                   select o;\r\n        }\r\n");
+            
+            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+
+		}
+
+            
+            #line default
+            #line hidden
+            this.Write("    }\r\n}\r\n");
+            
+            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
 
 	}
 
@@ -124,7 +153,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class ServiceTemplateBase
+    public class DataServiceTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

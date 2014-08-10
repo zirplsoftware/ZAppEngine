@@ -228,78 +228,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                 new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        public void StartDataServiceTestsDataServicesProviderFile()
-        {
-            this.FileManager.StartNewFile("DataServicesProvider.auto.cs", this.DataServiceTestsProject, this.AppDefinition.GeneratedCodeRootFolderName, new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartDataServiceTestsFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "DataServiceTests.auto.cs", this.DataServiceTestsProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartTestsStrategyFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "TestsStrategy.auto.cs", this.TestingProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartServiceTestsServicesProviderFile()
-        {
-            this.FileManager.StartNewFile("ServicesProvider.auto.cs", this.ServiceTestsProject, this.AppDefinition.GeneratedCodeRootFolderName, new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartServiceTestsFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "ServiceTests.auto.cs", this.ServiceTestsProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartSupportViewModelFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "Model.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartDictionaryViewModelFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "Model.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartLookupsControllerFile()
-        {
-            this.FileManager.StartNewFile("LookupsController.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Controllers\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartSupportControllerFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(this.GetPluralPropertyName(domainType) + "Controller.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Controllers\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartSupportIndexViewFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile("_GridColumnsAndModel.auto.cshtml", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Views\" + this.GetPluralPropertyName(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartSupportAreaRegistrationFile()
-        {
-            this.FileManager.StartNewFile("SupportAreaRegistration.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartRouteUtilsFile()
-        {
-            this.FileManager.StartNewFile("RouteUtils.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Core\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartModelMappingFile()
-        {
-            this.FileManager.StartNewFile("MappingModule.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Models\Mapping\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartSupportModelMappingFile()
-        {
-            this.FileManager.StartNewFile("MappingModule.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Models\Mapping\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartSupportHtmlUtilsFile()
-        {
-            this.FileManager.StartNewFile("HtmlUtils.auto.cs", this.WebCoreProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Mvc\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-
         #endregion
 
         #region DomainType filter members- contains virtual members
@@ -333,7 +261,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.IsDictionary
+                       where dt.IsPersistable
+                             && dt.IsDictionary
                              && dt.ModelOptions.GenerateEnum
                        select dt;
             }
@@ -343,7 +272,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.DataServiceOptions.GenerateDataServiceInterface
+                       where dt.IsPersistable
+                            && dt.DataServiceOptions.GenerateDataServiceInterface
                        select dt;
             }
         }
@@ -352,7 +282,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.DataServiceOptions.GenerateDataService
+                       where dt.IsPersistable
+                            && dt.DataServiceOptions.GenerateDataService
                        select dt;
             }
         }
@@ -361,7 +292,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.DataServiceOptions.GenerateDataContextProperty
+                       where dt.IsPersistable
+                            && dt.DataServiceOptions.GenerateDataContextProperty
                        select dt;
             }
         }
@@ -370,7 +302,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.DataServiceOptions.GenerateEntityFrameworkMapping
+                       where dt.IsPersistable
+                            && dt.DataServiceOptions.GenerateEntityFrameworkMapping
                        select dt;
             }
         }
@@ -379,7 +312,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.ServiceOptions.GenerateServiceInterface
+                       where dt.IsPersistable
+                            && dt.ServiceOptions.GenerateServiceInterface
                        select dt;
             }
         }
@@ -388,7 +322,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.ServiceOptions.GenerateService
+                       where dt.IsPersistable
+                            && dt.ServiceOptions.GenerateService
                        select dt;
             }
         }
@@ -400,46 +335,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                        where dt.ServiceOptions.GenerateValidator
                              && !dt.IsDictionary
                              && dt.ModelOptions.GenerateModel
-                       select dt;
-            }
-        }
-        public virtual IEnumerable<DomainType> DomainTypesToGenerateSupportViewModelFor
-        {
-            get
-            {
-                return from dt in this.AppDefinition.DomainTypes
-                       where dt.WebOptions.GenerateSupportViewModel
-                       //&& dt.IsDictionary
-                       select dt;
-            }
-        }
-        public virtual IEnumerable<DomainType> DomainTypesToGenerateSupportControllerFor
-        {
-            get
-            {
-                return from dt in this.AppDefinition.DomainTypes
-                       where dt.WebOptions.GenerateSupportController
-                             && !dt.IsDictionary
-                       select dt;
-            }
-        }
-        public virtual IEnumerable<DomainType> DomainTypesToGenerateSupportIndexViewsFor
-        {
-            get
-            {
-                return from dt in this.AppDefinition.DomainTypes
-                       where dt.WebOptions.GenerateSupportIndexView
-                             && !dt.IsDictionary
-                       select dt;
-            }
-        }
-        public virtual IEnumerable<DomainType> DomainTypesToGenerateLookupsControllerFor
-        {
-            get
-            {
-                return from dt in this.AppDefinition.DomainTypes
-                       where dt.WebOptions.GenerateLookupsController
-                             && dt.IsDictionary
                        select dt;
             }
         }
@@ -463,9 +358,11 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
                     ? " : " + domainType.BaseClassOverride
-                    : domainType.IsDictionary
-                        ? string.Format(" : DictionaryEntityBase<{0}, {1}>", this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
-                        : string.Format(" : AuditableBase<{0}>", this.GetModelIdTypeName(domainType));
+                    : domainType.IsPersistable 
+                        ? domainType.IsDictionary
+                            ? string.Format(" : DictionaryEntityBase<{0}, {1}>", this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
+                            : string.Format(" : AuditableBase<{0}>", this.GetModelIdTypeName(domainType))
+                        : "";
         }
         public virtual string GetModelIdTypeName(DomainType domainType)
         {
@@ -495,9 +392,11 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
                 ? " : " + domainType.BaseClassOverride + "Metadata"
-                : domainType.IsDictionary
-                     ? " : DictionaryEntityBaseMetadataBase"
-                     : " : MetadataBase";
+                : domainType.IsPersistable 
+                    ? domainType.IsDictionary
+                        ? " : DictionaryEntityBaseMetadataBase"
+                        : " : MetadataBase"
+                    : "";
         }
         #endregion
 
@@ -680,10 +579,34 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
                     ? string.Format(" : {0}", this.GetValidatorTypeFullName(this.GetDomainTypeByFullTypeName(domainType.BaseClassOverride)).Replace("<T>", String.Format("<{0}>",this.GetModelTypeName(domainType))))
-                    : domainType.IsAbstract
-                        ? " : DbEntityValidatorBase<T>"
-                        : string.Format(" : DbEntityValidatorBase<{0}>", this.GetModelTypeName(domainType));
+                    : domainType.IsPersistable 
+                        ? domainType.IsAbstract
+                            ? " : DbEntityValidatorBase<T>"
+                            : string.Format(" : DbEntityValidatorBase<{0}>", this.GetModelTypeName(domainType))
+                        : string.Format(" : AbstractValidator<{0}>", this.GetModelTypeName(domainType));
         }
+        #endregion
+
+        #region DataService Tests- DataServiceProvider methods 
+        
+        public void StartDataServiceTestsDataServicesProviderFile()
+        {
+            this.FileManager.StartNewFile(
+                this.GetDataServiceTestsDataServiceProviderTypeName() + this.AppDefinition.GeneratedCSFileExtension,
+                this.DataServiceTestsProject, 
+                this.AppDefinition.GeneratedCodeRootFolderName, 
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+
+        public virtual String GetDataServiceTestsDataServiceProviderTypeName()
+        {
+            return "DataServiceProvider";
+        }
+        public virtual string GetDataServiceTestsDataServicesProviderNamespace()
+        {
+            return this.DataServiceTestsProject.GetDefaultNamespace();
+        }
+
         #endregion
 
         #region Property-related methods
@@ -731,6 +654,115 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             }
         }
         #endregion
+
+
+
+
+
+        public void StartDataServiceTestsFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(domainType.Name + "DataServiceTests.auto.cs", this.DataServiceTestsProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartTestsStrategyFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(domainType.Name + "TestsStrategy.auto.cs", this.TestingProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartServiceTestsServicesProviderFile()
+        {
+            this.FileManager.StartNewFile("ServicesProvider.auto.cs", this.ServiceTestsProject, this.AppDefinition.GeneratedCodeRootFolderName, new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartServiceTestsFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(domainType.Name + "ServiceTests.auto.cs", this.ServiceTestsProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartSupportViewModelFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(domainType.Name + "Model.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartDictionaryViewModelFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(domainType.Name + "Model.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartLookupsControllerFile()
+        {
+            this.FileManager.StartNewFile("LookupsController.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Controllers\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartSupportControllerFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(this.GetPluralPropertyName(domainType) + "Controller.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Controllers\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartSupportIndexViewFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile("_GridColumnsAndModel.auto.cshtml", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Views\" + this.GetPluralPropertyName(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartSupportAreaRegistrationFile()
+        {
+            this.FileManager.StartNewFile("SupportAreaRegistration.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartRouteUtilsFile()
+        {
+            this.FileManager.StartNewFile("RouteUtils.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Core\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartModelMappingFile()
+        {
+            this.FileManager.StartNewFile("MappingModule.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Models\Mapping\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartSupportModelMappingFile()
+        {
+            this.FileManager.StartNewFile("MappingModule.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Models\Mapping\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public void StartSupportHtmlUtilsFile()
+        {
+            this.FileManager.StartNewFile("HtmlUtils.auto.cs", this.WebCoreProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Mvc\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+
+
+
+
+
+
+        public virtual IEnumerable<DomainType> DomainTypesToGenerateSupportViewModelFor
+        {
+            get
+            {
+                return from dt in this.AppDefinition.DomainTypes
+                       where dt.WebOptions.GenerateSupportViewModel
+                       //&& dt.IsDictionary
+                       select dt;
+            }
+        }
+        public virtual IEnumerable<DomainType> DomainTypesToGenerateSupportControllerFor
+        {
+            get
+            {
+                return from dt in this.AppDefinition.DomainTypes
+                       where dt.WebOptions.GenerateSupportController
+                             && !dt.IsDictionary
+                       select dt;
+            }
+        }
+        public virtual IEnumerable<DomainType> DomainTypesToGenerateSupportIndexViewsFor
+        {
+            get
+            {
+                return from dt in this.AppDefinition.DomainTypes
+                       where dt.WebOptions.GenerateSupportIndexView
+                             && !dt.IsDictionary
+                       select dt;
+            }
+        }
+        public virtual IEnumerable<DomainType> DomainTypesToGenerateLookupsControllerFor
+        {
+            get
+            {
+                return from dt in this.AppDefinition.DomainTypes
+                       where dt.WebOptions.GenerateLookupsController
+                             && dt.IsDictionary
+                       select dt;
+            }
+        }
+
+
 
 
 

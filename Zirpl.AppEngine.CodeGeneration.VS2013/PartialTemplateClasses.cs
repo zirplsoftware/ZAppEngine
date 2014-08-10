@@ -1,7 +1,24 @@
 ﻿
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.CodeGeneration.V1;
 
-namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService
+{
+	public partial class DataServiceInterfaceTemplate: IPreprocessedTextTransformation
+    {
+        public DataServiceInterfaceTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework
 {
 	public partial class DataContextTemplate: IPreprocessedTextTransformation
     {
@@ -14,17 +31,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
         public V1Helper Helper { get; private set; }
     }
-	public partial class DataServiceInterfaceTemplate: IPreprocessedTextTransformation
-    {
-        public DataServiceInterfaceTemplate(V1Helper helper)
-        {
-			this.Helper = helper;
-            this.Host = this.Helper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
-        }
+}
 
-        public V1Helper Helper { get; private set; }
-    }
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework
+{
 	public partial class DataServiceTemplate: IPreprocessedTextTransformation
     {
         public DataServiceTemplate(V1Helper helper)
@@ -36,9 +46,13 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
         public V1Helper Helper { get; private set; }
     }
-	public partial class EntityFrameworkMappingTemplate: IPreprocessedTextTransformation
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework.Mapping
+{
+	public partial class MappingTemplate: IPreprocessedTextTransformation
     {
-        public EntityFrameworkMappingTemplate(V1Helper helper)
+        public MappingTemplate(V1Helper helper)
         {
 			this.Helper = helper;
             this.Host = this.Helper.CallingTemplate.Host;
@@ -47,9 +61,13 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
         public V1Helper Helper { get; private set; }
     }
-	public partial class ModelEnumTemplate: IPreprocessedTextTransformation
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
+{
+	public partial class EnumTemplate: IPreprocessedTextTransformation
     {
-        public ModelEnumTemplate(V1Helper helper)
+        public EnumTemplate(V1Helper helper)
         {
 			this.Helper = helper;
             this.Host = this.Helper.CallingTemplate.Host;
@@ -58,9 +76,13 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
         public V1Helper Helper { get; private set; }
     }
-	public partial class ModelMetadataTemplate: IPreprocessedTextTransformation
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
+{
+	public partial class MetadataTemplate: IPreprocessedTextTransformation
     {
-        public ModelMetadataTemplate(V1Helper helper)
+        public MetadataTemplate(V1Helper helper)
         {
 			this.Helper = helper;
             this.Host = this.Helper.CallingTemplate.Host;
@@ -69,6 +91,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
         public V1Helper Helper { get; private set; }
     }
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
+{
 	public partial class ModelTemplate: IPreprocessedTextTransformation
     {
         public ModelTemplate(V1Helper helper)
@@ -80,17 +106,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
         public V1Helper Helper { get; private set; }
     }
-	public partial class ServiceInterfaceTemplate: IPreprocessedTextTransformation
-    {
-        public ServiceInterfaceTemplate(V1Helper helper)
-        {
-			this.Helper = helper;
-            this.Host = this.Helper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
-        }
+}
 
-        public V1Helper Helper { get; private set; }
-    }
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service.EntityFramework
+{
 	public partial class ServiceTemplate: IPreprocessedTextTransformation
     {
         public ServiceTemplate(V1Helper helper)
@@ -102,6 +121,40 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
 
         public V1Helper Helper { get; private set; }
     }
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service
+{
+	public partial class ServiceInterfaceTemplate: IPreprocessedTextTransformation
+    {
+        public ServiceInterfaceTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
+{
+	public partial class DataServicesProviderTemplate: IPreprocessedTextTransformation
+    {
+        public DataServicesProviderTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework.FluentValidation
+{
 	public partial class ValidatorTemplate: IPreprocessedTextTransformation
     {
         public ValidatorTemplate(V1Helper helper)

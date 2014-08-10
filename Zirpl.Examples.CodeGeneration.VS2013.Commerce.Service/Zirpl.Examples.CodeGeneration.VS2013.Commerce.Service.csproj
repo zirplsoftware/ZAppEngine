@@ -420,6 +420,9 @@
     <Compile Include="_auto\Validation\Membership\PasswordResetLinkValidator.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
+    <Compile Include="_auto\Validation\Membership\UserRegistrationRequestBaseValidator.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
     <Compile Include="_auto\Validation\Membership\VisitorValidator.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>

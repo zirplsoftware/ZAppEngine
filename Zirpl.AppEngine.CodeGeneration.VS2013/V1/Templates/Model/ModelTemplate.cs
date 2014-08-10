@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
 {
     using System;
     using System.Collections;
@@ -23,9 +23,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ModelMetadataTemplate : ModelMetadataTemplateBase
+    public partial class ModelTemplate : ModelTemplateBase
     {
 #line hidden
         /// <summary>
@@ -34,14 +34,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates
         public virtual string TransformText()
         {
             
-            #line 17 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 17 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
 
-// now we create the metadata classes
+// Generate Model classes
 //
-foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelMetadataFor)
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
 {
-	this.Helper.StartModelMetadataFile(domainType);
-	
+	this.Helper.StartModelFile(domainType);
+		
 
             
             #line default
@@ -49,364 +49,199 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelMetadata
             this.Write("using System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nusin" +
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.IsAbstract ? " abstract" : ""));
             
             #line default
             #line hidden
             this.Write(" partial class ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeName(domainType)));
             
             #line default
             #line hidden
+            this.Write(" ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataBaseDeclaration(domainType)));
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
 
 	if (domainType.Properties != null)
 	{
+		// grab all the collection properties now so we
+		// can add initializers in the Constructor
+		//
+		var collectionProperties = from p in domainType.Properties
+									where p.IsCollection
+									select p;
+		if (collectionProperties.Count() > 0)
+		{
+			// handle the constructor
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic ");
+            
+            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeName(domainType)));
+            
+            #line default
+            #line hidden
+            this.Write("()\r\n\t\t{\r\n");
+            
+            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+
+			// initialize any collection properties (everything defaults to IList<T>
+			foreach (var collectionProperty in collectionProperties)
+			{
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\tif (this.");
+            
+            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" == null)\r\n\t\t\t{\r\n\t\t\t\tthis.");
+            
+            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" = new List<");
+            
+            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.CollectionOfType));
+            
+            #line default
+            #line hidden
+            this.Write(">();\r\n\t\t\t}\r\n");
+            
+            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+
+			}
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t}\r\n\r\n");
+            
+            #line 63 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+
+		}
+
+		// now go through ALL properties
 		foreach (var property in domainType.Properties)
 		{
-
-            
-            #line default
-            #line hidden
-            this.Write("        public const string ");
-            
-            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_Name = \"");
-            
-            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\";\r\n\t\tpublic const bool ");
-            
-            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_IsRequired = ");
-            
-            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired.ToString().ToLowerInvariant()));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n");
-            
-            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-
-			if (!property.IsCollection
-				&& property.Type.ToLowerInvariant() == "string")
+			if (property.IsCollection)
 			{
 
             
             #line default
             #line hidden
-            this.Write("\t\tpublic const bool ");
+            this.Write("\t\tpublic virtual IList<");
             
-            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 72 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.CollectionOfType));
+            
+            #line default
+            #line hidden
+            this.Write("> ");
+            
+            #line 72 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
-            this.Write("_IsMaxLength = ");
+            this.Write(" { get; set; }\r\n");
             
-            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.IsMaxLength.ToString().ToLowerInvariant()));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n        public const int ");
-            
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MinLength = ");
-            
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinLength) ? property.MinLength : (property.IsRequired ? "1" : "0")));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n\t\tpublic const int ");
-            
-            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MaxLength = ");
-            
-            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxLength) ? property.MaxLength : "MetadataBase.MaxLength"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n");
-            
-            #line 50 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 73 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
 
 			}
-			if (!property.IsCollection
-				&& property.Type.ToLowerInvariant() == "int")
+			else
 			{
+				// the base class already has "Name" property, so skip that one
+				if (!(property.Name == "Name"
+					&& domainType.IsDictionary))
+                {
 
             
             #line default
             #line hidden
-            this.Write("\t\tpublic const int ");
+            this.Write("\t\tpublic virtual ");
             
-            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPropertyTypeName(property)));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 82 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
-            this.Write("_MinValue = ");
+            this.Write(" { get; set; }\r\n");
             
-            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "int.MinValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n        public const int ");
-            
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MaxValue = ");
-            
-            #line 57 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "int.MaxValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n");
-            
-            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 83 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
 
+					// handle the Id property of the relationship IE: "Parent" may need a "ParentId" property
+					if (property.IsRelationship
+						&& property.GenerateIdProperty)
+					{
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic virtual ");
+            
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetRelationshipIdPropertyTypeName(property)));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Id { get; set; }\r\n");
+            
+            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+
+					}
+                }
 			}
-			if (!property.IsCollection
-				&& (property.Type.ToLowerInvariant() == "decimal"
-					|| property.Type.ToLowerInvariant() == "currency"))
-			{
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\tpublic const decimal ");
-            
-            #line 65 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MinValue = ");
-            
-            #line 65 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n        public const decimal ");
-            
-            #line 66 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MaxValue = ");
-            
-            #line 66 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n\t\tpublic const double ");
-            
-            #line 67 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MinValue_Double = ");
-            
-            #line 67 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n        public const double ");
-            
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MaxValue_Double = ");
-            
-            #line 68 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n");
-            
-            #line 69 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-
-			}
-			if (!property.IsCollection
-				&& property.Type.ToLowerInvariant() == "double")
-			{
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\tpublic const double ");
-            
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MinValue = ");
-            
-            #line 75 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n        public const double ");
-            
-            #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MaxValue = ");
-            
-            #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n\t\tpublic const decimal ");
-            
-            #line 77 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MinValue_Decimal = ");
-            
-            #line 77 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n        public const decimal ");
-            
-            #line 78 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("_MaxValue_Decimal = ");
-            
-            #line 78 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue"));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n");
-            
-            #line 79 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-
-            }
-
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 83 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-
-			if (!property.IsCollection
-				&& property.IsRelationship
-				&& property.GenerateIdProperty)
-			{
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\tpublic const string ");
-            
-            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Id_Name = \"");
-            
-            #line 89 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Id\";\r\n\t\tpublic const bool ");
-            
-            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Id_IsRequired = ");
-            
-            #line 90 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired.ToString().ToLowerInvariant()));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n\r\n");
-            
-            #line 92 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
-
-            }
 		}
 	}
 
             
             #line default
             #line hidden
-            this.Write("\t}\r\n}\r\n");
+            this.Write("    }\r\n}\r\n\r\n");
             
-            #line 99 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\ModelMetadataTemplate.tt"
+            #line 100 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
 
 }
 
@@ -439,7 +274,7 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelMetadata
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class ModelMetadataTemplateBase
+    public class ModelTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
