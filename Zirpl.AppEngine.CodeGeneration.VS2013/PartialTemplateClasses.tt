@@ -23,7 +23,6 @@ var projectItems = GetAllProjectItemsRecursive(projectItem.ContainingProject.Pro
 foreach (var po in projectItems)
 {
 	var fullPath = GetFullPath(po);
-		this.LogLineToBuildPane(fullPath);
 	if (fullPath.EndsWith("Template.tt"))
 	{
 		//this.LogLineToBuildPane(fullPath);
@@ -39,6 +38,7 @@ using Zirpl.AppEngine.CodeGeneration.V1;
 
 foreach (var filePath in templateFilePaths)
 {
+	this.LogLineToBuildPane(filePath);
 	var fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(filePath);
 	var fileName = System.IO.Path.GetFileName(filePath);
 	var startOfNamespaceWithinFilePath = filePath.IndexOf("Zirpl.AppEngine.CodeGeneration.VS2013");

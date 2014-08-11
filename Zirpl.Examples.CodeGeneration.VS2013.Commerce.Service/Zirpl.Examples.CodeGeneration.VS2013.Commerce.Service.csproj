@@ -411,13 +411,25 @@
     <Compile Include="_auto\Validation\Customers\CustomerReferralValidator.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
+    <Compile Include="_auto\Validation\Customers\CustomerRegistrationRequestValidator.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
     <Compile Include="_auto\Validation\Customers\CustomerTagValidator.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Validation\Customers\CustomerValidator.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
+    <Compile Include="_auto\Validation\Membership\LoginRequestValidator.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
     <Compile Include="_auto\Validation\Membership\PasswordResetLinkValidator.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Validation\Membership\ResetLostPasswordRequestValidator.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Validation\Membership\SupportUserRegistrationRequestValidator.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Validation\Membership\UserRegistrationRequestBaseValidator.auto.cs">
@@ -454,6 +466,9 @@
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Validation\Partners\PartnerReferralValidator.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Validation\Partners\PartnerRegistrationRequestValidator.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Validation\Partners\PartnerValidator.auto.cs">

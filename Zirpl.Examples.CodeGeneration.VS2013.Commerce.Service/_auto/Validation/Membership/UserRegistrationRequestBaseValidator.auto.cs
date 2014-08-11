@@ -7,7 +7,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Membership
 {
-    public abstract partial class UserRegistrationRequestBaseValidator<T>  : AbstractValidator<UserRegistrationRequestBase>
+    public abstract partial class UserRegistrationRequestBaseValidator<T>  : AbstractValidator<T>
 		where T : UserRegistrationRequestBase
     {
         protected UserRegistrationRequestBaseValidator()

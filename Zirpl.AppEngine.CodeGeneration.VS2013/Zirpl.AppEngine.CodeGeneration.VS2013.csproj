@@ -115,6 +115,11 @@
     <Compile Include="V1\ConfigModel\XmlModelBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.cs">
+      <DependentUpon>PeristableModelTestsStrategyTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="V1\Templates\Tests\DataService\DataServicesProviderTemplate.cs">
       <DependentUpon>DataServicesProviderTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -122,6 +127,11 @@
     </Compile>
     <Compile Include="V1\Templates\DataService\EntityFramework\DataContextTemplate.cs">
       <DependentUpon>DataContextTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.cs">
+      <DependentUpon>PersistableModelTestsEntityWrapperTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -190,6 +200,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PeristableModelTestsStrategyTemplate.cs</LastGenOutput>
+    </None>
     <None Include="V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataServicesProviderTemplate.cs</LastGenOutput>
@@ -199,6 +213,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataContextTemplate.cs</LastGenOutput>
       <TransformOnBuild>True</TransformOnBuild>
+    </None>
+    <None Include="V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PersistableModelTestsEntityWrapperTemplate.cs</LastGenOutput>
     </None>
     <None Include="V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

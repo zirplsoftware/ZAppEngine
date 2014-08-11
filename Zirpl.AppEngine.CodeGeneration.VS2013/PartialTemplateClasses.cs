@@ -138,6 +138,36 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service
     }
 }
 
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
+{
+	public partial class PeristableModelTestsStrategyTemplate: IPreprocessedTextTransformation
+    {
+        public PeristableModelTestsStrategyTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+}
+
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
+{
+	public partial class PersistableModelTestsEntityWrapperTemplate: IPreprocessedTextTransformation
+    {
+        public PersistableModelTestsEntityWrapperTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+}
+
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
 {
 	public partial class DataServicesProviderTemplate: IPreprocessedTextTransformation

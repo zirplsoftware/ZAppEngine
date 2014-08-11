@@ -72,8 +72,12 @@
     <Content Include="_config\Model\Customers\CustomerChargeOption.model.xml" />
     <Content Include="_config\Model\Customers\CustomerReferral.model.xml" />
     <Content Include="_config\Model\Customers\CustomerTag.model.xml" />
+    <Content Include="_config\Model\Customers\CustomerRegistrationRequest.model.xml" />
+    <Content Include="_config\Model\Membership\ResetLostPasswordRequest.model.xml" />
     <Content Include="_config\Model\Membership\PasswordResetLink.model.xml" />
     <Content Include="_config\Model\Membership\User.model.xml" />
+    <Content Include="_config\Model\Membership\SupportUserRegistrationRequest.model.xml" />
+    <Content Include="_config\Model\Membership\LogInRequest.model.xml" />
     <Content Include="_config\Model\Membership\UserRegistrationRequestBase.model.xml" />
     <Content Include="_config\Model\Membership\Visitor.model.xml" />
     <Content Include="_config\Model\NamePrefixType.model.xml" />
@@ -95,6 +99,7 @@
     <Content Include="_config\Model\Orders\StripeCustomerChargeOption.model.xml" />
     <Content Include="_config\Model\Orders\SubscriptionOrderItem.model.xml" />
     <Content Include="_config\Model\Orders\SubscriptionOrderItemType.model.xml" />
+    <Content Include="_config\Model\Partners\PartnerRegistrationRequest.model.xml" />
     <Content Include="_config\Model\Partners\Partner.model.xml" />
     <Content Include="_config\Model\Partners\PartnerReferral.model.xml" />
     <Content Include="_config\Model\Partners\PartnerReferralCouponRequest.model.xml" />

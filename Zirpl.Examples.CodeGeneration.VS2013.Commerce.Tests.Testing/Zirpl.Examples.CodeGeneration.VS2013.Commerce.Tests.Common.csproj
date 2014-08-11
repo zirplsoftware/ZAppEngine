@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32B32731-B6E6-4B95-A440-762C2D4A09C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests</RootNamespace>
+    <AssemblyName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.0\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core">
+      <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.0\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.1.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressTestsStrategy.cs" />
+    <Compile Include="Catalog\BrandTestsStrategy.cs" />
+    <Compile Include="Catalog\CategoryTestsStrategy.cs" />
+    <Compile Include="Catalog\DisplayProductTestsStrategy.cs" />
+    <Compile Include="Catalog\ProductReviewTestsStrategy.cs" />
+    <Compile Include="Catalog\SubscriptionChoiceTestsStrategy.cs" />
+    <Compile Include="Catalog\SubscriptionChoiceTierPriceCombinationTestsStrategy.cs" />
+    <Compile Include="Catalog\TierPriceTestsStrategy.cs" />
+    <Compile Include="Catalog\TierShipmentTestsStrategy.cs" />
+    <Compile Include="Customers\CustomerChargeOptionTestsStrategy.cs" />
+    <Compile Include="Customers\CustomerReferralTestsStrategy.cs" />
+    <Compile Include="Customers\CustomerTagTestsStrategy.cs" />
+    <Compile Include="Customers\CustomerTestsStrategy.cs" />
+    <Compile Include="DataProvider.cs" />
+    <Compile Include="Ioc\DependencyModule.cs" />
+    <Compile Include="Membership\PasswordResetLinkTestsStrategy.cs" />
+    <Compile Include="Membership\VisitorTestsStrategy.cs" />
+    <Compile Include="Notifications\EmailEventTestsStrategy.cs" />
+    <Compile Include="Orders\ChargeTestsStrategy.cs" />
+    <Compile Include="Orders\DiscountUsageTestsStrategy.cs" />
+    <Compile Include="Orders\OrderItemTestsStrategy.cs" />
+    <Compile Include="Orders\OrderTestsStrategy.cs" />
+    <Compile Include="Orders\ShoppingCartItemTestsStrategy.cs" />
+    <Compile Include="Orders\StripeChargeTestsStrategy.cs" />
+    <Compile Include="Orders\StripeCustomerChargeOptionTestsStrategy.cs" />
+    <Compile Include="Orders\SubscriptionOrderItemTestsStrategy.cs" />
+    <Compile Include="Partners\PartnerReferralCouponRequestTestsStrategy.cs" />
+    <Compile Include="Partners\PartnerReferralPlanTestsStrategy.cs" />
+    <Compile Include="Partners\PartnerReferralTestsStrategy.cs" />
+    <Compile Include="Partners\PartnerTestsStrategy.cs" />
+    <Compile Include="Promotions\DiscountTestsStrategy.cs" />
+    <Compile Include="Promotions\PromoCodeTestsStrategy.cs" />
+    <Compile Include="Promotions\ReferralTestsStrategy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\SystemSettingTestsStrategy.cs" />
+    <Compile Include="Settings\TaxRuleTestsStrategy.cs" />
+    <Compile Include="Subscriptions\PendingSubscriptionChangeTestsStrategy.cs" />
+    <Compile Include="Subscriptions\SubscriptionInstanceTestsStrategy.cs" />
+    <Compile Include="Subscriptions\SubscriptionPeriodTestsStrategy.cs" />
+    <Compile Include="Subscriptions\SubscriptionTestsStrategy.cs" />
+    <Compile Include="TagTestsStrategy.cs" />
+    <Compile Include="_auto\AddressEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\AddressTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\BrandEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\BrandTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\CategoryEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\CategoryTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\DisplayProductEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\DisplayProductTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\ProductReviewEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\ProductReviewTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceTierPriceCombinationEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceTierPriceCombinationTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierPriceEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierPriceTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierShipmentEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierShipmentTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerChargeOptionEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerChargeOptionTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerReferralEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerReferralTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerTagEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerTagTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Membership\PasswordResetLinkEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Membership\PasswordResetLinkTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Membership\VisitorEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Membership\VisitorTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEventEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEventTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsageEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsageTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderItemEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderItemTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\ShoppingCartItemEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\ShoppingCartItemTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeChargeEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeChargeTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeCustomerChargeOptionEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeCustomerChargeOptionTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItemEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItemTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequestEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequestTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralPlanEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralPlanTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Promotions\PromoCodeEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Promotions\PromoCodeTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Promotions\ReferralEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Promotions\ReferralTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Settings\SystemSettingEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Settings\SystemSettingTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Settings\TaxRuleEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Settings\TaxRuleTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\PendingSubscriptionChangeEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\PendingSubscriptionChangeTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionInstanceEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionInstanceTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriodEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriodTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\TagEntityWrapper.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\TagTestsStrategy.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine.EntityFramework\Zirpl.AppEngine.EntityFramework.csproj">
+      <Project>{b23590ec-7c8d-4bd4-bfee-77c0f0d821a7}</Project>
+      <Name>Zirpl.AppEngine.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.AppEngine.Testing\Zirpl.AppEngine.Testing.csproj">
+      <Project>{366c5119-60f8-4c0b-9d03-fd423bd5b6c5}</Project>
+      <Name>Zirpl.AppEngine.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.AppEngine.Web\Zirpl.AppEngine.Web.csproj">
+      <Project>{9b6c4dba-94a5-4871-8fc5-a2bb2e91cc04}</Project>
+      <Name>Zirpl.AppEngine.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
+      <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
+      <Name>Zirpl.AppEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Common.Testing\Zirpl.Testing.csproj">
+      <Project>{f4fbe07d-ed80-4a72-9f19-90d15979fa0a}</Project>
+      <Name>Zirpl.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService\Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.csproj">
+      <Project>{fee3855e-8246-434f-a8cb-0b256e756e65}</Project>
+      <Name>Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.csproj">
+      <Project>{e28c3be3-44d0-4787-872f-8b2cdc62fb96}</Project>
+      <Name>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.csproj">
+      <Project>{1f8f5a09-cc96-46d9-99e3-8680c816b286}</Project>
+      <Name>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="_auto\AppTransform.txt4" />
+    <None Include="_auto\Catalog\AppTransform.txt4" />
+    <None Include="_auto\Customers\AppTransform.txt4" />
+    <None Include="_auto\Membership\AppTransform.txt4" />
+    <None Include="_auto\Notifications\AppTransform.txt4" />
+    <None Include="_auto\Orders\AppTransform.txt4" />
+    <None Include="_auto\Partners\AppTransform.txt4" />
+    <None Include="_auto\Promotions\AppTransform.txt4" />
+    <None Include="_auto\Settings\AppTransform.txt4" />
+    <None Include="_auto\Subscriptions\AppTransform.txt4" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

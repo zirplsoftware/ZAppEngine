@@ -40,8 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityExtensions.cs" />
     <Compile Include="Membership\User.cs" />
+    <Compile Include="Membership\UserRegistrationRequestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subscriptions\ISubscriptionPeriodFields.cs" />
+    <Compile Include="Subscriptions\SubscriptionPeriod.cs" />
     <Compile Include="Subscriptions\SubscriptionInstance.cs" />
     <Compile Include="_auto\Address.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
@@ -115,16 +119,40 @@
     <Compile Include="_auto\Customers\CustomerReferralMetadata.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
+    <Compile Include="_auto\Customers\CustomerRegistrationRequest.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerRegistrationRequestMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
     <Compile Include="_auto\Customers\CustomerTag.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Customers\CustomerTagMetadata.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
+    <Compile Include="_auto\Membership\LoginRequest.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\LoginRequestMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
     <Compile Include="_auto\Membership\PasswordResetLink.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Membership\PasswordResetLinkMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\ResetLostPasswordRequest.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\ResetLostPasswordRequestMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\SupportUserRegistrationRequest.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\SupportUserRegistrationRequestMetadata.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Membership\UserRegistrationRequestBase.auto.cs">
@@ -314,6 +342,12 @@
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Partners\PartnerReferralPlanMetadata.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerRegistrationRequest.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerRegistrationRequestMetadata.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\Promotions\Discount.auto.cs">

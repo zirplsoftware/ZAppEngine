@@ -1,34 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FluentAssertions;
+using Zirpl.AppEngine.Model;
 
-namespace Zirpl.Testing
+namespace Zirpl.AppEngine.Testing
 {
-    public static class AssertionUtilities
+    public static class AssertionUtils
     {
-        public static TException AssertThrowsException<TException>(this Object context, Action action) where TException : Exception
+        public static void AssertNavigationPropertyMatchesAndIsNotNull<TEntity, TNavigationEntity, TForeignKey>(
+            this TEntity entityFromDb,
+            TEntity entity,
+            Func<TEntity, TNavigationEntity> navigationPropertyFunction,
+            Func<TEntity, TForeignKey> foreignKeyPropertyFunction)
+            where TNavigationEntity : IPersistable
         {
-            Exception exceptionThrown = null;
-            try
-            {
-                action();
-            }
-            catch (Exception ex)
-            {
-                if (ex is TException)
-                {
-                    exceptionThrown = ex;
-                }
-                else
-                {
-                    throw new Exception("Exception thrown but not of correct type: " + ex.GetType().Name);
-                }
-            }
+            navigationPropertyFunction(entityFromDb).Should().NotBeNull();
+            navigationPropertyFunction(entityFromDb).Should().Be(navigationPropertyFunction(entity));
+            // no need to check the properties further since they are the EXACT same object
+            foreignKeyPropertyFunction(entityFromDb).Should().Be(navigationPropertyFunction(entityFromDb).GetId());
+            foreignKeyPropertyFunction(entityFromDb).Should().Be(foreignKeyPropertyFunction(entity));
 
-            if (exceptionThrown == null)
-            {
-                throw new Exception("Exception not thrown");
-            }
+            navigationPropertyFunction(entity).IsPersisted.Should().BeTrue();
+            navigationPropertyFunction(entityFromDb).IsPersisted.Should().BeTrue();
+        }
+        public static void AssertNavigationPropertyIsNull<TEntity, TNavigationEntity, TForeignKey>(
+            this TEntity entityFromDb,
+            TEntity entity,
+            Func<TEntity, TNavigationEntity> navigationPropertyFunction,
+            Func<TEntity, TForeignKey> foreignKeyPropertyFunction,
+            TForeignKey expectedValuefOForeignKey)
+            where TNavigationEntity : IPersistable
+        {
+            navigationPropertyFunction(entity).Should().BeNull();
+            navigationPropertyFunction(entityFromDb).Should().BeNull();
 
-            return (TException)exceptionThrown;
+            foreignKeyPropertyFunction(entity).Should().Be(expectedValuefOForeignKey);
+            foreignKeyPropertyFunction(entityFromDb).Should().Be(expectedValuefOForeignKey);
         }
     }
 }

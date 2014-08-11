@@ -72,3 +72,10 @@
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService.csproj.DotSettings
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Web.Core/obj
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Web.Core/bin
+/Zirpl.Common.Testing/bin
+/Zirpl.Common.Testing/obj
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing/obj
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing/bin
+/obj
+/Bin
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj.DotSettings

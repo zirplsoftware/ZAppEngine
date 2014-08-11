@@ -62,9 +62,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Zirpl.AppEngine.Testing\Zirpl.Common.Testing.csproj">
+    <ProjectReference Include="..\Zirpl.AppEngine.Testing\Zirpl.AppEngine.Testing.csproj">
       <Project>{366c5119-60f8-4c0b-9d03-fd423bd5b6c5}</Project>
-      <Name>Zirpl.Common.Testing</Name>
+      <Name>Zirpl.AppEngine.Testing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
       <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
@@ -72,6 +72,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -55,7 +55,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
             this.Write("\r\n{\r\n    public partial class ");
             
             #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsDataServiceProviderTypeName()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsDataServicesProviderTypeName()));
             
             #line default
             #line hidden

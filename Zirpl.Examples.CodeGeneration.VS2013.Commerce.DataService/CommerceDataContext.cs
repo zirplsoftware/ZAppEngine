@@ -10,7 +10,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService
     {
         protected override bool IsModifiable(object obj)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

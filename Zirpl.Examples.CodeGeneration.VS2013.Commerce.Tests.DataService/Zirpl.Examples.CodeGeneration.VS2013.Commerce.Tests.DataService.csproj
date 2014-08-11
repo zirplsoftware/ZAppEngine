@@ -11,6 +11,8 @@
     <AssemblyName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,7 +32,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core">
+      <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,17 +59,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_auto\DataServiceProvider.auto.cs">
+    <Compile Include="TagDataServiceTests.auto.cs" />
+    <Compile Include="_auto\DataServicesProvider.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="_auto\AppTransform.txt4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zirpl.AppEngine.EntityFramework\Zirpl.AppEngine.EntityFramework.csproj">
       <Project>{b23590ec-7c8d-4bd4-bfee-77c0f0d821a7}</Project>
       <Name>Zirpl.AppEngine.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.AppEngine.Testing\Zirpl.AppEngine.Testing.csproj">
+      <Project>{366c5119-60f8-4c0b-9d03-fd423bd5b6c5}</Project>
+      <Name>Zirpl.AppEngine.Testing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
       <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
@@ -64,8 +91,20 @@
       <Project>{e28c3be3-44d0-4787-872f-8b2cdc62fb96}</Project>
       <Name>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj">
+      <Project>{32b32731-b6e6-4b95-a440-762c2d4a09c4}</Project>
+      <Name>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

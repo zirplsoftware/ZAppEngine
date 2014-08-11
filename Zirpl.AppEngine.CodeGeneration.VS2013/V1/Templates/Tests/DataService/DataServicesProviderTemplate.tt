@@ -27,7 +27,7 @@ using Zirpl.AppEngine.DataService;
 
 namespace <#= this.Helper.GetDataServiceTestsDataServicesProviderNamespace() #>
 {
-    public partial class <#= this.Helper.GetDataServiceTestsDataServiceProviderTypeName() #>
+    public partial class <#= this.Helper.GetDataServiceTestsDataServicesProviderTypeName() #>
     {
 <#
 	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)

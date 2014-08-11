@@ -23,7 +23,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
         public String WebCoreProjectName { get; set; }
         public String DataServiceTestsProjectName { get; set; }
         public String ServiceTestsProjectName { get; set; }
-        public String TestingProjectName { get; set; }
+        public String TestsCommonProjectName { get; set; }
         public List<DomainType> DomainTypes { get; set; }
 
 

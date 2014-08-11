@@ -15,12 +15,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
         public IValidationHelper ValidationHelper { get; set; }
         public ICurrentUserKeyProvider CurrentUserKeyProvider { get; set; }
         public IRetryPolicyFactory RetryPolicyFactory { get; set; }
-
-        public DbContextBase()
-        {
-
-        }
-
+        
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    base.OnModelCreating(modelBuilder);
