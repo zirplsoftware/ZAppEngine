@@ -88,6 +88,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGenerati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing", "Zirpl.Common.Testing\Zirpl.Testing.csproj", "{F4FBE07D-ED80-4A72-9F19-90D15979FA0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service.csproj", "{C0BBCA01-519D-482A-90DD-928D415E38A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -198,6 +200,10 @@ Global
 		{F4FBE07D-ED80-4A72-9F19-90D15979FA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4FBE07D-ED80-4A72-9F19-90D15979FA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4FBE07D-ED80-4A72-9F19-90D15979FA0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0BBCA01-519D-482A-90DD-928D415E38A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0BBCA01-519D-482A-90DD-928D415E38A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0BBCA01-519D-482A-90DD-928D415E38A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0BBCA01-519D-482A-90DD-928D415E38A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -222,6 +228,7 @@ Global
 		{9BF853C3-9D13-40CC-8C55-DB7E362D978F} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{CE83AE31-23F9-4D04-8395-F22E46B43545} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{32B32731-B6E6-4B95-A440-762C2D4A09C4} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
+		{C0BBCA01-519D-482A-90DD-928D415E38A9} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45

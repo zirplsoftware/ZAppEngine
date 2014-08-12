@@ -4,6 +4,7 @@
   <DataServiceProjectName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService</DataServiceProjectName>
   <ServiceProjectName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service</ServiceProjectName>
   <DataServiceTestsProjectName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService</DataServiceTestsProjectName>
+  <ServiceTestsProjectName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service</ServiceTestsProjectName>
   <TestsCommonProjectName>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common</TestsCommonProjectName>
   <DataContextName>CommerceDataContext</DataContextName>
 </AppDefinition>

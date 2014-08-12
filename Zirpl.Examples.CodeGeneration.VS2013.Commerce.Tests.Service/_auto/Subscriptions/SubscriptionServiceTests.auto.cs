@@ -1,59 +1,36 @@
-﻿<#@ template language="C#" hostSpecific="true" #>
-<#@ output extension=".log" #>
-<#@ import namespace="System" #>
-<#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="System.Reflection" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1.ConfigModel" #>
-<#@ assembly name="EnvDTE" #>
-<#@ assembly name="VSLangProj" #>
-<#@ assembly name="VSLangProj80" #>
-<#@ assembly name="System.Xml" #>
-<#@ assembly name="System.Xml.Serialization" #>
-<#@ assembly name="System.Xml.Serialization" #>
-<#
-	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)
-	{
-		this.Helper.StartDataServiceTestsFile(domainType);
-		if (!domainType.IsDictionary)
-        {			
-
-#>		
+﻿		
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using Zirpl.AppEngine.Testing;
 using Zirpl.AppEngine.Validation;
-using <#= this.Helper.GetModelNamespace(domainType) #>;
-using <#= this.Helper.GetPersistableModelTestsEntityWrapperNamespace(domainType) #>;
-using <#= this.Helper.GetDataServiceInterfaceNamespace(domainType) #>;
-using <#= this.Helper.GetDataContextNamespace() #>;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Subscriptions;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Subscriptions;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Subscriptions;
 
-namespace <#= this.Helper.GetDataServiceTestsNamespace(domainType) #>
+namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service.Subscriptions
 {	
 	[TestFixture]
-    public partial class <#= this.Helper.GetDataServiceTestsTypeName(domainType) #> : <#= this.Helper.GetDataServiceTestsBaseTypeName(domainType) #>
+    public partial class SubscriptionServiceTests : SubscriptionDataServiceTestsBase
     {
 	}
 
     [TestFixture]
-    public abstract partial class <#= this.Helper.GetDataServiceTestsBaseTypeName(domainType) #><#= this.Helper.GetDataServiceTestsBaseTypeBaseDeclaration(domainType) #>
+    public abstract partial class SubscriptionDataServiceTestsBase : EntityLayerTestFixtureBase<Subscription, int, SubscriptionEntityWrapper, SubscriptionTestsStrategy>
     {
-		protected <#= this.Helper.GetDataServiceInterfaceTypeName(domainType) #> DataService {get { return this.DependencyResolver.Resolve<<#= this.Helper.GetDataServiceInterfaceTypeName(domainType) #>>(); } }
-		protected DataServicesProvider DataServices {get { return this.DependencyResolver.Resolve<<#= this.Helper.GetDataServiceTestsDataServicesProviderTypeName() #>>(); } }
+		protected ISubscriptionService Service {get { return this.DependencyResolver.Resolve<ISubscriptionService>(); } }
+		protected ServicesProvider Services {get { return this.DependencyResolver.Resolve<ServicesProvider>(); } }
 		
 		protected override TSupports GetLayer<TSupports>()
         {
-            return this.DependencyResolver.Resolve<<#= this.Helper.GetDataServiceInterfaceTypeName(domainType) #>>() as TSupports;
+            return this.DependencyResolver.Resolve<ISubscriptionService>() as TSupports;
         }		
         protected override AppEngine.DataService.EntityFramework.DbContextBase CreateNewDbContext()
         {
-            return new <#= this.Helper.GetDataContextTypeName() #>();
+            return new CommerceDataContext();
         }
 
 		// AUTOGENERATE CODE NOTE: the tests are overridden here so that they will be easily identified when run as relating to this domain type. 
@@ -486,145 +463,3 @@ namespace <#= this.Helper.GetDataServiceTestsNamespace(domainType) #>
         }
     }
 }
-<#
-        }
-		else
-		{
-
-#>		
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using NUnit.Framework;
-using Zirpl.AppEngine.Testing;
-using Zirpl.AppEngine.Validation;
-using <#= this.Helper.GetModelNamespace(domainType) #>;
-using <#= this.Helper.GetPersistableModelTestsEntityWrapperNamespace(domainType) #>;
-using <#= this.Helper.GetDataServiceInterfaceNamespace(domainType) #>;
-using <#= this.Helper.GetDataContextNamespace() #>;
-
-namespace <#= this.Helper.GetDataServiceTestsNamespace(domainType) #>
-{
-	[TestFixture]
-    public partial class <#= this.Helper.GetDataServiceTestsTypeName(domainType) #> : <#= this.Helper.GetDataServiceTestsBaseTypeName(domainType) #>
-    {
-	}
-
-    [TestFixture]
-    public abstract partial class <#= this.Helper.GetDataServiceTestsBaseTypeName(domainType) #><#= this.Helper.GetDataServiceTestsBaseTypeBaseDeclaration(domainType) #>
-    {
-		protected <#= this.Helper.GetDataServiceInterfaceTypeName(domainType) #> DataService {get { return this.DependencyResolver.Resolve<<#= this.Helper.GetDataServiceInterfaceTypeName(domainType) #>>(); } }
-		protected DataServicesProvider DataServices {get { return this.DependencyResolver.Resolve<<#= this.Helper.GetDataServiceTestsDataServicesProviderTypeName() #>>(); } }
-		
-		protected override TSupports GetLayer<TSupports>()
-        {
-            return this.DependencyResolver.Resolve<<#= this.Helper.GetDataServiceInterfaceTypeName(domainType) #>>() as TSupports;
-        }		
-        protected override AppEngine.DataService.EntityFramework.DbContextBase CreateNewDbContext()
-        {
-            return new <#= this.Helper.GetDataContextTypeName() #>();
-        }
-		// AUTOGENERATE CODE NOTE: the tests are overridden here so that they will be easily identified when run as relating to this domain type. 
-
-        [Test]
-        public override void TestGet()
-        {
-			base.TestGet();
-        }
-
-		[Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public override void TestGet_NonPersistedId()
-        {
-			base.TestGet_NonPersistedId();
-        }
-
-        [Test]
-        public override void TestGet_NonExistentId()
-        {
-			base.TestGet_NonExistentId();
-        }
-
-        [Test]
-        public override void TestExists()
-        {
-			base.TestExists();
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public override void TestExists_NonPersistedId()
-        {
-			base.TestExists_NonPersistedId();
-        }
-
-        [Test]
-        public override void TestExists_NonExistentId()
-        {
-			base.TestExists_NonExistentId();
-        }
-
-        [Test]
-        public override void TestGetAll()
-        {
-			base.TestGetAll();
-        }
-
-        [Test]
-        public override void TestGetQueryable()
-        {
-			base.TestGetQueryable();
-        }
-
-        [Test]
-        public override void TestGetTotalCount()
-        {
-			base.TestGetTotalCount();
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public override void TestGetTotalCount_Null()
-        {
-			base.TestGetTotalCount_Null();
-        }
-
-        [Test]
-        public override void TestSearch()
-        {
-			base.TestSearch();
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public override void TestSearch_Null()
-        {
-			base.TestSearch_Null();
-        }
-
-        [Test]
-        public override void TestSearchUnique()
-        {
-			base.TestSearchUnique();
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public override void TestSearchUnique_Null()
-        {
-			base.TestSearchUnique_Null();
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public override void TestSearchUnique_NotUnique()
-        {
-			base.TestSearchUnique_NotUnique();
-        }
-    }
-}
-<#
-  
-        }
-	}
-#>

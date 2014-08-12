@@ -120,7 +120,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\Tests\DataService\DataServiceTestsTemplate.cs">
+    <Compile Include="V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.cs">
       <DependentUpon>DataServiceTestsTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -137,6 +137,16 @@
     </Compile>
     <Compile Include="V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.cs">
       <DependentUpon>PersistableModelTestsEntityWrapperTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\Tests\Service\ServicesProviderTemplate.cs">
+      <DependentUpon>ServicesProviderTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\Tests\Service\EntityFramework\ServiceTestsTemplate.cs">
+      <DependentUpon>ServiceTestsTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -209,7 +219,7 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PeristableModelTestsStrategyTemplate.cs</LastGenOutput>
     </None>
-    <None Include="V1\Templates\Tests\DataService\DataServiceTestsTemplate.tt">
+    <None Include="V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataServiceTestsTemplate.cs</LastGenOutput>
     </None>
@@ -226,6 +236,14 @@
     <None Include="V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PersistableModelTestsEntityWrapperTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\Tests\Service\ServicesProviderTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ServicesProviderTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\Tests\Service\EntityFramework\ServiceTestsTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ServiceTestsTemplate.cs</LastGenOutput>
     </None>
     <None Include="V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

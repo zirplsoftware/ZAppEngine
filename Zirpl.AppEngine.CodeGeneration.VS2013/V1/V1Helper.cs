@@ -584,29 +584,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         }
         #endregion
 
-        #region DataService Tests- DataServiceProvider methods 
-        
-        public void StartDataServiceTestsDataServicesProviderFile()
-        {
-            this.FileManager.StartNewFile(
-                this.GetDataServiceTestsDataServicesProviderTypeName() + this.AppDefinition.GeneratedCSFileExtension,
-                this.DataServiceTestsProject, 
-                this.AppDefinition.GeneratedCodeRootFolderName, 
-                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-
-        public virtual String GetDataServiceTestsDataServicesProviderTypeName()
-        {
-            return "DataServicesProvider";
-        }
-        public virtual string GetDataServiceTestsDataServicesProviderNamespace()
-        {
-            return this.DataServiceTestsProject.GetDefaultNamespace();
-        }
-
-        #endregion
-
-        #region Tests Common- EntityWrapper methods
+       #region Tests Common- EntityWrapper methods
 
         public void StartPersistableModelTestsEntityWrapperFile(DomainType domainType)
         {
@@ -662,6 +640,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         
         #endregion
 
+        #region DataService Tests- DataServiceProvider methods
+
+        public void StartDataServiceTestsDataServicesProviderFile()
+        {
+            this.FileManager.StartNewFile(
+                this.GetDataServiceTestsDataServicesProviderTypeName() + this.AppDefinition.GeneratedCSFileExtension,
+                this.DataServiceTestsProject,
+                this.AppDefinition.GeneratedCodeRootFolderName,
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+
+        public virtual String GetDataServiceTestsDataServicesProviderTypeName()
+        {
+            return "DataServicesProvider";
+        }
+        public virtual string GetDataServiceTestsDataServicesProviderNamespace()
+        {
+            return this.DataServiceTestsProject.GetDefaultNamespace();
+        }
+
+        #endregion
+
         #region DataServiceTests related methods
 
         public void StartDataServiceTestsFile(DomainType domainType)
@@ -689,6 +689,66 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             return this.GetDataServiceTestsTypeName(domainType) + "Base";
         }
         public virtual String GetDataServiceTestsBaseTypeBaseDeclaration(DomainType domainType)
+        {
+            return domainType.IsDictionary
+                ? string.Format(" : DictionaryEntityLayerTestFixtureBase<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
+                : string.Format(" : EntityLayerTestFixtureBase<{0}, {1}, {2}, {3}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetPersistableModelTestsEntityWrapperTypeName(domainType), this.GetPersistableModelTestsStrategyTypeName(domainType));
+        }
+
+        #endregion
+
+        #region Service Tests- ServiceProvider methods
+
+        public void StartServiceTestsServicesProviderFile()
+        {
+            this.FileManager.StartNewFile(
+                this.GetServiceTestsServicesProviderTypeName() + this.AppDefinition.GeneratedCSFileExtension,
+                this.ServiceTestsProject,
+                this.AppDefinition.GeneratedCodeRootFolderName,
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public virtual String GetServiceTestsServicesProviderTypeName()
+        {
+            return "ServicesProvider";
+        }
+        public virtual String GetServiceTestsServicesProviderTypeFullName()
+        {
+            return String.Format("{0}.{1}", this.GetServiceTestsServicesProviderNamespace(), this.GetServiceTestsServicesProviderTypeName());
+        }
+        public virtual string GetServiceTestsServicesProviderNamespace()
+        {
+            return this.ServiceTestsProject.GetDefaultNamespace();
+        }
+
+        #endregion
+
+        #region ServiceTests related methods
+
+        public void StartServiceTestsFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(
+                this.GetServiceTestsTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+                this.ServiceTestsProject,
+                this.GetGeneratedCodeFolder(domainType),
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public virtual string GetServiceTestsNamespace(DomainType domainType)
+        {
+            return this.ServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public virtual String GetServiceTestsTypeName(DomainType domainType)
+        {
+            return this.GetServiceTypeName(domainType) + "Tests";
+        }
+        public virtual string GetServiceTestsTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetServiceTestsNamespace(domainType), this.GetServiceTestsTypeName(domainType));
+        }
+        public string GetServiceTestsBaseTypeName(DomainType domainType)
+        {
+            return this.GetDataServiceTestsTypeName(domainType) + "Base";
+        }
+        public virtual String GetServiceTestsBaseTypeBaseDeclaration(DomainType domainType)
         {
             return domainType.IsDictionary
                 ? string.Format(" : DictionaryEntityLayerTestFixtureBase<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
@@ -746,14 +806,11 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
 
 
-        public void StartServiceTestsServicesProviderFile()
-        {
-            this.FileManager.StartNewFile("ServicesProvider.auto.cs", this.ServiceTestsProject, this.AppDefinition.GeneratedCodeRootFolderName, new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
-        public void StartServiceTestsFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "ServiceTests.auto.cs", this.ServiceTestsProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
+
+
+
+
+
         public void StartSupportViewModelFile(DomainType domainType)
         {
             this.FileManager.StartNewFile(domainType.Name + "Model.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -847,10 +904,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
 
 
-        public string GetServiceTestsNamespace(DomainType domainType)
-        {
-            return this.ServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
-        }
+
         public string GetSupportViewModelNamespace(DomainType domainType)
         {
             return domainType.IsDictionary
@@ -873,12 +927,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
 
 
-        public string GetServiceTestsBaseClass(DomainType domainType)
-        {
-            return domainType.IsDictionary
-                ? string.Format("DictionaryEntityLayerTestFixtureBase<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdTypeName(domainType))
-                : string.Format("EntityLayerTestFixtureBase<{0}, {1}, {0}EntityWrapper, {0}TestsStrategy>", domainType.Name, this.GetModelIdTypeName(domainType));
-        }
+
         public string GetSupportViewModelBaseClass(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
