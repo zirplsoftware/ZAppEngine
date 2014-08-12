@@ -662,6 +662,41 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         
         #endregion
 
+        #region DataServiceTests related methods
+
+        public void StartDataServiceTestsFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(
+                this.GetDataServiceTestsTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+                this.DataServiceTestsProject,
+                this.GetGeneratedCodeFolder(domainType),
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public virtual string GetDataServiceTestsNamespace(DomainType domainType)
+        {
+            return this.DataServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public virtual String GetDataServiceTestsTypeName(DomainType domainType)
+        {
+            return this.GetDataServiceTypeName(domainType) + "Tests";
+        }
+        public virtual string GetDataServiceTestsTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetDataServiceTestsNamespace(domainType), this.GetDataServiceTestsTypeName(domainType));
+        }
+        public string GetDataServiceTestsBaseTypeName(DomainType domainType)
+        {
+            return this.GetDataServiceTestsTypeName(domainType) + "Base";
+        }
+        public virtual String GetDataServiceTestsBaseTypeBaseDeclaration(DomainType domainType)
+        {
+            return domainType.IsDictionary
+                ? string.Format(" : DictionaryEntityLayerTestFixtureBase<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
+                : string.Format(" : EntityLayerTestFixtureBase<{0}, {1}, {2}, {3}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetPersistableModelTestsEntityWrapperTypeName(domainType), this.GetPersistableModelTestsStrategyTypeName(domainType));
+        }
+
+        #endregion
+
         #region Property-related methods
         public String GetPropertyTypeName(Property property)
         {
@@ -711,11 +746,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
 
 
-
-        public void StartDataServiceTestsFile(DomainType domainType)
-        {
-            this.FileManager.StartNewFile(domainType.Name + "DataServiceTests.auto.cs", this.DataServiceTestsProject, this.GetGeneratedCodeFolder(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
-        }
         public void StartServiceTestsServicesProviderFile()
         {
             this.FileManager.StartNewFile("ServicesProvider.auto.cs", this.ServiceTestsProject, this.AppDefinition.GeneratedCodeRootFolderName, new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -817,11 +847,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
 
 
-
-        public string GetDataServiceTestsNamespace(DomainType domainType)
-        {
-            return this.DataServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
-        }
         public string GetServiceTestsNamespace(DomainType domainType)
         {
             return this.ServiceTestsProject.GetDefaultNamespace() + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
@@ -848,14 +873,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
 
 
-
-
-        public string GetDataServiceTestsBaseClass(DomainType domainType)
-        {
-            return domainType.IsDictionary
-                ? string.Format("DictionaryEntityLayerTestFixtureBase<{0}, {1}, {0}Enum>", domainType.Name, this.GetModelIdTypeName(domainType))
-                : string.Format("EntityLayerTestFixtureBase<{0}, {1}, {0}EntityWrapper, {0}TestsStrategy>", domainType.Name, this.GetModelIdTypeName(domainType));
-        }
         public string GetServiceTestsBaseClass(DomainType domainType)
         {
             return domainType.IsDictionary

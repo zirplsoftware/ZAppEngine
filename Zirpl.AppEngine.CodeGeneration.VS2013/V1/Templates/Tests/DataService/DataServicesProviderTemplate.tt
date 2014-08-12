@@ -18,7 +18,6 @@
 <#
 	// Generate DataContext class
 	//
-	this.Helper.StartDataContextFile();
 	this.Helper.StartDataServiceTestsDataServicesProviderFile();
 
 #>

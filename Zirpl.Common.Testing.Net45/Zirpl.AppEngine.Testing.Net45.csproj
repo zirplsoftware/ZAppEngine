@@ -92,6 +92,9 @@
     <Compile Include="..\Zirpl.AppEngine.Testing\AssertionUtilities.cs">
       <Link>AssertionUtilities.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Testing\DictionaryEntityLayerTestFixtureBase.cs">
+      <Link>DictionaryEntityLayerTestFixtureBase.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine.Testing\Entities.cs">
       <Link>Entities.cs</Link>
     </Compile>
@@ -100,6 +103,9 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine.Testing\EntityWrapper.cs">
       <Link>EntityWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.Testing\IdWrapper.cs">
+      <Link>IdWrapper.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine.Testing\IEntityLayerTestsStrategy.cs">
       <Link>IEntityLayerTestsStrategy.cs</Link>

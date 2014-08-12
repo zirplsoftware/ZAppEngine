@@ -38,7 +38,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
 
 	// Generate DataContext class
 	//
-	this.Helper.StartDataContextFile();
 	this.Helper.StartDataServiceTestsDataServicesProviderFile();
 
 
@@ -47,21 +46,21 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
             #line hidden
             this.Write("using System;\r\nusing Zirpl.AppEngine.DataService;\r\n\r\nnamespace ");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
+            #line 27 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsDataServicesProviderNamespace()));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
+            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsDataServicesProviderTypeName()));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
+            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
 
 	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)
 	{	
@@ -71,21 +70,21 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
             #line hidden
             this.Write("\t\t\tpublic ");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeFullName(domainType)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
+            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt"
 
 	}
 

@@ -183,6 +183,21 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
     }
 }
 
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
+{
+	public partial class DataServiceTestsTemplate: IPreprocessedTextTransformation
+    {
+        public DataServiceTestsTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+}
+
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework.FluentValidation
 {
 	public partial class ValidatorTemplate: IPreprocessedTextTransformation

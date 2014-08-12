@@ -94,9 +94,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertionUtilities.cs" />
+    <Compile Include="DictionaryEntityLayerTestFixtureBase.cs" />
     <Compile Include="Entities.cs" />
     <Compile Include="EntityLayerTestFixtureBase.cs" />
     <Compile Include="EntityWrapper.cs" />
+    <Compile Include="IdWrapper.cs" />
     <Compile Include="IEntityLayerTestsStrategy.cs" />
     <Compile Include="InitializeMappingBootstrapperAttribute.cs" />
     <Compile Include="SetAspNetMvcDependencyResolver.cs" />

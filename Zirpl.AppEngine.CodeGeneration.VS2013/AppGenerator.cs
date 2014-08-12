@@ -28,6 +28,7 @@ namespace Zirpl.AppEngine.CodeGeneration
                 new Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.DataServicesProviderTemplate(helper).TransformText();
                 new Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common.PersistableModelTestsEntityWrapperTemplate(helper).TransformText();
                 new Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common.PeristableModelTestsStrategyTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.DataServiceTestsTemplate(helper).TransformText();
             }
         }
     }

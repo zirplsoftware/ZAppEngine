@@ -120,6 +120,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="V1\Templates\Tests\DataService\DataServiceTestsTemplate.cs">
+      <DependentUpon>DataServiceTestsTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="V1\Templates\Tests\DataService\DataServicesProviderTemplate.cs">
       <DependentUpon>DataServicesProviderTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -203,6 +208,10 @@
     <None Include="V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PeristableModelTestsStrategyTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="V1\Templates\Tests\DataService\DataServiceTestsTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataServiceTestsTemplate.cs</LastGenOutput>
     </None>
     <None Include="V1\Templates\Tests\DataService\DataServicesProviderTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

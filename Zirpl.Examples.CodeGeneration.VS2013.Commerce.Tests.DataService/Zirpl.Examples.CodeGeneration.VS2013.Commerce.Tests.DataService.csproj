@@ -59,16 +59,185 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TagDataServiceTests.auto.cs" />
+    <Compile Include="_auto\AddressDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\BrandDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\CategoryDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\DisplayProductDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\ProductReviewDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\SubscriptionChoiceTierPriceCombinationDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierPriceDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Catalog\TierShipmentDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerChargeOptionDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerReferralDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customers\CustomerTagDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
     <Compile Include="_auto\DataServicesProvider.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
-      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\Membership\PasswordResetLinkDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Membership\VisitorDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\NamePrefixTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\NameSuffixTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEventDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Notifications\EmailEventTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeMethodTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeStatusTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ChargeTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsageDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\DiscountUsageRestrictionTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderChargeStatusTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderItemDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\OrderStatusTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\ShoppingCartItemDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeChargeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\StripeCustomerChargeOptionDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItemDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Orders\SubscriptionOrderItemTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequestDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralCouponRequestStatusTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Partners\PartnerReferralPlanDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountAmountTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountApplicabilityTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\DiscountDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\PromoCodeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Promotions\ReferralDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\StateProvinceTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\SystemSettingDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Settings\TaxRuleDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\PendingSubscriptionChangeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionInstanceDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriodDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionPeriodTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Subscriptions\SubscriptionStatusTypeDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\TagDataServiceTests.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="_auto\AppTransform.txt4" />
+    <None Include="_auto\Catalog\AppTransform.txt4" />
+    <None Include="_auto\Customers\AppTransform.txt4" />
+    <None Include="_auto\Membership\AppTransform.txt4" />
+    <None Include="_auto\Notifications\AppTransform.txt4" />
+    <None Include="_auto\Orders\AppTransform.txt4" />
+    <None Include="_auto\Partners\AppTransform.txt4" />
+    <None Include="_auto\Promotions\AppTransform.txt4" />
+    <None Include="_auto\Settings\AppTransform.txt4" />
+    <None Include="_auto\Subscriptions\AppTransform.txt4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zirpl.AppEngine.EntityFramework\Zirpl.AppEngine.EntityFramework.csproj">
