@@ -15,7 +15,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cust
 
             this.HasNavigationProperty(o => o.Customer,
                                         o => o.CustomerId,
-                                        CustomerChargeOptionMetadata.Customer_IsRequired,
+                                        CustomerChargeOptionMetadataConstants.Customer_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

@@ -15,13 +15,13 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cata
 
             this.HasNavigationProperty(o => o.DisplayProduct,
                                         o => o.DisplayProductId,
-                                        ProductReviewMetadata.DisplayProduct_IsRequired,
+                                        ProductReviewMetadataConstants.DisplayProduct_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.ReviewerName).IsRequired(ProductReviewMetadata.ReviewerName_IsRequired).HasMaxLength(ProductReviewMetadata.ReviewerName_MaxLength, ProductReviewMetadata.ReviewerName_IsMaxLength);
-			this.Property(o => o.ReviewerLocation).IsRequired(ProductReviewMetadata.ReviewerLocation_IsRequired).HasMaxLength(ProductReviewMetadata.ReviewerLocation_MaxLength, ProductReviewMetadata.ReviewerLocation_IsMaxLength);
-			this.Property(o => o.Date).IsRequired(ProductReviewMetadata.Date_IsRequired).IsDateTime();
-			this.Property(o => o.Text).IsRequired(ProductReviewMetadata.Text_IsRequired).HasMaxLength(ProductReviewMetadata.Text_MaxLength, ProductReviewMetadata.Text_IsMaxLength);
-			this.Property(o => o.Stars).IsRequired(ProductReviewMetadata.Stars_IsRequired);
+			this.Property(o => o.ReviewerName).IsRequired(ProductReviewMetadataConstants.ReviewerName_IsRequired).HasMaxLength(ProductReviewMetadataConstants.ReviewerName_MaxLength, ProductReviewMetadataConstants.ReviewerName_IsMaxLength);
+			this.Property(o => o.ReviewerLocation).IsRequired(ProductReviewMetadataConstants.ReviewerLocation_IsRequired).HasMaxLength(ProductReviewMetadataConstants.ReviewerLocation_MaxLength, ProductReviewMetadataConstants.ReviewerLocation_IsMaxLength);
+			this.Property(o => o.Date).IsRequired(ProductReviewMetadataConstants.Date_IsRequired).IsDateTime();
+			this.Property(o => o.Text).IsRequired(ProductReviewMetadataConstants.Text_IsRequired).HasMaxLength(ProductReviewMetadataConstants.Text_MaxLength, ProductReviewMetadataConstants.Text_IsMaxLength);
+			this.Property(o => o.Stars).IsRequired(ProductReviewMetadataConstants.Stars_IsRequired);
 
 			this.MapCustomProperties();
 

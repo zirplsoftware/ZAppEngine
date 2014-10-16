@@ -12,8 +12,8 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Sett
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Name).IsRequired(StateProvinceTypeMetadata.Name_IsRequired).HasMaxLength(StateProvinceTypeMetadata.Name_MaxLength, StateProvinceTypeMetadata.Name_IsMaxLength);
-			this.Property(o => o.Abbreviation).IsRequired(StateProvinceTypeMetadata.Abbreviation_IsRequired).HasMaxLength(StateProvinceTypeMetadata.Abbreviation_MaxLength, StateProvinceTypeMetadata.Abbreviation_IsMaxLength);
+			this.Property(o => o.Name).IsRequired(StateProvinceTypeMetadataConstants.Name_IsRequired).HasMaxLength(StateProvinceTypeMetadataConstants.Name_MaxLength, StateProvinceTypeMetadataConstants.Name_IsMaxLength);
+			this.Property(o => o.Abbreviation).IsRequired(StateProvinceTypeMetadataConstants.Abbreviation_IsRequired).HasMaxLength(StateProvinceTypeMetadataConstants.Abbreviation_MaxLength, StateProvinceTypeMetadataConstants.Abbreviation_IsMaxLength);
 
 			this.MapCustomProperties();
 

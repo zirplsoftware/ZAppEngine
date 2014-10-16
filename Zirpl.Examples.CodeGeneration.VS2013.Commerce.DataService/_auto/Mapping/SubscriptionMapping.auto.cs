@@ -12,34 +12,34 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Subs
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.StartDate).IsRequired(SubscriptionMetadata.StartDate_IsRequired).IsDateTime();
+			this.Property(o => o.StartDate).IsRequired(SubscriptionMetadataConstants.StartDate_IsRequired).IsDateTime();
 
             this.HasNavigationProperty(o => o.StatusType,
                                         o => o.StatusTypeId,
-                                        SubscriptionMetadata.StatusType_IsRequired,
+                                        SubscriptionMetadataConstants.StatusType_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.NextShipmentDate).IsRequired(SubscriptionMetadata.NextShipmentDate_IsRequired).IsDateTime();
-			this.Property(o => o.NextChargeDate).IsRequired(SubscriptionMetadata.NextChargeDate_IsRequired).IsDateTime();
-			this.Property(o => o.AutoRenew).IsRequired(SubscriptionMetadata.AutoRenew_IsRequired);
+			this.Property(o => o.NextShipmentDate).IsRequired(SubscriptionMetadataConstants.NextShipmentDate_IsRequired).IsDateTime();
+			this.Property(o => o.NextChargeDate).IsRequired(SubscriptionMetadataConstants.NextChargeDate_IsRequired).IsDateTime();
+			this.Property(o => o.AutoRenew).IsRequired(SubscriptionMetadataConstants.AutoRenew_IsRequired);
 
             this.HasNavigationProperty(o => o.Customer,
                                         o => o.CustomerId,
-                                        SubscriptionMetadata.Customer_IsRequired,
+                                        SubscriptionMetadataConstants.Customer_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.ShippingAddress,
                                         o => o.ShippingAddressId,
-                                        SubscriptionMetadata.ShippingAddress_IsRequired,
+                                        SubscriptionMetadataConstants.ShippingAddress_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.CustomerChargeOption,
                                         o => o.CustomerChargeOptionId,
-                                        SubscriptionMetadata.CustomerChargeOption_IsRequired,
+                                        SubscriptionMetadataConstants.CustomerChargeOption_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.CurrentSubscriptionInstance,
                                         o => o.CurrentSubscriptionInstanceId,
-                                        SubscriptionMetadata.CurrentSubscriptionInstance_IsRequired,
+                                        SubscriptionMetadataConstants.CurrentSubscriptionInstance_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

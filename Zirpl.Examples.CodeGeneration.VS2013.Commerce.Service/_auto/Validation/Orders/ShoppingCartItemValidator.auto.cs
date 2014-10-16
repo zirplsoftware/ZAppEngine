@@ -12,13 +12,13 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Order
     {
         public ShoppingCartItemValidator()
         {
-			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(ShoppingCartItemMetadata.Quantity_MinValue, ShoppingCartItemMetadata.Quantity_MaxValue);
+			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(ShoppingCartItemMetadataConstants.Quantity_MinValue, ShoppingCartItemMetadataConstants.Quantity_MaxValue);
             this.ForeignEntityNotNullAndIdMatches(o => o.DisplayProduct, o => o.DisplayProductId,
-                ShoppingCartItemMetadata.DisplayProduct_Name, ShoppingCartItemMetadata.DisplayProductId_Name);
+                ShoppingCartItemMetadataConstants.DisplayProduct_Name, ShoppingCartItemMetadataConstants.DisplayProductId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.Visitor, o => o.VisitorId,
-                ShoppingCartItemMetadata.Visitor_Name, ShoppingCartItemMetadata.VisitorId_Name);
+                ShoppingCartItemMetadataConstants.Visitor_Name, ShoppingCartItemMetadataConstants.VisitorId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.SubscriptionChoice, o => o.SubscriptionChoiceId,
-                ShoppingCartItemMetadata.SubscriptionChoice_Name, ShoppingCartItemMetadata.SubscriptionChoiceId_Name);
+                ShoppingCartItemMetadataConstants.SubscriptionChoice_Name, ShoppingCartItemMetadataConstants.SubscriptionChoiceId_Name);
 			this.RuleFor(o => o.AddedWhileAnonymous).NotNull();
 
 			this.OnCustomValidation();

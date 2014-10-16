@@ -15,14 +15,14 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Notif
 			this.RuleFor(o => o.SentDate).NotEmpty();
 			this.RuleFor(o => o.SentSucceeded).NotNull();
             this.ForeignEntityNotNullAndIdMatches(o => o.EmailEventType, o => o.EmailEventTypeId,
-                EmailEventMetadata.EmailEventType_Name, EmailEventMetadata.EmailEventTypeId_Name);
-			this.RuleFor(o => o.Subject).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(EmailEventMetadata.Subject_MinLength, EmailEventMetadata.Subject_MaxLength);
-			this.RuleFor(o => o.Body).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(EmailEventMetadata.Body_MinLength, EmailEventMetadata.Body_MaxLength);
-			this.RuleFor(o => o.FromEmail).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(EmailEventMetadata.FromEmail_MinLength, EmailEventMetadata.FromEmail_MaxLength);
-			this.RuleFor(o => o.FromName).Length(EmailEventMetadata.FromName_MinLength, EmailEventMetadata.FromName_MaxLength);
-			this.RuleFor(o => o.To).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(EmailEventMetadata.To_MinLength, EmailEventMetadata.To_MaxLength);
-			this.RuleFor(o => o.Cc).Length(EmailEventMetadata.Cc_MinLength, EmailEventMetadata.Cc_MaxLength);
-			this.RuleFor(o => o.Bcc).Length(EmailEventMetadata.Bcc_MinLength, EmailEventMetadata.Bcc_MaxLength);
+                EmailEventMetadataConstants.EmailEventType_Name, EmailEventMetadataConstants.EmailEventTypeId_Name);
+			this.RuleFor(o => o.Subject).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(EmailEventMetadataConstants.Subject_MinLength, EmailEventMetadataConstants.Subject_MaxLength);
+			this.RuleFor(o => o.Body).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(EmailEventMetadataConstants.Body_MinLength, EmailEventMetadataConstants.Body_MaxLength);
+			this.RuleFor(o => o.FromEmail).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(EmailEventMetadataConstants.FromEmail_MinLength, EmailEventMetadataConstants.FromEmail_MaxLength);
+			this.RuleFor(o => o.FromName).Length(EmailEventMetadataConstants.FromName_MinLength, EmailEventMetadataConstants.FromName_MaxLength);
+			this.RuleFor(o => o.To).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(EmailEventMetadataConstants.To_MinLength, EmailEventMetadataConstants.To_MaxLength);
+			this.RuleFor(o => o.Cc).Length(EmailEventMetadataConstants.Cc_MinLength, EmailEventMetadataConstants.Cc_MaxLength);
+			this.RuleFor(o => o.Bcc).Length(EmailEventMetadataConstants.Bcc_MinLength, EmailEventMetadataConstants.Bcc_MaxLength);
 			this.When(o =>  o.ResentDate.HasValue, () => {
 				this.RuleFor(o => o.ResentDate).NotEmpty();
 			});

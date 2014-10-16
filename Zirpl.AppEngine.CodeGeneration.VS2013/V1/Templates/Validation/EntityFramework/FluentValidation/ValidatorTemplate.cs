@@ -158,7 +158,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework
             this.Write(".Length(");
             
             #line 59 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetMetadataConstantsTypeName(domainType)));
             
             #line default
             #line hidden
@@ -172,7 +172,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework
             this.Write("_MinLength, ");
             
             #line 59 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetMetadataConstantsTypeName(domainType)));
             
             #line default
             #line hidden
@@ -222,7 +222,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework
             this.Write(".InclusiveBetween(");
             
             #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetMetadataConstantsTypeName(domainType)));
             
             #line default
             #line hidden
@@ -236,7 +236,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework
             this.Write("_MinValue, ");
             
             #line 76 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetMetadataConstantsTypeName(domainType)));
             
             #line default
             #line hidden
@@ -350,7 +350,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework
             this.Write("Id,\r\n                ");
             
             #line 110 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetMetadataConstantsTypeName(domainType)));
             
             #line default
             #line hidden
@@ -364,7 +364,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework
             this.Write("_Name, ");
             
             #line 110 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetMetadataConstantsTypeName(domainType)));
             
             #line default
             #line hidden
@@ -403,7 +403,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework
             this.Write("Id,\r\n                ");
             
             #line 117 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetMetadataConstantsTypeName(domainType)));
             
             #line default
             #line hidden
@@ -417,7 +417,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework
             this.Write("_Name, ");
             
             #line 117 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Validation\EntityFramework\FluentValidation\ValidatorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelMetadataTypeName(domainType)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetMetadataConstantsTypeName(domainType)));
             
             #line default
             #line hidden

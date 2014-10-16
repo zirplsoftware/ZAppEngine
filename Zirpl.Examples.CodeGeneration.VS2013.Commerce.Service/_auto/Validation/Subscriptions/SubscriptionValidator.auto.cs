@@ -14,18 +14,18 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Subsc
         {
 			this.RuleFor(o => o.StartDate).NotEmpty();
             this.ForeignEntityNotNullAndIdMatches(o => o.StatusType, o => o.StatusTypeId,
-                SubscriptionMetadata.StatusType_Name, SubscriptionMetadata.StatusTypeId_Name);
+                SubscriptionMetadataConstants.StatusType_Name, SubscriptionMetadataConstants.StatusTypeId_Name);
 			this.RuleFor(o => o.NextShipmentDate).NotEmpty();
 			this.RuleFor(o => o.NextChargeDate).NotEmpty();
 			this.RuleFor(o => o.AutoRenew).NotNull();
             this.ForeignEntityNotNullAndIdMatches(o => o.Customer, o => o.CustomerId,
-                SubscriptionMetadata.Customer_Name, SubscriptionMetadata.CustomerId_Name);
+                SubscriptionMetadataConstants.Customer_Name, SubscriptionMetadataConstants.CustomerId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.ShippingAddress, o => o.ShippingAddressId,
-                SubscriptionMetadata.ShippingAddress_Name, SubscriptionMetadata.ShippingAddressId_Name);
+                SubscriptionMetadataConstants.ShippingAddress_Name, SubscriptionMetadataConstants.ShippingAddressId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.CustomerChargeOption, o => o.CustomerChargeOptionId,
-                SubscriptionMetadata.CustomerChargeOption_Name, SubscriptionMetadata.CustomerChargeOptionId_Name);
+                SubscriptionMetadataConstants.CustomerChargeOption_Name, SubscriptionMetadataConstants.CustomerChargeOptionId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.CurrentSubscriptionInstance, o => o.CurrentSubscriptionInstanceId,
-                SubscriptionMetadata.CurrentSubscriptionInstance_Name, SubscriptionMetadata.CurrentSubscriptionInstanceId_Name);
+                SubscriptionMetadataConstants.CurrentSubscriptionInstance_Name, SubscriptionMetadataConstants.CurrentSubscriptionInstanceId_Name);
 
 			this.OnCustomValidation();
         }

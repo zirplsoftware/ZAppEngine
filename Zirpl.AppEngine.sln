@@ -84,7 +84,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGenerati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService.csproj", "{CE83AE31-23F9-4D04-8395-F22E46B43545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj", "{32B32731-B6E6-4B95-A440-762C2D4A09C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj", "{32B32731-B6E6-4B95-A440-762C2D4A09C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing", "Zirpl.Common.Testing\Zirpl.Testing.csproj", "{F4FBE07D-ED80-4A72-9F19-90D15979FA0A}"
 EndProject

@@ -15,11 +15,11 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Membe
 			this.RuleFor(o => o.Token).NotEmpty();
 			this.RuleFor(o => o.IsAnonymous).NotNull();
 			this.RuleFor(o => o.IsAbandoned).NotNull();
-			this.RuleFor(o => o.BotUserAgent).Length(VisitorMetadata.BotUserAgent_MinLength, VisitorMetadata.BotUserAgent_MaxLength);
+			this.RuleFor(o => o.BotUserAgent).Length(VisitorMetadataConstants.BotUserAgent_MinLength, VisitorMetadataConstants.BotUserAgent_MaxLength);
 			this.RuleFor(o => o.LastActivityDate).NotEmpty();
 			// unsure how to follow this for validation or even if it should with EF- Collection property: ShoppingCartItems
             this.ForeignEntityAndIdMatchIfNotNull(o => o.User, o => o.UserId,
-                VisitorMetadata.User_Name, VisitorMetadata.UserId_Name);
+                VisitorMetadataConstants.User_Name, VisitorMetadataConstants.UserId_Name);
 
 			this.OnCustomValidation();
         }

@@ -12,9 +12,9 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Subsc
     {
         public PendingSubscriptionChangeValidator()
         {
-			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(PendingSubscriptionChangeMetadata.Quantity_MinValue, PendingSubscriptionChangeMetadata.Quantity_MaxValue);
+			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(PendingSubscriptionChangeMetadataConstants.Quantity_MinValue, PendingSubscriptionChangeMetadataConstants.Quantity_MaxValue);
             this.ForeignEntityNotNullAndIdMatches(o => o.SubscriptionChoice, o => o.SubscriptionChoiceId,
-                PendingSubscriptionChangeMetadata.SubscriptionChoice_Name, PendingSubscriptionChangeMetadata.SubscriptionChoiceId_Name);
+                PendingSubscriptionChangeMetadataConstants.SubscriptionChoice_Name, PendingSubscriptionChangeMetadataConstants.SubscriptionChoiceId_Name);
 
 			this.OnCustomValidation();
         }

@@ -13,12 +13,12 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Catal
         public ProductReviewValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.DisplayProduct, o => o.DisplayProductId,
-                ProductReviewMetadata.DisplayProduct_Name, ProductReviewMetadata.DisplayProductId_Name);
-			this.RuleFor(o => o.ReviewerName).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(ProductReviewMetadata.ReviewerName_MinLength, ProductReviewMetadata.ReviewerName_MaxLength);
-			this.RuleFor(o => o.ReviewerLocation).Length(ProductReviewMetadata.ReviewerLocation_MinLength, ProductReviewMetadata.ReviewerLocation_MaxLength);
+                ProductReviewMetadataConstants.DisplayProduct_Name, ProductReviewMetadataConstants.DisplayProductId_Name);
+			this.RuleFor(o => o.ReviewerName).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(ProductReviewMetadataConstants.ReviewerName_MinLength, ProductReviewMetadataConstants.ReviewerName_MaxLength);
+			this.RuleFor(o => o.ReviewerLocation).Length(ProductReviewMetadataConstants.ReviewerLocation_MinLength, ProductReviewMetadataConstants.ReviewerLocation_MaxLength);
 			this.RuleFor(o => o.Date).NotEmpty();
-			this.RuleFor(o => o.Text).Length(ProductReviewMetadata.Text_MinLength, ProductReviewMetadata.Text_MaxLength);
-			this.RuleFor(o => o.Stars).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(ProductReviewMetadata.Stars_MinValue, ProductReviewMetadata.Stars_MaxValue);
+			this.RuleFor(o => o.Text).Length(ProductReviewMetadataConstants.Text_MinLength, ProductReviewMetadataConstants.Text_MaxLength);
+			this.RuleFor(o => o.Stars).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(ProductReviewMetadataConstants.Stars_MinValue, ProductReviewMetadataConstants.Stars_MaxValue);
 
 			this.OnCustomValidation();
         }

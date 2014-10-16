@@ -15,17 +15,17 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orde
 
             this.HasNavigationProperty(o => o.SubscriptionOrderItemType,
                                         o => o.SubscriptionOrderItemTypeId,
-                                        SubscriptionOrderItemMetadata.SubscriptionOrderItemType_IsRequired,
+                                        SubscriptionOrderItemMetadataConstants.SubscriptionOrderItemType_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.SubscriptionPeriod,
                                         o => o.SubscriptionPeriodId,
-                                        SubscriptionOrderItemMetadata.SubscriptionPeriod_IsRequired,
+                                        SubscriptionOrderItemMetadataConstants.SubscriptionPeriod_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.TriggeredBySubscriptionInstance,
                                         o => o.TriggeredBySubscriptionInstanceId,
-                                        SubscriptionOrderItemMetadata.TriggeredBySubscriptionInstance_IsRequired,
+                                        SubscriptionOrderItemMetadataConstants.TriggeredBySubscriptionInstance_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

@@ -12,22 +12,22 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orde
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.DateUsed).IsRequired(DiscountUsageMetadata.DateUsed_IsRequired).IsDateTime();
+			this.Property(o => o.DateUsed).IsRequired(DiscountUsageMetadataConstants.DateUsed_IsRequired).IsDateTime();
 
             this.HasNavigationProperty(o => o.Discount,
                                         o => o.DiscountId,
-                                        DiscountUsageMetadata.Discount_IsRequired,
+                                        DiscountUsageMetadataConstants.Discount_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.Order,
                                         o => o.OrderId,
-                                        DiscountUsageMetadata.Order_IsRequired,
+                                        DiscountUsageMetadataConstants.Order_IsRequired,
                                         CascadeOnDeleteOption.No,
 										o => o.DiscountUsages);
 
             this.HasNavigationProperty(o => o.OrderItem,
                                         o => o.OrderItemId,
-                                        DiscountUsageMetadata.OrderItem_IsRequired,
+                                        DiscountUsageMetadataConstants.OrderItem_IsRequired,
                                         CascadeOnDeleteOption.No,
 										o => o.DiscountUsages);
 

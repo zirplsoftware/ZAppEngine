@@ -13,11 +13,11 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Partn
         public PartnerReferralValidator()
         {
             this.ForeignEntityAndIdMatchIfNotNull(o => o.Request, o => o.RequestId,
-                PartnerReferralMetadata.Request_Name, PartnerReferralMetadata.RequestId_Name);
+                PartnerReferralMetadataConstants.Request_Name, PartnerReferralMetadataConstants.RequestId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.Partner, o => o.PartnerId,
-                PartnerReferralMetadata.Partner_Name, PartnerReferralMetadata.PartnerId_Name);
+                PartnerReferralMetadataConstants.Partner_Name, PartnerReferralMetadataConstants.PartnerId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.Plan, o => o.PlanId,
-                PartnerReferralMetadata.Plan_Name, PartnerReferralMetadata.PlanId_Name);
+                PartnerReferralMetadataConstants.Plan_Name, PartnerReferralMetadataConstants.PlanId_Name);
 
 			this.OnCustomValidation();
         }

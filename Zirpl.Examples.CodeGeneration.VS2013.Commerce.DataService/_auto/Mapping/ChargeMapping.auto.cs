@@ -12,27 +12,27 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orde
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Date).IsRequired(ChargeMetadata.Date_IsRequired).IsDateTime();
-			this.Property(o => o.Amount).IsRequired(ChargeMetadata.Amount_IsRequired).IsCurrency();
+			this.Property(o => o.Date).IsRequired(ChargeMetadataConstants.Date_IsRequired).IsDateTime();
+			this.Property(o => o.Amount).IsRequired(ChargeMetadataConstants.Amount_IsRequired).IsCurrency();
 
             this.HasNavigationProperty(o => o.ChargeType,
                                         o => o.ChargeTypeId,
-                                        ChargeMetadata.ChargeType_IsRequired,
+                                        ChargeMetadataConstants.ChargeType_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.ChargeMethodType,
                                         o => o.ChargeMethodTypeId,
-                                        ChargeMetadata.ChargeMethodType_IsRequired,
+                                        ChargeMetadataConstants.ChargeMethodType_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.ChargeStatusType,
                                         o => o.ChargeStatusTypeId,
-                                        ChargeMetadata.ChargeStatusType_IsRequired,
+                                        ChargeMetadataConstants.ChargeStatusType_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.Order,
                                         o => o.OrderId,
-                                        ChargeMetadata.Order_IsRequired,
+                                        ChargeMetadataConstants.Order_IsRequired,
                                         CascadeOnDeleteOption.No,
 										o => o.Charges);
 

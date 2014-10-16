@@ -13,13 +13,13 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Custo
         public CustomerValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.Visitor, o => o.VisitorId,
-                CustomerMetadata.Visitor_Name, CustomerMetadata.VisitorId_Name);
+                CustomerMetadataConstants.Visitor_Name, CustomerMetadataConstants.VisitorId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.PromoCode, o => o.PromoCodeId,
-                CustomerMetadata.PromoCode_Name, CustomerMetadata.PromoCodeId_Name);
+                CustomerMetadataConstants.PromoCode_Name, CustomerMetadataConstants.PromoCodeId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.CurrentShippingAddress, o => o.CurrentShippingAddressId,
-                CustomerMetadata.CurrentShippingAddress_Name, CustomerMetadata.CurrentShippingAddressId_Name);
+                CustomerMetadataConstants.CurrentShippingAddress_Name, CustomerMetadataConstants.CurrentShippingAddressId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.CurrentCustomerChargeOption, o => o.CurrentCustomerChargeOptionId,
-                CustomerMetadata.CurrentCustomerChargeOption_Name, CustomerMetadata.CurrentCustomerChargeOptionId_Name);
+                CustomerMetadataConstants.CurrentCustomerChargeOption_Name, CustomerMetadataConstants.CurrentCustomerChargeOptionId_Name);
 
 			this.OnCustomValidation();
         }

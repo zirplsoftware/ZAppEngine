@@ -12,15 +12,15 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orde
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.StripeCustomerId).IsRequired(StripeCustomerChargeOptionMetadata.StripeCustomerId_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadata.StripeCustomerId_MaxLength, StripeCustomerChargeOptionMetadata.StripeCustomerId_IsMaxLength);
-			this.Property(o => o.Last4OfCreditCard).IsRequired(StripeCustomerChargeOptionMetadata.Last4OfCreditCard_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadata.Last4OfCreditCard_MaxLength, StripeCustomerChargeOptionMetadata.Last4OfCreditCard_IsMaxLength);
-			this.Property(o => o.ExpirationMonthOfCreditCard).IsRequired(StripeCustomerChargeOptionMetadata.ExpirationMonthOfCreditCard_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadata.ExpirationMonthOfCreditCard_MaxLength, StripeCustomerChargeOptionMetadata.ExpirationMonthOfCreditCard_IsMaxLength);
-			this.Property(o => o.ExpirationYearOfCreditCard).IsRequired(StripeCustomerChargeOptionMetadata.ExpirationYearOfCreditCard_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadata.ExpirationYearOfCreditCard_MaxLength, StripeCustomerChargeOptionMetadata.ExpirationYearOfCreditCard_IsMaxLength);
-			this.Property(o => o.CreditCardFingerPrint).IsRequired(StripeCustomerChargeOptionMetadata.CreditCardFingerPrint_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadata.CreditCardFingerPrint_MaxLength, StripeCustomerChargeOptionMetadata.CreditCardFingerPrint_IsMaxLength);
+			this.Property(o => o.StripeCustomerId).IsRequired(StripeCustomerChargeOptionMetadataConstants.StripeCustomerId_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadataConstants.StripeCustomerId_MaxLength, StripeCustomerChargeOptionMetadataConstants.StripeCustomerId_IsMaxLength);
+			this.Property(o => o.Last4OfCreditCard).IsRequired(StripeCustomerChargeOptionMetadataConstants.Last4OfCreditCard_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadataConstants.Last4OfCreditCard_MaxLength, StripeCustomerChargeOptionMetadataConstants.Last4OfCreditCard_IsMaxLength);
+			this.Property(o => o.ExpirationMonthOfCreditCard).IsRequired(StripeCustomerChargeOptionMetadataConstants.ExpirationMonthOfCreditCard_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadataConstants.ExpirationMonthOfCreditCard_MaxLength, StripeCustomerChargeOptionMetadataConstants.ExpirationMonthOfCreditCard_IsMaxLength);
+			this.Property(o => o.ExpirationYearOfCreditCard).IsRequired(StripeCustomerChargeOptionMetadataConstants.ExpirationYearOfCreditCard_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadataConstants.ExpirationYearOfCreditCard_MaxLength, StripeCustomerChargeOptionMetadataConstants.ExpirationYearOfCreditCard_IsMaxLength);
+			this.Property(o => o.CreditCardFingerPrint).IsRequired(StripeCustomerChargeOptionMetadataConstants.CreditCardFingerPrint_IsRequired).HasMaxLength(StripeCustomerChargeOptionMetadataConstants.CreditCardFingerPrint_MaxLength, StripeCustomerChargeOptionMetadataConstants.CreditCardFingerPrint_IsMaxLength);
 
             this.HasNavigationProperty(o => o.BillingAddress,
                                         o => o.BillingAddressId,
-                                        StripeCustomerChargeOptionMetadata.BillingAddress_IsRequired,
+                                        StripeCustomerChargeOptionMetadataConstants.BillingAddress_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

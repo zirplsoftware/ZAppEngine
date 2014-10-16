@@ -12,35 +12,35 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orde
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Date).IsRequired(OrderMetadata.Date_IsRequired).IsDateTime();
+			this.Property(o => o.Date).IsRequired(OrderMetadataConstants.Date_IsRequired).IsDateTime();
 
             this.HasNavigationProperty(o => o.OrderChargeStatusType,
                                         o => o.OrderChargeStatusTypeId,
-                                        OrderMetadata.OrderChargeStatusType_IsRequired,
+                                        OrderMetadataConstants.OrderChargeStatusType_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.OrderStatusType,
                                         o => o.OrderStatusTypeId,
-                                        OrderMetadata.OrderStatusType_IsRequired,
+                                        OrderMetadataConstants.OrderStatusType_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.SubtotalAmountBeforeDiscount).IsRequired(OrderMetadata.SubtotalAmountBeforeDiscount_IsRequired).IsCurrency();
-			this.Property(o => o.OriginalSubtotalAmount).IsRequired(OrderMetadata.OriginalSubtotalAmount_IsRequired).IsCurrency();
-			this.Property(o => o.OriginalTaxAmount).IsRequired(OrderMetadata.OriginalTaxAmount_IsRequired).IsCurrency();
-			this.Property(o => o.OriginalTotalAmount).IsRequired(OrderMetadata.OriginalTotalAmount_IsRequired).IsCurrency();
+			this.Property(o => o.SubtotalAmountBeforeDiscount).IsRequired(OrderMetadataConstants.SubtotalAmountBeforeDiscount_IsRequired).IsCurrency();
+			this.Property(o => o.OriginalSubtotalAmount).IsRequired(OrderMetadataConstants.OriginalSubtotalAmount_IsRequired).IsCurrency();
+			this.Property(o => o.OriginalTaxAmount).IsRequired(OrderMetadataConstants.OriginalTaxAmount_IsRequired).IsCurrency();
+			this.Property(o => o.OriginalTotalAmount).IsRequired(OrderMetadataConstants.OriginalTotalAmount_IsRequired).IsCurrency();
 
             this.HasNavigationProperty(o => o.ShippingAddress,
                                         o => o.ShippingAddressId,
-                                        OrderMetadata.ShippingAddress_IsRequired,
+                                        OrderMetadataConstants.ShippingAddress_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.Customer,
                                         o => o.CustomerId,
-                                        OrderMetadata.Customer_IsRequired,
+                                        OrderMetadataConstants.Customer_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.CustomerChargeOption,
                                         o => o.CustomerChargeOptionId,
-                                        OrderMetadata.CustomerChargeOption_IsRequired,
+                                        OrderMetadataConstants.CustomerChargeOption_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

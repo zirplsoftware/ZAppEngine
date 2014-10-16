@@ -13,7 +13,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership
         //public DateTime LastActivityDate { get; set; }
     }
 
-    public class UserMetadata : MetadataBase
+    public partial class UserMetadataConstants
     {
         public const String UserName_Name = "UserName";
         public const int UserName_MaxLength = 256;

@@ -12,7 +12,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Noti
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Name).IsRequired(EmailEventTypeMetadata.Name_IsRequired).HasMaxLength(EmailEventTypeMetadata.Name_MaxLength, EmailEventTypeMetadata.Name_IsMaxLength);
+			this.Property(o => o.Name).IsRequired(EmailEventTypeMetadataConstants.Name_IsRequired).HasMaxLength(EmailEventTypeMetadataConstants.Name_MaxLength, EmailEventTypeMetadataConstants.Name_IsMaxLength);
 
 			this.MapCustomProperties();
 

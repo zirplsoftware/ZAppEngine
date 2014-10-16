@@ -74,11 +74,11 @@
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Web.Core/bin
 /Zirpl.Common.Testing/bin
 /Zirpl.Common.Testing/obj
-/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing/obj
-/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing/bin
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common/obj
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common/bin
 /obj
 /Bin
-/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj.DotSettings
+/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj.DotSettings
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service/obj
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service/bin
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service.csproj.DotSettings

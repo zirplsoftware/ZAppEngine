@@ -13,16 +13,16 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Promo
         protected ReferralValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.PromoCode, o => o.PromoCodeId,
-                ReferralMetadata.PromoCode_Name, ReferralMetadata.PromoCodeId_Name);
+                ReferralMetadataConstants.PromoCode_Name, ReferralMetadataConstants.PromoCodeId_Name);
 			this.When(o =>  o.ReferredCustomerJoinedDate.HasValue, () => {
 				this.RuleFor(o => o.ReferredCustomerJoinedDate).NotEmpty();
 			});
             this.ForeignEntityAndIdMatchIfNotNull(o => o.ReferredCustomer, o => o.ReferredCustomerId,
-                ReferralMetadata.ReferredCustomer_Name, ReferralMetadata.ReferredCustomerId_Name);
+                ReferralMetadataConstants.ReferredCustomer_Name, ReferralMetadataConstants.ReferredCustomerId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.ReferredCustomerAwardDiscount, o => o.ReferredCustomerAwardDiscountId,
-                ReferralMetadata.ReferredCustomerAwardDiscount_Name, ReferralMetadata.ReferredCustomerAwardDiscountId_Name);
+                ReferralMetadataConstants.ReferredCustomerAwardDiscount_Name, ReferralMetadataConstants.ReferredCustomerAwardDiscountId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.ReferredCustomerAwardDiscountUsage, o => o.ReferredCustomerAwardDiscountUsageId,
-                ReferralMetadata.ReferredCustomerAwardDiscountUsage_Name, ReferralMetadata.ReferredCustomerAwardDiscountUsageId_Name);
+                ReferralMetadataConstants.ReferredCustomerAwardDiscountUsage_Name, ReferralMetadataConstants.ReferredCustomerAwardDiscountUsageId_Name);
 
 			this.OnCustomValidation();
         }

@@ -12,9 +12,9 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Setti
     {
         public TaxRuleValidator()
         {
-			this.RuleFor(o => o.Rate).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TaxRuleMetadata.Rate_MinValue, TaxRuleMetadata.Rate_MaxValue);
+			this.RuleFor(o => o.Rate).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TaxRuleMetadataConstants.Rate_MinValue, TaxRuleMetadataConstants.Rate_MaxValue);
             this.ForeignEntityNotNullAndIdMatches(o => o.StateProvinceType, o => o.StateProvinceTypeId,
-                TaxRuleMetadata.StateProvinceType_Name, TaxRuleMetadata.StateProvinceTypeId_Name);
+                TaxRuleMetadataConstants.StateProvinceType_Name, TaxRuleMetadataConstants.StateProvinceTypeId_Name);
 
 			this.OnCustomValidation();
         }

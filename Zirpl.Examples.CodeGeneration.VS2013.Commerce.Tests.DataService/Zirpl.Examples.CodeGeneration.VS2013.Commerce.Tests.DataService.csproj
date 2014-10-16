@@ -260,7 +260,7 @@
       <Project>{e28c3be3-44d0-4787-872f-8b2cdc62fb96}</Project>
       <Name>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Testing\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj">
+    <ProjectReference Include="..\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj">
       <Project>{32b32731-b6e6-4b95-a440-762c2d4a09c4}</Project>
       <Name>Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common</Name>
     </ProjectReference>

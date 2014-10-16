@@ -15,14 +15,14 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cata
 
             this.HasNavigationProperty(o => o.SubscriptionChoice,
                                         o => o.SubscriptionChoiceId,
-                                        SubscriptionChoiceTierPriceCombinationMetadata.SubscriptionChoice_IsRequired,
+                                        SubscriptionChoiceTierPriceCombinationMetadataConstants.SubscriptionChoice_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.TierPrice,
                                         o => o.TierPriceId,
-                                        SubscriptionChoiceTierPriceCombinationMetadata.TierPrice_IsRequired,
+                                        SubscriptionChoiceTierPriceCombinationMetadataConstants.TierPrice_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.PriceEach).IsRequired(SubscriptionChoiceTierPriceCombinationMetadata.PriceEach_IsRequired).IsCurrency();
+			this.Property(o => o.PriceEach).IsRequired(SubscriptionChoiceTierPriceCombinationMetadataConstants.PriceEach_IsRequired).IsCurrency();
 
 			this.MapCustomProperties();
 

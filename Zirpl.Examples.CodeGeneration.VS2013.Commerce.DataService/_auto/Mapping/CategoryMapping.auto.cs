@@ -12,13 +12,13 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cata
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Name).IsRequired(CategoryMetadata.Name_IsRequired).HasMaxLength(CategoryMetadata.Name_MaxLength, CategoryMetadata.Name_IsMaxLength);
-			this.Property(o => o.SeoId).IsRequired(CategoryMetadata.SeoId_IsRequired).HasMaxLength(CategoryMetadata.SeoId_MaxLength, CategoryMetadata.SeoId_IsMaxLength);
-			this.Property(o => o.Description).IsRequired(CategoryMetadata.Description_IsRequired).HasMaxLength(CategoryMetadata.Description_MaxLength, CategoryMetadata.Description_IsMaxLength);
+			this.Property(o => o.Name).IsRequired(CategoryMetadataConstants.Name_IsRequired).HasMaxLength(CategoryMetadataConstants.Name_MaxLength, CategoryMetadataConstants.Name_IsMaxLength);
+			this.Property(o => o.SeoId).IsRequired(CategoryMetadataConstants.SeoId_IsRequired).HasMaxLength(CategoryMetadataConstants.SeoId_MaxLength, CategoryMetadataConstants.SeoId_IsMaxLength);
+			this.Property(o => o.Description).IsRequired(CategoryMetadataConstants.Description_IsRequired).HasMaxLength(CategoryMetadataConstants.Description_MaxLength, CategoryMetadataConstants.Description_IsMaxLength);
 
             this.HasNavigationProperty(o => o.Parent,
                                         o => o.ParentId,
-                                        CategoryMetadata.Parent_IsRequired,
+                                        CategoryMetadataConstants.Parent_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

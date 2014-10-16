@@ -12,17 +12,17 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Subs
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.ChargePeriod).IsRequired(SubscriptionPeriodMetadata.ChargePeriod_IsRequired);
+			this.Property(o => o.ChargePeriod).IsRequired(SubscriptionPeriodMetadataConstants.ChargePeriod_IsRequired);
 
             this.HasNavigationProperty(o => o.ChargePeriodType,
                                         o => o.ChargePeriodTypeId,
-                                        SubscriptionPeriodMetadata.ChargePeriodType_IsRequired,
+                                        SubscriptionPeriodMetadataConstants.ChargePeriodType_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.ShipmentPeriod).IsRequired(SubscriptionPeriodMetadata.ShipmentPeriod_IsRequired);
+			this.Property(o => o.ShipmentPeriod).IsRequired(SubscriptionPeriodMetadataConstants.ShipmentPeriod_IsRequired);
 
             this.HasNavigationProperty(o => o.ShipmentPeriodType,
                                         o => o.ShipmentPeriodTypeId,
-                                        SubscriptionPeriodMetadata.ShipmentPeriodType_IsRequired,
+                                        SubscriptionPeriodMetadataConstants.ShipmentPeriodType_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

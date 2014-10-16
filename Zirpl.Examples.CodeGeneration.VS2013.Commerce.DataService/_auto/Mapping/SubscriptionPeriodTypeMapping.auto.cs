@@ -12,8 +12,8 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Subs
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Name).IsRequired(SubscriptionPeriodTypeMetadata.Name_IsRequired).HasMaxLength(SubscriptionPeriodTypeMetadata.Name_MaxLength, SubscriptionPeriodTypeMetadata.Name_IsMaxLength);
-			this.Property(o => o.PluralName).IsRequired(SubscriptionPeriodTypeMetadata.PluralName_IsRequired).HasMaxLength(SubscriptionPeriodTypeMetadata.PluralName_MaxLength, SubscriptionPeriodTypeMetadata.PluralName_IsMaxLength);
+			this.Property(o => o.Name).IsRequired(SubscriptionPeriodTypeMetadataConstants.Name_IsRequired).HasMaxLength(SubscriptionPeriodTypeMetadataConstants.Name_MaxLength, SubscriptionPeriodTypeMetadataConstants.Name_IsMaxLength);
+			this.Property(o => o.PluralName).IsRequired(SubscriptionPeriodTypeMetadataConstants.PluralName_IsRequired).HasMaxLength(SubscriptionPeriodTypeMetadataConstants.PluralName_MaxLength, SubscriptionPeriodTypeMetadataConstants.PluralName_IsMaxLength);
 
 			this.MapCustomProperties();
 

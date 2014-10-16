@@ -26,6 +26,7 @@
         <dependency id="Common.Logging.Log4Net" version="2.0.1"  />
         <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
         <dependency id="EnterpriseLibrary.TransientFaultHandling.Data" version="6.0.1304.1"  />
+        <dependency id="FluentValidation" version="5.3.0.0" />
         <dependency id="log4net" version="1.2.10"  />
         <dependency id="Zirpl.Common" version="$version$"  />
       </group>
@@ -36,12 +37,15 @@
         <dependency id="Common.Logging.Log4Net" version="2.0.1"  />
         <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
         <dependency id="EnterpriseLibrary.TransientFaultHandling.Data" version="6.0.1304.1"  />
+        <dependency id="FluentValidation" version="5.3.0.0" />
         <dependency id="log4net" version="1.2.10"  />
         <dependency id="Zirpl.Common" version="$version$"  />
       </group>
       <group targetFramework="sl50">
         <dependency id="Autofac" version="3.5.0"  />
         <dependency id="AutoMapper" version="3.2.1"  />
+        <dependency id="FluentValidation" version="5.3.0.0" />
+        <dependency id="Zirpl.Common" version="$version$"  />
       </group>
     </dependencies>
   </metadata>

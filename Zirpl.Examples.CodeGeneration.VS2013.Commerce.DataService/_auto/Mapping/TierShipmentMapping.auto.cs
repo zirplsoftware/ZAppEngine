@@ -15,12 +15,12 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cata
 
             this.HasNavigationProperty(o => o.DisplayProduct,
                                         o => o.DisplayProductId,
-                                        TierShipmentMetadata.DisplayProduct_IsRequired,
+                                        TierShipmentMetadataConstants.DisplayProduct_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.Quantity).IsRequired(TierShipmentMetadata.Quantity_IsRequired);
-			this.Property(o => o.BaseWeightInOunces).IsRequired(TierShipmentMetadata.BaseWeightInOunces_IsRequired);
-			this.Property(o => o.WeightInOuncesEach).IsRequired(TierShipmentMetadata.WeightInOuncesEach_IsRequired);
-			this.Property(o => o.RequiresManualShipmentHandling).IsRequired(TierShipmentMetadata.RequiresManualShipmentHandling_IsRequired);
+			this.Property(o => o.Quantity).IsRequired(TierShipmentMetadataConstants.Quantity_IsRequired);
+			this.Property(o => o.BaseWeightInOunces).IsRequired(TierShipmentMetadataConstants.BaseWeightInOunces_IsRequired);
+			this.Property(o => o.WeightInOuncesEach).IsRequired(TierShipmentMetadataConstants.WeightInOuncesEach_IsRequired);
+			this.Property(o => o.RequiresManualShipmentHandling).IsRequired(TierShipmentMetadataConstants.RequiresManualShipmentHandling_IsRequired);
 
 			this.MapCustomProperties();
 

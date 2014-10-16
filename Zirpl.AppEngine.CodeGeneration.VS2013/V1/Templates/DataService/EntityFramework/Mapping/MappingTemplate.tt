@@ -55,7 +55,7 @@ namespace <#= this.Helper.GetEntityFrameworkMappingNamespace(domainType) #>
 
             this.HasNavigationProperty(o => o.<#= property.Name #>,
                                         o => o.<#= property.Name #>Id,
-                                        <#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired,
+                                        <#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_IsRequired,
                                         CascadeOnDeleteOption.<#= property.CascadeOnDelete ? "Yes" : "No" #><#= navigationPropertyString #>);
 <#				
                 }
@@ -65,26 +65,26 @@ namespace <#= this.Helper.GetEntityFrameworkMappingNamespace(domainType) #>
 				if (property.Type.ToLowerInvariant() == "string")
                 {
 #>
-			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired).HasMaxLength(<#= domainType.Name #>Metadata.<#= property.Name #>_MaxLength, <#= domainType.Name #>Metadata.<#= property.Name #>_IsMaxLength);
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_IsRequired).HasMaxLength(<#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_MaxLength, <#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_IsMaxLength);
 <#				}
 				else if (property.Type.ToLowerInvariant() == "decimal"
 						|| property.Type.ToLowerInvariant() == "double")
                 {
 					 var precisionString = String.IsNullOrEmpty(property.Precision) ? "" : ".HasPrecision(" + property.Precision + ")";
 #>
-			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired)<#= precisionString #>;
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_IsRequired)<#= precisionString #>;
 <#				
                 }
 				else if (property.Type.ToLowerInvariant() == "datetime")
                 {
 #>
-			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired).IsDateTime();
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_IsRequired).IsDateTime();
 <#				
                 }
 				else if (property.Type.ToLowerInvariant() == "currency")
                 {
 #>
-			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired).IsCurrency();
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_IsRequired).IsCurrency();
 <#				
                 }
 				else if (property.Type.ToLowerInvariant() == "bool"
@@ -93,7 +93,7 @@ namespace <#= this.Helper.GetEntityFrameworkMappingNamespace(domainType) #>
 						|| property.Type.ToLowerInvariant() == "byte")
                 {
 #>
-			this.Property(o => o.<#= property.Name #>).IsRequired(<#= domainType.Name #>Metadata.<#= property.Name #>_IsRequired);
+			this.Property(o => o.<#= property.Name #>).IsRequired(<#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_IsRequired);
 <#				
                 }
 				else 

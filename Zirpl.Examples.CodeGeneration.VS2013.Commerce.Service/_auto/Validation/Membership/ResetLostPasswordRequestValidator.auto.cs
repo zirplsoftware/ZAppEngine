@@ -12,7 +12,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Membe
     {
         public ResetLostPasswordRequestValidator()
         {
-			this.RuleFor(o => o.NewPassword).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(ResetLostPasswordRequestMetadata.NewPassword_MinLength, ResetLostPasswordRequestMetadata.NewPassword_MaxLength);
+			this.RuleFor(o => o.NewPassword).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(ResetLostPasswordRequestMetadataConstants.NewPassword_MinLength, ResetLostPasswordRequestMetadataConstants.NewPassword_MaxLength);
 			this.RuleFor(o => o.UserId).NotEmpty();
 
 			this.OnCustomValidation();

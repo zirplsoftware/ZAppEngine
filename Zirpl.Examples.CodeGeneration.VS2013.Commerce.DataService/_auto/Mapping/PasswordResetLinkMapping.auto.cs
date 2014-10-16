@@ -15,10 +15,10 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Memb
 
             this.HasNavigationProperty(o => o.User,
                                         o => o.UserId,
-                                        PasswordResetLinkMetadata.User_IsRequired,
+                                        PasswordResetLinkMetadataConstants.User_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.Token).IsRequired(PasswordResetLinkMetadata.Token_IsRequired);
-			this.Property(o => o.Expires).IsRequired(PasswordResetLinkMetadata.Expires_IsRequired).IsDateTime();
+			this.Property(o => o.Token).IsRequired(PasswordResetLinkMetadataConstants.Token_IsRequired);
+			this.Property(o => o.Expires).IsRequired(PasswordResetLinkMetadataConstants.Expires_IsRequired).IsDateTime();
 
 			this.MapCustomProperties();
 

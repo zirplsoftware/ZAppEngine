@@ -56,7 +56,7 @@ namespace <#= this.Helper.GetValidatorNamespace(domainType) #>
 					if (propertyType == "string")
 					{
 #>
-			this.RuleFor(o => o.<#= property.Name #>)<#= property.IsRequired ? ".Cascade(CascadeMode.StopOnFirstFailure).NotEmpty()" : ""  #>.Length(<#= this.Helper.GetModelMetadataTypeName(domainType)  #>.<#= property.Name #>_MinLength, <#= this.Helper.GetModelMetadataTypeName(domainType)  #>.<#= property.Name #>_MaxLength);
+			this.RuleFor(o => o.<#= property.Name #>)<#= property.IsRequired ? ".Cascade(CascadeMode.StopOnFirstFailure).NotEmpty()" : ""  #>.Length(<#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_MinLength, <#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_MaxLength);
 <#
 
 					}
@@ -73,7 +73,7 @@ namespace <#= this.Helper.GetValidatorNamespace(domainType) #>
 						//		? ".NotNull()"
 						//		: ".NotEmpty()";
 #>
-			this.RuleFor(o => o.<#= property.Name #>)<#= property.IsRequired ? ".Cascade(CascadeMode.StopOnFirstFailure).NotNull()" : ""  #>.InclusiveBetween(<#= this.Helper.GetModelMetadataTypeName(domainType)  #>.<#= property.Name #>_MinValue, <#= this.Helper.GetModelMetadataTypeName(domainType)  #>.<#= property.Name #>_MaxValue);
+			this.RuleFor(o => o.<#= property.Name #>)<#= property.IsRequired ? ".Cascade(CascadeMode.StopOnFirstFailure).NotNull()" : ""  #>.InclusiveBetween(<#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_MinValue, <#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_MaxValue);
 <#
 					}
 					else if (propertyType.ToLowerInvariant() == "datetime"
@@ -107,14 +107,14 @@ namespace <#= this.Helper.GetValidatorNamespace(domainType) #>
 				      {
 #>
             this.ForeignEntityNotNullAndIdMatches(o => o.<#= property.Name #>, o => o.<#= property.Name #>Id,
-                <#= this.Helper.GetModelMetadataTypeName(domainType)  #>.<#= property.Name #>_Name, <#= this.Helper.GetModelMetadataTypeName(domainType)  #>.<#= property.Name #>Id_Name);
+                <#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_Name, <#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>Id_Name);
 <#
 				      }
 						else
 				      {
 #>
             this.ForeignEntityAndIdMatchIfNotNull(o => o.<#= property.Name #>, o => o.<#= property.Name #>Id,
-                <#= this.Helper.GetModelMetadataTypeName(domainType)  #>.<#= property.Name #>_Name, <#= this.Helper.GetModelMetadataTypeName(domainType)  #>.<#= property.Name #>Id_Name);
+                <#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>_Name, <#= this.Helper.GetMetadataConstantsTypeName(domainType)  #>.<#= property.Name #>Id_Name);
 <#
 					    }
 				    }

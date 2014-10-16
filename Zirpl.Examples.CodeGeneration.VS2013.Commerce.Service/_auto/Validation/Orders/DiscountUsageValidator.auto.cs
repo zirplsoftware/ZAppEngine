@@ -14,11 +14,11 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Order
         {
 			this.RuleFor(o => o.DateUsed).NotEmpty();
             this.ForeignEntityNotNullAndIdMatches(o => o.Discount, o => o.DiscountId,
-                DiscountUsageMetadata.Discount_Name, DiscountUsageMetadata.DiscountId_Name);
+                DiscountUsageMetadataConstants.Discount_Name, DiscountUsageMetadataConstants.DiscountId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.Order, o => o.OrderId,
-                DiscountUsageMetadata.Order_Name, DiscountUsageMetadata.OrderId_Name);
+                DiscountUsageMetadataConstants.Order_Name, DiscountUsageMetadataConstants.OrderId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.OrderItem, o => o.OrderItemId,
-                DiscountUsageMetadata.OrderItem_Name, DiscountUsageMetadata.OrderItemId_Name);
+                DiscountUsageMetadataConstants.OrderItem_Name, DiscountUsageMetadataConstants.OrderItemId_Name);
 
 			this.OnCustomValidation();
         }

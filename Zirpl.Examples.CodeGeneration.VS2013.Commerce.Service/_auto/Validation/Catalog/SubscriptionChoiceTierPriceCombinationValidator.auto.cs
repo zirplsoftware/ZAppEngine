@@ -13,12 +13,12 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Catal
         public SubscriptionChoiceTierPriceCombinationValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.DisplayProduct, o => o.DisplayProductId,
-                SubscriptionChoiceTierPriceCombinationMetadata.DisplayProduct_Name, SubscriptionChoiceTierPriceCombinationMetadata.DisplayProductId_Name);
+                SubscriptionChoiceTierPriceCombinationMetadataConstants.DisplayProduct_Name, SubscriptionChoiceTierPriceCombinationMetadataConstants.DisplayProductId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.SubscriptionChoice, o => o.SubscriptionChoiceId,
-                SubscriptionChoiceTierPriceCombinationMetadata.SubscriptionChoice_Name, SubscriptionChoiceTierPriceCombinationMetadata.SubscriptionChoiceId_Name);
+                SubscriptionChoiceTierPriceCombinationMetadataConstants.SubscriptionChoice_Name, SubscriptionChoiceTierPriceCombinationMetadataConstants.SubscriptionChoiceId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.TierPrice, o => o.TierPriceId,
-                SubscriptionChoiceTierPriceCombinationMetadata.TierPrice_Name, SubscriptionChoiceTierPriceCombinationMetadata.TierPriceId_Name);
-			this.RuleFor(o => o.PriceEach).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(SubscriptionChoiceTierPriceCombinationMetadata.PriceEach_MinValue, SubscriptionChoiceTierPriceCombinationMetadata.PriceEach_MaxValue);
+                SubscriptionChoiceTierPriceCombinationMetadataConstants.TierPrice_Name, SubscriptionChoiceTierPriceCombinationMetadataConstants.TierPriceId_Name);
+			this.RuleFor(o => o.PriceEach).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(SubscriptionChoiceTierPriceCombinationMetadataConstants.PriceEach_MinValue, SubscriptionChoiceTierPriceCombinationMetadataConstants.PriceEach_MaxValue);
 
 			this.OnCustomValidation();
         }

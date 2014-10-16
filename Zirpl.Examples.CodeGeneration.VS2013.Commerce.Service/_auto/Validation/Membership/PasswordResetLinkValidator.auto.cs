@@ -13,7 +13,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Membe
         public PasswordResetLinkValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.User, o => o.UserId,
-                PasswordResetLinkMetadata.User_Name, PasswordResetLinkMetadata.UserId_Name);
+                PasswordResetLinkMetadataConstants.User_Name, PasswordResetLinkMetadataConstants.UserId_Name);
 			this.RuleFor(o => o.Token).NotEmpty();
 			this.RuleFor(o => o.Expires).NotEmpty();
 

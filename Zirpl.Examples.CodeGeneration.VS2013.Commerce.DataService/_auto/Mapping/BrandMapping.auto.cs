@@ -12,9 +12,9 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cata
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Name).IsRequired(BrandMetadata.Name_IsRequired).HasMaxLength(BrandMetadata.Name_MaxLength, BrandMetadata.Name_IsMaxLength);
-			this.Property(o => o.SeoId).IsRequired(BrandMetadata.SeoId_IsRequired).HasMaxLength(BrandMetadata.SeoId_MaxLength, BrandMetadata.SeoId_IsMaxLength);
-			this.Property(o => o.Description).IsRequired(BrandMetadata.Description_IsRequired).HasMaxLength(BrandMetadata.Description_MaxLength, BrandMetadata.Description_IsMaxLength);
+			this.Property(o => o.Name).IsRequired(BrandMetadataConstants.Name_IsRequired).HasMaxLength(BrandMetadataConstants.Name_MaxLength, BrandMetadataConstants.Name_IsMaxLength);
+			this.Property(o => o.SeoId).IsRequired(BrandMetadataConstants.SeoId_IsRequired).HasMaxLength(BrandMetadataConstants.SeoId_MaxLength, BrandMetadataConstants.SeoId_IsMaxLength);
+			this.Property(o => o.Description).IsRequired(BrandMetadataConstants.Description_IsRequired).HasMaxLength(BrandMetadataConstants.Description_MaxLength, BrandMetadataConstants.Description_IsMaxLength);
 
 			this.MapCustomProperties();
 

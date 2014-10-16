@@ -12,12 +12,12 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Part
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Name).IsRequired(PartnerReferralPlanMetadata.Name_IsRequired).HasMaxLength(PartnerReferralPlanMetadata.Name_MaxLength, PartnerReferralPlanMetadata.Name_IsMaxLength);
-			this.Property(o => o.Amount).IsRequired(PartnerReferralPlanMetadata.Amount_IsRequired).IsCurrency();
+			this.Property(o => o.Name).IsRequired(PartnerReferralPlanMetadataConstants.Name_IsRequired).HasMaxLength(PartnerReferralPlanMetadataConstants.Name_MaxLength, PartnerReferralPlanMetadataConstants.Name_IsMaxLength);
+			this.Property(o => o.Amount).IsRequired(PartnerReferralPlanMetadataConstants.Amount_IsRequired).IsCurrency();
 
             this.HasNavigationProperty(o => o.ReferredCustomerAwardDiscount,
                                         o => o.ReferredCustomerAwardDiscountId,
-                                        PartnerReferralPlanMetadata.ReferredCustomerAwardDiscount_IsRequired,
+                                        PartnerReferralPlanMetadataConstants.ReferredCustomerAwardDiscount_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

@@ -15,12 +15,12 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cust
 
             this.HasNavigationProperty(o => o.Customer,
                                         o => o.CustomerId,
-                                        CustomerTagMetadata.Customer_IsRequired,
+                                        CustomerTagMetadataConstants.Customer_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.Tag,
                                         o => o.TagId,
-                                        CustomerTagMetadata.Tag_IsRequired,
+                                        CustomerTagMetadataConstants.Tag_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

@@ -13,7 +13,7 @@ namespace Zirpl.AppEngine.Model
         public virtual String Name { get; set; }
     }
 
-    public abstract class DictionaryEntityBaseMetadataBase : MetadataBase
+    public abstract class DictionaryEntityBaseMetadataConstantsBase : MetadataConstantsBase
     {
     }
 }

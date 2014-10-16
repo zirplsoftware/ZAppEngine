@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.Model
 {
-    public abstract class MetadataBase
+    public abstract class MetadataConstantsBase
     {
         protected const int MaxLength = 100000;
     }

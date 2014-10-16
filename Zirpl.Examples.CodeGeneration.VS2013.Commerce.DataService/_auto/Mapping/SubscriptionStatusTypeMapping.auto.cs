@@ -12,7 +12,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Subs
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Name).IsRequired(SubscriptionStatusTypeMetadata.Name_IsRequired).HasMaxLength(SubscriptionStatusTypeMetadata.Name_MaxLength, SubscriptionStatusTypeMetadata.Name_IsMaxLength);
+			this.Property(o => o.Name).IsRequired(SubscriptionStatusTypeMetadataConstants.Name_IsRequired).HasMaxLength(SubscriptionStatusTypeMetadataConstants.Name_MaxLength, SubscriptionStatusTypeMetadataConstants.Name_IsMaxLength);
 
 			this.MapCustomProperties();
 

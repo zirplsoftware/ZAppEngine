@@ -80,9 +80,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
 {
-	public partial class MetadataTemplate: IPreprocessedTextTransformation
+	public partial class MetadataConstantsTemplate: IPreprocessedTextTransformation
     {
-        public MetadataTemplate(V1Helper helper)
+        public MetadataConstantsTemplate(V1Helper helper)
         {
 			this.Helper = helper;
             this.Host = this.Helper.CallingTemplate.Host;

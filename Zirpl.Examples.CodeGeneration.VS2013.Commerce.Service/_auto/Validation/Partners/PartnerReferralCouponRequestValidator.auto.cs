@@ -13,14 +13,14 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Partn
         public PartnerReferralCouponRequestValidator()
         {
 			this.RuleFor(o => o.RequestDate).NotEmpty();
-			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(PartnerReferralCouponRequestMetadata.Quantity_MinValue, PartnerReferralCouponRequestMetadata.Quantity_MaxValue);
+			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(PartnerReferralCouponRequestMetadataConstants.Quantity_MinValue, PartnerReferralCouponRequestMetadataConstants.Quantity_MaxValue);
 			this.When(o =>  o.ShippedDate.HasValue, () => {
 				this.RuleFor(o => o.ShippedDate).NotEmpty();
 			});
             this.ForeignEntityNotNullAndIdMatches(o => o.Partner, o => o.PartnerId,
-                PartnerReferralCouponRequestMetadata.Partner_Name, PartnerReferralCouponRequestMetadata.PartnerId_Name);
+                PartnerReferralCouponRequestMetadataConstants.Partner_Name, PartnerReferralCouponRequestMetadataConstants.PartnerId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.PartnerReferralCouponRequestStatusType, o => o.PartnerReferralCouponRequestStatusTypeId,
-                PartnerReferralCouponRequestMetadata.PartnerReferralCouponRequestStatusType_Name, PartnerReferralCouponRequestMetadata.PartnerReferralCouponRequestStatusTypeId_Name);
+                PartnerReferralCouponRequestMetadataConstants.PartnerReferralCouponRequestStatusType_Name, PartnerReferralCouponRequestMetadataConstants.PartnerReferralCouponRequestStatusTypeId_Name);
 
 			this.OnCustomValidation();
         }

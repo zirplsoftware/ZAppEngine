@@ -12,7 +12,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Name).IsRequired(NameSuffixTypeMetadata.Name_IsRequired).HasMaxLength(NameSuffixTypeMetadata.Name_MaxLength, NameSuffixTypeMetadata.Name_IsMaxLength);
+			this.Property(o => o.Name).IsRequired(NameSuffixTypeMetadataConstants.Name_IsRequired).HasMaxLength(NameSuffixTypeMetadataConstants.Name_MaxLength, NameSuffixTypeMetadataConstants.Name_IsMaxLength);
 
 			this.MapCustomProperties();
 

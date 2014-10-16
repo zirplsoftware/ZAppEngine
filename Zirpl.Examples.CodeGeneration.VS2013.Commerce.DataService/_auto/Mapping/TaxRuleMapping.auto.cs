@@ -12,11 +12,11 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Sett
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Rate).IsRequired(TaxRuleMetadata.Rate_IsRequired).HasPrecision(18,4);
+			this.Property(o => o.Rate).IsRequired(TaxRuleMetadataConstants.Rate_IsRequired).HasPrecision(18,4);
 
             this.HasNavigationProperty(o => o.StateProvinceType,
                                         o => o.StateProvinceTypeId,
-                                        TaxRuleMetadata.StateProvinceType_IsRequired,
+                                        TaxRuleMetadataConstants.StateProvinceType_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

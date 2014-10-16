@@ -12,7 +12,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Prom
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Code).IsRequired(PromoCodeMetadata.Code_IsRequired).HasMaxLength(PromoCodeMetadata.Code_MaxLength, PromoCodeMetadata.Code_IsMaxLength);
+			this.Property(o => o.Code).IsRequired(PromoCodeMetadataConstants.Code_IsRequired).HasMaxLength(PromoCodeMetadataConstants.Code_MaxLength, PromoCodeMetadataConstants.Code_IsMaxLength);
 
 			this.MapCustomProperties();
 

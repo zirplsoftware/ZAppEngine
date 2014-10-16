@@ -13,7 +13,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Custo
         protected CustomerChargeOptionValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.Customer, o => o.CustomerId,
-                CustomerChargeOptionMetadata.Customer_Name, CustomerChargeOptionMetadata.CustomerId_Name);
+                CustomerChargeOptionMetadataConstants.Customer_Name, CustomerChargeOptionMetadataConstants.CustomerId_Name);
 
 			this.OnCustomValidation();
         }

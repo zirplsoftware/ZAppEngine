@@ -13,9 +13,9 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Catal
         public TierPriceValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.DisplayProduct, o => o.DisplayProductId,
-                TierPriceMetadata.DisplayProduct_Name, TierPriceMetadata.DisplayProductId_Name);
-			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierPriceMetadata.Quantity_MinValue, TierPriceMetadata.Quantity_MaxValue);
-			this.RuleFor(o => o.PriceEach).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierPriceMetadata.PriceEach_MinValue, TierPriceMetadata.PriceEach_MaxValue);
+                TierPriceMetadataConstants.DisplayProduct_Name, TierPriceMetadataConstants.DisplayProductId_Name);
+			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierPriceMetadataConstants.Quantity_MinValue, TierPriceMetadataConstants.Quantity_MaxValue);
+			this.RuleFor(o => o.PriceEach).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierPriceMetadataConstants.PriceEach_MinValue, TierPriceMetadataConstants.PriceEach_MaxValue);
 
 			this.OnCustomValidation();
         }

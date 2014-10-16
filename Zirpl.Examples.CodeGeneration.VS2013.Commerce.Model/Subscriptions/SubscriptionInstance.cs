@@ -37,7 +37,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions
         }
     }
 
-    public partial class SubscriptionInstanceMetadata
+    public partial class SubscriptionInstanceMetadataConstants
     {
         public const String CreatedByOrderItemId_Name = "CreatedByOrderItemId";
         public const bool CreatedByOrderItemId_IsRequired = false;

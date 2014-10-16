@@ -12,18 +12,18 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Promo
     {
         public DiscountValidator()
         {
-			this.RuleFor(o => o.Name).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(DiscountMetadata.Name_MinLength, DiscountMetadata.Name_MaxLength);
+			this.RuleFor(o => o.Name).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(DiscountMetadataConstants.Name_MinLength, DiscountMetadataConstants.Name_MaxLength);
             this.ForeignEntityNotNullAndIdMatches(o => o.PromoCode, o => o.PromoCodeId,
-                DiscountMetadata.PromoCode_Name, DiscountMetadata.PromoCodeId_Name);
+                DiscountMetadataConstants.PromoCode_Name, DiscountMetadataConstants.PromoCodeId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.DiscountApplicabilityType, o => o.DiscountApplicabilityTypeId,
-                DiscountMetadata.DiscountApplicabilityType_Name, DiscountMetadata.DiscountApplicabilityTypeId_Name);
-			this.RuleFor(o => o.Amount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(DiscountMetadata.Amount_MinValue, DiscountMetadata.Amount_MaxValue);
+                DiscountMetadataConstants.DiscountApplicabilityType_Name, DiscountMetadataConstants.DiscountApplicabilityTypeId_Name);
+			this.RuleFor(o => o.Amount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(DiscountMetadataConstants.Amount_MinValue, DiscountMetadataConstants.Amount_MaxValue);
             this.ForeignEntityNotNullAndIdMatches(o => o.DiscountAmountType, o => o.DiscountAmountTypeId,
-                DiscountMetadata.DiscountAmountType_Name, DiscountMetadata.DiscountAmountTypeId_Name);
+                DiscountMetadataConstants.DiscountAmountType_Name, DiscountMetadataConstants.DiscountAmountTypeId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.DiscountUsageRestrictionType, o => o.DiscountUsageRestrictionTypeId,
-                DiscountMetadata.DiscountUsageRestrictionType_Name, DiscountMetadata.DiscountUsageRestrictionTypeId_Name);
-			this.RuleFor(o => o.DiscountUsageRestrictionQuantity).InclusiveBetween(DiscountMetadata.DiscountUsageRestrictionQuantity_MinValue, DiscountMetadata.DiscountUsageRestrictionQuantity_MaxValue);
-			this.RuleFor(o => o.StopAfterChargeCyles).InclusiveBetween(DiscountMetadata.StopAfterChargeCyles_MinValue, DiscountMetadata.StopAfterChargeCyles_MaxValue);
+                DiscountMetadataConstants.DiscountUsageRestrictionType_Name, DiscountMetadataConstants.DiscountUsageRestrictionTypeId_Name);
+			this.RuleFor(o => o.DiscountUsageRestrictionQuantity).InclusiveBetween(DiscountMetadataConstants.DiscountUsageRestrictionQuantity_MinValue, DiscountMetadataConstants.DiscountUsageRestrictionQuantity_MaxValue);
+			this.RuleFor(o => o.StopAfterChargeCyles).InclusiveBetween(DiscountMetadataConstants.StopAfterChargeCyles_MinValue, DiscountMetadataConstants.StopAfterChargeCyles_MaxValue);
 			this.When(o =>  o.StartDate.HasValue, () => {
 				this.RuleFor(o => o.StartDate).NotEmpty();
 			});

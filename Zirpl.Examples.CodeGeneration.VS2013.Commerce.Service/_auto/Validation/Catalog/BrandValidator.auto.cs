@@ -12,9 +12,9 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Catal
     {
         public BrandValidator()
         {
-			this.RuleFor(o => o.Name).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(BrandMetadata.Name_MinLength, BrandMetadata.Name_MaxLength);
-			this.RuleFor(o => o.SeoId).Length(BrandMetadata.SeoId_MinLength, BrandMetadata.SeoId_MaxLength);
-			this.RuleFor(o => o.Description).Length(BrandMetadata.Description_MinLength, BrandMetadata.Description_MaxLength);
+			this.RuleFor(o => o.Name).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(BrandMetadataConstants.Name_MinLength, BrandMetadataConstants.Name_MaxLength);
+			this.RuleFor(o => o.SeoId).Length(BrandMetadataConstants.SeoId_MinLength, BrandMetadataConstants.SeoId_MaxLength);
+			this.RuleFor(o => o.Description).Length(BrandMetadataConstants.Description_MinLength, BrandMetadataConstants.Description_MaxLength);
 
 			this.OnCustomValidation();
         }

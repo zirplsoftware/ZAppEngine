@@ -15,23 +15,23 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Prom
 
             this.HasNavigationProperty(o => o.PromoCode,
                                         o => o.PromoCodeId,
-                                        ReferralMetadata.PromoCode_IsRequired,
+                                        ReferralMetadataConstants.PromoCode_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.ReferredCustomerJoinedDate).IsRequired(ReferralMetadata.ReferredCustomerJoinedDate_IsRequired).IsDateTime();
+			this.Property(o => o.ReferredCustomerJoinedDate).IsRequired(ReferralMetadataConstants.ReferredCustomerJoinedDate_IsRequired).IsDateTime();
 
             this.HasNavigationProperty(o => o.ReferredCustomer,
                                         o => o.ReferredCustomerId,
-                                        ReferralMetadata.ReferredCustomer_IsRequired,
+                                        ReferralMetadataConstants.ReferredCustomer_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.ReferredCustomerAwardDiscount,
                                         o => o.ReferredCustomerAwardDiscountId,
-                                        ReferralMetadata.ReferredCustomerAwardDiscount_IsRequired,
+                                        ReferralMetadataConstants.ReferredCustomerAwardDiscount_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.ReferredCustomerAwardDiscountUsage,
                                         o => o.ReferredCustomerAwardDiscountUsageId,
-                                        ReferralMetadata.ReferredCustomerAwardDiscountUsage_IsRequired,
+                                        ReferralMetadataConstants.ReferredCustomerAwardDiscountUsage_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

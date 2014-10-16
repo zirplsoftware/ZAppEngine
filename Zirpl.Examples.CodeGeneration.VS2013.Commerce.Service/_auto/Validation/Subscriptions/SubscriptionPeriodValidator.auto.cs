@@ -12,12 +12,12 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Subsc
     {
         public SubscriptionPeriodValidator()
         {
-			this.RuleFor(o => o.ChargePeriod).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(SubscriptionPeriodMetadata.ChargePeriod_MinValue, SubscriptionPeriodMetadata.ChargePeriod_MaxValue);
+			this.RuleFor(o => o.ChargePeriod).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(SubscriptionPeriodMetadataConstants.ChargePeriod_MinValue, SubscriptionPeriodMetadataConstants.ChargePeriod_MaxValue);
             this.ForeignEntityNotNullAndIdMatches(o => o.ChargePeriodType, o => o.ChargePeriodTypeId,
-                SubscriptionPeriodMetadata.ChargePeriodType_Name, SubscriptionPeriodMetadata.ChargePeriodTypeId_Name);
-			this.RuleFor(o => o.ShipmentPeriod).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(SubscriptionPeriodMetadata.ShipmentPeriod_MinValue, SubscriptionPeriodMetadata.ShipmentPeriod_MaxValue);
+                SubscriptionPeriodMetadataConstants.ChargePeriodType_Name, SubscriptionPeriodMetadataConstants.ChargePeriodTypeId_Name);
+			this.RuleFor(o => o.ShipmentPeriod).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(SubscriptionPeriodMetadataConstants.ShipmentPeriod_MinValue, SubscriptionPeriodMetadataConstants.ShipmentPeriod_MaxValue);
             this.ForeignEntityNotNullAndIdMatches(o => o.ShipmentPeriodType, o => o.ShipmentPeriodTypeId,
-                SubscriptionPeriodMetadata.ShipmentPeriodType_Name, SubscriptionPeriodMetadata.ShipmentPeriodTypeId_Name);
+                SubscriptionPeriodMetadataConstants.ShipmentPeriodType_Name, SubscriptionPeriodMetadataConstants.ShipmentPeriodTypeId_Name);
 
 			this.OnCustomValidation();
         }

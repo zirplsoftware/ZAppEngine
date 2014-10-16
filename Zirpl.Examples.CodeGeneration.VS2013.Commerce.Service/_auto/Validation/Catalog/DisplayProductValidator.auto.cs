@@ -12,11 +12,11 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Catal
     {
         public DisplayProductValidator()
         {
-			this.RuleFor(o => o.Name).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(DisplayProductMetadata.Name_MinLength, DisplayProductMetadata.Name_MaxLength);
-			this.RuleFor(o => o.SeoId).Length(DisplayProductMetadata.SeoId_MinLength, DisplayProductMetadata.SeoId_MaxLength);
-			this.RuleFor(o => o.Description).Length(DisplayProductMetadata.Description_MinLength, DisplayProductMetadata.Description_MaxLength);
-			this.RuleFor(o => o.Sku).Length(DisplayProductMetadata.Sku_MinLength, DisplayProductMetadata.Sku_MaxLength);
-			this.RuleFor(o => o.AdminComment).Length(DisplayProductMetadata.AdminComment_MinLength, DisplayProductMetadata.AdminComment_MaxLength);
+			this.RuleFor(o => o.Name).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(DisplayProductMetadataConstants.Name_MinLength, DisplayProductMetadataConstants.Name_MaxLength);
+			this.RuleFor(o => o.SeoId).Length(DisplayProductMetadataConstants.SeoId_MinLength, DisplayProductMetadataConstants.SeoId_MaxLength);
+			this.RuleFor(o => o.Description).Length(DisplayProductMetadataConstants.Description_MinLength, DisplayProductMetadataConstants.Description_MaxLength);
+			this.RuleFor(o => o.Sku).Length(DisplayProductMetadataConstants.Sku_MinLength, DisplayProductMetadataConstants.Sku_MaxLength);
+			this.RuleFor(o => o.AdminComment).Length(DisplayProductMetadataConstants.AdminComment_MinLength, DisplayProductMetadataConstants.AdminComment_MaxLength);
 			// unsure how to follow this for validation or even if it should with EF- Collection property: ApplicableDiscounts
 
 			this.OnCustomValidation();

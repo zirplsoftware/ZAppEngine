@@ -13,11 +13,11 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Custo
         public CustomerReferralValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.ReferringCustomer, o => o.ReferringCustomerId,
-                CustomerReferralMetadata.ReferringCustomer_Name, CustomerReferralMetadata.ReferringCustomerId_Name);
+                CustomerReferralMetadataConstants.ReferringCustomer_Name, CustomerReferralMetadataConstants.ReferringCustomerId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.ReferringCustomerDiscountAward, o => o.ReferringCustomerDiscountAwardId,
-                CustomerReferralMetadata.ReferringCustomerDiscountAward_Name, CustomerReferralMetadata.ReferringCustomerDiscountAwardId_Name);
+                CustomerReferralMetadataConstants.ReferringCustomerDiscountAward_Name, CustomerReferralMetadataConstants.ReferringCustomerDiscountAwardId_Name);
             this.ForeignEntityAndIdMatchIfNotNull(o => o.ReferringCustomerDiscountAwardUsage, o => o.ReferringCustomerDiscountAwardUsageId,
-                CustomerReferralMetadata.ReferringCustomerDiscountAwardUsage_Name, CustomerReferralMetadata.ReferringCustomerDiscountAwardUsageId_Name);
+                CustomerReferralMetadataConstants.ReferringCustomerDiscountAwardUsage_Name, CustomerReferralMetadataConstants.ReferringCustomerDiscountAwardUsageId_Name);
 
 			this.OnCustomValidation();
         }

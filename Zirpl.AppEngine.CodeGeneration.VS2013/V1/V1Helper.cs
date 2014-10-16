@@ -162,12 +162,12 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                        select dt;
             }
         }
-        public virtual IEnumerable<DomainType> DomainTypesToGenerateModelMetadataFor
+        public virtual IEnumerable<DomainType> DomainTypesToGenerateMetadataConstantsFor
         {
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.ModelOptions.GenerateMetadata
+                       where dt.ModelOptions.GenerateMetadataConstants
                        select dt;
             }
         }
@@ -298,36 +298,36 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         }
         #endregion
 
-        #region ModelMetadata-related methods
-        public void StartModelMetadataFile(DomainType domainType)
+        #region MetadataConstants-related methods
+        public void StartMetadataConstantsFile(DomainType domainType)
         {
             this.FileManager.StartNewFile(
-                this.GetModelMetadataTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+                this.GetMetadataConstantsTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
                 this.ModelProject,
                 this.GetGeneratedCodeFolder(domainType),
                 new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
-        public virtual string GetModelMetadataNamespace(DomainType domainType)
+        public virtual string GetMetadataConstantsNamespace(DomainType domainType)
         {
             // use the same
             return this.GetModelNamespace(domainType);
         }
-        public virtual String GetModelMetadataTypeName(DomainType domainType)
+        public virtual String GetMetadataConstantsTypeName(DomainType domainType)
         {
-            return domainType.Name + "Metadata";
+            return domainType.Name + "MetadataConstants";
         }
-        public virtual String GetModelMetadataTypeFullName(DomainType domainType)
+        public virtual String GetMetadataConstantsTypeFullName(DomainType domainType)
         {
-            return String.Format("{0}.{1}", this.GetModelMetadataNamespace(domainType), this.GetModelMetadataTypeName(domainType));
+            return String.Format("{0}.{1}", this.GetMetadataConstantsNamespace(domainType), this.GetMetadataConstantsTypeName(domainType));
         }
-        public virtual string GetModelMetadataBaseDeclaration(DomainType domainType)
+        public virtual string GetMetadataConstantsBaseDeclaration(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
-                ? " : " + domainType.BaseClassOverride + "Metadata"
+                ? " : " + domainType.BaseClassOverride + "MetadataConstants"
                 : domainType.IsPersistable 
                     ? domainType.IsDictionary
-                        ? " : DictionaryEntityBaseMetadataBase"
-                        : " : MetadataBase"
+                        ? " : DictionaryEntityBaseMetadataConstantsBase"
+                        : " : MetadataConstantsBase"
                     : "";
         }
         #endregion
@@ -936,13 +936,13 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                         ? string.Format("DictionaryEntityModelBase<{0}>", this.GetModelIdTypeName(domainType))
                         : string.Format("AuditableModelBase<{0}>", this.GetModelIdTypeName(domainType));
         }
-        public string GetSupportViewModelMetadataBaseClass(DomainType domainType)
+        public string GetSupportViewModelMetadataConstantsBaseClass(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
-                    ? this.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name + "ModelMetadata"
+                    ? this.GetDomainTypeByFullTypeName(domainType.BaseClassOverride).Name + "ModelMetadataConstants"
                     : domainType.IsDictionary
                         ? ""
-                        : "AuditableModelBaseMetadata";
+                        : "AuditableModelBaseMetadataConstants";
         }
 
 

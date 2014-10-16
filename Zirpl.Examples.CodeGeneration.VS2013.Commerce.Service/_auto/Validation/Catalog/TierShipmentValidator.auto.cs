@@ -13,10 +13,10 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Catal
         public TierShipmentValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.DisplayProduct, o => o.DisplayProductId,
-                TierShipmentMetadata.DisplayProduct_Name, TierShipmentMetadata.DisplayProductId_Name);
-			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierShipmentMetadata.Quantity_MinValue, TierShipmentMetadata.Quantity_MaxValue);
-			this.RuleFor(o => o.BaseWeightInOunces).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierShipmentMetadata.BaseWeightInOunces_MinValue, TierShipmentMetadata.BaseWeightInOunces_MaxValue);
-			this.RuleFor(o => o.WeightInOuncesEach).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierShipmentMetadata.WeightInOuncesEach_MinValue, TierShipmentMetadata.WeightInOuncesEach_MaxValue);
+                TierShipmentMetadataConstants.DisplayProduct_Name, TierShipmentMetadataConstants.DisplayProductId_Name);
+			this.RuleFor(o => o.Quantity).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierShipmentMetadataConstants.Quantity_MinValue, TierShipmentMetadataConstants.Quantity_MaxValue);
+			this.RuleFor(o => o.BaseWeightInOunces).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierShipmentMetadataConstants.BaseWeightInOunces_MinValue, TierShipmentMetadataConstants.BaseWeightInOunces_MaxValue);
+			this.RuleFor(o => o.WeightInOuncesEach).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(TierShipmentMetadataConstants.WeightInOuncesEach_MinValue, TierShipmentMetadataConstants.WeightInOuncesEach_MaxValue);
 			this.RuleFor(o => o.RequiresManualShipmentHandling).NotNull();
 
 			this.OnCustomValidation();

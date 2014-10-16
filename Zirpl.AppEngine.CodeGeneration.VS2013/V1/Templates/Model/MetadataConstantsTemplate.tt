@@ -1,0 +1,101 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".log" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1.ConfigModel" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="VSLangProj" #>
+<#@ assembly name="VSLangProj80" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Serialization" #>
+<#
+// now we create the metadata classes
+//
+foreach (DomainType domainType in this.Helper.DomainTypesToGenerateMetadataConstantsFor)
+{
+	this.Helper.StartMetadataConstantsFile(domainType);
+	
+#>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Zirpl.AppEngine.Model;
+
+namespace <#= this.Helper.GetModelNamespace(domainType) #>
+{
+    public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= this.Helper.GetMetadataConstantsTypeName(domainType) #><#= this.Helper.GetMetadataConstantsBaseDeclaration(domainType) #>
+    {
+<#
+	if (domainType.Properties != null)
+	{
+		foreach (var property in domainType.Properties)
+		{
+#>
+        public const string <#= property.Name #>_Name = "<#= property.Name #>";
+		public const bool <#= property.Name #>_IsRequired = <#= property.IsRequired.ToString().ToLowerInvariant() #>;
+<#
+			if (!property.IsCollection
+				&& property.Type.ToLowerInvariant() == "string")
+			{
+#>
+		public const bool <#= property.Name #>_IsMaxLength = <#= property.IsMaxLength.ToString().ToLowerInvariant() #>;
+        public const int <#= property.Name #>_MinLength = <#= !String.IsNullOrEmpty(property.MinLength) ? property.MinLength : (property.IsRequired ? "1" : "0") #>;
+		public const int <#= property.Name #>_MaxLength = <#= !String.IsNullOrEmpty(property.MaxLength) ? property.MaxLength : "MetadataConstantsBase.MaxLength" #>;
+<#
+			}
+			if (!property.IsCollection
+				&& property.Type.ToLowerInvariant() == "int")
+			{
+#>
+		public const int <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "int.MinValue" #>;
+        public const int <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "int.MaxValue" #>;
+<#
+			}
+			if (!property.IsCollection
+				&& (property.Type.ToLowerInvariant() == "decimal"
+					|| property.Type.ToLowerInvariant() == "currency"))
+			{
+#>
+		public const decimal <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue" #>;
+        public const decimal <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue" #>;
+		public const double <#= property.Name #>_MinValue_Double = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue" #>;
+        public const double <#= property.Name #>_MaxValue_Double = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue" #>;
+<#
+			}
+			if (!property.IsCollection
+				&& property.Type.ToLowerInvariant() == "double")
+			{
+#>
+		public const double <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue" #>;
+        public const double <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue" #>;
+		public const decimal <#= property.Name #>_MinValue_Decimal = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue" #>;
+        public const decimal <#= property.Name #>_MaxValue_Decimal = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue" #>;
+<#
+            }
+#>
+
+<#
+			if (!property.IsCollection
+				&& property.IsRelationship
+				&& property.GenerateIdProperty)
+			{
+#>
+		public const string <#= property.Name #>Id_Name = "<#= property.Name #>Id";
+		public const bool <#= property.Name #>Id_IsRequired = <#= property.IsRequired.ToString().ToLowerInvariant() #>;
+
+<#
+            }
+		}
+	}
+#>
+	}
+}
+<#
+}
+#>

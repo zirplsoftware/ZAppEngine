@@ -12,8 +12,8 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Order
     {
         public StripeChargeValidator()
         {
-			this.RuleFor(o => o.StripeChargeId).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(StripeChargeMetadata.StripeChargeId_MinLength, StripeChargeMetadata.StripeChargeId_MaxLength);
-			this.RuleFor(o => o.StripeFee).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(StripeChargeMetadata.StripeFee_MinValue, StripeChargeMetadata.StripeFee_MaxValue);
+			this.RuleFor(o => o.StripeChargeId).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(StripeChargeMetadataConstants.StripeChargeId_MinLength, StripeChargeMetadataConstants.StripeChargeId_MaxLength);
+			this.RuleFor(o => o.StripeFee).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(StripeChargeMetadataConstants.StripeFee_MinValue, StripeChargeMetadataConstants.StripeFee_MaxValue);
 
 			this.OnCustomValidation();
         }

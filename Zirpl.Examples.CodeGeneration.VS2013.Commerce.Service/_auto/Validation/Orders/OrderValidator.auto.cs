@@ -14,19 +14,19 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Order
         {
 			this.RuleFor(o => o.Date).NotEmpty();
             this.ForeignEntityNotNullAndIdMatches(o => o.OrderChargeStatusType, o => o.OrderChargeStatusTypeId,
-                OrderMetadata.OrderChargeStatusType_Name, OrderMetadata.OrderChargeStatusTypeId_Name);
+                OrderMetadataConstants.OrderChargeStatusType_Name, OrderMetadataConstants.OrderChargeStatusTypeId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.OrderStatusType, o => o.OrderStatusTypeId,
-                OrderMetadata.OrderStatusType_Name, OrderMetadata.OrderStatusTypeId_Name);
-			this.RuleFor(o => o.SubtotalAmountBeforeDiscount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(OrderMetadata.SubtotalAmountBeforeDiscount_MinValue, OrderMetadata.SubtotalAmountBeforeDiscount_MaxValue);
-			this.RuleFor(o => o.OriginalSubtotalAmount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(OrderMetadata.OriginalSubtotalAmount_MinValue, OrderMetadata.OriginalSubtotalAmount_MaxValue);
-			this.RuleFor(o => o.OriginalTaxAmount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(OrderMetadata.OriginalTaxAmount_MinValue, OrderMetadata.OriginalTaxAmount_MaxValue);
-			this.RuleFor(o => o.OriginalTotalAmount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(OrderMetadata.OriginalTotalAmount_MinValue, OrderMetadata.OriginalTotalAmount_MaxValue);
+                OrderMetadataConstants.OrderStatusType_Name, OrderMetadataConstants.OrderStatusTypeId_Name);
+			this.RuleFor(o => o.SubtotalAmountBeforeDiscount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(OrderMetadataConstants.SubtotalAmountBeforeDiscount_MinValue, OrderMetadataConstants.SubtotalAmountBeforeDiscount_MaxValue);
+			this.RuleFor(o => o.OriginalSubtotalAmount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(OrderMetadataConstants.OriginalSubtotalAmount_MinValue, OrderMetadataConstants.OriginalSubtotalAmount_MaxValue);
+			this.RuleFor(o => o.OriginalTaxAmount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(OrderMetadataConstants.OriginalTaxAmount_MinValue, OrderMetadataConstants.OriginalTaxAmount_MaxValue);
+			this.RuleFor(o => o.OriginalTotalAmount).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(OrderMetadataConstants.OriginalTotalAmount_MinValue, OrderMetadataConstants.OriginalTotalAmount_MaxValue);
             this.ForeignEntityNotNullAndIdMatches(o => o.ShippingAddress, o => o.ShippingAddressId,
-                OrderMetadata.ShippingAddress_Name, OrderMetadata.ShippingAddressId_Name);
+                OrderMetadataConstants.ShippingAddress_Name, OrderMetadataConstants.ShippingAddressId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.Customer, o => o.CustomerId,
-                OrderMetadata.Customer_Name, OrderMetadata.CustomerId_Name);
+                OrderMetadataConstants.Customer_Name, OrderMetadataConstants.CustomerId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.CustomerChargeOption, o => o.CustomerChargeOptionId,
-                OrderMetadata.CustomerChargeOption_Name, OrderMetadata.CustomerChargeOptionId_Name);
+                OrderMetadataConstants.CustomerChargeOption_Name, OrderMetadataConstants.CustomerChargeOptionId_Name);
 			// unsure how to follow this for validation or even if it should with EF- Collection property: Charges
 			// unsure how to follow this for validation or even if it should with EF- Collection property: DiscountUsages
 			// unsure how to follow this for validation or even if it should with EF- Collection property: OrderItems

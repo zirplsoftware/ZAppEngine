@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Zirpl.AppEngine.Model;
+using Zirpl.Linq;
 
 namespace Zirpl.AppEngine.DataService.EntityFramework
 {
@@ -397,7 +399,9 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
             query = from o in query
                          orderby o.Id
                          select o;
+
             return query;
+            //return new QueryableWrapper<TEntity>(query, null);
         }
     }
 }

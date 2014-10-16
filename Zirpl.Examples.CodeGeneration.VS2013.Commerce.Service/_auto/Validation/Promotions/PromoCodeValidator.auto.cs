@@ -12,7 +12,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Promo
     {
         public PromoCodeValidator()
         {
-			this.RuleFor(o => o.Code).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(PromoCodeMetadata.Code_MinLength, PromoCodeMetadata.Code_MaxLength);
+			this.RuleFor(o => o.Code).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(PromoCodeMetadataConstants.Code_MinLength, PromoCodeMetadataConstants.Code_MaxLength);
 
 			this.OnCustomValidation();
         }

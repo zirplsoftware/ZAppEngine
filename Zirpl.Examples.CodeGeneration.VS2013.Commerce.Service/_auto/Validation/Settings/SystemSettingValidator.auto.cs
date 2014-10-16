@@ -12,8 +12,8 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Setti
     {
         public SystemSettingValidator()
         {
-			this.RuleFor(o => o.Name).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(SystemSettingMetadata.Name_MinLength, SystemSettingMetadata.Name_MaxLength);
-			this.RuleFor(o => o.Value).Length(SystemSettingMetadata.Value_MinLength, SystemSettingMetadata.Value_MaxLength);
+			this.RuleFor(o => o.Name).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(SystemSettingMetadataConstants.Name_MinLength, SystemSettingMetadataConstants.Name_MaxLength);
+			this.RuleFor(o => o.Value).Length(SystemSettingMetadataConstants.Value_MinLength, SystemSettingMetadataConstants.Value_MaxLength);
 
 			this.OnCustomValidation();
         }

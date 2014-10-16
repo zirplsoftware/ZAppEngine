@@ -15,17 +15,17 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Part
 
             this.HasNavigationProperty(o => o.Request,
                                         o => o.RequestId,
-                                        PartnerReferralMetadata.Request_IsRequired,
+                                        PartnerReferralMetadataConstants.Request_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.Partner,
                                         o => o.PartnerId,
-                                        PartnerReferralMetadata.Partner_IsRequired,
+                                        PartnerReferralMetadataConstants.Partner_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.Plan,
                                         o => o.PlanId,
-                                        PartnerReferralMetadata.Plan_IsRequired,
+                                        PartnerReferralMetadataConstants.Plan_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

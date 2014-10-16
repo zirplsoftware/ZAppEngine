@@ -12,8 +12,8 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Membe
     {
         protected UserRegistrationRequestBaseValidator()
         {
-			this.RuleFor(o => o.EmailAddress).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(UserRegistrationRequestBaseMetadata.EmailAddress_MinLength, UserRegistrationRequestBaseMetadata.EmailAddress_MaxLength);
-			this.RuleFor(o => o.Password).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(UserRegistrationRequestBaseMetadata.Password_MinLength, UserRegistrationRequestBaseMetadata.Password_MaxLength);
+			this.RuleFor(o => o.EmailAddress).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(UserRegistrationRequestBaseMetadataConstants.EmailAddress_MinLength, UserRegistrationRequestBaseMetadataConstants.EmailAddress_MaxLength);
+			this.RuleFor(o => o.Password).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().Length(UserRegistrationRequestBaseMetadataConstants.Password_MinLength, UserRegistrationRequestBaseMetadataConstants.Password_MaxLength);
 
 			this.OnCustomValidation();
         }

@@ -12,8 +12,8 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orde
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.StripeChargeId).IsRequired(StripeChargeMetadata.StripeChargeId_IsRequired).HasMaxLength(StripeChargeMetadata.StripeChargeId_MaxLength, StripeChargeMetadata.StripeChargeId_IsMaxLength);
-			this.Property(o => o.StripeFee).IsRequired(StripeChargeMetadata.StripeFee_IsRequired).IsCurrency();
+			this.Property(o => o.StripeChargeId).IsRequired(StripeChargeMetadataConstants.StripeChargeId_IsRequired).HasMaxLength(StripeChargeMetadataConstants.StripeChargeId_MaxLength, StripeChargeMetadataConstants.StripeChargeId_IsMaxLength);
+			this.Property(o => o.StripeFee).IsRequired(StripeChargeMetadataConstants.StripeFee_IsRequired).IsCurrency();
 
 			this.MapCustomProperties();
 

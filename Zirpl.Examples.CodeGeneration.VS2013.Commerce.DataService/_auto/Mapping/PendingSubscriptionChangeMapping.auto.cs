@@ -12,11 +12,11 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Subs
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.Quantity).IsRequired(PendingSubscriptionChangeMetadata.Quantity_IsRequired);
+			this.Property(o => o.Quantity).IsRequired(PendingSubscriptionChangeMetadataConstants.Quantity_IsRequired);
 
             this.HasNavigationProperty(o => o.SubscriptionChoice,
                                         o => o.SubscriptionChoiceId,
-                                        PendingSubscriptionChangeMetadata.SubscriptionChoice_IsRequired,
+                                        PendingSubscriptionChangeMetadataConstants.SubscriptionChoice_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

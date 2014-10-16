@@ -12,22 +12,22 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Noti
 		protected override void MapProperties()
         {
 
-			this.Property(o => o.SentDate).IsRequired(EmailEventMetadata.SentDate_IsRequired).IsDateTime();
-			this.Property(o => o.SentSucceeded).IsRequired(EmailEventMetadata.SentSucceeded_IsRequired);
+			this.Property(o => o.SentDate).IsRequired(EmailEventMetadataConstants.SentDate_IsRequired).IsDateTime();
+			this.Property(o => o.SentSucceeded).IsRequired(EmailEventMetadataConstants.SentSucceeded_IsRequired);
 
             this.HasNavigationProperty(o => o.EmailEventType,
                                         o => o.EmailEventTypeId,
-                                        EmailEventMetadata.EmailEventType_IsRequired,
+                                        EmailEventMetadataConstants.EmailEventType_IsRequired,
                                         CascadeOnDeleteOption.No);
-			this.Property(o => o.Subject).IsRequired(EmailEventMetadata.Subject_IsRequired).HasMaxLength(EmailEventMetadata.Subject_MaxLength, EmailEventMetadata.Subject_IsMaxLength);
-			this.Property(o => o.Body).IsRequired(EmailEventMetadata.Body_IsRequired).HasMaxLength(EmailEventMetadata.Body_MaxLength, EmailEventMetadata.Body_IsMaxLength);
-			this.Property(o => o.FromEmail).IsRequired(EmailEventMetadata.FromEmail_IsRequired).HasMaxLength(EmailEventMetadata.FromEmail_MaxLength, EmailEventMetadata.FromEmail_IsMaxLength);
-			this.Property(o => o.FromName).IsRequired(EmailEventMetadata.FromName_IsRequired).HasMaxLength(EmailEventMetadata.FromName_MaxLength, EmailEventMetadata.FromName_IsMaxLength);
-			this.Property(o => o.To).IsRequired(EmailEventMetadata.To_IsRequired).HasMaxLength(EmailEventMetadata.To_MaxLength, EmailEventMetadata.To_IsMaxLength);
-			this.Property(o => o.Cc).IsRequired(EmailEventMetadata.Cc_IsRequired).HasMaxLength(EmailEventMetadata.Cc_MaxLength, EmailEventMetadata.Cc_IsMaxLength);
-			this.Property(o => o.Bcc).IsRequired(EmailEventMetadata.Bcc_IsRequired).HasMaxLength(EmailEventMetadata.Bcc_MaxLength, EmailEventMetadata.Bcc_IsMaxLength);
-			this.Property(o => o.ResentDate).IsRequired(EmailEventMetadata.ResentDate_IsRequired).IsDateTime();
-			this.Property(o => o.ResentSucceeded).IsRequired(EmailEventMetadata.ResentSucceeded_IsRequired);
+			this.Property(o => o.Subject).IsRequired(EmailEventMetadataConstants.Subject_IsRequired).HasMaxLength(EmailEventMetadataConstants.Subject_MaxLength, EmailEventMetadataConstants.Subject_IsMaxLength);
+			this.Property(o => o.Body).IsRequired(EmailEventMetadataConstants.Body_IsRequired).HasMaxLength(EmailEventMetadataConstants.Body_MaxLength, EmailEventMetadataConstants.Body_IsMaxLength);
+			this.Property(o => o.FromEmail).IsRequired(EmailEventMetadataConstants.FromEmail_IsRequired).HasMaxLength(EmailEventMetadataConstants.FromEmail_MaxLength, EmailEventMetadataConstants.FromEmail_IsMaxLength);
+			this.Property(o => o.FromName).IsRequired(EmailEventMetadataConstants.FromName_IsRequired).HasMaxLength(EmailEventMetadataConstants.FromName_MaxLength, EmailEventMetadataConstants.FromName_IsMaxLength);
+			this.Property(o => o.To).IsRequired(EmailEventMetadataConstants.To_IsRequired).HasMaxLength(EmailEventMetadataConstants.To_MaxLength, EmailEventMetadataConstants.To_IsMaxLength);
+			this.Property(o => o.Cc).IsRequired(EmailEventMetadataConstants.Cc_IsRequired).HasMaxLength(EmailEventMetadataConstants.Cc_MaxLength, EmailEventMetadataConstants.Cc_IsMaxLength);
+			this.Property(o => o.Bcc).IsRequired(EmailEventMetadataConstants.Bcc_IsRequired).HasMaxLength(EmailEventMetadataConstants.Bcc_MaxLength, EmailEventMetadataConstants.Bcc_IsMaxLength);
+			this.Property(o => o.ResentDate).IsRequired(EmailEventMetadataConstants.ResentDate_IsRequired).IsDateTime();
+			this.Property(o => o.ResentSucceeded).IsRequired(EmailEventMetadataConstants.ResentSucceeded_IsRequired);
 
 			this.MapCustomProperties();
 

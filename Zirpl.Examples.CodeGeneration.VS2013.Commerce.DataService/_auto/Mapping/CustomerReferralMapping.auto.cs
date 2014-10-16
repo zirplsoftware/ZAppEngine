@@ -15,17 +15,17 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cust
 
             this.HasNavigationProperty(o => o.ReferringCustomer,
                                         o => o.ReferringCustomerId,
-                                        CustomerReferralMetadata.ReferringCustomer_IsRequired,
+                                        CustomerReferralMetadataConstants.ReferringCustomer_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.ReferringCustomerDiscountAward,
                                         o => o.ReferringCustomerDiscountAwardId,
-                                        CustomerReferralMetadata.ReferringCustomerDiscountAward_IsRequired,
+                                        CustomerReferralMetadataConstants.ReferringCustomerDiscountAward_IsRequired,
                                         CascadeOnDeleteOption.No);
 
             this.HasNavigationProperty(o => o.ReferringCustomerDiscountAwardUsage,
                                         o => o.ReferringCustomerDiscountAwardUsageId,
-                                        CustomerReferralMetadata.ReferringCustomerDiscountAwardUsage_IsRequired,
+                                        CustomerReferralMetadataConstants.ReferringCustomerDiscountAwardUsage_IsRequired,
                                         CascadeOnDeleteOption.No);
 
 			this.MapCustomProperties();

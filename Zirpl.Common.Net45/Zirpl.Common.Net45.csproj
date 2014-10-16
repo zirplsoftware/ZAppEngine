@@ -45,6 +45,9 @@
     <Compile Include="..\Zirpl.Common\ActionRunner.cs">
       <Link>ActionRunner.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\Collections\EnumeratorWrapper.cs">
+      <Link>Collections\EnumeratorWrapper.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\Collections\ICollectionExtensions.cs">
       <Link>Collections\ICollectionExtensions.cs</Link>
     </Compile>
@@ -65,6 +68,12 @@
     </Compile>
     <Compile Include="..\Zirpl.Common\Linq\Dynamic.cs">
       <Link>Linq\Dynamic.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Linq\QueryableWrapper.cs">
+      <Link>Linq\QueryableWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Linq\QueryProviderWrapper.cs">
+      <Link>Linq\QueryProviderWrapper.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\NumberExtensions.cs">
       <Link>NumberExtensions.cs</Link>

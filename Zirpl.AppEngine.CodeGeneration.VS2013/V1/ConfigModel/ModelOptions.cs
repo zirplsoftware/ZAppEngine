@@ -7,14 +7,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
         public ModelOptions()
         {
             this.GenerateModel = true;
-            this.GenerateMetadata = true;
+            this.GenerateMetadataConstants = true;
             this.GenerateEnum = true;
             this.GenerateSupportViewModel = true;
         }
         [XmlAttribute]
         public bool GenerateModel { get; set; }
         [XmlAttribute]
-        public bool GenerateMetadata { get; set; }
+        public bool GenerateMetadataConstants { get; set; }
         [XmlAttribute]
         public bool GenerateEnum { get; set; }
         [XmlAttribute]

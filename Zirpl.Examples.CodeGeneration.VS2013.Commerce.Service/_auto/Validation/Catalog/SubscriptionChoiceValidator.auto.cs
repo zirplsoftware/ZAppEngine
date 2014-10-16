@@ -13,10 +13,10 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Catal
         public SubscriptionChoiceValidator()
         {
             this.ForeignEntityNotNullAndIdMatches(o => o.DisplayProduct, o => o.DisplayProductId,
-                SubscriptionChoiceMetadata.DisplayProduct_Name, SubscriptionChoiceMetadata.DisplayProductId_Name);
+                SubscriptionChoiceMetadataConstants.DisplayProduct_Name, SubscriptionChoiceMetadataConstants.DisplayProductId_Name);
             this.ForeignEntityNotNullAndIdMatches(o => o.SubscriptionPeriod, o => o.SubscriptionPeriodId,
-                SubscriptionChoiceMetadata.SubscriptionPeriod_Name, SubscriptionChoiceMetadata.SubscriptionPeriodId_Name);
-			this.RuleFor(o => o.PriceEach).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(SubscriptionChoiceMetadata.PriceEach_MinValue, SubscriptionChoiceMetadata.PriceEach_MaxValue);
+                SubscriptionChoiceMetadataConstants.SubscriptionPeriod_Name, SubscriptionChoiceMetadataConstants.SubscriptionPeriodId_Name);
+			this.RuleFor(o => o.PriceEach).Cascade(CascadeMode.StopOnFirstFailure).NotNull().InclusiveBetween(SubscriptionChoiceMetadataConstants.PriceEach_MinValue, SubscriptionChoiceMetadataConstants.PriceEach_MaxValue);
 
 			this.OnCustomValidation();
         }
