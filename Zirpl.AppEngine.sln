@@ -33,8 +33,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{516549
 		.nuget\package.cmd = .nuget\package.cmd
 		.nuget\Zirpl.AppEngine.EntityFramework.nuspec = .nuget\Zirpl.AppEngine.EntityFramework.nuspec
 		.nuget\Zirpl.AppEngine.nuspec = .nuget\Zirpl.AppEngine.nuspec
+		.nuget\Zirpl.AppEngine.Testing.nuspec = .nuget\Zirpl.AppEngine.Testing.nuspec
 		.nuget\Zirpl.AppEngine.Web.nuspec = .nuget\Zirpl.AppEngine.Web.nuspec
 		.nuget\Zirpl.Common.nuspec = .nuget\Zirpl.Common.nuspec
+		.nuget\Zirpl.Testing.nuspec = .nuget\Zirpl.Testing.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{6C941E8E-85B6-4988-9854-AABEF704FCB5}"
