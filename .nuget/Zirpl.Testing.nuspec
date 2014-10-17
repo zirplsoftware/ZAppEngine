@@ -23,9 +23,14 @@
         <dependency id="FluentAssertions" version="3.0.107" />
         <dependency id="NUnit" version="2.6.3" />
       </group>
+      <group targetFramework="net45">
+        <dependency id="FluentAssertions" version="3.0.107" />
+        <dependency id="NUnit" version="2.6.3" />
+      </group>
     </dependencies>
   </metadata>
   <files>
     <file src="..\Zirpl.Testing\bin\$configuration$\Zirpl.Testing.dll" target="lib\net451\" />
+    <file src="..\Zirpl.Testing.Net45\bin\$configuration$\Zirpl.Testing.dll" target="lib\net45\" />
   </files>
 </package>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine", "Zirpl.AppEngine\Zirpl.AppEngine.csproj", "{DD9BCB12-748C-4395-9A8E-A599A60A0CAA}"
 EndProject
@@ -66,7 +66,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Common.Silverlight5",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Silverlight5", "Zirpl.AppEngine.Silverlight5\Zirpl.AppEngine.Silverlight5.csproj", "{373F2A7C-B29D-44FA-B096-031E70DEB2A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Testing.Net45", "Zirpl.Common.Testing.Net45\Zirpl.AppEngine.Testing.Net45.csproj", "{15590AA5-04CE-4ADD-AEB3-8ED12BF3C1CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Testing.Net45", "Zirpl.AppEngine.Testing.Net45\Zirpl.AppEngine.Testing.Net45.csproj", "{15590AA5-04CE-4ADD-AEB3-8ED12BF3C1CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.CodeGeneration.VS2013", "Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.CodeGeneration.VS2013.csproj", "{F8855F9A-35D1-4C30-BB53-1FD89A984989}"
 EndProject
@@ -86,9 +86,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGenerati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common.csproj", "{32B32731-B6E6-4B95-A440-762C2D4A09C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing", "Zirpl.Common.Testing\Zirpl.Testing.csproj", "{F4FBE07D-ED80-4A72-9F19-90D15979FA0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing", "Zirpl.Testing\Zirpl.Testing.csproj", "{F4FBE07D-ED80-4A72-9F19-90D15979FA0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service.csproj", "{C0BBCA01-519D-482A-90DD-928D415E38A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing.Net45", "Zirpl.Testing.Net45\Zirpl.Testing.Net45.csproj", "{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -200,6 +202,10 @@ Global
 		{C0BBCA01-519D-482A-90DD-928D415E38A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0BBCA01-519D-482A-90DD-928D415E38A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0BBCA01-519D-482A-90DD-928D415E38A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -224,6 +230,7 @@ Global
 		{CE83AE31-23F9-4D04-8395-F22E46B43545} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{32B32731-B6E6-4B95-A440-762C2D4A09C4} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{C0BBCA01-519D-482A-90DD-928D415E38A9} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
+		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8} = {53E45F83-AEF0-4176-93F2-DE7C8822D920}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45

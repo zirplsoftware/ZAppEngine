@@ -252,7 +252,7 @@
       <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
       <Name>Zirpl.AppEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zirpl.Common.Testing\Zirpl.Testing.csproj">
+    <ProjectReference Include="..\Zirpl.Testing\Zirpl.Testing.csproj">
       <Project>{f4fbe07d-ed80-4a72-9f19-90d15979fa0a}</Project>
       <Name>Zirpl.Testing</Name>
     </ProjectReference>

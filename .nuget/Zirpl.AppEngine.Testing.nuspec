@@ -34,6 +34,21 @@
         <dependency id="Zirpl.Common" version="$version$"  />
         <dependency id="Zirpl.Testing" version="$version$"  />
       </group>
+      <group targetFramework="net45">
+        <dependency id="EntityFramework" version="6.1.1" />
+        <dependency id="FluentAssertions" version="3.0.107" />
+        <dependency id="JustMock" version="2014.2.609.3" />
+        <dependency id="Microsoft.AspNet.Mvc" version="5.1.0" />
+        <dependency id="Microsoft.AspNet.Razor" version="3.1.0" />
+        <dependency id="Microsoft.AspNet.WebPages" version="3.1.0" />
+        <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+        <dependency id="NUnit" version="2.6.3" />
+        <dependency id="Zirpl.AppEngine" version="$version$"  />
+        <dependency id="Zirpl.AppEngine.EntityFramework" version="$version$"  />
+        <dependency id="Zirpl.AppEngine.Web" version="$version$"  />
+        <dependency id="Zirpl.Common" version="$version$"  />
+        <dependency id="Zirpl.Testing" version="$version$"  />
+      </group>
     </dependencies>
   </metadata>
   <files>

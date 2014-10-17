@@ -40,10 +40,10 @@
 /Zirpl.Common.Portable/bin
 /Zirpl.Common.Net45/obj
 /Zirpl.Common.Net45/bin
-/Zirpl.Common.Testing.Net45/obj
-/Zirpl.Common.Testing.Net45/bin
-/Zirpl.Common.Testing.Net4/obj
-/Zirpl.Common.Testing.Net4/bin
+/Zirpl.Testing.Net45/obj
+/Zirpl.Testing.Net45/bin
+/Zirpl.Testing.Net4/obj
+/Zirpl.Testing.Net4/bin
 /Zirpl.Common/obj
 /Zirpl.Common/bin
 /Zirpl.AppEngine.Silverlight5/obj
@@ -72,8 +72,8 @@
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.DataService.csproj.DotSettings
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Web.Core/obj
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Web.Core/bin
-/Zirpl.Common.Testing/bin
-/Zirpl.Common.Testing/obj
+/Zirpl.Testing/bin
+/Zirpl.Testing/obj
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common/obj
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Common/bin
 /obj
@@ -82,3 +82,5 @@
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service/obj
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service/bin
 /Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service/Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service.csproj.DotSettings
+/Zirpl.AppEngine.Testing.Net45/obj
+/Zirpl.AppEngine.Testing.Net45/bin
