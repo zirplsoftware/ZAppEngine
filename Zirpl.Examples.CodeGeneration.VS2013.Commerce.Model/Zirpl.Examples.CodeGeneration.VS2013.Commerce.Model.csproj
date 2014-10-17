@@ -131,6 +131,54 @@
     <Compile Include="_auto\Customers\CustomerTagMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
+    <Compile Include="_auto\Customization\AddressCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Catalog\BrandCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Catalog\CategoryCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Catalog\DisplayProductCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Catalog\ProductReviewCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Customers\CustomerCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Membership\UserCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Orders\OrderCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Orders\OrderItemCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Partners\PartnerCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Partners\PartnerReferralCouponRequestCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Partners\PartnerReferralPlanCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Promotions\DiscountCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Settings\TaxRuleCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\Subscriptions\SubscriptionCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Customization\TagCustomFieldValue.auto.cs">
+      <DependentUpon>AppTransform.txt4</DependentUpon>
+    </Compile>
     <Compile Include="_auto\Membership\LoginRequest.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
@@ -469,6 +517,15 @@
     <None Include="_auto\AppTransform.txt4" />
     <None Include="_auto\Catalog\AppTransform.txt4" />
     <None Include="_auto\Customers\AppTransform.txt4" />
+    <None Include="_auto\Customization\AppTransform.txt4" />
+    <None Include="_auto\Customization\Catalog\AppTransform.txt4" />
+    <None Include="_auto\Customization\Customers\AppTransform.txt4" />
+    <None Include="_auto\Customization\Membership\AppTransform.txt4" />
+    <None Include="_auto\Customization\Orders\AppTransform.txt4" />
+    <None Include="_auto\Customization\Partners\AppTransform.txt4" />
+    <None Include="_auto\Customization\Promotions\AppTransform.txt4" />
+    <None Include="_auto\Customization\Settings\AppTransform.txt4" />
+    <None Include="_auto\Customization\Subscriptions\AppTransform.txt4" />
     <None Include="_auto\Membership\AppTransform.txt4" />
     <None Include="_auto\Notifications\AppTransform.txt4" />
     <None Include="_auto\Orders\AppTransform.txt4" />

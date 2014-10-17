@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Type Name="Address" BaseClassOverride="" SubNamespace="">
+<Type Name="Address" BaseClassOverride="" SubNamespace="" IsCustomizable="true">
   <Properties>
     <Property Name="Prefix" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.NamePrefixType" IsRelationship="true" IsRequired="false" />
     <Property Name="FirstName" Type="string" IsRequired="false" MaxLength="150" />

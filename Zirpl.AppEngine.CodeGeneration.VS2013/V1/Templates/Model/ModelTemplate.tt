@@ -25,14 +25,29 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Customization;
+<#
+	if (domainType.IsCustomizable)
+	{
+#>
+using <#= this.Helper.GetCustomFieldValueNamespace(domainType) #>;
+<#
+    }
+#>
 
 namespace <#= this.Helper.GetModelNamespace(domainType) #>
 {
     public<#= domainType.IsAbstract ? " abstract" : "" #> partial class <#= this.Helper.GetModelTypeName(domainType) #> <#= this.Helper.GetModelBaseDeclaration(domainType) #>
     {
 <#
-	if (domainType.Properties != null)
+
+	// make sure properties is NOT null
+	domainType.Properties = domainType.Properties ?? new Property[] {};
+
+	if (domainType.Properties.Length > 0
+		|| domainType.IsCustomizable)
 	{
 		// grab all the collection properties now so we
 		// can add initializers in the Constructor
@@ -40,7 +55,8 @@ namespace <#= this.Helper.GetModelNamespace(domainType) #>
 		var collectionProperties = from p in domainType.Properties
 									where p.IsCollection
 									select p;
-		if (collectionProperties.Count() > 0)
+		if (collectionProperties.Count() > 0
+			|| domainType.IsCustomizable)
 		{
 			// handle the constructor
 #>
@@ -51,15 +67,18 @@ namespace <#= this.Helper.GetModelNamespace(domainType) #>
 			foreach (var collectionProperty in collectionProperties)
 			{
 #>
-			if (this.<#= collectionProperty.Name #> == null)
-			{
-				this.<#= collectionProperty.Name #> = new List<<#= collectionProperty.CollectionOfType #>>();
+			this.<#= collectionProperty.Name #> = this.<#= collectionProperty.Name #> ?? new List<<#= collectionProperty.CollectionOfType #>>();
+<#
 			}
+			if (domainType.IsCustomizable)
+			{
+#>
+			this.CustomFieldValues = this.CustomFieldValues ?? new List<<#= this.Helper.GetCustomFieldValueTypeName(domainType) #>>();
 <#
 			}
 #>
 		}
-
+		
 <#
 		}
 
@@ -93,6 +112,22 @@ namespace <#= this.Helper.GetModelNamespace(domainType) #>
 			}
 		}
 	}
+	if (domainType.IsCustomizable)
+    {
+#>
+
+
+		public virtual IList<<#= this.Helper.GetCustomFieldValueTypeName(domainType) #>> CustomFieldValues { get; set; }
+        public virtual IList<ICustomFieldValue> GetCustomFieldValues()
+        {
+            return this.CustomFieldValues.OfType<ICustomFieldValue>().ToList();
+        }	
+		public virtual void SetCustomFieldValues(IList<ICustomFieldValue> list)
+		{
+		    this.CustomFieldValues = list.OfType<<#= this.Helper.GetCustomFieldValueTypeName(domainType) #>>().ToList();
+		}
+<#
+    }
 #>
     }
 }

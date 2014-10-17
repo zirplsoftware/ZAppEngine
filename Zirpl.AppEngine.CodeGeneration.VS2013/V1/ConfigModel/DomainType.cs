@@ -30,6 +30,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
         [XmlAttribute]
         public bool IsAbstract { get; set; }
         [XmlAttribute]
+        public bool IsCustomizable { get; set; }
+        [XmlAttribute]
         public string IdTypeOverride { get; set; }
         public ModelOptions ModelOptions { get; set; }
         public DataServiceOptions DataServiceOptions { get; set; }

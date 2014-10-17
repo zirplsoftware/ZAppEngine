@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Customization;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Promotions;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions
 {
-    public partial class Discount  : AuditableBase<int>
+    public partial class Discount  : AuditableBase<int>, ICustomizable<Discount, DiscountCustomFieldValue, int>
     {
 		public Discount()
 		{
-			if (this.AppliesToDisplayProducts == null)
-			{
-				this.AppliesToDisplayProducts = new List<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.DisplayProduct>();
-			}
+			this.AppliesToDisplayProducts = this.AppliesToDisplayProducts ?? new List<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.DisplayProduct>();
+			this.CustomFieldValues = this.CustomFieldValues ?? new List<DiscountCustomFieldValue>();
 		}
-
+		
 		public virtual string Name { get; set; }
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.PromoCode PromoCode { get; set; }
 		public virtual int PromoCodeId { get; set; }
@@ -31,6 +32,17 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions
 		public virtual DateTime? EndDate { get; set; }
 		public virtual bool Published { get; set; }
 		public virtual IList<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.DisplayProduct> AppliesToDisplayProducts { get; set; }
+
+
+		public virtual IList<DiscountCustomFieldValue> CustomFieldValues { get; set; }
+        public virtual IList<ICustomFieldValue> GetCustomFieldValues()
+        {
+            return this.CustomFieldValues.OfType<ICustomFieldValue>().ToList();
+        }	
+		public virtual void SetCustomFieldValues(IList<ICustomFieldValue> list)
+		{
+		    this.CustomFieldValues = list.OfType<DiscountCustomFieldValue>().ToList();
+		}
     }
 }
 

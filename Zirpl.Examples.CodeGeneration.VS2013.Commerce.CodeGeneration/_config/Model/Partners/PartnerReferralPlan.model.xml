@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<Type Name="PartnerReferralPlan" BaseClassOverride="" SubNamespace="Partners">
+<Type Name="PartnerReferralPlan" BaseClassOverride="" SubNamespace="Partners" IsCustomizable="true">
 	
 		
 			<Properties>

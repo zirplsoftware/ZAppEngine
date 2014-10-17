@@ -115,6 +115,11 @@
     <Compile Include="V1\ConfigModel\XmlModelBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="V1\Templates\Model\Customization\CustomFieldValueTemplate.cs">
+      <DependentUpon>CustomFieldValueTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.cs">
       <DependentUpon>PeristableModelTestsStrategyTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -215,6 +220,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="V1\Templates\Model\Customization\CustomFieldValueTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CustomFieldValueTemplate.cs</LastGenOutput>
+    </None>
     <None Include="V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PeristableModelTestsStrategyTemplate.cs</LastGenOutput>

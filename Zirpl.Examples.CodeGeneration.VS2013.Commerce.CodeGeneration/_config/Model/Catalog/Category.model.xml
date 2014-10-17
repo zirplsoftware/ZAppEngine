@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<Type Name="Category" BaseClassOverride="" SubNamespace="Catalog">
+<Type Name="Category" BaseClassOverride="" SubNamespace="Catalog" IsCustomizable="true">
 			<Properties>
         <Property Name="Name" Type="string" IsRequired="true" MinLength="1" MaxLength="512" />
 				<Property Name="SeoId" Type="string" IsRequired="false" MaxLength="512" />

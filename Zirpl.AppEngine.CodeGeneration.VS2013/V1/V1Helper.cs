@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -162,6 +163,17 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                        select dt;
             }
         }
+        public virtual IEnumerable<DomainType> DomainTypesToCustomFieldValueFor
+        {
+            get
+            {
+                return from dt in this.AppDefinition.DomainTypes
+                       where dt.IsCustomizable
+                            //&& !dt.IsAbstract  TODO: add in a file validation at the beginning that checks to ensure only concrete classes are extendable
+                            // TODO: OR should abstract classes be customizable? in some ways, it may make more sense to put it there
+                       select dt;
+            }
+        }
         public virtual IEnumerable<DomainType> DomainTypesToGenerateMetadataConstantsFor
         {
             get
@@ -258,6 +270,16 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
 
         #region Model-related methods
 
+        public bool HasCustomizableEntities
+        {
+            get
+            {
+                return (from dt in this.AppDefinition.DomainTypes
+                    where dt.IsCustomizable
+                    select dt).Any();
+            }
+        }
+
         public void StartModelFile(DomainType domainType)
         {
             this.FileManager.StartNewFile(
@@ -280,13 +302,27 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         }
         public virtual string GetModelBaseDeclaration(DomainType domainType)
         {
-            return !String.IsNullOrEmpty(domainType.BaseClassOverride)
+            String customizableInterfaceDeclaration = null;
+            if (domainType.IsCustomizable)
+            {
+                customizableInterfaceDeclaration =
+                    String.Format("ICustomizable<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetCustomFieldValueTypeName(domainType), this.GetModelIdTypeName(domainType));
+            }
+            var baseDeclaration = !String.IsNullOrEmpty(domainType.BaseClassOverride)
                     ? " : " + domainType.BaseClassOverride
                     : domainType.IsPersistable 
                         ? domainType.IsDictionary
                             ? string.Format(" : DictionaryEntityBase<{0}, {1}>", this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
                             : string.Format(" : AuditableBase<{0}>", this.GetModelIdTypeName(domainType))
                         : "";
+            if (!String.IsNullOrEmpty(customizableInterfaceDeclaration))
+            {
+                baseDeclaration = String.IsNullOrEmpty(baseDeclaration)
+                    ? " : " + customizableInterfaceDeclaration
+                    : baseDeclaration + ", " + customizableInterfaceDeclaration;
+            }
+   
+            return baseDeclaration;
         }
         public virtual string GetModelIdTypeName(DomainType domainType)
         {
@@ -359,6 +395,36 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             // it should match the Model's ID type
             return " : " + this.GetModelIdTypeName(domainType);
         }
+        #endregion
+
+        #region CustomFieldValue methods
+
+        public void StartCustomFieldValueFile(DomainType domainType)
+        {
+            this.FileManager.StartNewFile(
+                this.GetCustomFieldValueTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+                this.ModelProject,
+                this.AppDefinition.GeneratedCodeRootFolderName + @"Customization\" + this.GetGeneratedCodeFolder(domainType, false),
+                new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        }
+        public virtual string GetCustomFieldValueNamespace(DomainType domainType)
+        {
+            return this.ModelProject.GetDefaultNamespace() + ".Customization" + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+        }
+        public virtual String GetCustomFieldValueTypeName(DomainType domainType)
+        {
+            return this.GetModelTypeName(domainType) + "CustomFieldValue";
+        }
+        public virtual string GetCustomFieldValueTypeFullName(DomainType domainType)
+        {
+            return String.Format("{0}.{1}", this.GetCustomFieldValueNamespace(domainType), this.GetCustomFieldValueTypeName(domainType));
+        }
+        public virtual string GetCustomFieldValueBaseDeclaration(DomainType domainType)
+        {
+            return String.Format(" : CustomFieldValueBase<{0}, {1}>", this.GetModelTypeName(domainType),
+                this.GetModelIdTypeName(domainType));
+        }
+
         #endregion
 
         #region DataServiceInterface related methods
@@ -584,7 +650,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         }
         #endregion
 
-       #region Tests Common- EntityWrapper methods
+        #region Tests Common- EntityWrapper methods
 
         public void StartPersistableModelTestsEntityWrapperFile(DomainType domainType)
         {

@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.Model
 {
-    public interface IDictionaryEntity : IPersistable, IAuditable
-    {
-        String Name { get; set; }
-    }
-
-    public interface IDictionaryEntity<TId, TEnum> : IDictionaryEntity
-        where TEnum: struct
+    public interface IDictionaryEntity<TId, TEnum> : IDictionaryEntity, IPersistable<TId>
+        where TEnum : struct
         where TId : IEquatable<TId>
     {
 
+    }
+    public interface IDictionaryEntity : IPersistable
+    {
+        String Name { get; set; }
     }
 }

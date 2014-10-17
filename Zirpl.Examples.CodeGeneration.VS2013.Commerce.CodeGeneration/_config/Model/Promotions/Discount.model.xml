@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<Type Name="Discount" BaseClassOverride="" SubNamespace="Promotions">
+<Type Name="Discount" BaseClassOverride="" SubNamespace="Promotions" IsCustomizable="true">
 	
 		
 			<Properties>

@@ -46,10 +46,10 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
             where TId : IEquatable<TId>
             where TContext : DbContext
         {
-            IDeletable entityDeletable = entity as IDeletable;
+            IMarkDeletable entityDeletable = entity as IMarkDeletable;
             if (entityDeletable != null)
             {
-                entityDeletable.IsDeleted = true;
+                entityDeletable.IsMarkedDeleted = true;
                 this.MarkUpdated<TContext, TEntity, TId>(context, entity);
             }
             else

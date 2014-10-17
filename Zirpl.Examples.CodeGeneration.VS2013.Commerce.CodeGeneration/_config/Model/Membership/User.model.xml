@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Type Name="User" IdTypeOverride="Guid" SubNamespace="Membership">
+<Type Name="User" IdTypeOverride="Guid" SubNamespace="Membership" IsCustomizable="true">
   <ModelOptions GenerateModel="false" GenerateMetadata="false" GenerateEnum="false" />
   <DataServiceOptions GenerateDataService="false" GenerateDataServiceInterface="false" GenerateEntityFrameworkMapping="false" />
   <ServiceOptions GenerateService="false" GenerateServiceInterface="false" />

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership
 {
@@ -9,12 +11,9 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership
     {
 		public Visitor()
 		{
-			if (this.ShoppingCartItems == null)
-			{
-				this.ShoppingCartItems = new List<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.ShoppingCartItem>();
-			}
+			this.ShoppingCartItems = this.ShoppingCartItems ?? new List<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.ShoppingCartItem>();
 		}
-
+		
 		public virtual Guid Token { get; set; }
 		public virtual bool IsAnonymous { get; set; }
 		public virtual bool IsAbandoned { get; set; }

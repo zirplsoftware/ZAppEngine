@@ -63,6 +63,21 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
     }
 }
 
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Customization
+{
+	public partial class CustomFieldValueTemplate: IPreprocessedTextTransformation
+    {
+        public CustomFieldValueTemplate(V1Helper helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public V1Helper Helper { get; private set; }
+    }
+}
+
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
 {
 	public partial class EnumTemplate: IPreprocessedTextTransformation

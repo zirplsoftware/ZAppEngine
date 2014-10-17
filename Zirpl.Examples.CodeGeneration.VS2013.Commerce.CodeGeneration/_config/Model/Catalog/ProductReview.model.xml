@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Type Name="ProductReview" BaseClassOverride="" SubNamespace="Catalog">
+<Type Name="ProductReview" BaseClassOverride="" SubNamespace="Catalog" IsCustomizable="true">
   <Properties>
     <Property Name="DisplayProduct" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.DisplayProduct" IsRelationship="true" IsRequired="true" />
     <Property Name="ReviewerName" Type="string" IsRequired="true" MinLength="1" MaxLength="512" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<Type Name="TaxRule" BaseClassOverride="" SubNamespace="Settings">
+<Type Name="TaxRule" BaseClassOverride="" SubNamespace="Settings" IsCustomizable="true">
 	
 		
 			<Properties>

@@ -192,6 +192,30 @@
     <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\IBatchItemError.cs">
       <Link>Model\BatchProcessing\IBatchItemError.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinition.cs">
+      <Link>Model\Customization\CustomFieldDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinitionType.cs">
+      <Link>Model\Customization\CustomFieldDefinitionType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinitionTypeEnum.cs">
+      <Link>Model\Customization\CustomFieldDefinitionTypeEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldValueBase.cs">
+      <Link>Model\Customization\CustomFieldValueBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomFieldDefinition.cs">
+      <Link>Model\Customization\ICustomFieldDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomFieldDefinitionType.cs">
+      <Link>Model\Customization\ICustomFieldDefinitionType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomFieldValue.cs">
+      <Link>Model\Customization\ICustomFieldValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomizable.cs">
+      <Link>Model\Customization\ICustomizable.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\DateOnlyWrapper.cs">
       <Link>Model\DateOnlyWrapper.cs</Link>
     </Compile>
@@ -210,9 +234,6 @@
     <Compile Include="..\Zirpl.AppEngine\Model\IAuthenticatedUser.cs">
       <Link>Model\IAuthenticatedUser.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IDeletable.cs">
-      <Link>Model\IDeletable.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IDictionaryEntity.cs">
       <Link>Model\IDictionaryEntity.cs</Link>
     </Compile>
@@ -221,6 +242,9 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IKeyedEntity.cs">
       <Link>Model\IKeyedEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IMarkDeletable.cs">
+      <Link>Model\IMarkDeletable.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\InvalidRangeException.cs">
       <Link>Model\InvalidRangeException.cs</Link>
@@ -500,7 +524,7 @@
       <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
         <SilverlightProjectProperties />
       </FlavorProperties>
-      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

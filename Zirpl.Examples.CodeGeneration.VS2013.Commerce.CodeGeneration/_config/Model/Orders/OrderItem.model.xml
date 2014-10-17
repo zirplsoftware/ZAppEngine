@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Type Name="OrderItem" BaseClassOverride="" SubNamespace="Orders">
+<Type Name="OrderItem" BaseClassOverride="" SubNamespace="Orders" IsCustomizable="true">
   <Properties>
     <Property Name="Quantity" Type="int" IsRequired="true" MinValue="1" />
     <Property Name="ItemName" Type="string" IsRequired="true" MinLength="1" MaxLength="512" />

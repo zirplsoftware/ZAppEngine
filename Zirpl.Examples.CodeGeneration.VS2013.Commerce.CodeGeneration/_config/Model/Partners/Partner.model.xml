@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Type Name="Partner" BaseClassOverride="" SubNamespace="Partners">
+<Type Name="Partner" BaseClassOverride="" SubNamespace="Partners" IsCustomizable="true">
   <Properties>
     <Property Name="Visitor" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership.Visitor" IsRelationship="true" IsRequired="true" />
     <!--<Property Name="Contact" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Address" IsRelationship="true" IsRequired="true" />-->
