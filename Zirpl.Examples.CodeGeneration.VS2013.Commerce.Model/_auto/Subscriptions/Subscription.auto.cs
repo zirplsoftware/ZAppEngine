@@ -30,7 +30,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionInstance CurrentSubscriptionInstance { get; set; }
 		public virtual int? CurrentSubscriptionInstanceId { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<SubscriptionCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -40,6 +40,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions
 		{
 		    this.CustomFieldValues = list.OfType<SubscriptionCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

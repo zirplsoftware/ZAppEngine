@@ -19,7 +19,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings.StateProvinceType StateProvinceType { get; set; }
 		public virtual int StateProvinceTypeId { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<TaxRuleCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -29,6 +29,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings
 		{
 		    this.CustomFieldValues = list.OfType<TaxRuleCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

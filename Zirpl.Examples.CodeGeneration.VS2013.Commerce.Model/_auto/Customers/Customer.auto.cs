@@ -24,7 +24,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.CustomerChargeOption CurrentCustomerChargeOption { get; set; }
 		public virtual int? CurrentCustomerChargeOptionId { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<CustomerCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -34,6 +34,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers
 		{
 		    this.CustomFieldValues = list.OfType<CustomerCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

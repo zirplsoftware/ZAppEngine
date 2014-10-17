@@ -30,6 +30,7 @@ using FluentValidation;
 using Zirpl.AppEngine.Validation;
 using Zirpl.AppEngine.Validation.EntityFramework;
 using <#= this.Helper.GetModelNamespace(domainType) #>;
+using <#= this.Helper.GetMetadataConstantsNamespace(domainType) #>;
 
 namespace <#= this.Helper.GetValidatorNamespace(domainType) #>
 {

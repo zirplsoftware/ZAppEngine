@@ -30,6 +30,7 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using <#= this.Helper.GetModelNamespace(domainType) #>;
+using <#= this.Helper.GetMetadataConstantsNamespace(domainType) #>;
 
 namespace <#= this.Helper.GetEntityFrameworkMappingNamespace(domainType) #>
 {

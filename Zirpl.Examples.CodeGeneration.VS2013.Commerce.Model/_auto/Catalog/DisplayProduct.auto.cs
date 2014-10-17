@@ -23,7 +23,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 		public virtual string AdminComment { get; set; }
 		public virtual IList<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.Discount> ApplicableDiscounts { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<DisplayProductCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -33,6 +33,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 		{
 		    this.CustomFieldValues = list.OfType<DisplayProductCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

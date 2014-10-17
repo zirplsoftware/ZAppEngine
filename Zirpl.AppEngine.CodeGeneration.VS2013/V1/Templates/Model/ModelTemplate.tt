@@ -116,7 +116,7 @@ namespace <#= this.Helper.GetModelNamespace(domainType) #>
     {
 #>
 
-
+		#region CustomFields
 		public virtual IList<<#= this.Helper.GetCustomFieldValueTypeName(domainType) #>> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -126,6 +126,7 @@ namespace <#= this.Helper.GetModelNamespace(domainType) #>
 		{
 		    this.CustomFieldValues = list.OfType<<#= this.Helper.GetCustomFieldValueTypeName(domainType) #>>().ToList();
 		}
+		#endregion
 <#
     }
 #>

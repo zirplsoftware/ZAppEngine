@@ -21,7 +21,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.Category Parent { get; set; }
 		public virtual int? ParentId { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<CategoryCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -31,6 +31,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 		{
 		    this.CustomFieldValues = list.OfType<CategoryCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

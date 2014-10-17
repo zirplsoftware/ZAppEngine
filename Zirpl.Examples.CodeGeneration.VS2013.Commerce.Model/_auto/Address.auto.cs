@@ -32,7 +32,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings.StateProvinceType StateProvinceType { get; set; }
 		public virtual int? StateProvinceTypeId { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<AddressCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -42,6 +42,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
 		{
 		    this.CustomFieldValues = list.OfType<AddressCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

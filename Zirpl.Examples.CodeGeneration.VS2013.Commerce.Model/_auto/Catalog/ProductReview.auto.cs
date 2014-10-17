@@ -23,7 +23,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 		public virtual string Text { get; set; }
 		public virtual int Stars { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<ProductReviewCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -33,6 +33,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 		{
 		    this.CustomFieldValues = list.OfType<ProductReviewCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

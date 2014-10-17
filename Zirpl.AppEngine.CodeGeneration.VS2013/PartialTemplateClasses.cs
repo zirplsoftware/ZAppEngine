@@ -93,7 +93,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
     }
 }
 
-namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
+namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Metadata
 {
 	public partial class MetadataConstantsTemplate: IPreprocessedTextTransformation
     {

@@ -292,7 +292,7 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n\t\tpublic virtual IList<");
+            this.Write("\r\n\t\t#region CustomFields\r\n\t\tpublic virtual IList<");
             
             #line 120 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetCustomFieldValueTypeName(domainType)));
@@ -313,9 +313,9 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
             
             #line default
             #line hidden
-            this.Write(">().ToList();\r\n\t\t}\r\n");
+            this.Write(">().ToList();\r\n\t\t}\r\n\t\t#endregion\r\n");
             
-            #line 129 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            #line 130 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
 
     }
 
@@ -324,7 +324,7 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
             #line hidden
             this.Write("    }\r\n}\r\n\r\n");
             
-            #line 135 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
+            #line 136 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
 
 }
 

@@ -25,7 +25,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 		public virtual int PromoCodeId { get; set; }
 		public virtual string CrmUrl { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<PartnerCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -35,6 +35,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 		{
 		    this.CustomFieldValues = list.OfType<PartnerCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

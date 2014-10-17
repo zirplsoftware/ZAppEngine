@@ -19,7 +19,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 		public virtual string SeoId { get; set; }
 		public virtual string Description { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<BrandCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -29,6 +29,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 		{
 		    this.CustomFieldValues = list.OfType<BrandCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

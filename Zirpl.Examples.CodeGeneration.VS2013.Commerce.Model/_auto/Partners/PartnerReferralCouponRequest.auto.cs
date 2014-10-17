@@ -23,7 +23,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners.PartnerReferralCouponRequestStatusType PartnerReferralCouponRequestStatusType { get; set; }
 		public virtual byte PartnerReferralCouponRequestStatusTypeId { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<PartnerReferralCouponRequestCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -33,6 +33,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 		{
 		    this.CustomFieldValues = list.OfType<PartnerReferralCouponRequestCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

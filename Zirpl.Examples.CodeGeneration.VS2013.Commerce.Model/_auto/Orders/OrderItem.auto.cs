@@ -27,7 +27,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 		public virtual int DisplayProductId { get; set; }
 		public virtual IList<Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.DiscountUsage> DiscountUsages { get; set; }
 
-
+		#region CustomFields
 		public virtual IList<OrderItemCustomFieldValue> CustomFieldValues { get; set; }
         public virtual IList<ICustomFieldValue> GetCustomFieldValues()
         {
@@ -37,6 +37,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 		{
 		    this.CustomFieldValues = list.OfType<OrderItemCustomFieldValue>().ToList();
 		}
+		#endregion
     }
 }
 

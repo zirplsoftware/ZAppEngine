@@ -340,13 +340,13 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             this.FileManager.StartNewFile(
                 this.GetMetadataConstantsTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
                 this.ModelProject,
-                this.GetGeneratedCodeFolder(domainType),
+                this.AppDefinition.GeneratedCodeRootFolderName + @"Metadata\" + this.GetGeneratedCodeFolder(domainType, false),
                 new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
         public virtual string GetMetadataConstantsNamespace(DomainType domainType)
         {
             // use the same
-            return this.GetModelNamespace(domainType);
+            return this.ModelProject.GetDefaultNamespace() + ".Metadata" + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public virtual String GetMetadataConstantsTypeName(DomainType domainType)
         {
@@ -359,7 +359,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         public virtual string GetMetadataConstantsBaseDeclaration(DomainType domainType)
         {
             return !String.IsNullOrEmpty(domainType.BaseClassOverride)
-                ? " : " + domainType.BaseClassOverride + "MetadataConstants"
+                ? " : " + this.GetMetadataConstantsTypeFullName(this.GetDomainTypeByFullTypeName(domainType.BaseClassOverride))
                 : domainType.IsPersistable 
                     ? domainType.IsDictionary
                         ? " : DictionaryEntityBaseMetadataConstantsBase"

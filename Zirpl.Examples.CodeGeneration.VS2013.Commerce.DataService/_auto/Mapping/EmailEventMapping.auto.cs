@@ -4,6 +4,7 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Notifications;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Notifications;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Notifications
 {
