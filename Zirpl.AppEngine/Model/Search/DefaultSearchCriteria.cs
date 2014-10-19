@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.Model
+namespace Zirpl.AppEngine.Model.Search
 {
     public class DefaultSearchCriteria: ISearchCriteria
     {

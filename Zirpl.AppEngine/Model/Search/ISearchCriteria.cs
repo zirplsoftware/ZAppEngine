@@ -1,5 +1,5 @@
 ﻿
-namespace Zirpl.AppEngine.Model
+namespace Zirpl.AppEngine.Model.Search
 {
     public interface ISearchCriteria
     {

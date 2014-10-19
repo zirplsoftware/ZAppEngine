@@ -13,6 +13,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
             this.ServiceOptions = new ServiceOptions();
             this.WebOptions = new WebOptions();
             this.IsPersistable = true;
+            //this.IsAuditable = true;
+            //this.IsVersionable = true;
         }
 
         [XmlAttribute]

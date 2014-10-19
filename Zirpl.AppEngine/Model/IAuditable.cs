@@ -4,10 +4,10 @@ namespace Zirpl.AppEngine.Model
 {
     public interface IAuditable
     {
+        String CreatedUserId { get; set; }
+        String UpdatedUserId { get; set; }
         DateTime? CreatedDate { get; set; }
-        Guid? CreatedUserId { get; set; }
         DateTime? UpdatedDate { get; set; }
-        Guid? UpdatedUserId { get; set; }
 
         bool IsCreatedDateUsed { get; }
         bool IsCreatedUserIdUsed { get; }

@@ -1,4 +1,4 @@
-﻿namespace Zirpl.AppEngine.Model
+﻿namespace Zirpl
 {
     public enum TimeAgoType
     {

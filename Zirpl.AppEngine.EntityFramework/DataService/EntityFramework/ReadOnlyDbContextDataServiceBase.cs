@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Search;
 
 namespace Zirpl.AppEngine.DataService.EntityFramework
 {

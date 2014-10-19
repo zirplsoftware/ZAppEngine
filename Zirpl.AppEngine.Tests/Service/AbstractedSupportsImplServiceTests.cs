@@ -13,7 +13,7 @@ namespace Zirpl.AppEngine.Tests.Service
     [TestFixture]
     public class AbstractedSupportsImplServiceTests
     {
-        public class PersistableEntityMock : PersistableBase<int>
+        public class PersistableEntityMock : EntityBase<int>
         {
         }
 

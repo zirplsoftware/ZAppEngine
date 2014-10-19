@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Zirpl.AppEngine.Model.Search;
 
 namespace Zirpl.AppEngine.Model.EntityFramework
 {

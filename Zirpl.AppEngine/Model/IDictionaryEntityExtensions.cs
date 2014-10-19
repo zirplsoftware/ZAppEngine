@@ -8,7 +8,7 @@ namespace Zirpl.AppEngine.Model
 {
     public static class IDictionaryEntityExtensions
     {
-        public static TEnum? GetEnumValue<TId, TEnum>(this IDictionaryEntity<TId, TEnum> dictionaryEntity)
+        public static TEnum? EvaluateEnumValue<TId, TEnum>(this IDictionaryEntity<TId, TEnum> dictionaryEntity)
             where TEnum : struct
             where TId : IEquatable<TId>
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.Model
+namespace Zirpl
 {
     public class TimeAgo
     {

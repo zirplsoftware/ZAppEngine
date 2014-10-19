@@ -114,37 +114,39 @@
     <Compile Include="Mapping\AutoMapper\MappingUtils.cs" />
     <Compile Include="Mapping\AutoMapper\ValueResolverBase.cs" />
     <Compile Include="Mapping\InvalidMappingDataException.cs" />
-    <Compile Include="Model\AuditableBase.cs" />
+    <Compile Include="Model\Metadata\Constants\DictionaryEntityBaseMetadataConstantsBase.cs" />
+    <Compile Include="Model\Metadata\Constants\EntityBaseMetadataConstantsBase.cs" />
+    <Compile Include="Model\Metadata\IEntityMetadata.cs" />
+    <Compile Include="Model\Metadata\IMetadataDescribed.cs" />
+    <Compile Include="Model\Metadata\IFieldMetadata.cs" />
+    <Compile Include="Model\Metadata\MetadataNotFoundException.cs" />
+    <Compile Include="Model\Metadata\DataTypeEnum.cs" />
+    <Compile Include="Model\Metadata\RelationshipDeletionBehaviorTypeEnum.cs" />
+    <Compile Include="Model\Metadata\RelationshipTypeEnum.cs" />
+    <Compile Include="Model\Metadata\UniquenessTypeEnum.cs" />
     <Compile Include="Model\BatchProcessing\BatchItemResult.cs" />
     <Compile Include="Model\BatchProcessing\BatchStatus.cs" />
     <Compile Include="Model\BatchProcessing\CoreBatchItemErrorCode.cs" />
     <Compile Include="Model\BatchProcessing\IBatch.cs" />
     <Compile Include="Model\BatchProcessing\IBatchItem.cs" />
     <Compile Include="Model\BatchProcessing\IBatchItemError.cs" />
-    <Compile Include="Model\Customization\CustomFieldDefinition.cs" />
-    <Compile Include="Model\Customization\CustomFieldDefinitionType.cs" />
+    <Compile Include="Model\Customization\CustomFieldDefinitionBase.cs" />
     <Compile Include="Model\Customization\CustomFieldDefinitionTypeEnum.cs" />
     <Compile Include="Model\Customization\CustomFieldValueBase.cs" />
     <Compile Include="Model\Customization\ICustomFieldDefinition.cs" />
     <Compile Include="Model\Customization\ICustomFieldDefinitionType.cs" />
     <Compile Include="Model\Customization\ICustomFieldValue.cs" />
     <Compile Include="Model\Customization\ICustomizable.cs" />
-    <Compile Include="Model\DateOnlyWrapper.cs" />
-    <Compile Include="Model\DefaultSearchCriteria.cs" />
+    <Compile Include="Model\Search\DefaultSearchCriteria.cs" />
     <Compile Include="Model\DictionaryEntityBase.cs" />
-    <Compile Include="Model\FixupCollection.cs" />
+    <Compile Include="Model\EntityBase.cs" />
     <Compile Include="Model\IAuditable.cs" />
-    <Compile Include="Model\IAuthenticatedUser.cs" />
     <Compile Include="Model\IMarkDeletable.cs" />
     <Compile Include="Model\IDictionaryEntityExtensions.cs" />
     <Compile Include="Model\IKeyedEntity.cs" />
     <Compile Include="Model\IDictionaryEntity.cs" />
-    <Compile Include="Model\InvalidRangeException.cs" />
     <Compile Include="Model\IPersistable.cs" />
-    <Compile Include="Model\IPersistable.gen.cs" />
-    <Compile Include="Model\IRange.cs" />
-    <Compile Include="Model\IRange.gen.cs" />
-    <Compile Include="Model\ISearchCriteria.cs" />
+    <Compile Include="Model\Search\ISearchCriteria.cs" />
     <Compile Include="Model\IVersionable.cs" />
     <Compile Include="Model\Membership\ChangePasswordRequest.cs" />
     <Compile Include="Model\Membership\ChangeUserNameRequest.cs" />
@@ -153,18 +155,11 @@
     <Compile Include="Model\Membership\ILogInRequest.cs" />
     <Compile Include="Model\Membership\IResetLostPasswordRequest.cs" />
     <Compile Include="Model\Membership\IUserRegistrationRequest.cs" />
-    <Compile Include="Model\MetadataBase.cs" />
+    <Compile Include="Model\Metadata\Constants\MetadataConstantsBase.cs" />
     <Compile Include="Model\NonPersistedObjectException.cs" />
-    <Compile Include="Model\PersistableBase.cs" />
-    <Compile Include="Model\PersistableExtensions.cs" />
+    <Compile Include="Model\IPersistableExtensions.cs" />
     <Compile Include="Model\PersistedObjectException.cs" />
-    <Compile Include="Model\Range.cs" />
-    <Compile Include="Model\ReferenceValue.cs" />
-    <Compile Include="Model\SearchResults.cs" />
-    <Compile Include="Model\TimeAgo.cs" />
-    <Compile Include="Model\TimeAgoType.cs" />
-    <Compile Include="Model\TimeOnlyWrapper.cs" />
-    <Compile Include="Model\UserBase.cs" />
+    <Compile Include="Model\Search\SearchResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo_common.cs" />
     <Compile Include="RetryPolicyFactory.cs" />
@@ -224,9 +219,6 @@
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\ValidationUtils.cs" />
     <Compile Include="Validation\FluentValidation\AbstractValidatorExtensions.cs" />
-    <Compile Include="_old\ChangedValueDelegate.cs" />
-    <Compile Include="_old\ChangedValueEventArgs.cs" />
-    <Compile Include="_old\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -239,6 +231,7 @@
       <Name>Zirpl.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

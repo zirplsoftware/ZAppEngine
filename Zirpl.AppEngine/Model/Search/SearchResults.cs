@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Zirpl.AppEngine.Model
+namespace Zirpl.AppEngine.Model.Search
 {
     public class SearchResults<TEntity>
     {

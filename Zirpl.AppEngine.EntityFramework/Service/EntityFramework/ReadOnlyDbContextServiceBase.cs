@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Search;
 
 namespace Zirpl.AppEngine.Service.EntityFramework
 {

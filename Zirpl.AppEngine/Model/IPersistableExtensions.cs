@@ -4,7 +4,7 @@ using Zirpl.AppEngine.Service;
 
 namespace Zirpl.AppEngine.Model
 {
-    public static class PersistableExtensions
+    public static class IPersistableExtensions
     {
         public static bool EvaluateIsPersisted(this IPersistable persistable)
         {

@@ -10,7 +10,7 @@ namespace Zirpl.AppEngine.Model
         where TEnum : struct
         where TId : IEquatable<TId>
     {
-
+        TEnum? EnumValue { get; }
     }
     public interface IDictionaryEntity : IPersistable
     {

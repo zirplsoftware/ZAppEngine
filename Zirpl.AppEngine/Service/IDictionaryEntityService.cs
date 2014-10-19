@@ -8,8 +8,8 @@ using Zirpl.AppEngine.Model;
 namespace Zirpl.AppEngine.Service
 {
     public interface IDictionaryEntityService<TEntity, TId, TEnum> : IReadOnlyService<TEntity, TId>
-        where TEntity : DictionaryEntityBase<TId, TEnum>
-        where TEnum : struct, IConvertible
+        where TEntity : class, IDictionaryEntity<TId, TEnum>
+        where TEnum : struct
         where TId : IEquatable<TId>
     {
         TEntity Get(TEnum enumValue);

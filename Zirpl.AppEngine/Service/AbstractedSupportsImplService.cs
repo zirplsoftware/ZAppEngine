@@ -4,6 +4,7 @@ using System.Linq;
 using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Search;
 using Zirpl.AppEngine.Validation;
 
 namespace Zirpl.AppEngine.Service

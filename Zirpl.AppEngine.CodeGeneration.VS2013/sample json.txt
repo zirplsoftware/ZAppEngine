@@ -1,0 +1,11 @@
+{
+	"name": "Brand",
+	"baseClassOverride": null,
+	"subNamespace": "Catalog",
+	"isCustomizable": true,
+	"properties": [
+		{ "name": "Name", "type": "string", "isRequired": true, "minLength": 1, "maxLength": 512 },
+		{ "name": "SeoId", "type": "string", "isRequired": false, "maxLength": 512 },
+		{ "name": "Description", "type": "string", "isRequired": false, "isMaxLength": true }
+	]	
+}

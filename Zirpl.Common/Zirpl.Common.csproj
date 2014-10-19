@@ -71,6 +71,8 @@
     <Compile Include="Text\TextCrawling\TextPosition.cs" />
     <Compile Include="Text\TextCrawling\TextPositionType.cs" />
     <Compile Include="Text\TextUtilities.cs" />
+    <Compile Include="TimeAgo.cs" />
+    <Compile Include="TimeAgoType.cs" />
     <Compile Include="Xml\Serialization\SerializationUtilities.cs" />
   </ItemGroup>
   <ItemGroup>

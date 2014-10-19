@@ -14,6 +14,6 @@ namespace Zirpl.AppEngine.Model.Customization
     {
         String ExtendedEntityTypeName { get; set; }
         String Label { get; set; }
-        CustomFieldDefinitionType Type { get; set; }
+        CustomFieldDefinitionTypeEnum Type { get; set; }
     }
 }

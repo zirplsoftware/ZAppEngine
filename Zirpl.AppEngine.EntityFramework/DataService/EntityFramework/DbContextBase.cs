@@ -63,12 +63,13 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
             if (auditable != null)
             {
                 auditable.UpdatedDate = now;
-                var id = (Guid?)this.CurrentUserKeyProvider.GetCurrentUserKey();
-                auditable.UpdatedUserId = id;
+                var id = this.CurrentUserKeyProvider.GetCurrentUserKey();
+                String idAsString = id == null ? null : id.ToString();
+                auditable.UpdatedUserId = idAsString;
                 if (entry.State == EntityState.Added)
                 {
                     auditable.CreatedDate = now;
-                    auditable.CreatedUserId = id;
+                    auditable.CreatedUserId = idAsString;
                 }
             }
 

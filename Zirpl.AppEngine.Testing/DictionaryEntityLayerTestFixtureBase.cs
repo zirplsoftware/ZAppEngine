@@ -9,6 +9,7 @@ using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.Ioc;
 using Zirpl.AppEngine.Model;
 using Zirpl.AppEngine.Model.EntityFramework;
+using Zirpl.AppEngine.Model.Search;
 using Zirpl.AppEngine.Service;
 using Zirpl.AppEngine.Testing;
 using Zirpl.AppEngine.Web.Mvc.Ioc.Autofac;
@@ -17,7 +18,7 @@ namespace Zirpl.AppEngine.Testing
 {
     [TestFixture]
     public abstract class DictionaryEntityLayerTestFixtureBase<TEntity, TId, TEnum>
-        where TEntity : DictionaryEntityBase<TId, TEnum>, IPersistable<TId>, IDictionaryEntity
+        where TEntity : class, IDictionaryEntity<TId, TEnum>
         where TEnum : struct
         where TId : struct, IEquatable<TId>
     {

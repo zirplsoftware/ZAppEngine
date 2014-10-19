@@ -171,9 +171,6 @@
     <Compile Include="..\Zirpl.AppEngine\Mapping\InvalidMappingDataException.cs">
       <Link>Mapping\InvalidMappingDataException.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\AuditableBase.cs">
-      <Link>Model\AuditableBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\BatchItemResult.cs">
       <Link>Model\BatchProcessing\BatchItemResult.cs</Link>
     </Compile>
@@ -192,11 +189,8 @@
     <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\IBatchItemError.cs">
       <Link>Model\BatchProcessing\IBatchItemError.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinition.cs">
-      <Link>Model\Customization\CustomFieldDefinition.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinitionType.cs">
-      <Link>Model\Customization\CustomFieldDefinitionType.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinitionBase.cs">
+      <Link>Model\Customization\CustomFieldDefinitionBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinitionTypeEnum.cs">
       <Link>Model\Customization\CustomFieldDefinitionTypeEnum.cs</Link>
@@ -216,23 +210,14 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomizable.cs">
       <Link>Model\Customization\ICustomizable.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\DateOnlyWrapper.cs">
-      <Link>Model\DateOnlyWrapper.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\DefaultSearchCriteria.cs">
-      <Link>Model\DefaultSearchCriteria.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\DictionaryEntityBase.cs">
       <Link>Model\DictionaryEntityBase.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\FixupCollection.cs">
-      <Link>Model\FixupCollection.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\EntityBase.cs">
+      <Link>Model\EntityBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IAuditable.cs">
       <Link>Model\IAuditable.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IAuthenticatedUser.cs">
-      <Link>Model\IAuthenticatedUser.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IDictionaryEntity.cs">
       <Link>Model\IDictionaryEntity.cs</Link>
@@ -246,23 +231,11 @@
     <Compile Include="..\Zirpl.AppEngine\Model\IMarkDeletable.cs">
       <Link>Model\IMarkDeletable.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\InvalidRangeException.cs">
-      <Link>Model\InvalidRangeException.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IPersistable.cs">
       <Link>Model\IPersistable.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IPersistable.gen.cs">
-      <Link>Model\IPersistable.gen.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IRange.cs">
-      <Link>Model\IRange.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IRange.gen.cs">
-      <Link>Model\IRange.gen.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\ISearchCriteria.cs">
-      <Link>Model\ISearchCriteria.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\IPersistableExtensions.cs">
+      <Link>Model\IPersistableExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IVersionable.cs">
       <Link>Model\IVersionable.cs</Link>
@@ -288,41 +261,53 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Membership\IUserRegistrationRequest.cs">
       <Link>Model\Membership\IUserRegistrationRequest.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\MetadataBase.cs">
-      <Link>Model\MetadataBase.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\Constants\DictionaryEntityBaseMetadataConstantsBase.cs">
+      <Link>Model\Metadata\Constants\DictionaryEntityBaseMetadataConstantsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\Constants\EntityBaseMetadataConstantsBase.cs">
+      <Link>Model\Metadata\Constants\EntityBaseMetadataConstantsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\Constants\MetadataConstantsBase.cs">
+      <Link>Model\Metadata\Constants\MetadataConstantsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\DataTypeEnum.cs">
+      <Link>Model\Metadata\DataTypeEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\IEntityMetadata.cs">
+      <Link>Model\Metadata\IEntityMetadata.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\IFieldMetadata.cs">
+      <Link>Model\Metadata\IFieldMetadata.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\IMetadataDescribed.cs">
+      <Link>Model\Metadata\IMetadataDescribed.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\MetadataNotFoundException.cs">
+      <Link>Model\Metadata\MetadataNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\RelationshipDeletionBehaviorTypeEnum.cs">
+      <Link>Model\Metadata\RelationshipDeletionBehaviorTypeEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\RelationshipTypeEnum.cs">
+      <Link>Model\Metadata\RelationshipTypeEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\UniquenessTypeEnum.cs">
+      <Link>Model\Metadata\UniquenessTypeEnum.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\NonPersistedObjectException.cs">
       <Link>Model\NonPersistedObjectException.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\PersistableBase.cs">
-      <Link>Model\PersistableBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\PersistableExtensions.cs">
-      <Link>Model\PersistableExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\PersistedObjectException.cs">
       <Link>Model\PersistedObjectException.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Range.cs">
-      <Link>Model\Range.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\Search\DefaultSearchCriteria.cs">
+      <Link>Model\Search\DefaultSearchCriteria.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\ReferenceValue.cs">
-      <Link>Model\ReferenceValue.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\Search\ISearchCriteria.cs">
+      <Link>Model\Search\ISearchCriteria.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\SearchResults.cs">
-      <Link>Model\SearchResults.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\TimeAgo.cs">
-      <Link>Model\TimeAgo.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\TimeAgoType.cs">
-      <Link>Model\TimeAgoType.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\TimeOnlyWrapper.cs">
-      <Link>Model\TimeOnlyWrapper.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\UserBase.cs">
-      <Link>Model\UserBase.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\Search\SearchResults.cs">
+      <Link>Model\Search\SearchResults.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
@@ -501,15 +486,6 @@
     <Compile Include="..\Zirpl.AppEngine\Validation\ValidationUtils.cs">
       <Link>Validation\ValidationUtils.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\_old\ChangedValueDelegate.cs">
-      <Link>_old\ChangedValueDelegate.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\_old\ChangedValueEventArgs.cs">
-      <Link>_old\ChangedValueEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\_old\Singleton.cs">
-      <Link>_old\Singleton.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -522,6 +498,7 @@
       <Name>Zirpl.Common.Net45</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

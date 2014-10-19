@@ -11,6 +11,7 @@ using Zirpl.AppEngine.Ioc;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Model;
 using Zirpl.AppEngine.Model.EntityFramework;
+using Zirpl.AppEngine.Model.Search;
 using Zirpl.AppEngine.Service;
 using Zirpl.AppEngine.Validation;
 using Zirpl.AppEngine.Web.Mvc.Ioc.Autofac;
@@ -231,11 +232,11 @@ namespace Zirpl.AppEngine.Testing
 
                 auditable.CreatedDate.Should().HaveValue();
                 auditable.CreatedDate.Value.Should().NotBe(default(DateTime));
-                auditable.CreatedUserId.Should().HaveValue();
+                auditable.CreatedUserId.Should().NotBeNullOrEmpty();
                 //auditable.CreatedUserId.Value.Should().NotBe(default(Guid));
                 auditable.UpdatedDate.Should().HaveValue();
                 auditable.UpdatedDate.Value.Should().NotBe(default(DateTime));
-                auditable.UpdatedUserId.Should().HaveValue();
+                auditable.UpdatedUserId.Should().NotBeNullOrEmpty();
                 //auditable.UpdatedUserId.Value.Should().NotBe(default(Guid));
 
                 auditableFromDb.CreatedDate.Should().Be(auditable.CreatedDate);

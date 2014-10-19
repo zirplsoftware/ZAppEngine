@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 #if !NET35CLIENT
 using System.ComponentModel.DataAnnotations;
 #endif
@@ -11,13 +11,11 @@ namespace Zirpl.AppEngine.Model
 #if !SILVERLIGHT
     [Serializable]
 #endif
-    public abstract class PersistableBase<TId> : IPersistable<TId>
-        where TId : IEquatable<TId>
+    public abstract class EntityBase<TId> : IPersistable<TId>, IAuditable, IVersionable 
+        where TId : IEquatable<TId> 
     {
-        public const String ID_PROPERTY_NAME = "Id";
+        #region IPersistable
 
-        #region IPersistable<TId> Members
-        
 #if !NET35 && !NET35CLIENT
         [Key]
 #endif
@@ -30,7 +28,7 @@ namespace Zirpl.AppEngine.Model
 
         public virtual void SetId(Object id)
         {
-            Id = (TId) id;
+            Id = (TId)id;
         }
 
         //[ScaffoldColumn(false)]
@@ -44,6 +42,24 @@ namespace Zirpl.AppEngine.Model
 
         #endregion
 
+        #region IAuditable
+        public virtual DateTime? CreatedDate { get; set; }
+        public virtual String CreatedUserId { get; set; }
+        public virtual DateTime? UpdatedDate { get; set; }
+        public virtual String UpdatedUserId { get; set; }
+
+        public virtual bool IsCreatedDateUsed { get { return true; } }
+        public virtual bool IsCreatedUserIdUsed { get { return true; } }
+        public virtual bool IsUpdatedDateUsed { get { return true; } }
+        public virtual bool IsUpdatedUserIdUsed { get { return true; } }
+        #endregion
+
+        #region IVersionable
+        public virtual byte[] RowVersion { get; set; }
+        public virtual bool IsRowVersionUsed { get { return true; } }
+        #endregion
+
+        #region Object overrides
         public override bool Equals(object other)
         {
             return this.EvaluateEquals(other);
@@ -53,14 +69,6 @@ namespace Zirpl.AppEngine.Model
         {
             return this.EvaluateGetHashCode();
         }
+        #endregion
     }
 }
-
-/* $Log: BaseIdentifiable.cs,v $
-/* Revision 1.1  2006/04/17 12:01:27  nathan
-/* rearranged some files for better organization
-/*
-/* Revision 1.2  2006/04/08 07:17:08  nathan
-/* added documentation. fixed nhibernate files
-/*
- */
