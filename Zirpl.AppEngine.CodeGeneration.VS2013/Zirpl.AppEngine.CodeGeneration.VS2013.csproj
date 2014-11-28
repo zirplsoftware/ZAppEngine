@@ -112,9 +112,6 @@
     <Compile Include="V1\ConfigModel\WebOptions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="V1\ConfigModel\XmlModelBase.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -307,6 +304,9 @@
       <LastGenOutput>ModelTemplate.cs</LastGenOutput>
       <TransformOnBuild>True</TransformOnBuild>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="V2\sample json.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
