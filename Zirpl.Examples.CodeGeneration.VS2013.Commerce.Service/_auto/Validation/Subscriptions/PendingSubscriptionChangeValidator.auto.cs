@@ -4,7 +4,7 @@ using FluentValidation;
 using Zirpl.AppEngine.Validation;
 using Zirpl.AppEngine.Validation.EntityFramework;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Subscriptions;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Subscriptions;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Subscriptions
 {

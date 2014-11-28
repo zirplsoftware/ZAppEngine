@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Notifications;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Notifications;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Notifications;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Notifications
 {
-    public partial class EmailEventMapping : CoreEntityMappingBase<EmailEvent, int>
+    public partial class EmailEventMapping : EntityMappingBase<EmailEvent, int>
     {
 		protected override void MapProperties()
         {

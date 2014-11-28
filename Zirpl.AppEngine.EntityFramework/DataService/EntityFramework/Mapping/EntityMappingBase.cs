@@ -4,7 +4,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Linq.Expressions;
 using Zirpl.AppEngine.Model;
 
-namespace Zirpl.AppEngine.DataService.EntityFramework
+namespace Zirpl.AppEngine.DataService.EntityFramework.Mapping
 {
     public abstract class EntityMappingBase<TEntity, TId> : EntityTypeConfiguration<TEntity>, IEntityMapping
         where TEntity : class, IPersistable<TId>
@@ -23,6 +23,22 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
 
         protected virtual void MapProperties()
         {
+            if (this.MapEntityBaseProperties)
+            {
+                Type type = typeof(TEntity);
+                if (typeof(IAuditable).IsAssignableFrom(type))
+                {
+                    this.Property(s => ((IAuditable)s).CreatedDate).IsRequired().IsDateTime();
+                    this.Property(s => ((IAuditable)s).CreatedUserId).IsRequired();
+                    this.Property(s => ((IAuditable)s).UpdatedDate).IsRequired().IsDateTime();
+                    this.Property(s => ((IAuditable)s).UpdatedUserId).IsRequired();
+                }
+                if (typeof(IVersionable).IsAssignableFrom(type))
+                {
+                    this.Property(s => ((IVersionable)s).RowVersion).IsRequired().IsRowVersion();
+                }
+                // TODO: map ICustomizable
+            }
         }
 
         protected virtual String GetTableName()
@@ -38,6 +54,11 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
         public void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(this);
+        }
+
+        protected virtual bool MapEntityBaseProperties
+        {
+            get { return true; }
         }
     }
 }

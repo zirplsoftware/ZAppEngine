@@ -43,8 +43,8 @@
     <Compile Include="EntityExtensions.cs" />
     <Compile Include="Membership\User.cs" />
     <Compile Include="Membership\UserRegistrationRequestBase.cs" />
-    <Compile Include="Metadata\Membership\UserMetadataConstants.cs" />
-    <Compile Include="Metadata\Subscriptions\SubscriptionInstanceMetadataConstants.cs" />
+    <Compile Include="Metadata\Constants\Membership\UserMetadataConstants.cs" />
+    <Compile Include="Metadata\Constants\Subscriptions\SubscriptionInstanceMetadataConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subscriptions\ISubscriptionPeriodFields.cs" />
     <Compile Include="Subscriptions\SubscriptionPeriod.cs" />
@@ -157,187 +157,187 @@
     <Compile Include="_auto\Membership\Visitor.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\AddressMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\AddressMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Catalog\BrandMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Catalog\BrandMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Catalog\CategoryMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Catalog\CategoryMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Catalog\DisplayProductMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Catalog\DisplayProductMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Catalog\ProductReviewMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Catalog\ProductReviewMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Catalog\SubscriptionChoiceMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Catalog\SubscriptionChoiceMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Catalog\SubscriptionChoiceTierPriceCombinationMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Catalog\SubscriptionChoiceTierPriceCombinationMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Catalog\TierPriceMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Catalog\TierPriceMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Catalog\TierShipmentMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Catalog\TierShipmentMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Customers\CustomerChargeOptionMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Customers\CustomerChargeOptionMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Customers\CustomerMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Customers\CustomerMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Customers\CustomerReferralMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Customers\CustomerReferralMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Customers\CustomerRegistrationRequestMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Customers\CustomerRegistrationRequestMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Customers\CustomerTagMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Customers\CustomerTagMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Membership\LoginRequestMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Membership\LoginRequestMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Membership\PasswordResetLinkMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Membership\PasswordResetLinkMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Membership\ResetLostPasswordRequestMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Membership\ResetLostPasswordRequestMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Membership\SupportUserRegistrationRequestMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Membership\SupportUserRegistrationRequestMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Membership\UserMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Membership\UserMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Membership\UserRegistrationRequestBaseMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Membership\UserRegistrationRequestBaseMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Membership\VisitorMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Membership\VisitorMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\NamePrefixTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\NamePrefixTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\NameSuffixTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\NameSuffixTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Notifications\EmailEventMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Notifications\EmailEventMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Notifications\EmailEventTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Notifications\EmailEventTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\ChargeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\ChargeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\ChargeMethodTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\ChargeMethodTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\ChargeStatusTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\ChargeStatusTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\ChargeTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\ChargeTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\DiscountUsageMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\DiscountUsageMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\DiscountUsageRestrictionTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\DiscountUsageRestrictionTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\OrderChargeStatusTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\OrderChargeStatusTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\OrderItemMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\OrderItemMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\OrderMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\OrderMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\OrderStatusTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\OrderStatusTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\ShoppingCartItemMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\ShoppingCartItemMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\StripeChargeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\StripeChargeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\StripeCustomerChargeOptionMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\StripeCustomerChargeOptionMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\SubscriptionOrderItemMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\SubscriptionOrderItemMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Orders\SubscriptionOrderItemTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Orders\SubscriptionOrderItemTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Partners\PartnerMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Partners\PartnerMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Partners\PartnerReferralCouponRequestMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Partners\PartnerReferralCouponRequestMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Partners\PartnerReferralCouponRequestStatusTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Partners\PartnerReferralCouponRequestStatusTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Partners\PartnerReferralMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Partners\PartnerReferralMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Partners\PartnerReferralPlanMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Partners\PartnerReferralPlanMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Partners\PartnerRegistrationRequestMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Partners\PartnerRegistrationRequestMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Promotions\DiscountAmountTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Promotions\DiscountAmountTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Promotions\DiscountApplicabilityTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Promotions\DiscountApplicabilityTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Promotions\DiscountMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Promotions\DiscountMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Promotions\PromoCodeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Promotions\PromoCodeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Promotions\ReferralMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Promotions\ReferralMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Settings\StateProvinceTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Settings\StateProvinceTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Settings\SystemSettingMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Settings\SystemSettingMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Settings\TaxRuleMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Settings\TaxRuleMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Subscriptions\PendingSubscriptionChangeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Subscriptions\PendingSubscriptionChangeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Subscriptions\SubscriptionInstanceMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Subscriptions\SubscriptionInstanceMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Subscriptions\SubscriptionMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Subscriptions\SubscriptionMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Subscriptions\SubscriptionPeriodMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Subscriptions\SubscriptionPeriodMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Subscriptions\SubscriptionPeriodTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Subscriptions\SubscriptionPeriodTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\Subscriptions\SubscriptionStatusTypeMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\Subscriptions\SubscriptionStatusTypeMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
-    <Compile Include="_auto\Metadata\TagMetadataConstants.auto.cs">
+    <Compile Include="_auto\Metadata\Constants\TagMetadataConstants.auto.cs">
       <DependentUpon>AppTransform.txt4</DependentUpon>
     </Compile>
     <Compile Include="_auto\NamePrefixType.auto.cs">
@@ -529,22 +529,42 @@
     <None Include="_auto\Customization\Settings\AppTransform.txt4" />
     <None Include="_auto\Customization\Subscriptions\AppTransform.txt4" />
     <None Include="_auto\Membership\AppTransform.txt4" />
-    <None Include="_auto\Metadata\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Catalog\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Customers\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Membership\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Notifications\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Orders\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Partners\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Promotions\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Settings\AppTransform.txt4" />
-    <None Include="_auto\Metadata\Subscriptions\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Catalog\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Customers\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Membership\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Notifications\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Orders\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Partners\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Promotions\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Settings\AppTransform.txt4" />
+    <None Include="_auto\Metadata\Constants\Subscriptions\AppTransform.txt4" />
     <None Include="_auto\Notifications\AppTransform.txt4" />
     <None Include="_auto\Orders\AppTransform.txt4" />
     <None Include="_auto\Partners\AppTransform.txt4" />
     <None Include="_auto\Promotions\AppTransform.txt4" />
     <None Include="_auto\Settings\AppTransform.txt4" />
     <None Include="_auto\Subscriptions\AppTransform.txt4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_auto\Metadata.Constants\Catalog\" />
+    <Folder Include="_auto\Metadata.Constants\Customers\" />
+    <Folder Include="_auto\Metadata.Constants\Membership\" />
+    <Folder Include="_auto\Metadata.Constants\Notifications\" />
+    <Folder Include="_auto\Metadata.Constants\Orders\" />
+    <Folder Include="_auto\Metadata.Constants\Partners\" />
+    <Folder Include="_auto\Metadata.Constants\Promotions\" />
+    <Folder Include="_auto\Metadata.Constants\Settings\" />
+    <Folder Include="_auto\Metadata.Constants\Subscriptions\" />
+    <Folder Include="_auto\Metadata\Catalog\" />
+    <Folder Include="_auto\Metadata\Customers\" />
+    <Folder Include="_auto\Metadata\Membership\" />
+    <Folder Include="_auto\Metadata\Notifications\" />
+    <Folder Include="_auto\Metadata\Orders\" />
+    <Folder Include="_auto\Metadata\Partners\" />
+    <Folder Include="_auto\Metadata\Promotions\" />
+    <Folder Include="_auto\Metadata\Settings\" />
+    <Folder Include="_auto\Metadata\Subscriptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

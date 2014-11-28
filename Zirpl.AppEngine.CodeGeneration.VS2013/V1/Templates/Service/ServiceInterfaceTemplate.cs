@@ -14,6 +14,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
+    using Zirpl.AppEngine.Model;
+    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
     using Zirpl.AppEngine.CodeGeneration.V1;
@@ -34,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
+            #line 20 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
 
 	// Generate DataService interfaces
 	//
@@ -48,35 +50,35 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service
             #line hidden
             this.Write("using System;\r\nusing Zirpl.AppEngine.Service;\r\nusing ");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceInterfaceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial interface ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceInterfaceTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceInterfaceBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n    }\r\n}\r\n");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
+            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\ServiceInterfaceTemplate.tt"
 
 	}
 

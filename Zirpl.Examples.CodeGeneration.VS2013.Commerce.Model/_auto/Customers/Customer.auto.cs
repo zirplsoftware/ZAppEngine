@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Customer
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers
 {
-    public partial class Customer  : AuditableBase<int>, ICustomizable<Customer, CustomerCustomFieldValue, int>
+    public partial class Customer  : EntityBase<int>, ICustomizable<Customer, CustomerCustomFieldValue, int>
     {
 		public Customer()
 		{

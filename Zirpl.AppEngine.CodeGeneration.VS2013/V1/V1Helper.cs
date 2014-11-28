@@ -11,6 +11,7 @@ using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V1.ConfigModel;
+using Zirpl.AppEngine.Model.Metadata;
 using Property = Zirpl.AppEngine.CodeGeneration.V1.ConfigModel.Property;
 
 namespace Zirpl.AppEngine.CodeGeneration.V1
@@ -30,6 +31,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             foreach (var modelConfigProjectItem in modelConfigFileProjectItems)
             {
                 var fullPath = modelConfigProjectItem.GetFullPath();
+                this.CallingTemplate.Host.LogLineToBuildPane(fullPath);
                 if (fullPath.EndsWith(".model.xml"))
                 {
                     domaintTypeConfigFilePaths.Add(fullPath);
@@ -313,7 +315,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                     : domainType.IsPersistable 
                         ? domainType.IsDictionary
                             ? string.Format(" : DictionaryEntityBase<{0}, {1}>", this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
-                            : string.Format(" : AuditableBase<{0}>", this.GetModelIdTypeName(domainType))
+                            : string.Format(" : EntityBase<{0}>", this.GetModelIdTypeName(domainType))
                         : "";
             if (!String.IsNullOrEmpty(customizableInterfaceDeclaration))
             {
@@ -340,13 +342,13 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             this.FileManager.StartNewFile(
                 this.GetMetadataConstantsTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
                 this.ModelProject,
-                this.AppDefinition.GeneratedCodeRootFolderName + @"Metadata\" + this.GetGeneratedCodeFolder(domainType, false),
+                this.AppDefinition.GeneratedCodeRootFolderName + @"Metadata\Constants\" + this.GetGeneratedCodeFolder(domainType, false),
                 new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         }
         public virtual string GetMetadataConstantsNamespace(DomainType domainType)
         {
             // use the same
-            return this.ModelProject.GetDefaultNamespace() + ".Metadata" + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
+            return this.ModelProject.GetDefaultNamespace() + ".Metadata.Constants" + (String.IsNullOrEmpty(domainType.SubNamespace) ? null : "." + domainType.SubNamespace);
         }
         public virtual String GetMetadataConstantsTypeName(DomainType domainType)
         {
@@ -537,7 +539,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         {
             return domainType.IsDictionary
                 ? string.Format(" : DictionaryEntityMapping<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
-                : string.Format(" : CoreEntityMappingBase<{0}, {1}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType));
+                : string.Format(" : EntityMappingBase<{0}, {1}>", this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType));
         }
         #endregion
 

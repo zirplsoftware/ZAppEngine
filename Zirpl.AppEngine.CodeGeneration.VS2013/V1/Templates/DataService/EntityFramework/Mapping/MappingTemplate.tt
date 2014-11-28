@@ -5,6 +5,8 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Reflection" #>
 <#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.Model" #>
+<#@ import namespace="Zirpl.AppEngine.Model.Metadata" #>
 <#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
 <#@ import namespace="Zirpl.AppEngine.CodeGeneration.V1" #>
@@ -119,7 +121,7 @@ namespace <#= this.Helper.GetEntityFrameworkMappingNamespace(domainType) #>
 			&& this.Helper.GetDomainTypeByFullTypeName(domainType.BaseClassOverride) != null)
         {
 #>
-        protected override bool MapCoreEntityBaseProperties
+        protected override bool MapEntityBaseProperties
         {
             get
             {

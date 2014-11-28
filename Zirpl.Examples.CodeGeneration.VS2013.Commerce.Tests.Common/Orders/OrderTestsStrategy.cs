@@ -66,8 +66,8 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Orders
         public virtual void OnAssertExpectationsAfterUpdate(
             OrderEntityWrapper entityWrapper, Order entity, Order entityFromDb)
         {
-            entityFromDb.OrderChargeStatusType.GetEnumValue().Should().Be(OrderChargeStatusTypeEnum.Failed);
-            entityFromDb.OrderStatusType.GetEnumValue().Should().Be(OrderStatusTypeEnum.PaymentFailed);
+            entityFromDb.OrderChargeStatusType.EnumValue.Should().Be(OrderChargeStatusTypeEnum.Failed);
+            entityFromDb.OrderStatusType.EnumValue.Should().Be(OrderStatusTypeEnum.PaymentFailed);
         }
 
         public virtual void OnAssertExpectationsAfterDelete(OrderEntityWrapper entityWrapper)

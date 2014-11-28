@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Subscrip
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions
 {
-    public partial class Subscription  : AuditableBase<int>, ICustomizable<Subscription, SubscriptionCustomFieldValue, int>
+    public partial class Subscription  : EntityBase<int>, ICustomizable<Subscription, SubscriptionCustomFieldValue, int>
     {
 		public Subscription()
 		{

@@ -14,6 +14,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service.EntityFramework
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
+    using Zirpl.AppEngine.Model;
+    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
     using Zirpl.AppEngine.CodeGeneration.V1;
@@ -34,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service.EntityFramework
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
+            #line 20 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
 
 	// Generate DataService interfaces
 	//
@@ -49,49 +51,49 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service.EntityFramework
             this.Write("using System;\r\nusing Zirpl.AppEngine.Service;\r\nusing Zirpl.AppEngine.Service.Enti" +
                     "tyFramework;\r\nusing ");
             
-            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
+            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextNamespace()));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
+            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetServiceBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n    }\r\n}\r\n");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
+            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Service\EntityFramework\ServiceTemplate.tt"
 
 	}
 

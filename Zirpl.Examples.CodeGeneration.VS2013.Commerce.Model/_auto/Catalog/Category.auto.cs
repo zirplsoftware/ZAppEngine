@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Catalog;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 {
-    public partial class Category  : AuditableBase<int>, ICustomizable<Category, CategoryCustomFieldValue, int>
+    public partial class Category  : EntityBase<int>, ICustomizable<Category, CategoryCustomFieldValue, int>
     {
 		public Category()
 		{

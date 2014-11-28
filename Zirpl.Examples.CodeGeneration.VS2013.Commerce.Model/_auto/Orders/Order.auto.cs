@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Orders;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
-    public partial class Order  : AuditableBase<int>, ICustomizable<Order, OrderCustomFieldValue, int>
+    public partial class Order  : EntityBase<int>, ICustomizable<Order, OrderCustomFieldValue, int>
     {
 		public Order()
 		{

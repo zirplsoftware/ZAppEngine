@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Partners
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners
 {
-    public partial class PartnerReferralPlan  : AuditableBase<int>, ICustomizable<PartnerReferralPlan, PartnerReferralPlanCustomFieldValue, int>
+    public partial class PartnerReferralPlan  : EntityBase<int>, ICustomizable<PartnerReferralPlan, PartnerReferralPlanCustomFieldValue, int>
     {
 		public PartnerReferralPlan()
 		{

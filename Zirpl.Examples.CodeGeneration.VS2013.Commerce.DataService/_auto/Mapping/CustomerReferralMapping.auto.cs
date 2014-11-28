@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Customers;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Customers;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Customers
 {
-    public partial class CustomerReferralMapping : CoreEntityMappingBase<CustomerReferral, int>
+    public partial class CustomerReferralMapping : EntityMappingBase<CustomerReferral, int>
     {
 		protected override void MapProperties()
         {
@@ -36,7 +36,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Cust
 		
 		partial void MapCustomProperties();
 		
-        protected override bool MapCoreEntityBaseProperties
+        protected override bool MapEntityBaseProperties
         {
             get
             {

@@ -65,11 +65,10 @@
     <Compile Include="DataService\EntityFramework\DbContextBase.cs" />
     <Compile Include="DataService\EntityFramework\DbContextCudHandler.cs" />
     <Compile Include="DataService\EntityFramework\DbContextDataService.cs" />
-    <Compile Include="DataService\EntityFramework\EntityMappingBase.cs" />
+    <Compile Include="DataService\EntityFramework\Mapping\EntityMappingBase.cs" />
     <Compile Include="DataService\EntityFramework\IDbContextCudHandler.cs" />
-    <Compile Include="DataService\EntityFramework\IEntityMapping.cs" />
+    <Compile Include="DataService\EntityFramework\Mapping\IEntityMapping.cs" />
     <Compile Include="DataService\EntityFramework\ISearchCriteriaTranslator.cs" />
-    <Compile Include="DataService\EntityFramework\Mapping\CoreEntityMappingBase.cs" />
     <Compile Include="DataService\EntityFramework\Mapping\DictionaryEntityMapping.cs" />
     <Compile Include="DataService\EntityFramework\Mapping\MappingUtils.cs" />
     <Compile Include="DataService\EntityFramework\Migrations\AspNetMembershipMigratorBase.cs" />

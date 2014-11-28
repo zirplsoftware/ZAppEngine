@@ -2,7 +2,6 @@
 {
     public enum DataTypeEnum : byte
     {
-        Unknown = 0,
         //SByte = 1,
         Byte = 2,
         Char = 3,
@@ -23,6 +22,10 @@
         DateTime = 18,
         Currency = 19,
         Percentage = 20,
-        Relationship = 21
+        Relationship = 21,
+        Guid = 22,
+        EmailAddress = 23,
+        Url = 24,
+        Image = 25
     }
 }

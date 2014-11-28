@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping
 {
-    public partial class AddressMapping : CoreEntityMappingBase<Address, int>
+    public partial class AddressMapping : EntityMappingBase<Address, int>
     {
 		protected override void MapProperties()
         {

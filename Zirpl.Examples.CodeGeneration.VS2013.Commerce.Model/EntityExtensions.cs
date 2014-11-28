@@ -14,13 +14,13 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
         public static DateTime GetNextShipmentDate(this ISubscriptionPeriodFields entity, DateTime lastShipmentDate)
         {
             if (entity.ShipmentPeriod == 0
-                || !entity.ShipmentPeriodType.GetEnumValue().HasValue)
+                || !entity.ShipmentPeriodType.EnumValue.HasValue)
             {
                 throw new InvalidOperationException();
             }
 
             DateTime nextShipmentDate;
-            switch (entity.ShipmentPeriodType.GetEnumValue().Value)
+            switch (entity.ShipmentPeriodType.EnumValue.Value)
             {
                 case SubscriptionPeriodTypeEnum.Day:
                     nextShipmentDate = lastShipmentDate.AddDays(entity.ShipmentPeriod);
@@ -42,13 +42,13 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
         public static DateTime GetNextChargeDate(this ISubscriptionPeriodFields entity, DateTime lastChargeDate)
         {
             if (entity.ChargePeriod == 0
-                || !entity.ChargePeriodType.GetEnumValue().HasValue)
+                || !entity.ChargePeriodType.EnumValue.HasValue)
             {
                 throw new InvalidOperationException();
             }
 
             DateTime nextChargeDate;
-            switch (entity.ChargePeriodType.GetEnumValue().Value)
+            switch (entity.ChargePeriodType.EnumValue.Value)
             {
                 case SubscriptionPeriodTypeEnum.Day:
                     nextChargeDate = lastChargeDate.AddDays(entity.ChargePeriod);

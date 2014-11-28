@@ -85,7 +85,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Subscriptions
         public virtual void OnAssertExpectationsAfterUpdate(
             SubscriptionEntityWrapper entityWrapper, Subscription entity, Subscription entityFromDb)
         {
-            entityFromDb.StatusType.GetEnumValue().Should().Be(SubscriptionStatusTypeEnum.RenewalFailed);
+            entityFromDb.StatusType.EnumValue.Should().Be(SubscriptionStatusTypeEnum.RenewalFailed);
             entityFromDb.AssertNavigationPropertyMatchesAndIsNotNull(entity, o => o.CurrentSubscriptionInstance, o => o.CurrentSubscriptionInstanceId);
             entityFromDb.CurrentSubscriptionInstance.Should().Be(entityWrapper.Entity.CurrentSubscriptionInstance);
         }

@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Catalog;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Catalog;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Catalog
 {
-    public partial class TierShipmentMapping : CoreEntityMappingBase<TierShipment, int>
+    public partial class TierShipmentMapping : EntityMappingBase<TierShipment, int>
     {
 		protected override void MapProperties()
         {

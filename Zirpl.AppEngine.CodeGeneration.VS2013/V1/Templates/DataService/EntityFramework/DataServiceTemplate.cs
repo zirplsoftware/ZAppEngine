@@ -14,6 +14,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
+    using Zirpl.AppEngine.Model;
+    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
     using Zirpl.AppEngine.CodeGeneration.V1;
@@ -34,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 20 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
 
 	// Generate DataService classes
 	//
@@ -49,34 +51,34 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
             this.Write("using System;\r\nusing System.Linq;\r\nusing Zirpl.AppEngine.DataService;\r\nusing Zirp" +
                     "l.AppEngine.DataService.EntityFramework;\r\nusing ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTypeName(domainType)));
             
             #line default
             #line hidden
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
 
 		var defaultSortProperty = (from p in domainType.Properties
 									where p.IsDefaultSort
@@ -89,14 +91,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
             #line hidden
             this.Write("\t\tprotected override IQueryable<");
             
-            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write("> ApplyDefaultSort(IQueryable<");
             
-            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeName(domainType)));
             
             #line default
@@ -104,14 +106,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
             this.Write("> query)\r\n        {\r\n            return from o in query\r\n                   order" +
                     "by o.");
             
-            #line 46 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(defaultSortProperty.Name));
             
             #line default
             #line hidden
             this.Write("\r\n                   select o;\r\n        }\r\n");
             
-            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 51 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
 
 		}
 
@@ -120,7 +122,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
             #line hidden
             this.Write("    }\r\n}\r\n");
             
-            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
+            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\DataService\EntityFramework\DataServiceTemplate.tt"
 
 	}
 

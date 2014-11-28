@@ -14,6 +14,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
+    using Zirpl.AppEngine.Model;
+    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
     using Zirpl.AppEngine.CodeGeneration.V1;
@@ -34,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
+            #line 20 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
 
 	
 	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)
@@ -50,28 +52,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
             this.Write("using System;\r\nusing Zirpl.AppEngine.Ioc;\r\nusing Zirpl.AppEngine.Service;\r\nusing " +
                     "Zirpl.AppEngine.Testing;\r\nusing Zirpl.AppEngine.Web.Mvc.Ioc.Autofac;\r\nusing ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPersistableModelTestsStrategyNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
+            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPersistableModelTestsStrategyTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPersistableModelTestsStrategyBaseDeclaration(domainType)));
             
             #line default
@@ -89,7 +91,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
 }
 ");
             
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
+            #line 50 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.tt"
 
         }
 	}

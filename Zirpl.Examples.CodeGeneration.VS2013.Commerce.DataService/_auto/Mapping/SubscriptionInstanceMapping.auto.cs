@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Subscriptions;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Subscriptions;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Subscriptions
 {
-    public partial class SubscriptionInstanceMapping : CoreEntityMappingBase<SubscriptionInstance, int>
+    public partial class SubscriptionInstanceMapping : EntityMappingBase<SubscriptionInstance, int>
     {
 		protected override void MapProperties()
         {

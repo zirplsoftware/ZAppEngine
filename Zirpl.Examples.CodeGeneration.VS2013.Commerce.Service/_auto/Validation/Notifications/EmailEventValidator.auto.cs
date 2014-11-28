@@ -4,7 +4,7 @@ using FluentValidation;
 using Zirpl.AppEngine.Validation;
 using Zirpl.AppEngine.Validation.EntityFramework;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Notifications;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Notifications;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Notifications;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Notifications
 {

@@ -115,18 +115,23 @@
     <Compile Include="V1\ConfigModel\XmlModelBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MappingTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="V1\Templates\Model\Customization\CustomFieldValueTemplate.cs">
       <DependentUpon>CustomFieldValueTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.cs">
-      <DependentUpon>PeristableModelTestsStrategyTemplate.tt</DependentUpon>
+    <Compile Include="V1\Templates\Model\EnumTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>EnumTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Include="V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.cs">
-      <DependentUpon>DataServiceTestsTemplate.tt</DependentUpon>
+    <Compile Include="V1\Templates\Tests\Common\PeristableModelTestsStrategyTemplate.cs">
+      <DependentUpon>PeristableModelTestsStrategyTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -144,6 +149,11 @@
       <DependentUpon>PersistableModelTestsEntityWrapperTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataServiceTestsTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="V1\Templates\Tests\Service\ServicesProviderTemplate.cs">
       <DependentUpon>ServicesProviderTemplate.tt</DependentUpon>
@@ -170,11 +180,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\DataService\EntityFramework\Mapping\MappingTemplate.cs">
-      <DependentUpon>MappingTemplate.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="V1\Templates\DataService\EntityFramework\DataServiceTemplate.cs">
       <DependentUpon>DataServiceTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -184,12 +189,6 @@
       <DependentUpon>PartialTemplateClasses.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="V1\Templates\Model\EnumTemplate.cs">
-      <DependentUpon>EnumTemplate.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="V1\Templates\Model\Metadata\MetadataConstantsTemplate.cs">
       <DependentUpon>MetadataConstantsTemplate.tt</DependentUpon>
@@ -214,6 +213,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
+      <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
+      <Name>Zirpl.AppEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zirpl.Common\Zirpl.Common.csproj">
       <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
       <Name>Zirpl.Common</Name>

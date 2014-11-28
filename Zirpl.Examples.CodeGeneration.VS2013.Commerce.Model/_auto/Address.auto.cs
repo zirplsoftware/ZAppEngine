@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
 {
-    public partial class Address  : AuditableBase<int>, ICustomizable<Address, AddressCustomFieldValue, int>
+    public partial class Address  : EntityBase<int>, ICustomizable<Address, AddressCustomFieldValue, int>
     {
 		public Address()
 		{

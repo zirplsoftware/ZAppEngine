@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Promotio
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions
 {
-    public partial class Discount  : AuditableBase<int>, ICustomizable<Discount, DiscountCustomFieldValue, int>
+    public partial class Discount  : EntityBase<int>, ICustomizable<Discount, DiscountCustomFieldValue, int>
     {
 		public Discount()
 		{

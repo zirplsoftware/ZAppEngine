@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Subscriptions
+namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Subscriptions
 {
 
     public partial class SubscriptionInstanceMetadataConstants

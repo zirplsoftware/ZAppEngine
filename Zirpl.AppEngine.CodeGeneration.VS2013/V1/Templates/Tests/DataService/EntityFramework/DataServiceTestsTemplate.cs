@@ -14,6 +14,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
+    using Zirpl.AppEngine.Model;
+    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
     using Zirpl.AppEngine.CodeGeneration.V1;
@@ -34,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 20 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
 
 	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)
 	{
@@ -50,90 +52,90 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
                     "ing NUnit.Framework;\r\nusing Zirpl.AppEngine.Testing;\r\nusing Zirpl.AppEngine.Vali" +
                     "dation;\r\nusing ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPersistableModelTestsEntityWrapperNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextNamespace()));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\t\r\n\t[TestFixture]\r\n    public partial class ");
             
-            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsBaseTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n\t}\r\n\r\n    [TestFixture]\r\n    public abstract partial class ");
             
-            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsBaseTypeName(domainType)));
             
             #line default
             #line hidden
             
-            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsBaseTypeBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n\t\tprotected ");
             
-            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" DataService {get { return this.DependencyResolver.Resolve<");
             
-            #line 47 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 49 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(">(); } }\r\n\t\tprotected ");
             
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 50 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsDataServicesProviderTypeName()));
             
             #line default
             #line hidden
             this.Write(" DataServices {get { return this.DependencyResolver.Resolve<");
             
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 50 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsDataServicesProviderTypeName()));
             
             #line default
@@ -141,7 +143,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
             this.Write(">(); } }\r\n\t\t\r\n\t\tprotected override TSupports GetLayer<TSupports>()\r\n        {\r\n  " +
                     "          return this.DependencyResolver.Resolve<");
             
-            #line 52 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 54 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeName(domainType)));
             
             #line default
@@ -150,7 +152,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
                     "EntityFramework.DbContextBase CreateNewDbContext()\r\n        {\r\n            retur" +
                     "n new ");
             
-            #line 56 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 58 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextTypeName()));
             
             #line default
@@ -289,7 +291,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
                     "de void TestSearchUnique_NotUnique()\r\n        {\r\n\t\t\tbase.TestSearchUnique_NotUni" +
                     "que();\r\n        }\r\n    }\r\n}\r\n");
             
-            #line 489 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 491 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
 
         }
 		else
@@ -303,90 +305,90 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
                     "ing NUnit.Framework;\r\nusing Zirpl.AppEngine.Testing;\r\nusing Zirpl.AppEngine.Vali" +
                     "dation;\r\nusing ");
             
-            #line 501 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 503 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 502 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 504 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPersistableModelTestsEntityWrapperNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 503 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 505 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 504 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 506 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextNamespace()));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 506 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 508 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\t[TestFixture]\r\n    public partial class ");
             
-            #line 509 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 511 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 509 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 511 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsBaseTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n\t}\r\n\r\n    [TestFixture]\r\n    public abstract partial class ");
             
-            #line 514 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 516 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsBaseTypeName(domainType)));
             
             #line default
             #line hidden
             
-            #line 514 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 516 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsBaseTypeBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n\t\tprotected ");
             
-            #line 516 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 518 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" DataService {get { return this.DependencyResolver.Resolve<");
             
-            #line 516 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 518 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(">(); } }\r\n\t\tprotected ");
             
-            #line 517 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 519 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsDataServicesProviderTypeName()));
             
             #line default
             #line hidden
             this.Write(" DataServices {get { return this.DependencyResolver.Resolve<");
             
-            #line 517 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 519 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceTestsDataServicesProviderTypeName()));
             
             #line default
@@ -394,7 +396,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
             this.Write(">(); } }\r\n\t\t\r\n\t\tprotected override TSupports GetLayer<TSupports>()\r\n        {\r\n  " +
                     "          return this.DependencyResolver.Resolve<");
             
-            #line 521 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 523 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataServiceInterfaceTypeName(domainType)));
             
             #line default
@@ -403,7 +405,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
                     "EntityFramework.DbContextBase CreateNewDbContext()\r\n        {\r\n            retur" +
                     "n new ");
             
-            #line 525 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 527 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetDataContextTypeName()));
             
             #line default
@@ -439,7 +441,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
                     "Unique_NotUnique()\r\n        {\r\n\t\t\tbase.TestSearchUnique_NotUnique();\r\n        }\r" +
                     "\n    }\r\n}\r\n");
             
-            #line 626 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
+            #line 628 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\DataService\EntityFramework\DataServiceTestsTemplate.tt"
 
   
         }

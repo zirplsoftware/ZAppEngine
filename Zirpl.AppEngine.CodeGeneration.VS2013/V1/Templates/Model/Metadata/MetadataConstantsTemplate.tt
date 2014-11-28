@@ -26,6 +26,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Metadata.Constants;
 
 namespace <#= this.Helper.GetMetadataConstantsNamespace(domainType) #>
 {

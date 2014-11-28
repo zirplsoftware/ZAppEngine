@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Catalog;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Catalog;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Catalog
 {
-    public partial class BrandMapping : CoreEntityMappingBase<Brand, int>
+    public partial class BrandMapping : EntityMappingBase<Brand, int>
     {
 		protected override void MapProperties()
         {

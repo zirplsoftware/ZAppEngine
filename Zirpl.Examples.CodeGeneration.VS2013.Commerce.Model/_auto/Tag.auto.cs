@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
 {
-    public partial class Tag  : AuditableBase<int>, ICustomizable<Tag, TagCustomFieldValue, int>
+    public partial class Tag  : EntityBase<int>, ICustomizable<Tag, TagCustomFieldValue, int>
     {
 		public Tag()
 		{

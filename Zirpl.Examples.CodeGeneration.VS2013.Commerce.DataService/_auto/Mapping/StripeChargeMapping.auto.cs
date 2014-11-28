@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Orders;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Orders;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orders
 {
-    public partial class StripeChargeMapping : CoreEntityMappingBase<StripeCharge, int>
+    public partial class StripeChargeMapping : EntityMappingBase<StripeCharge, int>
     {
 		protected override void MapProperties()
         {
@@ -23,7 +23,7 @@ namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orde
 		
 		partial void MapCustomProperties();
 		
-        protected override bool MapCoreEntityBaseProperties
+        protected override bool MapEntityBaseProperties
         {
             get
             {

@@ -92,8 +92,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGenerati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing.Net45", "Zirpl.Testing.Net45\Zirpl.Testing.Net45.csproj", "{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.OpenMF.Core", "..\core\trunk\dotnet\Zirpl.OpenMF.Core\Zirpl.OpenMF.Core.csproj", "{19DD7924-FB7F-4094-83A6-5E75084817E7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -208,10 +206,6 @@ Global
 		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19DD7924-FB7F-4094-83A6-5E75084817E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19DD7924-FB7F-4094-83A6-5E75084817E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19DD7924-FB7F-4094-83A6-5E75084817E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19DD7924-FB7F-4094-83A6-5E75084817E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

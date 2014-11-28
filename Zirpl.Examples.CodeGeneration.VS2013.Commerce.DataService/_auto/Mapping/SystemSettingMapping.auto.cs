@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Settings;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Settings;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Settings
 {
-    public partial class SystemSettingMapping : CoreEntityMappingBase<SystemSetting, int>
+    public partial class SystemSettingMapping : EntityMappingBase<SystemSetting, int>
     {
 		protected override void MapProperties()
         {

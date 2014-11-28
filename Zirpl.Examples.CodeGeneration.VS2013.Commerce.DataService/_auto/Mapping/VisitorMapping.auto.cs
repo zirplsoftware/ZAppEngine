@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Membership;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Membership;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Membership
 {
-    public partial class VisitorMapping : CoreEntityMappingBase<Visitor, int>
+    public partial class VisitorMapping : EntityMappingBase<Visitor, int>
     {
 		protected override void MapProperties()
         {

@@ -7,7 +7,7 @@ using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers
 {
-    public partial class CustomerTag  : AuditableBase<int>
+    public partial class CustomerTag  : EntityBase<int>
     {
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.Customer Customer { get; set; }
 		public virtual int CustomerId { get; set; }

@@ -7,7 +7,7 @@ using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership
 {
-    public partial class Visitor  : AuditableBase<int>
+    public partial class Visitor  : EntityBase<int>
     {
 		public Visitor()
 		{

@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Catalog;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog
 {
-    public partial class Brand  : AuditableBase<int>, ICustomizable<Brand, BrandCustomFieldValue, int>
+    public partial class Brand  : EntityBase<int>, ICustomizable<Brand, BrandCustomFieldValue, int>
     {
 		public Brand()
 		{

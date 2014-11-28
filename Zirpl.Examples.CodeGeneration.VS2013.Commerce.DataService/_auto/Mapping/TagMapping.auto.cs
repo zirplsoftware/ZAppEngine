@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping
 {
-    public partial class TagMapping : CoreEntityMappingBase<Tag, int>
+    public partial class TagMapping : EntityMappingBase<Tag, int>
     {
 		protected override void MapProperties()
         {

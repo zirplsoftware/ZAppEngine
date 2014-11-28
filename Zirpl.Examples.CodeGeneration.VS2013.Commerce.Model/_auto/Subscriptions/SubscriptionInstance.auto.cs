@@ -7,7 +7,7 @@ using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions
 {
-    public partial class SubscriptionInstance  : AuditableBase<int>
+    public partial class SubscriptionInstance  : EntityBase<int>
     {
 		public virtual DateTime StartDate { get; set; }
 		public virtual int TotalShipments { get; set; }

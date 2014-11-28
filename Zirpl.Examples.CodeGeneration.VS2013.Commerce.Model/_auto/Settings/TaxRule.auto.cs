@@ -8,7 +8,7 @@ using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customization.Settings
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings
 {
-    public partial class TaxRule  : AuditableBase<int>, ICustomizable<TaxRule, TaxRuleCustomFieldValue, int>
+    public partial class TaxRule  : EntityBase<int>, ICustomizable<TaxRule, TaxRuleCustomFieldValue, int>
     {
 		public TaxRule()
 		{

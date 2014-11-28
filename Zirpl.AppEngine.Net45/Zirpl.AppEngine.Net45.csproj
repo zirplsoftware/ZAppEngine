@@ -273,12 +273,6 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Metadata\DataTypeEnum.cs">
       <Link>Model\Metadata\DataTypeEnum.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\IEntityMetadata.cs">
-      <Link>Model\Metadata\IEntityMetadata.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\IFieldMetadata.cs">
-      <Link>Model\Metadata\IFieldMetadata.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Metadata\IMetadataDescribed.cs">
       <Link>Model\Metadata\IMetadataDescribed.cs</Link>
     </Compile>
@@ -308,6 +302,9 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Search\SearchResults.cs">
       <Link>Model\Search\SearchResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Xml\XmlModelBase.cs">
+      <Link>Model\Xml\XmlModelBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>

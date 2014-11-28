@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Membership
+namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Membership
 {
 
     public partial class UserMetadataConstants

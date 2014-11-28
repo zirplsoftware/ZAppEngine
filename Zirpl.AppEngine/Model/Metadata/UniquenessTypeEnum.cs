@@ -2,8 +2,8 @@
 {
     public enum UniquenessTypeEnum : byte
     {
-        NotUnique = 0,
-        Unique = 1,
-        UniqueAmongNonNullValues = 2
+        NotUnique = 1,
+        Unique = 2,
+        UniqueAmongNonNullValues = 3
     }
 }

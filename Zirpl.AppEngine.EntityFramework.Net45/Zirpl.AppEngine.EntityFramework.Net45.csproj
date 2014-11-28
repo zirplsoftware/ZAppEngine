@@ -69,23 +69,20 @@
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\DbContextDataService.cs">
       <Link>DataService\EntityFramework\DbContextDataService.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\EntityMappingBase.cs">
-      <Link>DataService\EntityFramework\EntityMappingBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\IDbContextCudHandler.cs">
       <Link>DataService\EntityFramework\IDbContextCudHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\IEntityMapping.cs">
-      <Link>DataService\EntityFramework\IEntityMapping.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\ISearchCriteriaTranslator.cs">
       <Link>DataService\EntityFramework\ISearchCriteriaTranslator.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\Mapping\CoreEntityMappingBase.cs">
-      <Link>DataService\EntityFramework\Mapping\CoreEntityMappingBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\Mapping\DictionaryEntityMapping.cs">
       <Link>DataService\EntityFramework\Mapping\DictionaryEntityMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\Mapping\EntityMappingBase.cs">
+      <Link>DataService\EntityFramework\Mapping\EntityMappingBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\Mapping\IEntityMapping.cs">
+      <Link>DataService\EntityFramework\Mapping\IEntityMapping.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\DataService\EntityFramework\Mapping\MappingUtils.cs">
       <Link>DataService\EntityFramework\Mapping\MappingUtils.cs</Link>

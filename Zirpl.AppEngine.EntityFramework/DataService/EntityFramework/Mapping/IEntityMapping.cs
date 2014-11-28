@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Zirpl.AppEngine.DataService.EntityFramework
+namespace Zirpl.AppEngine.DataService.EntityFramework.Mapping
 {
     public interface IEntityMapping
     {

@@ -9,6 +9,7 @@ using Zirpl.AppEngine.Testing;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Settings;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings;
 using Zirpl.Testing;
 

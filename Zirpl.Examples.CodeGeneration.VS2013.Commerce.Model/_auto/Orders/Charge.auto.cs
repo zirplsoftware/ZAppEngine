@@ -7,7 +7,7 @@ using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
-    public abstract partial class Charge  : AuditableBase<int>
+    public abstract partial class Charge  : EntityBase<int>
     {
 		public virtual DateTime Date { get; set; }
 		public virtual decimal Amount { get; set; }

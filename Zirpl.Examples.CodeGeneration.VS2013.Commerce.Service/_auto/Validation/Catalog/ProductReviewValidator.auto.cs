@@ -4,7 +4,7 @@ using FluentValidation;
 using Zirpl.AppEngine.Validation;
 using Zirpl.AppEngine.Validation.EntityFramework;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Catalog;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Catalog;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Catalog
 {

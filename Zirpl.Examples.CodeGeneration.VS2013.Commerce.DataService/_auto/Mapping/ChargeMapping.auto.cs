@@ -4,11 +4,11 @@ using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.DataService.EntityFramework.Mapping;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Orders;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Orders;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.DataService.Mapping.Orders
 {
-    public partial class ChargeMapping : CoreEntityMappingBase<Charge, int>
+    public partial class ChargeMapping : EntityMappingBase<Charge, int>
     {
 		protected override void MapProperties()
         {

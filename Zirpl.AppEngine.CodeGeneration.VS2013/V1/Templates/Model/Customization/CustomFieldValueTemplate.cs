@@ -14,6 +14,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Customization
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
+    using Zirpl.AppEngine.Model;
+    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
     using Zirpl.AppEngine.CodeGeneration.V1;
@@ -34,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Customization
         public virtual string TransformText()
         {
             
-            #line 17 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
+            #line 19 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
 
 // Generate Model classes
 //
@@ -49,35 +51,35 @@ foreach (DomainType domainType in this.Helper.DomainTypesToCustomFieldValueFor)
             this.Write("using System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nusin" +
                     "g Zirpl.AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Customization;\r\nusing ");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
+            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 32 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetCustomFieldValueNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetCustomFieldValueTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetCustomFieldValueBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n    }\r\n}\r\n");
             
-            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
+            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\Customization\CustomFieldValueTemplate.tt"
 
 }
 

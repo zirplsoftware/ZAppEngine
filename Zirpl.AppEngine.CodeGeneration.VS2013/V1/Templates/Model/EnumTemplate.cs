@@ -14,6 +14,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
+    using Zirpl.AppEngine.Model;
+    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
     using Zirpl.AppEngine.CodeGeneration.V1;
@@ -34,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 17 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 19 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
 
 // now we create the dictionary enums
 //
@@ -48,27 +50,27 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelEnumFor)
             this.Write("using System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nusin" +
                     "g Zirpl.AppEngine.Model;\r\n\r\nnamespace ");
             
-            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelEnumNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public enum ");
             
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelEnumTypeName(domainType)));
             
             #line default
             #line hidden
             
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelEnumBaseDeclaration(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
 
 	if (domainType.EnumValueEntries != null)
 	{
@@ -82,27 +84,27 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelEnumFor)
             #line hidden
             this.Write("        ");
             
-            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValueEntry.Key));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValueEntry.Value));
             
             #line default
             #line hidden
             
-            #line 41 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(totalRemaining > 0 ? "," : ""));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 42 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 44 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
 					
 		}
 	}
@@ -112,7 +114,7 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelEnumFor)
             #line hidden
             this.Write("\t}\r\n}\r\n");
             
-            #line 48 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
+            #line 50 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\EnumTemplate.tt"
 
 }
 

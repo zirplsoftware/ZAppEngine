@@ -14,6 +14,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
+    using Zirpl.AppEngine.Model;
+    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
     using Zirpl.AppEngine.CodeGeneration.V1;
@@ -34,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
         public virtual string TransformText()
         {
             
-            #line 18 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
+            #line 20 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
 
 	
 	foreach (DomainType domainType in this.Helper.DomainTypesToGenerateDataServiceFor)
@@ -49,35 +51,35 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
             #line hidden
             this.Write("using System;\r\nusing Zirpl.AppEngine.Testing;\r\nusing ");
             
-            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
+            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPersistableModelTestsEntityWrapperNamespace(domainType)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic partial class ");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
+            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetPersistableModelTestsEntityWrapperTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(" : EntityWrapper<");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
+            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Helper.GetModelTypeName(domainType)));
             
             #line default
             #line hidden
             this.Write(">\r\n    {\r\n    }\r\n}\r\n");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Tests\Common\PersistableModelTestsEntityWrapperTemplate.tt"
 
         }
 	}

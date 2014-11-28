@@ -7,7 +7,7 @@ using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions
 {
-    public abstract partial class Referral  : AuditableBase<int>
+    public abstract partial class Referral  : EntityBase<int>
     {
 		public virtual Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.PromoCode PromoCode { get; set; }
 		public virtual int PromoCodeId { get; set; }

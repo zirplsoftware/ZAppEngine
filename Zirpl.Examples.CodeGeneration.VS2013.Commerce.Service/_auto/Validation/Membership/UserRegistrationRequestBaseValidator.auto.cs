@@ -4,7 +4,7 @@ using FluentValidation;
 using Zirpl.AppEngine.Validation;
 using Zirpl.AppEngine.Validation.EntityFramework;
 using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership;
-using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Membership;
+using Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Metadata.Constants.Membership;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Service.Validation.Membership
 {
