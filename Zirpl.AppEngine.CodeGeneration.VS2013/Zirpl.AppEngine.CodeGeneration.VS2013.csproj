@@ -205,6 +205,10 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="V1\V1Helper.cs" />
+    <Compile Include="V2\ConfigModel\AppDefinition.cs" />
+    <Compile Include="V2\ConfigModel\PersistableDomainType.cs" />
+    <Compile Include="V2\ConfigModel\EnumValueEntry.cs" />
+    <Compile Include="V2\ConfigModel\PersistableProperty.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -2,15 +2,16 @@
 {
     public enum DataTypeEnum : byte
     {
-        //SByte = 1,
+        Unknown = 0,
+        SByte = 1,
         Byte = 2,
         Char = 3,
-        //Short = 4,
-        //UShort = 5,
+        Short = 4,
+        UShort = 5,
         Int = 6,
-        //UInt = 7,
+        UInt = 7,
         Long = 8,
-        //ULong = 9,
+        ULong = 9,
         Float = 10,
         Double = 11,
         Decimal = 12,

@@ -1,10 +1,28 @@
+Sample Persistable Entity Json file
+would be stored at:
+config/Catalog/Brand.entity.json
+
 {
-	"name": "Brand",
-	"baseClassOverride": null,
-	"subNamespace": "Catalog",
-	"isCustomizable": true,
-	"properties": [
-		{ "name": "Name", "type": "string", "isRequired": true, "minLength": 1, "maxLength": 512 },
+	"UniqueName": "Catalog.Brand",
+	"PluralNameOverride" : "Brandes", // defaults to null, just use the final piece of the name
+	"InheritsFrom" : "Catalog.BrandBase", // defaults to null, must be another DomainType's UniqueName (case sensitive)
+	"IsStaticLookup" : false, // defaults to false
+	"IsAbstract": false, // defaults to false
+	"IsVersionable": true, // defaults to true
+	"IsAuditable": true, // defaults to true
+	"IsUserCustomizable": true, // defaults to false, only applies if persistable
+	"IsInsertable": true, // defaults to true, only applies if persistable and not static lookup
+	"IsUpdateable": true, // defaults to true, only applies if persistable and not static lookup
+	"IsDeleteable": true, // defaults to true, only applies if persistable and not static lookup
+	"Properties": [
+		{ 
+			"Name": "Name", 
+			"Type": "string", // must be one of the DataTypeEnums (case insensitive)
+			"IsRequired": true, // defaults to true
+			"IsCalculate":false,
+			"MinLength": 1, // 0 to Int32.Max
+			"MaxLength": 512 // number, or blank if IsMaxLength is true
+		},
 		{ "name": "SeoId", "type": "string", "isRequired": false, "maxLength": 512 },
 		{ "name": "Description", "type": "string", "isRequired": false, "isMaxLength": true }
 	]	
