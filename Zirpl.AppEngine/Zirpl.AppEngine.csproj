@@ -139,7 +139,7 @@
     <Compile Include="Model\IAuditable.cs" />
     <Compile Include="Model\IMarkDeletable.cs" />
     <Compile Include="Model\IStaticLookupEntityExtensions.cs" />
-    <Compile Include="Model\IKeyedEntity.cs" />
+    <Compile Include="Model\IIdable.cs" />
     <Compile Include="Model\IStaticLookup.cs" />
     <Compile Include="Model\IPersistable.cs" />
     <Compile Include="Model\Search\ISearchCriteria.cs" />

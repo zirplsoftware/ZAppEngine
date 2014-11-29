@@ -36,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 19 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\ModelTemplate.tt"
+            #line 20 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\ModelTemplate.tt"
 
 
 
@@ -60,6 +60,72 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
                 this.hostValue = value;
             }
         }
+        
+        #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\ModelTemplate.tt"
+
+private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig _AppConfigField;
+
+/// <summary>
+/// Access the AppConfig parameter of the template.
+/// </summary>
+private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig AppConfig
+{
+    get
+    {
+        return this._AppConfigField;
+    }
+}
+
+
+/// <summary>
+/// Initialize the template
+/// </summary>
+public virtual void Initialize()
+{
+    if ((this.Errors.HasErrors == false))
+    {
+bool AppConfigValueAcquired = false;
+if (this.Session.ContainsKey("AppConfig"))
+{
+    this._AppConfigField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig)(this.Session["AppConfig"]));
+    AppConfigValueAcquired = true;
+}
+if ((AppConfigValueAcquired == false))
+{
+    string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "AppConfig");
+    if ((string.IsNullOrEmpty(parameterValue) == false))
+    {
+        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig));
+        if (((tc != null) 
+                    && tc.CanConvertFrom(typeof(string))))
+        {
+            this._AppConfigField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig)(tc.ConvertFrom(parameterValue)));
+            AppConfigValueAcquired = true;
+        }
+        else
+        {
+            this.Error("The type \'Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig\' of the paramet" +
+                    "er \'AppConfig\' did not match the type of the data passed to the template.");
+        }
+    }
+}
+if ((AppConfigValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("AppConfig");
+    if ((data != null))
+    {
+        this._AppConfigField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig)(data));
+    }
+}
+
+
+    }
+}
+
+
+        
+        #line default
+        #line hidden
     }
     
     #line default

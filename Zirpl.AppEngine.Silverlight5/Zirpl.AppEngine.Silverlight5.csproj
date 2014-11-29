@@ -216,8 +216,8 @@
     <Compile Include="..\Zirpl.AppEngine\Model\IAuditable.cs">
       <Link>Model\IAuditable.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IKeyedEntity.cs">
-      <Link>Model\IKeyedEntity.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\IIdable.cs">
+      <Link>Model\IIdable.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IMarkDeletable.cs">
       <Link>Model\IMarkDeletable.cs</Link>

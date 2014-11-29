@@ -3,9 +3,9 @@ using EnvDTE;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
 {
-    public class PersistableDomainTypeDefinition : DomainTypeDefinitionBase
+    public class PersistableDomainClassConfig : DomainClassConfigBase
     {
-        public PersistableDomainTypeDefinition()
+        public PersistableDomainClassConfig()
         {
             this.IsAuditable = true;
             this.IsVersionable = true;

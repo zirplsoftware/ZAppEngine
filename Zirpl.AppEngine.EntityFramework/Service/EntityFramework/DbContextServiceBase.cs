@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.Model;
-using Zirpl.AppEngine.Model.Metadata.Constants;
 using Zirpl.AppEngine.Validation;
 
 namespace Zirpl.AppEngine.Service.EntityFramework
@@ -30,10 +29,10 @@ namespace Zirpl.AppEngine.Service.EntityFramework
                 foreach (var error in validationResult.ValidationErrors)
                 {
                     if (validationResult.Entry.State == EntityState.Added
-                        && (error.PropertyName == EntityBaseMetadataConstantsBase.CreatedDate_Name
-                        || error.PropertyName == EntityBaseMetadataConstantsBase.CreatedUserId_Name
-                        || error.PropertyName == EntityBaseMetadataConstantsBase.UpdatedDate_Name
-                        || error.PropertyName == EntityBaseMetadataConstantsBase.UpdatedUserId_Name))
+                        && (error.PropertyName == "CreatedDate"
+                        || error.PropertyName == "CreatedUserId"
+                        || error.PropertyName == "UpdatedDate"
+                        || error.PropertyName == "UpdatedUserId"))
                     {
                         // ignore it- we don't care about these errors during service-level validation
                     }

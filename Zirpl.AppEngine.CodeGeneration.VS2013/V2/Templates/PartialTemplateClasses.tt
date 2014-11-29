@@ -12,7 +12,6 @@
 <#@ import namespace="Microsoft.VisualStudio.Shell.Interop" #>
 <#@ import namespace="EnvDTE" #>
 <#@ import namespace="EnvDTE80" #>
-
 <#
 
 var hostServiceProvider = (IServiceProvider)this.Host;
@@ -23,7 +22,8 @@ var projectItems = GetAllProjectItemsRecursive(projectItem.ContainingProject.Pro
 foreach (var po in projectItems)
 {
 	var fullPath = GetFullPath(po);
-	if (fullPath.EndsWith("Template.tt"))
+	if (fullPath.EndsWith("Template.tt")
+		&& fullPath.Contains("\\V2\\"))
 	{
 		//this.LogLineToBuildPane(fullPath);
 		templateFilePaths.Add(fullPath);
@@ -32,8 +32,6 @@ foreach (var po in projectItems)
 
 #>
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V1;
-
 <#
 
 foreach (var filePath in templateFilePaths)
@@ -45,8 +43,6 @@ foreach (var filePath in templateFilePaths)
 	var classNamespace = filePath.Substring(startOfNamespaceWithinFilePath).Replace(@"\", ".").Replace(".VS2013.", ".").Replace(fileName, "");
 	classNamespace = classNamespace.Substring(0, classNamespace.Length - 1);
 
-	var helperTypeName = filePath.Contains("V2") ? "V2Helper" : "V1Helper";
-
 	
 
 	
@@ -56,14 +52,11 @@ namespace <#= classNamespace #>
 {
 	public partial class <#=  fileNameWithoutExtension #>: IPreprocessedTextTransformation
     {
-        public <#=  fileNameWithoutExtension #>(<#=helperTypeName #> helper)
+        public <#=  fileNameWithoutExtension #>()
         {
-			this.Helper = helper;
-            this.Host = this.Helper.CallingTemplate.Host;
-            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+            this.Host = TextTransformationSession.Instance.CallingTemplate.Host;
+            this.GenerationEnvironment = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment;
         }
-
-        public <#=helperTypeName #> Helper { get; private set; }
     }
 }
 <#

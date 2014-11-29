@@ -3,12 +3,12 @@ using System;
 
 namespace Zirpl.AppEngine.Model
 {
-    public interface IKeyedEntity<TId> : IKeyedEntity
+    public interface IIdable<TId> : IIdable
     {
          TId Id { get; }
     }
 
-    public interface IKeyedEntity
+    public interface IIdable
     {
         Object GetId();
     }

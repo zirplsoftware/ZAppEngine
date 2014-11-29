@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -14,210 +15,45 @@ using Newtonsoft.Json.Serialization;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.IO;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2
 {
-    public class V2Helper : TransformationHelperBase
+    public class TextTransformationSession : TextTransformationSessionBase<TextTransformationSession>
     {
-        public AppDefinition AppDefinition { get; private set; }
+        public AppConfig App { get; private set; }
 
-
-        public V2Helper(TextTransformation callingTemplate)
-            :base(callingTemplate)
+        public void LoadConfiguration(AppConfigParser appConfigParser, DomainClassConfigParser domainClassConfigParser)
         {
-            #region Finding config files
-            var domainTypeConfigFilePaths = new List<string>();
-            String appConfigFilePath = null;
-            var modelConfigFileProjectItems = this.CodeGenerationProject.ProjectItems.GetAllProjectItemsRecursive();
-            foreach (var modelConfigProjectItem in modelConfigFileProjectItems)
+            appConfigParser = appConfigParser ?? new AppConfigParser();
+
+            var domainClassConfigProjectItems = new List<ProjectItem>();
+            ProjectItem appConfigProjectItem = null;
+            var projectItems = this.CodeGenerationProject.ProjectItems.GetAllProjectItemsRecursive();
+            foreach (var configProjectItem in projectItems)
             {
-                var fullPath = modelConfigProjectItem.GetFullPath();
-                this.CallingTemplate.Host.LogLineToBuildPane(fullPath);
+                var fullPath = configProjectItem.GetFullPath();
                 if (fullPath.EndsWith(".domain.zae"))
                 {
-                    domainTypeConfigFilePaths.Add(fullPath);
+                    domainClassConfigProjectItems.Add(configProjectItem);
+                    this.LogLineToBuildPane(fullPath);
                 }
                 else if (fullPath.EndsWith(".app.zae"))
                 {
-                    appConfigFilePath = fullPath;
+                    appConfigProjectItem = configProjectItem;
+                    this.LogLineToBuildPane("App config file: " + fullPath);
                 }
             }
-            #endregion
 
-            #region Parsing app file
-
-            if (appConfigFilePath == null)
-            {
-                throw new Exception("An AppDefinition file must be present (extension .app.zae)");
-            }
-            this.LogLineToBuildPane("AppDefinition config file: " + appConfigFilePath);
-
-            AppDefinitionJson appJson = null;
-            using (var fileStream = new FileStream(appConfigFilePath, FileMode.Open, FileAccess.Read))
-            {
-                var content = fileStream.ReadAllToString();
-                appJson = JsonConvert.DeserializeObject<AppDefinitionJson>(content);
-                //this.LogLineToBuildPane(JsonConvert.SerializeObject(this.AppDefinition));
-            }
-            var appDefinition = new AppDefinition();
-            appDefinition.DataContextName = appJson.DataContextName ?? "MyDataContext";
-            appDefinition.GeneratedCSFileExtension = appJson.GeneratedCSFileExtension ?? ".auto.cs";
-            appDefinition.GeneratedCodeRootFolderName = appJson.DataServiceProjectName ?? @"_auto\";
-
-            // TODO: these can also have defaults based on the namespace of the CodeGeneration project
-            appDefinition.DataServiceProjectName = appJson.DataServiceProjectName;
-            appDefinition.DataServiceTestsProjectName = appJson.DataServiceTestsProjectName;
-            appDefinition.ModelProjectName = appJson.ModelProjectName;
-            appDefinition.ServiceProjectName = appJson.ServiceProjectName;
-            appDefinition.TestsCommonProjectName = appJson.TestsCommonProjectName;
-            appDefinition.WebCoreProjectName = appJson.WebCoreProjectName;
-            appDefinition.WebProjectName = appJson.WebProjectName;
-            this.AppDefinition = appDefinition;
-
-            #endregion
-
-            #region  Parsing model files
-
-            foreach (var path in domainTypeConfigFilePaths)
-            {
-                this.LogLineToBuildPane("DomainType config file: " + path);
-                DomainTypeDefinitionJson domainJson = null;
-                using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    var content = fileStream.ReadAllToString();
-                    domainJson = JsonConvert.DeserializeObject<DomainTypeDefinitionJson>(content);
-                }
-                DomainTypeDefinitionBase domainType = null;
-                if (domainJson.IsPersistable)
-                {
-                    if (domainJson.IsStaticLookup)
-                    {
-                        domainType = new StaticLookupDomainTypeDefinition();
-                    }
-                    else
-                    {
-                        domainType = new PersistableDomainTypeDefinition();
-                    }
-                }
-                else
-                {
-                    domainType = new TransientDomainTypeDefinition();
-                }
-
-                
-                // NOTES:
-                // for this to work, we are expecting the following conventions
-                //
-                // - all DomainType config files are in _config
-                // - they are in a folder specifying which Project (ModelProject, DataServiceProject etc etc)
-                // - the name of the file (minus extension) is the class name
-                // - the file path (minus the file name) is the subnamespace within the project
-                
-
-                // BASE fields
-                //
-                //public String UniqueName { get; set; }
-                //public DomainTypeDefinitionBase InheritsFrom { get; set; }
-                //
-                domainType.IsAbstract = domainJson.IsAbstract;
-                domainType.ClassName = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path));
-                var relativeDirectory = Path.GetDirectoryName(path).SubstringAfterLastInstanceOf("_config\\");
-                var tempUniqueName = relativeDirectory.Replace('\\', '.') + "." + domainType.ClassName;
-                var whichProject = tempUniqueName.SubstringUntilFirstInstanceOf("Project.", true);
-                var whichProjectLower = whichProject.ToLower();
-                if (whichProjectLower == "model")
-                {
-                    domainType.Project = this.ModelProject;
-                }
-                else if (whichProjectLower == "dataservice")
-                {
-                    domainType.Project = this.DataServiceProject;
-                }
-                else if (whichProjectLower == "service")
-                {
-                    domainType.Project = this.ServiceProject;
-                }
-                else if (whichProjectLower == "webcore")
-                {
-                    domainType.Project = this.WebCoreProject;
-                }
-                else if (whichProjectLower == "web")
-                {
-                    domainType.Project = this.WebProject;
-                }
-                else if (whichProjectLower == "testscommon")
-                {
-                    domainType.Project = this.TestsCommonProject;
-                }
-                else if (whichProjectLower == "dataservicetests")
-                {
-                    domainType.Project = this.DataServiceTestsProject;
-                }
-                else if (whichProjectLower == "servicetests")
-                {
-                    domainType.Project = this.ServiceTestsProject;
-                }
-                else
-                {
-                    throw new Exception("Project unknown");
-                }
-                var subNamespace = tempUniqueName.SubstringAfterFirstInstanceOf(whichProject + "Project.", true)
-                                                        .SubstringUntilLastInstanceOf("." + domainType.ClassName)
-                                                        .SubstringUntilLastInstanceOf(domainType.ClassName);
-                domainType.Namespace = domainType.Project.GetDefaultNamespace() +
-                                        (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
-                domainType.FullClassName = domainType.Namespace + "." + domainType.ClassName;
-
-                if (!String.IsNullOrEmpty(domainJson.PluralName))
-                {
-                    domainType.PluralName = domainJson.PluralName;
-                }
-                else if (domainType.ClassName.EndsWith("s"))
-                {
-                    domainType.PluralName = domainType.ClassName + "es";
-                }
-                else if (domainType.ClassName.EndsWith("y"))
-                {
-                    domainType.PluralName = domainType.ClassName.Substring(0, domainType.UniqueName.Length - 1) + "ies";
-                }
-                else
-                {
-                    domainType.PluralName = domainType.ClassName +"s";
-                }
-
-                // StaticLookup-specific fields
-                var staticLookupDomainType = domainType as StaticLookupDomainTypeDefinition;
-                if (staticLookupDomainType != null)
-                {
-                    foreach (var enumValue in domainJson.EnumValues)
-                    {
-                        staticLookupDomainType.EnumValues.Add(new StaticLookupValueDefinition() {Id = enumValue.Id, Name = enumValue.Name});
-                    }
-                }
-
-                // Persistable-specific fields
-                var persistableDomainType = domainType as PersistableDomainTypeDefinition;
-                if (persistableDomainType != null)
-                {
-                    persistableDomainType.IsVersionable = domainJson.IsVersionable;
-                    persistableDomainType.IsAuditable = domainJson.IsAuditable;
-                    persistableDomainType.IsUserCustomizable = domainJson.IsUserCustomizable;
-                    persistableDomainType.IsInsertable = domainJson.IsInsertable;
-                    persistableDomainType.IsUpdatable = domainJson.IsUpdatable;
-                    persistableDomainType.IsDeletable = domainJson.IsDeletable;
-                    persistableDomainType.IsMarkDeletable = domainJson.IsMarkDeletable;
-                }
-
-                this.AppDefinition.DomainTypes.Add(domainType);
-                this.LogLineToBuildPane(JsonConvert.SerializeObject(domainType, Formatting.Indented));
-            }
-            #endregion
+            this.App = appConfigParser.Parse(appConfigProjectItem);
+            this.App.DomainTypes.AddRange(domainClassConfigParser.Parse(domainClassConfigProjectItems));
 
         }
 
         #region Solution/Project members- no virtual members
+
         public DTE2 VisualStudio
         {
             get
@@ -238,7 +74,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         {
             get
             {
-                return this.VisualStudio.GetProject(this.AppDefinition.ModelProjectName);
+                return this.VisualStudio.GetProject(this.App.ModelProjectName);
             }
         }
 
@@ -246,7 +82,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         {
             get
             {
-                return this.VisualStudio.GetProject(this.AppDefinition.DataServiceProjectName);
+                return this.VisualStudio.GetProject(this.App.DataServiceProjectName);
             }
         }
 
@@ -254,7 +90,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         {
             get
             {
-                return this.VisualStudio.GetProject(this.AppDefinition.DataServiceTestsProjectName);
+                return this.VisualStudio.GetProject(this.App.DataServiceTestsProjectName);
             }
         }
 
@@ -262,7 +98,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         {
             get
             {
-                return this.VisualStudio.GetProject(this.AppDefinition.ServiceProjectName);
+                return this.VisualStudio.GetProject(this.App.ServiceProjectName);
             }
         }
 
@@ -270,7 +106,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         {
             get
             {
-                return this.VisualStudio.GetProject(this.AppDefinition.WebProjectName);
+                return this.VisualStudio.GetProject(this.App.WebProjectName);
             }
         }
 
@@ -278,7 +114,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         {
             get
             {
-                return this.VisualStudio.GetProject(this.AppDefinition.WebCoreProjectName);
+                return this.VisualStudio.GetProject(this.App.WebCoreProjectName);
             }
         }
 
@@ -286,7 +122,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         {
             get
             {
-                return this.VisualStudio.GetProject(this.AppDefinition.ServiceTestsProjectName);
+                return this.VisualStudio.GetProject(this.App.ServiceTestsProjectName);
             }
         }
 
@@ -294,17 +130,16 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         {
             get
             {
-                return this.VisualStudio.GetProject(this.AppDefinition.TestsCommonProjectName);
+                return this.VisualStudio.GetProject(this.App.TestsCommonProjectName);
             }
         }
-
 
         //public string GetGeneratedCodeFolder(PersistableDomainType domainType, String subNamespace = null, bool includeGeneratedCodeRootFolderName = true)
         //{
         //    var folderHeirarchy = new List<string>();
         //    if (includeGeneratedCodeRootFolderName)
         //    {
-        //        folderHeirarchy.Add(this.AppDefinition.GeneratedCodeRootFolderName);
+        //        folderHeirarchy.Add(this.App.GeneratedCodeRootFolderName);
         //    }
         //    if (subNamespace != null)
         //    {
@@ -320,7 +155,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //    {
         //        subNamespace += ".", domainType.UniqueName.Substring(0, domainType.UniqueName.Length - className.Length - 1);
         //    }
-        //    return (includeGeneratedCodeRootFolderName ? this.AppDefinition.GeneratedCodeRootFolderName : "") + domainType.SubNamespace.Replace(".", @"\");
+        //    return (includeGeneratedCodeRootFolderName ? this.App.GeneratedCodeRootFolderName : "") + domainType.SubNamespace.Replace(".", @"\");
         //}
         #endregion
 
@@ -330,14 +165,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
 
         //public PersistableDomainType GetDomainTypeByFullTypeName(string fullTypeName)
         //{
-        //    return (from dt in this.AppDefinition.PersistableTypes
+        //    return (from dt in this.App.PersistableTypes
         //            where this.GetModelTypeFullName(dt) == fullTypeName
         //            select dt).SingleOrDefault();
         //}
 
         //public PersistableDomainType GetDomainTypeByName(string name)
         //{
-        //    return (from dt in this.AppDefinition.PersistableTypes
+        //    return (from dt in this.App.PersistableTypes
         //            where dt.UniqueName == name
         //            select dt).SingleOrDefault();
         //}
@@ -345,7 +180,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               //where dt.ModelOptions.GenerateModel
         //               select dt;
         //    }
@@ -354,7 +189,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where dt.IsCustomizable
         //                    //&& !dt.IsAbstract  TODO: add in a file validation at the beginning that checks to ensure only concrete classes are extendable
         //                    // TODO: OR should abstract classes be customizable? in some ways, it may make more sense to put it there
@@ -365,7 +200,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               //where dt.ModelOptions.GenerateMetadataConstants
         //               select dt;
         //    }
@@ -374,7 +209,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where dt.IsPersistable
         //                     && dt.IsDictionary
         //                     //&& dt.ModelOptions.GenerateEnum
@@ -385,7 +220,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where dt.IsPersistable
         //                    //&& dt.DataServiceOptions.GenerateDataServiceInterface
         //               select dt;
@@ -395,7 +230,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where dt.IsPersistable
         //                    //&& dt.DataServiceOptions.GenerateDataService
         //               select dt;
@@ -405,7 +240,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where dt.IsPersistable
         //                    //&& dt.DataServiceOptions.GenerateDataContextProperty
         //               select dt;
@@ -415,7 +250,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where dt.IsPersistable
         //                    //&& dt.DataServiceOptions.GenerateEntityFrameworkMapping
         //               select dt;
@@ -425,7 +260,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where dt.IsPersistable
         //                    //&& dt.ServiceOptions.GenerateServiceInterface
         //               select dt;
@@ -435,7 +270,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where dt.IsPersistable
         //                    //&& dt.ServiceOptions.GenerateService
         //               select dt;
@@ -445,7 +280,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               where !dt.IsDictionary
         //                     //dt.ServiceOptions.GenerateValidator
         //                     //&& !dt.IsDictionary
@@ -462,7 +297,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return (from dt in this.AppDefinition.PersistableTypes
+        //        return (from dt in this.App.PersistableTypes
         //            where dt.IsCustomizable
         //            select dt).Any();
         //    }
@@ -471,7 +306,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartModelFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetModelTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetModelTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.ModelProject,
         //        this.GetGeneratedCodeFolder(domainType),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -496,8 +331,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //        customizableInterfaceDeclaration =
         //            String.Format("ICustomizable<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetCustomFieldValueTypeName(domainType), this.GetModelIdTypeName(domainType));
         //    }
-        //    var baseDeclaration = !String.IsNullOrEmpty(domainType.InheritsFrom)
-        //            ? " : " + domainType.InheritsFrom
+        //    var baseDeclaration = !String.IsNullOrEmpty(domainType.ParentDomainClass)
+        //            ? " : " + domainType.ParentDomainClass
         //            : domainType.IsPersistable 
         //                ? domainType.IsDictionary
         //                    ? string.Format(" : DictionaryEntityBase<{0}, {1}>", this.GetModelIdTypeName(domainType), this.GetModelEnumTypeName(domainType))
@@ -527,9 +362,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartMetadataConstantsFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetMetadataConstantsTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetMetadataConstantsTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.ModelProject,
-        //        this.AppDefinition.GeneratedCodeRootFolderName + @"Metadata\Constants\" + this.GetGeneratedCodeFolder(domainType, false),
+        //        this.App.GeneratedCodeRootFolderName + @"Metadata\Constants\" + this.GetGeneratedCodeFolder(domainType, false),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public virtual string GetMetadataConstantsNamespace(PersistableDomainType domainType)
@@ -547,8 +382,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //}
         //public virtual string GetMetadataConstantsBaseDeclaration(PersistableDomainType domainType)
         //{
-        //    return !String.IsNullOrEmpty(domainType.InheritsFrom)
-        //        ? " : " + this.GetMetadataConstantsTypeFullName(this.GetDomainTypeByName(domainType.InheritsFrom))
+        //    return !String.IsNullOrEmpty(domainType.ParentDomainClass)
+        //        ? " : " + this.GetMetadataConstantsTypeFullName(this.GetDomainTypeByName(domainType.ParentDomainClass))
         //        : domainType.IsPersistable 
         //            ? domainType.IsDictionary
         //                ? " : DictionaryEntityBaseMetadataConstantsBase"
@@ -561,7 +396,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartModelEnumFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetModelEnumTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetModelEnumTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.ModelProject,
         //        this.GetGeneratedCodeFolder(domainType),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -591,9 +426,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartCustomFieldValueFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetCustomFieldValueTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetCustomFieldValueTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.ModelProject,
-        //        this.AppDefinition.GeneratedCodeRootFolderName + @"Customization\" + this.GetGeneratedCodeFolder(domainType, false),
+        //        this.App.GeneratedCodeRootFolderName + @"Customization\" + this.GetGeneratedCodeFolder(domainType, false),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public virtual string GetCustomFieldValueNamespace(PersistableDomainType domainType)
@@ -620,7 +455,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartDataServiceInterfaceFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetDataServiceInterfaceTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetDataServiceInterfaceTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.DataServiceProject,
         //        this.GetGeneratedCodeFolder(domainType),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -649,7 +484,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartDataServiceFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetDataServiceTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetDataServiceTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.DataServiceProject,
         //        this.GetGeneratedCodeFolder(domainType),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -669,8 +504,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public virtual string GetDataServiceBaseDeclaration(PersistableDomainType domainType)
         //{
         //    return domainType.IsDictionary
-        //        ? string.Format(" : ReadOnlyDbContextDataServiceBase<{0}, {1}, {2}>, {3}", this.AppDefinition.DataContextName, this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetDataServiceInterfaceTypeName(domainType))
-        //        : string.Format(" : DbContextDataServiceBase<{0}, {1}, {2}>, {3}", this.AppDefinition.DataContextName, this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetDataServiceInterfaceTypeName(domainType));
+        //        ? string.Format(" : ReadOnlyDbContextDataServiceBase<{0}, {1}, {2}>, {3}", this.App.DataContextName, this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetDataServiceInterfaceTypeName(domainType))
+        //        : string.Format(" : DbContextDataServiceBase<{0}, {1}, {2}>, {3}", this.App.DataContextName, this.GetModelTypeName(domainType), this.GetModelIdTypeName(domainType), this.GetDataServiceInterfaceTypeName(domainType));
         //}
         //#endregion
 
@@ -678,9 +513,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartDataContextFile()
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetDataContextTypeName() + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetDataContextTypeName() + this.App.GeneratedCSFileExtension,
         //        this.DataServiceProject,
-        //        this.AppDefinition.GeneratedCodeRootFolderName,
+        //        this.App.GeneratedCodeRootFolderName,
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public virtual string GetDataContextNamespace()
@@ -689,7 +524,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //}
         //public virtual String GetDataContextTypeName()
         //{
-        //    return this.AppDefinition.DataContextName;
+        //    return this.App.DataContextName;
         //}
         //public virtual String GetDataContextTypeFullName()
         //{
@@ -705,9 +540,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartEntityFrameworkMappingFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetEntityFrameworkMappingTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetEntityFrameworkMappingTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.DataServiceProject,
-        //        this.AppDefinition.GeneratedCodeRootFolderName + @"Mapping",
+        //        this.App.GeneratedCodeRootFolderName + @"Mapping",
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public virtual string GetEntityFrameworkMappingNamespace(PersistableDomainType domainType)
@@ -734,7 +569,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartServiceInterfaceFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetServiceInterfaceTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetServiceInterfaceTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.ServiceProject,
         //        this.GetGeneratedCodeFolder(domainType),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -763,7 +598,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartServiceFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetServiceTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetServiceTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.ServiceProject,
         //        this.GetGeneratedCodeFolder(domainType),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -794,7 +629,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //    this.FileManager.StartNewFile(
         //        this.GetValidatorFileName(domainType),
         //        this.ServiceProject,
-        //        this.AppDefinition.GeneratedCodeRootFolderName + @"Validation\" + this.GetGeneratedCodeFolder(domainType, false),
+        //        this.App.GeneratedCodeRootFolderName + @"Validation\" + this.GetGeneratedCodeFolder(domainType, false),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public virtual string GetValidatorNamespace(PersistableDomainType domainType)
@@ -819,7 +654,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //}
         //public virtual String GetValidatorFileName(PersistableDomainType domainType)
         //{
-        //    return domainType.UniqueName + "Validator" + this.AppDefinition.GeneratedCSFileExtension;
+        //    return domainType.UniqueName + "Validator" + this.App.GeneratedCSFileExtension;
         //}
         //public virtual string GetValidatorTypeFullName(PersistableDomainType domainType)
         //{
@@ -827,8 +662,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //}
         //public virtual string GetValidatorBaseDeclaration(PersistableDomainType domainType)
         //{
-        //    return !String.IsNullOrEmpty(domainType.InheritsFrom)
-        //            ? string.Format(" : {0}", this.GetValidatorTypeFullName(this.GetDomainTypeByName(domainType.InheritsFrom)).Replace("<T>", String.Format("<{0}>", this.GetModelTypeName(domainType))))
+        //    return !String.IsNullOrEmpty(domainType.ParentDomainClass)
+        //            ? string.Format(" : {0}", this.GetValidatorTypeFullName(this.GetDomainTypeByName(domainType.ParentDomainClass)).Replace("<T>", String.Format("<{0}>", this.GetModelTypeName(domainType))))
         //            : domainType.IsPersistable 
         //                ? domainType.IsAbstract
         //                    ? " : DbEntityValidatorBase<T>"
@@ -844,7 +679,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartPersistableModelTestsEntityWrapperFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetPersistableModelTestsEntityWrapperTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension, 
+        //        this.GetPersistableModelTestsEntityWrapperTypeName(domainType) + this.App.GeneratedCSFileExtension, 
         //        this.TestsCommonProject, 
         //        this.GetGeneratedCodeFolder(domainType), 
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -869,7 +704,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartPersistableModelTestsStrategyFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetPersistableModelTestsStrategyTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension, 
+        //        this.GetPersistableModelTestsStrategyTypeName(domainType) + this.App.GeneratedCSFileExtension, 
         //        this.TestsCommonProject, 
         //        this.GetGeneratedCodeFolder(domainType), 
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -900,9 +735,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartDataServiceTestsDataServicesProviderFile()
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetDataServiceTestsDataServicesProviderTypeName() + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetDataServiceTestsDataServicesProviderTypeName() + this.App.GeneratedCSFileExtension,
         //        this.DataServiceTestsProject,
-        //        this.AppDefinition.GeneratedCodeRootFolderName,
+        //        this.App.GeneratedCodeRootFolderName,
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
 
@@ -922,7 +757,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartDataServiceTestsFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetDataServiceTestsTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetDataServiceTestsTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.DataServiceTestsProject,
         //        this.GetGeneratedCodeFolder(domainType),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -957,9 +792,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartServiceTestsServicesProviderFile()
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetServiceTestsServicesProviderTypeName() + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetServiceTestsServicesProviderTypeName() + this.App.GeneratedCSFileExtension,
         //        this.ServiceTestsProject,
-        //        this.AppDefinition.GeneratedCodeRootFolderName,
+        //        this.App.GeneratedCodeRootFolderName,
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public virtual String GetServiceTestsServicesProviderTypeName()
@@ -982,7 +817,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //public void StartServiceTestsFile(PersistableDomainType domainType)
         //{
         //    this.FileManager.StartNewFile(
-        //        this.GetServiceTestsTypeName(domainType) + this.AppDefinition.GeneratedCSFileExtension,
+        //        this.GetServiceTestsTypeName(domainType) + this.App.GeneratedCSFileExtension,
         //        this.ServiceTestsProject,
         //        this.GetGeneratedCodeFolder(domainType),
         //        new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
@@ -1124,43 +959,43 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
 
         //public void StartSupportViewModelFile(PersistableDomainType domainType)
         //{
-        //    this.FileManager.StartNewFile(domainType.UniqueName + "Model.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile(domainType.UniqueName + "Model.auto.cs", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Areas\Support\Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartDictionaryViewModelFile(PersistableDomainType domainType)
         //{
-        //    this.FileManager.StartNewFile(domainType.UniqueName + "Model.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile(domainType.UniqueName + "Model.auto.cs", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Models\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartLookupsControllerFile()
         //{
-        //    this.FileManager.StartNewFile("LookupsController.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Controllers\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile("LookupsController.auto.cs", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Controllers\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartSupportControllerFile(PersistableDomainType domainType)
         //{
-        //    this.FileManager.StartNewFile(this.GetPluralPropertyName(domainType) + "Controller.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Controllers\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile(this.GetPluralPropertyName(domainType) + "Controller.auto.cs", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Areas\Support\Controllers\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartSupportIndexViewFile(PersistableDomainType domainType)
         //{
-        //    this.FileManager.StartNewFile("_GridColumnsAndModel.auto.cshtml", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Views\" + this.GetPluralPropertyName(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile("_GridColumnsAndModel.auto.cshtml", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Areas\Support\Views\" + this.GetPluralPropertyName(domainType), new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartSupportAreaRegistrationFile()
         //{
-        //    this.FileManager.StartNewFile("SupportAreaRegistration.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile("SupportAreaRegistration.auto.cs", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Areas\Support\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartRouteUtilsFile()
         //{
-        //    this.FileManager.StartNewFile("RouteUtils.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Core\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile("RouteUtils.auto.cs", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Core\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartModelMappingFile()
         //{
-        //    this.FileManager.StartNewFile("MappingModule.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Models\Mapping\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile("MappingModule.auto.cs", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Models\Mapping\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartSupportModelMappingFile()
         //{
-        //    this.FileManager.StartNewFile("MappingModule.auto.cs", this.WebProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Areas\Support\Models\Mapping\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile("MappingModule.auto.cs", this.WebProject, this.App.GeneratedCodeRootFolderName + @"Areas\Support\Models\Mapping\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
         //public void StartSupportHtmlUtilsFile()
         //{
-        //    this.FileManager.StartNewFile("HtmlUtils.auto.cs", this.WebCoreProject, this.AppDefinition.GeneratedCodeRootFolderName + @"Mvc\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
+        //    this.FileManager.StartNewFile("HtmlUtils.auto.cs", this.WebCoreProject, this.App.GeneratedCodeRootFolderName + @"Mvc\", new OutputFileProperties() { BuildAction = OutputFileBuildActionType.Compile });
         //}
 
 
@@ -1172,7 +1007,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               //where dt.WebOptions.GenerateSupportViewModel
         //               //&& dt.IsDictionary
         //               select dt;
@@ -1182,7 +1017,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //              // where dt.WebOptions.GenerateSupportController
         //              where!dt.IsDictionary
         //                     //&& !dt.IsDictionary
@@ -1193,7 +1028,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               //where dt.WebOptions.GenerateSupportIndexView
         //               //      && !dt.IsDictionary
         //               where !dt.IsDictionary
@@ -1204,7 +1039,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //{
         //    get
         //    {
-        //        return from dt in this.AppDefinition.PersistableTypes
+        //        return from dt in this.App.PersistableTypes
         //               //where dt.WebOptions.GenerateLookupsController
         //               //      && dt.IsDictionary
         //               where !dt.IsDictionary
@@ -1244,16 +1079,16 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
 
         //public string GetSupportViewModelBaseClass(PersistableDomainType domainType)
         //{
-        //    return !String.IsNullOrEmpty(domainType.InheritsFrom)
-        //            ? this.GetDomainTypeByName(domainType.InheritsFrom).UniqueName + "Model"
+        //    return !String.IsNullOrEmpty(domainType.ParentDomainClass)
+        //            ? this.GetDomainTypeByName(domainType.ParentDomainClass).UniqueName + "Model"
         //            : domainType.IsDictionary
         //                ? string.Format("DictionaryEntityModelBase<{0}>", this.GetModelIdTypeName(domainType))
         //                : string.Format("AuditableModelBase<{0}>", this.GetModelIdTypeName(domainType));
         //}
         //public string GetSupportViewModelMetadataConstantsBaseClass(PersistableDomainType domainType)
         //{
-        //    return !String.IsNullOrEmpty(domainType.InheritsFrom)
-        //            ? this.GetDomainTypeByName(domainType.InheritsFrom).UniqueName + "ModelMetadataConstants"
+        //    return !String.IsNullOrEmpty(domainType.ParentDomainClass)
+        //            ? this.GetDomainTypeByName(domainType.ParentDomainClass).UniqueName + "ModelMetadataConstants"
         //            : domainType.IsDictionary
         //                ? ""
         //                : "AuditableModelBaseMetadataConstants";

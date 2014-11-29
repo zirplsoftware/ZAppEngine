@@ -1,0 +1,4 @@
+﻿{
+    "isDeletable": false,
+    "inheritsFrom" :  "AddressBase"
+}

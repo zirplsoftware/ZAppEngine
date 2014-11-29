@@ -1,0 +1,109 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.12.0" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.Interop" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.Interop.8.0" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="EnvDTE80" #>
+<#@ assembly name="VSLangProj" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Microsoft.VisualStudio.Shell.Interop" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="EnvDTE80" #>
+
+<#
+
+var hostServiceProvider = (IServiceProvider)this.Host;
+var dte = (DTE)hostServiceProvider.GetService(typeof(DTE));
+var projectItem = dte.Solution.FindProjectItem(this.Host.TemplateFile);
+var templateFilePaths = new List<string>();
+var projectItems = GetAllProjectItemsRecursive(projectItem.ContainingProject.ProjectItems);
+foreach (var po in projectItems)
+{
+	var fullPath = GetFullPath(po);
+	if (fullPath.EndsWith("Template.tt")
+		&& fullPath.Contains("\\V1\\"))
+	{
+		//this.LogLineToBuildPane(fullPath);
+		templateFilePaths.Add(fullPath);
+	}
+}
+
+#>
+using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.CodeGeneration.V1;
+
+<#
+
+foreach (var filePath in templateFilePaths)
+{
+	this.LogLineToBuildPane(filePath);
+	var fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(filePath);
+	var fileName = System.IO.Path.GetFileName(filePath);
+	var startOfNamespaceWithinFilePath = filePath.IndexOf("Zirpl.AppEngine.CodeGeneration.VS2013");
+	var classNamespace = filePath.Substring(startOfNamespaceWithinFilePath).Replace(@"\", ".").Replace(".VS2013.", ".").Replace(fileName, "");
+	classNamespace = classNamespace.Substring(0, classNamespace.Length - 1);
+
+	var helperTypeName = "V1Helper";
+
+	
+
+	
+#>
+
+namespace <#= classNamespace #>
+{
+	public partial class <#=  fileNameWithoutExtension #>: IPreprocessedTextTransformation
+    {
+        public <#=  fileNameWithoutExtension #>(<#=helperTypeName #> helper)
+        {
+			this.Helper = helper;
+            this.Host = this.Helper.CallingTemplate.Host;
+            this.GenerationEnvironment = this.Helper.CallingTemplate.GenerationEnvironment;
+        }
+
+        public <#=helperTypeName #> Helper { get; private set; }
+    }
+}
+<#
+}
+#>
+<#+
+public IEnumerable<ProjectItem> GetAllProjectItemsRecursive(ProjectItems projectItems)
+{
+    foreach (ProjectItem projectItem in projectItems)
+    {
+        if (projectItem.ProjectItems == null) continue;
+
+        foreach (ProjectItem subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
+        {
+            yield return subItem;
+        }
+
+        yield return projectItem;
+    }
+}
+public string GetFullPath(ProjectItem item)
+{
+    if (item != null
+        && item.Properties != null
+        && item.Properties.Item("FullPath") != null
+        && item.Properties.Item("FullPath").Value != null)
+    {
+        return item.Properties.Item("FullPath").Value.ToString();
+    }
+    return "";
+}
+public void LogLineToBuildPane(string message)
+{
+    IVsOutputWindow outWindow = (this.Host as IServiceProvider).GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+    Guid generalPaneGuid = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.BuildOutputPane_guid;
+    // P.S. There's also the GUID_OutWindowDebugPane available.
+    IVsOutputWindowPane generalPane;
+    outWindow.GetPane(ref generalPaneGuid, out generalPane);
+    generalPane.OutputString(message + "\r\n");
+    generalPane.Activate(); // Brings this pane into view
+}
+#>

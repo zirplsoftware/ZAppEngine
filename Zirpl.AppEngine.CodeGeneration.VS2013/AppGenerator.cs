@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EnvDTE;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration;
 using Zirpl.AppEngine.CodeGeneration.V1;
 using Zirpl.AppEngine.CodeGeneration.V2;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers;
 
 namespace Zirpl.AppEngine.CodeGeneration
 {
     public static class AppGenerator
     {
-        public static void GenerateApp(this TextTransformation callingTemplate, V2Helper helper = null)
+        public static void GenerateApp(
+            this TextTransformation callingTemplate, 
+            AppConfigParser appConfigParser = null, 
+            DomainClassConfigParser domainClassConfigParser = null)
         {
-            using (helper = helper ?? new V2Helper(callingTemplate))
+            using (var session = V2.TextTransformationSession.StartSession(callingTemplate))
             {
+                session.LoadConfiguration(
+                    appConfigParser ?? new AppConfigParser(),
+                    domainClassConfigParser ?? new DomainClassConfigParser());
             }
         }
+
         public static void GenerateV1App(this TextTransformation callingTemplate, V1Helper helper = null)
         {
             using (helper = helper ?? new V1Helper(callingTemplate))

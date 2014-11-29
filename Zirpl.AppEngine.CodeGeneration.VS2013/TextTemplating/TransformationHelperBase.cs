@@ -12,7 +12,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         protected TransformationHelperBase(TextTransformation callingTemplate)
         {
             this.CallingTemplate = new TextTransformationWrapper(callingTemplate);
-            this.FileManager = new TemplateFileManager(this.CallingTemplate);
+            FileManager = new TemplateFileManager(this.CallingTemplate);
         }
 
         public ITextTransformation CallingTemplate { get; private set; }
@@ -20,7 +20,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         
         public void Dispose()
         {
-            this.FileManager.Finish();
+            FileManager.Finish();
         }
     }
 }

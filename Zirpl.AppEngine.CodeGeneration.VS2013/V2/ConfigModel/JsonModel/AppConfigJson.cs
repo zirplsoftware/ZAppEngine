@@ -5,7 +5,7 @@ using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel
 {
-    public class AppDefinitionJson
+    public class AppConfigJson
     {
         public String GeneratedCodeRootFolderName { get; set; }
         public String GeneratedCSFileExtension { get; set; }
