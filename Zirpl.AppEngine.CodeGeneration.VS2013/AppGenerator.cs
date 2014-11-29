@@ -17,7 +17,7 @@ namespace Zirpl.AppEngine.CodeGeneration
             {
                 new Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.ModelTemplate(helper).TransformText();
                 new Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Customization.CustomFieldValueTemplate(helper).TransformText();
-                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Metadata.MetadataConstantsTemplate(helper).TransformText();
+                new Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Metadata.Constants.MetadataConstantsTemplate(helper).TransformText();
                 new Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.EnumTemplate(helper).TransformText();
                 new Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.DataServiceInterfaceTemplate(helper).TransformText();
                 new Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework.DataServiceTemplate(helper).TransformText();

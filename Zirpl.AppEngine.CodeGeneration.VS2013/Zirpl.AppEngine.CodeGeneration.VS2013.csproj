@@ -187,7 +187,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="V1\Templates\Model\Metadata\MetadataConstantsTemplate.cs">
+    <Compile Include="V1\Templates\Model\Metadata\Constants\MetadataConstantsTemplate.cs">
       <DependentUpon>MetadataConstantsTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
@@ -289,7 +289,7 @@
       <LastGenOutput>EnumTemplate.cs</LastGenOutput>
       <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V1\Templates\Model\Metadata\MetadataConstantsTemplate.tt">
+    <None Include="V1\Templates\Model\Metadata\Constants\MetadataConstantsTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>MetadataConstantsTemplate.cs</LastGenOutput>
       <TransformOnBuild>True</TransformOnBuild>
