@@ -54,10 +54,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="_config\AppDefinition.app.json">
+    <None Include="_config\AppDefinition.app.zae">
       <SubType>Designer</SubType>
     </None>
-    <None Include="_config\ModelProject\Address.persistable.json">
+    <None Include="_config\ModelProject\Address.domain.zae">
       <SubType>Designer</SubType>
     </None>
     <Content Include="_config\ModelProject\Catalog\Brand.model.xml" />

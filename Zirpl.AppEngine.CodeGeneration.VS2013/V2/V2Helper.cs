@@ -13,10 +13,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.IO;
-using Property = Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableProperty;
-using DomainType = Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainType;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2
 {
@@ -28,129 +27,194 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         public V2Helper(TextTransformation callingTemplate)
             :base(callingTemplate)
         {
-            #region loading config
-            var domaintTypeConfigFilePaths = new List<string>();
-            String appDefinitionConfigFilePath = null;
+            #region Finding config files
+            var domainTypeConfigFilePaths = new List<string>();
+            String appConfigFilePath = null;
             var modelConfigFileProjectItems = this.CodeGenerationProject.ProjectItems.GetAllProjectItemsRecursive();
             foreach (var modelConfigProjectItem in modelConfigFileProjectItems)
             {
                 var fullPath = modelConfigProjectItem.GetFullPath();
                 this.CallingTemplate.Host.LogLineToBuildPane(fullPath);
-                if (fullPath.EndsWith(".persistable.json"))
+                if (fullPath.EndsWith(".domain.zae"))
                 {
-                    domaintTypeConfigFilePaths.Add(fullPath);
+                    domainTypeConfigFilePaths.Add(fullPath);
                 }
-                else if (fullPath.EndsWith(".app.json"))
+                else if (fullPath.EndsWith(".app.zae"))
                 {
-                    appDefinitionConfigFilePath = fullPath;
+                    appConfigFilePath = fullPath;
                 }
             }
+            #endregion
 
-            if (appDefinitionConfigFilePath != null)
+            #region Parsing app file
+
+            if (appConfigFilePath == null)
             {
-                this.LogLineToBuildPane("AppDefinition config file: " + appDefinitionConfigFilePath);
-                using (var fileStream = new FileStream(appDefinitionConfigFilePath, FileMode.Open, FileAccess.Read))
+                throw new Exception("An AppDefinition file must be present (extension .app.zae)");
+            }
+            this.LogLineToBuildPane("AppDefinition config file: " + appConfigFilePath);
+
+            AppDefinitionJson appJson = null;
+            using (var fileStream = new FileStream(appConfigFilePath, FileMode.Open, FileAccess.Read))
+            {
+                var content = fileStream.ReadAllToString();
+                appJson = JsonConvert.DeserializeObject<AppDefinitionJson>(content);
+                //this.LogLineToBuildPane(JsonConvert.SerializeObject(this.AppDefinition));
+            }
+            var appDefinition = new AppDefinition();
+            appDefinition.DataContextName = appJson.DataContextName ?? "MyDataContext";
+            appDefinition.GeneratedCSFileExtension = appJson.GeneratedCSFileExtension ?? ".auto.cs";
+            appDefinition.GeneratedCodeRootFolderName = appJson.DataServiceProjectName ?? @"_auto\";
+
+            // TODO: these can also have defaults based on the namespace of the CodeGeneration project
+            appDefinition.DataServiceProjectName = appJson.DataServiceProjectName;
+            appDefinition.DataServiceTestsProjectName = appJson.DataServiceTestsProjectName;
+            appDefinition.ModelProjectName = appJson.ModelProjectName;
+            appDefinition.ServiceProjectName = appJson.ServiceProjectName;
+            appDefinition.TestsCommonProjectName = appJson.TestsCommonProjectName;
+            appDefinition.WebCoreProjectName = appJson.WebCoreProjectName;
+            appDefinition.WebProjectName = appJson.WebProjectName;
+            this.AppDefinition = appDefinition;
+
+            #endregion
+
+            #region  Parsing model files
+
+            foreach (var path in domainTypeConfigFilePaths)
+            {
+                this.LogLineToBuildPane("DomainType config file: " + path);
+                DomainTypeDefinitionJson domainJson = null;
+                using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     var content = fileStream.ReadAllToString();
-                    this.AppDefinition = JsonConvert.DeserializeObject<AppDefinition>(content);
-                    //this.LogLineToBuildPane(JsonConvert.SerializeObject(this.AppDefinition));
+                    domainJson = JsonConvert.DeserializeObject<DomainTypeDefinitionJson>(content);
                 }
-                foreach (var path in domaintTypeConfigFilePaths)
+                DomainTypeDefinitionBase domainType = null;
+                if (domainJson.IsPersistable)
                 {
-                    this.LogLineToBuildPane("DomainType config file: " + path);
-                    DomainType domainType = null;
-                    using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    if (domainJson.IsStaticLookup)
                     {
-                        var content = fileStream.ReadAllToString();
-                        domainType = JsonConvert.DeserializeObject<DomainType>(content);
-                    }
-
-
-                    // NOTES:
-                    // for this to work, we are expecting the following conventions
-                    //
-                    // - all DomainType config files are in _config
-                    // - they are in a folder specifying which Project
-                    // - the name of the file (minus extension) is the class name
-                    // - the file path (minus the file name) is the subnamespace within the project
-                    domainType.ConfigFilePath = path;
-                    domainType.ClassName = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path));
-                    var relativeDirectory = Path.GetDirectoryName(path).SubstringAfterLastInstanceOf("_config\\");
-                    var tempUniqueName = relativeDirectory.Replace('\\', '.') + "." + domainType.ClassName;
-                    var whichProject = tempUniqueName.SubstringUntilFirstInstanceOf("Project.", true);
-                    var whichProjectLower = whichProject.ToLower();
-                    if (whichProjectLower == "model")
-                    {
-                        domainType.Project = this.ModelProject;
-                    }
-                    else if (whichProjectLower == "dataservice")
-                    {
-                        domainType.Project = this.DataServiceProject;
-                    }
-                    else if (whichProjectLower == "service")
-                    {
-                        domainType.Project = this.ServiceProject;
-                    }
-                    else if (whichProjectLower == "webcore")
-                    {
-                        domainType.Project = this.WebCoreProject;
-                    }
-                    else if (whichProjectLower == "web")
-                    {
-                        domainType.Project = this.WebProject;
-                    }
-                    else if (whichProjectLower == "testscommon")
-                    {
-                        domainType.Project = this.TestsCommonProject;
-                    }
-                    else if (whichProjectLower == "dataservicetests")
-                    {
-                        domainType.Project = this.DataServiceTestsProject;
-                    }
-                    else if (whichProjectLower == "servicetests")
-                    {
-                        domainType.Project = this.ServiceTestsProject;
+                        domainType = new StaticLookupDomainTypeDefinition();
                     }
                     else
                     {
-                        throw new Exception("Project unknown");
+                        domainType = new PersistableDomainTypeDefinition();
                     }
-                    var subNamespace = tempUniqueName.SubstringAfterFirstInstanceOf(whichProject + "Project.", true)
-                                                            .SubstringUntilLastInstanceOf("." + domainType.ClassName)
-                                                            .SubstringUntilLastInstanceOf(domainType.ClassName);
-                    domainType.Namespace = domainType.Project.GetDefaultNamespace() +
-                                           (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
-                    domainType.FullClassName = domainType.Namespace + "." + domainType.ClassName;
-                    domainType.IsPersistable = Path.GetFileNameWithoutExtension(Path.GetFileName(path)).ToLower().EndsWith(".persistable");
-                    if (!domainType.IsPersistable)
-                    {
-                        // clean up everything we DON't need for a transient class
-                        //
-                        domainType.IsStaticLookup = false;
-                        domainType.IsVersionable = false;
-                        domainType.IsAuditable = false;
-                        domainType.IsUserCustomizable = false;
-                        domainType.IsInsertable = false;
-                        domainType.IsUpdateable = false;
-                        domainType.IsDeletable = false;
-                        domainType.IsMarkDeletable = false;
-                        domainType.EnumValueEntries = null;
-                    }
-
-
-
-                            //public String UniqueName { get; set; }
-
-                    this.AppDefinition.DomainTypes.Add(domainType);
-                    this.LogLineToBuildPane(JsonConvert.SerializeObject(domainType, Formatting.Indented));
                 }
-            }
-            else
-            {
-                this.LogLineToBuildPane("No AppDefinition config file found: " + appDefinitionConfigFilePath);
-            }
+                else
+                {
+                    domainType = new TransientDomainTypeDefinition();
+                }
 
+                
+                // NOTES:
+                // for this to work, we are expecting the following conventions
+                //
+                // - all DomainType config files are in _config
+                // - they are in a folder specifying which Project (ModelProject, DataServiceProject etc etc)
+                // - the name of the file (minus extension) is the class name
+                // - the file path (minus the file name) is the subnamespace within the project
+                
+
+                // BASE fields
+                //
+                //public String UniqueName { get; set; }
+                //public DomainTypeDefinitionBase InheritsFrom { get; set; }
+                //
+                domainType.IsAbstract = domainJson.IsAbstract;
+                domainType.ClassName = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path));
+                var relativeDirectory = Path.GetDirectoryName(path).SubstringAfterLastInstanceOf("_config\\");
+                var tempUniqueName = relativeDirectory.Replace('\\', '.') + "." + domainType.ClassName;
+                var whichProject = tempUniqueName.SubstringUntilFirstInstanceOf("Project.", true);
+                var whichProjectLower = whichProject.ToLower();
+                if (whichProjectLower == "model")
+                {
+                    domainType.Project = this.ModelProject;
+                }
+                else if (whichProjectLower == "dataservice")
+                {
+                    domainType.Project = this.DataServiceProject;
+                }
+                else if (whichProjectLower == "service")
+                {
+                    domainType.Project = this.ServiceProject;
+                }
+                else if (whichProjectLower == "webcore")
+                {
+                    domainType.Project = this.WebCoreProject;
+                }
+                else if (whichProjectLower == "web")
+                {
+                    domainType.Project = this.WebProject;
+                }
+                else if (whichProjectLower == "testscommon")
+                {
+                    domainType.Project = this.TestsCommonProject;
+                }
+                else if (whichProjectLower == "dataservicetests")
+                {
+                    domainType.Project = this.DataServiceTestsProject;
+                }
+                else if (whichProjectLower == "servicetests")
+                {
+                    domainType.Project = this.ServiceTestsProject;
+                }
+                else
+                {
+                    throw new Exception("Project unknown");
+                }
+                var subNamespace = tempUniqueName.SubstringAfterFirstInstanceOf(whichProject + "Project.", true)
+                                                        .SubstringUntilLastInstanceOf("." + domainType.ClassName)
+                                                        .SubstringUntilLastInstanceOf(domainType.ClassName);
+                domainType.Namespace = domainType.Project.GetDefaultNamespace() +
+                                        (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
+                domainType.FullClassName = domainType.Namespace + "." + domainType.ClassName;
+
+                if (!String.IsNullOrEmpty(domainJson.PluralName))
+                {
+                    domainType.PluralName = domainJson.PluralName;
+                }
+                else if (domainType.ClassName.EndsWith("s"))
+                {
+                    domainType.PluralName = domainType.ClassName + "es";
+                }
+                else if (domainType.ClassName.EndsWith("y"))
+                {
+                    domainType.PluralName = domainType.ClassName.Substring(0, domainType.UniqueName.Length - 1) + "ies";
+                }
+                else
+                {
+                    domainType.PluralName = domainType.ClassName +"s";
+                }
+
+                // StaticLookup-specific fields
+                var staticLookupDomainType = domainType as StaticLookupDomainTypeDefinition;
+                if (staticLookupDomainType != null)
+                {
+                    foreach (var enumValue in domainJson.EnumValues)
+                    {
+                        staticLookupDomainType.EnumValues.Add(new StaticLookupValueDefinition() {Id = enumValue.Id, Name = enumValue.Name});
+                    }
+                }
+
+                // Persistable-specific fields
+                var persistableDomainType = domainType as PersistableDomainTypeDefinition;
+                if (persistableDomainType != null)
+                {
+                    persistableDomainType.IsVersionable = domainJson.IsVersionable;
+                    persistableDomainType.IsAuditable = domainJson.IsAuditable;
+                    persistableDomainType.IsUserCustomizable = domainJson.IsUserCustomizable;
+                    persistableDomainType.IsInsertable = domainJson.IsInsertable;
+                    persistableDomainType.IsUpdatable = domainJson.IsUpdatable;
+                    persistableDomainType.IsDeletable = domainJson.IsDeletable;
+                    persistableDomainType.IsMarkDeletable = domainJson.IsMarkDeletable;
+                }
+
+                this.AppDefinition.DomainTypes.Add(domainType);
+                this.LogLineToBuildPane(JsonConvert.SerializeObject(domainType, Formatting.Indented));
+            }
             #endregion
+
         }
 
         #region Solution/Project members- no virtual members

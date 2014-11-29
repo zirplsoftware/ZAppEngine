@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using Zirpl.Xml.Serialization;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
+namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel
 {
-    public class AppDefinition
+    public class AppDefinitionJson
     {
-        public AppDefinition()
-        {
-            this.DomainTypes = new List<DomainTypeDefinitionBase>();
-        }
-
         public String GeneratedCodeRootFolderName { get; set; }
         public String GeneratedCSFileExtension { get; set; }
         public String ModelProjectName { get; set; }
@@ -23,6 +18,5 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public String ServiceTestsProjectName { get; set; }
         public String TestsCommonProjectName { get; set; }
         public String DataContextName { get; set; }
-        public List<DomainTypeDefinitionBase> DomainTypes { get; set; }
     }
 }

@@ -209,9 +209,16 @@
     </Compile>
     <Compile Include="V1\V1Helper.cs" />
     <Compile Include="V2\ConfigModel\AppDefinition.cs" />
-    <Compile Include="V2\ConfigModel\DomainType.cs" />
-    <Compile Include="V2\ConfigModel\EnumValueEntry.cs" />
-    <Compile Include="V2\ConfigModel\PersistableProperty.cs" />
+    <Compile Include="V2\ConfigModel\StaticLookupValueDefinition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="V2\ConfigModel\JsonModel\StaticLookupValueDefinitionJson.cs" />
+    <Compile Include="V2\ConfigModel\TransientDomainTypeDefinition.cs" />
+    <Compile Include="V2\ConfigModel\StaticLookupDomainTypeDefinition.cs" />
+    <Compile Include="V2\ConfigModel\PersistableDomainTypeDefinition.cs" />
+    <Compile Include="V2\ConfigModel\DomainTypeDefinitionBase.cs" />
+    <Compile Include="V2\ConfigModel\JsonModel\AppDefinitionJson.cs" />
+    <Compile Include="V2\ConfigModel\JsonModel\DomainTypeDefinitionJson.cs" />
     <Compile Include="V2\V2Helper.cs">
       <SubType>Code</SubType>
     </Compile>
