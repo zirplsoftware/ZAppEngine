@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="TaxRule" BaseClassOverride="" SubNamespace="Settings" IsCustomizable="true">
+	
+		
+			<Properties>
+				<Property Name="Rate" Type="decimal" IsRequired="true" MinValue="0.0001" Precision="18,4" />
+				<Property Name="StateProvinceType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Settings.StateProvinceType" IsRelationship="true" IsRequired="true" />
+			</Properties>
+		
+	
+</Type>

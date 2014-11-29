@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.Model.Customization
 {
-    public interface ICustomFieldDefinitionType<TId, TEnum> : IDictionaryEntity<TId, TEnum>, ICustomFieldDefinitionType
+    public interface ICustomFieldDefinitionType<TId, TEnum> : IStaticLookup<TId, TEnum>, ICustomFieldDefinitionType
         where TId : IEquatable<TId>
         where TEnum : struct
     {
     }
 
-    public interface ICustomFieldDefinitionType :IDictionaryEntity
+    public interface ICustomFieldDefinitionType :IStaticLookup
     {
 
     }

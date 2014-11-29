@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="SubscriptionPeriod" BaseClassOverride="" SubNamespace="Subscriptions">
+	
+		
+			<Properties>
+				<Property Name="ChargePeriod" Type="int" IsRequired="true" MinValue="1" />
+				<Property Name="ChargePeriodType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionPeriodType" IsRelationship="true" IsRequired="true" />
+				<Property Name="ShipmentPeriod" Type="int" IsRequired="true" MinValue="1" />
+				<Property Name="ShipmentPeriodType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionPeriodType" IsRelationship="true" IsRequired="true" />
+			</Properties>
+		
+	
+</Type>

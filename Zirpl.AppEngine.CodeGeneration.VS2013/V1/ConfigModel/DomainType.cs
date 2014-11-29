@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Xml.Serialization;
-using Zirpl.AppEngine.Model.Xml;
+using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
 {
     [XmlRoot("Type", Namespace = "")]
-    public class DomainType : XmlModelBase
+    public class DomainType : XmlSerializableBase
     {
         public DomainType()
         {
-            this.ModelOptions = new ModelOptions();
+            this.SerializableOptions = new SerializableOptions();
             this.DataServiceOptions = new DataServiceOptions();
             this.ServiceOptions = new ServiceOptions();
             this.WebOptions = new WebOptions();
@@ -36,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
         public bool IsCustomizable { get; set; }
         [XmlAttribute]
         public string IdTypeOverride { get; set; }
-        public ModelOptions ModelOptions { get; set; }
+        public SerializableOptions SerializableOptions { get; set; }
         public DataServiceOptions DataServiceOptions { get; set; }
         public ServiceOptions ServiceOptions { get; set; }
         public WebOptions WebOptions { get; set; }

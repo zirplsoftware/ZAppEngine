@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="Visitor" BaseClassOverride="" SubNamespace="Membership">
+  <Properties>
+    <Property Name="Token" Type="Guid" IsRequired="true" />
+    <Property Name="IsAnonymous" Type="bool" IsRequired="true" />
+    <Property Name="IsAbandoned" Type="bool" IsRequired="true" />
+    <Property Name="BotUserAgent" Type="string" IsRequired="false" MaxLength="256" />
+    <Property Name="LastActivityDate" Type="DateTime" IsRequired="true" />
+    <Property Name="ShoppingCartItems" CollectionOfType="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.ShoppingCartItem" IsCollection="true" />
+    <Property Name="User" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership.User" IsRelationship="true" IsRequired="false" />
+  </Properties>
+</Type>

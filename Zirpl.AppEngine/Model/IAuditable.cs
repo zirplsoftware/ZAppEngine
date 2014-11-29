@@ -8,10 +8,5 @@ namespace Zirpl.AppEngine.Model
         String UpdatedUserId { get; set; }
         DateTime? CreatedDate { get; set; }
         DateTime? UpdatedDate { get; set; }
-
-        bool IsCreatedDateUsed { get; }
-        bool IsCreatedUserIdUsed { get; }
-        bool IsUpdatedDateUsed { get; }
-        bool IsUpdatedUserIdUsed { get; }
     }
 }

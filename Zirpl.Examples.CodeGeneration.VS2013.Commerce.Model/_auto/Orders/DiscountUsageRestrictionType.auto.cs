@@ -7,7 +7,7 @@ using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
-    public partial class DiscountUsageRestrictionType  : DictionaryEntityBase<byte, DiscountUsageRestrictionTypeEnum>
+    public partial class DiscountUsageRestrictionType  : StaticLookupBase<byte, DiscountUsageRestrictionTypeEnum>
     {
     }
 }

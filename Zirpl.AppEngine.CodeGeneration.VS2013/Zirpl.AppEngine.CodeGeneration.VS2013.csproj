@@ -65,6 +65,9 @@
     <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -100,7 +103,7 @@
     <Compile Include="V1\ConfigModel\Entry.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="V1\ConfigModel\ModelOptions.cs">
+    <Compile Include="V1\ConfigModel\SerializableOptions.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="V1\ConfigModel\Property.cs">
@@ -206,9 +209,12 @@
     </Compile>
     <Compile Include="V1\V1Helper.cs" />
     <Compile Include="V2\ConfigModel\AppDefinition.cs" />
-    <Compile Include="V2\ConfigModel\PersistableDomainType.cs" />
+    <Compile Include="V2\ConfigModel\DomainType.cs" />
     <Compile Include="V2\ConfigModel\EnumValueEntry.cs" />
     <Compile Include="V2\ConfigModel\PersistableProperty.cs" />
+    <Compile Include="V2\V2Helper.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -224,6 +230,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="V1\Templates\Model\Customization\CustomFieldValueTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CustomFieldValueTemplate.cs</LastGenOutput>
@@ -311,6 +318,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="V2\sample json.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="V2\Templates\Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using Zirpl.AppEngine.Model.Xml;
+using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
 {
     [XmlRoot("AppDefinition", Namespace = "")]
-    public class AppDefinition : XmlModelBase
+    public class AppDefinition : XmlSerializableBase
     {
         public AppDefinition()
         {
-            this.PersistableTypes = new List<PersistableDomainType>();
+            this.DomainTypes = new List<DomainType>();
             this.GeneratedCodeRootFolderName = @"_auto\";
             this.GeneratedCSFileExtension = ".auto.cs";
         }
@@ -25,7 +25,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public String DataServiceTestsProjectName { get; set; }
         public String ServiceTestsProjectName { get; set; }
         public String TestsCommonProjectName { get; set; }
-        public List<PersistableDomainType> PersistableTypes { get; set; }
+        public List<DomainType> DomainTypes { get; set; }
 
 
 

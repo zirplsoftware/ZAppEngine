@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="PartnerReferralCouponRequest" BaseClassOverride="" SubNamespace="Partners" IsCustomizable="true">
+	
+		
+			<Properties>
+				<Property Name="RequestDate" Type="DateTime" IsRequired="true" />
+				<Property Name="Quantity" Type="int" IsRequired="true" MinValue="1" />
+				<Property Name="ShippedDate" Type="DateTime" IsRequired="false" />
+				<Property Name="Partner" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners.Partner" IsRelationship="true" IsRequired="true" />
+				<Property Name="PartnerReferralCouponRequestStatusType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Partners.PartnerReferralCouponRequestStatusType" IsRelationship="true" IsRequired="true" />
+			</Properties>
+		
+	
+</Type>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="Subscription" BaseClassOverride="" SubNamespace="Subscriptions" IsCustomizable="true">
+	
+		
+			<Properties>
+				<Property Name="StartDate" Type="DateTime" IsRequired="true" />
+				<Property Name="StatusType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionStatusType" IsRelationship="true" IsRequired="true" />
+				<Property Name="NextShipmentDate" Type="DateTime" IsRequired="true" />
+				<Property Name="NextChargeDate" Type="DateTime" IsRequired="true" />
+				<Property Name="AutoRenew" Type="bool" IsRequired="true" />
+				<Property Name="Customer" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.Customer" IsRelationship="true" IsRequired="true" />
+				<Property Name="ShippingAddress" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Address" IsRelationship="true" IsRequired="true" />
+				<Property Name="CustomerChargeOption" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.CustomerChargeOption" IsRelationship="true" IsRequired="true" />
+				<Property Name="CurrentSubscriptionInstance" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionInstance" IsRelationship="true" IsRequired="false" />
+			</Properties>
+		
+	
+</Type>

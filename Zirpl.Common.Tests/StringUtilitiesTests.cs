@@ -118,6 +118,72 @@ namespace Zirpl.Common.Tests
             String text = "abc";
             text.LastXSubstring(4);
         }
+
+        [Test]
+        public void TestSubstringUntilFirstInstanceOf()
+        {
+            "abcad".SubstringUntilFirstInstanceOf(".").Should().Be("abcad");
+            "abcad".SubstringUntilFirstInstanceOf("a").Should().Be("");
+            "abcad".SubstringUntilFirstInstanceOf("b").Should().Be("a");
+            "abcad".SubstringUntilFirstInstanceOf("d").Should().Be("abca");
+        }
+        [Test]
+        public void TestSubstringThroughFirstInstanceOf()
+        {
+            "abcad".SubstringThroughFirstInstanceOf(".").Should().Be("abcad");
+            "abcad".SubstringThroughFirstInstanceOf("a").Should().Be("a");
+            "abcad".SubstringThroughFirstInstanceOf("b").Should().Be("ab");
+            "abcad".SubstringThroughFirstInstanceOf("d").Should().Be("abcad");
+        }
+        [Test]
+        public void TestSubstringFromFirstInstanceOf()
+        {
+            "abcad".SubstringFromFirstInstanceOf(".").Should().Be("abcad");
+            "abcad".SubstringFromFirstInstanceOf("a").Should().Be("abcad");
+            "abcad".SubstringFromFirstInstanceOf("b").Should().Be("bcad");
+            "abcad".SubstringFromFirstInstanceOf("d").Should().Be("d");
+        }
+        [Test]
+        public void TestSubstringAfterFirstInstanceOf()
+        {
+            "abcad".SubstringAfterFirstInstanceOf(".").Should().Be("abcad");
+            "abcad".SubstringAfterFirstInstanceOf("a").Should().Be("bcad");
+            "abcad".SubstringAfterFirstInstanceOf("b").Should().Be("cad");
+            "abcad".SubstringAfterFirstInstanceOf("d").Should().Be("");
+        }
+
+        [Test]
+        public void TestSubstringUntilLastInstanceOf()
+        {
+            "abcad".SubstringUntilLastInstanceOf(".").Should().Be("abcad");
+            "abcad".SubstringUntilLastInstanceOf("a").Should().Be("abc");
+            "abcad".SubstringUntilLastInstanceOf("b").Should().Be("a");
+            "abcad".SubstringUntilLastInstanceOf("d").Should().Be("abca");
+        }
+        [Test]
+        public void TestSubstringThroughLastInstanceOf()
+        {
+            "abcad".SubstringThroughLastInstanceOf(".").Should().Be("abcad");
+            "abcad".SubstringThroughLastInstanceOf("a").Should().Be("abca");
+            "abcad".SubstringThroughLastInstanceOf("b").Should().Be("ab");
+            "abcad".SubstringThroughLastInstanceOf("d").Should().Be("abcad");
+        }
+        [Test]
+        public void TestSubstringFromLastInstanceOf()
+        {
+            "abcad".SubstringFromLastInstanceOf(".").Should().Be("abcad");
+            "abcad".SubstringFromLastInstanceOf("a").Should().Be("ad");
+            "abcad".SubstringFromLastInstanceOf("b").Should().Be("bcad");
+            "abcad".SubstringFromLastInstanceOf("d").Should().Be("d");
+        }
+        [Test]
+        public void TestSubstringAfterLastInstanceOf()
+        {
+            "abcad".SubstringAfterLastInstanceOf(".").Should().Be("abcad");
+            "abcad".SubstringAfterLastInstanceOf("a").Should().Be("d");
+            "abcad".SubstringAfterLastInstanceOf("b").Should().Be("cad");
+            "abcad".SubstringAfterLastInstanceOf("d").Should().Be("");
+        }
     }
 }
 

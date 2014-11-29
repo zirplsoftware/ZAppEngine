@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="StripeCharge" BaseClassOverride="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.Charge" SubNamespace="Orders">
+	
+		
+			<Properties>
+        <Property Name="StripeChargeId" Type="string" IsRequired="true" MaxLength="64" />
+				<Property Name="StripeFee" Type="currency" IsRequired="true" />
+			</Properties>
+		
+	
+</Type>

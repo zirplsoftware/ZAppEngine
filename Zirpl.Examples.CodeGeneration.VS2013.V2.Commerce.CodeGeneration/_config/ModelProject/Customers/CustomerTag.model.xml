@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="CustomerTag" BaseClassOverride="" SubNamespace="Customers">
+  <Properties>
+    <Property Name="Customer" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.Customer" IsRelationship="true" IsRequired="true" />
+    <Property Name="Tag" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Tag" IsRelationship="true" IsRequired="true" />
+  </Properties>
+</Type>

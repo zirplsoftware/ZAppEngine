@@ -8,7 +8,7 @@ using Zirpl.AppEngine.Model;
 namespace Zirpl.AppEngine.DataService.EntityFramework.Mapping
 {
     public class DictionaryEntityMapping<TEntity, TId, TEnum> : EntityMappingBase<TEntity, TId>
-        where TEntity : DictionaryEntityBase<TId, TEnum>
+        where TEntity : StaticLookupEntityBase<TId, TEnum>
         where TEnum : struct
         where TId : IEquatable<TId>
     {

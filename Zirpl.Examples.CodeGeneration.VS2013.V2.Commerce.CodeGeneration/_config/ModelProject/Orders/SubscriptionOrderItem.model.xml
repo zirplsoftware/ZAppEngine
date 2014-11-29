@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="SubscriptionOrderItem" BaseClassOverride="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.OrderItem" SubNamespace="Orders">
+  <Properties>
+    <Property Name="SubscriptionOrderItemType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.SubscriptionOrderItemType" IsRelationship="true" IsRequired="true" />
+    <Property Name="SubscriptionPeriod" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionPeriod" IsRelationship="true" IsRequired="false" />
+    <Property Name="TriggeredBySubscriptionInstance" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionInstance" IsRelationship="true" IsRequired="false" />
+    <Property Name="ResultingSubscriptionInstance" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.SubscriptionInstance" IsRelationship="true" IsRequired="false" GenerateIdProperty="false" />
+  </Properties>
+  <ServiceOptions GenerateValidator="false" />
+</Type>

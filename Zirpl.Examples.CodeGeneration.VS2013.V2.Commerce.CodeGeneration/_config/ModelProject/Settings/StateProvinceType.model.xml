@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="StateProvinceType" IsDictionary="true" BaseClassOverride="" SubNamespace="Settings" IdTypeOverride="int">
+  <EnumValueEntries>
+    <Entry Key="UnitedStatesOfAmerica_Alabama"  Value="1" />
+    <Entry Key="UnitedStatesOfAmerica_Alaska"  Value="2" />
+    <Entry Key="UnitedStatesOfAmerica_Arizona"  Value="3" />
+    <Entry Key="UnitedStatesOfAmerica_Arkansas"  Value="4" />
+    <Entry Key="UnitedStatesOfAmerica_California"  Value="5" />
+    <Entry Key="UnitedStatesOfAmerica_Colorado"  Value="6" />
+    <Entry Key="UnitedStatesOfAmerica_Connecticut"  Value="7" />
+    <Entry Key="UnitedStatesOfAmerica_Delaware"  Value="8" />
+    <Entry Key="UnitedStatesOfAmerica_DistrictOfColumbia"  Value="9" />
+    <Entry Key="UnitedStatesOfAmerica_Florida"  Value="10" />
+    <Entry Key="UnitedStatesOfAmerica_Georgia"  Value="11" />
+    <Entry Key="UnitedStatesOfAmerica_Hawaii"  Value="12" />
+    <Entry Key="UnitedStatesOfAmerica_Idaho"  Value="13" />
+    <Entry Key="UnitedStatesOfAmerica_Illinois"  Value="14" />
+    <Entry Key="UnitedStatesOfAmerica_Indiana"  Value="15" />
+    <Entry Key="UnitedStatesOfAmerica_Iowa"  Value="16" />
+    <Entry Key="UnitedStatesOfAmerica_Kansas"  Value="17" />
+    <Entry Key="UnitedStatesOfAmerica_Kentucky"  Value="18" />
+    <Entry Key="UnitedStatesOfAmerica_Louisiana"  Value="19" />
+    <Entry Key="UnitedStatesOfAmerica_Maine"  Value="20" />
+    <Entry Key="UnitedStatesOfAmerica_Maryland"  Value="21" />
+    <Entry Key="UnitedStatesOfAmerica_Massachusetts"  Value="22" />
+    <Entry Key="UnitedStatesOfAmerica_Michigan"  Value="23" />
+    <Entry Key="UnitedStatesOfAmerica_Minnesota"  Value="24" />
+    <Entry Key="UnitedStatesOfAmerica_Mississippi"  Value="25" />
+    <Entry Key="UnitedStatesOfAmerica_Missouri"  Value="26" />
+    <Entry Key="UnitedStatesOfAmerica_Montana"  Value="27" />
+    <Entry Key="UnitedStatesOfAmerica_Nebraska"  Value="28" />
+    <Entry Key="UnitedStatesOfAmerica_Nevada"  Value="29" />
+    <Entry Key="UnitedStatesOfAmerica_NewHampshire"  Value="30" />
+    <Entry Key="UnitedStatesOfAmerica_NewJersey"  Value="31" />
+    <Entry Key="UnitedStatesOfAmerica_NewMexico"  Value="32" />
+    <Entry Key="UnitedStatesOfAmerica_NewYork"  Value="33" />
+    <Entry Key="UnitedStatesOfAmerica_NorthCarolina"  Value="34" />
+    <Entry Key="UnitedStatesOfAmerica_NorthDakota"  Value="35" />
+    <Entry Key="UnitedStatesOfAmerica_Ohio"  Value="36" />
+    <Entry Key="UnitedStatesOfAmerica_Oklahoma"  Value="37" />
+    <Entry Key="UnitedStatesOfAmerica_Oregon"  Value="38" />
+    <Entry Key="UnitedStatesOfAmerica_Pennsylvania"  Value="39" />
+    <Entry Key="UnitedStatesOfAmerica_RhodeIsland"  Value="40" />
+    <Entry Key="UnitedStatesOfAmerica_SouthCarolina"  Value="41" />
+    <Entry Key="UnitedStatesOfAmerica_SouthDakota"  Value="42" />
+    <Entry Key="UnitedStatesOfAmerica_Tennessee"  Value="43" />
+    <Entry Key="UnitedStatesOfAmerica_Texas"  Value="44" />
+    <Entry Key="UnitedStatesOfAmerica_Utah"  Value="45" />
+    <Entry Key="UnitedStatesOfAmerica_Vermont"  Value="46" />
+    <Entry Key="UnitedStatesOfAmerica_Virginia"  Value="47" />
+    <Entry Key="UnitedStatesOfAmerica_Washington"  Value="48" />
+    <Entry Key="UnitedStatesOfAmerica_WestVirginia"  Value="49" />
+    <Entry Key="UnitedStatesOfAmerica_Wisconsin"  Value="50" />
+    <Entry Key="UnitedStatesOfAmerica_Wyoming"  Value="51" />
+  </EnumValueEntries>
+  <Properties>
+    <Property Name="Name" Type="string" IsRequired="true" MinLength="1" MaxLength="256" />
+    <Property Name="Abbreviation" Type="string" IsRequired="true" MinLength="1" MaxLength="2" />
+  </Properties>
+</Type>

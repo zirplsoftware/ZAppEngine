@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
-using Zirpl.AppEngine.Model.Xml;
+using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
 {
-    public class WebOptions : XmlModelBase
+    public class WebOptions : XmlSerializableBase
     {
         public WebOptions()
         {

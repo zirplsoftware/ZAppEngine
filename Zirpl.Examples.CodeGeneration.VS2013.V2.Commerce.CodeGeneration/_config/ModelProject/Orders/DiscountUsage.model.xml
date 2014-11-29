@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="DiscountUsage" BaseClassOverride="" SubNamespace="Orders">
+	
+		
+			<Properties>
+				<Property Name="DateUsed" Type="DateTime" IsRequired="true" />
+				<Property Name="Discount" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.Discount" IsRelationship="true" IsRequired="true" />
+				<Property Name="Order" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.Order" IsRelationship="true" IsRequired="true" NavigationProperty="DiscountUsages" />
+				<Property Name="OrderItem" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.OrderItem" IsRelationship="true" IsRequired="false" NavigationProperty="DiscountUsages" />
+			</Properties>
+		
+	
+</Type>

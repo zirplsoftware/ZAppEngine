@@ -1,0 +1,9 @@
+﻿{ 
+    "modelProjectName" :  "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model",
+    "dataServiceProjectName" :  "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.DataService",
+    "serviceProjectName" :  "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Service",
+    "testsCommonProjectName" :  "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Tests.Common",
+    "dataServiceTestsProjectName" :  "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Tests.DataService",
+    "serviceTestsProjectName" :  "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Tests.Service",
+    "dataContextName" :  "CommerceDataContext"
+}

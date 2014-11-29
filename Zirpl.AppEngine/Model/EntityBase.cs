@@ -47,16 +47,10 @@ namespace Zirpl.AppEngine.Model
         public virtual String CreatedUserId { get; set; }
         public virtual DateTime? UpdatedDate { get; set; }
         public virtual String UpdatedUserId { get; set; }
-
-        public virtual bool IsCreatedDateUsed { get { return true; } }
-        public virtual bool IsCreatedUserIdUsed { get { return true; } }
-        public virtual bool IsUpdatedDateUsed { get { return true; } }
-        public virtual bool IsUpdatedUserIdUsed { get { return true; } }
         #endregion
 
         #region IVersionable
         public virtual byte[] RowVersion { get; set; }
-        public virtual bool IsRowVersionUsed { get { return true; } }
         #endregion
 
         #region Object overrides

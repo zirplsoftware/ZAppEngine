@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="SubscriptionInstance" BaseClassOverride="" SubNamespace="Subscriptions">
+	
+		
+			<Properties>
+				<Property Name="StartDate" Type="DateTime" IsRequired="true" />
+				<Property Name="TotalShipments" Type="int" IsRequired="true" MinValue="1" />
+				<Property Name="ShipmentsRemaining" Type="int" IsRequired="true" MinValue="0" />
+				<Property Name="Subscription" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.Subscription" IsRelationship="true" IsRequired="true" CascadeOnDelete="true" />
+				<Property Name="CreatedByOrderItem" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.SubscriptionOrderItem" IsRelationship="true" IsRequired="true" GenerateIdProperty="false" />
+				<Property Name="PendingSubscriptionChange" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Subscriptions.PendingSubscriptionChange" IsRelationship="true" IsRequired="false" />
+			</Properties>
+		
+	
+</Type>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="Category" BaseClassOverride="" SubNamespace="Catalog" IsCustomizable="true">
+			<Properties>
+        <Property Name="Name" Type="string" IsRequired="true" MinLength="1" MaxLength="512" />
+				<Property Name="SeoId" Type="string" IsRequired="false" MaxLength="512" />
+        <Property Name="Description" Type="string" IsRequired="false" IsMaxLength="true" />
+        <Property Name="Parent" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Catalog.Category" IsRelationship="true" IsRequired="false" />
+			</Properties>
+</Type>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Type Name="PartnerRegistrationRequest" BaseClassOverride="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership.UserRegistrationRequestBase" SubNamespace="Partners" IsPersistable="false" IsAbstract="false">
+  <Properties>
+    <Property Name="AcceptTermsOfUse" Type="bool" IsRequired="true"/>
+  </Properties>
+</Type>

@@ -10,10 +10,11 @@ config/Catalog/Brand.entity.json
 	"IsAbstract": false, // defaults to false
 	"IsVersionable": true, // defaults to true
 	"IsAuditable": true, // defaults to true
-	"IsUserCustomizable": true, // defaults to false, only applies if persistable
-	"IsInsertable": true, // defaults to true, only applies if persistable and not static lookup
-	"IsUpdateable": true, // defaults to true, only applies if persistable and not static lookup
-	"IsDeleteable": true, // defaults to true, only applies if persistable and not static lookup
+	"IsUserCustomizable": true, // defaults to false
+	"IsInsertable": true, // defaults to true, only applies if not static lookup
+	"IsUpdateable": true, // defaults to true, only applies if not static lookup
+	"IsDeleteable": true, // defaults to true, only applies if not static lookup
+	"IsMarkDeletable" : false, // defaults to false, only applies if not static lookup and not deleteable
 	"Properties": [
 		{ 
 			"Name": "Name", 

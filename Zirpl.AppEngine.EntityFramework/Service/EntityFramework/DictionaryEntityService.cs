@@ -13,7 +13,7 @@ namespace Zirpl.AppEngine.Service.EntityFramework
            ReadOnlyDbContextServiceBase<TDataContext, TEntity, TId>,
            IDictionaryEntityService<TEntity, TId, TEnum>
         where TDataContext : DbContext
-        where TEntity : DictionaryEntityBase<TId, TEnum>
+        where TEntity : StaticLookupEntityBase<TId, TEnum>
         where TEnum : struct, IConvertible
         where TId : IEquatable<TId>
     {

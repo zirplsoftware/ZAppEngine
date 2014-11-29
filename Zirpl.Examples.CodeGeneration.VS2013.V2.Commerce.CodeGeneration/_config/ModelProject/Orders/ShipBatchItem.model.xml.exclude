@@ -1,0 +1,32 @@
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using Zirpl.AppFramework.Model;
+
+//namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
+//{
+//    public class ShipBatchItem :AuditableBase<int>
+//    {
+//        public ShipBatchItem()
+//        {
+//            this.OrderItems = this.OrderItems ?? new List<OrderItem>();
+//        }
+
+//        public virtual ShipBatch ShipBatch { get; set; }
+//        public virtual int ShipBatchId { get; set; }
+//        public virtual IList<OrderItem> OrderItems { get; set; }
+//    }
+
+//    public class ShipBatchItemMetadata : MetadataBase
+//    {
+//        public const String ShipBatch_Name = "ShipBatch";
+//        public const bool ShipBatch_IsRequired = true;
+
+//        public const String ShipBatchId_Name = ShipBatch_Name + "Id";
+//        public const bool ShipBatchId_IsRequired = ShipBatch_IsRequired;
+
+//        public const String OrderItems_Name = "OrderItems";
+//    }
+//}

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="Referral" BaseClassOverride="" SubNamespace="Promotions" IsAbstract="true">
+	
+		
+			<Properties>
+				<Property Name="PromoCode" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.PromoCode" IsRelationship="true" IsRequired="true" />
+				<Property Name="ReferredCustomerJoinedDate" Type="DateTime" IsRequired="false" />
+				<Property Name="ReferredCustomer" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.Customer" IsRelationship="true" IsRequired="false" />
+				<Property Name="ReferredCustomerAwardDiscount" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.Discount" IsRelationship="true" IsRequired="false" />
+				<Property Name="ReferredCustomerAwardDiscountUsage" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.DiscountUsage" IsRelationship="true" IsRequired="false" />
+			</Properties>
+		
+	
+</Type>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Serialization;
-using Zirpl.AppEngine.Model.Xml;
 using Zirpl.AppEngine.Model.Metadata;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel

@@ -161,7 +161,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.ModelOptions.GenerateModel
+                       where dt.SerializableOptions.GenerateModel
                        select dt;
             }
         }
@@ -181,7 +181,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             get
             {
                 return from dt in this.AppDefinition.DomainTypes
-                       where dt.ModelOptions.GenerateMetadataConstants
+                       where dt.SerializableOptions.GenerateMetadataConstants
                        select dt;
             }
         }
@@ -192,7 +192,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                 return from dt in this.AppDefinition.DomainTypes
                        where dt.IsPersistable
                              && dt.IsDictionary
-                             && dt.ModelOptions.GenerateEnum
+                             && dt.SerializableOptions.GenerateEnum
                        select dt;
             }
         }
@@ -263,7 +263,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
                 return from dt in this.AppDefinition.DomainTypes
                        where dt.ServiceOptions.GenerateValidator
                              && !dt.IsDictionary
-                             && dt.ModelOptions.GenerateModel
+                             && dt.SerializableOptions.GenerateModel
                        select dt;
             }
         }

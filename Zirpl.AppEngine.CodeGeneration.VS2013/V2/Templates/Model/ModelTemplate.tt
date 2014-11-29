@@ -1,0 +1,21 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".log" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.Model" #>
+<#@ import namespace="Zirpl.AppEngine.Model.Metadata" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V2" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V2.ConfigModel" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="VSLangProj" #>
+<#@ assembly name="VSLangProj80" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Serialization" #>
+<#
+
+#>

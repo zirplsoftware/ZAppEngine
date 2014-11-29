@@ -210,20 +210,11 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomizable.cs">
       <Link>Model\Customization\ICustomizable.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\DictionaryEntityBase.cs">
-      <Link>Model\DictionaryEntityBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\EntityBase.cs">
       <Link>Model\EntityBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IAuditable.cs">
       <Link>Model\IAuditable.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IDictionaryEntity.cs">
-      <Link>Model\IDictionaryEntity.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IDictionaryEntityExtensions.cs">
-      <Link>Model\IDictionaryEntityExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IKeyedEntity.cs">
       <Link>Model\IKeyedEntity.cs</Link>
@@ -236,6 +227,12 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IPersistableExtensions.cs">
       <Link>Model\IPersistableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IStaticLookup.cs">
+      <Link>Model\IStaticLookup.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IStaticLookupEntityExtensions.cs">
+      <Link>Model\IStaticLookupEntityExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IVersionable.cs">
       <Link>Model\IVersionable.cs</Link>
@@ -260,15 +257,6 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Membership\IUserRegistrationRequest.cs">
       <Link>Model\Membership\IUserRegistrationRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\Constants\DictionaryEntityBaseMetadataConstantsBase.cs">
-      <Link>Model\Metadata\Constants\DictionaryEntityBaseMetadataConstantsBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\Constants\EntityBaseMetadataConstantsBase.cs">
-      <Link>Model\Metadata\Constants\EntityBaseMetadataConstantsBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\Constants\MetadataConstantsBase.cs">
-      <Link>Model\Metadata\Constants\MetadataConstantsBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Metadata\DataTypeEnum.cs">
       <Link>Model\Metadata\DataTypeEnum.cs</Link>
@@ -303,8 +291,8 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Search\SearchResults.cs">
       <Link>Model\Search\SearchResults.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Xml\XmlModelBase.cs">
-      <Link>Model\Xml\XmlModelBase.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\StaticLookupEntityBase.cs">
+      <Link>Model\StaticLookupEntityBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo_common.cs">
       <Link>Properties\AssemblyInfo_common.cs</Link>
@@ -498,7 +486,7 @@
       <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
         <SilverlightProjectProperties />
       </FlavorProperties>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
+      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

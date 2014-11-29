@@ -3,6 +3,5 @@
     public interface IVersionable
     {
         byte[] RowVersion { get; set; }
-        bool IsRowVersionUsed { get; }
     }
 }

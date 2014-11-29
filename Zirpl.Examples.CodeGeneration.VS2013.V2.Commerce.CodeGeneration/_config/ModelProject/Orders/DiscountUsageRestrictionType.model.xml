@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="DiscountUsageRestrictionType" IsDictionary="true" BaseClassOverride="" SubNamespace="Orders">
+	
+		
+			<EnumValueEntries>
+				<Entry Key="Infinite" Value="1" />
+				<Entry Key="NTimes" Value="2" />
+				<Entry Key="NTimesPerCustomer" Value="3" />
+			</EnumValueEntries>
+			<Properties>
+        <Property Name="Name" DisplayText="Usage Restriction" Type="string" IsRequired="true" MaxLength="100" />
+			</Properties>
+		
+	
+</Type>

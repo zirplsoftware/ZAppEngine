@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="Charge" BaseClassOverride="" SubNamespace="Orders" IsAbstract="true">
+	
+		
+			<Properties>
+				<Property Name="Date" Type="DateTime" IsRequired="true" />
+				<Property Name="Amount" Type="currency" IsRequired="true" />
+				<Property Name="ChargeType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.ChargeType" IsRelationship="true" IsRequired="true" />
+				<Property Name="ChargeMethodType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.ChargeMethodType" IsRelationship="true" IsRequired="true" />
+				<Property Name="ChargeStatusType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.ChargeStatusType" IsRelationship="true" IsRequired="true" />
+				<Property Name="Order" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.Order" IsRelationship="true" IsRequired="true" NavigationProperty="Charges" />
+			</Properties>
+		
+	
+</Type>

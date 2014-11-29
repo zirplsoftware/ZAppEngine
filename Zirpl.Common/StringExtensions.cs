@@ -12,6 +12,108 @@ namespace Zirpl
 {
     public static class StringExtensions
     {
+        public static String SubstringUntilLastInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        {
+            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).LastIndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (index == -1)
+            {
+                return originalText;
+            }
+            else if (index == 0)
+            {
+                return String.Empty;
+            }
+            return originalText.Substring(0, index);
+        }
+        public static String SubstringThroughLastInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        {
+            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).LastIndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (index == -1)
+            {
+                return originalText;
+            }
+            else if (index + search.Length == originalText.Length)
+            {
+                return originalText;
+            }
+            return originalText.Substring(0, index + search.Length);
+        }
+        public static String SubstringFromLastInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        {
+            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).LastIndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (index == -1)
+            {
+                return originalText;
+            }
+            else
+            {
+                return originalText.Substring(index);
+            }
+        }
+        public static String SubstringAfterLastInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        {
+            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).LastIndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (index == -1)
+            {
+                return originalText;
+            }
+            else if (index + search.Length == originalText.Length)
+            {
+                return String.Empty;
+            }
+            return originalText.Substring(index + search.Length);
+        }
+        public static String SubstringUntilFirstInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        {
+            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).IndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (index == -1)
+            {
+                return originalText;
+            }
+            else if (index == 0)
+            {
+                return String.Empty;
+            }
+            return originalText.Substring(0, index);
+        }
+        public static String SubstringThroughFirstInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        {
+            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).IndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (index == -1)
+            {
+                return originalText;
+            }
+            else if (index + search.Length == originalText.Length - 1)
+            {
+                return originalText;
+            }
+            return originalText.Substring(0, index + search.Length);
+        }
+        public static String SubstringFromFirstInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        {
+            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).IndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (index == -1)
+            {
+                return originalText;
+            }
+            else
+            {
+                return originalText.Substring(index);
+            }
+        }
+        public static String SubstringAfterFirstInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        {
+            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).IndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (index == -1)
+            {
+                return originalText;
+            }
+            else if (index + search.Length == originalText.Length - 1)
+            {
+                return String.Empty;
+            }
+            return originalText.Substring(index + search.Length);
+        }
         public static String Substitute(this String originalText, int startIndex, int length, String newToken)
         {
             var sb = new StringBuilder();

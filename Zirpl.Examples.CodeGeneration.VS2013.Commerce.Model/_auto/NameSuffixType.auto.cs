@@ -7,7 +7,7 @@ using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model
 {
-    public partial class NameSuffixType  : DictionaryEntityBase<byte, NameSuffixTypeEnum>
+    public partial class NameSuffixType  : StaticLookupBase<byte, NameSuffixTypeEnum>
     {
     }
 }

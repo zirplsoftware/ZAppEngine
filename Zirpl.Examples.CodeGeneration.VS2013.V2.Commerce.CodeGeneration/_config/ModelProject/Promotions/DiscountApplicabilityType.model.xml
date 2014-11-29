@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="DiscountApplicabilityType" IsDictionary="true" BaseClassOverride="" SubNamespace="Promotions">
+	
+		
+			<EnumValueEntries>
+				<Entry Key="Order" Value="1" />
+				<Entry Key="Item" Value="2" />
+			</EnumValueEntries>
+			<Properties>
+        <Property Name="Name" DisplayText="Applicability" Type="string" IsRequired="true" MaxLength="100" />
+			</Properties>
+		
+	
+</Type>

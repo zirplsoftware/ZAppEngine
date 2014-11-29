@@ -8,7 +8,7 @@ using Zirpl.AppEngine.Model;
 namespace Zirpl.AppEngine.Service
 {
     public interface IDictionaryEntityService<TEntity, TId, TEnum> : IReadOnlyService<TEntity, TId>
-        where TEntity : class, IDictionaryEntity<TId, TEnum>
+        where TEntity : class, IStaticLookup<TId, TEnum>
         where TEnum : struct
         where TId : IEquatable<TId>
     {

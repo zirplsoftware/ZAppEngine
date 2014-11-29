@@ -10,6 +10,15 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// Writes a line to the build pane in visual studio and activates it
         /// </summary>
         /// <param name="message">Text to output - a \n is appended</param>
+        public static void LogLineToBuildPane(this TransformationHelperBase helper, string message)
+        {
+            helper.CallingTemplate.Host.LogToBuildPane(String.Format("{0}\n", message));
+        }
+
+        /// <summary>
+        /// Writes a line to the build pane in visual studio and activates it
+        /// </summary>
+        /// <param name="message">Text to output - a \n is appended</param>
         public static void LogLineToBuildPane(this ITextTemplatingEngineHost host, string message)
         {
             host.LogToBuildPane(String.Format("{0}\n", message));

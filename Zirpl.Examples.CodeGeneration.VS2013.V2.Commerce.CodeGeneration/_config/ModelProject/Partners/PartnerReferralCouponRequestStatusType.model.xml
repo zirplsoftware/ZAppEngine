@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="PartnerReferralCouponRequestStatusType" IsDictionary="true" BaseClassOverride="" SubNamespace="Partners">
+	
+		
+			<EnumValueEntries>
+				<Entry Key="Open" Value="1" />
+				<Entry Key="ReferralsCreated" Value="2" />
+				<Entry Key="Printed" Value="3" />
+				<Entry Key="Shipped" Value="4" />
+				<Entry Key="Cancelled" Value="5" />
+			</EnumValueEntries>
+			<Properties>
+        <Property Name="Name" DisplayText="Status" Type="string" IsRequired="true" MaxLength="100" />
+			</Properties>
+		
+	
+</Type>

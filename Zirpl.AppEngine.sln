@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine", "Zirpl.AppEngine\Zirpl.AppEngine.csproj", "{DD9BCB12-748C-4395-9A8E-A599A60A0CAA}"
 EndProject
@@ -91,6 +91,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service", "Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service\Zirpl.Examples.CodeGeneration.VS2013.Commerce.Tests.Service.csproj", "{C0BBCA01-519D-482A-90DD-928D415E38A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing.Net45", "Zirpl.Testing.Net45\Zirpl.Testing.Net45.csproj", "{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration", "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration.csproj", "{00E636C4-0A01-4A65-9AB9-13DD4C015418}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model", "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model.csproj", "{84E18337-0043-464A-B9D9-D4B3F4B849CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -206,6 +210,14 @@ Global
 		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00E636C4-0A01-4A65-9AB9-13DD4C015418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E636C4-0A01-4A65-9AB9-13DD4C015418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E636C4-0A01-4A65-9AB9-13DD4C015418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E636C4-0A01-4A65-9AB9-13DD4C015418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84E18337-0043-464A-B9D9-D4B3F4B849CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84E18337-0043-464A-B9D9-D4B3F4B849CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84E18337-0043-464A-B9D9-D4B3F4B849CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84E18337-0043-464A-B9D9-D4B3F4B849CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,6 +243,8 @@ Global
 		{32B32731-B6E6-4B95-A440-762C2D4A09C4} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{C0BBCA01-519D-482A-90DD-928D415E38A9} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8} = {53E45F83-AEF0-4176-93F2-DE7C8822D920}
+		{00E636C4-0A01-4A65-9AB9-13DD4C015418} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
+		{84E18337-0043-464A-B9D9-D4B3F4B849CD} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45

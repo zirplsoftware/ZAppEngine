@@ -18,7 +18,7 @@ namespace Zirpl.AppEngine.Testing
 {
     [TestFixture]
     public abstract class DictionaryEntityLayerTestFixtureBase<TEntity, TId, TEnum>
-        where TEntity : class, IDictionaryEntity<TId, TEnum>
+        where TEntity : class, IStaticLookup<TId, TEnum>
         where TEnum : struct
         where TId : struct, IEquatable<TId>
     {

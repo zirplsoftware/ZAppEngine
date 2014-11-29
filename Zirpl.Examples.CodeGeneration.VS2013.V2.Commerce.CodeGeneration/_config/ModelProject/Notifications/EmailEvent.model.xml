@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Type Name="EmailEvent" BaseClassOverride="" SubNamespace="Notifications">
+		<Properties>
+			<Property Name="SentDate" Type="DateTime" IsRequired="true" IsDefaultSort="true" IsGroupable="false" GridTemplate="SentDate.toDateTimeString()" GridOrder="2" />
+			<Property Name="SentSucceeded" Type="bool" IsRequired="true" ShowInGrid="false" />
+			<Property Name="EmailEventType" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Notifications.EmailEventType" IsRelationship="true" IsRequired="true" />
+			<Property Name="Subject" Type="string" IsRequired="true" MinLength="1" MaxLength="512"  GridOrder="4" />
+			<Property Name="Body" Type="string" IsRequired="true" MinLength="1" IsMaxLength="true" IsGroupable="false" ShowInGrid="false" />
+			<Property Name="FromEmail" Type="string" IsRequired="true" MinLength="1" MaxLength="2048" ShowInGrid="false" />
+			<Property Name="FromName" Type="string" IsRequired="false" MaxLength="2048" ShowInGrid="false" />
+			<Property Name="To" Type="string" IsRequired="true" MinLength="1" MaxLength="2048" GridOrder="5" />
+			<Property Name="Cc" Type="string" IsRequired="false" MaxLength="2048" GridOrder="6" />
+			<Property Name="Bcc" Type="string" IsRequired="false" MaxLength="2048" GridOrder="7" />
+			<Property Name="ResentDate" Type="DateTime" IsRequired="false" IsGroupable="false" GridTemplate="ResentDate == null ? '' : ResentDate.toDateTimeString()" GridOrder="8" />
+			<Property Name="ResentSucceeded" Type="bool" IsRequired="false" ShowInGrid="false" />
+		</Properties>
+  <WebOptions>
+    <AdditionalProperties>
+      <Property Name="EmailEventType.Name" Type="string" GridOrder="3" DisplayText="Type" />
+    </AdditionalProperties>
+  </WebOptions>
+</Type>

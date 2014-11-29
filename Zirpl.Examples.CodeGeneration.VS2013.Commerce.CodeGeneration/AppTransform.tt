@@ -3,5 +3,5 @@
 <#@ assembly name="$(SolutionDir)Zirpl.AppEngine.CodeGeneration.VS2013\bin\$(Configuration)\Zirpl.AppEngine.CodeGeneration.VS2013.dll" #>
 <#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
 <#
-	this.GenerateApp();
+	//this.GenerateApp();
 #>

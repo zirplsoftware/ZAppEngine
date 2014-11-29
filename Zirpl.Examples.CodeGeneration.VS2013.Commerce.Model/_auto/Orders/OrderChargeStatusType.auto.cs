@@ -7,7 +7,7 @@ using Zirpl.AppEngine.Model.Customization;
 
 namespace Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders
 {
-    public partial class OrderChargeStatusType  : DictionaryEntityBase<byte, OrderChargeStatusTypeEnum>
+    public partial class OrderChargeStatusType  : StaticLookupBase<byte, OrderChargeStatusTypeEnum>
     {
     }
 }

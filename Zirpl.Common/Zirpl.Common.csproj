@@ -74,6 +74,7 @@
     <Compile Include="TimeAgo.cs" />
     <Compile Include="TimeAgoType.cs" />
     <Compile Include="Xml\Serialization\SerializationUtilities.cs" />
+    <Compile Include="Xml\Serialization\XmlSerializableBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Linq\Dynamic Expressions.html" />

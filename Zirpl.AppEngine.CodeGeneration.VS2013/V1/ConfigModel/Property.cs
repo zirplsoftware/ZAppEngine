@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml.Serialization;
-using Zirpl.AppEngine.Model.Xml;
+using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
 {
-    public class Property : XmlModelBase
+    public class Property : XmlSerializableBase
     {
         public Property()
         {

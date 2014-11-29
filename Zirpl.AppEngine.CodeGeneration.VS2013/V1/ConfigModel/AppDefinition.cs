@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using Zirpl.AppEngine.Model.Xml;
+using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.ConfigModel
 {
     [XmlRoot("AppDefinition", Namespace = "")]
-    public class AppDefinition : XmlModelBase
+    public class AppDefinition : XmlSerializableBase
     {
         public AppDefinition()
         {
