@@ -9,6 +9,7 @@ using Zirpl.AppEngine.CodeGeneration;
 using Zirpl.AppEngine.CodeGeneration.V1;
 using Zirpl.AppEngine.CodeGeneration.V2;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers;
+using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.CodeGeneration
 {
@@ -24,6 +25,18 @@ namespace Zirpl.AppEngine.CodeGeneration
                 session.LoadConfiguration(
                     appConfigParser ?? new AppConfigParser(),
                     domainClassConfigParser ?? new DomainClassConfigParser());
+
+                var template = new V2.Templates.Model.ModelTemplate();
+                template.Host = TextTransformationSession.Instance.CallingTemplate.Host;
+                template.GetDynamicAccessorForDeclaredType().SetPropertyValue(template, "GenerationEnvironment", TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment);
+
+
+                template.Session = new Microsoft.VisualStudio.TextTemplating.TextTemplatingSession();
+                template.Session["AppConfig"] = session.AppConfig;
+                // Add other parameter values to t.Session here.
+                template.Initialize(); // Must call this to transfer values.
+
+                template.TransformText();
             }
         }
 

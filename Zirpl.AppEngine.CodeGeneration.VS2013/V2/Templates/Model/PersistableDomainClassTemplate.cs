@@ -25,9 +25,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\ModelTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ModelTemplate : ModelTemplateBase
+    public partial class PersistableDomainClassTemplate : PersistableDomainClassTemplateBase
     {
 #line hidden
         /// <summary>
@@ -36,9 +36,19 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 20 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\ModelTemplate.tt"
+            #line 21 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
 
+if (AppConfig != null)
+{
 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 26 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
+
+}
 
             
             #line default
@@ -61,7 +71,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
             }
         }
         
-        #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\ModelTemplate.tt"
+        #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
 
 private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig _AppConfigField;
 
@@ -73,6 +83,19 @@ private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig AppConfi
     get
     {
         return this._AppConfigField;
+    }
+}
+
+private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableDomainClassConfig _DomainClassConfigField;
+
+/// <summary>
+/// Access the DomainClassConfig parameter of the template.
+/// </summary>
+private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableDomainClassConfig DomainClassConfig
+{
+    get
+    {
+        return this._DomainClassConfigField;
     }
 }
 
@@ -117,6 +140,40 @@ if ((AppConfigValueAcquired == false))
         this._AppConfigField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig)(data));
     }
 }
+bool DomainClassConfigValueAcquired = false;
+if (this.Session.ContainsKey("DomainClassConfig"))
+{
+    this._DomainClassConfigField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableDomainClassConfig)(this.Session["DomainClassConfig"]));
+    DomainClassConfigValueAcquired = true;
+}
+if ((DomainClassConfigValueAcquired == false))
+{
+    string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "DomainClassConfig");
+    if ((string.IsNullOrEmpty(parameterValue) == false))
+    {
+        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableDomainClassConfig));
+        if (((tc != null) 
+                    && tc.CanConvertFrom(typeof(string))))
+        {
+            this._DomainClassConfigField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableDomainClassConfig)(tc.ConvertFrom(parameterValue)));
+            DomainClassConfigValueAcquired = true;
+        }
+        else
+        {
+            this.Error("The type \'Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableDomainClassCon" +
+                    "fig\' of the parameter \'DomainClassConfig\' did not match the type of the data pas" +
+                    "sed to the template.");
+        }
+    }
+}
+if ((DomainClassConfigValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainClassConfig");
+    if ((data != null))
+    {
+        this._DomainClassConfigField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableDomainClassConfig)(data));
+    }
+}
 
 
     }
@@ -135,7 +192,7 @@ if ((AppConfigValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class ModelTemplateBase
+    public class PersistableDomainClassTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

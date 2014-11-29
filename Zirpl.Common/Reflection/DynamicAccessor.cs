@@ -103,7 +103,7 @@ namespace Zirpl.Reflection
         {
             if (!_propertySetters.ContainsKey(propertyName))
             {
-                _propertySetters.Add(propertyName, DynamicMethodCompiler.CreateSetHandler(_type, _type.GetProperty(propertyName)));
+                _propertySetters.Add(propertyName, DynamicMethodCompiler.CreateSetHandler(_type, _type.GetProperty(propertyName, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic)));
             }
         }
 
@@ -111,7 +111,7 @@ namespace Zirpl.Reflection
         {
             if (!_propertyGetters.ContainsKey(propertyName))
             {
-                _propertyGetters.Add(propertyName, DynamicMethodCompiler.CreateGetHandler(_type, _type.GetProperty(propertyName)));
+                _propertyGetters.Add(propertyName, DynamicMethodCompiler.CreateGetHandler(_type, _type.GetProperty(propertyName, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic)));
             }
         }
         private void ValidateFieldGetter(string fieldName)

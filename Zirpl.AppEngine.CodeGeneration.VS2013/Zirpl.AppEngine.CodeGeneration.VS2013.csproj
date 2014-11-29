@@ -224,13 +224,8 @@
     <Compile Include="V2\ConfigModel\JsonModel\AppConfigJson.cs" />
     <Compile Include="V2\ConfigModel\JsonModel\DomainClassConfigJson.cs" />
     <Compile Include="V2\LogHelper.cs" />
-    <Compile Include="V2\Templates\PartialTemplateClasses.cs">
-      <DependentUpon>PartialTemplateClasses.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="V2\Templates\Model\ModelTemplate.cs">
-      <DependentUpon>ModelTemplate.tt</DependentUpon>
+    <Compile Include="V2\Templates\Model\PersistableDomainClassTemplate.cs">
+      <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -338,13 +333,9 @@
       <LastGenOutput>ModelTemplate.cs</LastGenOutput>
       <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="V2\Templates\PartialTemplateClasses.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PartialTemplateClasses.cs</LastGenOutput>
-    </None>
-    <None Include="V2\Templates\Model\ModelTemplate.tt">
+    <None Include="V2\Templates\Model\PersistableDomainClassTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelTemplate.cs</LastGenOutput>
+      <LastGenOutput>PersistableDomainClassTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
