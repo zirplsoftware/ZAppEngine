@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EnvDTE;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
+using Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
+namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers
 {
     public class DomainClassConfigParser
     {
-        public IEnumerable<DomainClassConfigBase> Parse(IEnumerable<ProjectItem> configProjectItems)
+        public IEnumerable<DomainClassConfigBase> Parse(AppConfig app, IEnumerable<ProjectItem> configProjectItems)
         {
             var domainClassConfigList = new List<DomainClassConfigBase>();
             foreach (var projectItem in configProjectItems)
@@ -70,35 +69,35 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 var whichProjectLower = whichProject.ToLower();
                 if (whichProjectLower == "model")
                 {
-                    domainType.DestinationProject = TextTransformationSession.Instance.ModelProject;
+                    domainType.DestinationProject = app.ModelProject;
                 }
                 else if (whichProjectLower == "dataservice")
                 {
-                    domainType.DestinationProject = TextTransformationSession.Instance.DataServiceProject;
+                    domainType.DestinationProject = app.DataServiceProject;
                 }
                 else if (whichProjectLower == "service")
                 {
-                    domainType.DestinationProject = TextTransformationSession.Instance.ServiceProject;
+                    domainType.DestinationProject = app.ServiceProject;
                 }
                 else if (whichProjectLower == "webcore")
                 {
-                    domainType.DestinationProject = TextTransformationSession.Instance.WebCoreProject;
+                    domainType.DestinationProject = app.WebCoreProject;
                 }
                 else if (whichProjectLower == "web")
                 {
-                    domainType.DestinationProject = TextTransformationSession.Instance.WebProject;
+                    domainType.DestinationProject = app.WebProject;
                 }
                 else if (whichProjectLower == "testscommon")
                 {
-                    domainType.DestinationProject = TextTransformationSession.Instance.TestsCommonProject;
+                    domainType.DestinationProject = app.TestsCommonProject;
                 }
                 else if (whichProjectLower == "dataservicetests")
                 {
-                    domainType.DestinationProject = TextTransformationSession.Instance.DataServiceTestsProject;
+                    domainType.DestinationProject = app.DataServiceTestsProject;
                 }
                 else if (whichProjectLower == "servicetests")
                 {
-                    domainType.DestinationProject = TextTransformationSession.Instance.ServiceTestsProject;
+                    domainType.DestinationProject = app.ServiceTestsProject;
                 }
                 else
                 {

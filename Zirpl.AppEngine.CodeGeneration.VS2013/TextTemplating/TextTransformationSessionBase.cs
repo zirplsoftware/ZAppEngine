@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 {

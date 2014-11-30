@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell.Interop;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel;
+using Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
 {

@@ -36,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 21 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 22 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
 
 if (AppConfig != null)
 {
@@ -44,7 +44,6 @@ if (AppConfig != null)
             
             #line default
             #line hidden
-            this.Write("\r\n");
             
             #line 26 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
 
@@ -83,6 +82,19 @@ private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig AppConfi
     get
     {
         return this._AppConfigField;
+    }
+}
+
+private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate _FileToGenerateField;
+
+/// <summary>
+/// Access the FileToGenerate parameter of the template.
+/// </summary>
+private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate FileToGenerate
+{
+    get
+    {
+        return this._FileToGenerateField;
     }
 }
 
@@ -138,6 +150,40 @@ if ((AppConfigValueAcquired == false))
     if ((data != null))
     {
         this._AppConfigField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig)(data));
+    }
+}
+bool FileToGenerateValueAcquired = false;
+if (this.Session.ContainsKey("FileToGenerate"))
+{
+    this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate)(this.Session["FileToGenerate"]));
+    FileToGenerateValueAcquired = true;
+}
+if ((FileToGenerateValueAcquired == false))
+{
+    string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "FileToGenerate");
+    if ((string.IsNullOrEmpty(parameterValue) == false))
+    {
+        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate));
+        if (((tc != null) 
+                    && tc.CanConvertFrom(typeof(string))))
+        {
+            this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate)(tc.ConvertFrom(parameterValue)));
+            FileToGenerateValueAcquired = true;
+        }
+        else
+        {
+            this.Error("The type \'Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate\' of the pa" +
+                    "rameter \'FileToGenerate\' did not match the type of the data passed to the templa" +
+                    "te.");
+        }
+    }
+}
+if ((FileToGenerateValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("FileToGenerate");
+    if ((data != null))
+    {
+        this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate)(data));
     }
 }
 bool DomainClassConfigValueAcquired = false;

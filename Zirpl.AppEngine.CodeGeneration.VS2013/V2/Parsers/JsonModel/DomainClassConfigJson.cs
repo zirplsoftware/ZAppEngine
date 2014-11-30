@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using EnvDTE;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel
+namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel
 {
     public class DomainClassConfigJson
     {

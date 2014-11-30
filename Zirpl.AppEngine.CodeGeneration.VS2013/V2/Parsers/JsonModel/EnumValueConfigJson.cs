@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Xml.Serialization;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel
+namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel
 {
     public class EnumValueConfigJson
     {

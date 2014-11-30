@@ -78,8 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppGenerator.cs" />
-    <Compile Include="TextTemplating\IPreprocessedTextTransformation.cs" />
     <Compile Include="TextTemplating\ITextTransformation.cs" />
+    <Compile Include="TextTemplating\PreprocessedTextTransformationWrapper.cs" />
     <Compile Include="TextTemplating\TextTransformationSessionBase.cs" />
     <Compile Include="TextTemplating\TextTransformationWrapper.cs" />
     <Compile Include="TextTemplating\OutputFileProperties.cs" />
@@ -91,20 +91,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextTemplating\LogHelper.cs" />
     <Compile Include="V2\ConfigModel\AppConfig.cs" />
+    <Compile Include="V2\ConfigModel\ClassToGenerate.cs" />
     <Compile Include="V2\ConfigModel\EnumConfig.cs" />
     <Compile Include="V2\ConfigModel\EnumValueConfig.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="V2\ConfigModel\FileToGenerate.cs" />
-    <Compile Include="V2\ConfigModel\JsonModel\EnumValueConfigJson.cs" />
-    <Compile Include="V2\ConfigModel\Parsers\AppConfigParser.cs" />
-    <Compile Include="V2\ConfigModel\Parsers\DomainClassConfigParser.cs" />
+    <Compile Include="V2\Parsers\JsonModel\EnumValueConfigJson.cs" />
+    <Compile Include="V2\Parsers\AppConfigParser.cs" />
+    <Compile Include="V2\Parsers\DomainClassConfigParser.cs" />
     <Compile Include="V2\ConfigModel\TransientDomainClassConfig.cs" />
     <Compile Include="V2\ConfigModel\StaticLookupDomainClassConfig.cs" />
     <Compile Include="V2\ConfigModel\PersistableDomainClassConfig.cs" />
     <Compile Include="V2\ConfigModel\DomainClassConfigBase.cs" />
-    <Compile Include="V2\ConfigModel\JsonModel\AppConfigJson.cs" />
-    <Compile Include="V2\ConfigModel\JsonModel\DomainClassConfigJson.cs" />
+    <Compile Include="V2\Parsers\JsonModel\AppConfigJson.cs" />
+    <Compile Include="V2\Parsers\JsonModel\DomainClassConfigJson.cs" />
     <Compile Include="V2\LogHelper.cs" />
     <Compile Include="V2\Templates\Model\PersistableDomainClassTemplate.cs">
       <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>

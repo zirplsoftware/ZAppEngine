@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers;
+using Zirpl.AppEngine.CodeGeneration.V2.Parsers;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.IO;
+using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2
 {
@@ -31,7 +32,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
 
             var domainClassConfigProjectItems = new List<ProjectItem>();
             ProjectItem appConfigProjectItem = null;
-            var projectItems = this.CodeGenerationProject.ProjectItems.GetAllProjectItemsRecursive();
+
+            // get all ProjectItems for the project with the initial template
+            //
+            var projectItems = this.FileManager.TemplateProjectItem.ContainingProject.ProjectItems.GetAllProjectItemsRecursive();
             foreach (var configProjectItem in projectItems)
             {
                 var fullPath = configProjectItem.GetFullPath();
@@ -48,90 +52,38 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
             }
 
             this.AppConfig = appConfigParser.Parse(appConfigProjectItem);
-            this.AppConfig.DomainTypes.AddRange(domainClassConfigParser.Parse(domainClassConfigProjectItems));
-
+            this.AppConfig.DomainTypes.AddRange(domainClassConfigParser.Parse(this.AppConfig, domainClassConfigProjectItems));
         }
 
-        #region Solution/Project members- no virtual members
-
-        public DTE2 VisualStudio
+        public void CreateFile(FileToGenerate fileToGenerate, IDictionary<String, Object> parameters = null)
         {
-            get
-            {
-                return this.FileManager.VisualStudio;
-            }
-        }
+            var template = Activator.CreateInstance(fileToGenerate.TemplateType);
+            
+            var templateWrapper = new PreprocessedTextTransformationWrapper(template);
+            templateWrapper.Host = this.CallingTemplate.Host;
+            templateWrapper.GenerationEnvironment = this.CallingTemplate.GenerationEnvironment;
 
-        public Project CodeGenerationProject
-        {
-            get
-            {
-                return this.FileManager.TemplateProjectItem.ContainingProject;
-            }
-        }
 
-        public Project ModelProject
-        {
-            get
+            var session = new Microsoft.VisualStudio.TextTemplating.TextTemplatingSession();
+            session["FileToGenerate"] = fileToGenerate;
+            session["AppConfig"] = this.AppConfig;
+            if (parameters != null)
             {
-                return this.VisualStudio.GetProject(this.AppConfig.ModelProjectName);
+                foreach (var parameter in parameters)
+                {
+                    session[parameter.Key] = parameter.Value;
+                }
             }
-        }
+            templateWrapper.Session = session;
+            templateWrapper.Initialize(); // Must call this to transfer values.
 
-        public Project DataServiceProject
-        {
-            get
-            {
-                return this.VisualStudio.GetProject(this.AppConfig.DataServiceProjectName);
-            }
-        }
+            this.FileManager.StartNewFile(
+                fileToGenerate.FileName,
+                fileToGenerate.DestinationProject,
+                fileToGenerate.FolderPath,
+                new OutputFileProperties() { BuildAction = fileToGenerate.BuildAction });
 
-        public Project DataServiceTestsProject
-        {
-            get
-            {
-                return this.VisualStudio.GetProject(this.AppConfig.DataServiceTestsProjectName);
-            }
-        }
-
-        public Project ServiceProject
-        {
-            get
-            {
-                return this.VisualStudio.GetProject(this.AppConfig.ServiceProjectName);
-            }
-        }
-
-        public Project WebProject
-        {
-            get
-            {
-                return this.VisualStudio.GetProject(this.AppConfig.WebProjectName);
-            }
-        }
-
-        public Project WebCoreProject
-        {
-            get
-            {
-                return this.VisualStudio.GetProject(this.AppConfig.WebCoreProjectName);
-            }
-        }
-
-        public Project ServiceTestsProject
-        {
-            get
-            {
-                return this.VisualStudio.GetProject(this.AppConfig.ServiceTestsProjectName);
-            }
-        }
-
-        public Project TestsCommonProject
-        {
-            get
-            {
-                return this.VisualStudio.GetProject(this.AppConfig.TestsCommonProjectName);
-            }
+            templateWrapper.TransformText();
         }
 
         //public string GetGeneratedCodeFolder(PersistableDomainType domainType, String subNamespace = null, bool includeGeneratedCodeRootFolderName = true)
@@ -157,8 +109,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
         //    }
         //    return (includeGeneratedCodeRootFolderName ? this.App.GeneratedCodeRootFolderName : "") + domainType.SubNamespace.Replace(".", @"\");
         //}
-        #endregion
-
 
 
         //#region PersistableDomainType filter members- contains virtual members

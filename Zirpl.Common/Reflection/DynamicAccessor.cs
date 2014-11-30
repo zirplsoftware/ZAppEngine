@@ -91,7 +91,7 @@ namespace Zirpl.Reflection
         {
             if (!_fieldSetters.ContainsKey(fieldName))
             {
-                FieldInfo fieldInfo = _type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+                FieldInfo fieldInfo = _type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
 
                 if (fieldInfo == null)
                     throw new ArgumentOutOfRangeException(fieldName, "Unable to find fieldname");
@@ -103,7 +103,10 @@ namespace Zirpl.Reflection
         {
             if (!_propertySetters.ContainsKey(propertyName))
             {
-                _propertySetters.Add(propertyName, DynamicMethodCompiler.CreateSetHandler(_type, _type.GetProperty(propertyName, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic)));
+                var propertyInfo = _type.GetProperty(propertyName, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (propertyInfo == null)
+                    throw new ArgumentOutOfRangeException(propertyName, "Unable to find propertyName");
+                _propertySetters.Add(propertyName, DynamicMethodCompiler.CreateSetHandler(_type, propertyInfo));
             }
         }
 
@@ -111,14 +114,17 @@ namespace Zirpl.Reflection
         {
             if (!_propertyGetters.ContainsKey(propertyName))
             {
-                _propertyGetters.Add(propertyName, DynamicMethodCompiler.CreateGetHandler(_type, _type.GetProperty(propertyName, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic)));
+                var propertyInfo = _type.GetProperty(propertyName, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (propertyInfo == null)
+                    throw new ArgumentOutOfRangeException(propertyName, "Unable to find propertyName");
+                _propertyGetters.Add(propertyName, DynamicMethodCompiler.CreateGetHandler(_type, propertyInfo));
             }
         }
         private void ValidateFieldGetter(string fieldName)
         {
             if (!_fieldGetters.ContainsKey(fieldName))
             {
-                FieldInfo fieldInfo = _type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+                FieldInfo fieldInfo = _type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
                 if (fieldInfo == null)
                     throw new ArgumentOutOfRangeException(fieldName, "Unable to find fieldname");
                 _fieldGetters.Add(fieldName, DynamicMethodCompiler.CreateGetHandler(_type, fieldInfo));

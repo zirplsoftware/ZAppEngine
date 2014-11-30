@@ -17,12 +17,12 @@
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
 <#@ parameter type="Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig" name="AppConfig" #>
+<#@ parameter type="Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate" name="FileToGenerate" #>
 <#@ parameter type="Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.PersistableDomainClassConfig" name="DomainClassConfig" #>
 <#
 if (AppConfig != null)
 {
 #>
-
 <#
 }
 #>

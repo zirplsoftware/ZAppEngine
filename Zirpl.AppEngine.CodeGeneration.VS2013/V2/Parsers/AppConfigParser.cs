@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EnvDTE;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
+using Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
+namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers
 {
     public class AppConfigParser
     {

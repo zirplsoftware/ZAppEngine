@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using EnvDTE;
+using EnvDTE80;
+using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
@@ -11,6 +13,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public AppConfig()
         {
             this.DomainTypes = new List<DomainClassConfigBase>();
+            this.FilesToGenerate = new List<FileToGenerate>();
         }
 
         public ProjectItem SourceProjectItem { get; set; }
@@ -26,5 +29,89 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public String TestsCommonProjectName { get; set; }
         public String DataContextName { get; set; }
         public List<DomainClassConfigBase> DomainTypes { get; set; }
+        public List<FileToGenerate> FilesToGenerate { get; set; }
+
+        #region Project references
+        public DTE2 VisualStudio
+        {
+            get
+            {
+                return TextTransformationSession.Instance.FileManager.VisualStudio;
+            }
+        }
+
+        public Project CodeGenerationProject
+        {
+            get
+            {
+                return TextTransformationSession.Instance.FileManager.TemplateProjectItem.ContainingProject;
+            }
+        }
+
+        public Project ModelProject
+        {
+            get
+            {
+                return this.VisualStudio.GetProject(this.ModelProjectName);
+            }
+        }
+
+        public Project DataServiceProject
+        {
+            get
+            {
+                return this.VisualStudio.GetProject(this.DataServiceProjectName);
+            }
+        }
+
+        public Project DataServiceTestsProject
+        {
+            get
+            {
+                return this.VisualStudio.GetProject(this.DataServiceTestsProjectName);
+            }
+        }
+
+        public Project ServiceProject
+        {
+            get
+            {
+                return this.VisualStudio.GetProject(this.ServiceProjectName);
+            }
+        }
+
+        public Project WebProject
+        {
+            get
+            {
+                return this.VisualStudio.GetProject(this.WebProjectName);
+            }
+        }
+
+        public Project WebCoreProject
+        {
+            get
+            {
+                return this.VisualStudio.GetProject(this.WebCoreProjectName);
+            }
+        }
+
+        public Project ServiceTestsProject
+        {
+            get
+            {
+                return this.VisualStudio.GetProject(this.ServiceTestsProjectName);
+            }
+        }
+
+        public Project TestsCommonProject
+        {
+            get
+            {
+                return this.VisualStudio.GetProject(this.TestsCommonProjectName);
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-using Zirpl.Xml.Serialization;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.JsonModel
+namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel
 {
     public class AppConfigJson
     {
