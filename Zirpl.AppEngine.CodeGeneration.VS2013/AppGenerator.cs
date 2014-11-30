@@ -20,26 +20,19 @@ namespace Zirpl.AppEngine.CodeGeneration
         public static void GenerateApp(
             this TextTransformation callingTemplate, 
             AppConfigParser appConfigParser = null, 
-            DomainClassConfigParser domainClassConfigParser = null)
+            DomainClassConfigParser domainClassConfigParser = null,
+            IDictionary<String, Object> additionalTemplateParameters = null)
         {
             using (var session = V2.TextTransformationSession.StartSession(callingTemplate))
             {
-                session.LoadConfiguration(
+                session.Initialize(
                     appConfigParser ?? new AppConfigParser(),
                     domainClassConfigParser ?? new DomainClassConfigParser());
 
-                var file = new FileToGenerate()
+                foreach (var file in session.AppConfig.FilesToGenerate)
                 {
-                    BuildAction = OutputFileBuildActionType.Compile,
-                    DestinationProject = session.AppConfig.ModelProject,
-                    FileExtension = ".auto.cs",
-                    FileNameWithoutExtension = "Testing123",
-                    FolderPath = "_auto/",
-                    TemplateType = typeof (PersistableDomainClassTemplate)
-
-                };
-
-                session.CreateFile(file);
+                    session.CreateFile(session.AppConfig, file, additionalTemplateParameters);
+                }
             }
         }
     }

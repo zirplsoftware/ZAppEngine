@@ -26,9 +26,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
     {
         public AppConfig AppConfig { get; private set; }
 
-        public void LoadConfiguration(AppConfigParser appConfigParser, DomainClassConfigParser domainClassConfigParser)
+        public void Initialize(AppConfigParser appConfigParser, DomainClassConfigParser domainClassConfigParser)
         {
             appConfigParser = appConfigParser ?? new AppConfigParser();
+            domainClassConfigParser = domainClassConfigParser ?? new DomainClassConfigParser();
 
             var domainClassConfigProjectItems = new List<ProjectItem>();
             ProjectItem appConfigProjectItem = null;
@@ -53,37 +54,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V2
 
             this.AppConfig = appConfigParser.Parse(appConfigProjectItem);
             this.AppConfig.DomainTypes.AddRange(domainClassConfigParser.Parse(this.AppConfig, domainClassConfigProjectItems));
-        }
-
-        public void CreateFile(FileToGenerate fileToGenerate, IDictionary<String, Object> parameters = null)
-        {
-            var template = Activator.CreateInstance(fileToGenerate.TemplateType);
-            
-            var templateWrapper = new PreprocessedTextTransformationWrapper(template);
-            templateWrapper.Host = this.CallingTemplate.Host;
-            templateWrapper.GenerationEnvironment = this.CallingTemplate.GenerationEnvironment;
-
-
-            var session = new Microsoft.VisualStudio.TextTemplating.TextTemplatingSession();
-            session["FileToGenerate"] = fileToGenerate;
-            session["AppConfig"] = this.AppConfig;
-            if (parameters != null)
-            {
-                foreach (var parameter in parameters)
-                {
-                    session[parameter.Key] = parameter.Value;
-                }
-            }
-            templateWrapper.Session = session;
-            templateWrapper.Initialize(); // Must call this to transfer values.
-
-            this.FileManager.StartNewFile(
-                fileToGenerate.FileName,
-                fileToGenerate.DestinationProject,
-                fileToGenerate.FolderPath,
-                new OutputFileProperties() { BuildAction = fileToGenerate.BuildAction });
-
-            templateWrapper.TransformText();
         }
 
         //public string GetGeneratedCodeFolder(PersistableDomainType domainType, String subNamespace = null, bool includeGeneratedCodeRootFolderName = true)

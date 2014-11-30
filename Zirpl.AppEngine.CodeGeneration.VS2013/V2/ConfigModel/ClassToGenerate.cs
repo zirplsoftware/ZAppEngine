@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
 {

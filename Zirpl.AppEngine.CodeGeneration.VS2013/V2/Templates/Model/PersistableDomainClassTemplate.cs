@@ -85,12 +85,12 @@ private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppConfig AppConfi
     }
 }
 
-private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate _FileToGenerateField;
+private global::Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate _FileToGenerateField;
 
 /// <summary>
 /// Access the FileToGenerate parameter of the template.
 /// </summary>
-private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate FileToGenerate
+private global::Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate FileToGenerate
 {
     get
     {
@@ -155,7 +155,7 @@ if ((AppConfigValueAcquired == false))
 bool FileToGenerateValueAcquired = false;
 if (this.Session.ContainsKey("FileToGenerate"))
 {
-    this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate)(this.Session["FileToGenerate"]));
+    this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate)(this.Session["FileToGenerate"]));
     FileToGenerateValueAcquired = true;
 }
 if ((FileToGenerateValueAcquired == false))
@@ -163,11 +163,11 @@ if ((FileToGenerateValueAcquired == false))
     string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "FileToGenerate");
     if ((string.IsNullOrEmpty(parameterValue) == false))
     {
-        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate));
+        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate));
         if (((tc != null) 
                     && tc.CanConvertFrom(typeof(string))))
         {
-            this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate)(tc.ConvertFrom(parameterValue)));
+            this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate)(tc.ConvertFrom(parameterValue)));
             FileToGenerateValueAcquired = true;
         }
         else
@@ -183,7 +183,7 @@ if ((FileToGenerateValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("FileToGenerate");
     if ((data != null))
     {
-        this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileToGenerate)(data));
+        this._FileToGenerateField = ((global::Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate)(data));
     }
 }
 bool DomainClassConfigValueAcquired = false;

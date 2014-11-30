@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EnvDTE;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.AppEngine.CodeGeneration.V2;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
+using Zirpl.AppEngine.CodeGeneration.V2.Parsers;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
@@ -14,10 +18,6 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
     public abstract class TextTransformationSessionBase<TConcrete>: IDisposable
         where TConcrete : TextTransformationSessionBase<TConcrete>, new()
     {
-        protected TextTransformationSessionBase()
-        {
-        }
-
         public static TConcrete Instance { get; private set; }
         private static Object STATIC_SYNC_ROOT;
 
@@ -52,10 +52,42 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         public ITextTransformation CallingTemplate { get; private set; }
         public TemplateFileManager FileManager { get; private set; }
-        
+
+        public void CreateFile(Object appConfig, FileToGenerate fileToGenerate, IDictionary<String, Object> additionalTemplateParameters = null)
+        {
+            var template = Activator.CreateInstance(fileToGenerate.TemplateType);
+
+            var templateWrapper = new PreprocessedTextTransformationWrapper(template);
+            templateWrapper.Host = this.CallingTemplate.Host;
+            templateWrapper.GenerationEnvironment = this.CallingTemplate.GenerationEnvironment;
+
+
+            var session = new Microsoft.VisualStudio.TextTemplating.TextTemplatingSession();
+            session["FileToGenerate"] = fileToGenerate;
+            session["AppConfig"] = appConfig;
+            if (additionalTemplateParameters != null)
+            {
+                foreach (var parameter in additionalTemplateParameters)
+                {
+                    session[parameter.Key] = parameter.Value;
+                }
+            }
+            templateWrapper.Session = session;
+            templateWrapper.Initialize(); // Must call this to transfer values.
+
+            this.FileManager.StartNewFile(
+                fileToGenerate.FileName,
+                fileToGenerate.DestinationProject,
+                fileToGenerate.FolderPath,
+                new OutputFileProperties() { BuildAction = fileToGenerate.BuildAction });
+
+            templateWrapper.TransformText();
+        }
+
+
         public void Dispose()
         {
-            FileManager.Finish();
+            this.FileManager.Finish();
         }
     }
 }

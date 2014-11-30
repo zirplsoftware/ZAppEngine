@@ -96,7 +96,7 @@
     <Compile Include="V2\ConfigModel\EnumValueConfig.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="V2\ConfigModel\FileToGenerate.cs" />
+    <Compile Include="TextTemplating\FileToGenerate.cs" />
     <Compile Include="V2\Parsers\JsonModel\EnumValueConfigJson.cs" />
     <Compile Include="V2\Parsers\AppConfigParser.cs" />
     <Compile Include="V2\Parsers\DomainClassConfigParser.cs" />
