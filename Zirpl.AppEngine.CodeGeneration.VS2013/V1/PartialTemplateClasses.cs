@@ -5,7 +5,7 @@ using Zirpl.AppEngine.CodeGeneration.V1;
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService
 {
-	public partial class DataServiceInterfaceTemplate: IPreprocessedTextTransformation
+	public partial class DataServiceInterfaceTemplate
     {
         public DataServiceInterfaceTemplate(V1Helper helper)
         {
@@ -20,7 +20,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework
 {
-	public partial class DataContextTemplate: IPreprocessedTextTransformation
+	public partial class DataContextTemplate
     {
         public DataContextTemplate(V1Helper helper)
         {
@@ -35,7 +35,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework
 {
-	public partial class DataServiceTemplate: IPreprocessedTextTransformation
+	public partial class DataServiceTemplate
     {
         public DataServiceTemplate(V1Helper helper)
         {
@@ -50,7 +50,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramework.Mapping
 {
-	public partial class MappingTemplate: IPreprocessedTextTransformation
+	public partial class MappingTemplate
     {
         public MappingTemplate(V1Helper helper)
         {
@@ -65,7 +65,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.DataService.EntityFramewor
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Customization
 {
-	public partial class CustomFieldValueTemplate: IPreprocessedTextTransformation
+	public partial class CustomFieldValueTemplate
     {
         public CustomFieldValueTemplate(V1Helper helper)
         {
@@ -80,7 +80,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Customization
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
 {
-	public partial class EnumTemplate: IPreprocessedTextTransformation
+	public partial class EnumTemplate
     {
         public EnumTemplate(V1Helper helper)
         {
@@ -95,7 +95,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Metadata.Constants
 {
-	public partial class MetadataConstantsTemplate: IPreprocessedTextTransformation
+	public partial class MetadataConstantsTemplate
     {
         public MetadataConstantsTemplate(V1Helper helper)
         {
@@ -110,7 +110,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model.Metadata.Constants
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
 {
-	public partial class ModelTemplate: IPreprocessedTextTransformation
+	public partial class ModelTemplate
     {
         public ModelTemplate(V1Helper helper)
         {
@@ -125,7 +125,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Model
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service.EntityFramework
 {
-	public partial class ServiceTemplate: IPreprocessedTextTransformation
+	public partial class ServiceTemplate
     {
         public ServiceTemplate(V1Helper helper)
         {
@@ -140,7 +140,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service.EntityFramework
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service
 {
-	public partial class ServiceInterfaceTemplate: IPreprocessedTextTransformation
+	public partial class ServiceInterfaceTemplate
     {
         public ServiceInterfaceTemplate(V1Helper helper)
         {
@@ -155,7 +155,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Service
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
 {
-	public partial class PeristableModelTestsStrategyTemplate: IPreprocessedTextTransformation
+	public partial class PeristableModelTestsStrategyTemplate
     {
         public PeristableModelTestsStrategyTemplate(V1Helper helper)
         {
@@ -170,7 +170,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
 {
-	public partial class PersistableModelTestsEntityWrapperTemplate: IPreprocessedTextTransformation
+	public partial class PersistableModelTestsEntityWrapperTemplate
     {
         public PersistableModelTestsEntityWrapperTemplate(V1Helper helper)
         {
@@ -185,7 +185,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Common
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
 {
-	public partial class DataServicesProviderTemplate: IPreprocessedTextTransformation
+	public partial class DataServicesProviderTemplate
     {
         public DataServicesProviderTemplate(V1Helper helper)
         {
@@ -200,7 +200,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFramework
 {
-	public partial class DataServiceTestsTemplate: IPreprocessedTextTransformation
+	public partial class DataServiceTestsTemplate
     {
         public DataServiceTestsTemplate(V1Helper helper)
         {
@@ -215,7 +215,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.DataService.EntityFr
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Service.EntityFramework
 {
-	public partial class ServiceTestsTemplate: IPreprocessedTextTransformation
+	public partial class ServiceTestsTemplate
     {
         public ServiceTestsTemplate(V1Helper helper)
         {
@@ -230,7 +230,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Service.EntityFramew
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Service
 {
-	public partial class ServicesProviderTemplate: IPreprocessedTextTransformation
+	public partial class ServicesProviderTemplate
     {
         public ServicesProviderTemplate(V1Helper helper)
         {
@@ -245,7 +245,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Tests.Service
 
 namespace Zirpl.AppEngine.CodeGeneration.V1.Templates.Validation.EntityFramework.FluentValidation
 {
-	public partial class ValidatorTemplate: IPreprocessedTextTransformation
+	public partial class ValidatorTemplate
     {
         public ValidatorTemplate(V1Helper helper)
         {

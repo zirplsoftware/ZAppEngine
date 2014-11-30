@@ -7,6 +7,7 @@ using EnvDTE;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.CodeGeneration.V1;
 using Zirpl.AppEngine.CodeGeneration.V2;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
 using Zirpl.AppEngine.CodeGeneration.V2.Parsers;
@@ -23,16 +24,65 @@ namespace Zirpl.AppEngine.CodeGeneration
             DomainClassConfigParser domainClassConfigParser = null,
             IDictionary<String, Object> additionalTemplateParameters = null)
         {
-            using (var session = V2.TextTransformationSession.StartSession(callingTemplate))
+            using (var session = TextTransformationSession.StartSession(callingTemplate))
             {
-                session.Initialize(
-                    appConfigParser ?? new AppConfigParser(),
-                    domainClassConfigParser ?? new DomainClassConfigParser());
+                appConfigParser = appConfigParser ?? new AppConfigParser();
+                domainClassConfigParser = domainClassConfigParser ?? new DomainClassConfigParser();
 
-                foreach (var file in session.AppConfig.FilesToGenerate)
+                var domainClassConfigProjectItems = new List<ProjectItem>();
+                ProjectItem appConfigProjectItem = null;
+
+                // get all ProjectItems for the project with the initial template
+                //
+                var projectItems = session.FileManager.TemplateProjectItem.ContainingProject.ProjectItems.GetAllProjectItemsRecursive();
+                foreach (var configProjectItem in projectItems)
                 {
-                    session.CreateFile(session.AppConfig, file, additionalTemplateParameters);
+                    var fullPath = configProjectItem.GetFullPath();
+                    if (fullPath.EndsWith(".domain.zae"))
+                    {
+                        domainClassConfigProjectItems.Add(configProjectItem);
+                        session.LogLineToBuildPane(fullPath);
+                    }
+                    else if (fullPath.EndsWith(".app.zae"))
+                    {
+                        appConfigProjectItem = configProjectItem;
+                        session.LogLineToBuildPane("App config file: " + fullPath);
+                    }
                 }
+
+                var appConfig = appConfigParser.Parse(appConfigProjectItem);
+                appConfig.DomainTypes.AddRange(domainClassConfigParser.Parse(appConfig, domainClassConfigProjectItems));
+
+                additionalTemplateParameters = additionalTemplateParameters ?? new Dictionary<string, object>();
+                additionalTemplateParameters.Add("AppConfig", appConfig);
+                foreach (var file in appConfig.FilesToGenerate)
+                {
+                    session.CreateFile(file, additionalTemplateParameters);
+                }
+            }
+        }
+
+        public static void GenerateV1App(this TextTransformation callingTemplate, V1Helper helper = null)
+        {
+            using (helper = helper ?? new V1Helper(callingTemplate))
+            {
+                new V1.Templates.Model.ModelTemplate(helper).TransformText();
+                new V1.Templates.Model.Customization.CustomFieldValueTemplate(helper).TransformText();
+                new V1.Templates.Model.Metadata.Constants.MetadataConstantsTemplate(helper).TransformText();
+                new V1.Templates.Model.EnumTemplate(helper).TransformText();
+                new V1.Templates.DataService.DataServiceInterfaceTemplate(helper).TransformText();
+                new V1.Templates.DataService.EntityFramework.DataServiceTemplate(helper).TransformText();
+                new V1.Templates.DataService.EntityFramework.DataContextTemplate(helper).TransformText();
+                new V1.Templates.DataService.EntityFramework.Mapping.MappingTemplate(helper).TransformText();
+                new V1.Templates.Service.ServiceInterfaceTemplate(helper).TransformText();
+                new V1.Templates.Service.EntityFramework.ServiceTemplate(helper).TransformText();
+                new V1.Templates.Validation.EntityFramework.FluentValidation.ValidatorTemplate(helper).TransformText();
+                new V1.Templates.Tests.DataService.DataServicesProviderTemplate(helper).TransformText();
+                new V1.Templates.Tests.Common.PersistableModelTestsEntityWrapperTemplate(helper).TransformText();
+                new V1.Templates.Tests.Common.PeristableModelTestsStrategyTemplate(helper).TransformText();
+                new V1.Templates.Tests.DataService.EntityFramework.DataServiceTestsTemplate(helper).TransformText();
+                new V1.Templates.Tests.Service.ServicesProviderTemplate(helper).TransformText();
+                new V1.Templates.Tests.Service.EntityFramework.ServiceTestsTemplate(helper).TransformText();
             }
         }
     }

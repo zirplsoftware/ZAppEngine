@@ -32,7 +32,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers
                 {
                     if (domainJson.IsStaticLookup.GetValueOrDefault())
                     {
-                        domainType = new StaticLookupDomainClassConfig();
+                        domainType = new StaticLookupPersistableDomainClassConfig();
                     }
                     else
                     {
@@ -128,7 +128,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers
                 }
 
                 // StaticLookup-specific fields
-                var staticLookupDomainType = domainType as StaticLookupDomainClassConfig;
+                var staticLookupDomainType = domainType as StaticLookupPersistableDomainClassConfig;
                 if (staticLookupDomainType != null)
                 {
                     if (domainJson.EnumValues != null
@@ -188,7 +188,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers
 
                     // reset any fields to match if ON in base
                     var persistableDomainType = domainType as PersistableDomainClassConfig;
-                    var staticLookupDomainType = domainType as StaticLookupDomainClassConfig;
+                    var staticLookupDomainType = domainType as StaticLookupPersistableDomainClassConfig;
                     var transientDomainType = domainType as TransientDomainClassConfig;
                     if (persistableDomainType != null)
                     {

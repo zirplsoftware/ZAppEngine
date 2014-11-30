@@ -15,13 +15,12 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
     /// <summary>
     /// Manages a TextTransformation Session
     /// </summary>
-    public abstract class TextTransformationSessionBase<TConcrete>: IDisposable
-        where TConcrete : TextTransformationSessionBase<TConcrete>, new()
+    public class TextTransformationSession: IDisposable
     {
-        public static TConcrete Instance { get; private set; }
+        public static TextTransformationSession Instance { get; private set; }
         private static Object STATIC_SYNC_ROOT;
 
-        public static TConcrete StartSession(TextTransformation callingTemplate)
+        public static TextTransformationSession StartSession(TextTransformation callingTemplate)
         {
             lock (StaticSyncRoot)
             {
@@ -31,7 +30,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
                     Instance = null;
 //                    throw new Exception("Cannot call StartSession more than once");
                 }
-                Instance = new TConcrete();
+                Instance = new TextTransformationSession();
                 Instance.CallingTemplate = new TextTransformationWrapper(callingTemplate);
                 Instance.FileManager = new TemplateFileManager(Instance.CallingTemplate);
             }
@@ -53,7 +52,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         public ITextTransformation CallingTemplate { get; private set; }
         public TemplateFileManager FileManager { get; private set; }
 
-        public void CreateFile(Object appConfig, FileToGenerate fileToGenerate, IDictionary<String, Object> additionalTemplateParameters = null)
+        public void CreateFile(FileToGenerate fileToGenerate, IDictionary<String, Object> additionalTemplateParameters = null)
         {
             var template = Activator.CreateInstance(fileToGenerate.TemplateType);
 
@@ -64,7 +63,6 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
             var session = new Microsoft.VisualStudio.TextTemplating.TextTemplatingSession();
             session["FileToGenerate"] = fileToGenerate;
-            session["AppConfig"] = appConfig;
             if (additionalTemplateParameters != null)
             {
                 foreach (var parameter in additionalTemplateParameters)

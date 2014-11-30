@@ -5,9 +5,9 @@ using EnvDTE;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
 {
-    public class StaticLookupDomainClassConfig : DomainClassConfigBase
+    public class StaticLookupPersistableDomainClassConfig : DomainClassConfigBase
     {
-        public StaticLookupDomainClassConfig()
+        public StaticLookupPersistableDomainClassConfig()
         {
         }
 

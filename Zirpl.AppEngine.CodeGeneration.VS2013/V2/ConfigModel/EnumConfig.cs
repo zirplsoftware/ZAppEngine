@@ -20,6 +20,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public String FullEnumName { get; set; }
         public Project DestinationProject { get; set; }
         public String ValueType { get; set; }
-        public StaticLookupDomainClassConfig StaticLookupParent { get; set; }
+        public StaticLookupPersistableDomainClassConfig StaticLookupParent { get; set; }
     }
 }

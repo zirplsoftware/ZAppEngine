@@ -16,14 +16,24 @@ using Property = Zirpl.AppEngine.CodeGeneration.V1.ConfigModel.Property;
 
 namespace Zirpl.AppEngine.CodeGeneration.V1
 {
-    public class V1Helper : TransformationHelperBase
+    public class V1Helper : IDisposable
     {
+        public ITextTransformation CallingTemplate { get; private set; }
+        public TemplateFileManager FileManager { get; private set; }
+
+        public void Dispose()
+        {
+            FileManager.Finish();
+        }
+
         public AppDefinition AppDefinition { get; private set; }
 
 
         public V1Helper(TextTransformation callingTemplate)
-            :base(callingTemplate)
         {
+            this.CallingTemplate = new TextTransformationWrapper(callingTemplate);
+            FileManager = new TemplateFileManager(this.CallingTemplate);
+
             #region loading config
             var domaintTypeConfigFilePaths = new List<string>();
             String appDefinitionConfigFilePath = null;

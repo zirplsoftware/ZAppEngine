@@ -55,7 +55,7 @@ foreach (var filePath in templateFilePaths)
 
 namespace <#= classNamespace #>
 {
-	public partial class <#=  fileNameWithoutExtension #>: IPreprocessedTextTransformation
+	public partial class <#=  fileNameWithoutExtension #>
     {
         public <#=  fileNameWithoutExtension #>(<#=helperTypeName #> helper)
         {
