@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.Model.Customization
 {
-    public abstract class CustomFieldValueBase<TExtendedEntity, TId> : EntityBase<TId>, ICustomFieldValue<TExtendedEntity, TId>
+    public abstract class ExtendedEntityFieldValueBase<TExtendedEntity, TId> : EntityBase<TId>, IExtendedEntityFieldValue<TExtendedEntity, TId>
         where TExtendedEntity : IPersistable<TId>
         where TId : IEquatable<TId>
     {

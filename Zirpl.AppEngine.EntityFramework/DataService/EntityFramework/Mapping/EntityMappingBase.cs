@@ -37,7 +37,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework.Mapping
                 {
                     this.Property(s => ((IVersionable)s).RowVersion).IsRequired().IsRowVersion();
                 }
-                // TODO: map ICustomizable
+                // TODO: map IExtendable
             }
         }
 

@@ -318,7 +318,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             if (domainType.IsCustomizable)
             {
                 customizableInterfaceDeclaration =
-                    String.Format("ICustomizable<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetCustomFieldValueTypeName(domainType), this.GetModelIdTypeName(domainType));
+                    String.Format("IExtendable<{0}, {1}, {2}>", this.GetModelTypeName(domainType), this.GetCustomFieldValueTypeName(domainType), this.GetModelIdTypeName(domainType));
             }
             var baseDeclaration = !String.IsNullOrEmpty(domainType.BaseClassOverride)
                     ? " : " + domainType.BaseClassOverride
@@ -433,7 +433,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
         }
         public virtual string GetCustomFieldValueBaseDeclaration(DomainType domainType)
         {
-            return String.Format(" : CustomFieldValueBase<{0}, {1}>", this.GetModelTypeName(domainType),
+            return String.Format(" : ExtendedEntityFieldValueBase<{0}, {1}>", this.GetModelTypeName(domainType),
                 this.GetModelIdTypeName(domainType));
         }
 

@@ -302,11 +302,11 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
             #line default
             #line hidden
             this.Write(@"> CustomFieldValues { get; set; }
-        public virtual IList<ICustomFieldValue> GetCustomFieldValues()
+        public virtual IList<IExtendedEntityFieldValue> GetExtendedFieldValues()
         {
-            return this.CustomFieldValues.OfType<ICustomFieldValue>().ToList();
+            return this.CustomFieldValues.OfType<IExtendedEntityFieldValue>().ToList();
         }	
-		public virtual void SetCustomFieldValues(IList<ICustomFieldValue> list)
+		public virtual void SetExtendedFieldValues(IList<IExtendedEntityFieldValue> list)
 		{
 		    this.CustomFieldValues = list.OfType<");
             

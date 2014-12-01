@@ -1,8 +1,8 @@
 ﻿{
-    "isCustomizable": true,
+    "isEndUserExtendable": true,
     "isDeletable": false,
     "isAbstract": true,
     "id": {
-        "dataType": "Long"
+        "dataType": "Guid"
     }
 }

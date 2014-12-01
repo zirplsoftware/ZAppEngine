@@ -12,30 +12,30 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public String Name { get; set; }
         public DataTypeEnum DataType { get; set; }
         public bool IsPrimaryKey { get; set; }
+        public bool IsForeignKey { get; set; }
         public AutoGenerationBehaviorTypeEnum AutoGenerationBehavior { get; set; }
         public bool IsRowVersion { get; set; }
         public bool IsForAuditableInterface { get; set; }
         public bool IsForMarkDeletedInterface { get; set; }
-        public bool IsForCustomizableInterface { get; set; }
-        public bool IsForCustomValueInterface { get; set; }
+        public bool IsForExtendableInterface { get; set; }
+        public bool IsForExtendedEntityFieldValueInterface { get; set; }
+        public bool IsForIsStaticLookupInterface { get; set; }
 
 
         public bool IsNullable { get; set; }
         public bool IsRequired { get; set; }
         public bool IsMaxLength { get; set; }
-        public String MinLength { get; set; }
-        public String MaxLength { get; set; }
+        public long MinLength { get; set; }
+        public long MaxLength { get; set; }
         public String MinValue { get; set; }
         public String MaxValue { get; set; }
         public String Precision { get; set; }
         public UniquenessTypeEnum UniquenessType { get; set; }
 
         public DomainTypeInfo Owner { get; set; }
-        public RelationshipTypeEnum RelationshipType { get; set; }
-        public RelationshipDeletionBehaviorTypeEnum RelationshipDeletionBehaviorType { get; set; }
-        public DomainTypeInfo RelatedTo { get; set; }
-        public DomainPropertyInfo RelationshipReflexiveProperty { get; set; }
-        public DomainPropertyInfo RelationshipIdProperty { get; set; }
+
+        public RelationshipInfo Relationship { get; set; }
+
 
 
         // TODO: validation

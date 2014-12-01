@@ -129,11 +129,11 @@
     <Compile Include="Model\BatchProcessing\IBatchItemError.cs" />
     <Compile Include="Model\Customization\CustomFieldDefinitionBase.cs" />
     <Compile Include="Model\Customization\CustomFieldDefinitionTypeEnum.cs" />
-    <Compile Include="Model\Customization\CustomFieldValueBase.cs" />
+    <Compile Include="Model\Customization\ExtendedEntityFieldValueBase.cs" />
     <Compile Include="Model\Customization\ICustomFieldDefinition.cs" />
     <Compile Include="Model\Customization\ICustomFieldDefinitionType.cs" />
-    <Compile Include="Model\Customization\ICustomFieldValue.cs" />
-    <Compile Include="Model\Customization\ICustomizable.cs" />
+    <Compile Include="Model\Customization\IExtendedEntityFieldValue.cs" />
+    <Compile Include="Model\Customization\IExtendable.cs" />
     <Compile Include="Model\Search\DefaultSearchCriteria.cs" />
     <Compile Include="Model\StaticLookupEntityBase.cs" />
     <Compile Include="Model\EntityBase.cs" />

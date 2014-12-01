@@ -1,0 +1,16 @@
+﻿{
+"isStaticLookup": true,
+"id": {
+"dataType": "int"
+},
+"enumValues" : [
+{
+"id" : 1,
+"name" : "Dr"
+},
+{
+"id" : 2,
+"name" : "Mr"
+}
+]
+}

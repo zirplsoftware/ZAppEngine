@@ -17,7 +17,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
         public bool? IsAbstract { get; set; }
         public bool? IsVersionable { get; set; }
         public bool? IsAuditable { get; set; }
-        public bool? IsCustomizable { get; set; }
+        public bool? IsEndUserExtendable { get; set; }
         public bool? IsInsertable { get; set; }
         public bool? IsUpdatable { get; set; }
         public bool? IsDeletable { get; set; }

@@ -228,6 +228,7 @@
     <Compile Include="V2\ConfigModel\AppInfo.cs" />
     <Compile Include="V2\ConfigModel\DomainPropertyInfo.cs" />
     <Compile Include="V2\ConfigModel\DomainTypeInfo.cs" />
+    <Compile Include="V2\ConfigModel\EnumValueInfo.cs" />
     <Compile Include="V2\ConfigModel\FileGeneration\ClassToGenerate.cs" />
     <Compile Include="TextTemplating\FileToGenerate.cs" />
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\EnumValueJson.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\AppJson.cs" />
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\DomainTypeJson.cs" />
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\IdJson.cs" />
+    <Compile Include="V2\ConfigModel\RelationshipInfo.cs" />
     <Compile Include="V2\Templates\Model\PersistableDomainClassTemplate.cs">
       <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
       <SubType>Code</SubType>

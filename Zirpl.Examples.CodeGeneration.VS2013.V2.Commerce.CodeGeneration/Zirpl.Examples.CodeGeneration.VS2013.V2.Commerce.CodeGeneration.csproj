@@ -133,6 +133,7 @@
       <TransformOnBuild>True</TransformOnBuild>
       <LastGenOutput>AppTransform.json</LastGenOutput>
     </None>
+    <None Include="_config\ModelProject\NamePrefixType.domain.zae" />
     <None Include="_config\ModelProject\Orders\ShipBatch.model.xml.exclude" />
     <None Include="_config\ModelProject\Orders\ShipBatchItem.model.xml.exclude" />
   </ItemGroup>

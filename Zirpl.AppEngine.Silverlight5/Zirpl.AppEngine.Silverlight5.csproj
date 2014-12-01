@@ -195,8 +195,8 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinitionTypeEnum.cs">
       <Link>Model\Customization\CustomFieldDefinitionTypeEnum.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldValueBase.cs">
-      <Link>Model\Customization\CustomFieldValueBase.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ExtendedEntityFieldValueBase.cs">
+      <Link>Model\Customization\ExtendedEntityFieldValueBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomFieldDefinition.cs">
       <Link>Model\Customization\ICustomFieldDefinition.cs</Link>
@@ -204,11 +204,11 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomFieldDefinitionType.cs">
       <Link>Model\Customization\ICustomFieldDefinitionType.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomFieldValue.cs">
-      <Link>Model\Customization\ICustomFieldValue.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\IExtendable.cs">
+      <Link>Model\Customization\IExtendable.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomizable.cs">
-      <Link>Model\Customization\ICustomizable.cs</Link>
+    <Compile Include="..\Zirpl.AppEngine\Model\Customization\IExtendedEntityFieldValue.cs">
+      <Link>Model\Customization\IExtendedEntityFieldValue.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\EntityBase.cs">
       <Link>Model\EntityBase.cs</Link>
@@ -489,7 +489,7 @@
       <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
         <SilverlightProjectProperties />
       </FlavorProperties>
-      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

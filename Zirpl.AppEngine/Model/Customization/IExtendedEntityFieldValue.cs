@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.Model.Customization
 {
-    public interface ICustomFieldValue<TExtendedEntity, TId> : ICustomFieldValue, IPersistable<TId> where TId : IEquatable<TId>
+    public interface IExtendedEntityFieldValue<TExtendedEntity, TId> : IExtendedEntityFieldValue, IPersistable<TId> where TId : IEquatable<TId>
     {
         TId ExtendedEntityId { get; set; }
         TExtendedEntity ExtendedEntity { get; set; }
     }
 
-    public interface ICustomFieldValue : IPersistable
-    {   
+    public interface IExtendedEntityFieldValue : IPersistable
+    {
         String Value { get; set; }
         Object GetExtendedEntityId();
         Object GetExtendedEntity();
