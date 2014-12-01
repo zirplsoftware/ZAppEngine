@@ -8,6 +8,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
         public DomainTypeJson()
         {
             this.EnumValues = new List<EnumValueJson>();
+            this.Properties = new List<PropertyJson>();
+            this.Properties = new List<PropertyJson>();
         }
         public IdJson Id { get; set; }
         public bool? IsPersistable { get; set; }
@@ -23,5 +25,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
         public bool? IsDeletable { get; set; }
         public bool? IsMarkDeletable { get; set; }
         public IList<EnumValueJson> EnumValues { get; set; }
+        public IList<PropertyJson> Properties { get; set; }
     }
 }

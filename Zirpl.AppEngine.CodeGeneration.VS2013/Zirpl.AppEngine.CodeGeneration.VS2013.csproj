@@ -231,6 +231,7 @@
     <Compile Include="V2\ConfigModel\EnumValueInfo.cs" />
     <Compile Include="V2\ConfigModel\FileGeneration\ClassToGenerate.cs" />
     <Compile Include="TextTemplating\FileToGenerate.cs" />
+    <Compile Include="V2\ConfigModel\Parsers\JsonModel\PropertyJson.cs" />
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\EnumValueJson.cs" />
     <Compile Include="V2\ConfigModel\Parsers\AppFileParser.cs" />
     <Compile Include="V2\ConfigModel\Parsers\DomainFileParser.cs" />

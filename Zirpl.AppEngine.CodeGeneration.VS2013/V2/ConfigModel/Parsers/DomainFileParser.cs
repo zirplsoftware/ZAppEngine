@@ -194,41 +194,12 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 
             // handle inheritance
             //
-            foreach (var domainType in list.Where(o => !String.IsNullOrEmpty(o.Config.InheritsFrom)))
+            foreach (var domainType in list.Where(o => !String.IsNullOrEmpty(o.Config.InheritsFrom)).ToList())
             {
                 var inheritsFromFullNameTokens = domainType.Config.InheritsFrom.Split('.').Reverse().ToList();
                 var inheritsFromClassName = inheritsFromFullNameTokens.First();
 
-                var potentialMatches = (from dt in list
-                                        where dt.Name.ToLowerInvariant() == inheritsFromClassName.ToLowerInvariant()
-                                        select dt).ToList();
-
-                // even though there may only be one, we still take this step because
-                // we want to ensure the entire namespace matches
-                //
-                for (int i = potentialMatches.Count() - 1; i >= 0; i--)
-                {
-                    var potentialMatch = potentialMatches[i];
-                    var potentialMatchFullNameTokens = potentialMatch.FullName.Split('.').Reverse().ToList();
-                    if (inheritsFromFullNameTokens.Count() > potentialMatchFullNameTokens.Count())
-                    {
-                        // by definition this can't be a match since the
-                        // number of namespace tokens is greater than the match
-                        //
-                        potentialMatches.Remove(potentialMatch);
-                    }
-                    else
-                    {
-                        for (int j = 0; j < inheritsFromFullNameTokens.Count(); j++)
-                        {
-                            if (potentialMatchFullNameTokens[j] != inheritsFromFullNameTokens[j])
-                            {
-                                potentialMatches.Remove(potentialMatch);
-                                break;
-                            }
-                        }
-                    }
-                }
+                var potentialMatches = this.FindDomainTypes(list, domainType.Config.InheritsFrom);
                 if (!potentialMatches.Any())
                 {
                     throw new Exception("Could not find domain type matching InheritsFrom in: " + domainType.ConfigFilePath);
@@ -504,6 +475,163 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 nameProperty.Owner = domainType;
                 domainType.Properties.Add(nameProperty);
             }
+
+
+
+
+            // TODO: handle properties passed in that override one of the implicit properties
+
+
+            foreach (var domainType in list.Where(o => o.Config != null && o.Config.Properties.Any()))
+            {
+                foreach (var json in domainType.Config.Properties)
+                {
+
+                    // TODO: up above with the rest, do validation so we know we're working with valid data here
+
+                    if (json.DataType != DataTypeEnum.Relationship)
+                    {
+                        // Value type
+                        var property = new DomainPropertyInfo();
+                        property.Name = json.Name;
+                        property.DataType = json.DataType.GetValueOrDefault(DataTypeEnum.String);
+                        property.AutoGenerationBehavior = json.AutoGenerationBehavior.GetValueOrDefault(AutoGenerationBehaviorTypeEnum.None);
+                        property.IsNullable = json.IsNullable.GetValueOrDefault();
+                        property.IsRequired = json.IsRequired.GetValueOrDefault();
+                        property.IsMaxLength = json.IsMaxLength.GetValueOrDefault();
+                        property.MinLength = String.IsNullOrEmpty(json.MinLength) ? 0 : Int64.Parse(json.MinLength);
+                        property.MaxLength = String.IsNullOrEmpty(json.MaxLength) ? 0 : Int64.Parse(json.MaxLength);
+                        property.MinValue = json.MinValue;
+                        property.MaxValue = json.MaxValue;
+                        property.Precision = json.Precision;
+                        property.UniquenessType = json.UniquenessType.GetValueOrDefault(UniquenessTypeEnum.NotUnique);
+                        property.Owner = domainType;
+                        domainType.Properties.Add(property);
+                    }
+                    else
+                    {
+                        var potentialMatches = this.FindDomainTypes(list, json.RelationshipTo);
+                        if (!potentialMatches.Any())
+                        {
+                            throw new Exception("Could not find domain type matching RelationshipTo in: " + domainType.ConfigFilePath);
+                        }
+                        else if (potentialMatches.Count() > 1)
+                        {
+                            throw new Exception("Found more than 1 matching domain type for RelationshipTo in: " + domainType.ConfigFilePath);
+                        }
+                        var toEntity = potentialMatches.Single();
+                        var fromEntity = domainType;
+                        var fromProperty = new DomainPropertyInfo();
+                        fromProperty.Name = json.Name;
+                        fromProperty.DataType = DataTypeEnum.Relationship;
+                        DomainPropertyInfo toProperty = null;
+                        DomainPropertyInfo foreignKeyOnTo = null;
+                        DomainPropertyInfo foreignKeyOnFrom = null;
+                        var relationship = new RelationshipInfo();
+
+                        // TODO: fixed requireds and NUllables for relationships
+                        // TODO: can even support Uniqueness
+
+                        switch (json.RelationshipType.Value)
+                        {
+                            case RelationshipTypeEnum.OneToMany:
+
+                                // collection property on the from
+
+                                if (!String.IsNullOrEmpty(json.NavigationPropertyName))
+                                {
+                                    toProperty = new DomainPropertyInfo();
+                                    toProperty.Name = json.NavigationPropertyName;
+                                    toProperty.DataType = DataTypeEnum.Relationship;
+                                    toProperty.IsRequired = true;
+
+                                    foreignKeyOnTo = new DomainPropertyInfo();
+                                    foreignKeyOnTo.Name = json.NavigationPropertyName + "Id";
+                                    foreignKeyOnTo.DataType = fromEntity.IdProperty.DataType;
+                                    foreignKeyOnTo.IsForeignKey = true;
+                                    foreignKeyOnTo.IsRequired = true;
+                                }
+
+                                relationship.Type = RelationshipTypeEnum.OneToMany;
+                                relationship.DeletionBehavior = json.RelationshipDeletionBehavior.GetValueOrDefault(RelationshipDeletionBehaviorTypeEnum.CascadeDelete);
+       
+                                
+                                break;
+                            case RelationshipTypeEnum.ManyToOne:
+
+                                // collection property on the to
+                                
+                                fromProperty.IsRequired = true;
+
+                                foreignKeyOnFrom = new DomainPropertyInfo();
+                                foreignKeyOnFrom.Name = json.NavigationPropertyName + "Id";
+                                foreignKeyOnFrom.DataType = fromEntity.IdProperty.DataType;
+                                foreignKeyOnFrom.IsForeignKey = true;
+                                foreignKeyOnFrom.IsRequired = true;
+
+                                if (!String.IsNullOrEmpty(json.NavigationPropertyName))
+                                {
+                                    toProperty = new DomainPropertyInfo();
+                                    toProperty.Name = json.NavigationPropertyName;
+                                    toProperty.DataType = DataTypeEnum.Relationship;
+                                }
+
+                                break;
+                        }
+                        relationship.From = fromEntity;
+                        relationship.To = toEntity;
+                        relationship.Type = json.RelationshipType.GetValueOrDefault();
+                        relationship.DeletionBehavior = json.RelationshipDeletionBehavior.GetValueOrDefault(
+                                RelationshipDeletionBehaviorTypeEnum.Restricted);
+                        relationship.NavigationPropertyOnFrom = fromProperty;
+                        relationship.NavigationPropertyOnTo = toProperty;
+                        relationship.ForeignKeyOnTo = foreignKeyOnTo;
+                        relationship.ForeignKeyOnFrom = foreignKeyOnFrom;
+
+                        fromProperty.Relationship = relationship;
+                        fromProperty.Owner = fromEntity;
+                        fromEntity.Properties.Add(fromProperty);
+                        if (foreignKeyOnFrom != null)
+                        {
+                            foreignKeyOnFrom.Relationship = relationship;
+                            foreignKeyOnFrom.Owner = fromEntity;
+                            fromEntity.Properties.Add(foreignKeyOnFrom);
+                        }
+                        if (toProperty != null)
+                        {
+                            toProperty.Relationship = relationship;
+                            toProperty.Owner = toEntity;
+                            toEntity.Properties.Add(toProperty);
+                        }
+                        if (foreignKeyOnTo != null)
+                        {
+                            foreignKeyOnTo.Relationship = relationship;
+                            foreignKeyOnTo.Owner = toEntity;
+                            toEntity.Properties.Add(foreignKeyOnTo);
+                        }
+                        fromEntity.Relationships.Add(relationship);
+                        toEntity.Relationships.Add(relationship);
+                    }
+                }
+            }
+
+
+
+
+
+            // validation of names
+            //
+            if (list.GroupBy(p => p.FullName).Where(g => g.Count() > 1).Any())
+            {
+                throw new Exception("2 DomainTypes with the same name resulted");
+            }
+            foreach (var domainType in list)
+            {
+                if (domainType.Properties.GroupBy(p => p.Name).Where(g => g.Count() > 1).Any())
+                {
+                    throw new Exception("2 Properties with the same name resulted in: " + domainType.ConfigFilePath);
+                }
+            }
             
 
             //this.LogLineToBuildPane(JsonConvert.SerializeObject(list, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
@@ -533,6 +661,44 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                     this.AlignInterfacePropertiesInHeirarchy(child);
                     // TODO: if we start using IsDeletable, IsUpdatable, IsInsertable as interfaces on the domain type, then we need to apply those here
                 }
+        }
+
+        protected IEnumerable<DomainTypeInfo> FindDomainTypes(IEnumerable<DomainTypeInfo> list, String partialFullName)
+        {
+            var partialFullNameTokens = partialFullName.Split('.').Reverse().ToList();
+            var className = partialFullNameTokens.First();
+
+            var potentialMatches = (from dt in list
+                                    where dt.Name.ToLowerInvariant() == className.ToLowerInvariant()
+                                    select dt).ToList();
+
+            // even though there may only be one, we still take this step because
+            // we want to ensure the entire namespace matches
+            //
+            for (int i = potentialMatches.Count() - 1; i >= 0; i--)
+            {
+                var potentialMatch = potentialMatches[i];
+                var potentialMatchFullNameTokens = potentialMatch.FullName.Split('.').Reverse().ToList();
+                if (partialFullNameTokens.Count() > potentialMatchFullNameTokens.Count())
+                {
+                    // by definition this can't be a match since the
+                    // number of namespace tokens is greater than the match
+                    //
+                    potentialMatches.Remove(potentialMatch);
+                }
+                else
+                {
+                    for (int j = 0; j < partialFullNameTokens.Count(); j++)
+                    {
+                        if (potentialMatchFullNameTokens[j] != partialFullNameTokens[j])
+                        {
+                            potentialMatches.Remove(potentialMatch);
+                            break;
+                        }
+                    }
+                }
+            }
+            return potentialMatches;
         }
 
         protected DomainTypeInfo GetBaseMostDomainType(DomainTypeInfo domainType)

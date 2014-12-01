@@ -49,7 +49,8 @@
         "IsUpdatable": null,
         "IsDeletable": false,
         "IsMarkDeletable": null,
-        "EnumValues": []
+        "EnumValues": [],
+        "Properties": []
       },
       "ConfigFilePath": "E:\\projects\\ZAppEngine\\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration\\_config\\ModelProject\\AddressBase.domain.zae",
       "DestinationProject": {
@@ -592,7 +593,8 @@
             "IsUpdatable": null,
             "IsDeletable": false,
             "IsMarkDeletable": null,
-            "EnumValues": []
+            "EnumValues": [],
+            "Properties": []
           },
           "ConfigFilePath": "E:\\projects\\ZAppEngine\\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration\\_config\\ModelProject\\DomesticAddress.domain.zae",
           "DestinationProject": {
@@ -645,7 +647,8 @@
             "IsUpdatable": null,
             "IsDeletable": false,
             "IsMarkDeletable": null,
-            "EnumValues": []
+            "EnumValues": [],
+            "Properties": []
           },
           "ConfigFilePath": "E:\\projects\\ZAppEngine\\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration\\_config\\ModelProject\\InternationalAddress.domain.zae",
           "DestinationProject": {
@@ -735,7 +738,8 @@
             "Id": "2",
             "Name": "Mr"
           }
-        ]
+        ],
+        "Properties": []
       },
       "ConfigFilePath": "E:\\projects\\ZAppEngine\\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration\\_config\\ModelProject\\NamePrefixType.domain.zae",
       "DestinationProject": {
