@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 using EnvDTE;
 using EnvDTE80;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel;
 using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel

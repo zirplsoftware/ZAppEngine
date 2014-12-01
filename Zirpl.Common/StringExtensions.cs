@@ -12,7 +12,12 @@ namespace Zirpl
 {
     public static class StringExtensions
     {
-        public static String SubstringUntilNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringUntilNthInstanceOf(this string originalText, String search, int nthInstance,      
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+            StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             if (nthInstance < 1)
             {
@@ -45,7 +50,12 @@ namespace Zirpl
             }
             return originalText.Substring(0, foundIndex);
         }
-        public static String SubstringThroughNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringThroughNthInstanceOf(this string originalText, String search, int nthInstance,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             if (nthInstance < 1)
             {
@@ -74,7 +84,12 @@ namespace Zirpl
             }
             return originalText.Substring(0, foundIndex + search.Length);
         }
-        public static String SubstringFromNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringFromNthInstanceOf(this string originalText, String search, int nthInstance, 
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+            StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             if (nthInstance < 1)
             {
@@ -103,7 +118,12 @@ namespace Zirpl
             }
             return originalText.Substring(foundIndex);
         }
-        public static String SubstringAfterNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringAfterNthInstanceOf(this string originalText, String search, int nthInstance,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             if (nthInstance < 1)
             {
@@ -140,7 +160,12 @@ namespace Zirpl
 
 
 
-        //public static String SubstringUntilLastNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        //public static String SubstringUntilLastNthInstanceOf(this string originalText, String search, int nthInstance, 
+#if !PORTABLE
+//            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+//            StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         //{
         //    if (nthInstance < 1)
         //    {
@@ -173,7 +198,12 @@ namespace Zirpl
         //    }
         //    return originalText.Substring(0, foundIndex);
         //}
-        //public static String SubstringThroughLastNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        //public static String SubstringThroughLastNthInstanceOf(this string originalText, String search, int nthInstance
+#if !PORTABLE
+//            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+        //            StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         //{
         //    if (nthInstance < 1)
         //    {
@@ -202,7 +232,12 @@ namespace Zirpl
         //    }
         //    return originalText.Substring(0, foundIndex + search.Length);
         //}
-        //public static String SubstringFromLastNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        //public static String SubstringFromLastNthInstanceOf(this string originalText, String search, int nthInstance
+#if !PORTABLE
+//            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+        //            StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         //{
         //    if (nthInstance < 1)
         //    {
@@ -231,7 +266,12 @@ namespace Zirpl
         //    }
         //    return originalText.Substring(foundIndex);
         //}
-        //public static String SubstringAfterLastNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        //public static String SubstringAfterLastNthInstanceOf(this string originalText, String search, int nthInstance
+#if !PORTABLE
+//            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+        //            StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         //{
         //    if (nthInstance < 1)
         //    {
@@ -269,7 +309,12 @@ namespace Zirpl
 
 
 
-        public static String SubstringUntilLastInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringUntilLastInstanceOf(this string originalText, String search,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
@@ -282,7 +327,12 @@ namespace Zirpl
             }
             return originalText.Substring(0, index);
         }
-        public static String SubstringThroughLastInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringThroughLastInstanceOf(this string originalText, String search,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
@@ -295,7 +345,12 @@ namespace Zirpl
             }
             return originalText.Substring(0, index + search.Length);
         }
-        public static String SubstringFromLastInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringFromLastInstanceOf(this string originalText, String search,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
@@ -307,7 +362,12 @@ namespace Zirpl
                 return originalText.Substring(index);
             }
         }
-        public static String SubstringAfterLastInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringAfterLastInstanceOf(this string originalText, String search,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
@@ -320,7 +380,12 @@ namespace Zirpl
             }
             return originalText.Substring(index + search.Length);
         }
-        public static String SubstringUntilFirstInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringUntilFirstInstanceOf(this string originalText, String search,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
@@ -333,7 +398,12 @@ namespace Zirpl
             }
             return originalText.Substring(0, index);
         }
-        public static String SubstringThroughFirstInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringThroughFirstInstanceOf(this string originalText, String search,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
@@ -346,7 +416,12 @@ namespace Zirpl
             }
             return originalText.Substring(0, index + search.Length);
         }
-        public static String SubstringFromFirstInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringFromFirstInstanceOf(this string originalText, String search,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
@@ -358,7 +433,12 @@ namespace Zirpl
                 return originalText.Substring(index);
             }
         }
-        public static String SubstringAfterFirstInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        public static String SubstringAfterFirstInstanceOf(this string originalText, String search,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
         {
             var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)

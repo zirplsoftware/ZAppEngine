@@ -7,7 +7,6 @@ using EnvDTE;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V2;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
-using Zirpl.AppEngine.CodeGeneration.V2.Parsers;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.CodeGeneration.TextTemplating

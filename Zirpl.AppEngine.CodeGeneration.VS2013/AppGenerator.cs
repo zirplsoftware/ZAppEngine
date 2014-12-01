@@ -11,7 +11,7 @@ using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V1;
 using Zirpl.AppEngine.CodeGeneration.V2;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
-using Zirpl.AppEngine.CodeGeneration.V2.Parsers;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers;
 using Zirpl.AppEngine.CodeGeneration.V2.Templates.Model;
 using Zirpl.Reflection;
 

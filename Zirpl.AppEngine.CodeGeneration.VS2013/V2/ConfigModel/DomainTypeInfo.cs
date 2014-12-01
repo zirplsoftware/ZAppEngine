@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
-using Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel;
 using Zirpl.AppEngine.Model.Metadata;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel

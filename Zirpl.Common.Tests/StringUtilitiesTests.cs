@@ -485,60 +485,60 @@ namespace Zirpl.Common.Tests
 
 
 
-        [Test]
-        public void TestSubstringUntilLastNthInstanceOf()
-        {
-            "AbcAad".SubstringUntilLastNthInstanceOf(".", 1).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf(".", 2).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf("A", 1).Should().Be("Abc");
-            "AbcAad".SubstringUntilLastNthInstanceOf("A", 2).Should().Be("");
-            "AbcAad".SubstringUntilLastNthInstanceOf("A", 3).Should().Be("");
-            "AbcAad".SubstringUntilLastNthInstanceOf("a", 1).Should().Be("AbcA");
-            "AbcAad".SubstringUntilLastNthInstanceOf("a", 2).Should().Be("");
-            "AbcAad".SubstringUntilLastNthInstanceOf("a", 3).Should().Be("");
-            "AbcAad".SubstringUntilLastNthInstanceOf("B", 1).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf("B", 2).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf("b", 1).Should().Be("A");
-            "AbcAad".SubstringUntilLastNthInstanceOf("b", 2).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf("d", 1).Should().Be("AbcAa");
-            "AbcAad".SubstringUntilLastNthInstanceOf("d", 2).Should().Be("AbcAad");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 1).Should().Be("");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 2).Should().Be("A");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 3).Should().Be("AAAaaa");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 1).Should().Be("AAA");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 2).Should().Be("AAAa");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 3).Should().Be("AAAaaa");
+        //[Test]
+        //public void TestSubstringUntilLastNthInstanceOf()
+        //{
+        //    "AbcAad".SubstringUntilLastNthInstanceOf(".", 1).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf(".", 2).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("A", 1).Should().Be("Abc");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("A", 2).Should().Be("");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("A", 3).Should().Be("");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("a", 1).Should().Be("AbcA");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("a", 2).Should().Be("");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("a", 3).Should().Be("");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("B", 1).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("B", 2).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("b", 1).Should().Be("A");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("b", 2).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("d", 1).Should().Be("AbcAa");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("d", 2).Should().Be("AbcAad");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 1).Should().Be("");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 2).Should().Be("A");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 3).Should().Be("AAAaaa");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 1).Should().Be("AAA");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 2).Should().Be("AAAa");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 3).Should().Be("AAAaaa");
 
 
-            "AbcAad".SubstringUntilLastNthInstanceOf(".", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf(".", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf("A", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("");
-            "AbcAad".SubstringUntilLastNthInstanceOf("A", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("Abc");
-            "AbcAad".SubstringUntilLastNthInstanceOf("A", 3, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcA");
-            "AbcAad".SubstringUntilLastNthInstanceOf("a", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("");
-            "AbcAad".SubstringUntilLastNthInstanceOf("a", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("Abc");
-            "AbcAad".SubstringUntilLastNthInstanceOf("a", 3, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcA");
-            "AbcAad".SubstringUntilLastNthInstanceOf("B", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("A");
-            "AbcAad".SubstringUntilLastNthInstanceOf("B", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf("b", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("A");
-            "AbcAad".SubstringUntilLastNthInstanceOf("b", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
-            "AbcAad".SubstringUntilLastNthInstanceOf("d", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAa");
-            "AbcAad".SubstringUntilLastNthInstanceOf("d", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("A");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 3, StringComparison.InvariantCultureIgnoreCase).Should().Be("AA");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 4, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAA");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 5, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAa");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 6, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAaaa");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 7, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAaaa");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("A");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 3, StringComparison.InvariantCultureIgnoreCase).Should().Be("AA");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 4, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAA");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 5, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAa");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 6, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAaaa");
-            "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 7, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAaaa");
-        }
+        //    "AbcAad".SubstringUntilLastNthInstanceOf(".", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf(".", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("A", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("A", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("Abc");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("A", 3, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcA");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("a", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("a", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("Abc");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("a", 3, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcA");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("B", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("A");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("B", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("b", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("A");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("b", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("d", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAa");
+        //    "AbcAad".SubstringUntilLastNthInstanceOf("d", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("AbcAad");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("A");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 3, StringComparison.InvariantCultureIgnoreCase).Should().Be("AA");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 4, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAA");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 5, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAa");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 6, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAaaa");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("AA", 7, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAaaa");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 1, StringComparison.InvariantCultureIgnoreCase).Should().Be("");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 2, StringComparison.InvariantCultureIgnoreCase).Should().Be("A");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 3, StringComparison.InvariantCultureIgnoreCase).Should().Be("AA");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 4, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAA");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 5, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAa");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 6, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAaaa");
+        //    "AAAaaa".SubstringUntilLastNthInstanceOf("aa", 7, StringComparison.InvariantCultureIgnoreCase).Should().Be("AAAaaa");
+        //}
     }
 }
 

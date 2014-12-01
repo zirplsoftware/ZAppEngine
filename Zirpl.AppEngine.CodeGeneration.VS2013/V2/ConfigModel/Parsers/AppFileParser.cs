@@ -1,13 +1,10 @@
 ﻿using System;
 using System.IO;
-using EnvDTE;
 using Newtonsoft.Json;
-using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
-using Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers
+namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 {
     public class AppFileParser
     {

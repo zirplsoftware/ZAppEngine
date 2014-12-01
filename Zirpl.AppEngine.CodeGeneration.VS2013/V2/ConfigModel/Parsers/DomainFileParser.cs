@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using EnvDTE;
-using Microsoft.VisualStudio.Shell.Interop;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
-using Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel;
-using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers
+namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 {
     public class DomainFileParser
     {
