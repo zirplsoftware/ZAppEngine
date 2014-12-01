@@ -1,18 +1,26 @@
 ﻿using System;
-using System.Xml.Serialization;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Zirpl.AppEngine.Model.Metadata;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
 {
-    public class PersistableProperty
+    public class DomainPropertyInfo
     {
-        public PersistableProperty()
-        {
-            this.DataType = DataTypeEnum.String;
-        }
-
         public String Name { get; set; }
         public DataTypeEnum DataType { get; set; }
+        public bool IsPrimaryKey { get; set; }
+        public AutoGenerationBehaviorTypeEnum AutoGenerationBehavior { get; set; }
+        public bool IsRowVersion { get; set; }
+        public bool IsForAuditableInterface { get; set; }
+        public bool IsForMarkDeletedInterface { get; set; }
+        public bool IsForCustomizableInterface { get; set; }
+        public bool IsForCustomValueInterface { get; set; }
+
+
+        public bool IsNullable { get; set; }
         public bool IsRequired { get; set; }
         public bool IsMaxLength { get; set; }
         public String MinLength { get; set; }
@@ -21,10 +29,13 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public String MaxValue { get; set; }
         public String Precision { get; set; }
         public UniquenessTypeEnum UniquenessType { get; set; }
-        public RelationshipTypeEnum? RelationshipType { get; set; }
-        public RelationshipDeletionBehaviorTypeEnum? RelationshipDeletionBehaviorType { get; set; }
-        public String RelatedTo { get; set; }
-        public String RelationshipReflexivePropertyName { get; set; }
+
+        public DomainTypeInfo Owner { get; set; }
+        public RelationshipTypeEnum RelationshipType { get; set; }
+        public RelationshipDeletionBehaviorTypeEnum RelationshipDeletionBehaviorType { get; set; }
+        public DomainTypeInfo RelatedTo { get; set; }
+        public DomainPropertyInfo RelationshipReflexiveProperty { get; set; }
+        public DomainPropertyInfo RelationshipIdProperty { get; set; }
 
 
         // TODO: validation

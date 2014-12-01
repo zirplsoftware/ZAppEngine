@@ -280,7 +280,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         public static Project GetProject(this DTE2 dte, string projectName)
         {
-            return dte.GetAllProjects().First(p => p.Name == projectName);
+            return dte.GetAllProjects().FirstOrDefault(p => p.Name == projectName);
         }
 
         public static IEnumerable<Project> GetAllProjects(this DTE2 dte)

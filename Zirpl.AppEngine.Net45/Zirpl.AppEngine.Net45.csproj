@@ -258,6 +258,9 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Membership\IUserRegistrationRequest.cs">
       <Link>Model\Membership\IUserRegistrationRequest.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\AutoGenerationBehaviorTypeEnum.cs">
+      <Link>Model\Metadata\AutoGenerationBehaviorTypeEnum.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Metadata\DataTypeEnum.cs">
       <Link>Model\Metadata\DataTypeEnum.cs</Link>
     </Compile>

@@ -16,27 +16,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public IList<String> InterfaceDeclarations { get; set; }
         public IList<String> GenericConstraintDeclarations { get; set; }
         public String NameWithoutGenericParameters { get; set; }
-        public bool IsPartial { get; set; }
+        //public bool IsPartial { get; set; }
         public bool IsAbstract { get; set; }
-        public bool IsSealed { get; set; }
+        //public bool IsSealed { get; set; }
         public bool IsGeneric { get; set; }
-        public String AccessModifier { get; set; }
+        //public String AccessModifier { get; set; }
 
         public String BaseDeclaration
         {
             get
             {
                 var sb = new StringBuilder();
-                sb.Append(this.AccessModifier);
-                sb.Append(" ");
-                if (this.IsPartial)
-                {
-                    sb.Append("partial ");
-                }
-                if (this.IsSealed)
-                {
-                    sb.Append("sealed ");
-                }
+                //sb.Append(this.AccessModifier);
+                //sb.Append(" ");
+                sb.Append("public ");
+                //if (this.IsPartial)
+                //{
+                //    sb.Append("partial ");
+                //}
+                //if (this.IsSealed)
+                //{
+                //    sb.Append("sealed ");
+                //}
                 if (this.IsAbstract)
                 {
                     sb.Append("abstract ");

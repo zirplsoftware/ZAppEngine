@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
 using Microsoft.VisualStudio.TextTemplating;
+using Newtonsoft.Json;
 using Zirpl.AppEngine.CodeGeneration;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V1;
@@ -20,42 +21,49 @@ namespace Zirpl.AppEngine.CodeGeneration
     {
         public static void GenerateApp(
             this TextTransformation callingTemplate, 
-            AppConfigParser appConfigParser = null, 
-            DomainClassConfigParser domainClassConfigParser = null,
+            AppFileParser appFileParser = null, 
+            DomainFileParser domainFileParser = null,
             IDictionary<String, Object> additionalTemplateParameters = null)
         {
             using (var session = TextTransformationSession.StartSession(callingTemplate))
             {
-                appConfigParser = appConfigParser ?? new AppConfigParser();
-                domainClassConfigParser = domainClassConfigParser ?? new DomainClassConfigParser();
+                appFileParser = appFileParser ?? new AppFileParser();
+                domainFileParser = domainFileParser ?? new DomainFileParser();
 
-                var domainClassConfigProjectItems = new List<ProjectItem>();
-                ProjectItem appConfigProjectItem = null;
+                var domainFilePaths = new List<String>();
+                String appFilePath = null;
 
                 // get all ProjectItems for the project with the initial template
                 //
                 var projectItems = session.FileManager.TemplateProjectItem.ContainingProject.ProjectItems.GetAllProjectItemsRecursive();
                 foreach (var configProjectItem in projectItems)
                 {
-                    var fullPath = configProjectItem.GetFullPath();
-                    if (fullPath.EndsWith(".domain.zae"))
+                    var path = configProjectItem.GetFullPath();
+                    if (path.EndsWith(".domain.zae"))
                     {
-                        domainClassConfigProjectItems.Add(configProjectItem);
-                        session.LogLineToBuildPane(fullPath);
+                        domainFilePaths.Add(path);
+                        session.LogLineToBuildPane("Domain file: " + path);
                     }
-                    else if (fullPath.EndsWith(".app.zae"))
+                    else if (path.EndsWith(".app.zae"))
                     {
-                        appConfigProjectItem = configProjectItem;
-                        session.LogLineToBuildPane("App config file: " + fullPath);
+                        appFilePath = path;
+                        session.LogLineToBuildPane("App file: " + path);
                     }
                 }
 
-                var appConfig = appConfigParser.Parse(appConfigProjectItem);
-                appConfig.DomainTypes.AddRange(domainClassConfigParser.Parse(appConfig, domainClassConfigProjectItems));
+                if (appFilePath == null)
+                {
+                    throw new Exception("An App config file with extension .app.zae must be present");
+                }
+
+                var app = appFileParser.Parse(appFilePath);
+                app.DomainTypes.AddRange(domainFileParser.Parse(app, domainFilePaths));
+
+                session.CallingTemplate.WriteLine(JsonConvert.SerializeObject(app, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
 
                 additionalTemplateParameters = additionalTemplateParameters ?? new Dictionary<string, object>();
-                additionalTemplateParameters.Add("AppConfig", appConfig);
-                foreach (var file in appConfig.FilesToGenerate)
+                additionalTemplateParameters.Add("AppInfo", app);
+                foreach (var file in app.FilesToGenerate)
                 {
                     session.CreateFile(file, additionalTemplateParameters);
                 }

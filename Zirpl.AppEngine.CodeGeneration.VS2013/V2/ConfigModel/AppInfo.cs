@@ -4,19 +4,21 @@ using System.Xml.Serialization;
 using EnvDTE;
 using EnvDTE80;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel;
 using Zirpl.Xml.Serialization;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
 {
-    public class AppConfig
+    public class AppInfo
     {
-        public AppConfig()
+        public AppInfo()
         {
-            this.DomainTypes = new List<DomainClassConfigBase>();
+            this.DomainTypes = new List<DomainTypeInfo>();
             this.FilesToGenerate = new List<FileToGenerate>();
         }
 
-        public ProjectItem SourceProjectItem { get; set; }
+        public AppJson Config { get; set; }
+        public String ConfigFilePath { get; set; }
         public String GeneratedCodeRootFolderName { get; set; }
         public String GeneratedCSFileExtension { get; set; }
         public String ModelProjectName { get; set; }
@@ -28,7 +30,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public String ServiceTestsProjectName { get; set; }
         public String TestsCommonProjectName { get; set; }
         public String DataContextName { get; set; }
-        public List<DomainClassConfigBase> DomainTypes { get; set; }
+        public List<DomainTypeInfo> DomainTypes { get; set; }
         public List<FileToGenerate> FilesToGenerate { get; set; }
 
         #region Project references

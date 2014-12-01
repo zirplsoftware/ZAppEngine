@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel
 {
-    public class DomainClassConfigJson
+    public class DomainTypeJson
     {
-        public DomainClassConfigJson()
+        public DomainTypeJson()
         {
-            this.EnumValues = new List<EnumValueConfigJson>();
+            this.EnumValues = new List<EnumValueJson>();
         }
+        public IdJson Id { get; set; }
         public bool? IsPersistable { get; set; }
         public String PluralName { get; set; }
         public String InheritsFrom { get; set; }
@@ -16,11 +17,11 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel
         public bool? IsAbstract { get; set; }
         public bool? IsVersionable { get; set; }
         public bool? IsAuditable { get; set; }
-        public bool? IsUserCustomizable { get; set; }
+        public bool? IsCustomizable { get; set; }
         public bool? IsInsertable { get; set; }
         public bool? IsUpdatable { get; set; }
         public bool? IsDeletable { get; set; }
         public bool? IsMarkDeletable { get; set; }
-        public IList<EnumValueConfigJson> EnumValues { get; set; }
+        public IList<EnumValueJson> EnumValues { get; set; }
     }
 }

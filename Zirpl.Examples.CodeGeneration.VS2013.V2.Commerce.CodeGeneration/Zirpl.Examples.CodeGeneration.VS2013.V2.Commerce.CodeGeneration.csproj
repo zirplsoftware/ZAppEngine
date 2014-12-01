@@ -40,11 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppTransform.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppTransform.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="_config\ModelProject\Tag.model.xml" />
+    <None Include="AppTransform.json">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppTransform.tt</DependentUpon>
+    </None>
     <None Include="_config\AppDefinition.app.zae">
       <SubType>Designer</SubType>
     </None>
@@ -130,8 +130,8 @@
   <ItemGroup>
     <None Include="AppTransform.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AppTransform.cs</LastGenOutput>
       <TransformOnBuild>True</TransformOnBuild>
+      <LastGenOutput>AppTransform.json</LastGenOutput>
     </None>
     <None Include="_config\ModelProject\Orders\ShipBatch.model.xml.exclude" />
     <None Include="_config\ModelProject\Orders\ShipBatchItem.model.xml.exclude" />

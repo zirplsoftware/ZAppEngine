@@ -2,6 +2,7 @@
 {
     public enum RelationshipDeletionBehaviorTypeEnum : byte
     {
+        None = 0,
         /// <summary>
         /// When a "Table1" is deleted, delete all related "Table2" instances.
         /// </summary>

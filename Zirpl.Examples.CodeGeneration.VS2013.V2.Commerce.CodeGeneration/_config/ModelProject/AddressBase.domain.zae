@@ -1,5 +1,8 @@
 ﻿{
-    "isUserCustomizable": true,
+    "isCustomizable": true,
     "isDeletable": false,
-    "isAbstract" :  true
+    "isAbstract": true,
+    "id": {
+        "dataType": "Long"
+    }
 }

@@ -12,9 +12,266 @@ namespace Zirpl
 {
     public static class StringExtensions
     {
-        public static String SubstringUntilLastInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        public static String SubstringUntilNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
         {
-            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).LastIndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            if (nthInstance < 1)
+            {
+                throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+            }
+            int startIndex = 0;
+            int foundIndex = -1;
+            for (int i = 1; i <= nthInstance; i++)
+            {
+                if (startIndex >= originalText.Length)
+                {
+                    foundIndex = -1;
+                    break;
+                }
+                foundIndex = originalText.IndexOf(search, startIndex, stringComparison);
+                if (foundIndex == -1)
+                {
+                    break;
+                }
+                startIndex = foundIndex + 1;
+            }
+
+            if (foundIndex == -1)
+            {
+                return originalText;
+            }
+            else if (foundIndex == 0)
+            {
+                return String.Empty;
+            }
+            return originalText.Substring(0, foundIndex);
+        }
+        public static String SubstringThroughNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        {
+            if (nthInstance < 1)
+            {
+                throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+            }
+            int startIndex = 0;
+            int foundIndex = -1;
+            for (int i = 1; i <= nthInstance; i++)
+            {
+                if (startIndex >= originalText.Length)
+                {
+                    foundIndex = -1;
+                    break;
+                }
+                foundIndex = originalText.IndexOf(search, startIndex, stringComparison);
+                if (foundIndex == -1)
+                {
+                    break;
+                }
+                startIndex = foundIndex + 1;
+            }
+
+            if (foundIndex == -1)
+            {
+                return originalText;
+            }
+            return originalText.Substring(0, foundIndex + search.Length);
+        }
+        public static String SubstringFromNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        {
+            if (nthInstance < 1)
+            {
+                throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+            }
+            int startIndex = 0;
+            int foundIndex = -1;
+            for (int i = 1; i <= nthInstance; i++)
+            {
+                if (startIndex >= originalText.Length)
+                {
+                    foundIndex = -1;
+                    break;
+                }
+                foundIndex = originalText.IndexOf(search, startIndex, stringComparison);
+                if (foundIndex == -1)
+                {
+                    break;
+                }
+                startIndex = foundIndex + 1;
+            }
+
+            if (foundIndex == -1)
+            {
+                return String.Empty;
+            }
+            return originalText.Substring(foundIndex);
+        }
+        public static String SubstringAfterNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        {
+            if (nthInstance < 1)
+            {
+                throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+            }
+            int startIndex = 0;
+            int foundIndex = -1;
+            for (int i = 1; i <= nthInstance; i++)
+            {
+                if (startIndex >= originalText.Length)
+                {
+                    foundIndex = -1;
+                    break;
+                }
+                foundIndex = originalText.IndexOf(search, startIndex, stringComparison);
+                if (foundIndex == -1)
+                {
+                    break;
+                }
+                startIndex = foundIndex + 1;
+            }
+
+            if (foundIndex == -1)
+            {
+                return String.Empty;
+            }
+            else if (foundIndex + search.Length == originalText.Length)
+            {
+                return String.Empty;
+            }
+            return originalText.Substring(foundIndex + search.Length);
+        }
+
+
+
+
+        //public static String SubstringUntilLastNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        //{
+        //    if (nthInstance < 1)
+        //    {
+        //        throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+        //    }
+        //    int startIndex = 0;
+        //    int foundIndex = -1;
+        //    for (int i = 1; i <= nthInstance; i++)
+        //    {
+        //        if (startIndex >= originalText.Length)
+        //        {
+        //            foundIndex = -1;
+        //            break;
+        //        }
+        //        foundIndex = originalText.LastIndexOf(search, startIndex, stringComparison);
+        //        if (foundIndex == -1)
+        //        {
+        //            break;
+        //        }
+        //        startIndex = foundIndex + 1;
+        //    }
+
+        //    if (foundIndex == -1)
+        //    {
+        //        return originalText;
+        //    }
+        //    else if (foundIndex == 0)
+        //    {
+        //        return String.Empty;
+        //    }
+        //    return originalText.Substring(0, foundIndex);
+        //}
+        //public static String SubstringThroughLastNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        //{
+        //    if (nthInstance < 1)
+        //    {
+        //        throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+        //    }
+        //    int startIndex = 0;
+        //    int foundIndex = -1;
+        //    for (int i = 1; i <= nthInstance; i++)
+        //    {
+        //        if (startIndex >= originalText.Length)
+        //        {
+        //            foundIndex = -1;
+        //            break;
+        //        }
+        //        foundIndex = originalText.LastIndexOf(search, startIndex, stringComparison);
+        //        if (foundIndex == -1)
+        //        {
+        //            break;
+        //        }
+        //        startIndex = foundIndex + 1;
+        //    }
+
+        //    if (foundIndex == -1)
+        //    {
+        //        return originalText;
+        //    }
+        //    return originalText.Substring(0, foundIndex + search.Length);
+        //}
+        //public static String SubstringFromLastNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        //{
+        //    if (nthInstance < 1)
+        //    {
+        //        throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+        //    }
+        //    int startIndex = 0;
+        //    int foundIndex = -1;
+        //    for (int i = 1; i <= nthInstance; i++)
+        //    {
+        //        if (startIndex >= originalText.Length)
+        //        {
+        //            foundIndex = -1;
+        //            break;
+        //        }
+        //        foundIndex = originalText.LastIndexOf(search, startIndex, stringComparison);
+        //        if (foundIndex == -1)
+        //        {
+        //            break;
+        //        }
+        //        startIndex = foundIndex + 1;
+        //    }
+
+        //    if (foundIndex == -1)
+        //    {
+        //        return String.Empty;
+        //    }
+        //    return originalText.Substring(foundIndex);
+        //}
+        //public static String SubstringAfterLastNthInstanceOf(this string originalText, String search, int nthInstance, StringComparison stringComparison = StringComparison.InvariantCulture)
+        //{
+        //    if (nthInstance < 1)
+        //    {
+        //        throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+        //    }
+        //    int startIndex = 0;
+        //    int foundIndex = -1;
+        //    for (int i = 1; i <= nthInstance; i++)
+        //    {
+        //        if (startIndex >= originalText.Length)
+        //        {
+        //            foundIndex = -1;
+        //            break;
+        //        }
+        //        foundIndex = originalText.LastIndexOf(search, startIndex, stringComparison);
+        //        if (foundIndex == -1)
+        //        {
+        //            break;
+        //        }
+        //        startIndex = foundIndex + 1;
+        //    }
+
+        //    if (foundIndex == -1)
+        //    {
+        //        return String.Empty;
+        //    }
+        //    else if (foundIndex + search.Length == originalText.Length)
+        //    {
+        //        return String.Empty;
+        //    }
+        //    return originalText.Substring(foundIndex + search.Length);
+        //}
+
+
+
+
+
+        public static String SubstringUntilLastInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
+        {
+            var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
             {
                 return originalText;
@@ -25,9 +282,9 @@ namespace Zirpl
             }
             return originalText.Substring(0, index);
         }
-        public static String SubstringThroughLastInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        public static String SubstringThroughLastInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
         {
-            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).LastIndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
             {
                 return originalText;
@@ -38,24 +295,24 @@ namespace Zirpl
             }
             return originalText.Substring(0, index + search.Length);
         }
-        public static String SubstringFromLastInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        public static String SubstringFromLastInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
         {
-            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).LastIndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
             {
-                return originalText;
+                return String.Empty;
             }
             else
             {
                 return originalText.Substring(index);
             }
         }
-        public static String SubstringAfterLastInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        public static String SubstringAfterLastInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
         {
-            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).LastIndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
             {
-                return originalText;
+                return String.Empty;
             }
             else if (index + search.Length == originalText.Length)
             {
@@ -63,9 +320,9 @@ namespace Zirpl
             }
             return originalText.Substring(index + search.Length);
         }
-        public static String SubstringUntilFirstInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        public static String SubstringUntilFirstInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
         {
-            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).IndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
             {
                 return originalText;
@@ -76,39 +333,39 @@ namespace Zirpl
             }
             return originalText.Substring(0, index);
         }
-        public static String SubstringThroughFirstInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        public static String SubstringThroughFirstInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
         {
-            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).IndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
             {
                 return originalText;
             }
-            else if (index + search.Length == originalText.Length - 1)
+            else if (index + search.Length == originalText.Length)
             {
                 return originalText;
             }
             return originalText.Substring(0, index + search.Length);
         }
-        public static String SubstringFromFirstInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        public static String SubstringFromFirstInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
         {
-            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).IndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
             {
-                return originalText;
+                return String.Empty;
             }
             else
             {
                 return originalText.Substring(index);
             }
         }
-        public static String SubstringAfterFirstInstanceOf(this string originalText, String search, bool caseInsensitive = false)
+        public static String SubstringAfterFirstInstanceOf(this string originalText, String search, StringComparison stringComparison = StringComparison.InvariantCulture)
         {
-            var index = (caseInsensitive ? originalText.ToLowerInvariant() : originalText).IndexOf(caseInsensitive ? search.ToLowerInvariant() : search);
+            var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
             {
-                return originalText;
+                return String.Empty;
             }
-            else if (index + search.Length == originalText.Length - 1)
+            else if (index + search.Length == originalText.Length)
             {
                 return String.Empty;
             }

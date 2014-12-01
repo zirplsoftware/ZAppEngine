@@ -1,5 +1,5 @@
 ﻿<#@ template  debug="true" hostSpecific="true" #>
-<#@ output extension=".cs" #>
+<#@ output extension=".json" #>
 <#@ assembly name="$(SolutionDir)Zirpl.AppEngine.CodeGeneration.VS2013\bin\$(Configuration)\Zirpl.AppEngine.CodeGeneration.VS2013.dll" #>
 <#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
 <#

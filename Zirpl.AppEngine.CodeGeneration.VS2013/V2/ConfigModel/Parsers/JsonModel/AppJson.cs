@@ -2,7 +2,7 @@
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.Parsers.JsonModel
 {
-    public class AppConfigJson
+    public class AppJson
     {
         public String GeneratedCodeRootFolderName { get; set; }
         public String GeneratedCSFileExtension { get; set; }

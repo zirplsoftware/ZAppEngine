@@ -114,6 +114,7 @@
     <Compile Include="Mapping\AutoMapper\MappingUtils.cs" />
     <Compile Include="Mapping\AutoMapper\ValueResolverBase.cs" />
     <Compile Include="Mapping\InvalidMappingDataException.cs" />
+    <Compile Include="Model\Metadata\AutoGenerationBehaviorTypeEnum.cs" />
     <Compile Include="Model\Metadata\IMetadataDescribed.cs" />
     <Compile Include="Model\Metadata\MetadataNotFoundException.cs" />
     <Compile Include="Model\Metadata\DataTypeEnum.cs" />

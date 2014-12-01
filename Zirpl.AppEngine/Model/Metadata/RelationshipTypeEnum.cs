@@ -2,6 +2,7 @@
 {
     public enum RelationshipTypeEnum : byte
     {
+        None = 0,
         //OneToZeroOrOne = 1,
         OneToMany = 2,
         //ZeroOrOneToOne = 3,

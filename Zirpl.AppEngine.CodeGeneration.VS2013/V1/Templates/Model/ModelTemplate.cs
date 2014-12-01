@@ -257,7 +257,7 @@ foreach (DomainType domainType in this.Helper.DomainTypesToGenerateModelFor)
             
             #line 104 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V1\Templates\Model\ModelTemplate.tt"
 
-					// handle the Id property of the relationship IE: "Parent" may need a "ParentId" property
+					// handle the Id property of the relationship IE: "InheritsFrom" may need a "ParentId" property
 					if (property.IsRelationship
 						&& property.GenerateIdProperty)
 					{

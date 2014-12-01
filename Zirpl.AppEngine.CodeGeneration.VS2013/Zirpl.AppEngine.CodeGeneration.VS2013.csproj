@@ -225,23 +225,17 @@
     <Compile Include="V1\V1Helper.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="V2\ConfigModel\AppConfig.cs" />
-    <Compile Include="V2\ConfigModel\ClassToGenerate.cs" />
-    <Compile Include="V2\ConfigModel\EnumConfig.cs" />
-    <Compile Include="V2\ConfigModel\EnumValueConfig.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="V2\ConfigModel\AppInfo.cs" />
+    <Compile Include="V2\ConfigModel\DomainPropertyInfo.cs" />
+    <Compile Include="V2\ConfigModel\DomainTypeInfo.cs" />
+    <Compile Include="V2\ConfigModel\FileGeneration\ClassToGenerate.cs" />
     <Compile Include="TextTemplating\FileToGenerate.cs" />
-    <Compile Include="V2\Parsers\JsonModel\EnumValueConfigJson.cs" />
-    <Compile Include="V2\Parsers\AppConfigParser.cs" />
-    <Compile Include="V2\Parsers\DomainClassConfigParser.cs" />
-    <Compile Include="V2\ConfigModel\TransientDomainClassConfig.cs" />
-    <Compile Include="V2\ConfigModel\StaticLookupPersistableDomainClassConfig.cs" />
-    <Compile Include="V2\ConfigModel\PersistableDomainClassConfig.cs" />
-    <Compile Include="V2\ConfigModel\DomainClassConfigBase.cs" />
-    <Compile Include="V2\Parsers\JsonModel\AppConfigJson.cs" />
-    <Compile Include="V2\Parsers\JsonModel\DomainClassConfigJson.cs" />
-    <Compile Include="V2\LogHelper.cs" />
+    <Compile Include="V2\ConfigModel\Parsers\JsonModel\EnumValueJson.cs" />
+    <Compile Include="V2\ConfigModel\Parsers\AppFileParser.cs" />
+    <Compile Include="V2\ConfigModel\Parsers\DomainFileParser.cs" />
+    <Compile Include="V2\ConfigModel\Parsers\JsonModel\AppJson.cs" />
+    <Compile Include="V2\ConfigModel\Parsers\JsonModel\DomainTypeJson.cs" />
+    <Compile Include="V2\ConfigModel\Parsers\JsonModel\IdJson.cs" />
     <Compile Include="V2\Templates\Model\PersistableDomainClassTemplate.cs">
       <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
       <SubType>Code</SubType>

@@ -2,7 +2,7 @@
 {
     public enum DataTypeEnum : byte
     {
-        Unknown = 0,
+        None = 0,
         SByte = 1,
         Byte = 2,
         Char = 3,
@@ -27,6 +27,7 @@
         Guid = 22,
         EmailAddress = 23,
         Url = 24,
-        Image = 25
+        Image = 25,
+        ByteArray = 26
     }
 }
