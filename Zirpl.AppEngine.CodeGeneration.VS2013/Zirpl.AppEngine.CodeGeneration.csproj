@@ -80,15 +80,17 @@
   <ItemGroup>
     <Compile Include="AppGenerator.cs" />
     <Compile Include="TextTemplating\ITextTransformation.cs" />
+    <Compile Include="TextTemplating\ParamTextTemplate.cs" />
     <Compile Include="TextTemplating\PreprocessedTextTransformationWrapper.cs" />
     <Compile Include="TextTemplating\TextTransformationSession.cs" />
     <Compile Include="TextTemplating\TextTransformationWrapper.cs" />
     <Compile Include="TextTemplating\OutputFileProperties.cs" />
     <Compile Include="TextTemplating\TextBlock.cs" />
-    <Compile Include="TextTemplating\BuildActionTypeEnum.cs" />
+    <Compile Include="VisualStudio\BuildActionTypeEnum.cs" />
     <Compile Include="TextTemplating\OutputFile.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
-    <Compile Include="TextTemplating\VisualStudioExtensions.cs" />
+    <Compile Include="VisualStudio\VisualStudio.cs" />
+    <Compile Include="VisualStudio\DTEExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextTemplating\LogHelper.cs" />
     <Compile Include="AppGeneration\ConfigModel\App.cs" />

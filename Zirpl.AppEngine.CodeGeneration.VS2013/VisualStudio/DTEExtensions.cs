@@ -11,48 +11,6 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 {
     public static class VisualStudioExtensions
     {
-        [DllImport("ole32.dll")]
-        private static extern void CreateBindCtx(int reserved, out IBindCtx ppbc);
-        [DllImport("ole32.dll")]
-        private static extern void GetRunningObjectTable(int reserved, out IRunningObjectTable prot);
-        public static DTE2 GetCurrentVisualStudioInstance()
-        {
-            // TODO: this method needs to handle case of multiple VS's being open
-            // TODO: this method should  really be in another place
-            // TODO: this method needs to handle other VS versions
-
-            //rot entry for visual studio running under current process.
-
-            var rotEntry = System.Diagnostics.Debugger.IsAttached 
-                ? "!VisualStudio.DTE.12.0"
-                : String.Format("!VisualStudio.DTE.12.0:{0}", System.Diagnostics.Process.GetCurrentProcess().Id);
-
-            IRunningObjectTable rot;
-            GetRunningObjectTable(0, out rot);
-            IEnumMoniker enumMoniker;
-            rot.EnumRunning(out enumMoniker);
-            enumMoniker.Reset();
-            IntPtr fetched = IntPtr.Zero;
-            IMoniker[] moniker = new IMoniker[1];
-            while (enumMoniker.Next(1, moniker, fetched) == 0)
-            {
-                IBindCtx bindCtx;
-                CreateBindCtx(0, out bindCtx);
-                string displayName;
-                moniker[0].GetDisplayName(bindCtx, null, out displayName);
-
-                var match = System.Diagnostics.Debugger.IsAttached
-                    ? displayName.StartsWith(rotEntry)
-                    : displayName == rotEntry;
-                if (match)
-                {
-                    object comObject;
-                    rot.GetObject(moniker[0], out comObject);
-                    return (DTE2)comObject;
-                }
-            }
-            return null;
-        }
 
         /// <summary>
         /// Execute Visual VisualStudio commands against the project item.

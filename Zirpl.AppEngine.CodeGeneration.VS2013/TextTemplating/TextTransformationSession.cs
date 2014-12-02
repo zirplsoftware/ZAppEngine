@@ -29,7 +29,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             {
                 throw new ArgumentException("Host.TemplateFile cannot be null. Preprocessed templates need to be passed the calling templates.", "callingTemplate");
             }
-            var visualStudio = VisualStudioExtensions.GetCurrentVisualStudioInstance();
+            var visualStudio = CodeGeneration.VisualStudio.VisualStudio.GetCurrentInstance();
             if (visualStudio == null)
             {
                 throw new Exception("Could not obtain DTE2");

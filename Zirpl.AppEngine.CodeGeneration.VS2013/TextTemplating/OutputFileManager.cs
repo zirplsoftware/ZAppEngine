@@ -52,8 +52,8 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         private readonly Action<IEnumerable<OutputFile>> projectSyncAction;
         private readonly List<string> templatePlaceholderList = new List<string>();
         private readonly List<TextBlock> files = new List<TextBlock>();
-        private readonly TextBlock footer = new TextBlock();
-        private readonly TextBlock header = new TextBlock();
+        //private readonly TextBlock footer = new TextBlock();
+        //private readonly TextBlock header = new TextBlock();
         private TextBlock currentBlock;
 
         /// <summary>
@@ -124,15 +124,15 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             this.StartNewFile(name, project.Name, folderName, fileProperties);
         }
 
-        public void StartFooter()
-        {
-            CurrentBlock = footer;
-        }
+        //public void StartFooter()
+        //{
+        //    CurrentBlock = footer;
+        //}
 
-        public void StartHeader()
-        {
-            CurrentBlock = header;
-        }
+        //public void StartHeader()
+        //{
+        //    CurrentBlock = header;
+        //}
 
         public void EndBlock()
         {
@@ -143,10 +143,10 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
             CurrentBlock.Length = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.Length - CurrentBlock.Start;
 
-            if (CurrentBlock != header && CurrentBlock != footer)
-            {
+            //if (CurrentBlock != header && CurrentBlock != footer)
+            //{
                 files.Add(CurrentBlock);
-            }
+            //}
 
             currentBlock = null;
         }
@@ -162,17 +162,16 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             {
                 EndBlock();
 
-                var headerText = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(header.Start, header.Length);
-                var footerText = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(footer.Start, footer.Length);
+                //var headerText = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(header.Start, header.Length);
+                //var footerText = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(footer.Start, footer.Length);
                 files.Reverse();
 
                 foreach (var block in files)
                 {
                     var outputPath = TextTransformationSession.Instance.VisualStudio.GetOutputPath(block, Path.GetDirectoryName(TextTransformationSession.Instance.CallingTemplate.Host.TemplateFile));
                     var fileName = Path.Combine(outputPath, block.Name);
-                    var content = this.ReplaceParameter(headerText, block) +
-                    TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(block.Start, block.Length) +
-                    footerText;
+                    //var content = this.ReplaceParameter(headerText, block) + TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(block.Start, block.Length) + footerText;
+                    var content = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(block.Start, block.Length);
 
                     var file = new OutputFile(block.FileProperties)
                     {
