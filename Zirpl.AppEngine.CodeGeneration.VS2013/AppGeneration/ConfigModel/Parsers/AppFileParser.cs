@@ -1,16 +1,15 @@
 ﻿using System;
 using System.IO;
-using EnvDTE;
 using Newtonsoft.Json;
+using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers
 {
     public class AppFileParser
     {
-        public AppInfo Parse(String path)
+        public App Parse(String path)
         {
 
             AppJson json = null;
@@ -19,7 +18,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 var content = fileStream.ReadAllToString();
                 json = JsonConvert.DeserializeObject<AppJson>(content);
             }
-            var app = new AppInfo();
+            var app = new App();
             app.ConfigFilePath = path;
             app.Config = json;
             app.DataContextName = json.DataContextName ?? "MyDataContext";

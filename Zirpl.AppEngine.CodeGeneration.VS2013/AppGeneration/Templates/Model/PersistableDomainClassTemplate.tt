@@ -10,16 +10,16 @@
 <#@ import namespace="Zirpl.AppEngine.Model.Metadata" #>
 <#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V2" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration.V2.ConfigModel" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.AppGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel" #>
 <#@ assembly name="EnvDTE" #>
 <#@ assembly name="VSLangProj" #>
 <#@ assembly name="VSLangProj80" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
 <#@ parameter type="Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate" name="FileToGenerate" #>
-<#@ parameter type="Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo" name="App" #>
-<#@ parameter type="Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainTypeInfo" name="DomainType" #>
+<#@ parameter type="Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App" name="App" #>
+<#@ parameter type="Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo" name="DomainType" #>
 <#
 if (App != null)
 {

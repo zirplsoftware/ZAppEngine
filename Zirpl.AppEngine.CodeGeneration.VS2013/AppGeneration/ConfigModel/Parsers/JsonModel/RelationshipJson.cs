@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel
 {
     public class RelationshipJson
     {

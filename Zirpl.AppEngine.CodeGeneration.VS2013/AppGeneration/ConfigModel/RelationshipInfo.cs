@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using EnvDTE;
-using Zirpl.AppEngine.Model.Metadata;
+﻿using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
 {
     public class RelationshipInfo
     {

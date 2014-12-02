@@ -6,12 +6,12 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
     {
         public OutputFileProperties()
         {
-            this.BuildAction = OutputFileBuildActionType.None;
+            this.BuildAction = BuildActionTypeEnum.None;
             this.TemplateParameter = new Dictionary<string, string>();
         }
 
         public string CustomTool { get; set; }
-        public OutputFileBuildActionType BuildAction { get; set; }
+        public BuildActionTypeEnum BuildAction { get; set; }
         public Dictionary<string, string> TemplateParameter { get; set; }
 
         internal string BuildActionString
@@ -20,15 +20,15 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             {
                 switch (BuildAction)
                 {
-                    case OutputFileBuildActionType.Compile:
+                    case BuildActionTypeEnum.Compile:
                         return "Compile";
-                    case OutputFileBuildActionType.Content:
+                    case BuildActionTypeEnum.Content:
                         return "Content";
-                    case OutputFileBuildActionType.EmbeddedResource:
+                    case BuildActionTypeEnum.EmbeddedResource:
                         return "EmbeddedResource";
-                    case OutputFileBuildActionType.EntityDeploy:
+                    case BuildActionTypeEnum.EntityDeploy:
                         return "EntityDeploy";
-                    case OutputFileBuildActionType.None:
+                    case BuildActionTypeEnum.None:
                     default:
                         return "None";
                 }

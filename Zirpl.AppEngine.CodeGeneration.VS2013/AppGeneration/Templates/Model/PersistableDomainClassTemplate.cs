@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.Templates.Model
 {
     using System;
     using System.Collections;
@@ -19,14 +19,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
     using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.CodeGeneration;
     using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-    using Zirpl.AppEngine.CodeGeneration.V2;
-    using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
+    using Zirpl.AppEngine.CodeGeneration.AppGeneration;
+    using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class PersistableDomainClassTemplate : PersistableDomainClassTemplateBase
     {
@@ -37,7 +37,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 23 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 23 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
 
 if (App != null)
 {
@@ -47,7 +47,7 @@ if (App != null)
             #line hidden
             this.Write("public partial class asdasdasd\r\n{\r\n}\r\n");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
 
 }
 
@@ -72,7 +72,7 @@ if (App != null)
             }
         }
         
-        #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\V2\Templates\Model\PersistableDomainClassTemplate.tt"
+        #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
 
 private global::Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate _FileToGenerateField;
 
@@ -87,12 +87,12 @@ private global::Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate Fil
     }
 }
 
-private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo _AppField;
+private global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App _AppField;
 
 /// <summary>
 /// Access the App parameter of the template.
 /// </summary>
-private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo App
+private global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App App
 {
     get
     {
@@ -100,12 +100,12 @@ private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo App
     }
 }
 
-private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainTypeInfo _DomainTypeField;
+private global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo _DomainTypeField;
 
 /// <summary>
 /// Access the DomainType parameter of the template.
 /// </summary>
-private global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainTypeInfo DomainType
+private global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo DomainType
 {
     get
     {
@@ -158,7 +158,7 @@ if ((FileToGenerateValueAcquired == false))
 bool AppValueAcquired = false;
 if (this.Session.ContainsKey("App"))
 {
-    this._AppField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo)(this.Session["App"]));
+    this._AppField = ((global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App)(this.Session["App"]));
     AppValueAcquired = true;
 }
 if ((AppValueAcquired == false))
@@ -166,17 +166,17 @@ if ((AppValueAcquired == false))
     string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "App");
     if ((string.IsNullOrEmpty(parameterValue) == false))
     {
-        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo));
+        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App));
         if (((tc != null) 
                     && tc.CanConvertFrom(typeof(string))))
         {
-            this._AppField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo)(tc.ConvertFrom(parameterValue)));
+            this._AppField = ((global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App)(tc.ConvertFrom(parameterValue)));
             AppValueAcquired = true;
         }
         else
         {
-            this.Error("The type \'Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo\' of the parameter" +
-                    " \'App\' did not match the type of the data passed to the template.");
+            this.Error("The type \'Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App\' of the pa" +
+                    "rameter \'App\' did not match the type of the data passed to the template.");
         }
     }
 }
@@ -185,13 +185,13 @@ if ((AppValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("App");
     if ((data != null))
     {
-        this._AppField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.AppInfo)(data));
+        this._AppField = ((global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App)(data));
     }
 }
 bool DomainTypeValueAcquired = false;
 if (this.Session.ContainsKey("DomainType"))
 {
-    this._DomainTypeField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainTypeInfo)(this.Session["DomainType"]));
+    this._DomainTypeField = ((global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo)(this.Session["DomainType"]));
     DomainTypeValueAcquired = true;
 }
 if ((DomainTypeValueAcquired == false))
@@ -199,17 +199,18 @@ if ((DomainTypeValueAcquired == false))
     string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "DomainType");
     if ((string.IsNullOrEmpty(parameterValue) == false))
     {
-        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainTypeInfo));
+        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo));
         if (((tc != null) 
                     && tc.CanConvertFrom(typeof(string))))
         {
-            this._DomainTypeField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainTypeInfo)(tc.ConvertFrom(parameterValue)));
+            this._DomainTypeField = ((global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo)(tc.ConvertFrom(parameterValue)));
             DomainTypeValueAcquired = true;
         }
         else
         {
-            this.Error("The type \'Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainTypeInfo\' of the pa" +
-                    "rameter \'DomainType\' did not match the type of the data passed to the template.");
+            this.Error("The type \'Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo" +
+                    "\' of the parameter \'DomainType\' did not match the type of the data passed to the" +
+                    " template.");
         }
     }
 }
@@ -218,7 +219,7 @@ if ((DomainTypeValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainType");
     if ((data != null))
     {
-        this._DomainTypeField = ((global::Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.DomainTypeInfo)(data));
+        this._DomainTypeField = ((global::Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo)(data));
     }
 }
 

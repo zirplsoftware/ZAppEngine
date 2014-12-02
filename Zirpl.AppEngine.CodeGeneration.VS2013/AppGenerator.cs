@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EnvDTE;
 using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
-using Zirpl.AppEngine.CodeGeneration;
+using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.FileGeneration;
+using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-//using Zirpl.AppEngine.CodeGeneration.V1;
-using Zirpl.AppEngine.CodeGeneration.V2;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileGeneration;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers;
-using Zirpl.AppEngine.CodeGeneration.V2.Templates.Model;
-using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.CodeGeneration
 {

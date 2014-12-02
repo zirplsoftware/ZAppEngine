@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EnvDTE;
+using Zirpl.AppEngine.CodeGeneration.AppGeneration.Templates.Model;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.Templates.Model;
-using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileGeneration
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.FileGeneration
 {
     public class FilesToGenerateFactory
     {
-        public IEnumerable<FileToGenerate> CreateList(AppInfo app)
+        public IEnumerable<FileToGenerate> CreateList(App app)
         {
             var list = new List<FileToGenerate>();
 
@@ -26,7 +23,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileGeneration
                     FileExtension = app.GeneratedCSFileExtension,
                     DestinationProject = domainType.DestinationProject,
                     FolderPath = this.GetFolderPathFromNamespace(app, domainType.DestinationProject, domainType.Namespace),
-                    BuildAction = OutputFileBuildActionType.Compile,
+                    BuildAction = BuildActionTypeEnum.Compile,
                     TemplateType = typeof (PersistableDomainClassTemplate),
                     ClassName = domainType.Name,
                     ClassFullName = domainType.FullName,
@@ -87,7 +84,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileGeneration
             return list;
         }
 
-        private String GetFolderPathFromNamespace(AppInfo app, Project project, String nameSpace)
+        private String GetFolderPathFromNamespace(App app, Project project, String nameSpace)
         {
             String folderPath = nameSpace;
             folderPath = folderPath.SubstringAfterFirstInstanceOf(project.GetDefaultNamespace() + ".");

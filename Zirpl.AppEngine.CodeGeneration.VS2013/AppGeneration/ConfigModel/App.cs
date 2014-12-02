@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using EnvDTE;
-using EnvDTE80;
+using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel;
-using Zirpl.Xml.Serialization;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
 {
-    public class AppInfo
+    public class App
     {
-        public AppInfo()
+        public App()
         {
             this.DomainTypes = new List<DomainTypeInfo>();
             this.FilesToGenerate = new List<FileToGenerate>();

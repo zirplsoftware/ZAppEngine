@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileGeneration
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.FileGeneration
 {
     public class ClassFileToGenerate : FileToGenerate
     {

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers
 {
     public class ConfigFileException: Exception
     {

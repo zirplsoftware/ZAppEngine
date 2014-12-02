@@ -1,6 +1,6 @@
 ﻿namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 {
-    public enum OutputFileBuildActionType
+    public enum BuildActionTypeEnum
     {
         None,
         Compile,

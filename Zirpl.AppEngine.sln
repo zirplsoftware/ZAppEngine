@@ -68,7 +68,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Silverlight
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Testing.Net45", "Zirpl.AppEngine.Testing.Net45\Zirpl.AppEngine.Testing.Net45.csproj", "{15590AA5-04CE-4ADD-AEB3-8ED12BF3C1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.CodeGeneration.VS2013", "Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.CodeGeneration.VS2013.csproj", "{F8855F9A-35D1-4C30-BB53-1FD89A984989}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.CodeGeneration", "Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.CodeGeneration.csproj", "{F8855F9A-35D1-4C30-BB53-1FD89A984989}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}"
 EndProject
@@ -76,9 +76,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing", "Zirpl.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing.Net45", "Zirpl.Testing.Net45\Zirpl.Testing.Net45.csproj", "{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration", "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration.csproj", "{00E636C4-0A01-4A65-9AB9-13DD4C015418}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.CodeGenerationConfig", "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration\Zirpl.Examples.Commerce.CodeGenerationConfig.csproj", "{00E636C4-0A01-4A65-9AB9-13DD4C015418}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model", "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model.csproj", "{84E18337-0043-464A-B9D9-D4B3F4B849CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.Model", "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model\Zirpl.Examples.Commerce.Model.csproj", "{84E18337-0043-464A-B9D9-D4B3F4B849CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

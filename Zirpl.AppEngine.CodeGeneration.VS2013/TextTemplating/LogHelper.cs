@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2;
 
 namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 {

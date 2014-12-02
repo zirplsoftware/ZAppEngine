@@ -1,16 +1,15 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers
 {
     public class DomainFileParser
     {
@@ -25,7 +24,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
         /// <param name="app"></param>
         /// <param name="domainFilePaths"></param>
         /// <returns></returns>
-        public virtual IEnumerable<DomainTypeInfo> Parse(AppInfo app, IEnumerable<string> domainFilePaths)
+        public virtual IEnumerable<DomainTypeInfo> Parse(App app, IEnumerable<string> domainFilePaths)
         {
             var list = new List<DomainTypeInfo>();
 

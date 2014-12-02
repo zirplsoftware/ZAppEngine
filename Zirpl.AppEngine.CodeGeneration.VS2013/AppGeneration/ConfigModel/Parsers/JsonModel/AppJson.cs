@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel
 {
     public class AppJson
     {

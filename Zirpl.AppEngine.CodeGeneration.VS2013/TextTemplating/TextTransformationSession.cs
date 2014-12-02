@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V2;
-using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
-using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 {

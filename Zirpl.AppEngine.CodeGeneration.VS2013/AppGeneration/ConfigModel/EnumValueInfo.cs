@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
+namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
 {
     public class EnumValueInfo
     {
