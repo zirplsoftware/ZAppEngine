@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -24,9 +25,11 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
         /// <param name="app"></param>
         /// <param name="domainFilePaths"></param>
         /// <returns></returns>
-        public virtual IEnumerable<DomainTypeInfo> Parse(AppInfo app, IEnumerable<String> domainFilePaths)
+        public virtual IEnumerable<DomainTypeInfo> Parse(AppInfo app, IEnumerable<string> domainFilePaths)
         {
             var list = new List<DomainTypeInfo>();
+
+            #region create DomainTypeInfos specified by directly by the files
             foreach (var path in domainFilePaths)
             {
                 DomainTypeJson json = null;
@@ -116,6 +119,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 
                 #endregion
 
+                #region create DomainType for the file
                 DomainTypeInfo domainType = new DomainTypeInfo();
                 domainType.Config = json;
                 domainType.ConfigFilePath = path;
@@ -132,7 +136,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 domainType.IsMarkDeletable = json.IsMarkDeletable.GetValueOrDefault();
 
                 domainType.Name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path));
-                if (!VisualStudioExtensions.IsValidTypeName(domainType.Name))
+                if (!IsValidTypeName(domainType.Name))
                 {
                     throw new Exception(String.Format("Invalid resulting class name of '{0}'. Rename file to be in format 'ValidClassName.domain.zae': {1}", domainType.Name, domainType.ConfigFilePath));
                 }
@@ -181,7 +185,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                                                         .SubstringUntilLastInstanceOf(domainType.Name);
                 domainType.Namespace = domainType.DestinationProject.GetDefaultNamespace() +
                                         (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
-                if (!VisualStudioExtensions.IsValidNamespace(domainType.Namespace))
+                if (!IsValidNamespace(domainType.Namespace))
                 {
                     throw new Exception(String.Format("Invalid resulting Namespace of '{0}' at: {1}", domainType.Namespace, domainType.ConfigFilePath));
                 }
@@ -193,16 +197,17 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 {
                     domainType.PluralName = this.GetPluralName(domainType.Name);
                 }
-                if (!VisualStudioExtensions.IsValidTypeName(domainType.PluralName))
+                if (!IsValidTypeName(domainType.PluralName))
                 {
                     throw new Exception(String.Format("Invalid resulting PluralName of '{0}' at: {1}", domainType.PluralName, domainType.ConfigFilePath));
                 }
 
                 list.Add(domainType);
+                #endregion
             }
+            #endregion
 
-
-            // handle inheritance
+            #region handle inheritance
             //
             foreach (var domainType in list.Where(o => !String.IsNullOrEmpty(o.Config.InheritsFrom)).ToList())
             {
@@ -255,8 +260,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 
             #endregion
 
+            #endregion
 
-            //create implicit DomainTypeInfos
+            #region create implicit DomainTypeInfos
             //
             var newDomainTypes = new List<DomainTypeInfo>();
             foreach (var domainType in list)
@@ -312,8 +318,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 }
             }
             list.AddRange(newDomainTypes);
+            #endregion
 
-            // create implicit properties
+            #region create implicit properties
             //
             // Id properties, which are ALWAYS at the bottom of the heirarchy
             //
@@ -495,6 +502,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 domainType.Properties.Add(nameProperty);
             }
 
+            #endregion
+
+            #region create Properties specified by the file
             foreach (var domainType in list.Where(o => o.Config != null && o.Config.Properties.Any()))
             {
                 foreach (var json in domainType.Config.Properties)
@@ -771,11 +781,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 }
             }
 
+            #endregion
 
-
-
-
-            // validation of names
+            #region validate there are no name conflicts
             //
             if (list.GroupBy(p => p.FullName).Where(g => g.Count() > 1).Any())
             {
@@ -789,9 +797,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                     throw new Exception("2 Properties with the same name resulted in: " + domainType.ConfigFilePath);
                 }
             }
-            
-
-            //this.LogLineToBuildPane(JsonConvert.SerializeObject(list, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
+            #endregion
             
             return list;
         }
@@ -867,7 +873,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
             return domainType;
         }
 
-        protected virtual String GetPluralName(String className)
+        private String GetPluralName(String className)
         {
             if (className.EndsWith("s"))
             {
@@ -881,6 +887,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
             {
                 return className + "s";
             }
+        }
+
+        private bool IsValidTypeName(String typeName)
+        {
+            return CodeGenerator.IsValidLanguageIndependentIdentifier(typeName);
+        }
+
+        private bool IsValidNamespace(String nameSpace)
+        {
+            if (String.IsNullOrWhiteSpace(nameSpace))
+            {
+                return false;
+            }
+            var tokens = nameSpace.Split('.');
+            foreach (var token in tokens)
+            {
+                if (!IsValidTypeName(token))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

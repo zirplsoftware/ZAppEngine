@@ -365,34 +365,6 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             }
         }
 
-        // TODO: these methods belong somemewhere else
-        public static bool IsValidTypeName(String typeName)
-        {
-            return System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(typeName);
-        }
-
-        public static bool IsValidNamespace(String nameSpace)
-        {
-            if (String.IsNullOrWhiteSpace(nameSpace))
-            {
-                return false;
-            }
-            var tokens = nameSpace.Split('.');
-            foreach (var token in tokens)
-            {
-                if (!IsValidTypeName(token))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-
-
-
-
-
         public static Guid? GetUniqueGuid(this EnvDTE.Project proj)
         {
             Guid? guid = null;
