@@ -11,13 +11,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
     {
         public String Name { get; set; }
         public DataTypeEnum DataType { get; set; }
+        public String DataTypeString { get; set; }
         public bool IsPrimaryKey { get; set; }
         public bool IsForeignKey { get; set; }
         public AutoGenerationBehaviorTypeEnum AutoGenerationBehavior { get; set; }
         public bool IsRowVersion { get; set; }
         public bool IsForAuditableInterface { get; set; }
         public bool IsForMarkDeletedInterface { get; set; }
-        public bool IsForExtendableInterface { get; set; }
+        public bool IsForExtensibleInterface { get; set; }
         public bool IsForExtendedEntityFieldValueInterface { get; set; }
         public bool IsForIsStaticLookupInterface { get; set; }
 

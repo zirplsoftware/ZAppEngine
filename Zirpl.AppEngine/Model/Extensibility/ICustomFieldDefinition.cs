@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Zirpl.AppEngine.Model.Customization
+namespace Zirpl.AppEngine.Model.Extensibility
 {
     public interface ICustomFieldDefinition<TId> : IPersistable<TId>, ICustomFieldDefinition where TId : IEquatable<TId>
     {

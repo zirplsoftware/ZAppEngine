@@ -93,8 +93,8 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// and marks this point in generation as a new file.
         /// </summary>
         /// <param name="name">Filename</param>
-        /// <param name="projectName">Name of the target project for the new file.</param>
-        /// <param name="folderName">Name of the target folder for the new file.</param>
+        /// <param name="projectName">ClassName of the target project for the new file.</param>
+        /// <param name="folderName">ClassName of the target folder for the new file.</param>
         /// <param name="fileProperties">File property settings in vs for the new File</param>
         public void StartNewFile(string name, string projectName = "", string folderName = "", OutputFileProperties fileProperties = null)
         {
@@ -116,8 +116,8 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// and marks this point in generation as a new file.
         /// </summary>
         /// <param name="name">Filename</param>
-        /// <param name="projectName">Name of the target project for the new file.</param>
-        /// <param name="folderName">Name of the target folder for the new file.</param>
+        /// <param name="projectName">ClassName of the target project for the new file.</param>
+        /// <param name="folderName">ClassName of the target folder for the new file.</param>
         /// <param name="fileProperties">File property settings in vs for the new File</param>
         public void StartNewFile(string name, Project project, string folderName = "", OutputFileProperties fileProperties = null)
         {

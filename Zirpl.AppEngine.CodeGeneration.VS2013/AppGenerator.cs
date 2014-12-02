@@ -11,6 +11,7 @@ using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 //using Zirpl.AppEngine.CodeGeneration.V1;
 using Zirpl.AppEngine.CodeGeneration.V2;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
+using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileGeneration;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers;
 using Zirpl.AppEngine.CodeGeneration.V2.Templates.Model;
 using Zirpl.Reflection;
@@ -23,12 +24,14 @@ namespace Zirpl.AppEngine.CodeGeneration
             this TextTransformation callingTemplate, 
             AppFileParser appFileParser = null, 
             DomainFileParser domainFileParser = null,
+            FilesToGenerateFactory factory = null,
             IDictionary<String, Object> additionalTemplateParameters = null)
         {
             using (var session = TextTransformationSession.StartSession(callingTemplate))
             {
                 appFileParser = appFileParser ?? new AppFileParser();
                 domainFileParser = domainFileParser ?? new DomainFileParser();
+                factory = factory ?? new FilesToGenerateFactory();
 
                 var domainFilePaths = new List<String>();
                 String appFilePath = null;
@@ -58,14 +61,27 @@ namespace Zirpl.AppEngine.CodeGeneration
 
                 var app = appFileParser.Parse(appFilePath);
                 app.DomainTypes.AddRange(domainFileParser.Parse(app, domainFilePaths));
+                app.FilesToGenerate.AddRange(factory.CreateList(app));
 
                 session.CallingTemplate.WriteLine(JsonConvert.SerializeObject(app, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
 
-                additionalTemplateParameters = additionalTemplateParameters ?? new Dictionary<string, object>();
-                additionalTemplateParameters.Add("AppInfo", app);
                 foreach (var file in app.FilesToGenerate)
                 {
-                    session.CreateFile(file, additionalTemplateParameters);
+                    var templateParameters = new Dictionary<string, object>();
+                    if (additionalTemplateParameters != null
+                        && additionalTemplateParameters.Any())
+                    {
+                        foreach (var additionalTemplateParameter in additionalTemplateParameters)
+                        {
+                            templateParameters.Add(additionalTemplateParameter.Key, additionalTemplateParameter.Value);
+                        }
+                    }
+                    foreach (var parameter in file.TemplateParameters)
+                    {
+                        templateParameters.Add(parameter.Key, parameter.Value);
+                    }
+                    templateParameters.Add("App", app);
+                    session.CreateFile(file, templateParameters);
                 }
             }
         }

@@ -6,45 +6,35 @@ using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 
 namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileGeneration
 {
-    public class ClassToGenerate : FileToGenerate
+    public class ClassFileToGenerate : FileToGenerate
     {
-        public String Name { get; set; }
-        public String FullName { get; set; }
+        public ClassFileToGenerate()
+        {
+            this.InterfaceDeclarations = new List<string>();
+        }
+
+        public String ClassName { get; set; }
+        public String ClassFullName { get; set; }
         public String Namespace { get; set; }
         public String BaseClassDeclaration { get; set; }
         public IList<String> InterfaceDeclarations { get; set; }
-        public IList<String> GenericConstraintDeclarations { get; set; }
-        public String NameWithoutGenericParameters { get; set; }
-        //public bool IsPartial { get; set; }
+        //public String NameWithoutGenericParameters { get; set; }
         public bool IsAbstract { get; set; }
-        //public bool IsSealed { get; set; }
-        public bool IsGeneric { get; set; }
-        //public String AccessModifier { get; set; }
 
         public String BaseDeclaration
         {
             get
             {
                 var sb = new StringBuilder();
-                //sb.Append(this.AccessModifier);
-                //sb.Append(" ");
-                sb.Append("public ");
-                //if (this.IsPartial)
-                //{
-                //    sb.Append("partial ");
-                //}
-                //if (this.IsSealed)
-                //{
-                //    sb.Append("sealed ");
-                //}
+                sb.Append("public partial ");
                 if (this.IsAbstract)
                 {
                     sb.Append("abstract ");
                 }
-                sb.Append(this.Name);
+                sb.Append(this.ClassName);
                 if (!String.IsNullOrEmpty(this.BaseClassDeclaration)
-                    || this.InterfaceDeclarations.Any()
-                    || this.GenericConstraintDeclarations.Any())
+                    || this.InterfaceDeclarations.Any())
+                    //|| this.GenericConstraintDeclarations.Any())
                 {
                     sb.AppendLine(" :");
                     bool useCommaIfAnother = false;
@@ -65,18 +55,18 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.FileGeneration
                             useCommaIfAnother = true;
                         }
                     }
-                    if (this.GenericConstraintDeclarations.Any())
-                    {
-                        foreach (var genericConstraintDeclaration in this.GenericConstraintDeclarations)
-                        {
-                            if (useCommaIfAnother)
-                            {
-                                sb.AppendLine(",");
-                            }
-                            sb.Append(genericConstraintDeclaration);
-                            useCommaIfAnother = true;
-                        }
-                    }
+                    //if (this.GenericConstraintDeclarations.Any())
+                    //{
+                    //    foreach (var genericConstraintDeclaration in this.GenericConstraintDeclarations)
+                    //    {
+                    //        if (useCommaIfAnother)
+                    //        {
+                    //            sb.AppendLine(",");
+                    //        }
+                    //        sb.Append(genericConstraintDeclaration);
+                    //        useCommaIfAnother = true;
+                    //    }
+                    //}
                 }
                 return sb.ToString();
             }

@@ -55,24 +55,24 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 if (!json.IsPersistable.GetValueOrDefault(true)
                     && (json.IsVersionable.GetValueOrDefault()
                         || json.IsAuditable.GetValueOrDefault()
-                        || json.IsEndUserExtendable.GetValueOrDefault()
+                        || json.IsExtensible.GetValueOrDefault()
                         || json.IsInsertable.GetValueOrDefault()
                         || json.IsUpdatable.GetValueOrDefault()
                         || json.IsDeletable.GetValueOrDefault()
                         || json.IsMarkDeletable.GetValueOrDefault()))
                 {
-                    throw new ConfigFileException("IsPersistable is false but one of the following is true: IsVersionable, IsAuditable, IsExtendable, IsInsertable, IsUpdatable, IsDeletable, IsMarkDeletable", path);
+                    throw new ConfigFileException("IsPersistable is false but one of the following is true: IsVersionable, IsAuditable, IsExtensible, IsInsertable, IsUpdatable, IsDeletable, IsMarkDeletable", path);
                 }
                 if (json.IsStaticLookup.GetValueOrDefault()
                     && (json.IsVersionable.GetValueOrDefault()
                         || json.IsAuditable.GetValueOrDefault()
-                        || json.IsEndUserExtendable.GetValueOrDefault()
+                        || json.IsExtensible.GetValueOrDefault()
                         || json.IsInsertable.GetValueOrDefault()
                         || json.IsUpdatable.GetValueOrDefault()
                         || json.IsDeletable.GetValueOrDefault()
                         || json.IsMarkDeletable.GetValueOrDefault()))
                 {
-                    throw new ConfigFileException("IsStaticLookup is false but one of the following is true: IsVersionable, IsAuditable, IsExtendable, IsInsertable, IsUpdatable, IsDeletable, IsMarkDeletable", path);
+                    throw new ConfigFileException("IsStaticLookup is false but one of the following is true: IsVersionable, IsAuditable, IsExtensible, IsInsertable, IsUpdatable, IsDeletable, IsMarkDeletable", path);
                 }
                 if (!json.IsStaticLookup.GetValueOrDefault()
                     && json.EnumValues.Any())
@@ -129,7 +129,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 domainType.IsStaticLookup = json.IsStaticLookup.GetValueOrDefault();
                 domainType.IsVersionable = json.IsVersionable.GetValueOrDefault(domainType.IsPersistable && !domainType.IsStaticLookup);
                 domainType.IsAuditable = json.IsAuditable.GetValueOrDefault(domainType.IsPersistable && !domainType.IsStaticLookup);
-                domainType.IsExtendable = json.IsEndUserExtendable.GetValueOrDefault();
+                domainType.IsExtensible = json.IsExtensible.GetValueOrDefault();
                 domainType.IsInsertable = json.IsInsertable.GetValueOrDefault(domainType.IsPersistable && !domainType.IsStaticLookup);
                 domainType.IsUpdatable = json.IsUpdatable.GetValueOrDefault(domainType.IsPersistable && !domainType.IsStaticLookup);
                 domainType.IsDeletable = json.IsDeletable.GetValueOrDefault(domainType.IsPersistable && !domainType.IsStaticLookup);
@@ -270,9 +270,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 // validation checks for these have already been done- we can trust the config is right 
                 // if we get to this point
                 //
-                if (domainType.IsExtendable
+                if (domainType.IsExtensible
                     && (domainType.InheritsFrom == null
-                        || !domainType.InheritsFrom.IsExtendable))
+                        || !domainType.InheritsFrom.IsExtensible))
                 {
                     var extendedFieldValueDomainType = new DomainTypeInfo();
                     extendedFieldValueDomainType.DestinationProject = domainType.DestinationProject;
@@ -429,12 +429,12 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 property.Owner = domainType;
                 domainType.Properties.Add(property);
             }
-            foreach (var domainType in list.Where(o => o.IsExtendable && (o.InheritsFrom == null || !o.InheritsFrom.IsExtendable)))
+            foreach (var domainType in list.Where(o => o.IsExtensible && (o.InheritsFrom == null || !o.InheritsFrom.IsExtensible)))
             {
                 var fromProperty = new DomainPropertyInfo();
                 fromProperty.Name = "ExtendedFieldValues";
                 fromProperty.DataType = DataTypeEnum.Relationship;
-                fromProperty.IsForExtendableInterface = true;
+                fromProperty.IsForExtensibleInterface = true;
                 fromProperty.Owner = domainType;
                 domainType.Properties.Add(fromProperty);
 
@@ -491,7 +491,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
             {
                 var nameProperty = new DomainPropertyInfo()
                 {
-                    Name = "Name",
+                    Name = "ClassName",
                     IsForIsStaticLookupInterface = true,
                     DataType = DataTypeEnum.String,
                     IsRequired = true,
@@ -783,6 +783,88 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 
             #endregion
 
+            #region Set all of the DataTypeString properties of the DomainPropertyInfo
+
+            foreach (var domainType in list)
+            {
+                foreach (var property in domainType.Properties)
+                {
+                    switch (property.DataType)
+                    {
+                        case DataTypeEnum.SByte:
+                        case DataTypeEnum.Byte:
+                        case DataTypeEnum.Char:
+                        case DataTypeEnum.Short:
+                        case DataTypeEnum.UShort:
+                        case DataTypeEnum.Int:
+                        case DataTypeEnum.UInt:
+                        case DataTypeEnum.Long:
+                        case DataTypeEnum.ULong:
+                        case DataTypeEnum.Float:
+                        case DataTypeEnum.Double:
+                        case DataTypeEnum.Decimal:
+                            property.DataTypeString = property.IsNullable 
+                                ? property.DataType.ToString().ToLowerInvariant() + "?" 
+                                : property.DataType.ToString().ToLowerInvariant();
+                            break;
+                        case DataTypeEnum.String:
+                        case DataTypeEnum.EmailAddress:
+                        case DataTypeEnum.Url:
+                            property.DataTypeString = "string";
+                            break;
+                        case DataTypeEnum.Boolean:
+                            property.DataTypeString = property.IsNullable ? "bool?" : "bool";
+                            break;
+                        case DataTypeEnum.Date:
+                        case DataTypeEnum.Time:
+                        case DataTypeEnum.DateTime:
+                            property.DataTypeString = property.IsNullable ? "DateTime?" : "DateTime";
+                            break;
+                        case DataTypeEnum.Currency:
+                        case DataTypeEnum.Percentage:
+                            property.DataTypeString = property.IsNullable ? "decimal?" : "decimal";
+                            break;
+                        case DataTypeEnum.Relationship:
+                            if (property.Owner == property.Relationship.From)
+                            {
+                                if (property.Relationship.Type == RelationshipTypeEnum.OneToMany)
+                                {
+                                    property.DataTypeString = String.Format("System.Collections.Generic.IList<{0}>", property.Relationship.To.FullName);
+                                }
+                                else
+                                {
+                                    property.DataTypeString = property.Relationship.To.FullName;
+                                }
+                            }
+                            else
+                            {
+                                if (property.Relationship.Type == RelationshipTypeEnum.OneToMany)
+                                {
+                                    property.DataTypeString = property.Relationship.From.FullName;
+                                }
+                                else
+                                {
+                                    property.DataTypeString = String.Format("System.Collections.Generic.IList<{0}>", property.Relationship.From.FullName);
+                                }
+                            }
+                            break;
+                        case DataTypeEnum.Guid:
+                            property.DataTypeString = property.IsNullable ? "Guid?" : "Guid";
+                            break;
+                        case DataTypeEnum.Image:
+                        case DataTypeEnum.ByteArray:
+                            property.DataTypeString = "byte[]";
+                            break;
+                        case DataTypeEnum.Object:
+                        default:
+                            break;
+                    }
+                }
+            }
+            
+
+            #endregion
+
             #region validate there are no name conflicts
             //
             if (list.GroupBy(p => p.FullName).Where(g => g.Count() > 1).Any())
@@ -814,9 +896,9 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                     child.IsAuditable = domainType.IsAuditable
                         ? true
                         : child.IsAuditable;
-                    child.IsExtendable = domainType.IsExtendable
+                    child.IsExtensible = domainType.IsExtensible
                         ? true
-                        : child.IsExtendable;
+                        : child.IsExtensible;
                     child.IsMarkDeletable = domainType.IsMarkDeletable
                         ? true
                         : child.IsMarkDeletable;

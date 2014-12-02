@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Zirpl.AppEngine.Model.Customization
+namespace Zirpl.AppEngine.Model.Extensibility
 {
     public abstract class ExtendedEntityFieldValueBase<TExtendedEntity, TId> : EntityBase<TId>, IExtendedEntityFieldValue<TExtendedEntity, TId>
         where TExtendedEntity : IPersistable<TId>

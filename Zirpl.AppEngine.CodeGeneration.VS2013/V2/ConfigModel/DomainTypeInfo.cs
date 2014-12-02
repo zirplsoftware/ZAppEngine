@@ -36,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public bool IsEnum { get; set; }
         public bool IsVersionable { get; set; }
         public bool IsAuditable { get; set; }
-        public bool IsExtendable { get; set; }
+        public bool IsExtensible { get; set; }
         public bool IsExtendedEntityFieldValue { get; set; }
         public bool IsInsertable { get; set; }
         public bool IsUpdatable { get; set; }

@@ -95,8 +95,9 @@
     <Compile Include="V2\ConfigModel\DomainPropertyInfo.cs" />
     <Compile Include="V2\ConfigModel\DomainTypeInfo.cs" />
     <Compile Include="V2\ConfigModel\EnumValueInfo.cs" />
-    <Compile Include="V2\ConfigModel\FileGeneration\ClassToGenerate.cs" />
+    <Compile Include="V2\ConfigModel\FileGeneration\ClassFileToGenerate.cs" />
     <Compile Include="TextTemplating\FileToGenerate.cs" />
+    <Compile Include="V2\ConfigModel\FileGeneration\FilesToGenerateFactory.cs" />
     <Compile Include="V2\ConfigModel\Parsers\ConfigFileException.cs" />
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\PropertyJson.cs" />
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\EnumValueJson.cs" />

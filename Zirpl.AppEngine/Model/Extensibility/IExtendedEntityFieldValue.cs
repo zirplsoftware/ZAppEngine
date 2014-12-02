@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zirpl.AppEngine.Model.Customization
+namespace Zirpl.AppEngine.Model.Extensibility
 {
     public interface IExtendedEntityFieldValue<TExtendedEntity, TId> : IExtendedEntityFieldValue, IPersistable<TId> where TId : IEquatable<TId>
     {

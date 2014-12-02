@@ -189,29 +189,29 @@
     <Compile Include="..\Zirpl.AppEngine\Model\BatchProcessing\IBatchItemError.cs">
       <Link>Model\BatchProcessing\IBatchItemError.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinitionBase.cs">
-      <Link>Model\Customization\CustomFieldDefinitionBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\CustomFieldDefinitionTypeEnum.cs">
-      <Link>Model\Customization\CustomFieldDefinitionTypeEnum.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ExtendedEntityFieldValueBase.cs">
-      <Link>Model\Customization\ExtendedEntityFieldValueBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomFieldDefinition.cs">
-      <Link>Model\Customization\ICustomFieldDefinition.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\ICustomFieldDefinitionType.cs">
-      <Link>Model\Customization\ICustomFieldDefinitionType.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\IExtendable.cs">
-      <Link>Model\Customization\IExtendable.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Customization\IExtendedEntityFieldValue.cs">
-      <Link>Model\Customization\IExtendedEntityFieldValue.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\EntityBase.cs">
       <Link>Model\EntityBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\CustomFieldDefinitionBase.cs">
+      <Link>Model\Extensibility\CustomFieldDefinitionBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\CustomFieldDefinitionTypeEnum.cs">
+      <Link>Model\Extensibility\CustomFieldDefinitionTypeEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\ExtendedEntityFieldValueBase.cs">
+      <Link>Model\Extensibility\ExtendedEntityFieldValueBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\ICustomFieldDefinition.cs">
+      <Link>Model\Extensibility\ICustomFieldDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\ICustomFieldDefinitionType.cs">
+      <Link>Model\Extensibility\ICustomFieldDefinitionType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\IExtendedEntityFieldValue.cs">
+      <Link>Model\Extensibility\IExtendedEntityFieldValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\IExtensible.cs">
+      <Link>Model\Extensibility\IExtensible.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IAuditable.cs">
       <Link>Model\IAuditable.cs</Link>
@@ -490,7 +490,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
+      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

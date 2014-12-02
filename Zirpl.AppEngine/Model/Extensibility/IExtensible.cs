@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Zirpl.AppEngine.Model.Customization
+namespace Zirpl.AppEngine.Model.Extensibility
 {
-    public interface IExtendable<TExtendedEntity, TExtendedEntityFieldValue, TId> : IPersistable<TId>, IExtendable
+    public interface IExtensible<TExtendedEntity, TExtendedEntityFieldValue, TId> : IPersistable<TId>, IExtensible
         where TId : IEquatable<TId>
         where TExtendedEntityFieldValue : IExtendedEntityFieldValue<TExtendedEntity, TId>
         where TExtendedEntity: IPersistable<TId>
@@ -14,7 +11,7 @@ namespace Zirpl.AppEngine.Model.Customization
         IList<TExtendedEntityFieldValue> ExtendedFieldValues { get; set; }
     }
 
-    public interface IExtendable : IPersistable
+    public interface IExtensible : IPersistable
     {
         IList<IExtendedEntityFieldValue> GetExtendedFieldValues();
         void SetExtendedFieldValues(IList<IExtendedEntityFieldValue> list);

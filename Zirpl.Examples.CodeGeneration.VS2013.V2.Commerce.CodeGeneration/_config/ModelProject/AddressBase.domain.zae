@@ -1,5 +1,5 @@
 ﻿{
-    "isEndUserExtendable": true,
+    "isExtensible": true,
     "isDeletable": false,
     "isAbstract": true,
     "id": {

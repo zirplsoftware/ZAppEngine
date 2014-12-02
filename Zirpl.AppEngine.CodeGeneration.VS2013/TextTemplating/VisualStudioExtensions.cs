@@ -143,14 +143,14 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             }
             else if (prj != null && String.IsNullOrEmpty(block.FolderName) == false)
             {
-                //item = GetAllProjectItemsRecursive(prj.ProjectItems).Where(i=>i.Name == block.FolderName).First();
+                //item = GetAllProjectItemsRecursive(prj.ProjectItems).Where(i=>i.ClassName == block.FolderName).First();
                 item = EnsureProjectFolderExists(block.FolderName, prj.ProjectItems);
             }
             else if (String.IsNullOrEmpty(block.FolderName) == false)
             {
                 //var items =GetAllProjectItemsRecursive(
                 //	VisualStudio.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).ToList();
-                //item = items.Where(i=>i.Name == block.FolderName).First();
+                //item = items.Where(i=>i.ClassName == block.FolderName).First();
                 item = EnsureProjectFolderExists(block.FolderName, dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems);
             }
 
@@ -247,14 +247,14 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             }
             else if (prj != null && String.IsNullOrEmpty(file.FolderName) == false)
             {
-                //item = GetAllProjectItemsRecursive(prj.ProjectItems).Where(i=>i.Name == file.FolderName).First();
+                //item = GetAllProjectItemsRecursive(prj.ProjectItems).Where(i=>i.ClassName == file.FolderName).First();
                 item = EnsureProjectFolderExists(file.FolderName, prj.ProjectItems);
             }
             else if (String.IsNullOrEmpty(file.FolderName) == false)
             {
                 //item = GetAllProjectItemsRecursive(
                 //	VisualStudio.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
-                //	Where(i=>i.Name == file.FolderName).First();
+                //	Where(i=>i.ClassName == file.FolderName).First();
                 item = EnsureProjectFolderExists(file.FolderName, dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems);
             }
 
@@ -321,7 +321,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         //public static ProjectItem GetProjectItemWithName(this ProjectItems items, string itemName)
         //{
-        //    return GetAllProjectItemsRecursive(items).Cast<ProjectItem>().Where(i => i.Name == itemName).First();
+        //    return GetAllProjectItemsRecursive(items).Cast<ProjectItem>().Where(i => i.ClassName == itemName).First();
         //}
 
         public static string GetFullPath(this ProjectItem item)
