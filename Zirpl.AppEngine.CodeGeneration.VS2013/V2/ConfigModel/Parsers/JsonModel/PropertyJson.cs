@@ -11,7 +11,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
     {
         public String Name { get; set; }
         public DataTypeEnum? DataType { get; set; }
-        public AutoGenerationBehaviorTypeEnum? AutoGenerationBehavior { get; set; }
         public bool? IsNullable { get; set; }
         public bool? IsRequired { get; set; }
         public bool? IsMaxLength { get; set; }
@@ -27,6 +26,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
         public RelationshipTypeEnum? RelationshipType { get; set; }
         public RelationshipDeletionBehaviorTypeEnum? RelationshipDeletionBehavior { get; set; }
         public String RelationshipTo { get; set; }
-        public String NavigationPropertyName { get; set; }
+        public String RelationshipOtherSidePropertyName { get; set; }
+        public bool? IsRelationshipOtherSidePropertyRequired { get; set; }
+        public UniquenessTypeEnum? RelationshipOtherSidePropertyUniquenessType { get; set; }
     }
 }

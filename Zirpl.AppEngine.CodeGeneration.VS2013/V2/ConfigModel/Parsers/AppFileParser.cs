@@ -28,9 +28,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 
             var codeGenerationProjectName = TextTransformationSession.Instance.TemplateProjectItem.ContainingProject.GetDefaultNamespace();
             var defaultProjectNamespace = codeGenerationProjectName.SubstringUntilLastInstanceOf(".");
-
-            this.LogLineToBuildPane(defaultProjectNamespace);
-
+            // TODO: create the projects if they don't exist
             app.DataServiceProjectName = json.DataServiceProjectName ?? defaultProjectNamespace + ".DataService";
             app.DataServiceTestsProjectName = json.DataServiceTestsProjectName ?? defaultProjectNamespace + ".Tests.DataService";
             app.ModelProjectName = json.ModelProjectName ?? defaultProjectNamespace + ".Model";
@@ -38,9 +36,6 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
             app.TestsCommonProjectName = json.TestsCommonProjectName ?? defaultProjectNamespace + ".Tests.Common";
             app.WebCommonProjectName = json.WebCommonProjectName ?? defaultProjectNamespace + ".Web.Common";
             app.WebProjectName = json.WebProjectName ?? defaultProjectNamespace + ".Web";
-
-            //this.LogLineToBuildPane(app.ModelProject.GetUniqueGuid().GetValueOrDefault().ToString());
-
 
             return app;
         }

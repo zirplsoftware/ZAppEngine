@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
@@ -41,12 +42,12 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 if (!json.IsPersistable.GetValueOrDefault(true)
                     && json.IsStaticLookup.GetValueOrDefault())
                 {
-                    throw new Exception("IsStaticLookup cannot be true if IsPersistable is false in: " + path);
+                    throw new ConfigFileException("IsStaticLookup cannot be true if IsPersistable is false", path);
                 }
                 if (json.IsStaticLookup.GetValueOrDefault()
                     && json.IsAbstract.GetValueOrDefault())
                 {
-                    throw new Exception("IsStaticLookup and IsAbstract cannot both be true in: " + path);
+                    throw new ConfigFileException("IsStaticLookup and IsAbstract cannot both be true", path);
                 }                
                 if (!json.IsPersistable.GetValueOrDefault(true)
                     && (json.IsVersionable.GetValueOrDefault()
@@ -57,7 +58,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                         || json.IsDeletable.GetValueOrDefault()
                         || json.IsMarkDeletable.GetValueOrDefault()))
                 {
-                    throw new Exception("IsPersistable is false but one of the following is true: IsVersionable, IsAuditable, IsExtendable, IsInsertable, IsUpdatable, IsDeletable, IsMarkDeletable in: " + path);
+                    throw new ConfigFileException("IsPersistable is false but one of the following is true: IsVersionable, IsAuditable, IsExtendable, IsInsertable, IsUpdatable, IsDeletable, IsMarkDeletable", path);
                 }
                 if (json.IsStaticLookup.GetValueOrDefault()
                     && (json.IsVersionable.GetValueOrDefault()
@@ -68,28 +69,28 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                         || json.IsDeletable.GetValueOrDefault()
                         || json.IsMarkDeletable.GetValueOrDefault()))
                 {
-                    throw new Exception("IsStaticLookup is false but one of the following is true: IsVersionable, IsAuditable, IsExtendable, IsInsertable, IsUpdatable, IsDeletable, IsMarkDeletable in: " + path);
+                    throw new ConfigFileException("IsStaticLookup is false but one of the following is true: IsVersionable, IsAuditable, IsExtendable, IsInsertable, IsUpdatable, IsDeletable, IsMarkDeletable", path);
                 }
                 if (!json.IsStaticLookup.GetValueOrDefault()
                     && json.EnumValues.Any())
                 {
-                    throw new Exception("IsStaticLookup is false but EnumValues are present in: " + path);
+                    throw new ConfigFileException("IsStaticLookup is false but EnumValues are present", path);
                 }
                 if (json.IsStaticLookup.GetValueOrDefault()
                     && !String.IsNullOrEmpty(json.InheritsFrom))
                 {
-                    throw new Exception("StaticLookup types cannot inherit from anything in: " + path);
+                    throw new ConfigFileException("StaticLookup types cannot inherit from anything in", path);
                 }
                 if (!json.IsPersistable.GetValueOrDefault(true)
                     && json.Id != null)
                 {
-                    throw new Exception("Id can only be specific if IsPersistable is true in: " + path);
+                    throw new ConfigFileException("Id can only be specific if IsPersistable is true", path);
                 }
                 if (json.Id != null
                     && json.Id.AutoGenerationBehavior.HasValue
                     && json.Id.AutoGenerationBehavior.Value == AutoGenerationBehaviorTypeEnum.None)
                 {
-                    throw new Exception("AutoGenerationBehavior of None is not supported in: " + path);
+                    throw new ConfigFileException("AutoGenerationBehavior of None is not supported", path);
                 }
                 if (json.Id != null
                     && json.Id.DataType.HasValue
@@ -103,14 +104,14 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                         && json.Id.DataType.Value != DataTypeEnum.UShort
                         && json.Id.DataType.Value != DataTypeEnum.Byte))
                 {
-                    throw new Exception("Invalid Id DataType in: " + path);
+                    throw new ConfigFileException("Invalid Id DataType", path);
                 }
                 if (json.Id != null
                     && json.Id.DataType.HasValue
                     && json.Id.DataType.Value == DataTypeEnum.String
                     && json.Id.IsNullable.GetValueOrDefault())
                 {
-                    throw new Exception("Id DataType of String cannot be Nullable: " + path);
+                    throw new ConfigFileException("Id DataType of String cannot be Nullable" + path);
                 }
 
                 #endregion
@@ -131,7 +132,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 domainType.IsMarkDeletable = json.IsMarkDeletable.GetValueOrDefault();
 
                 domainType.Name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path));
-                // TODO: validate the class name
+                if (!VisualStudioExtensions.IsValidTypeName(domainType.Name))
+                {
+                    throw new Exception(String.Format("Invalid resulting class name of '{0}'. Rename file to be in format 'ValidClassName.domain.zae': {1}", domainType.Name, domainType.ConfigFilePath));
+                }
                 var relativeDirectory = Path.GetDirectoryName(path).SubstringAfterLastInstanceOf("_config\\");
                 var tempUniqueName = relativeDirectory.Replace('\\', '.') + "." + domainType.Name;
                 var whichProject = tempUniqueName.SubstringUntilFirstInstanceOf("Project.", StringComparison.InvariantCultureIgnoreCase);
@@ -177,7 +181,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                                                         .SubstringUntilLastInstanceOf(domainType.Name);
                 domainType.Namespace = domainType.DestinationProject.GetDefaultNamespace() +
                                         (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
-                // TODO: validate the namespace
+                if (!VisualStudioExtensions.IsValidNamespace(domainType.Namespace))
+                {
+                    throw new Exception(String.Format("Invalid resulting Namespace of '{0}' at: {1}", domainType.Namespace, domainType.ConfigFilePath));
+                }
                 if (!String.IsNullOrEmpty(json.PluralName))
                 {
                     domainType.PluralName = json.PluralName;
@@ -186,7 +193,10 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 {
                     domainType.PluralName = this.GetPluralName(domainType.Name);
                 }
-                // TODO: validate the PluralName
+                if (!VisualStudioExtensions.IsValidTypeName(domainType.PluralName))
+                {
+                    throw new Exception(String.Format("Invalid resulting PluralName of '{0}' at: {1}", domainType.PluralName, domainType.ConfigFilePath));
+                }
 
                 list.Add(domainType);
             }
@@ -268,13 +278,12 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                     extendedFieldValueDomainType.Extends = domainType;
                     domainType.ExtendedBy = extendedFieldValueDomainType;
 
-                    // TODO: some of these may not be correct- need to decide how these things get handled for CustomValue classes
                     extendedFieldValueDomainType.IsVersionable = domainType.IsVersionable;
-                    extendedFieldValueDomainType.IsAuditable = domainType.IsAuditable;
+                    extendedFieldValueDomainType.IsAuditable = false; //domainType.IsAuditable;
                     extendedFieldValueDomainType.IsInsertable = domainType.IsInsertable;
                     extendedFieldValueDomainType.IsUpdatable = domainType.IsUpdatable;
                     extendedFieldValueDomainType.IsDeletable = domainType.IsDeletable;
-                    extendedFieldValueDomainType.IsMarkDeletable = domainType.IsMarkDeletable;
+                    extendedFieldValueDomainType.IsMarkDeletable = false; //domainType.IsMarkDeletable;
 
                     newDomainTypes.Add(extendedFieldValueDomainType);
                 }
@@ -422,31 +431,37 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 fromProperty.Owner = domainType;
                 domainType.Properties.Add(fromProperty);
 
-                var toProperty = new DomainPropertyInfo();
-                toProperty.Name = "ExtendedEntity";
-                toProperty.DataType = DataTypeEnum.Relationship;
-                toProperty.IsForExtendedEntityFieldValueInterface = true;
-                toProperty.IsRequired = true;
-                toProperty.Owner = domainType.ExtendedBy;
+                var toProperty = new DomainPropertyInfo()
+                {
+                    Name = "ExtendedEntity",
+                    DataType = DataTypeEnum.Relationship,
+                    IsForExtendedEntityFieldValueInterface = true,
+                    IsRequired = true,
+                    Owner = domainType.ExtendedBy
+                };
                 domainType.ExtendedBy.Properties.Add(toProperty);
 
-                var foreignKeyOnTo = new DomainPropertyInfo();
-                foreignKeyOnTo.Name = "ExtendedEntityId";
-                foreignKeyOnTo.DataType = domainType.IdProperty.DataType;
-                foreignKeyOnTo.IsForeignKey = true;
-                foreignKeyOnTo.IsForExtendedEntityFieldValueInterface = true;
-                foreignKeyOnTo.IsRequired = true;
-                foreignKeyOnTo.Owner = domainType.ExtendedBy;
+                var foreignKeyOnTo = new DomainPropertyInfo()
+                {
+                    Name = "ExtendedEntityId",
+                    DataType = domainType.IdProperty.DataType,
+                    IsForeignKey = true,
+                    IsForExtendedEntityFieldValueInterface = true,
+                    IsRequired = true,
+                    Owner = domainType.ExtendedBy
+                };
                 domainType.ExtendedBy.Properties.Add(foreignKeyOnTo);
 
-                var relationship = new RelationshipInfo();
-                relationship.Type = RelationshipTypeEnum.OneToMany;
-                relationship.DeletionBehavior = RelationshipDeletionBehaviorTypeEnum.CascadeDelete;
-                relationship.From = domainType;
-                relationship.To = domainType.ExtendedBy;
-                relationship.NavigationPropertyOnFrom = fromProperty;
-                relationship.NavigationPropertyOnTo = toProperty;
-                relationship.ForeignKeyOnTo = foreignKeyOnTo;
+                var relationship = new RelationshipInfo()
+                {
+                    Type = RelationshipTypeEnum.OneToMany,
+                    DeletionBehavior = RelationshipDeletionBehaviorTypeEnum.CascadeDelete,
+                    From = domainType,
+                    To = domainType.ExtendedBy,
+                    NavigationPropertyOnFrom = fromProperty,
+                    NavigationPropertyOnTo = toProperty,
+                    ForeignKeyOnTo = foreignKeyOnTo
+                };
 
                 fromProperty.Relationship = relationship;
                 toProperty.Relationship = relationship;
@@ -455,47 +470,178 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                 domainType.ExtendedBy.Relationships.Add(relationship);
 
                 // also the Value field
-                var valueProperty = new DomainPropertyInfo();
-                valueProperty.Name = "Value";
-                valueProperty.DataType = DataTypeEnum.String;
-                valueProperty.IsForExtendedEntityFieldValueInterface = true;
-                valueProperty.IsMaxLength = true;
-                valueProperty.Owner = domainType.ExtendedBy;
+                var valueProperty = new DomainPropertyInfo()
+                {
+                    Name = "Value",
+                    DataType = DataTypeEnum.String,
+                    IsForExtendedEntityFieldValueInterface = true,
+                    IsMaxLength = true,
+                    Owner = domainType.ExtendedBy
+                };
                 domainType.ExtendedBy.Properties.Add(valueProperty);
             }
             foreach (var domainType in list.Where(o => o.IsStaticLookup))
             {
-                var nameProperty = new DomainPropertyInfo();
-                nameProperty.Name = "Name";
-                nameProperty.IsForIsStaticLookupInterface = true;
-                nameProperty.DataType = DataTypeEnum.String;
-                nameProperty.IsRequired = true;
-                nameProperty.MinLength = 1;
-                nameProperty.MaxLength = 1024;
-                nameProperty.Owner = domainType;
+                var nameProperty = new DomainPropertyInfo()
+                {
+                    Name = "Name",
+                    IsForIsStaticLookupInterface = true,
+                    DataType = DataTypeEnum.String,
+                    IsRequired = true,
+                    MinLength = 1,
+                    MaxLength = 1024,
+                    Owner = domainType
+                };
                 domainType.Properties.Add(nameProperty);
             }
-
-
-
-
-            // TODO: handle properties passed in that override one of the implicit properties
-
 
             foreach (var domainType in list.Where(o => o.Config != null && o.Config.Properties.Any()))
             {
                 foreach (var json in domainType.Config.Properties)
                 {
+                    #region Property validation
+                    if (String.IsNullOrWhiteSpace(json.Name))
+                    {
+                        throw new ConfigFileException("Invalid PropertyName: " + json.Name, domainType.ConfigFilePath);
+                    }
+                    Action verifyMinMaxLengthPropertiesNotUsed = delegate() {
+                        if (!String.IsNullOrEmpty(json.MinLength)
+                            || !String.IsNullOrEmpty(json.MaxLength)
+                            || json.IsMaxLength.GetValueOrDefault())
+                        {
+                            throw new ConfigFileException("Cannot use MinLength, MaxLength or IsMaxLength with integer DataTypes: " + json.Name, domainType.ConfigFilePath);
+                        }
+                    }; 
+                    Action verifyRelationshipPropertiesNotUsed = delegate()
+                    {
+                        if (!String.IsNullOrEmpty(json.RelationshipTo)
+                            || !String.IsNullOrEmpty(json.RelationshipOtherSidePropertyName)
+                            || json.RelationshipType.GetValueOrDefault() != RelationshipTypeEnum.None
+                            || json.RelationshipDeletionBehavior.GetValueOrDefault() != RelationshipDeletionBehaviorTypeEnum.None
+                            || json.RelationshipOtherSidePropertyUniquenessType.GetValueOrDefault() != UniquenessTypeEnum.None)
+                        {
+                            throw new ConfigFileException("Cannot use RelationshipTo, NavigationPropertyName, RelationshipDeletionBehavior or RelationshipType with non-relationship DataTypes: " + json.Name, domainType.ConfigFilePath);
+                        }
+                    };
+                    Action verifyNullablePropertyNotUsed = delegate()
+                    {
+                        if (json.IsNullable.GetValueOrDefault())
+                        {
+                            throw new ConfigFileException("Cannot use Nullable for specified DataType: " + json.Name, domainType.ConfigFilePath);
+                        }
+                    };
+                    Action verifyMinMaxValuePropertiesNotUsed = delegate()
+                    {
+                        if (!String.IsNullOrEmpty(json.MinValue)
+                            || !String.IsNullOrEmpty(json.MaxValue))
+                        {
+                            throw new ConfigFileException("Cannot use Nullable for specified DataType: " + json.Name, domainType.ConfigFilePath);
+                        }
+                    };
+                    Action verifyPrecisionPropertiesNotUsed = delegate()
+                    {
+                        if (!String.IsNullOrEmpty(json.Precision))
+                        {
+                            throw new ConfigFileException("Cannot use Precision for specified DataType: " + json.Name, domainType.ConfigFilePath);
+                        }
+                    };
+                    DataTypeEnum dataType = json.DataType.GetValueOrDefault(DataTypeEnum.String);
+                    switch (dataType)
+	                {
+                        case DataTypeEnum.None:
+                        case DataTypeEnum.Object:
+                        case DataTypeEnum.SByte:
+                        case DataTypeEnum.UShort:
+                        case DataTypeEnum.UInt:
+                        case DataTypeEnum.ULong:
+                            throw new ConfigFileException("Unsupported or invalid Property DataType: " + json.Name, domainType.ConfigFilePath);
+                        case DataTypeEnum.Byte:
+                        case DataTypeEnum.Short:
+                        case DataTypeEnum.Int:
+                        case DataTypeEnum.Long:
+	                        verifyMinMaxLengthPropertiesNotUsed();
+	                        verifyRelationshipPropertiesNotUsed();
+	                        verifyPrecisionPropertiesNotUsed();
 
-                    // TODO: up above with the rest, do validation so we know we're working with valid data here
+                            // TODO: validate Min/Max Value
+                            break;
+                        case DataTypeEnum.Char:
+                            verifyMinMaxLengthPropertiesNotUsed();
+	                        verifyRelationshipPropertiesNotUsed();
+	                        verifyMinMaxValuePropertiesNotUsed();
+	                        verifyPrecisionPropertiesNotUsed();
+                            break;
+                        case DataTypeEnum.Boolean:
+                            verifyMinMaxLengthPropertiesNotUsed();
+	                        verifyRelationshipPropertiesNotUsed();
+	                        verifyMinMaxValuePropertiesNotUsed();
+	                        verifyPrecisionPropertiesNotUsed();
+                            break;
+                        case DataTypeEnum.Float:
+                        case DataTypeEnum.Double:
+                        case DataTypeEnum.Decimal:
+                        case DataTypeEnum.Currency:
+                        case DataTypeEnum.Percentage:
+                            verifyMinMaxLengthPropertiesNotUsed();
+	                        verifyRelationshipPropertiesNotUsed();
 
+                            // TODO: validate Min/Max Value, Precision
+                            break;
+                        case DataTypeEnum.String:
+                        case DataTypeEnum.EmailAddress:
+                        case DataTypeEnum.Url:
+                            verifyRelationshipPropertiesNotUsed();
+	                        verifyNullablePropertyNotUsed();
+	                        verifyMinMaxValuePropertiesNotUsed();
+	                        verifyPrecisionPropertiesNotUsed();
+
+                            // TODO: validate Min/Max Length, IsMaxLength
+                            break;
+                        case DataTypeEnum.Date:
+                        case DataTypeEnum.Time:
+                        case DataTypeEnum.DateTime:
+                            verifyMinMaxLengthPropertiesNotUsed();
+	                        verifyRelationshipPropertiesNotUsed();
+	                        verifyPrecisionPropertiesNotUsed();
+
+                            // TODO: validate Min/Max Value
+                            break;
+                        case DataTypeEnum.Relationship:
+                            verifyMinMaxLengthPropertiesNotUsed();
+	                        verifyRelationshipPropertiesNotUsed();
+	                        verifyNullablePropertyNotUsed();
+	                        verifyMinMaxValuePropertiesNotUsed();
+	                        verifyPrecisionPropertiesNotUsed();
+
+                            // TODO: more validation here for actual relationship properties
+                            break;
+                        case DataTypeEnum.Guid:
+                            verifyMinMaxLengthPropertiesNotUsed();
+	                        verifyRelationshipPropertiesNotUsed();
+	                        verifyMinMaxValuePropertiesNotUsed();
+	                        verifyPrecisionPropertiesNotUsed();
+                            break;
+                        case DataTypeEnum.Image:
+                        case DataTypeEnum.ByteArray:
+                            verifyRelationshipPropertiesNotUsed();
+	                        verifyNullablePropertyNotUsed();
+	                        verifyMinMaxValuePropertiesNotUsed();
+	                        verifyPrecisionPropertiesNotUsed();
+
+                            // TODO: validate Min/Max Length, IsMaxLength
+                            break;
+                        default:
+                            throw new ConfigFileException("Invalid Property DataType: " + json.Name, domainType.ConfigFilePath);
+                    }
+                    #endregion
+                    
                     if (json.DataType != DataTypeEnum.Relationship)
                     {
                         // Value type
                         var property = new DomainPropertyInfo();
                         property.Name = json.Name;
                         property.DataType = json.DataType.GetValueOrDefault(DataTypeEnum.String);
-                        property.AutoGenerationBehavior = json.AutoGenerationBehavior.GetValueOrDefault(AutoGenerationBehaviorTypeEnum.None);
+                        property.AutoGenerationBehavior = AutoGenerationBehaviorTypeEnum.None;
                         property.IsNullable = json.IsNullable.GetValueOrDefault();
                         property.IsRequired = json.IsRequired.GetValueOrDefault();
                         property.IsMaxLength = json.IsMaxLength.GetValueOrDefault();
@@ -528,28 +674,34 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                         DomainPropertyInfo foreignKeyOnTo = null;
                         DomainPropertyInfo foreignKeyOnFrom = null;
                         var relationship = new RelationshipInfo();
+                        
+                        // TODO: support the rest of the relationship types
 
-                        // TODO: fixed requireds and NUllables for relationships
-                        // TODO: can even support Uniqueness
-
-                        switch (json.RelationshipType.Value)
+                        switch (json.RelationshipType.GetValueOrDefault(RelationshipTypeEnum.None))
                         {
+                            case RelationshipTypeEnum.None:
+                                throw new ConfigFileException("Invalid RelationShipType: " + json.Name, domainType.ConfigFilePath);
                             case RelationshipTypeEnum.OneToMany:
 
                                 // collection property on the from
 
-                                if (!String.IsNullOrEmpty(json.NavigationPropertyName))
+                                if (!String.IsNullOrEmpty(json.RelationshipOtherSidePropertyName))
                                 {
                                     toProperty = new DomainPropertyInfo();
-                                    toProperty.Name = json.NavigationPropertyName;
+                                    toProperty.Name = json.RelationshipOtherSidePropertyName;
                                     toProperty.DataType = DataTypeEnum.Relationship;
-                                    toProperty.IsRequired = true;
+                                    toProperty.IsRequired = json.IsRelationshipOtherSidePropertyRequired.GetValueOrDefault();
+                                    toProperty.UniquenessType =
+                                        json.RelationshipOtherSidePropertyUniquenessType.GetValueOrDefault(
+                                            UniquenessTypeEnum.NotUnique);
 
                                     foreignKeyOnTo = new DomainPropertyInfo();
-                                    foreignKeyOnTo.Name = json.NavigationPropertyName + "Id";
+                                    foreignKeyOnTo.Name = json.RelationshipOtherSidePropertyName + "Id";
                                     foreignKeyOnTo.DataType = fromEntity.IdProperty.DataType;
                                     foreignKeyOnTo.IsForeignKey = true;
-                                    foreignKeyOnTo.IsRequired = true;
+                                    foreignKeyOnTo.IsRequired = json.IsRelationshipOtherSidePropertyRequired.GetValueOrDefault();
+                                    foreignKeyOnTo.IsNullable = foreignKeyOnTo.IsRequired;
+                                    foreignKeyOnTo.UniquenessType = toProperty.UniquenessType;
                                 }
 
                                 relationship.Type = RelationshipTypeEnum.OneToMany;
@@ -561,18 +713,21 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 
                                 // collection property on the to
                                 
-                                fromProperty.IsRequired = true;
+                                fromProperty.IsRequired = json.IsRequired.GetValueOrDefault();
+                                fromProperty.UniquenessType = json.UniquenessType.GetValueOrDefault(UniquenessTypeEnum.NotUnique);
 
                                 foreignKeyOnFrom = new DomainPropertyInfo();
-                                foreignKeyOnFrom.Name = json.NavigationPropertyName + "Id";
+                                foreignKeyOnFrom.Name = json.RelationshipOtherSidePropertyName + "Id";
                                 foreignKeyOnFrom.DataType = fromEntity.IdProperty.DataType;
                                 foreignKeyOnFrom.IsForeignKey = true;
-                                foreignKeyOnFrom.IsRequired = true;
+                                foreignKeyOnFrom.IsRequired = json.IsRequired.GetValueOrDefault();
+                                foreignKeyOnFrom.IsNullable = foreignKeyOnFrom.IsRequired;
+                                foreignKeyOnFrom.UniquenessType = fromProperty.UniquenessType;
 
-                                if (!String.IsNullOrEmpty(json.NavigationPropertyName))
+                                if (!String.IsNullOrEmpty(json.RelationshipOtherSidePropertyName))
                                 {
                                     toProperty = new DomainPropertyInfo();
-                                    toProperty.Name = json.NavigationPropertyName;
+                                    toProperty.Name = json.RelationshipOtherSidePropertyName;
                                     toProperty.DataType = DataTypeEnum.Relationship;
                                 }
 
@@ -627,6 +782,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
             }
             foreach (var domainType in list)
             {
+                // TODO: this only checks per class, not per heirarchy
                 if (domainType.Properties.GroupBy(p => p.Name).Where(g => g.Count() > 1).Any())
                 {
                     throw new Exception("2 Properties with the same name resulted in: " + domainType.ConfigFilePath);

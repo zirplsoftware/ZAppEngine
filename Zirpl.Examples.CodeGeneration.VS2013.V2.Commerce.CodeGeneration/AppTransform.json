@@ -283,7 +283,7 @@
               "IsStaticLookup": false,
               "IsEnum": false,
               "IsVersionable": true,
-              "IsAuditable": true,
+              "IsAuditable": false,
               "IsExtendable": false,
               "IsExtendedEntityFieldValue": true,
               "IsInsertable": true,
@@ -347,114 +347,6 @@
                 },
                 {
                   "$id": "18",
-                  "Name": "CreatedUserId",
-                  "DataType": 13,
-                  "IsPrimaryKey": false,
-                  "IsForeignKey": false,
-                  "AutoGenerationBehavior": 2,
-                  "IsRowVersion": false,
-                  "IsForAuditableInterface": true,
-                  "IsForMarkDeletedInterface": false,
-                  "IsForExtendableInterface": false,
-                  "IsForExtendedEntityFieldValueInterface": false,
-                  "IsForIsStaticLookupInterface": false,
-                  "IsNullable": false,
-                  "IsRequired": true,
-                  "IsMaxLength": false,
-                  "MinLength": 1,
-                  "MaxLength": 256,
-                  "MinValue": null,
-                  "MaxValue": null,
-                  "Precision": null,
-                  "UniquenessType": 1,
-                  "Owner": {
-                    "$ref": "15"
-                  },
-                  "Relationship": null
-                },
-                {
-                  "$id": "19",
-                  "Name": "UpdatedUserId",
-                  "DataType": 13,
-                  "IsPrimaryKey": false,
-                  "IsForeignKey": false,
-                  "AutoGenerationBehavior": 2,
-                  "IsRowVersion": false,
-                  "IsForAuditableInterface": true,
-                  "IsForMarkDeletedInterface": false,
-                  "IsForExtendableInterface": false,
-                  "IsForExtendedEntityFieldValueInterface": false,
-                  "IsForIsStaticLookupInterface": false,
-                  "IsNullable": false,
-                  "IsRequired": true,
-                  "IsMaxLength": false,
-                  "MinLength": 1,
-                  "MaxLength": 256,
-                  "MinValue": null,
-                  "MaxValue": null,
-                  "Precision": null,
-                  "UniquenessType": 1,
-                  "Owner": {
-                    "$ref": "15"
-                  },
-                  "Relationship": null
-                },
-                {
-                  "$id": "20",
-                  "Name": "CreatedDate",
-                  "DataType": 18,
-                  "IsPrimaryKey": false,
-                  "IsForeignKey": false,
-                  "AutoGenerationBehavior": 2,
-                  "IsRowVersion": false,
-                  "IsForAuditableInterface": true,
-                  "IsForMarkDeletedInterface": false,
-                  "IsForExtendableInterface": false,
-                  "IsForExtendedEntityFieldValueInterface": false,
-                  "IsForIsStaticLookupInterface": false,
-                  "IsNullable": true,
-                  "IsRequired": true,
-                  "IsMaxLength": false,
-                  "MinLength": 0,
-                  "MaxLength": 0,
-                  "MinValue": null,
-                  "MaxValue": null,
-                  "Precision": null,
-                  "UniquenessType": 1,
-                  "Owner": {
-                    "$ref": "15"
-                  },
-                  "Relationship": null
-                },
-                {
-                  "$id": "21",
-                  "Name": "UpdatedDate",
-                  "DataType": 18,
-                  "IsPrimaryKey": false,
-                  "IsForeignKey": false,
-                  "AutoGenerationBehavior": 2,
-                  "IsRowVersion": false,
-                  "IsForAuditableInterface": true,
-                  "IsForMarkDeletedInterface": false,
-                  "IsForExtendableInterface": false,
-                  "IsForExtendedEntityFieldValueInterface": false,
-                  "IsForIsStaticLookupInterface": false,
-                  "IsNullable": true,
-                  "IsRequired": true,
-                  "IsMaxLength": false,
-                  "MinLength": 0,
-                  "MaxLength": 0,
-                  "MinValue": null,
-                  "MaxValue": null,
-                  "Precision": null,
-                  "UniquenessType": 1,
-                  "Owner": {
-                    "$ref": "15"
-                  },
-                  "Relationship": null
-                },
-                {
-                  "$id": "22",
                   "Name": "ExtendedEntity",
                   "DataType": 21,
                   "IsPrimaryKey": false,
@@ -483,7 +375,7 @@
                   }
                 },
                 {
-                  "$id": "23",
+                  "$id": "19",
                   "Name": "ExtendedEntityId",
                   "DataType": 22,
                   "IsPrimaryKey": false,
@@ -512,7 +404,7 @@
                   }
                 },
                 {
-                  "$id": "24",
+                  "$id": "20",
                   "Name": "Value",
                   "DataType": 13,
                   "IsPrimaryKey": false,
@@ -560,13 +452,13 @@
             },
             "ForeignKeyOnFrom": null,
             "ForeignKeyOnTo": {
-              "$ref": "23"
+              "$ref": "19"
             },
             "NavigationPropertyOnFrom": {
               "$ref": "13"
             },
             "NavigationPropertyOnTo": {
-              "$ref": "22"
+              "$ref": "18"
             }
           }
         }
@@ -577,9 +469,9 @@
       "InheritsFrom": null,
       "InheritedBy": [
         {
-          "$id": "25",
+          "$id": "21",
           "Config": {
-            "$id": "26",
+            "$id": "22",
             "Id": null,
             "IsPersistable": null,
             "PluralName": null,
@@ -631,9 +523,9 @@
           "Relationships": []
         },
         {
-          "$id": "27",
+          "$id": "23",
           "Config": {
-            "$id": "28",
+            "$id": "24",
             "Id": null,
             "IsPersistable": null,
             "PluralName": null,
@@ -700,17 +592,17 @@
       ]
     },
     {
-      "$ref": "25"
+      "$ref": "21"
     },
     {
-      "$ref": "27"
+      "$ref": "23"
     },
     {
-      "$id": "29",
+      "$id": "25",
       "Config": {
-        "$id": "30",
+        "$id": "26",
         "Id": {
-          "$id": "31",
+          "$id": "27",
           "DataType": 6,
           "AutoGenerationBehavior": null,
           "IsNullable": null
@@ -729,12 +621,12 @@
         "IsMarkDeletable": null,
         "EnumValues": [
           {
-            "$id": "32",
+            "$id": "28",
             "Id": "1",
             "Name": "Dr"
           },
           {
-            "$id": "33",
+            "$id": "29",
             "Id": "2",
             "Name": "Mr"
           }
@@ -763,7 +655,7 @@
       "IsMarkDeletable": false,
       "Properties": [
         {
-          "$id": "34",
+          "$id": "30",
           "Name": "Id",
           "DataType": 6,
           "IsPrimaryKey": true,
@@ -785,12 +677,12 @@
           "Precision": null,
           "UniquenessType": 0,
           "Owner": {
-            "$ref": "29"
+            "$ref": "25"
           },
           "Relationship": null
         },
         {
-          "$id": "35",
+          "$id": "31",
           "Name": "Name",
           "DataType": 13,
           "IsPrimaryKey": false,
@@ -812,13 +704,13 @@
           "Precision": null,
           "UniquenessType": 0,
           "Owner": {
-            "$ref": "29"
+            "$ref": "25"
           },
           "Relationship": null
         }
       ],
       "IdProperty": {
-        "$ref": "34"
+        "$ref": "30"
       },
       "InheritsFrom": null,
       "InheritedBy": [],
@@ -826,7 +718,7 @@
       "ExtendedBy": null,
       "EnumDescribes": null,
       "DescribedByEnum": {
-        "$id": "36",
+        "$id": "32",
         "Config": null,
         "ConfigFilePath": null,
         "DestinationProject": {
@@ -855,18 +747,18 @@
         "Extends": null,
         "ExtendedBy": null,
         "EnumDescribes": {
-          "$ref": "29"
+          "$ref": "25"
         },
         "DescribedByEnum": null,
         "EnumDataType": 6,
         "EnumValues": [
           {
-            "$id": "37",
+            "$id": "33",
             "Id": 1,
             "Name": "Dr"
           },
           {
-            "$id": "38",
+            "$id": "34",
             "Id": 2,
             "Name": "Mr"
           }
@@ -881,12 +773,12 @@
       "$ref": "15"
     },
     {
-      "$ref": "36"
+      "$ref": "32"
     }
   ],
   "FilesToGenerate": [],
   "CodeGenerationProject": {
-    "$id": "39"
+    "$id": "35"
   },
   "ModelProject": {
     "$ref": "6"
