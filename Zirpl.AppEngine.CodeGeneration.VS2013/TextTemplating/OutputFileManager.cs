@@ -46,7 +46,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
     /// so they can be split up into separate files and projects
     /// </summary>
     /// <author>R. Leupold</author>
-    public class TemplateFileManager
+    public class OutputFileManager
     {
         private readonly Action<string> checkOutAction;
         private readonly Action<IEnumerable<OutputFile>> projectSyncAction;
@@ -79,7 +79,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// Initializes an TemplateFileManager Instance  with the
         /// TextTransformation (T4 generated class) that is currently running
         /// </summary>
-        public TemplateFileManager()
+        public OutputFileManager()
         {
             this.CanOverrideExistingFile = true;
             this.IsAutoIndentEnabled = false;

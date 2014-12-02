@@ -53,7 +53,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
                 instance.Host = callingTemplateWrapper.Host;
                 instance.VisualStudio = visualStudio;
                 instance.TemplateProjectItem = templateProjectItem;
-                instance.FileManager = new TemplateFileManager();
+                instance.FileManager = new OutputFileManager();
                 Instance = instance;
             }
             return Instance;
@@ -72,7 +72,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         }
 
         public ITextTransformation CallingTemplate { get; private set; }
-        public TemplateFileManager FileManager { get; private set; }
+        public OutputFileManager FileManager { get; private set; }
         public ITextTemplatingEngineHost Host { get; private set; }
         public DTE2 VisualStudio { get; private set; }
         public ProjectItem TemplateProjectItem { get; private set; }
