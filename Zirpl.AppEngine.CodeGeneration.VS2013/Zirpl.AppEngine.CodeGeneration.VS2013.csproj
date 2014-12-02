@@ -105,6 +105,7 @@
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\AppJson.cs" />
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\DomainTypeJson.cs" />
     <Compile Include="V2\ConfigModel\Parsers\JsonModel\IdJson.cs" />
+    <Compile Include="V2\ConfigModel\Parsers\JsonModel\RelationshipJson.cs" />
     <Compile Include="V2\ConfigModel\RelationshipInfo.cs" />
     <Compile Include="V2\Templates\Model\PersistableDomainClassTemplate.cs">
       <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>

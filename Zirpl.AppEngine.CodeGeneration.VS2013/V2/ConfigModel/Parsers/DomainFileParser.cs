@@ -514,11 +514,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                     }; 
                     Action verifyRelationshipPropertiesNotUsed = delegate()
                     {
-                        if (!String.IsNullOrEmpty(json.RelationshipTo)
-                            || !String.IsNullOrEmpty(json.RelationshipOtherSidePropertyName)
-                            || json.RelationshipType.GetValueOrDefault() != RelationshipTypeEnum.None
-                            || json.RelationshipDeletionBehavior.GetValueOrDefault() != RelationshipDeletionBehaviorTypeEnum.None
-                            || json.RelationshipOtherSidePropertyUniquenessType.GetValueOrDefault() != UniquenessTypeEnum.None)
+                        if (json.Relationship != null)
                         {
                             throw new ConfigFileException("Cannot use RelationshipTo, NavigationPropertyName, RelationshipDeletionBehavior or RelationshipType with non-relationship DataTypes: " + json.Name, domainType.ConfigFilePath);
                         }
@@ -613,6 +609,11 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 	                        verifyMinMaxValuePropertiesNotUsed();
 	                        verifyPrecisionPropertiesNotUsed();
 
+	                        if (json.Relationship == null)
+	                        {
+	                            throw new ConfigFileException("Relationsip Data missing for Relationship DataType", domainType.ConfigFilePath);
+	                        }
+
                             // TODO: more validation here for actual relationship properties
                             break;
                         case DataTypeEnum.Guid:
@@ -650,20 +651,20 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                         property.MinValue = json.MinValue;
                         property.MaxValue = json.MaxValue;
                         property.Precision = json.Precision;
-                        property.UniquenessType = json.UniquenessType.GetValueOrDefault(UniquenessTypeEnum.NotUnique);
+                        property.UniquenessType = json.Uniqueness.GetValueOrDefault(UniquenessTypeEnum.NotUnique);
                         property.Owner = domainType;
                         domainType.Properties.Add(property);
                     }
                     else
                     {
-                        var potentialMatches = this.FindDomainTypes(list, json.RelationshipTo);
+                        var potentialMatches = this.FindDomainTypes(list, json.Relationship.To);
                         if (!potentialMatches.Any())
                         {
-                            throw new Exception("Could not find domain type matching RelationshipTo in: " + domainType.ConfigFilePath);
+                            throw new Exception("Could not find domain type matching To in: " + domainType.ConfigFilePath);
                         }
                         else if (potentialMatches.Count() > 1)
                         {
-                            throw new Exception("Found more than 1 matching domain type for RelationshipTo in: " + domainType.ConfigFilePath);
+                            throw new Exception("Found more than 1 matching domain type for To in: " + domainType.ConfigFilePath);
                         }
                         var toEntity = potentialMatches.Single();
                         var fromEntity = domainType;
@@ -677,7 +678,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                         
                         // TODO: support the rest of the relationship types
 
-                        switch (json.RelationshipType.GetValueOrDefault(RelationshipTypeEnum.None))
+                        switch (json.Relationship.Type.GetValueOrDefault(RelationshipTypeEnum.None))
                         {
                             case RelationshipTypeEnum.None:
                                 throw new ConfigFileException("Invalid RelationShipType: " + json.Name, domainType.ConfigFilePath);
@@ -685,27 +686,27 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
 
                                 // collection property on the from
 
-                                if (!String.IsNullOrEmpty(json.RelationshipOtherSidePropertyName))
+                                if (!String.IsNullOrEmpty(json.Relationship.ToPropertyName))
                                 {
                                     toProperty = new DomainPropertyInfo();
-                                    toProperty.Name = json.RelationshipOtherSidePropertyName;
+                                    toProperty.Name = json.Relationship.ToPropertyName;
                                     toProperty.DataType = DataTypeEnum.Relationship;
-                                    toProperty.IsRequired = json.IsRelationshipOtherSidePropertyRequired.GetValueOrDefault();
+                                    toProperty.IsRequired = json.Relationship.ToProperyIsRequired.GetValueOrDefault();
                                     toProperty.UniquenessType =
-                                        json.RelationshipOtherSidePropertyUniquenessType.GetValueOrDefault(
+                                        json.Relationship.ToPropertyUniqueness.GetValueOrDefault(
                                             UniquenessTypeEnum.NotUnique);
 
                                     foreignKeyOnTo = new DomainPropertyInfo();
-                                    foreignKeyOnTo.Name = json.RelationshipOtherSidePropertyName + "Id";
+                                    foreignKeyOnTo.Name = json.Relationship.ToPropertyName + "Id";
                                     foreignKeyOnTo.DataType = fromEntity.IdProperty.DataType;
                                     foreignKeyOnTo.IsForeignKey = true;
-                                    foreignKeyOnTo.IsRequired = json.IsRelationshipOtherSidePropertyRequired.GetValueOrDefault();
+                                    foreignKeyOnTo.IsRequired = json.Relationship.ToProperyIsRequired.GetValueOrDefault();
                                     foreignKeyOnTo.IsNullable = foreignKeyOnTo.IsRequired;
                                     foreignKeyOnTo.UniquenessType = toProperty.UniquenessType;
                                 }
 
                                 relationship.Type = RelationshipTypeEnum.OneToMany;
-                                relationship.DeletionBehavior = json.RelationshipDeletionBehavior.GetValueOrDefault(RelationshipDeletionBehaviorTypeEnum.CascadeDelete);
+                                relationship.DeletionBehavior = json.Relationship.DeletionBehavior.GetValueOrDefault(RelationshipDeletionBehaviorTypeEnum.CascadeDelete);
        
                                 
                                 break;
@@ -714,20 +715,20 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                                 // collection property on the to
                                 
                                 fromProperty.IsRequired = json.IsRequired.GetValueOrDefault();
-                                fromProperty.UniquenessType = json.UniquenessType.GetValueOrDefault(UniquenessTypeEnum.NotUnique);
+                                fromProperty.UniquenessType = json.Uniqueness.GetValueOrDefault(UniquenessTypeEnum.NotUnique);
 
                                 foreignKeyOnFrom = new DomainPropertyInfo();
-                                foreignKeyOnFrom.Name = json.RelationshipOtherSidePropertyName + "Id";
+                                foreignKeyOnFrom.Name = json.Relationship.ToPropertyName + "Id";
                                 foreignKeyOnFrom.DataType = fromEntity.IdProperty.DataType;
                                 foreignKeyOnFrom.IsForeignKey = true;
                                 foreignKeyOnFrom.IsRequired = json.IsRequired.GetValueOrDefault();
                                 foreignKeyOnFrom.IsNullable = foreignKeyOnFrom.IsRequired;
                                 foreignKeyOnFrom.UniquenessType = fromProperty.UniquenessType;
 
-                                if (!String.IsNullOrEmpty(json.RelationshipOtherSidePropertyName))
+                                if (!String.IsNullOrEmpty(json.Relationship.ToPropertyName))
                                 {
                                     toProperty = new DomainPropertyInfo();
-                                    toProperty.Name = json.RelationshipOtherSidePropertyName;
+                                    toProperty.Name = json.Relationship.ToPropertyName;
                                     toProperty.DataType = DataTypeEnum.Relationship;
                                 }
 
@@ -735,8 +736,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
                         }
                         relationship.From = fromEntity;
                         relationship.To = toEntity;
-                        relationship.Type = json.RelationshipType.GetValueOrDefault();
-                        relationship.DeletionBehavior = json.RelationshipDeletionBehavior.GetValueOrDefault(
+                        relationship.Type = json.Relationship.Type.GetValueOrDefault();
+                        relationship.DeletionBehavior = json.Relationship.DeletionBehavior.GetValueOrDefault(
                                 RelationshipDeletionBehaviorTypeEnum.Restricted);
                         relationship.NavigationPropertyOnFrom = fromProperty;
                         relationship.NavigationPropertyOnTo = toProperty;

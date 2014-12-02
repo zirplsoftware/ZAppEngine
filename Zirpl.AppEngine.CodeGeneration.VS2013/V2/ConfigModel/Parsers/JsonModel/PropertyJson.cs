@@ -19,15 +19,8 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
         public String MinValue { get; set; }
         public String MaxValue { get; set; }
         public String Precision { get; set; }
-        public UniquenessTypeEnum? UniquenessType { get; set; }
+        public UniquenessTypeEnum? Uniqueness { get; set; }
 
-        //relationship properties
-        //
-        public RelationshipTypeEnum? RelationshipType { get; set; }
-        public RelationshipDeletionBehaviorTypeEnum? RelationshipDeletionBehavior { get; set; }
-        public String RelationshipTo { get; set; }
-        public String RelationshipOtherSidePropertyName { get; set; }
-        public bool? IsRelationshipOtherSidePropertyRequired { get; set; }
-        public UniquenessTypeEnum? RelationshipOtherSidePropertyUniquenessType { get; set; }
+        public RelationshipJson Relationship { get; set; }
     }
 }
