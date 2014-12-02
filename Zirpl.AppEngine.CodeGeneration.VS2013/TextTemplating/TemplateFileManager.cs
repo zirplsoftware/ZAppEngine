@@ -54,15 +54,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         private readonly List<TextBlock> files = new List<TextBlock>();
         private readonly TextBlock footer = new TextBlock();
         private readonly TextBlock header = new TextBlock();
-        private readonly ITextTransformation _callingTemplate;
-        //private readonly StringBuilder _generationEnvironment; // reference to the GenerationEnvironment StringBuilder on the TextTransformation object
         private TextBlock currentBlock;
-        private readonly ProjectItem _templateProjectItem;
-        private readonly DTE2 _visualStudio;
-
-        public ITextTransformation CallingTemplate { get { return this._callingTemplate; } }
-        public ProjectItem TemplateProjectItem { get { return this._templateProjectItem; }}
-        public DTE2 VisualStudio { get { return this._visualStudio; } }
 
         /// <summary>
         /// If set to false, existing files are not overwritten
@@ -87,43 +79,13 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// Initializes an TemplateFileManager Instance  with the
         /// TextTransformation (T4 generated class) that is currently running
         /// </summary>
-        public TemplateFileManager(ITextTransformation callingTemplate)
+        public TemplateFileManager()
         {
-            if (callingTemplate == null)
-            {
-                throw new ArgumentNullException("callingTemplate");
-            }
-            if (callingTemplate.Host == null)
-            {
-                throw new ArgumentException("Host cannot be null. Preprocessed templates need to be passed the calling templates.", "callingTemplate");
-            }
-            if (String.IsNullOrEmpty(callingTemplate.Host.TemplateFile))
-            {
-                throw new ArgumentException("Host.TemplateFile cannot be null. Preprocessed templates need to be passed the calling templates.", "callingTemplate");
-            }
-
-            this._callingTemplate = callingTemplate;
-
-            // Get an instance of the currently running Visual VisualStudio IDE.
-            //this._visualStudio = (DTE2)System.Runtime.InteropServices.Marshal.GetActiveObject(String.Format("!VisualStudio.DTE.12.0:{0}", System.Diagnostics.Process.GetCurrentProcess().Id));
-            this._visualStudio = VisualStudioExtensions.GetCurrentVisualStudioInstance();
-            if (this.VisualStudio == null)
-            {
-                throw new Exception("Could not obtain DTE2");
-            }
-
-            var templateFile = this.CallingTemplate.Host.TemplateFile;
-            this.CallingTemplate.Host.LogLineToBuildPane("Visual VisualStudio Solution Name: " + this.VisualStudio.Solution.FullName);
-            this._templateProjectItem = this.VisualStudio.FindProjectItem(templateFile);
-            if (this.TemplateProjectItem == null)
-            {
-                throw new Exception("Could not obtain TemplateProjectItem from " + templateFile);
-            }
             this.CanOverrideExistingFile = true;
             this.IsAutoIndentEnabled = false;
             this.Encoding = System.Text.Encoding.UTF8;
-            this.checkOutAction = fileName => VisualStudio.SourceControl.CheckOutItem(fileName);
-            this.projectSyncAction = keepFileNames => ProjectSync(TemplateProjectItem, keepFileNames);
+            this.checkOutAction = fileName => TextTransformationSession.Instance.VisualStudio.SourceControl.CheckOutItem(fileName);
+            this.projectSyncAction = keepFileNames => ProjectSync(TextTransformationSession.Instance.TemplateProjectItem, keepFileNames);
         }
 
         /// <summary>
@@ -179,7 +141,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
                 return;
             }
 
-            CurrentBlock.Length = this.CallingTemplate.GenerationEnvironment.Length - CurrentBlock.Start;
+            CurrentBlock.Length = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.Length - CurrentBlock.Start;
 
             if (CurrentBlock != header && CurrentBlock != footer)
             {
@@ -200,16 +162,16 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             {
                 EndBlock();
 
-                var headerText = this.CallingTemplate.GenerationEnvironment.ToString(header.Start, header.Length);
-                var footerText = this.CallingTemplate.GenerationEnvironment.ToString(footer.Start, footer.Length);
+                var headerText = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(header.Start, header.Length);
+                var footerText = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(footer.Start, footer.Length);
                 files.Reverse();
 
                 foreach (var block in files)
                 {
-                    var outputPath = VisualStudio.GetOutputPath(block, Path.GetDirectoryName(this.CallingTemplate.Host.TemplateFile));
+                    var outputPath = TextTransformationSession.Instance.VisualStudio.GetOutputPath(block, Path.GetDirectoryName(TextTransformationSession.Instance.CallingTemplate.Host.TemplateFile));
                     var fileName = Path.Combine(outputPath, block.Name);
                     var content = this.ReplaceParameter(headerText, block) +
-                    this.CallingTemplate.GenerationEnvironment.ToString(block.Start, block.Length) +
+                    TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.ToString(block.Start, block.Length) +
                     footerText;
 
                     var file = new OutputFile(block.FileProperties)
@@ -221,7 +183,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
                     };
 
                     CreateFile(file);
-                    this.CallingTemplate.GenerationEnvironment.Remove(block.Start, block.Length);
+                    TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.Remove(block.Start, block.Length);
 
                     list.Add(file);
                 }
@@ -229,7 +191,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
             projectSyncAction.EndInvoke(projectSyncAction.BeginInvoke(list, null, null));
             this.CleanUpTemplatePlaceholders();
-            var items = this.VisualStudio.GetOutputFilesAsProjectItems(list);
+            var items = TextTransformationSession.Instance.VisualStudio.GetOutputFilesAsProjectItems(list);
             this.WriteVsProperties(items, list);
 
             if (this.IsAutoIndentEnabled == true && split == true)
@@ -246,9 +208,9 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         {
             foreach (var item in items)
             {
-                this.CallingTemplate.WriteLine(
-                this.VisualStudio.ExecuteVsCommand(item, "Edit.FormatDocument")); //, "Edit.RemoveAndSort"));
-                this.CallingTemplate.WriteLine("//-> " + item.Name);
+                TextTransformationSession.Instance.CallingTemplate.WriteLine(
+                TextTransformationSession.Instance.VisualStudio.ExecuteVsCommand(item, "Edit.FormatDocument")); //, "Edit.RemoveAndSort"));
+                TextTransformationSession.Instance.CallingTemplate.WriteLine("//-> " + item.Name);
             }
         }
 
@@ -293,16 +255,16 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// <param name="list"></param>
         private void WriteLog(IEnumerable<OutputFile> list)
         {
-            this.CallingTemplate.WriteLine("// Generated helper templates");
+            TextTransformationSession.Instance.CallingTemplate.WriteLine("// Generated helper templates");
             foreach (var item in templatePlaceholderList)
             {
-                this.CallingTemplate.WriteLine("// " + this.GetDirectorySolutionRelative(item));
+                TextTransformationSession.Instance.CallingTemplate.WriteLine("// " + this.GetDirectorySolutionRelative(item));
             }
 
-            this.CallingTemplate.WriteLine("// Generated items");
+            TextTransformationSession.Instance.CallingTemplate.WriteLine("// Generated items");
             foreach (var item in list)
             {
-                this.CallingTemplate.WriteLine("// " + this.GetDirectorySolutionRelative(item.FileName));
+                TextTransformationSession.Instance.CallingTemplate.WriteLine("// " + this.GetDirectorySolutionRelative(item.FileName));
             }
         }
 
@@ -312,14 +274,14 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         private void CleanUpTemplatePlaceholders()
         {
             string[] activeTemplateFullNames = this.templatePlaceholderList.ToArray();
-            string[] allHelperTemplateFullNames = this.VisualStudio.GetAllProjectItemsRecursive()
-                .Where(p => p.Name == this.TemplateProjectItem.GetTemplatePlaceholderName())
+            string[] allHelperTemplateFullNames = TextTransformationSession.Instance.VisualStudio.GetAllProjectItemsRecursive()
+                .Where(p => p.Name == TextTransformationSession.Instance.TemplateProjectItem.GetTemplatePlaceholderName())
                 .Select(p => p.GetFullPath())
                 .ToArray();
 
             var delta = allHelperTemplateFullNames.Except(activeTemplateFullNames).ToArray();
 
-            var dirtyHelperTemplates = this.VisualStudio.GetAllProjectItemsRecursive()
+            var dirtyHelperTemplates = TextTransformationSession.Instance.VisualStudio.GetAllProjectItemsRecursive()
                 .Where(p => delta.Contains(p.GetFullPath()));
 
             foreach (ProjectItem item in dirtyHelperTemplates)
@@ -338,7 +300,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         private string GetDirectorySolutionRelative(string fullName)
         {
-            int slnPos = fullName.IndexOf(Path.GetFileNameWithoutExtension(this.VisualStudio.Solution.FileName));
+            int slnPos = fullName.IndexOf(Path.GetFileNameWithoutExtension(TextTransformationSession.Instance.VisualStudio.Solution.FileName));
             if (slnPos < 0)
             {
                 slnPos = 0;
@@ -378,7 +340,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
                 if (value != null)
                 {
-                    value.Start = CallingTemplate.GenerationEnvironment.Length;
+                    value.Start = TextTransformationSession.Instance.CallingTemplate.GenerationEnvironment.Length;
                 }
 
                 currentBlock = value;
@@ -451,9 +413,9 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         private void CheckoutFileIfRequired(string fileName)
         {
-            if (VisualStudio.SourceControl == null
-                || !VisualStudio.SourceControl.IsItemUnderSCC(fileName)
-                    || VisualStudio.SourceControl.IsItemCheckedOut(fileName))
+            if (TextTransformationSession.Instance.VisualStudio.SourceControl == null
+                || !TextTransformationSession.Instance.VisualStudio.SourceControl.IsItemUnderSCC(fileName)
+                    || TextTransformationSession.Instance.VisualStudio.SourceControl.IsItemCheckedOut(fileName))
             {
                 return;
             }

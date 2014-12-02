@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V2;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
@@ -14,24 +16,52 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
     /// <summary>
     /// Manages a TextTransformation Session
     /// </summary>
-    public class TextTransformationSession: IDisposable
+    public sealed class TextTransformationSession: IDisposable
     {
         public static TextTransformationSession Instance { get; private set; }
         private static Object STATIC_SYNC_ROOT;
 
         public static TextTransformationSession StartSession(TextTransformation callingTemplate)
         {
+            if (callingTemplate == null)
+            {
+                throw new ArgumentNullException("callingTemplate");
+            }
+            var callingTemplateWrapper = new TextTransformationWrapper(callingTemplate);
+            if (callingTemplateWrapper.Host == null)
+            {
+                throw new ArgumentException("Host cannot be null. Preprocessed templates need to be passed the calling templates.", "callingTemplate");
+            }
+            if (String.IsNullOrEmpty(callingTemplateWrapper.Host.TemplateFile))
+            {
+                throw new ArgumentException("Host.TemplateFile cannot be null. Preprocessed templates need to be passed the calling templates.", "callingTemplate");
+            }
+            var visualStudio = VisualStudioExtensions.GetCurrentVisualStudioInstance();
+            if (visualStudio == null)
+            {
+                throw new Exception("Could not obtain DTE2");
+            }
+            var templateFilePath = callingTemplateWrapper.Host.TemplateFile;
+            var templateProjectItem = visualStudio.FindProjectItem(templateFilePath);
+            if (templateProjectItem == null)
+            {
+                throw new Exception("Could not obtain TemplateProjectItem from " + templateFilePath);
+            }
+
             lock (StaticSyncRoot)
             {
                 if (Instance != null)
                 {
-                    Instance.Dispose();
-                    Instance = null;
-//                    throw new Exception("Cannot call StartSession more than once");
+                    throw new Exception("Cannot call StartSession more than once");
                 }
-                Instance = new TextTransformationSession();
-                Instance.CallingTemplate = new TextTransformationWrapper(callingTemplate);
-                Instance.FileManager = new TemplateFileManager(Instance.CallingTemplate);
+
+                var instance = new TextTransformationSession();
+                instance.CallingTemplate = callingTemplateWrapper;
+                instance.Host = callingTemplateWrapper.Host;
+                instance.VisualStudio = visualStudio;
+                instance.TemplateProjectItem = templateProjectItem;
+                instance.FileManager = new TemplateFileManager();
+                Instance = instance;
             }
             return Instance;
         }
@@ -50,6 +80,9 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         public ITextTransformation CallingTemplate { get; private set; }
         public TemplateFileManager FileManager { get; private set; }
+        public ITextTemplatingEngineHost Host { get; private set; }
+        public DTE2 VisualStudio { get; private set; }
+        public ProjectItem TemplateProjectItem { get; private set; }
 
         public void CreateFile(FileToGenerate fileToGenerate, IDictionary<String, Object> additionalTemplateParameters = null)
         {
@@ -84,7 +117,14 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
         public void Dispose()
         {
-            this.FileManager.Finish();
+            try
+            {
+                this.FileManager.Finish();
+            }
+            finally
+            {
+                Instance = null;
+            }
         }
     }
 }

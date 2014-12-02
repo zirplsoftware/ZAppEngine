@@ -41,7 +41,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V1
             foreach (var modelConfigProjectItem in modelConfigFileProjectItems)
             {
                 var fullPath = modelConfigProjectItem.GetFullPath();
-                this.CallingTemplate.Host.LogLineToBuildPane(fullPath);
+                //this.CallingTemplate.Host.LogLineToBuildPane(fullPath);
                 if (fullPath.EndsWith(".model.xml"))
                 {
                     domaintTypeConfigFilePaths.Add(fullPath);

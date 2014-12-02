@@ -10,7 +10,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel
         public String DataServiceProjectName { get; set; }
         public String ServiceProjectName { get; set; }
         public String WebProjectName { get; set; }
-        public String WebCoreProjectName { get; set; }
+        public String WebCommonProjectName { get; set; }
         public String DataServiceTestsProjectName { get; set; }
         public String ServiceTestsProjectName { get; set; }
         public String TestsCommonProjectName { get; set; }

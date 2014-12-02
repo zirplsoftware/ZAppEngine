@@ -4,24 +4,24 @@
     "$id": "2",
     "GeneratedCodeRootFolderName": null,
     "GeneratedCSFileExtension": null,
-    "ModelProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model",
-    "DataServiceProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.DataService",
-    "ServiceProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Service",
+    "ModelProjectName": null,
+    "DataServiceProjectName": null,
+    "ServiceProjectName": null,
     "WebProjectName": null,
-    "WebCoreProjectName": null,
-    "DataServiceTestsProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Tests.DataService",
-    "ServiceTestsProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Tests.Service",
-    "TestsCommonProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Tests.Common",
+    "WebCommonProjectName": null,
+    "DataServiceTestsProjectName": null,
+    "ServiceTestsProjectName": null,
+    "TestsCommonProjectName": null,
     "DataContextName": "CommerceDataContext"
   },
   "ConfigFilePath": "E:\\projects\\ZAppEngine\\Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.CodeGeneration\\_config\\AppDefinition.app.zae",
-  "GeneratedCodeRootFolderName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.DataService",
+  "GeneratedCodeRootFolderName": "_auto\\",
   "GeneratedCSFileExtension": ".auto.cs",
   "ModelProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model",
   "DataServiceProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.DataService",
   "ServiceProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Service",
-  "WebProjectName": null,
-  "WebCoreProjectName": null,
+  "WebProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Web",
+  "WebCommonProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Web.Common",
   "DataServiceTestsProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Tests.DataService",
   "ServiceTestsProjectName": null,
   "TestsCommonProjectName": "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Tests.Common",
@@ -885,11 +885,8 @@
     }
   ],
   "FilesToGenerate": [],
-  "VisualStudio": {
-    "$id": "39"
-  },
   "CodeGenerationProject": {
-    "$id": "40"
+    "$id": "39"
   },
   "ModelProject": {
     "$ref": "6"

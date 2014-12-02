@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.CodeGeneration;
 using Zirpl.AppEngine.CodeGeneration.TextTemplating;
-using Zirpl.AppEngine.CodeGeneration.V1;
+//using Zirpl.AppEngine.CodeGeneration.V1;
 using Zirpl.AppEngine.CodeGeneration.V2;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers;
@@ -35,7 +35,7 @@ namespace Zirpl.AppEngine.CodeGeneration
 
                 // get all ProjectItems for the project with the initial template
                 //
-                var projectItems = session.FileManager.TemplateProjectItem.ContainingProject.ProjectItems.GetAllProjectItemsRecursive();
+                var projectItems = session.TemplateProjectItem.ContainingProject.ProjectItems.GetAllProjectItemsRecursive();
                 foreach (var configProjectItem in projectItems)
                 {
                     var path = configProjectItem.GetFullPath();
@@ -70,28 +70,28 @@ namespace Zirpl.AppEngine.CodeGeneration
             }
         }
 
-        public static void GenerateV1App(this TextTransformation callingTemplate, V1Helper helper = null)
-        {
-            using (helper = helper ?? new V1Helper(callingTemplate))
-            {
-                new V1.Templates.Model.ModelTemplate(helper).TransformText();
-                new V1.Templates.Model.Customization.CustomFieldValueTemplate(helper).TransformText();
-                new V1.Templates.Model.Metadata.Constants.MetadataConstantsTemplate(helper).TransformText();
-                new V1.Templates.Model.EnumTemplate(helper).TransformText();
-                new V1.Templates.DataService.DataServiceInterfaceTemplate(helper).TransformText();
-                new V1.Templates.DataService.EntityFramework.DataServiceTemplate(helper).TransformText();
-                new V1.Templates.DataService.EntityFramework.DataContextTemplate(helper).TransformText();
-                new V1.Templates.DataService.EntityFramework.Mapping.MappingTemplate(helper).TransformText();
-                new V1.Templates.Service.ServiceInterfaceTemplate(helper).TransformText();
-                new V1.Templates.Service.EntityFramework.ServiceTemplate(helper).TransformText();
-                new V1.Templates.Validation.EntityFramework.FluentValidation.ValidatorTemplate(helper).TransformText();
-                new V1.Templates.Tests.DataService.DataServicesProviderTemplate(helper).TransformText();
-                new V1.Templates.Tests.Common.PersistableModelTestsEntityWrapperTemplate(helper).TransformText();
-                new V1.Templates.Tests.Common.PeristableModelTestsStrategyTemplate(helper).TransformText();
-                new V1.Templates.Tests.DataService.EntityFramework.DataServiceTestsTemplate(helper).TransformText();
-                new V1.Templates.Tests.Service.ServicesProviderTemplate(helper).TransformText();
-                new V1.Templates.Tests.Service.EntityFramework.ServiceTestsTemplate(helper).TransformText();
-            }
-        }
+        //public static void GenerateV1App(this TextTransformation callingTemplate, V1Helper helper = null)
+        //{
+        //    using (helper = helper ?? new V1Helper(callingTemplate))
+        //    {
+        //        new V1.Templates.Model.ModelTemplate(helper).TransformText();
+        //        new V1.Templates.Model.Customization.CustomFieldValueTemplate(helper).TransformText();
+        //        new V1.Templates.Model.Metadata.Constants.MetadataConstantsTemplate(helper).TransformText();
+        //        new V1.Templates.Model.EnumTemplate(helper).TransformText();
+        //        new V1.Templates.DataService.DataServiceInterfaceTemplate(helper).TransformText();
+        //        new V1.Templates.DataService.EntityFramework.DataServiceTemplate(helper).TransformText();
+        //        new V1.Templates.DataService.EntityFramework.DataContextTemplate(helper).TransformText();
+        //        new V1.Templates.DataService.EntityFramework.Mapping.MappingTemplate(helper).TransformText();
+        //        new V1.Templates.Service.ServiceInterfaceTemplate(helper).TransformText();
+        //        new V1.Templates.Service.EntityFramework.ServiceTemplate(helper).TransformText();
+        //        new V1.Templates.Validation.EntityFramework.FluentValidation.ValidatorTemplate(helper).TransformText();
+        //        new V1.Templates.Tests.DataService.DataServicesProviderTemplate(helper).TransformText();
+        //        new V1.Templates.Tests.Common.PersistableModelTestsEntityWrapperTemplate(helper).TransformText();
+        //        new V1.Templates.Tests.Common.PeristableModelTestsStrategyTemplate(helper).TransformText();
+        //        new V1.Templates.Tests.DataService.EntityFramework.DataServiceTestsTemplate(helper).TransformText();
+        //        new V1.Templates.Tests.Service.ServicesProviderTemplate(helper).TransformText();
+        //        new V1.Templates.Tests.Service.EntityFramework.ServiceTestsTemplate(helper).TransformText();
+        //    }
+        //}
     }
 }

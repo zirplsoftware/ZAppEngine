@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using EnvDTE;
 using Newtonsoft.Json;
+using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers.JsonModel;
 using Zirpl.IO;
 
@@ -19,19 +21,26 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel.Parsers
             }
             var app = new AppInfo();
             app.ConfigFilePath = path;
+            app.Config = json;
             app.DataContextName = json.DataContextName ?? "MyDataContext";
             app.GeneratedCSFileExtension = json.GeneratedCSFileExtension ?? ".auto.cs";
             app.GeneratedCodeRootFolderName = json.DataServiceProjectName ?? @"_auto\";
 
-            // TODO: these can also have defaults based on the namespace of the CodeGeneration project
-            app.DataServiceProjectName = json.DataServiceProjectName;
-            app.DataServiceTestsProjectName = json.DataServiceTestsProjectName;
-            app.ModelProjectName = json.ModelProjectName;
-            app.ServiceProjectName = json.ServiceProjectName;
-            app.TestsCommonProjectName = json.TestsCommonProjectName;
-            app.WebCoreProjectName = json.WebCoreProjectName;
-            app.WebProjectName = json.WebProjectName;
-            app.Config = json;
+            var codeGenerationProjectName = TextTransformationSession.Instance.TemplateProjectItem.ContainingProject.GetDefaultNamespace();
+            var defaultProjectNamespace = codeGenerationProjectName.SubstringUntilLastInstanceOf(".");
+
+            this.LogLineToBuildPane(defaultProjectNamespace);
+
+            app.DataServiceProjectName = json.DataServiceProjectName ?? defaultProjectNamespace + ".DataService";
+            app.DataServiceTestsProjectName = json.DataServiceTestsProjectName ?? defaultProjectNamespace + ".Tests.DataService";
+            app.ModelProjectName = json.ModelProjectName ?? defaultProjectNamespace + ".Model";
+            app.ServiceProjectName = json.ServiceProjectName ?? defaultProjectNamespace + ".Service";
+            app.TestsCommonProjectName = json.TestsCommonProjectName ?? defaultProjectNamespace + ".Tests.Common";
+            app.WebCommonProjectName = json.WebCommonProjectName ?? defaultProjectNamespace + ".Web.Common";
+            app.WebProjectName = json.WebProjectName ?? defaultProjectNamespace + ".Web";
+
+            //this.LogLineToBuildPane(app.ModelProject.GetUniqueGuid().GetValueOrDefault().ToString());
+
 
             return app;
         }

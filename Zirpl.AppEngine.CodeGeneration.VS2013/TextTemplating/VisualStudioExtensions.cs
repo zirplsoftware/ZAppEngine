@@ -17,9 +17,16 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         private static extern void GetRunningObjectTable(int reserved, out IRunningObjectTable prot);
         public static DTE2 GetCurrentVisualStudioInstance()
         {
+            // TODO: this method needs to handle case of multiple VS's being open
+            // TODO: this method should  really be in another place
+            // TODO: this method needs to handle other VS versions
+
             //rot entry for visual studio running under current process.
-            string rotEntry = String.Format("!VisualStudio.DTE.12.0:{0}",
-                                             System.Diagnostics.Process.GetCurrentProcess().Id);
+
+            var rotEntry = System.Diagnostics.Debugger.IsAttached 
+                ? "!VisualStudio.DTE.12.0"
+                : String.Format("!VisualStudio.DTE.12.0:{0}", System.Diagnostics.Process.GetCurrentProcess().Id);
+
             IRunningObjectTable rot;
             GetRunningObjectTable(0, out rot);
             IEnumMoniker enumMoniker;
@@ -33,7 +40,11 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
                 CreateBindCtx(0, out bindCtx);
                 string displayName;
                 moniker[0].GetDisplayName(bindCtx, null, out displayName);
-                if (displayName == rotEntry)
+
+                var match = System.Diagnostics.Debugger.IsAttached
+                    ? displayName.StartsWith(rotEntry)
+                    : displayName == rotEntry;
+                if (match)
                 {
                     object comObject;
                     rot.GetObject(moniker[0], out comObject);
@@ -352,6 +363,69 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
 
                 yield return projectItem;
             }
+        }
+
+
+
+
+
+
+        public static Guid? GetUniqueGuid(this EnvDTE.Project proj)
+        {
+            Guid? guid = null;
+            object service = null;
+            Microsoft.VisualStudio.Shell.Interop.IVsSolution solution = null;
+            Microsoft.VisualStudio.Shell.Interop.IVsHierarchy hierarchy = null;
+            Microsoft.VisualStudio.Shell.Interop.IVsAggregatableProject aggregatableProject = null;
+            int result = 0;
+            service = GetService(proj.DTE, typeof(Microsoft.VisualStudio.Shell.Interop.IVsSolution));
+            solution = (Microsoft.VisualStudio.Shell.Interop.IVsSolution)service;
+
+            result = solution.GetProjectOfUniqueName(proj.UniqueName, out hierarchy);
+
+            if (result == 0)
+            {
+                Guid theGuid = default(Guid);
+                solution.GetGuidOfProject(hierarchy, out theGuid);
+                guid = (theGuid == Guid.Empty) ? null : new Nullable<Guid>(theGuid);
+                //aggregatableProject = (Microsoft.VisualStudio.Shell.Interop.IVsAggregatableProject)hierarchy;
+                //result = aggregatableProject.GetAggregateProjectTypeGuids(out projectTypeGuids);
+                // return projectTypeGuids; (string)
+            }
+
+            return guid;
+        }
+
+        public static object GetService(object serviceProvider, System.Type type)
+        {
+            return GetService(serviceProvider, type.GUID);
+        }
+
+        public static object GetService(object serviceProviderObject, System.Guid guid)
+        {
+            object service = null;
+            Microsoft.VisualStudio.OLE.Interop.IServiceProvider serviceProvider = null;
+            IntPtr serviceIntPtr;
+            int hr = 0;
+            Guid SIDGuid;
+            Guid IIDGuid;
+
+            SIDGuid = guid;
+            IIDGuid = SIDGuid;
+            serviceProvider = (Microsoft.VisualStudio.OLE.Interop.IServiceProvider)serviceProviderObject;
+            hr = serviceProvider.QueryService(ref SIDGuid, ref IIDGuid, out serviceIntPtr);
+
+            if (hr != 0)
+            {
+                System.Runtime.InteropServices.Marshal.ThrowExceptionForHR(hr);
+            }
+            else if (!serviceIntPtr.Equals(IntPtr.Zero))
+            {
+                service = System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(serviceIntPtr);
+                System.Runtime.InteropServices.Marshal.Release(serviceIntPtr);
+            }
+
+            return service;
         }
     }
 }

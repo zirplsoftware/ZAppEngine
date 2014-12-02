@@ -25,7 +25,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public String DataServiceProjectName { get; set; }
         public String ServiceProjectName { get; set; }
         public String WebProjectName { get; set; }
-        public String WebCoreProjectName { get; set; }
+        public String WebCommonProjectName { get; set; }
         public String DataServiceTestsProjectName { get; set; }
         public String ServiceTestsProjectName { get; set; }
         public String TestsCommonProjectName { get; set; }
@@ -34,19 +34,12 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         public List<FileToGenerate> FilesToGenerate { get; set; }
 
         #region Project references
-        public DTE2 VisualStudio
-        {
-            get
-            {
-                return TextTransformationSession.Instance.FileManager.VisualStudio;
-            }
-        }
 
         public Project CodeGenerationProject
         {
             get
             {
-                return TextTransformationSession.Instance.FileManager.TemplateProjectItem.ContainingProject;
+                return TextTransformationSession.Instance.TemplateProjectItem.ContainingProject;
             }
         }
 
@@ -54,7 +47,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         {
             get
             {
-                return this.VisualStudio.GetProject(this.ModelProjectName);
+                return TextTransformationSession.Instance.VisualStudio.GetProject(this.ModelProjectName);
             }
         }
 
@@ -62,7 +55,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         {
             get
             {
-                return this.VisualStudio.GetProject(this.DataServiceProjectName);
+                return TextTransformationSession.Instance.VisualStudio.GetProject(this.DataServiceProjectName);
             }
         }
 
@@ -70,7 +63,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         {
             get
             {
-                return this.VisualStudio.GetProject(this.DataServiceTestsProjectName);
+                return TextTransformationSession.Instance.VisualStudio.GetProject(this.DataServiceTestsProjectName);
             }
         }
 
@@ -78,7 +71,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         {
             get
             {
-                return this.VisualStudio.GetProject(this.ServiceProjectName);
+                return TextTransformationSession.Instance.VisualStudio.GetProject(this.ServiceProjectName);
             }
         }
 
@@ -86,7 +79,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         {
             get
             {
-                return this.VisualStudio.GetProject(this.WebProjectName);
+                return TextTransformationSession.Instance.VisualStudio.GetProject(this.WebProjectName);
             }
         }
 
@@ -94,7 +87,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         {
             get
             {
-                return this.VisualStudio.GetProject(this.WebCoreProjectName);
+                return TextTransformationSession.Instance.VisualStudio.GetProject(this.WebCommonProjectName);
             }
         }
 
@@ -102,7 +95,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         {
             get
             {
-                return this.VisualStudio.GetProject(this.ServiceTestsProjectName);
+                return TextTransformationSession.Instance.VisualStudio.GetProject(this.ServiceTestsProjectName);
             }
         }
 
@@ -110,7 +103,7 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
         {
             get
             {
-                return this.VisualStudio.GetProject(this.TestsCommonProjectName);
+                return TextTransformationSession.Instance.VisualStudio.GetProject(this.TestsCommonProjectName);
             }
         }
 

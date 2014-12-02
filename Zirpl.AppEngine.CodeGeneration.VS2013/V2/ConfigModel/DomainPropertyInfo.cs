@@ -36,31 +36,17 @@ namespace Zirpl.AppEngine.CodeGeneration.V2.ConfigModel
 
         public RelationshipInfo Relationship { get; set; }
 
-
-
-        // TODO: validation
         //public String FormatPattern { get; set; }
         //public String Regex { get; set; }
 
-        // TODO: calculated
         //public bool IsCalculated { get; set; }
 
-
-
-
-        // TODO: unsure
         //public String DisplayText { get; set; }
-        //
         //public bool CreateOnNullPost { get; set; }
-        //
         //public int GridOrder { get; set; }
-        //
         //public bool IsGroupable { get; set; }
-        //
         //public bool IsFilterable { get; set; }
-        //
         //public String GridTemplate { get; set; }
-        //
         //public bool ShowInGrid { get; set; }
     }
 }
