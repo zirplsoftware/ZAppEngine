@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
     public interface ITemplateOutputFileBuilderStrategy
     {
-        IList<TemplateOutputFile> BuildOutputFiles(App app);
+        IEnumerable<TemplateOutputFile> BuildOutputFiles(App app);
         TemplateOutputFile BuildOutputFile(App app, DomainType domainType);
+        String TemplateCategory { get; }
     }
 }

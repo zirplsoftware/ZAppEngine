@@ -6,6 +6,9 @@ using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1.Templates.Model;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.Collections;
 
@@ -19,6 +22,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             {
                 using (var session = TransformSession.StartSession(callingTemplate))
                 {
+                    // set all of the settings defaults
+                    //
                     settings = settings ?? new AppGenerationSettings();
                     settings.DataContextName = settings.DataContextName ?? "AppDataContext";
                     settings.GeneratedContentRootFolderName = settings.GeneratedContentRootFolderName ?? @"_auto\";
@@ -26,6 +31,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                         ?? session.CallingTemplateProjectItem.ContainingProject
                                                           .GetDefaultNamespace().SubstringUntilLastInstanceOf(".");
 
+                    // default V1 builder strategies
+                    //
+                    if (!settings.BuilderStrategies.Where(o => o.TemplateCategory == TemplateCategories.PersistableDomainClass).Any())
+                    {
+                        settings.BuilderStrategies.Add(new PersistableDomainClassStrategy());
+                    }
+
+                    // create the app
+                    //
                     var app = new App()
                     {
                         Settings = settings,
@@ -39,36 +53,26 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                         DataServiceTestsProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Tests.DataService"),
                         ServiceTestsProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Tests.Service"),
                     };
-                    var domainFileParser = new DomainFileParser();
-
-                    var domainFilePaths = new List<String>();
-                    String appFilePath = null;
-
-                    // get all ProjectItems for the project with the initial template
+                    
+                    // create all of the domain types
                     //
                     var projectItems = app.AppGenerationConfigProject.ProjectItems.GetAllProjectItemsRecursive();
-                    foreach (var configProjectItem in projectItems)
+                    var paths = from p in projectItems
+                        where p.GetFullPath().ToLowerInvariant().EndsWith(".domain.zae")
+                        select p.GetFullPath();
+                    app.DomainTypes.AddRange(new DomainFileParser().Parse(app, paths));
+
+                    // create all of the Template output files
+                    //
+                    foreach (var strategy in app.Settings.BuilderStrategies)
                     {
-                        var path = configProjectItem.GetFullPath();
-                        if (path.EndsWith(".domain.zae"))
-                        {
-                            domainFilePaths.Add(path);
-                            session.LogLineToBuildPane("Domain file: " + path);
-                        }
+                        app.FilesToGenerate.AddRange(strategy.BuildOutputFiles(app));   
                     }
-                    app.DomainTypes.AddRange(domainFileParser.Parse(app, domainFilePaths));
-
-
-                    var factory = new OutputFileFactory();
-                    app.FilesToGenerate.AddRange(factory.CreateList(app));
-
-
-
-
+                    
                     //session.CallingTemplate.WriteLine(JsonConvert.SerializeObject(app, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
 
-
-
+                    // call the templates to build the files
+                    //
                     foreach (var file in app.FilesToGenerate)
                     {
                         var templateParameters = new Dictionary<string, object>();
@@ -94,7 +98,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 {
                     try
                     {
-                        //callingTemplate.WriteLine(e.ToString());
+                        callingTemplate.WriteLine(e.ToString());
                     }
                     catch (Exception)
                     {

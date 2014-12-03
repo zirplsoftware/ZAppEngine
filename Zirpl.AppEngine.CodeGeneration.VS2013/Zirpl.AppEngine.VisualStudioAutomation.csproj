@@ -86,11 +86,11 @@
     <Compile Include="AppGeneration\Config\DomainProperty.cs" />
     <Compile Include="AppGeneration\Config\DomainType.cs" />
     <Compile Include="AppGeneration\Config\EnumValue.cs" />
-    <Compile Include="AppGeneration\ClassToGenerate.cs">
+    <Compile Include="AppGeneration\TextTemplating\ClassToGenerate.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppGeneration\Config\AppGenerationSettings.cs" />
-    <Compile Include="AppGeneration\OutputFileFactory.cs" />
+    <Compile Include="AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassStrategy.cs" />
     <Compile Include="AppGeneration\Config\Parsers\ConfigFileException.cs" />
     <Compile Include="AppGeneration\Config\Parsers\DomainFileParser.cs" />
     <Compile Include="AppGeneration\Config\Parsers\Json\AppJson.cs" />
@@ -100,13 +100,14 @@
     <Compile Include="AppGeneration\Config\Parsers\Json\PropertyJson.cs" />
     <Compile Include="AppGeneration\Config\Parsers\Json\RelationshipJson.cs" />
     <Compile Include="AppGeneration\Config\Relationship.cs" />
-    <Compile Include="AppGeneration\Templates\Model\PersistableDomainClassTemplate.cs">
+    <Compile Include="AppGeneration\TextTemplating\V1\TemplateCategories.cs" />
+    <Compile Include="AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.cs">
       <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="AppGeneration\ITemplateOutputFileBuilderStrategy.cs" />
+    <Compile Include="AppGeneration\TextTemplating\ITemplateOutputFileBuilderStrategy.cs" />
     <Compile Include="TextTemplating\ITransformation.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
     <Compile Include="TextTemplating\PreprocessedTransformWrapper.cs" />
@@ -134,7 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AppGeneration\Config\Parsers\Json\sample domain.zae" />
-    <None Include="AppGeneration\Templates\Model\PersistableDomainClassTemplate.tt">
+    <None Include="AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PersistableDomainClassTemplate.cs</LastGenOutput>
     </None>

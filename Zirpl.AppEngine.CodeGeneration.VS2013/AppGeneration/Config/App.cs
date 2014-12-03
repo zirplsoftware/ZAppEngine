@@ -12,13 +12,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
             this.FilesToGenerate = new List<TemplateOutputFile>();
         }
 
-        public AppGenerationSettings Settings { get; set; }
+        public AppGenerationSettings Settings { get; internal set; }
 
-        public List<DomainType> DomainTypes { get; set; }
-        public List<TemplateOutputFile> FilesToGenerate { get; set; }
+        public IList<DomainType> DomainTypes { get; private set; }
+        public IList<TemplateOutputFile> FilesToGenerate { get; private set; } 
 
 
-        public Project AppGenerationConfigProject { get; set; }
+        public Project AppGenerationConfigProject { get; internal set; }
         public Project ModelProject { get; internal set; }
         public Project DataServiceProject { get; internal set; }
         public Project DataServiceTestsProject { get; internal set; }

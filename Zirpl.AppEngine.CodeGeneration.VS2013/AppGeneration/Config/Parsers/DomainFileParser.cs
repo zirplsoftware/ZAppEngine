@@ -23,7 +23,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
         /// <param name="app"></param>
         /// <param name="domainFilePaths"></param>
         /// <returns></returns>
-        public virtual IEnumerable<DomainType> Parse(App app, IEnumerable<string> domainFilePaths)
+        public IList<DomainType> Parse(App app, IEnumerable<string> domainFilePaths)
         {
             var list = new List<DomainType>();
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
     public class ClassToGenerate
     {
@@ -14,7 +14,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             this.InterfaceDeclarations = new List<string>();
         }
 
-        public TemplateOutputFile OutputFile { get; set; }
+        public TemplateOutputFile OutputFile { get; private set; }
         public String ClassName { get; set; }
         public String ClassFullName { get; set; }
         public String Namespace { get; set; }

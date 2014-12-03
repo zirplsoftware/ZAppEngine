@@ -19,7 +19,7 @@
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateOutputFile" name="TemplateOutputFile" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ClassToGenerate" name="ClassToGenerate" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.ClassToGenerate" name="ClassToGenerate" #>
 <#
 
 #>

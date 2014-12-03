@@ -39,16 +39,16 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public bool IsUpdatable { get; set; }
         public bool IsDeletable { get; set; }
         public bool IsMarkDeletable { get; set; }
-        public IList<DomainProperty> Properties { get; set; }
+        public IList<DomainProperty> Properties { get; private set; }
         public DomainProperty IdProperty { get; set; }
         public DomainType InheritsFrom { get; set; }
-        public IList<DomainType> InheritedBy { get; set; }
+        public IList<DomainType> InheritedBy { get; private set; }
         public DomainType Extends { get; set; }
         public DomainType ExtendedBy { get; set; }
         public DomainType EnumDescribes { get; set; }
         public DomainType DescribedByEnum { get; set; }
         public DataTypeEnum EnumDataType { get; set; }
-        public IList<EnumValue> EnumValues { get; set; }
-        public IList<Relationship> Relationships { get; set; } 
+        public IList<EnumValue> EnumValues { get; private set; }
+        public IList<Relationship> Relationships { get; private set; } 
     }
 }
