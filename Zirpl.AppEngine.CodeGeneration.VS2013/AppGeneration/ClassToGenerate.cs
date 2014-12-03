@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
-    public class ClassOutputFile : TransformOutputFile
+    public class ClassToGenerate
     {
-        public ClassOutputFile(OutputFile outputFile)
-            :base(outputFile)
+        public ClassToGenerate(TemplateOutputFile outputFile)
         {
+            this.OutputFile = outputFile;
             this.InterfaceDeclarations = new List<string>();
         }
 
+        public TemplateOutputFile OutputFile { get; set; }
         public String ClassName { get; set; }
         public String ClassFullName { get; set; }
         public String Namespace { get; set; }

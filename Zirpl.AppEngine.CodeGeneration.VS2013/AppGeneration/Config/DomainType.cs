@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using EnvDTE;
 using Zirpl.AppEngine.Model.Metadata;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers.JsonModel;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.JsonModel;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {
-    public class DomainTypeInfo
+    public class DomainType
     {
-        public DomainTypeInfo()
+        public DomainType()
         {
-            this.Properties = new List<DomainPropertyInfo>();
-            this.InheritedBy = new List<DomainTypeInfo>();
-            this.Relationships = new List<RelationshipInfo>();
-            this.EnumValues = new List<EnumValueInfo>();
+            this.Properties = new List<DomainProperty>();
+            this.InheritedBy = new List<DomainType>();
+            this.Relationships = new List<Relationship>();
+            this.EnumValues = new List<EnumValue>();
         }
 
         public DomainTypeJson Config { get; set; }
@@ -39,16 +39,16 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel
         public bool IsUpdatable { get; set; }
         public bool IsDeletable { get; set; }
         public bool IsMarkDeletable { get; set; }
-        public IList<DomainPropertyInfo> Properties { get; set; }
-        public DomainPropertyInfo IdProperty { get; set; }
-        public DomainTypeInfo InheritsFrom { get; set; }
-        public IList<DomainTypeInfo> InheritedBy { get; set; }
-        public DomainTypeInfo Extends { get; set; }
-        public DomainTypeInfo ExtendedBy { get; set; }
-        public DomainTypeInfo EnumDescribes { get; set; }
-        public DomainTypeInfo DescribedByEnum { get; set; }
+        public IList<DomainProperty> Properties { get; set; }
+        public DomainProperty IdProperty { get; set; }
+        public DomainType InheritsFrom { get; set; }
+        public IList<DomainType> InheritedBy { get; set; }
+        public DomainType Extends { get; set; }
+        public DomainType ExtendedBy { get; set; }
+        public DomainType EnumDescribes { get; set; }
+        public DomainType DescribedByEnum { get; set; }
         public DataTypeEnum EnumDataType { get; set; }
-        public IList<EnumValueInfo> EnumValues { get; set; }
-        public IList<RelationshipInfo> Relationships { get; set; } 
+        public IList<EnumValue> EnumValues { get; set; }
+        public IList<Relationship> Relationships { get; set; } 
     }
 }

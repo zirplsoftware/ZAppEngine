@@ -6,20 +6,14 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class TransformOutputFile
+    public class TemplateOutputFile : OutputFile
     {
-        public TransformOutputFile(OutputFile outputFile)
+        public TemplateOutputFile()
         {
-            if (outputFile == null)
-            {
-                throw new ArgumentNullException("outputFile");
-            }
-            this.OutputFile = outputFile;
             this.TemplateParameters = new Dictionary<string, object>();
         }
 
         public Type TemplateType { get; set; }
         public IDictionary<string, object> TemplateParameters { get; set; }
-        public OutputFile OutputFile { get; set; }
     }
 }

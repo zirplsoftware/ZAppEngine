@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.Model.Metadata;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers.JsonModel;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.JsonModel;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
 {
     public class DomainFileParser
     {
@@ -23,9 +23,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
         /// <param name="app"></param>
         /// <param name="domainFilePaths"></param>
         /// <returns></returns>
-        public virtual IEnumerable<DomainTypeInfo> Parse(App app, IEnumerable<string> domainFilePaths)
+        public virtual IEnumerable<DomainType> Parse(App app, IEnumerable<string> domainFilePaths)
         {
-            var list = new List<DomainTypeInfo>();
+            var list = new List<DomainType>();
 
             #region create DomainTypeInfos specified by directly by the files
             foreach (var path in domainFilePaths)
@@ -118,7 +118,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 #endregion
 
                 #region create DomainType for the file
-                DomainTypeInfo domainType = new DomainTypeInfo();
+                DomainType domainType = new DomainType();
                 domainType.Config = json;
                 domainType.ConfigFilePath = path;
 
@@ -154,9 +154,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 {
                     domainType.DestinationProject = app.ServiceProject;
                 }
-                else if (whichProjectLower == "webcore")
+                else if (whichProjectLower == "webcommon")
                 {
-                    domainType.DestinationProject = app.WebCoreProject;
+                    domainType.DestinationProject = app.WebCommonProject;
                 }
                 else if (whichProjectLower == "web")
                 {
@@ -262,7 +262,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
 
             #region create implicit DomainTypeInfos
             //
-            var newDomainTypes = new List<DomainTypeInfo>();
+            var newDomainTypes = new List<DomainType>();
             foreach (var domainType in list)
             {
                 // validation checks for these have already been done- we can trust the config is right 
@@ -272,7 +272,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                     && (domainType.InheritsFrom == null
                         || !domainType.InheritsFrom.IsExtensible))
                 {
-                    var extendedFieldValueDomainType = new DomainTypeInfo();
+                    var extendedFieldValueDomainType = new DomainType();
                     extendedFieldValueDomainType.DestinationProject = domainType.DestinationProject;
                     extendedFieldValueDomainType.Name = domainType.Name + "ExtendedFieldValue";
                     extendedFieldValueDomainType.PluralName = extendedFieldValueDomainType.Name + "s";
@@ -295,7 +295,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 {
                     // create DomainTypeInfo for the enum
                     //
-                    var enumDomainType = new DomainTypeInfo();
+                    var enumDomainType = new DomainType();
                     enumDomainType.DestinationProject = domainType.DestinationProject;
                     enumDomainType.Name = domainType.Name + "Enum";
                     enumDomainType.Namespace = domainType.Namespace;
@@ -310,7 +310,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                                                    : DataTypeEnum.Byte;
                     foreach (var enumValue in domainType.Config.EnumValues)
                     {
-                        enumDomainType.EnumValues.Add(new EnumValueInfo() {Id = Int32.Parse(enumValue.Id), Name = enumValue.Name});
+                        enumDomainType.EnumValues.Add(new EnumValue() {Id = Int32.Parse(enumValue.Id), Name = enumValue.Name});
                     }
                     newDomainTypes.Add(enumDomainType);
                 }
@@ -328,7 +328,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                     ? this.GetBaseMostDomainType(domainType.Extends).Config
                     : domainType.Config;
 
-                var property = new DomainPropertyInfo();
+                var property = new DomainProperty();
                 property.Name = "Id";
                 property.IsPrimaryKey = true;
                 
@@ -357,7 +357,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
 
             foreach (var domainType in list.Where(o => o.IsVersionable && (o.InheritsFrom == null || !o.InheritsFrom.IsVersionable)))
             {
-                var property = new DomainPropertyInfo();
+                var property = new DomainProperty();
                 property.Name = "RowVersion";
                 property.DataType = DataTypeEnum.ByteArray;
                 property.IsRowVersion = true;
@@ -367,7 +367,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
             }
             foreach (var domainType in list.Where(o => o.IsAuditable && (o.InheritsFrom == null || !o.InheritsFrom.IsAuditable)))
             {
-                var property = new DomainPropertyInfo();
+                var property = new DomainProperty();
                 property.Name = "CreatedUserId";
                 property.IsForAuditableInterface = true;
                 property.DataType = DataTypeEnum.String;
@@ -379,7 +379,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 property.Owner = domainType;
                 domainType.Properties.Add(property);
 
-                property = new DomainPropertyInfo();
+                property = new DomainProperty();
                 property.Name = "UpdatedUserId";
                 property.IsForAuditableInterface = true;
                 property.DataType = DataTypeEnum.String;
@@ -391,7 +391,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 property.Owner = domainType;
                 domainType.Properties.Add(property);
 
-                property = new DomainPropertyInfo();
+                property = new DomainProperty();
                 property.Name = "CreatedDate";
                 property.IsForAuditableInterface = true;
                 property.DataType = DataTypeEnum.DateTime;
@@ -402,7 +402,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 property.Owner = domainType;
                 domainType.Properties.Add(property);
 
-                property = new DomainPropertyInfo();
+                property = new DomainProperty();
                 property.Name = "UpdatedDate";
                 property.IsForAuditableInterface = true;
                 property.DataType = DataTypeEnum.DateTime;
@@ -416,7 +416,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
 
             foreach (var domainType in list.Where(o => o.IsMarkDeletable && (o.InheritsFrom == null || !o.InheritsFrom.IsMarkDeletable)))
             {
-                var property = new DomainPropertyInfo();
+                var property = new DomainProperty();
                 property.Name = "IsMarkedDeleted";
                 property.AutoGenerationBehavior = AutoGenerationBehaviorTypeEnum.ByFramework;
                 property.DataType = DataTypeEnum.Boolean;
@@ -429,14 +429,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
             }
             foreach (var domainType in list.Where(o => o.IsExtensible && (o.InheritsFrom == null || !o.InheritsFrom.IsExtensible)))
             {
-                var fromProperty = new DomainPropertyInfo();
+                var fromProperty = new DomainProperty();
                 fromProperty.Name = "ExtendedFieldValues";
                 fromProperty.DataType = DataTypeEnum.Relationship;
                 fromProperty.IsForExtensibleInterface = true;
                 fromProperty.Owner = domainType;
                 domainType.Properties.Add(fromProperty);
 
-                var toProperty = new DomainPropertyInfo()
+                var toProperty = new DomainProperty()
                 {
                     Name = "ExtendedEntity",
                     DataType = DataTypeEnum.Relationship,
@@ -446,7 +446,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 };
                 domainType.ExtendedBy.Properties.Add(toProperty);
 
-                var foreignKeyOnTo = new DomainPropertyInfo()
+                var foreignKeyOnTo = new DomainProperty()
                 {
                     Name = "ExtendedEntityId",
                     DataType = domainType.IdProperty.DataType,
@@ -457,7 +457,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 };
                 domainType.ExtendedBy.Properties.Add(foreignKeyOnTo);
 
-                var relationship = new RelationshipInfo()
+                var relationship = new Relationship()
                 {
                     Type = RelationshipTypeEnum.OneToMany,
                     DeletionBehavior = RelationshipDeletionBehaviorTypeEnum.CascadeDelete,
@@ -475,7 +475,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 domainType.ExtendedBy.Relationships.Add(relationship);
 
                 // also the Value field
-                var valueProperty = new DomainPropertyInfo()
+                var valueProperty = new DomainProperty()
                 {
                     Name = "Value",
                     DataType = DataTypeEnum.String,
@@ -487,7 +487,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
             }
             foreach (var domainType in list.Where(o => o.IsStaticLookup))
             {
-                var nameProperty = new DomainPropertyInfo()
+                var nameProperty = new DomainProperty()
                 {
                     Name = "ClassName",
                     IsForIsStaticLookupInterface = true,
@@ -647,7 +647,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                     if (json.DataType != DataTypeEnum.Relationship)
                     {
                         // Value type
-                        var property = new DomainPropertyInfo();
+                        var property = new DomainProperty();
                         property.Name = json.Name;
                         property.DataType = json.DataType.GetValueOrDefault(DataTypeEnum.String);
                         property.AutoGenerationBehavior = AutoGenerationBehaviorTypeEnum.None;
@@ -676,13 +676,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                         }
                         var toEntity = potentialMatches.Single();
                         var fromEntity = domainType;
-                        var fromProperty = new DomainPropertyInfo();
+                        var fromProperty = new DomainProperty();
                         fromProperty.Name = json.Name;
                         fromProperty.DataType = DataTypeEnum.Relationship;
-                        DomainPropertyInfo toProperty = null;
-                        DomainPropertyInfo foreignKeyOnTo = null;
-                        DomainPropertyInfo foreignKeyOnFrom = null;
-                        var relationship = new RelationshipInfo();
+                        DomainProperty toProperty = null;
+                        DomainProperty foreignKeyOnTo = null;
+                        DomainProperty foreignKeyOnFrom = null;
+                        var relationship = new Relationship();
                         
                         // TODO: support the rest of the relationship types
 
@@ -696,7 +696,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
 
                                 if (!String.IsNullOrEmpty(json.Relationship.ToPropertyName))
                                 {
-                                    toProperty = new DomainPropertyInfo();
+                                    toProperty = new DomainProperty();
                                     toProperty.Name = json.Relationship.ToPropertyName;
                                     toProperty.DataType = DataTypeEnum.Relationship;
                                     toProperty.IsRequired = json.Relationship.ToProperyIsRequired.GetValueOrDefault();
@@ -704,7 +704,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                                         json.Relationship.ToPropertyUniqueness.GetValueOrDefault(
                                             UniquenessTypeEnum.NotUnique);
 
-                                    foreignKeyOnTo = new DomainPropertyInfo();
+                                    foreignKeyOnTo = new DomainProperty();
                                     foreignKeyOnTo.Name = json.Relationship.ToPropertyName + "Id";
                                     foreignKeyOnTo.DataType = fromEntity.IdProperty.DataType;
                                     foreignKeyOnTo.IsForeignKey = true;
@@ -725,7 +725,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                                 fromProperty.IsRequired = json.IsRequired.GetValueOrDefault();
                                 fromProperty.UniquenessType = json.Uniqueness.GetValueOrDefault(UniquenessTypeEnum.NotUnique);
 
-                                foreignKeyOnFrom = new DomainPropertyInfo();
+                                foreignKeyOnFrom = new DomainProperty();
                                 foreignKeyOnFrom.Name = json.Relationship.ToPropertyName + "Id";
                                 foreignKeyOnFrom.DataType = fromEntity.IdProperty.DataType;
                                 foreignKeyOnFrom.IsForeignKey = true;
@@ -735,7 +735,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
 
                                 if (!String.IsNullOrEmpty(json.Relationship.ToPropertyName))
                                 {
-                                    toProperty = new DomainPropertyInfo();
+                                    toProperty = new DomainProperty();
                                     toProperty.Name = json.Relationship.ToPropertyName;
                                     toProperty.DataType = DataTypeEnum.Relationship;
                                 }
@@ -882,7 +882,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
             return list;
         }
 
-        private void AlignInterfacePropertiesInHeirarchy(DomainTypeInfo domainType)
+        private void AlignInterfacePropertiesInHeirarchy(DomainType domainType)
         {
                 foreach (var child in domainType.InheritedBy)
                 {
@@ -906,7 +906,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
                 }
         }
 
-        protected IEnumerable<DomainTypeInfo> FindDomainTypes(IEnumerable<DomainTypeInfo> list, String partialFullName)
+        protected IEnumerable<DomainType> FindDomainTypes(IEnumerable<DomainType> list, String partialFullName)
         {
             var partialFullNameTokens = partialFullName.Split('.').Reverse().ToList();
             var className = partialFullNameTokens.First();
@@ -944,7 +944,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parse
             return potentialMatches;
         }
 
-        protected DomainTypeInfo GetBaseMostDomainType(DomainTypeInfo domainType)
+        protected DomainType GetBaseMostDomainType(DomainType domainType)
         {
             if (domainType.InheritsFrom != null)
             {

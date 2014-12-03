@@ -1,104 +1,107 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileGeneration;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.Collections;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {
-        public static void GenerateApp(
-            this TextTransformation callingTemplate, 
-            AppFileParser appFileParser = null, 
-            DomainFileParser domainFileParser = null,
-            OutputFileFactory factory = null,
-            IDictionary<String, Object> additionalTemplateParameters = null)
+        public static void GenerateApp(this TextTransformation callingTemplate, AppGenerationSettings settings = null)
         {
-            using (var session = TransformSession.StartSession(callingTemplate))
+            try
             {
-                appFileParser = appFileParser ?? new AppFileParser();
-                domainFileParser = domainFileParser ?? new DomainFileParser();
-                factory = factory ?? new OutputFileFactory();
-
-                var domainFilePaths = new List<String>();
-                String appFilePath = null;
-
-                // get all ProjectItems for the project with the initial template
-                //
-                var projectItems = session.TemplateProjectItem.ContainingProject.ProjectItems.GetAllProjectItemsRecursive();
-                foreach (var configProjectItem in projectItems)
+                using (var session = TransformSession.StartSession(callingTemplate))
                 {
-                    var path = configProjectItem.GetFullPath();
-                    if (path.EndsWith(".domain.zae"))
+                    settings = settings ?? new AppGenerationSettings();
+                    settings.DataContextName = settings.DataContextName ?? "AppDataContext";
+                    settings.GeneratedContentRootFolderName = settings.GeneratedContentRootFolderName ?? @"_auto\";
+                    settings.ProjectNamespacePrefix = settings.ProjectNamespacePrefix
+                        ?? session.CallingTemplateProjectItem.ContainingProject
+                                                          .GetDefaultNamespace().SubstringUntilLastInstanceOf(".");
+
+                    var app = new App()
                     {
-                        domainFilePaths.Add(path);
-                        session.LogLineToBuildPane("Domain file: " + path);
-                    }
-                    else if (path.EndsWith(".app.zae"))
+                        Settings = settings,
+                        AppGenerationConfigProject = session.CallingTemplateProjectItem.ContainingProject,
+                        ModelProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Model"),
+                        DataServiceProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".DataService"),
+                        ServiceProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Service"),
+                        WebCommonProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Web.Common"),
+                        WebProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Web"),
+                        TestsCommonProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Tests.Common"),
+                        DataServiceTestsProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Tests.DataService"),
+                        ServiceTestsProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Tests.Service"),
+                    };
+                    var domainFileParser = new DomainFileParser();
+
+                    var domainFilePaths = new List<String>();
+                    String appFilePath = null;
+
+                    // get all ProjectItems for the project with the initial template
+                    //
+                    var projectItems = app.AppGenerationConfigProject.ProjectItems.GetAllProjectItemsRecursive();
+                    foreach (var configProjectItem in projectItems)
                     {
-                        appFilePath = path;
-                        session.LogLineToBuildPane("App file: " + path);
-                    }
-                }
-
-                if (appFilePath == null)
-                {
-                    throw new Exception("An App config file with extension .app.zae must be present");
-                }
-
-                var app = appFileParser.Parse(appFilePath);
-                app.DomainTypes.AddRange(domainFileParser.Parse(app, domainFilePaths));
-                app.FilesToGenerate.AddRange(factory.CreateList(app));
-
-                session.CallingTemplate.WriteLine(JsonConvert.SerializeObject(app, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
-
-                foreach (var file in app.FilesToGenerate)
-                {
-                    var templateParameters = new Dictionary<string, object>();
-                    if (additionalTemplateParameters != null
-                        && additionalTemplateParameters.Any())
-                    {
-                        foreach (var additionalTemplateParameter in additionalTemplateParameters)
+                        var path = configProjectItem.GetFullPath();
+                        if (path.EndsWith(".domain.zae"))
                         {
-                            templateParameters.Add(additionalTemplateParameter.Key, additionalTemplateParameter.Value);
+                            domainFilePaths.Add(path);
+                            session.LogLineToBuildPane("Domain file: " + path);
                         }
                     }
-                    foreach (var parameter in file.TemplateParameters)
+                    app.DomainTypes.AddRange(domainFileParser.Parse(app, domainFilePaths));
+
+
+                    var factory = new OutputFileFactory();
+                    app.FilesToGenerate.AddRange(factory.CreateList(app));
+
+
+
+
+                    //session.CallingTemplate.WriteLine(JsonConvert.SerializeObject(app, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
+
+
+
+                    foreach (var file in app.FilesToGenerate)
                     {
-                        templateParameters.Add(parameter.Key, parameter.Value);
+                        var templateParameters = new Dictionary<string, object>();
+                        // put in the ones from the settings file first
+                        foreach (var parameter in app.Settings.TemplateParameters)
+                        {
+                            templateParameters.Add(parameter.Key, parameter.Value);
+                        }
+                        // next the ones from the file to generate (which may override from the settings)
+                        foreach (var parameter in file.TemplateParameters)
+                        {
+                            templateParameters.Add(parameter.Key, parameter.Value);
+                        }
+                        // finally the App
+                        templateParameters.Add("App", app);
+                        session.ExecuteTransform(file, templateParameters);
                     }
-                    templateParameters.Add("App", app);
-                    session.TransformToFile(file, templateParameters);
                 }
             }
+            catch (Exception e)
+            {
+                if (callingTemplate != null)
+                {
+                    try
+                    {
+                        //callingTemplate.WriteLine(e.ToString());
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                throw;
+            }
         }
-
-        //public static void GenerateV1App(this TextTransformation callingTemplate, V1Helper helper = null)
-        //{
-        //    using (helper = helper ?? new V1Helper(callingTemplate))
-        //    {
-        //        new V1.Templates.Model.ModelTemplate(helper).TransformText();
-        //        new V1.Templates.Model.Customization.CustomFieldValueTemplate(helper).TransformText();
-        //        new V1.Templates.Model.Metadata.Constants.MetadataConstantsTemplate(helper).TransformText();
-        //        new V1.Templates.Model.EnumTemplate(helper).TransformText();
-        //        new V1.Templates.DataService.DataServiceInterfaceTemplate(helper).TransformText();
-        //        new V1.Templates.DataService.EntityFramework.DataServiceTemplate(helper).TransformText();
-        //        new V1.Templates.DataService.EntityFramework.DataContextTemplate(helper).TransformText();
-        //        new V1.Templates.DataService.EntityFramework.Mapping.MappingTemplate(helper).TransformText();
-        //        new V1.Templates.Service.ServiceInterfaceTemplate(helper).TransformText();
-        //        new V1.Templates.Service.EntityFramework.ServiceTemplate(helper).TransformText();
-        //        new V1.Templates.Validation.EntityFramework.FluentValidation.ValidatorTemplate(helper).TransformText();
-        //        new V1.Templates.Tests.DataService.DataServicesProviderTemplate(helper).TransformText();
-        //        new V1.Templates.Tests.Common.PersistableModelTestsEntityWrapperTemplate(helper).TransformText();
-        //        new V1.Templates.Tests.Common.PeristableModelTestsStrategyTemplate(helper).TransformText();
-        //        new V1.Templates.Tests.DataService.EntityFramework.DataServiceTestsTemplate(helper).TransformText();
-        //        new V1.Templates.Tests.Service.ServicesProviderTemplate(helper).TransformText();
-        //        new V1.Templates.Tests.Service.EntityFramework.ServiceTestsTemplate(helper).TransformText();
-        //    }
-        //}
     }
 }

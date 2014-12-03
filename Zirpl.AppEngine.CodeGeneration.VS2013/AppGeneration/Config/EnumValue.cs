@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {
-    public class EnumValueInfo
+    public class EnumValue
     {
         public int Id { get; set; }
         public String Name { get; set; }

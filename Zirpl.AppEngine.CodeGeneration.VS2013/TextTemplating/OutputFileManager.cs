@@ -14,13 +14,17 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             // apply parameters to content
             //
-            // check if file exists
-            //      if exists, chech if different
+            // check out from source control
+            //      check if file exists
+            //      if exists, check if different
             //      if different, check if allowed to overwrite
             //      if allowed, check out from source control
             //
-            // write the file
-            //      create ProjectItem
+            // create the file
+            //      create the folder on system
+            //      write the file to disk
+            //      create the folder in project
+            //      add file to folder project item
             //      write VS properties (if each exists)
             //          CustomTool
             //          ItemType
@@ -32,6 +36,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             File.WriteAllText(outputFile.FullFilePath, outputFile.Content);
             var folder = outputFile.DestinationProject.GetOrCreateProjectFolder(outputFile.FolderPathWithinProject);
             outputFile.ProjectItem = folder.ProjectItems.AddFromFile(outputFile.FullFilePath);
+        }
+
+        public void Finish()
+        {
+            
         }
     }
 }

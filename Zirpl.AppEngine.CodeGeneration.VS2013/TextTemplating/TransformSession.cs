@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
@@ -13,6 +14,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
     {
         public static TransformSession Instance { get; private set; }
         private static Object STATIC_SYNC_ROOT;
+
+        public ProjectItem CallingTemplateProjectItem { get; private set; }
+        private ITransformation CallingTemplate { get; set; }
+        private ITextTemplatingEngineHost Host { get { return this.CallingTemplate.Host; } }
+        private OutputFileManager FileManager { get; set; }
 
         public static TransformSession StartSession(TextTransformation callingTemplate)
         {
@@ -37,7 +43,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             var templateProjectItem = VisualStudio.Current.GetProjectItem(templateFilePath);
             if (templateProjectItem == null)
             {
-                throw new Exception("Could not obtain TemplateProjectItem from " + templateFilePath);
+                throw new Exception("Could not obtain CallingTemplateProjectItem from " + templateFilePath);
             }
 
             lock (StaticSyncRoot)
@@ -49,9 +55,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
                 var instance = new TransformSession();
                 instance.CallingTemplate = callingTemplateWrapper;
-                instance.Host = callingTemplateWrapper.Host;
-                instance.TemplateProjectItem = templateProjectItem;
-                //instance.FileManager = new OutputFileManager();
+                instance.CallingTemplateProjectItem = templateProjectItem;
+                instance.FileManager = new OutputFileManager();
                 Instance = instance;
             }
             return Instance;
@@ -69,21 +74,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
         }
 
-        public ITransformation CallingTemplate { get; private set; }
-        //public OutputFileManager FileManager { get; private set; }
-        public ITextTemplatingEngineHost Host { get; private set; }
-        public ProjectItem TemplateProjectItem { get; private set; }
 
-        public void TransformToFile(TransformOutputFile file, IDictionary<String, Object> additionalTemplateParameters = null)
+        public void ExecuteTransform(TemplateOutputFile file, IDictionary<String, Object> additionalTemplateParameters = null)
         {
             var template = Activator.CreateInstance(file.TemplateType);
 
             var templateWrapper = new PreprocessedTransformWrapper(template);
-            templateWrapper.Host = this.CallingTemplate.Host;
-            //templateWrapper.GenerationEnvironment = this.CallingTemplate.GenerationEnvironment;
 
-            var session = new Microsoft.VisualStudio.TextTemplating.TextTemplatingSession();
-            session["FileToGenerate"] = file;
+            var session = new TextTemplatingSession();
             if (additionalTemplateParameters != null)
             {
                 foreach (var parameter in additionalTemplateParameters)
@@ -91,16 +89,39 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     session[parameter.Key] = parameter.Value;
                 }
             }
+            session["TemplateOutputFile"] = file;
             templateWrapper.Session = session;
             templateWrapper.Initialize(); // Must call this to transfer values.
 
-            file.OutputFile.Content = templateWrapper.TransformText();
+            file.Content = templateWrapper.TransformText();
 
-            new OutputFileManager().CreateFile(file.OutputFile);
+            this.FileManager.CreateFile(file);
 
-            // TODO: write the file, add to VS and handle any filewriting responsibilities such as checking out from source control
+            this.CallingTemplate.WriteLine("//--> " + file.FilePathWithinProject);
+        }
 
-            this.CallingTemplate.WriteLine("// File generated: " + file.OutputFile.FilePathWithinProject);
+        /// <summary>
+        /// Writes a line to the build pane in visual studio and activates it
+        /// </summary>
+        /// <param name="message">Text to output - a \n is appended</param>
+        public void LogLineToBuildPane(string message)
+        {
+            this.LogToBuildPane(String.Format("{0}\n", message));
+        }
+
+        /// <summary>
+        /// Writes a string to the build pane in visual studio and activates it
+        /// </summary>
+        /// <param name="message">Text to output</param>
+        public void LogToBuildPane(string message)
+        {
+            IVsOutputWindow outWindow = (this.Host as IServiceProvider).GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+            Guid generalPaneGuid = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.BuildOutputPane_guid;
+            // P.S. There's also the GUID_OutWindowDebugPane available.
+            IVsOutputWindowPane generalPane;
+            outWindow.GetPane(ref generalPaneGuid, out generalPane);
+            generalPane.OutputString(message);
+            generalPane.Activate(); // Brings this pane into view
         }
 
 
@@ -109,7 +130,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             try
             {
                 // TODO: reenable if we have this again
-                //this.FileManager.Finish();
+                this.FileManager.Finish();
             }
             finally
             {

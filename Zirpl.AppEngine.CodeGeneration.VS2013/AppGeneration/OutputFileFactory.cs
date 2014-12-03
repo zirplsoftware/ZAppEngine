@@ -2,31 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using EnvDTE;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public class OutputFileFactory
     {
-        public IEnumerable<TransformOutputFile> CreateList(App app)
+        public IList<TemplateOutputFile> CreateList(App app)
         {
-            var list = new List<TransformOutputFile>();
+            var list = new List<TemplateOutputFile>();
 
             #region Model for persistable domain classes
             // generate the Model class for persistable domain classes
             foreach (var domainType in app.DomainTypes.Where(o => o.IsPersistable))
             {
-                var classToGenerate = new ClassOutputFile(new OutputFile()
+                var classToGenerate = new ClassToGenerate(new TemplateOutputFile()
                     {
                         FileNameWithoutExtension = domainType.Name,
-                        FileExtension = app.GeneratedCSFileExtension,
+                        FileExtension = ".cs",
                         DestinationProject = domainType.DestinationProject,
                         FolderPathWithinProject = this.GetFolderPathFromNamespace(app, domainType.DestinationProject, domainType.Namespace),
-                        BuildAction = BuildActionTypeEnum.Compile
+                        BuildAction = BuildActionTypeEnum.Compile,
+                        TemplateType = typeof(PersistableDomainClassTemplate),
                     })
                     {
-                        TemplateType = typeof (PersistableDomainClassTemplate),
                         ClassName = domainType.Name,
                         ClassFullName = domainType.FullName,
                         Namespace = domainType.Namespace,
@@ -75,10 +76,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileG
                 {
                     classToGenerate.InterfaceDeclarations.Add("Zirpl.AppEngine.Model.IVersionable");
                 }
-                classToGenerate.TemplateParameters.Add("DomainType", domainType);
+                classToGenerate.OutputFile.TemplateParameters.Add("DomainType", domainType);
+                classToGenerate.OutputFile.TemplateParameters.Add("ClassToGenerate", classToGenerate);
 
 
-                list.Add(classToGenerate);
+                list.Add(classToGenerate.OutputFile);
             }
 
             #endregion
@@ -91,7 +93,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileG
             String folderPath = nameSpace;
             folderPath = folderPath.SubstringAfterFirstInstanceOf(project.GetDefaultNamespace() + ".");
             folderPath = folderPath.Replace('.', '\\');
-            folderPath = app.GeneratedCodeRootFolderName + folderPath;
+            folderPath = app.Settings.GeneratedContentRootFolderName + folderPath;
             return folderPath;
         }
 

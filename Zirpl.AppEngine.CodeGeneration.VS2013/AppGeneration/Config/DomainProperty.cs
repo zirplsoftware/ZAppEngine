@@ -1,9 +1,9 @@
 ﻿using System;
 using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {
-    public class DomainPropertyInfo
+    public class DomainProperty
     {
         public String Name { get; set; }
         public DataTypeEnum DataType { get; set; }
@@ -29,9 +29,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel
         public String Precision { get; set; }
         public UniquenessTypeEnum UniquenessType { get; set; }
 
-        public DomainTypeInfo Owner { get; set; }
+        public DomainType Owner { get; set; }
 
-        public RelationshipInfo Relationship { get; set; }
+        public Relationship Relationship { get; set; }
 
         //public String FormatPattern { get; set; }
         //public String Regex { get; set; }
