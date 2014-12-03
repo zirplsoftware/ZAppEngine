@@ -1,6 +1,6 @@
 ﻿using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers.JsonModel
 {
     public class IdJson
     {

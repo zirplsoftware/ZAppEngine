@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel;
-using Zirpl.AppEngine.CodeGeneration.TextTemplating;
 using Zirpl.AppEngine.Model.Metadata;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers.JsonModel;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers
 {
     public class DomainFileParser
     {

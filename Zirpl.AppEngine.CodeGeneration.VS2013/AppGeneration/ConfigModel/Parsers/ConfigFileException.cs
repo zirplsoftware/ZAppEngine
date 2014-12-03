@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers
 {
     public class ConfigFileException: Exception
     {

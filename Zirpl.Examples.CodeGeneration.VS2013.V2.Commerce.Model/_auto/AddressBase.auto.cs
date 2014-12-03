@@ -1,3 +1,4 @@
-﻿public partial class asdasdasd
+public partial class AddressBase
 {
+	
 }

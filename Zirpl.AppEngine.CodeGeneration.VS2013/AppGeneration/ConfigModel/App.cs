@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using EnvDTE;
-using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel;
-using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers.JsonModel;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel
 {
     public class App
     {
         public App()
         {
             this.DomainTypes = new List<DomainTypeInfo>();
-            this.FilesToGenerate = new List<FileToGenerate>();
+            this.FilesToGenerate = new List<TransformOutputFile>();
         }
 
         public AppJson Config { get; set; }
@@ -28,7 +28,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         public String TestsCommonProjectName { get; set; }
         public String DataContextName { get; set; }
         public List<DomainTypeInfo> DomainTypes { get; set; }
-        public List<FileToGenerate> FilesToGenerate { get; set; }
+        public List<TransformOutputFile> FilesToGenerate { get; set; }
 
         #region Project references
 
@@ -36,7 +36,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.TemplateProjectItem.ContainingProject;
+                return TransformSession.Instance.TemplateProjectItem.ContainingProject;
             }
         }
 
@@ -44,7 +44,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.VisualStudio.GetProject(this.ModelProjectName);
+                return VisualStudio.Current.GetProject(this.ModelProjectName);
             }
         }
 
@@ -52,7 +52,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.VisualStudio.GetProject(this.DataServiceProjectName);
+                return VisualStudio.Current.GetProject(this.DataServiceProjectName);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.VisualStudio.GetProject(this.DataServiceTestsProjectName);
+                return VisualStudio.Current.GetProject(this.DataServiceTestsProjectName);
             }
         }
 
@@ -68,7 +68,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.VisualStudio.GetProject(this.ServiceProjectName);
+                return VisualStudio.Current.GetProject(this.ServiceProjectName);
             }
         }
 
@@ -76,7 +76,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.VisualStudio.GetProject(this.WebProjectName);
+                return VisualStudio.Current.GetProject(this.WebProjectName);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.VisualStudio.GetProject(this.WebCommonProjectName);
+                return VisualStudio.Current.GetProject(this.WebCommonProjectName);
             }
         }
 
@@ -92,7 +92,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.VisualStudio.GetProject(this.ServiceTestsProjectName);
+                return VisualStudio.Current.GetProject(this.ServiceTestsProjectName);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
         {
             get
             {
-                return TextTransformationSession.Instance.VisualStudio.GetProject(this.TestsCommonProjectName);
+                return VisualStudio.Current.GetProject(this.TestsCommonProjectName);
             }
         }
 

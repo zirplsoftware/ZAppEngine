@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
-using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel;
-using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers.JsonModel;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers
 {
     public class AppFileParser
     {
@@ -25,7 +25,7 @@ namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers
             app.GeneratedCSFileExtension = json.GeneratedCSFileExtension ?? ".auto.cs";
             app.GeneratedCodeRootFolderName = json.DataServiceProjectName ?? @"_auto\";
 
-            var codeGenerationProjectName = TextTransformationSession.Instance.TemplateProjectItem.ContainingProject.GetDefaultNamespace();
+            var codeGenerationProjectName = TransformSession.Instance.TemplateProjectItem.ContainingProject.GetDefaultNamespace();
             var defaultProjectNamespace = codeGenerationProjectName.SubstringUntilLastInstanceOf(".");
             // TODO: create the projects if they don't exist
             app.DataServiceProjectName = json.DataServiceProjectName ?? defaultProjectNamespace + ".DataService";

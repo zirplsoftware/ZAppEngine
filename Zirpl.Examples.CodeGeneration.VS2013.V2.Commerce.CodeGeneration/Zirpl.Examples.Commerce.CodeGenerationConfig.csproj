@@ -43,9 +43,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.CodeGeneration.csproj">
+    <ProjectReference Include="..\Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.VisualStudioAutomation.csproj">
       <Project>{f8855f9a-35d1-4c30-bb53-1fd89a984989}</Project>
-      <Name>Zirpl.AppEngine.CodeGeneration</Name>
+      <Name>Zirpl.AppEngine.VisualStudioAutomation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

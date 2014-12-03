@@ -3,12 +3,12 @@ using System.Reflection;
 using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class TextTransformationWrapper :ITextTransformation
+    public class TransformWrapper :ITransformation
     {
         private readonly TextTransformation _textTransformation;
-        public TextTransformationWrapper(TextTransformation textTransformation)
+        public TransformWrapper(TextTransformation textTransformation)
         {
             this._textTransformation = textTransformation;
         }

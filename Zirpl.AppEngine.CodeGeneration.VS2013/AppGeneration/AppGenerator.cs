@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
-using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.FileGeneration;
-using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers;
-using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileGeneration;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {
@@ -15,14 +15,14 @@ namespace Zirpl.AppEngine.CodeGeneration
             this TextTransformation callingTemplate, 
             AppFileParser appFileParser = null, 
             DomainFileParser domainFileParser = null,
-            FilesToGenerateFactory factory = null,
+            OutputFileFactory factory = null,
             IDictionary<String, Object> additionalTemplateParameters = null)
         {
-            using (var session = TextTransformationSession.StartSession(callingTemplate))
+            using (var session = TransformSession.StartSession(callingTemplate))
             {
                 appFileParser = appFileParser ?? new AppFileParser();
                 domainFileParser = domainFileParser ?? new DomainFileParser();
-                factory = factory ?? new FilesToGenerateFactory();
+                factory = factory ?? new OutputFileFactory();
 
                 var domainFilePaths = new List<String>();
                 String appFilePath = null;
@@ -72,7 +72,7 @@ namespace Zirpl.AppEngine.CodeGeneration
                         templateParameters.Add(parameter.Key, parameter.Value);
                     }
                     templateParameters.Add("App", app);
-                    session.CreateFile(file, templateParameters);
+                    session.TransformToFile(file, templateParameters);
                 }
             }
         }

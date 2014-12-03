@@ -8,24 +8,26 @@
 <#@ import namespace="Newtonsoft.Json" #>
 <#@ import namespace="Zirpl.AppEngine.Model" #>
 <#@ import namespace="Zirpl.AppEngine.Model.Metadata" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration.TextTemplating" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration.AppGeneration" #>
-<#@ import namespace="Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileGeneration" #>
 <#@ assembly name="EnvDTE" #>
 <#@ assembly name="VSLangProj" #>
 <#@ assembly name="VSLangProj80" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
-<#@ parameter type="Zirpl.AppEngine.CodeGeneration.TextTemplating.FileToGenerate" name="FileToGenerate" #>
-<#@ parameter type="Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.App" name="App" #>
-<#@ parameter type="Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.DomainTypeInfo" name="DomainType" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TransformOutputFile" name="FileToGenerate" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.App" name="App" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.DomainTypeInfo" name="DomainType" #>
 <#
 if (App != null)
 {
 #>
-public partial class asdasdasd
+public partial class <#= ((ClassOutputFile)FileToGenerate).ClassName #>
 {
+	
 }
 <#
 }

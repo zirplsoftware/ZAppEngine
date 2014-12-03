@@ -41,35 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_auto\AddressBase.auto.cs">
-      <DependentUpon>AppTransform.txt4</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_auto\AddressBaseExtendedFieldValue.auto.cs">
-      <DependentUpon>AppTransform.txt4</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_auto\DomesticAddress.auto.cs">
-      <DependentUpon>AppTransform.txt4</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_auto\InternationalAddress.auto.cs">
-      <DependentUpon>AppTransform.txt4</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_auto\NamePrefixType.auto.cs">
-      <DependentUpon>AppTransform.txt4</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="_auto\AddressBase.auto.cs" />
+    <Compile Include="_auto\AddressBaseExtendedFieldValue.auto.cs" />
+    <Compile Include="_auto\DomesticAddress.auto.cs" />
+    <Compile Include="_auto\InternationalAddress.auto.cs" />
+    <Compile Include="_auto\NamePrefixType.auto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
       <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
       <Name>Zirpl.AppEngine</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="_auto\AppTransform.txt4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

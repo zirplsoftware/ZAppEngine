@@ -1,6 +1,6 @@
 ﻿using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel
 {
     public class RelationshipInfo
     {

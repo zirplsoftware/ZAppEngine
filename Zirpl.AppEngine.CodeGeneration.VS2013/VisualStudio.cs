@@ -6,17 +6,48 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using EnvDTE80;
+using Microsoft.VisualStudio.PlatformUI;
 
-namespace Zirpl.AppEngine.CodeGeneration.VisualStudio
+namespace Zirpl.AppEngine.VisualStudioAutomation
 {
-    public static class VisualStudio
+    public sealed class VisualStudio
     {
+        private static DTE2 current;
+        private static Object STATIC_SYNC_ROOT;
+
+        public static DTE2 Current
+        {
+            get
+            {
+                if (current == null)
+                {
+                    lock (StaticSyncRoot)
+                    {
+                        current = GetCurrentInstance();
+                    }
+                }
+                return current;
+            }
+        }
+
+        private static Object StaticSyncRoot
+        {
+            get
+            {
+                if (STATIC_SYNC_ROOT == null)
+                {
+                    System.Threading.Interlocked.CompareExchange(ref STATIC_SYNC_ROOT, new object(), null);
+                }
+                return STATIC_SYNC_ROOT;
+            }
+        }
+
+
         [DllImport("ole32.dll")]
         private static extern void CreateBindCtx(int reserved, out IBindCtx ppbc);
         [DllImport("ole32.dll")]
         private static extern void GetRunningObjectTable(int reserved, out IRunningObjectTable prot);
-
-        public static DTE2 GetCurrentInstance()
+        private static DTE2 GetCurrentInstance()
         {
             // TODO: this method needs to handle case of multiple VS's being open
             // TODO: this method needs to handle other VS versions

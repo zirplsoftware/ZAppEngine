@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public interface ITextTransformation : IDisposable
+    public interface ITransformation : IDisposable
     {
         StringBuilder GenerationEnvironment { get; set; }
         CompilerErrorCollection Errors { get; }

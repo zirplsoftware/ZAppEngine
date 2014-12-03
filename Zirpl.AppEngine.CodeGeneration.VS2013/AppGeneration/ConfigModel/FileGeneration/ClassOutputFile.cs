@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.FileGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileGeneration
 {
-    public class ClassFileToGenerate : FileToGenerate
+    public class ClassOutputFile : TransformOutputFile
     {
-        public ClassFileToGenerate()
+        public ClassOutputFile(OutputFile outputFile)
+            :base(outputFile)
         {
             this.InterfaceDeclarations = new List<string>();
         }

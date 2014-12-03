@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using EnvDTE;
-using Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.Parsers.JsonModel;
 using Zirpl.AppEngine.Model.Metadata;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.Parsers.JsonModel;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel
 {
     public class DomainTypeInfo
     {

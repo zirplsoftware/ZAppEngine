@@ -2,35 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using EnvDTE;
-using Zirpl.AppEngine.CodeGeneration.AppGeneration.Templates.Model;
-using Zirpl.AppEngine.CodeGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration.AppGeneration.ConfigModel.FileGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.ConfigModel.FileGeneration
 {
-    public class FilesToGenerateFactory
+    public class OutputFileFactory
     {
-        public IEnumerable<FileToGenerate> CreateList(App app)
+        public IEnumerable<TransformOutputFile> CreateList(App app)
         {
-            var list = new List<FileToGenerate>();
+            var list = new List<TransformOutputFile>();
 
             #region Model for persistable domain classes
             // generate the Model class for persistable domain classes
             foreach (var domainType in app.DomainTypes.Where(o => o.IsPersistable))
             {
-                var classToGenerate = new ClassFileToGenerate()
-                {
-                    FileNameWithoutExtension = domainType.Name,
-                    FileExtension = app.GeneratedCSFileExtension,
-                    DestinationProject = domainType.DestinationProject,
-                    FolderPath = this.GetFolderPathFromNamespace(app, domainType.DestinationProject, domainType.Namespace),
-                    BuildAction = BuildActionTypeEnum.Compile,
-                    TemplateType = typeof (PersistableDomainClassTemplate),
-                    ClassName = domainType.Name,
-                    ClassFullName = domainType.FullName,
-                    Namespace = domainType.Namespace,
-                    BaseClassDeclaration = domainType.InheritsFrom == null ? null : domainType.InheritsFrom.FullName,
-                    IsAbstract = domainType.IsAbstract
-                };
+                var classToGenerate = new ClassOutputFile(new OutputFile()
+                    {
+                        FileNameWithoutExtension = domainType.Name,
+                        FileExtension = app.GeneratedCSFileExtension,
+                        DestinationProject = domainType.DestinationProject,
+                        FolderPathWithinProject = this.GetFolderPathFromNamespace(app, domainType.DestinationProject, domainType.Namespace),
+                        BuildAction = BuildActionTypeEnum.Compile
+                    })
+                    {
+                        TemplateType = typeof (PersistableDomainClassTemplate),
+                        ClassName = domainType.Name,
+                        ClassFullName = domainType.FullName,
+                        Namespace = domainType.Namespace,
+                        BaseClassDeclaration = domainType.InheritsFrom == null ? null : domainType.InheritsFrom.FullName,
+                        IsAbstract = domainType.IsAbstract
+                    };
                 if (domainType.IsPersistable
                     && domainType.InheritsFrom == null)
                 {

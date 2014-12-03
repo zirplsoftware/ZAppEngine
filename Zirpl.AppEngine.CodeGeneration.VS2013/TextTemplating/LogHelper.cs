@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public static class LogHelper
     {
@@ -12,7 +12,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// <param name="message">Text to output - a \n is appended</param>
         public static void LogToBuildPane(this Object anything, string message)
         {
-            TextTransformationSession.Instance.Host.LogToBuildPane(message);
+            TransformSession.Instance.Host.LogToBuildPane(message);
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// <param name="message">Text to output - a \n is appended</param>
         public static void LogLineToBuildPane(this Object anything, string message)
         {
-            TextTransformationSession.Instance.Host.LogLineToBuildPane(message);
+            TransformSession.Instance.Host.LogLineToBuildPane(message);
         }
 
 
@@ -31,7 +31,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// <param name="message">Text to output - a \n is appended</param>
         public static void LogToBuildPane(string message)
         {
-            TextTransformationSession.Instance.Host.LogToBuildPane(message);
+            TransformSession.Instance.Host.LogToBuildPane(message);
         }
 
 
@@ -41,7 +41,7 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         /// <param name="message">Text to output - a \n is appended</param>
         public static void LogLineToBuildPane(string message)
         {
-            TextTransformationSession.Instance.Host.LogLineToBuildPane(message);
+            TransformSession.Instance.Host.LogLineToBuildPane(message);
         }
 
         /// <summary>

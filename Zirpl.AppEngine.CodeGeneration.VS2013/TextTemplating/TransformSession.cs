@@ -4,23 +4,23 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
 
-namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     /// <summary>
     /// Manages a TextTransformation Session
     /// </summary>
-    public sealed class TextTransformationSession: IDisposable
+    public sealed class TransformSession: IDisposable
     {
-        public static TextTransformationSession Instance { get; private set; }
+        public static TransformSession Instance { get; private set; }
         private static Object STATIC_SYNC_ROOT;
 
-        public static TextTransformationSession StartSession(TextTransformation callingTemplate)
+        public static TransformSession StartSession(TextTransformation callingTemplate)
         {
             if (callingTemplate == null)
             {
                 throw new ArgumentNullException("callingTemplate");
             }
-            var callingTemplateWrapper = new TextTransformationWrapper(callingTemplate);
+            var callingTemplateWrapper = new TransformWrapper(callingTemplate);
             if (callingTemplateWrapper.Host == null)
             {
                 throw new ArgumentException("Host cannot be null. Preprocessed templates need to be passed the calling templates.", "callingTemplate");
@@ -29,13 +29,12 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             {
                 throw new ArgumentException("Host.TemplateFile cannot be null. Preprocessed templates need to be passed the calling templates.", "callingTemplate");
             }
-            var visualStudio = CodeGeneration.VisualStudio.VisualStudio.GetCurrentInstance();
-            if (visualStudio == null)
+            if (VisualStudio.Current == null)
             {
-                throw new Exception("Could not obtain DTE2");
+                throw new Exception("Could not load VisualStudio DTE2");
             }
             var templateFilePath = callingTemplateWrapper.Host.TemplateFile;
-            var templateProjectItem = visualStudio.FindProjectItem(templateFilePath);
+            var templateProjectItem = VisualStudio.Current.GetProjectItem(templateFilePath);
             if (templateProjectItem == null)
             {
                 throw new Exception("Could not obtain TemplateProjectItem from " + templateFilePath);
@@ -48,12 +47,11 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
                     throw new Exception("Cannot call StartSession more than once");
                 }
 
-                var instance = new TextTransformationSession();
+                var instance = new TransformSession();
                 instance.CallingTemplate = callingTemplateWrapper;
                 instance.Host = callingTemplateWrapper.Host;
-                instance.VisualStudio = visualStudio;
                 instance.TemplateProjectItem = templateProjectItem;
-                instance.FileManager = new OutputFileManager();
+                //instance.FileManager = new OutputFileManager();
                 Instance = instance;
             }
             return Instance;
@@ -71,23 +69,21 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             }
         }
 
-        public ITextTransformation CallingTemplate { get; private set; }
-        public OutputFileManager FileManager { get; private set; }
+        public ITransformation CallingTemplate { get; private set; }
+        //public OutputFileManager FileManager { get; private set; }
         public ITextTemplatingEngineHost Host { get; private set; }
-        public DTE2 VisualStudio { get; private set; }
         public ProjectItem TemplateProjectItem { get; private set; }
 
-        public void CreateFile(FileToGenerate fileToGenerate, IDictionary<String, Object> additionalTemplateParameters = null)
+        public void TransformToFile(TransformOutputFile file, IDictionary<String, Object> additionalTemplateParameters = null)
         {
-            var template = Activator.CreateInstance(fileToGenerate.TemplateType);
+            var template = Activator.CreateInstance(file.TemplateType);
 
-            var templateWrapper = new PreprocessedTextTransformationWrapper(template);
+            var templateWrapper = new PreprocessedTransformWrapper(template);
             templateWrapper.Host = this.CallingTemplate.Host;
-            templateWrapper.GenerationEnvironment = this.CallingTemplate.GenerationEnvironment;
-
+            //templateWrapper.GenerationEnvironment = this.CallingTemplate.GenerationEnvironment;
 
             var session = new Microsoft.VisualStudio.TextTemplating.TextTemplatingSession();
-            session["FileToGenerate"] = fileToGenerate;
+            session["FileToGenerate"] = file;
             if (additionalTemplateParameters != null)
             {
                 foreach (var parameter in additionalTemplateParameters)
@@ -98,13 +94,13 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
             templateWrapper.Session = session;
             templateWrapper.Initialize(); // Must call this to transfer values.
 
-            this.FileManager.StartNewFile(
-                fileToGenerate.FileName,
-                fileToGenerate.DestinationProject,
-                fileToGenerate.FolderPath,
-                new OutputFileProperties() { BuildAction = fileToGenerate.BuildAction });
+            file.OutputFile.Content = templateWrapper.TransformText();
 
-            templateWrapper.TransformText();
+            new OutputFileManager().CreateFile(file.OutputFile);
+
+            // TODO: write the file, add to VS and handle any filewriting responsibilities such as checking out from source control
+
+            this.CallingTemplate.WriteLine("// File generated: " + file.OutputFile.FilePathWithinProject);
         }
 
 
@@ -112,7 +108,8 @@ namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
         {
             try
             {
-                this.FileManager.Finish();
+                // TODO: reenable if we have this again
+                //this.FileManager.Finish();
             }
             finally
             {

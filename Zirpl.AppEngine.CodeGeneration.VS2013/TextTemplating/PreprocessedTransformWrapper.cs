@@ -6,14 +6,14 @@ using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.Reflection;
 
-namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class PreprocessedTextTransformationWrapper : ITextTransformation
+    public class PreprocessedTransformWrapper : ITransformation
     {
         private readonly Object _textTransformation;
         private readonly IDynamicAccessor _dynamicAccessor;
 
-        public PreprocessedTextTransformationWrapper(Object textTransformation)
+        public PreprocessedTransformWrapper(Object textTransformation)
         {
             this._textTransformation = textTransformation;
             this._dynamicAccessor = textTransformation.GetDynamicAccessor();

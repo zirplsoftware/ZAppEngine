@@ -1,4 +1,4 @@
-﻿namespace Zirpl.AppEngine.CodeGeneration.TextTemplating
+﻿namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public enum BuildActionTypeEnum
     {
