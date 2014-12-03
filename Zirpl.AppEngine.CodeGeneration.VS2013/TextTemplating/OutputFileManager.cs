@@ -32,6 +32,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             //          format
             //
             // clean up template placeholders
+
+            // TODO: implement all of the above
+
             PathUtilities.EnsureDirectoryExists(outputFile.FullFilePath);
             File.WriteAllText(outputFile.FullFilePath, outputFile.Content);
             var folder = outputFile.DestinationProject.GetOrCreateProjectFolder(outputFile.FolderPathWithinProject);

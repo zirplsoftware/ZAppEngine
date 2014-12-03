@@ -15,9 +15,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         public static TransformSession Instance { get; private set; }
         private static Object STATIC_SYNC_ROOT;
 
-        public ProjectItem CallingTemplateProjectItem { get; private set; }
-        private ITransformation CallingTemplate { get; set; }
-        private ITextTemplatingEngineHost Host { get { return this.CallingTemplate.Host; } }
+        public ITransformation CallingTemplate { get; private set; }
         private OutputFileManager FileManager { get; set; }
 
         public static TransformSession StartSession(TextTransformation callingTemplate)
@@ -39,12 +37,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 throw new Exception("Could not load VisualStudio DTE2");
             }
-            var templateFilePath = callingTemplateWrapper.Host.TemplateFile;
-            var templateProjectItem = VisualStudio.Current.GetProjectItem(templateFilePath);
-            if (templateProjectItem == null)
-            {
-                throw new Exception("Could not obtain CallingTemplateProjectItem from " + templateFilePath);
-            }
 
             lock (StaticSyncRoot)
             {
@@ -55,7 +47,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
                 var instance = new TransformSession();
                 instance.CallingTemplate = callingTemplateWrapper;
-                instance.CallingTemplateProjectItem = templateProjectItem;
                 instance.FileManager = new OutputFileManager();
                 Instance = instance;
             }
@@ -115,7 +106,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         /// <param name="message">Text to output</param>
         public void LogToBuildPane(string message)
         {
-            IVsOutputWindow outWindow = (this.Host as IServiceProvider).GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+            IVsOutputWindow outWindow = (this.CallingTemplate.Host as IServiceProvider).GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
             Guid generalPaneGuid = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.BuildOutputPane_guid;
             // P.S. There's also the GUID_OutWindowDebugPane available.
             IVsOutputWindowPane generalPane;
@@ -129,7 +120,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             try
             {
-                // TODO: reenable if we have this again
                 this.FileManager.Finish();
             }
             finally

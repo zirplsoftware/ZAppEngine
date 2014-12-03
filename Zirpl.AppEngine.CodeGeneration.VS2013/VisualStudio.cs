@@ -51,6 +51,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
         {
             // TODO: this method needs to handle case of multiple VS's being open
             // TODO: this method needs to handle other VS versions
+            // TODO: add another method to return ALL open DTEs
 
             //rot entry for visual studio running under current process.
 
