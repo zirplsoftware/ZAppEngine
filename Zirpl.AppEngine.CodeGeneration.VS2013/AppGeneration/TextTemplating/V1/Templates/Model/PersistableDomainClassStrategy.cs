@@ -28,7 +28,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
                 FileNameWithoutExtension = domainType.Name,
                 FileExtension = ".cs",
                 DestinationProject = domainType.DestinationProject,
-                FolderPathWithinProject = this.GetFolderPathFromNamespace(app, domainType.DestinationProject, domainType.Namespace),
+                FolderPathWithinProject = app.GetFolderPathFromNamespace(domainType.DestinationProject, domainType.Namespace),
                 BuildAction = BuildActionTypeEnum.Compile,
                 TemplateType = typeof(PersistableDomainClassTemplate),
             })
@@ -88,16 +88,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
             classToGenerate.OutputFile.TemplateParameters.Add("ClassToGenerate", classToGenerate);
             return classToGenerate;
         }
-
-        private String GetFolderPathFromNamespace(App app, Project project, String nameSpace)
-        {
-            String folderPath = nameSpace;
-            folderPath = folderPath.SubstringAfterFirstInstanceOf(project.GetDefaultNamespace() + ".");
-            folderPath = folderPath.Replace('.', '\\');
-            folderPath = app.Settings.GeneratedContentRootFolderName + folderPath;
-            return folderPath;
-        }
-
 
         public string TemplateCategory
         {

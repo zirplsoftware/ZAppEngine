@@ -86,6 +86,7 @@
     <Compile Include="AppGeneration\Config\DomainProperty.cs" />
     <Compile Include="AppGeneration\Config\DomainType.cs" />
     <Compile Include="AppGeneration\Config\EnumValue.cs" />
+    <Compile Include="AppGeneration\TextTemplating\AppExtensions.cs" />
     <Compile Include="AppGeneration\TextTemplating\ClassToGenerate.cs">
       <SubType>Code</SubType>
     </Compile>

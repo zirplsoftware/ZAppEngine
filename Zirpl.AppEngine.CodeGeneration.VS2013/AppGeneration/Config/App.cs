@@ -9,13 +9,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public App()
         {
             this.DomainTypes = new List<DomainType>();
-            this.FilesToGenerate = new List<TemplateOutputFile>();
         }
 
         public AppGenerationSettings Settings { get; internal set; }
 
         public IList<DomainType> DomainTypes { get; private set; }
-        public IList<TemplateOutputFile> FilesToGenerate { get; private set; } 
 
 
         public Project AppGenerationConfigProject { get; internal set; }

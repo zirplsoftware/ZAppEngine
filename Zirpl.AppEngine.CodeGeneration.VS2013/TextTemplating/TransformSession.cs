@@ -65,20 +65,16 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
         }
 
-
-        public void ExecuteTransform(TemplateOutputFile file, IDictionary<String, Object> additionalTemplateParameters = null)
+        public void ExecuteTransform(TemplateOutputFile file)
         {
             var template = Activator.CreateInstance(file.TemplateType);
 
             var templateWrapper = new PreprocessedTransformWrapper(template);
 
             var session = new TextTemplatingSession();
-            if (additionalTemplateParameters != null)
+            foreach (var parameter in file.TemplateParameters)
             {
-                foreach (var parameter in additionalTemplateParameters)
-                {
-                    session[parameter.Key] = parameter.Value;
-                }
+                session[parameter.Key] = parameter.Value;
             }
             session["TemplateOutputFile"] = file;
             templateWrapper.Session = session;

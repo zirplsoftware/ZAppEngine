@@ -6,6 +6,8 @@ using System.Linq;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
+using Zirpl.Collections;
 using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
@@ -23,10 +25,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
         /// <param name="app"></param>
         /// <param name="domainFilePaths"></param>
         /// <returns></returns>
-        public IList<DomainType> Parse(App app, IEnumerable<string> domainFilePaths)
+        public void ParseDomainTypes(App app, IEnumerable<string> domainFilePaths)
         {
-            var list = new List<DomainType>();
-
             #region create DomainTypeInfos specified by directly by the files
             foreach (var path in domainFilePaths)
             {
@@ -118,7 +118,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 #endregion
 
                 #region create DomainType for the file
-                DomainType domainType = new DomainType();
+                var domainType = new DomainType();
                 domainType.Config = json;
                 domainType.ConfigFilePath = path;
 
@@ -134,7 +134,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 domainType.IsMarkDeletable = json.IsMarkDeletable.GetValueOrDefault();
 
                 domainType.Name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path));
-                if (!IsValidTypeName(domainType.Name))
+                if (!app.IsValidTypeName(domainType.Name))
                 {
                     throw new Exception(String.Format("Invalid resulting class name of '{0}'. Rename file to be in format 'ValidClassName.domain.zae': {1}", domainType.Name, domainType.ConfigFilePath));
                 }
@@ -183,7 +183,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                                                         .SubstringUntilLastInstanceOf(domainType.Name);
                 domainType.Namespace = domainType.DestinationProject.GetDefaultNamespace() +
                                         (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
-                if (!IsValidNamespace(domainType.Namespace))
+                if (!app.IsValidNamespace(domainType.Namespace))
                 {
                     throw new Exception(String.Format("Invalid resulting Namespace of '{0}' at: {1}", domainType.Namespace, domainType.ConfigFilePath));
                 }
@@ -193,26 +193,26 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 }
                 else
                 {
-                    domainType.PluralName = this.GetPluralName(domainType.Name);
+                    domainType.PluralName = app.GetPluralName(domainType.Name);
                 }
-                if (!IsValidTypeName(domainType.PluralName))
+                if (!app.IsValidTypeName(domainType.PluralName))
                 {
                     throw new Exception(String.Format("Invalid resulting PluralName of '{0}' at: {1}", domainType.PluralName, domainType.ConfigFilePath));
                 }
 
-                list.Add(domainType);
+                app.DomainTypes.Add(domainType);
                 #endregion
             }
             #endregion
 
             #region handle inheritance
             //
-            foreach (var domainType in list.Where(o => !String.IsNullOrEmpty(o.Config.InheritsFrom)).ToList())
+            foreach (var domainType in app.DomainTypes.Where(o => !String.IsNullOrEmpty(o.Config.InheritsFrom)).ToList())
             {
                 var inheritsFromFullNameTokens = domainType.Config.InheritsFrom.Split('.').Reverse().ToList();
                 var inheritsFromClassName = inheritsFromFullNameTokens.First();
 
-                var potentialMatches = this.FindDomainTypes(list, domainType.Config.InheritsFrom);
+                var potentialMatches = app.FindDomainTypes(domainType.Config.InheritsFrom);
                 if (!potentialMatches.Any())
                 {
                     throw new Exception("Could not find domain type matching InheritsFrom in: " + domainType.ConfigFilePath);
@@ -227,7 +227,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             }
             // this is to ensure the interfaces that are on base classes are handled appropriately
             //
-            foreach (var domainType in list.Where(o => o.InheritedBy.Any() && o.InheritsFrom == null))
+            foreach (var domainType in app.DomainTypes.Where(o => o.InheritedBy.Any() && o.InheritsFrom == null))
             {
                 // these are the base-most domain types of each heirarchy
                 this.AlignInterfacePropertiesInHeirarchy(domainType);
@@ -236,7 +236,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
 
             #region validate inheritance
             
-            foreach (var domainType in list.Where(o => o.InheritsFrom != null))
+            foreach (var domainType in app.DomainTypes.Where(o => o.InheritsFrom != null))
             {
                 if (domainType.InheritsFrom.IsStaticLookup)
                 {
@@ -263,7 +263,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             #region create implicit DomainTypeInfos
             //
             var newDomainTypes = new List<DomainType>();
-            foreach (var domainType in list)
+            foreach (var domainType in app.DomainTypes)
             {
                 // validation checks for these have already been done- we can trust the config is right 
                 // if we get to this point
@@ -315,17 +315,17 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                     newDomainTypes.Add(enumDomainType);
                 }
             }
-            list.AddRange(newDomainTypes);
+            app.DomainTypes.AddRange(newDomainTypes);
             #endregion
 
             #region create implicit properties
             //
             // Id properties, which are ALWAYS at the bottom of the heirarchy
             //
-            foreach (var domainType in list.Where(o => o.IsPersistable && o.InheritsFrom == null))
+            foreach (var domainType in app.DomainTypes.Where(o => o.IsPersistable && o.InheritsFrom == null))
             {
                 var configToUse = domainType.IsExtendedEntityFieldValue
-                    ? this.GetBaseMostDomainType(domainType.Extends).Config
+                    ? domainType.Extends.GetBaseMostDomainType().Config
                     : domainType.Config;
 
                 var property = new DomainProperty();
@@ -355,7 +355,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 domainType.IdProperty = property;
             }
 
-            foreach (var domainType in list.Where(o => o.IsVersionable && (o.InheritsFrom == null || !o.InheritsFrom.IsVersionable)))
+            foreach (var domainType in app.DomainTypes.Where(o => o.IsVersionable && (o.InheritsFrom == null || !o.InheritsFrom.IsVersionable)))
             {
                 var property = new DomainProperty();
                 property.Name = "RowVersion";
@@ -365,7 +365,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 domainType.Properties.Add(property);
                 property.Owner = domainType;
             }
-            foreach (var domainType in list.Where(o => o.IsAuditable && (o.InheritsFrom == null || !o.InheritsFrom.IsAuditable)))
+            foreach (var domainType in app.DomainTypes.Where(o => o.IsAuditable && (o.InheritsFrom == null || !o.InheritsFrom.IsAuditable)))
             {
                 var property = new DomainProperty();
                 property.Name = "CreatedUserId";
@@ -414,7 +414,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 domainType.Properties.Add(property);
             }
 
-            foreach (var domainType in list.Where(o => o.IsMarkDeletable && (o.InheritsFrom == null || !o.InheritsFrom.IsMarkDeletable)))
+            foreach (var domainType in app.DomainTypes.Where(o => o.IsMarkDeletable && (o.InheritsFrom == null || !o.InheritsFrom.IsMarkDeletable)))
             {
                 var property = new DomainProperty();
                 property.Name = "IsMarkedDeleted";
@@ -427,7 +427,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 property.Owner = domainType;
                 domainType.Properties.Add(property);
             }
-            foreach (var domainType in list.Where(o => o.IsExtensible && (o.InheritsFrom == null || !o.InheritsFrom.IsExtensible)))
+            foreach (var domainType in app.DomainTypes.Where(o => o.IsExtensible && (o.InheritsFrom == null || !o.InheritsFrom.IsExtensible)))
             {
                 var fromProperty = new DomainProperty();
                 fromProperty.Name = "ExtendedFieldValues";
@@ -485,7 +485,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 };
                 domainType.ExtendedBy.Properties.Add(valueProperty);
             }
-            foreach (var domainType in list.Where(o => o.IsStaticLookup))
+            foreach (var domainType in app.DomainTypes.Where(o => o.IsStaticLookup))
             {
                 var nameProperty = new DomainProperty()
                 {
@@ -503,7 +503,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             #endregion
 
             #region create Properties specified by the file
-            foreach (var domainType in list.Where(o => o.Config != null && o.Config.Properties.Any()))
+            foreach (var domainType in app.DomainTypes.Where(o => o.Config != null && o.Config.Properties.Any()))
             {
                 foreach (var json in domainType.Config.Properties)
                 {
@@ -665,7 +665,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                     }
                     else
                     {
-                        var potentialMatches = this.FindDomainTypes(list, json.Relationship.To);
+                        var potentialMatches = app.FindDomainTypes(json.Relationship.To);
                         if (!potentialMatches.Any())
                         {
                             throw new Exception("Could not find domain type matching To in: " + domainType.ConfigFilePath);
@@ -783,7 +783,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
 
             #region Set all of the DataTypeString properties of the DomainPropertyInfo
 
-            foreach (var domainType in list)
+            foreach (var domainType in app.DomainTypes)
             {
                 foreach (var property in domainType.Properties)
                 {
@@ -865,11 +865,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
 
             #region validate there are no name conflicts
             //
-            if (list.GroupBy(p => p.FullName).Where(g => g.Count() > 1).Any())
+            if (app.DomainTypes.GroupBy(p => p.FullName).Where(g => g.Count() > 1).Any())
             {
                 throw new Exception("2 DomainTypes with the same name resulted");
             }
-            foreach (var domainType in list)
+            foreach (var domainType in app.DomainTypes)
             {
                 // TODO: this only checks per class, not per heirarchy
                 if (domainType.Properties.GroupBy(p => p.Name).Where(g => g.Count() > 1).Any())
@@ -878,117 +878,30 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 }
             }
             #endregion
-            
-            return list;
         }
 
         private void AlignInterfacePropertiesInHeirarchy(DomainType domainType)
         {
-                foreach (var child in domainType.InheritedBy)
-                {
-                    // if inheriting an interface, then this class HAS to have it
-                    //
-                    child.IsVersionable = domainType.IsVersionable
-                        ? true
-                        : child.IsVersionable;
-                    child.IsAuditable = domainType.IsAuditable
-                        ? true
-                        : child.IsAuditable;
-                    child.IsExtensible = domainType.IsExtensible
-                        ? true
-                        : child.IsExtensible;
-                    child.IsMarkDeletable = domainType.IsMarkDeletable
-                        ? true
-                        : child.IsMarkDeletable;
-
-                    this.AlignInterfacePropertiesInHeirarchy(child);
-                    // TODO: if we start using IsDeletable, IsUpdatable, IsInsertable as interfaces on the domain type, then we need to apply those here
-                }
-        }
-
-        protected IEnumerable<DomainType> FindDomainTypes(IEnumerable<DomainType> list, String partialFullName)
-        {
-            var partialFullNameTokens = partialFullName.Split('.').Reverse().ToList();
-            var className = partialFullNameTokens.First();
-
-            var potentialMatches = (from dt in list
-                                    where dt.Name.ToLowerInvariant() == className.ToLowerInvariant()
-                                    select dt).ToList();
-
-            // even though there may only be one, we still take this step because
-            // we want to ensure the entire namespace matches
-            //
-            for (int i = potentialMatches.Count() - 1; i >= 0; i--)
+            foreach (var child in domainType.InheritedBy)
             {
-                var potentialMatch = potentialMatches[i];
-                var potentialMatchFullNameTokens = potentialMatch.FullName.Split('.').Reverse().ToList();
-                if (partialFullNameTokens.Count() > potentialMatchFullNameTokens.Count())
-                {
-                    // by definition this can't be a match since the
-                    // number of namespace tokens is greater than the match
-                    //
-                    potentialMatches.Remove(potentialMatch);
-                }
-                else
-                {
-                    for (int j = 0; j < partialFullNameTokens.Count(); j++)
-                    {
-                        if (potentialMatchFullNameTokens[j] != partialFullNameTokens[j])
-                        {
-                            potentialMatches.Remove(potentialMatch);
-                            break;
-                        }
-                    }
-                }
-            }
-            return potentialMatches;
-        }
+                // if inheriting an interface, then this class HAS to have it
+                //
+                child.IsVersionable = domainType.IsVersionable
+                    ? true
+                    : child.IsVersionable;
+                child.IsAuditable = domainType.IsAuditable
+                    ? true
+                    : child.IsAuditable;
+                child.IsExtensible = domainType.IsExtensible
+                    ? true
+                    : child.IsExtensible;
+                child.IsMarkDeletable = domainType.IsMarkDeletable
+                    ? true
+                    : child.IsMarkDeletable;
 
-        protected DomainType GetBaseMostDomainType(DomainType domainType)
-        {
-            if (domainType.InheritsFrom != null)
-            {
-                domainType = domainType.InheritsFrom;
+                this.AlignInterfacePropertiesInHeirarchy(child);
+                // TODO: if we start using IsDeletable, IsUpdatable, IsInsertable as interfaces on the domain type, then we need to apply those here
             }
-            return domainType;
-        }
-
-        private String GetPluralName(String className)
-        {
-            if (className.EndsWith("s"))
-            {
-                return className + "es";
-            }
-            else if (className.EndsWith("y"))
-            {
-                return className.Substring(0, className.Length - 1) + "ies";
-            }
-            else
-            {
-                return className + "s";
-            }
-        }
-
-        private bool IsValidTypeName(String typeName)
-        {
-            return CodeGenerator.IsValidLanguageIndependentIdentifier(typeName);
-        }
-
-        private bool IsValidNamespace(String nameSpace)
-        {
-            if (String.IsNullOrWhiteSpace(nameSpace))
-            {
-                return false;
-            }
-            var tokens = nameSpace.Split('.');
-            foreach (var token in tokens)
-            {
-                if (!IsValidTypeName(token))
-                {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }

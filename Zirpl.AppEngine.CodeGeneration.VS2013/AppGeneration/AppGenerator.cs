@@ -60,35 +60,33 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     var paths = from p in projectItems
                         where p.GetFullPath().ToLowerInvariant().EndsWith(".domain.zae")
                         select p.GetFullPath();
-                    app.DomainTypes.AddRange(new DomainFileParser().Parse(app, paths));
+                    new DomainFileParser().ParseDomainTypes(app, paths);
 
                     // create all of the Template output files
                     //
+                    var filesToGenerate = new List<TemplateOutputFile>();
                     foreach (var strategy in app.Settings.BuilderStrategies)
                     {
-                        app.FilesToGenerate.AddRange(strategy.BuildOutputFiles(app));   
+                        filesToGenerate.AddRange(strategy.BuildOutputFiles(app));   
                     }
                     
                     //session.CallingTemplate.WriteLine(JsonConvert.SerializeObject(app, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
 
                     // call the templates to build the files
                     //
-                    foreach (var file in app.FilesToGenerate)
+                    foreach (var file in filesToGenerate)
                     {
-                        var templateParameters = new Dictionary<string, object>();
-                        // put in the ones from the settings file first
                         foreach (var parameter in app.Settings.TemplateParameters)
                         {
-                            templateParameters.Add(parameter.Key, parameter.Value);
-                        }
-                        // next the ones from the file to generate (which may override from the settings)
-                        foreach (var parameter in file.TemplateParameters)
-                        {
-                            templateParameters.Add(parameter.Key, parameter.Value);
+                            if (file.TemplateParameters.ContainsKey(parameter.Key))
+                            {
+                                throw new Exception("Global TemplateParameters in Settings conflict with parameters a file to generate. Key = " + parameter.Key);
+                            }
+                            file.TemplateParameters.Add(parameter.Key, parameter.Value);
                         }
                         // finally the App
-                        templateParameters.Add("App", app);
-                        session.ExecuteTransform(file, templateParameters);
+                        file.TemplateParameters.Add("App", app);
+                        session.ExecuteTransform(file);
                     }
                 }
             }
