@@ -44,16 +44,57 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
             
             #line default
             #line hidden
-            this.Write("public partial class ");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing Zirpl.AppEngine.Model;\r\nu" +
+                    "sing Zirpl.AppEngine.Model.Extensibility;\r\n\r\nnamespace ");
             
-            #line 26 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ClassToGenerate.ClassName));
+            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassToGenerate.Namespace));
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n\t\r\n}\r\n");
+            this.Write("\r\n{\r\n\t");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassToGenerate.ClassDeclaration));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t{\r\n");
+            
+            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+
+	foreach (var property in this.DomainType.Properties)
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic virtual ");
+            
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" { get; set; }\r\n");
+            
+            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+
+    }
+
+            
+            #line default
+            #line hidden
+            this.Write("\t}\r\n}\r\n");
+            
+            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
 
 
 

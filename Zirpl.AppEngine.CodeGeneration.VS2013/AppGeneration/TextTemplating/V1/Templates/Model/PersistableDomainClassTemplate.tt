@@ -23,9 +23,24 @@
 <#
 
 #>
-public partial class <#= ClassToGenerate.ClassName #>
+using System;
+using System.Collections.Generic;
+using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Extensibility;
+
+namespace <#= this.ClassToGenerate.Namespace #>
 {
-	
+	<#= this.ClassToGenerate.ClassDeclaration #>
+	{
+<#
+	foreach (var property in this.DomainType.Properties)
+    {
+#>
+		public virtual <#= property.DataTypeString #> <#= property.Name #> { get; set; }
+<#
+    }
+#>
+	}
 }
 <#
 

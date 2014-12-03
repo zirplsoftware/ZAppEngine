@@ -36,7 +36,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
                 ClassName = domainType.Name,
                 ClassFullName = domainType.FullName,
                 Namespace = domainType.Namespace,
-                BaseClassDeclaration = domainType.InheritsFrom == null ? null : domainType.InheritsFrom.FullName,
+                BaseClass = domainType.InheritsFrom == null ? null : domainType.InheritsFrom.FullName,
                 IsAbstract = domainType.IsAbstract
             };
             if (domainType.IsPersistable

@@ -18,31 +18,32 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         public String ClassName { get; set; }
         public String ClassFullName { get; set; }
         public String Namespace { get; set; }
-        public String BaseClassDeclaration { get; set; }
+        public String BaseClass { get; set; }
         public IList<String> InterfaceDeclarations { get; set; }
         //public String NameWithoutGenericParameters { get; set; }
         public bool IsAbstract { get; set; }
 
-        public String BaseDeclaration
+        public String ClassDeclaration
         {
             get
             {
                 var sb = new StringBuilder();
-                sb.Append("public partial ");
+                sb.Append("public ");
                 if (this.IsAbstract)
                 {
                     sb.Append("abstract ");
                 }
+                sb.Append("partial class ");
                 sb.Append(this.ClassName);
-                if (!String.IsNullOrEmpty(this.BaseClassDeclaration)
+                if (!String.IsNullOrEmpty(this.BaseClass)
                     || this.InterfaceDeclarations.Any())
                     //|| this.GenericConstraintDeclarations.Any())
                 {
-                    sb.AppendLine(" :");
+                    sb.AppendLine(" : ");
                     bool useCommaIfAnother = false;
-                    if (String.IsNullOrEmpty(this.BaseClassDeclaration))
+                    if (!String.IsNullOrEmpty(this.BaseClass))
                     {
-                        sb.Append(this.BaseClassDeclaration);
+                        sb.Append(this.BaseClass);
                         useCommaIfAnother = true;
                     }
                     if (this.InterfaceDeclarations.Any())

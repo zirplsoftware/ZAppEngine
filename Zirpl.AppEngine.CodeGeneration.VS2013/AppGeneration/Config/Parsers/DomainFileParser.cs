@@ -489,7 +489,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             {
                 var nameProperty = new DomainProperty()
                 {
-                    Name = "ClassName",
+                    Name = "Name",
                     IsForIsStaticLookupInterface = true,
                     DataType = DataTypeEnum.String,
                     IsRequired = true,
