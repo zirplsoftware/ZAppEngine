@@ -93,12 +93,12 @@
     <Compile Include="AppGeneration\OutputFileFactory.cs" />
     <Compile Include="AppGeneration\Config\Parsers\ConfigFileException.cs" />
     <Compile Include="AppGeneration\Config\Parsers\DomainFileParser.cs" />
-    <Compile Include="AppGeneration\Config\Parsers\JsonModel\AppJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsers\JsonModel\DomainTypeJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsers\JsonModel\EnumValueJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsers\JsonModel\IdJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsers\JsonModel\PropertyJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsers\JsonModel\RelationshipJson.cs" />
+    <Compile Include="AppGeneration\Config\Parsers\Json\AppJson.cs" />
+    <Compile Include="AppGeneration\Config\Parsers\Json\DomainTypeJson.cs" />
+    <Compile Include="AppGeneration\Config\Parsers\Json\EnumValueJson.cs" />
+    <Compile Include="AppGeneration\Config\Parsers\Json\IdJson.cs" />
+    <Compile Include="AppGeneration\Config\Parsers\Json\PropertyJson.cs" />
+    <Compile Include="AppGeneration\Config\Parsers\Json\RelationshipJson.cs" />
     <Compile Include="AppGeneration\Config\Relationship.cs" />
     <Compile Include="AppGeneration\Templates\Model\PersistableDomainClassTemplate.cs">
       <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
@@ -133,7 +133,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AppGeneration\Config\Parsers\JsonModel\sample domain.zae" />
+    <None Include="AppGeneration\Config\Parsers\Json\sample domain.zae" />
     <None Include="AppGeneration\Templates\Model\PersistableDomainClassTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PersistableDomainClassTemplate.cs</LastGenOutput>

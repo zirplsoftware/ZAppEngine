@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.JsonModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json
 {
     public class EnumValueJson
     {

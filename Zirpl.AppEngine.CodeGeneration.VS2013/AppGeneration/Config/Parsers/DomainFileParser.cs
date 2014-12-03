@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.Model.Metadata;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.JsonModel;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json;
 using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using EnvDTE;
 using Zirpl.AppEngine.Model.Metadata;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.JsonModel;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {

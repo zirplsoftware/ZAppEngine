@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.JsonModel
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json
 {
     public class DomainTypeJson
     {
