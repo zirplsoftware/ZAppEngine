@@ -39,6 +39,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
                 BaseClass = domainType.InheritsFrom == null ? null : domainType.InheritsFrom.FullName,
                 IsAbstract = domainType.IsAbstract
             };
+
+            // TODO: I think from here down belongs in the template???
+
             if (domainType.IsPersistable
                 && domainType.InheritsFrom == null)
             {

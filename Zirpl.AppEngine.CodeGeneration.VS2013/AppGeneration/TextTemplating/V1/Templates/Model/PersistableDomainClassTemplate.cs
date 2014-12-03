@@ -12,9 +12,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.Linq;
-    using Newtonsoft.Json;
     using Zirpl.AppEngine.Model;
     using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.VisualStudioAutomation;
@@ -37,7 +35,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
         public virtual string TransformText()
         {
             
-            #line 23 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 21 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
 
 
 
@@ -47,21 +45,21 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
             this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing Zirpl.AppEngine.Model;\r\nu" +
                     "sing Zirpl.AppEngine.Model.Extensibility;\r\n\r\nnamespace ");
             
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassToGenerate.Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\t");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassToGenerate.ClassDeclaration));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
 
 	foreach (var property in this.DomainType.Properties)
     {
@@ -71,21 +69,21 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
             #line hidden
             this.Write("\t\tpublic virtual ");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 40 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
 
     }
 
@@ -94,7 +92,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
             #line hidden
             this.Write("\t}\r\n}\r\n");
             
-            #line 45 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
 
 
 
