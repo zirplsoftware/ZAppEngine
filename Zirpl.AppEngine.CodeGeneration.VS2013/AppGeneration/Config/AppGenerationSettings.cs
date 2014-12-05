@@ -17,6 +17,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public String GeneratedContentRootFolderName { get; set; }
         public String DataContextName { get; set; }
         public IDictionary<String, Object> GlobalTemplateParameters { get; private set; }
-        public ITemplateOutputFileBuilderStrategyFactory FileFactory { get; internal set; }
+        internal ITemplateOutputFileBuilderStrategyFactory FileFactory { get; set; }
     }
 }

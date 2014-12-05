@@ -19,7 +19,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         private static Object STATIC_SYNC_ROOT;
 
         public ITextTemplatingEngineHost Host { get { return this.CallingTemplate.Host; } }
-        private ITextTransformation CallingTemplate { get; set; }
+        internal ITextTransformation CallingTemplate { get; private set; }
         private StringBuilder CallingTemplateOriginalGenerationEnvironment { get; set; }
         private StringBuilder CurrentGenerationEnvironment { get; set; }
         private OutputFileManager FileManager { get; set; }

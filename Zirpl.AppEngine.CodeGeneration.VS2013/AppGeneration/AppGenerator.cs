@@ -15,9 +15,16 @@ using Zirpl.Collections;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
-    public static class AppGenerator
+    public class AppGenerator : IDisposable
     {
-        public static void GenerateV1App(this TextTransformation callingTemplate, AppGenerationSettings settings = null, IEnumerable<ITemplateOutputFileBuilderStrategy> strategies = null)
+        public AppGenerator(TextTransformation callingTemplate)
+        {
+            TransformationContext.Create(callingTemplate);
+        }
+
+        public TransformationContext TransformationContext { get { return TransformationContext.Instance; } }
+
+        public void GenerateV1App(AppGenerationSettings settings = null, IEnumerable<ITemplateOutputFileBuilderStrategy> strategies = null)
         {
             // set all of the settings defaults
             //
@@ -36,10 +43,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             }
             settings.FileFactory = factory;
 
-            GenerateApp(callingTemplate, settings);
+            GenerateApp(settings);
         }
 
-        public static void GenerateCustomApp(this TextTransformation callingTemplate, AppGenerationSettings settings = null, IEnumerable<ITemplateOutputFileBuilderStrategy> strategies = null)
+        public void GenerateCustomApp(AppGenerationSettings settings = null, IEnumerable<ITemplateOutputFileBuilderStrategy> strategies = null)
         {
             // set all of the settings defaults
             //
@@ -57,24 +64,22 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             }
             settings.FileFactory = factory;
 
-            GenerateApp(callingTemplate, settings);
+            GenerateApp(settings);
         }
 
-        private static void GenerateApp(TextTransformation callingTemplate, AppGenerationSettings settings)
+        private void GenerateApp(AppGenerationSettings settings)
         {
             try
             {
-                using (var session = TransformationContext.Create(callingTemplate))
-                {
                     settings.ProjectNamespacePrefix = settings.ProjectNamespacePrefix
-                        ?? VisualStudio.Current.GetProjectItem(session.Host.TemplateFile).ContainingProject
+                        ?? VisualStudio.Current.GetProjectItem(this.TransformationContext.Host.TemplateFile).ContainingProject
                                                   .GetDefaultNamespace().SubstringUntilLastInstanceOf(".");
                     // create the app
                     //
                     var app = new App()
                     {
                         Settings = settings,
-                        AppGenerationConfigProject = VisualStudio.Current.GetProjectItem(session.Host.TemplateFile).ContainingProject,
+                        AppGenerationConfigProject = VisualStudio.Current.GetProjectItem(this.TransformationContext.Host.TemplateFile).ContainingProject,
                         ModelProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Model"),
                         DataServiceProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".DataService"),
                         ServiceProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Service"),
@@ -117,23 +122,30 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                         }
                         // finally the App
                         file.TemplateParameters.Add("App", app);
-                        session.TransformAndCreateFile(file);
+                        this.TransformationContext.TransformAndCreateFile(file);
                     }
-                }
             }
             catch (Exception e)
             {
-                if (callingTemplate != null)
+                if (this.TransformationContext.CallingTemplate != null)
                 {
                     try
                     {
-                        callingTemplate.WriteLine(e.ToString());
+                        this.TransformationContext.CallingTemplate.WriteLine(e.ToString());
                     }
                     catch (Exception)
                     {
                     }
                 }
                 throw;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (this.TransformationContext != null)
+            {
+                this.TransformationContext.Dispose();
             }
         }
     }
