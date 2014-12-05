@@ -49,12 +49,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_config\ModelProject\Tag.model.xml" />
-    <None Include="AppTransform.json">
+    <Content Include="AppTransform.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppTransform.tt</DependentUpon>
-    </None>
+    </Content>
+    <Content Include="_config\ModelProject\Tag.model.xml" />
     <None Include="_config\AppDefinition.app.zae">
       <SubType>Designer</SubType>
     </None>
@@ -133,7 +133,7 @@
       <TransformOnBuild>True</TransformOnBuild>
       <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
 &lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
-      <LastGenOutput>AppTransform.json</LastGenOutput>
+      <LastGenOutput>AppTransform.txt</LastGenOutput>
     </None>
     <None Include="_config\ModelProject\NamePrefixType.domain.zae" />
     <None Include="_config\ModelProject\Orders\ShipBatch.model.xml.exclude" />
