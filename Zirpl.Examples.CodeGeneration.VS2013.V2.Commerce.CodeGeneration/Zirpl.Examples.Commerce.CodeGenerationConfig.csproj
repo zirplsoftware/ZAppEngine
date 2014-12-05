@@ -131,6 +131,8 @@
     <None Include="AppTransform.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <TransformOnBuild>True</TransformOnBuild>
+      <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
+&lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
       <LastGenOutput>AppTransform.json</LastGenOutput>
     </None>
     <None Include="_config\ModelProject\NamePrefixType.domain.zae" />

@@ -20,7 +20,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
         {
             try
             {
-                using (var session = TransformSession.StartSession(callingTemplate))
+                using (var session = TransformationContext.Create(callingTemplate))
                 {
                     // set all of the settings defaults
                     //
@@ -28,7 +28,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     settings.DataContextName = settings.DataContextName ?? "AppDataContext";
                     settings.GeneratedContentRootFolderName = settings.GeneratedContentRootFolderName ?? @"_auto\";
                     settings.ProjectNamespacePrefix = settings.ProjectNamespacePrefix
-                        ?? VisualStudio.Current.GetProjectItem(session.CallingTemplate.Host.TemplateFile).ContainingProject
+                        ?? VisualStudio.Current.GetProjectItem(session.Host.TemplateFile).ContainingProject
                                                           .GetDefaultNamespace().SubstringUntilLastInstanceOf(".");
 
                     // default V1 builder strategies
@@ -43,7 +43,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     var app = new App()
                     {
                         Settings = settings,
-                        AppGenerationConfigProject = VisualStudio.Current.GetProjectItem(session.CallingTemplate.Host.TemplateFile).ContainingProject,
+                        AppGenerationConfigProject = VisualStudio.Current.GetProjectItem(session.Host.TemplateFile).ContainingProject,
                         ModelProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Model"),
                         DataServiceProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".DataService"),
                         ServiceProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Service"),
@@ -86,7 +86,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                         }
                         // finally the App
                         file.TemplateParameters.Add("App", app);
-                        session.ExecuteTransform(file);
+                        session.TransformAndCreateFile(file);
                     }
                 }
             }

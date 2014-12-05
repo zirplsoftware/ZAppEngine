@@ -5,10 +5,10 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class TransformWrapper :ITransformation
+    public class TextTransformationWrapper :ITextTransformation
     {
         private readonly TextTransformation _textTransformation;
-        public TransformWrapper(TextTransformation textTransformation)
+        public TextTransformationWrapper(TextTransformation textTransformation)
         {
             this._textTransformation = textTransformation;
         }

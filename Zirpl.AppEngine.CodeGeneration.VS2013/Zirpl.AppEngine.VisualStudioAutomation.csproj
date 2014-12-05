@@ -109,12 +109,12 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="AppGeneration\TextTemplating\ITemplateOutputFileBuilderStrategy.cs" />
-    <Compile Include="TextTemplating\ITransformation.cs" />
+    <Compile Include="TextTemplating\ITextTransformation.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
-    <Compile Include="TextTemplating\PreprocessedTransformWrapper.cs" />
+    <Compile Include="TextTemplating\PreprocessedTextTransformationWrapper.cs" />
     <Compile Include="TextTemplating\TemplateOutputFile.cs" />
-    <Compile Include="TextTemplating\TransformSession.cs" />
-    <Compile Include="TextTemplating\TransformWrapper.cs" />
+    <Compile Include="TextTemplating\TransformationContext.cs" />
+    <Compile Include="TextTemplating\TextTransformationWrapper.cs" />
     <Compile Include="TextTemplating\BuildActionTypeEnum.cs" />
     <Compile Include="VisualStudio.cs" />
     <Compile Include="VisualStudioExtensions.cs" />

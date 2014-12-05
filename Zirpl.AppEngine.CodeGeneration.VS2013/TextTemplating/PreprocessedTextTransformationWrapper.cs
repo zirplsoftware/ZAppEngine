@@ -8,12 +8,12 @@ using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class PreprocessedTransformWrapper : ITransformation
+    public class PreprocessedTextTransformationWrapper : ITextTransformation
     {
         private readonly Object _textTransformation;
         private readonly IDynamicAccessor _dynamicAccessor;
 
-        public PreprocessedTransformWrapper(Object textTransformation)
+        public PreprocessedTextTransformationWrapper(Object textTransformation)
         {
             this._textTransformation = textTransformation;
             this._dynamicAccessor = textTransformation.GetDynamicAccessor();

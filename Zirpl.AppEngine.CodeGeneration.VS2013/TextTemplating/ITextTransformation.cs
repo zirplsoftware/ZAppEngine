@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public interface ITransformation : IDisposable
+    public interface ITextTransformation : IDisposable
     {
         StringBuilder GenerationEnvironment { get; set; }
         CompilerErrorCollection Errors { get; }

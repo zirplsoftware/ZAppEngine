@@ -26,7 +26,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         //public Dictionary<string, string> ContentParameters { get; set; }
 
         public ProjectItem ProjectItem { get; internal set; }
-        public string Content { get; internal set; }
+        public String Content { get; internal set; }
         public String FileName
         {
             get { return this.FileNameWithoutExtension + this.FileExtension; }
