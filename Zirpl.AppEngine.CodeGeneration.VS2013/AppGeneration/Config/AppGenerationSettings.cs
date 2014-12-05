@@ -11,13 +11,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
     {
         public AppGenerationSettings()
         {
-            this.TemplateParameters = new Dictionary<string, object>();
-            this.BuilderStrategies = new List<ITemplateOutputFileBuilderStrategy>();
+            this.GlobalTemplateParameters = new Dictionary<string, object>();
         }
         public String ProjectNamespacePrefix { get; set; }
         public String GeneratedContentRootFolderName { get; set; }
         public String DataContextName { get; set; }
-        public IDictionary<String, Object> TemplateParameters { get; private set; }
-        public IList<ITemplateOutputFileBuilderStrategy> BuilderStrategies { get; private set; }  
+        public IDictionary<String, Object> GlobalTemplateParameters { get; private set; }
+        public ITemplateOutputFileBuilderStrategyFactory FileFactory { get; internal set; }
     }
 }

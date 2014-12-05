@@ -91,6 +91,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppGeneration\Config\AppGenerationSettings.cs" />
+    <Compile Include="AppGeneration\TextTemplating\TemplateOutputFileBuilderStrategyFactoryBase.cs" />
+    <Compile Include="AppGeneration\TextTemplating\ITemplateOutputFileBuilderStrategyFactory.cs" />
+    <Compile Include="AppGeneration\TextTemplating\CustomTemplateOutputFileBuilderStrategyFactory.cs" />
     <Compile Include="AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassStrategy.cs" />
     <Compile Include="AppGeneration\Config\Parsers\ConfigFileException.cs" />
     <Compile Include="AppGeneration\Config\Parsers\DomainFileParser.cs" />
@@ -109,6 +112,7 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="AppGeneration\TextTemplating\ITemplateOutputFileBuilderStrategy.cs" />
+    <Compile Include="AppGeneration\TextTemplating\V1\V1TemplateOutputFileBuilderStrategyFactory.cs" />
     <Compile Include="TextTemplating\ITextTransformation.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
     <Compile Include="TextTemplating\PreprocessedTextTransformationWrapper.cs" />

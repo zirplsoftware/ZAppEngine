@@ -203,6 +203,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             try
             {
+                this.EndFile();
                 this.FileManager.Finish();
             }
             finally

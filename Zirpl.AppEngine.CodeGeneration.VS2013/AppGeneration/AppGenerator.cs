@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
@@ -16,28 +17,58 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {
-        public static void GenerateApp(this TextTransformation callingTemplate, AppGenerationSettings settings = null)
+        public static void GenerateV1App(this TextTransformation callingTemplate, AppGenerationSettings settings = null, IEnumerable<ITemplateOutputFileBuilderStrategy> strategies = null)
+        {
+            // set all of the settings defaults
+            //
+            settings = settings ?? new AppGenerationSettings();
+            settings.DataContextName = settings.DataContextName ?? "AppDataContext";
+            settings.GeneratedContentRootFolderName = settings.GeneratedContentRootFolderName ?? @"_auto\";
+            settings.FileFactory = new V1TemplateOutputFileBuilderStrategyFactory();
+
+            var factory = new V1TemplateOutputFileBuilderStrategyFactory();
+            if (strategies != null)
+            {
+                foreach (var strategy in strategies)
+                {
+                    factory.AddStrategy(strategy);
+                }
+            }
+            settings.FileFactory = factory;
+
+            GenerateApp(callingTemplate, settings);
+        }
+
+        public static void GenerateCustomApp(this TextTransformation callingTemplate, AppGenerationSettings settings = null, IEnumerable<ITemplateOutputFileBuilderStrategy> strategies = null)
+        {
+            // set all of the settings defaults
+            //
+            settings = settings ?? new AppGenerationSettings();
+            settings.DataContextName = settings.DataContextName ?? "AppDataContext";
+            settings.GeneratedContentRootFolderName = settings.GeneratedContentRootFolderName ?? @"_auto\";
+
+            var factory = new CustomTemplateOutputFileBuilderStrategyFactory();
+            if (strategies != null)
+            {
+                foreach (var strategy in strategies)
+                {
+                    factory.AddStrategy(strategy);
+                }
+            }
+            settings.FileFactory = factory;
+
+            GenerateApp(callingTemplate, settings);
+        }
+
+        private static void GenerateApp(TextTransformation callingTemplate, AppGenerationSettings settings)
         {
             try
             {
                 using (var session = TransformationContext.Create(callingTemplate))
                 {
-                    // set all of the settings defaults
-                    //
-                    settings = settings ?? new AppGenerationSettings();
-                    settings.DataContextName = settings.DataContextName ?? "AppDataContext";
-                    settings.GeneratedContentRootFolderName = settings.GeneratedContentRootFolderName ?? @"_auto\";
                     settings.ProjectNamespacePrefix = settings.ProjectNamespacePrefix
                         ?? VisualStudio.Current.GetProjectItem(session.Host.TemplateFile).ContainingProject
-                                                          .GetDefaultNamespace().SubstringUntilLastInstanceOf(".");
-
-                    // default V1 builder strategies
-                    //
-                    if (!settings.BuilderStrategies.Where(o => o.TemplateCategory == TemplateCategories.PersistableDomainClass).Any())
-                    {
-                        settings.BuilderStrategies.Add(new PersistableDomainClassStrategy());
-                    }
-
+                                                  .GetDefaultNamespace().SubstringUntilLastInstanceOf(".");
                     // create the app
                     //
                     var app = new App()
@@ -65,7 +96,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     // create all of the Template output files
                     //
                     var filesToGenerate = new List<TemplateOutputFile>();
-                    foreach (var strategy in app.Settings.BuilderStrategies)
+                    foreach (var strategy in app.Settings.FileFactory.GetAllStrategies())
                     {
                         filesToGenerate.AddRange(strategy.BuildOutputFiles(app));   
                     }
@@ -76,11 +107,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     //
                     foreach (var file in filesToGenerate)
                     {
-                        foreach (var parameter in app.Settings.TemplateParameters)
+                        foreach (var parameter in app.Settings.GlobalTemplateParameters)
                         {
                             if (file.TemplateParameters.ContainsKey(parameter.Key))
                             {
-                                throw new Exception("Global TemplateParameters in Settings conflict with parameters a file to generate. Key = " + parameter.Key);
+                                throw new Exception("Global GlobalTemplateParameters in Settings conflict with parameters a file to generate. Key = " + parameter.Key);
                             }
                             file.TemplateParameters.Add(parameter.Key, parameter.Value);
                         }
