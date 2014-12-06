@@ -13,25 +13,21 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
     /// <summary>
     /// Manages a TextTransformation Session
     /// </summary>
-    public sealed class TransformationContext: IDisposable
+    public sealed class TextTransformationContext: IDisposable
     {
-        public static TransformationContext Instance { get; private set; }
+        public static TextTransformationContext Instance { get; private set; }
         private static Object STATIC_SYNC_ROOT;
 
         public ITextTemplatingEngineHost Host { get { return this.CallingTemplate.Host; } }
+        public DTE2 VisualStudio { get; private set; }
         internal ITextTransformation CallingTemplate { get; private set; }
         private StringBuilder CallingTemplateOriginalGenerationEnvironment { get; set; }
         private StringBuilder CurrentGenerationEnvironment { get; set; }
         private OutputFileManager FileManager { get; set; }
         private OutputFile CurrentOutputFile { get; set; }
 
-        public static TransformationContext Create(TextTransformation callingTemplate)
+        public static TextTransformationContext Create(TextTransformation callingTemplate)
         {
-            //IServiceProvider serviceProvider = (IServiceProvider)this.Host;
-            //EnvDTE.DTE dte = (EnvDTE.DTE)serviceProvider.GetCOMService(typeof(EnvDTE.DTE));
-            
-            //DTE2 dte = (DTE2)GetService(typeof(DTE));
-
             if (callingTemplate == null)
             {
                 throw new ArgumentNullException("callingTemplate");
@@ -45,7 +41,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 throw new ArgumentException("Host.TemplateFile cannot be null. Preprocessed templates need to be passed the calling templates.", "callingTemplate");
             }
-            if (VisualStudio.Current == null)
+            var dte2 = (DTE2)((IServiceProvider)callingTemplateWrapper.Host).GetCOMService(typeof(DTE));
+            if (dte2 == null)
             {
                 throw new Exception("Could not load VisualStudio DTE2");
             }
@@ -57,11 +54,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     throw new Exception("Cannot call Create more than once");
                 }
 
-                var instance = new TransformationContext();
+                var instance = new TextTransformationContext();
                 instance.CallingTemplate = callingTemplateWrapper;
                 instance.CallingTemplateOriginalGenerationEnvironment = instance.CallingTemplate.GenerationEnvironment;
                 instance.CurrentGenerationEnvironment = instance.CallingTemplateOriginalGenerationEnvironment;
                 instance.FileManager = new OutputFileManager();
+                instance.VisualStudio = dte2;
                 Instance = instance;
             }
             return Instance;
@@ -80,7 +78,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         }
 
 
-        public void TransformAndCreateFile(TemplateOutputFile file)
+        public void TransformAndCreateFile(PreprocessedTextTransformationOutputFile file)
         {
             if (file == this.CurrentOutputFile)
             {
@@ -127,7 +125,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             var project = String.IsNullOrEmpty(destinationProjectName)
                 ? null
-                : VisualStudio.Current.GetProject(destinationProjectName);
+                : VisualStudio.GetProject(destinationProjectName);
 
             this.StartFile(fileName, folderWithinProject, project, buildAction, customTool, autoFormat, overwrite, encoding);
         }
@@ -140,7 +138,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
                 FileExtension = Path.GetExtension(fileName),
-                DestinationProject = destinationProject ?? VisualStudio.Current.GetProjectItem(this.CallingTemplate.Host.TemplateFile).ContainingProject,
+                DestinationProject = destinationProject ?? VisualStudio.GetProjectItem(this.CallingTemplate.Host.TemplateFile).ContainingProject,
                 FolderPathWithinProject = folderWithinProject,
                 CustomTool = customTool
             };

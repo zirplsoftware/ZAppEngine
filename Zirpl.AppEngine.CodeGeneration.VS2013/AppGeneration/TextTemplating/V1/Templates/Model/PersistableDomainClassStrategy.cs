@@ -9,21 +9,21 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
 {
     public class PersistableDomainClassStrategy : ITemplateOutputFileBuilderStrategy
     {
-        public IEnumerable<TemplateOutputFile> BuildOutputFiles(App app)
+        public IEnumerable<PreprocessedTextTransformationOutputFile> BuildOutputFiles(App app)
         {
             return from d in app.DomainTypes
                 where d.IsPersistable
                 select this.BuildOutputFile(app, d);
         }
 
-        public TemplateOutputFile BuildOutputFile(App app, DomainType domainType)
+        public PreprocessedTextTransformationOutputFile BuildOutputFile(App app, DomainType domainType)
         {
             return this.BuildClassToGenerate(app, domainType).OutputFile;
         }
 
         public ClassToGenerate BuildClassToGenerate(App app, DomainType domainType)
         {
-            var classToGenerate = new ClassToGenerate(new TemplateOutputFile()
+            var classToGenerate = new ClassToGenerate(new PreprocessedTextTransformationOutputFile()
             {
                 FileNameWithoutExtension = domainType.Name,
                 FileExtension = ".cs",

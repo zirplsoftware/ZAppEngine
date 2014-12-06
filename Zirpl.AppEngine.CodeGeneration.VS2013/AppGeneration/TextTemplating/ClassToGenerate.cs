@@ -8,13 +8,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
     public class ClassToGenerate
     {
-        public ClassToGenerate(TemplateOutputFile outputFile)
+        public ClassToGenerate(PreprocessedTextTransformationOutputFile outputFile)
         {
             this.OutputFile = outputFile;
             this.InterfaceDeclarations = new List<string>();
         }
 
-        public TemplateOutputFile OutputFile { get; private set; }
+        public PreprocessedTextTransformationOutputFile OutputFile { get; private set; }
         public String ClassName { get; set; }
         public String ClassFullName { get; set; }
         public String Namespace { get; set; }

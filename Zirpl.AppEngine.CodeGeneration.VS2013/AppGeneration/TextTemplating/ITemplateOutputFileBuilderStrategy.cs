@@ -7,8 +7,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
     public interface ITemplateOutputFileBuilderStrategy
     {
-        IEnumerable<TemplateOutputFile> BuildOutputFiles(App app);
-        TemplateOutputFile BuildOutputFile(App app, DomainType domainType);
+        IEnumerable<PreprocessedTextTransformationOutputFile> BuildOutputFiles(App app);
+        PreprocessedTextTransformationOutputFile BuildOutputFile(App app, DomainType domainType);
         String TemplateCategory { get; }
     }
 }

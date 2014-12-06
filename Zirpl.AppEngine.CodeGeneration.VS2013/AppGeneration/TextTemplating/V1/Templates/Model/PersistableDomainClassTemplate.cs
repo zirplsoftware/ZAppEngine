@@ -119,12 +119,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
         
         #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateOutputFile _TemplateOutputFileField;
+private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile _TemplateOutputFileField;
 
 /// <summary>
 /// Access the TemplateOutputFile parameter of the template.
 /// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateOutputFile TemplateOutputFile
+private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile TemplateOutputFile
 {
     get
     {
@@ -182,7 +182,7 @@ public virtual void Initialize()
 bool TemplateOutputFileValueAcquired = false;
 if (this.Session.ContainsKey("TemplateOutputFile"))
 {
-    this._TemplateOutputFileField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateOutputFile)(this.Session["TemplateOutputFile"]));
+    this._TemplateOutputFileField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile)(this.Session["TemplateOutputFile"]));
     TemplateOutputFileValueAcquired = true;
 }
 if ((TemplateOutputFileValueAcquired == false))
@@ -190,11 +190,11 @@ if ((TemplateOutputFileValueAcquired == false))
     string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "TemplateOutputFile");
     if ((string.IsNullOrEmpty(parameterValue) == false))
     {
-        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateOutputFile));
+        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile));
         if (((tc != null) 
                     && tc.CanConvertFrom(typeof(string))))
         {
-            this._TemplateOutputFileField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateOutputFile)(tc.ConvertFrom(parameterValue)));
+            this._TemplateOutputFileField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile)(tc.ConvertFrom(parameterValue)));
             TemplateOutputFileValueAcquired = true;
         }
         else
@@ -210,7 +210,7 @@ if ((TemplateOutputFileValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("TemplateOutputFile");
     if ((data != null))
     {
-        this._TemplateOutputFileField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateOutputFile)(data));
+        this._TemplateOutputFileField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile)(data));
     }
 }
 bool AppValueAcquired = false;

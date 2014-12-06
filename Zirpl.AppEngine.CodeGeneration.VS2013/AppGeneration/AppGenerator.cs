@@ -19,10 +19,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
     {
         public AppGenerator(TextTransformation callingTemplate)
         {
-            TransformationContext.Create(callingTemplate);
+            TextTransformationContext.Create(callingTemplate);
         }
 
-        public TransformationContext TransformationContext { get { return TransformationContext.Instance; } }
+        public TextTransformationContext Context { get { return TextTransformationContext.Instance; } }
 
         public void GenerateV1App(AppGenerationSettings settings = null, IEnumerable<ITemplateOutputFileBuilderStrategy> strategies = null)
         {
@@ -43,7 +43,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             }
             settings.FileFactory = factory;
 
-            GenerateApp(settings);
+            this.GenerateApp(settings);
         }
 
         public void GenerateCustomApp(AppGenerationSettings settings = null, IEnumerable<ITemplateOutputFileBuilderStrategy> strategies = null)
@@ -72,22 +72,22 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             try
             {
                     settings.ProjectNamespacePrefix = settings.ProjectNamespacePrefix
-                        ?? VisualStudio.Current.GetProjectItem(this.TransformationContext.Host.TemplateFile).ContainingProject
+                        ?? this.Context.VisualStudio.GetProjectItem(this.Context.Host.TemplateFile).ContainingProject
                                                   .GetDefaultNamespace().SubstringUntilLastInstanceOf(".");
                     // create the app
                     //
                     var app = new App()
                     {
                         Settings = settings,
-                        AppGenerationConfigProject = VisualStudio.Current.GetProjectItem(this.TransformationContext.Host.TemplateFile).ContainingProject,
-                        ModelProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Model"),
-                        DataServiceProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".DataService"),
-                        ServiceProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Service"),
-                        WebCommonProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Web.Common"),
-                        WebProject = VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Web"),
-                        TestsCommonProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Tests.Common"),
-                        DataServiceTestsProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Tests.DataService"),
-                        ServiceTestsProject =VisualStudio.Current.GetProject(settings.ProjectNamespacePrefix + ".Tests.Service"),
+                        AppGenerationConfigProject = this.Context.VisualStudio.GetProjectItem(this.Context.Host.TemplateFile).ContainingProject,
+                        ModelProject = this.Context.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Model"),
+                        DataServiceProject = this.Context.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".DataService"),
+                        ServiceProject = this.Context.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Service"),
+                        WebCommonProject = this.Context.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Web.Common"),
+                        WebProject = this.Context.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Web"),
+                        TestsCommonProject = this.Context.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Tests.Common"),
+                        DataServiceTestsProject = this.Context.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Tests.DataService"),
+                        ServiceTestsProject = this.Context.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Tests.Service"),
                     };
                     
                     // create all of the domain types
@@ -100,7 +100,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
                     // create all of the Template output files
                     //
-                    var filesToGenerate = new List<TemplateOutputFile>();
+                    var filesToGenerate = new List<PreprocessedTextTransformationOutputFile>();
                     foreach (var strategy in app.Settings.FileFactory.GetAllStrategies())
                     {
                         filesToGenerate.AddRange(strategy.BuildOutputFiles(app));   
@@ -122,16 +122,16 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                         }
                         // finally the App
                         file.TemplateParameters.Add("App", app);
-                        this.TransformationContext.TransformAndCreateFile(file);
+                        this.Context.TransformAndCreateFile(file);
                     }
             }
             catch (Exception e)
             {
-                if (this.TransformationContext.CallingTemplate != null)
+                if (this.Context.CallingTemplate != null)
                 {
                     try
                     {
-                        this.TransformationContext.CallingTemplate.WriteLine(e.ToString());
+                        this.Context.CallingTemplate.WriteLine(e.ToString());
                     }
                     catch (Exception)
                     {
@@ -143,9 +143,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
         public void Dispose()
         {
-            if (this.TransformationContext != null)
+            if (this.Context != null)
             {
-                this.TransformationContext.Dispose();
+                this.Context.Dispose();
             }
         }
     }

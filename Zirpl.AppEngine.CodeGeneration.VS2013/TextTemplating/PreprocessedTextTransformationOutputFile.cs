@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class TemplateOutputFile : OutputFile
+    public class PreprocessedTextTransformationOutputFile : OutputFile
     {
-        public TemplateOutputFile()
+        public PreprocessedTextTransformationOutputFile()
         {
             this.TemplateParameters = new Dictionary<string, object>();
         }
