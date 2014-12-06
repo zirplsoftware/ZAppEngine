@@ -21,10 +21,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         public ITextTemplatingEngineHost Host { get { return this.CallingTemplate.Host; } }
         public DTE2 VisualStudio { get; private set; }
         internal ITextTransformation CallingTemplate { get; private set; }
-        private StringBuilder CallingTemplateOriginalGenerationEnvironment { get; set; }
-        private StringBuilder CurrentGenerationEnvironment { get; set; }
         private OutputFileManager FileManager { get; set; }
-        private OutputFile CurrentOutputFile { get; set; }
 
         public static TextTransformationContext Create(TextTransformation callingTemplate)
         {
@@ -56,8 +53,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
                 var instance = new TextTransformationContext();
                 instance.CallingTemplate = callingTemplateWrapper;
-                instance.CallingTemplateOriginalGenerationEnvironment = instance.CallingTemplate.GenerationEnvironment;
-                instance.CurrentGenerationEnvironment = instance.CallingTemplateOriginalGenerationEnvironment;
                 instance.VisualStudio = dte2;
                 instance.FileManager = new OutputFileManager(instance);
                 Instance = instance;
@@ -78,99 +73,53 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         }
 
 
-        public void WriteFile(PreprocessedTextTransformationOutputFile file)
+
+        public void WriteFile(OutputFile outputFile)
         {
-            if (file == this.CurrentOutputFile)
-            {
-                this.EndFile();
-            }
-            else
-            {
-                this.EndFile();
-
-                var template = Activator.CreateInstance(file.TemplateType);
-
-                var templateWrapper = new PreprocessedTextTransformationWrapper(template);
-
-                var session = new TextTemplatingSession();
-                foreach (var parameter in file.TemplateParameters)
-                {
-                    session[parameter.Key] = parameter.Value;
-                }
-                session["TemplateOutputFile"] = file;
-                templateWrapper.Session = session;
-                templateWrapper.Initialize(); // Must call this to transfer values.
-
-                file.Content = templateWrapper.TransformText();
-
-                this.FileManager.CreateFile(file);
-            }
+            this.FileManager.WriteFile(outputFile);
         }
 
-        public void WriteFile(OutputFile file)
+        public void WriteFile(PreprocessedTextTransformationOutputFile outputFile)
         {
-            if (file == this.CurrentOutputFile)
-            {
-                this.EndFile();
-            }
-            else
-            {
-                this.EndFile();
-
-                this.FileManager.CreateFile(file);   
-            }
+            this.FileManager.WriteFile(outputFile);
         }
 
         public void StartFile(String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
             var project = String.IsNullOrEmpty(destinationProjectName)
                 ? null
-                : VisualStudio.GetProject(destinationProjectName);
+                : this.VisualStudio.GetProject(destinationProjectName);
 
             this.StartFile(fileName, folderWithinProject, project, buildAction, customTool, autoFormat, overwrite, encoding);
         }
 
         public void StartFile(String fileName, String folderWithinProject = null, Project destinationProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
-            //this.EndFile();
-
             var outputFile = new OutputFile()
             {
                 FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
                 FileExtension = Path.GetExtension(fileName),
-                DestinationProject = destinationProject ?? VisualStudio.GetProjectItem(this.CallingTemplate.Host.TemplateFile).ContainingProject,
+                DestinationProject = destinationProject ?? this.VisualStudio.GetProjectItem(this.Host.TemplateFile).ContainingProject,
                 FolderPathWithinProject = folderWithinProject,
                 CustomTool = customTool
             };
-            outputFile.BuildAction = buildAction ?? this.CurrentOutputFile.BuildAction;
-            outputFile.CanOverrideExistingFile = overwrite ?? this.CurrentOutputFile.CanOverrideExistingFile;
-            outputFile.AutoFormat = autoFormat ?? this.CurrentOutputFile.AutoFormat;
-            outputFile.Encoding = encoding ?? this.CurrentOutputFile.Encoding;
+            outputFile.BuildAction = buildAction ?? outputFile.BuildAction;
+            outputFile.CanOverrideExistingFile = overwrite ?? outputFile.CanOverrideExistingFile;
+            outputFile.AutoFormat = autoFormat ?? outputFile.AutoFormat;
+            outputFile.Encoding = encoding ?? outputFile.Encoding;
 
             this.StartFile(outputFile);
         }
 
-        public void StartFile(OutputFile file)
+        public void StartFile(OutputFile outputFile)
         {
-            this.EndFile();
-
-            this.CurrentOutputFile = file;
-            this.CurrentGenerationEnvironment = new StringBuilder();
-            this.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
+            this.FileManager.StartFile(outputFile);
         }
 
         public void EndFile()
         {
-            if (this.CurrentOutputFile != null)
-            {
-                this.CurrentOutputFile.Content += this.CurrentGenerationEnvironment.ToString();
-                this.CurrentGenerationEnvironment = this.CallingTemplateOriginalGenerationEnvironment;
-                this.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
-                this.FileManager.CreateFile(this.CurrentOutputFile);
-                this.CurrentOutputFile = null;
-            }
+            this.FileManager.EndFile();
         }
-
 
         /// <summary>
         /// Writes a line to the build pane in visual studio and activates it
@@ -201,8 +150,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             try
             {
-                this.EndFile();
-                this.FileManager.Finish();
+                this.FileManager.Dispose();
             }
             finally
             {

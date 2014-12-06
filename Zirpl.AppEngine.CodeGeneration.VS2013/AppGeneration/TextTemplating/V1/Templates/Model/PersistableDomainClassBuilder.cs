@@ -7,31 +7,32 @@ using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1.Templates.Model
 {
-    public class PersistableDomainClassStrategy : ITemplateOutputFileBuilderStrategy
+    public class PersistableDomainClassBuilder : IOutputClassBuilder
     {
-        public IEnumerable<PreprocessedTextTransformationOutputFile> BuildOutputFiles(App app)
+        public IEnumerable<OutputFile> BuildOutputFiles(App app)
         {
             return from d in app.DomainTypes
                 where d.IsPersistable
                 select this.BuildOutputFile(app, d);
         }
 
-        public PreprocessedTextTransformationOutputFile BuildOutputFile(App app, DomainType domainType)
+        public OutputFile BuildOutputFile(App app, DomainType domainType)
         {
-            return this.BuildClassToGenerate(app, domainType).OutputFile;
+            return this.BuildOutputClass(app, domainType).OutputFile;
         }
 
-        public ClassToGenerate BuildClassToGenerate(App app, DomainType domainType)
+        public OutputClass BuildOutputClass(App app, DomainType domainType)
         {
-            var classToGenerate = new ClassToGenerate(new PreprocessedTextTransformationOutputFile()
+            var outputFile = new PreprocessedTextTransformationOutputFile()
             {
                 FileNameWithoutExtension = domainType.Name,
                 FileExtension = ".cs",
                 DestinationProject = domainType.DestinationProject,
                 FolderPathWithinProject = app.GetFolderPathFromNamespace(domainType.DestinationProject, domainType.Namespace),
                 BuildAction = BuildActionTypeEnum.Compile,
-                TemplateType = typeof(PersistableDomainClassTemplate),
-            })
+                TemplateType = typeof (PersistableDomainClassTemplate),
+            };
+            var classToGenerate = new OutputClass(outputFile)
             {
                 ClassName = domainType.Name,
                 ClassFullName = domainType.FullName,
@@ -84,14 +85,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
             {
                 classToGenerate.InterfaceDeclarations.Add("Zirpl.AppEngine.Model.IVersionable");
             }
-            classToGenerate.OutputFile.TemplateParameters.Add("DomainType", domainType);
-            classToGenerate.OutputFile.TemplateParameters.Add("ClassToGenerate", classToGenerate);
+            outputFile.TemplateParameters.Add("DomainType", domainType);
+            outputFile.TemplateParameters.Add("ClassToGenerate", classToGenerate);
             return classToGenerate;
         }
 
-        public string TemplateCategory
+        public string Key
         {
-            get { return TemplateCategories.PersistableDomainClass; }
+            get { return BuilderKeys.PersistableDomainClass; }
         }
     }
 }

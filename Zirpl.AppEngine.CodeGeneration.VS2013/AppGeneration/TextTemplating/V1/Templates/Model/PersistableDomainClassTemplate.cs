@@ -158,12 +158,12 @@ private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Doma
     }
 }
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.ClassToGenerate _ClassToGenerateField;
+private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass _ClassToGenerateField;
 
 /// <summary>
 /// Access the ClassToGenerate parameter of the template.
 /// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.ClassToGenerate ClassToGenerate
+private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass ClassToGenerate
 {
     get
     {
@@ -283,7 +283,7 @@ if ((DomainTypeValueAcquired == false))
 bool ClassToGenerateValueAcquired = false;
 if (this.Session.ContainsKey("ClassToGenerate"))
 {
-    this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.ClassToGenerate)(this.Session["ClassToGenerate"]));
+    this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(this.Session["ClassToGenerate"]));
     ClassToGenerateValueAcquired = true;
 }
 if ((ClassToGenerateValueAcquired == false))
@@ -291,11 +291,11 @@ if ((ClassToGenerateValueAcquired == false))
     string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "ClassToGenerate");
     if ((string.IsNullOrEmpty(parameterValue) == false))
     {
-        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.ClassToGenerate));
+        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass));
         if (((tc != null) 
                     && tc.CanConvertFrom(typeof(string))))
         {
-            this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.ClassToGenerate)(tc.ConvertFrom(parameterValue)));
+            this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(tc.ConvertFrom(parameterValue)));
             ClassToGenerateValueAcquired = true;
         }
         else
@@ -311,7 +311,7 @@ if ((ClassToGenerateValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ClassToGenerate");
     if ((data != null))
     {
-        this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.ClassToGenerate)(data));
+        this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(data));
     }
 }
 

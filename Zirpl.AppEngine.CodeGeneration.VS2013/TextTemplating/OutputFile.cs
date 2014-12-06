@@ -13,6 +13,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             //this.ContentParameters = new Dictionary<string, string>();
             this.CanOverrideExistingFile = true;
             this.Encoding = Encoding.UTF8;
+            this.BuildAction = BuildActionTypeEnum.Compile;
         }
         public String FileNameWithoutExtension { get; set; }
         public String FileExtension { get; set; }

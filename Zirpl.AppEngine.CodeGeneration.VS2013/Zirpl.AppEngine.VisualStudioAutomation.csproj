@@ -87,14 +87,14 @@
     <Compile Include="AppGeneration\Config\DomainType.cs" />
     <Compile Include="AppGeneration\Config\EnumValue.cs" />
     <Compile Include="AppGeneration\Config\AppExtensions.cs" />
-    <Compile Include="AppGeneration\TextTemplating\ClassToGenerate.cs">
+    <Compile Include="AppGeneration\TextTemplating\IOutputClassBuilder.cs" />
+    <Compile Include="AppGeneration\TextTemplating\OutputClass.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppGeneration\Config\AppGenerationSettings.cs" />
-    <Compile Include="AppGeneration\TextTemplating\TemplateOutputFileBuilderStrategyFactoryBase.cs" />
-    <Compile Include="AppGeneration\TextTemplating\ITemplateOutputFileBuilderStrategyFactory.cs" />
-    <Compile Include="AppGeneration\TextTemplating\CustomTemplateOutputFileBuilderStrategyFactory.cs" />
-    <Compile Include="AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassStrategy.cs" />
+    <Compile Include="AppGeneration\TextTemplating\DefaultOutputFileBuilderFactory.cs" />
+    <Compile Include="AppGeneration\TextTemplating\IOutputFileBuilderFactory.cs" />
+    <Compile Include="AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassBuilder.cs" />
     <Compile Include="AppGeneration\Config\Parsers\ConfigFileException.cs" />
     <Compile Include="AppGeneration\Config\Parsers\DomainFileParser.cs" />
     <Compile Include="AppGeneration\Config\Parsers\Json\AppJson.cs" />
@@ -104,15 +104,14 @@
     <Compile Include="AppGeneration\Config\Parsers\Json\PropertyJson.cs" />
     <Compile Include="AppGeneration\Config\Parsers\Json\RelationshipJson.cs" />
     <Compile Include="AppGeneration\Config\Relationship.cs" />
-    <Compile Include="AppGeneration\TextTemplating\V1\TemplateCategories.cs" />
+    <Compile Include="AppGeneration\TextTemplating\V1\BuilderKeys.cs" />
     <Compile Include="AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.cs">
       <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
       <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="AppGeneration\TextTemplating\ITemplateOutputFileBuilderStrategy.cs" />
-    <Compile Include="AppGeneration\TextTemplating\V1\V1TemplateOutputFileBuilderStrategyFactory.cs" />
+    <Compile Include="AppGeneration\TextTemplating\IOutputFileBuilder.cs" />
     <Compile Include="TextTemplating\ITextTransformation.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
     <Compile Include="TextTemplating\PreprocessedTextTransformationWrapper.cs" />

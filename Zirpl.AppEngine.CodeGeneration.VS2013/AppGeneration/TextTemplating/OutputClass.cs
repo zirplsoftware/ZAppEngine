@@ -6,15 +6,15 @@ using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    public class ClassToGenerate
+    public class OutputClass
     {
-        public ClassToGenerate(PreprocessedTextTransformationOutputFile outputFile)
+        public OutputClass(OutputFile outputFile)
         {
             this.OutputFile = outputFile;
             this.InterfaceDeclarations = new List<string>();
         }
 
-        public PreprocessedTextTransformationOutputFile OutputFile { get; private set; }
+        public OutputFile OutputFile { get; private set; }
         public String ClassName { get; set; }
         public String ClassFullName { get; set; }
         public String Namespace { get; set; }

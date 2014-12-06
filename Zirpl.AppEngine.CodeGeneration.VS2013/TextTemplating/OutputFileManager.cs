@@ -4,92 +4,143 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class OutputFileManager
+    public class OutputFileManager : IDisposable
     {
-        private IList<OutputFile> Files { get; set; }
+        private IList<OutputFile> CompletedFiles { get; set; }
         private TextTransformationContext Context { get; set; }
+        private StringBuilder CallingTemplateOriginalGenerationEnvironment { get; set; }
+        private StringBuilder CurrentGenerationEnvironment { get; set; }
+        private OutputFile CurrentOutputFile { get; set; }
 
         public OutputFileManager(TextTransformationContext context)
         {
+            this.CallingTemplateOriginalGenerationEnvironment = context.CallingTemplate.GenerationEnvironment;
+            this.CurrentGenerationEnvironment = context.CallingTemplate.GenerationEnvironment;
             this.Context = context;
-            this.Files = new List<OutputFile>();
+            this.CompletedFiles = new List<OutputFile>();
         }
 
-        public void CreateFile(OutputFile outputFile)
+        public void WriteFile(OutputFile outputFile)
         {
-            // apply parameters to content
-            //
-            // 1) ensure directory exists       [DONE]
-            //      first within file system    [DONE]
-            //      then within Solution        [DONE]
-            //
-            // 2) check out from source control
-            //      check if file exists                        [DONE]
-            //      if exists, check if different               [DONE]
-            //      if different, check if allowed to overwrite [DONE]
-            //      if allowed, check out from source control   [DONE]
-            //
-            // 3) create the file
-            //      write the file to disk                  [DONE]
-            //      add file to folder project item         [DONE]
-            //      write VS properties (if each exists)    [DONE]
-            //          CustomTool                          [DONE]
-            //          ItemType                            [DONE]
-            //      check if autoformat                     [DONE]
-            //          format                              [DONE]
-            //
-            // clean up template placeholders
+            this.EndFile();
+            this.CurrentOutputFile = outputFile;
+            this.EndFile();
+        }
 
-            // TODO: use template placeholders if should
+        public void WriteFile(PreprocessedTextTransformationOutputFile file)
+        {
+            this.EndFile();
 
-            PathUtilities.EnsureDirectoryExists(outputFile.FullFilePath);
-            var folder = outputFile.DestinationProject.GetOrCreateProjectFolder(outputFile.FolderPathWithinProject);
-
-            if (File.Exists(outputFile.FullFilePath))
+            var template = Activator.CreateInstance(file.TemplateType);
+            var templateWrapper = new PreprocessedTextTransformationWrapper(template);
+            var session = new TextTemplatingSession();
+            foreach (var parameter in file.TemplateParameters)
             {
-                if (File.ReadAllText(outputFile.FullFilePath, outputFile.Encoding) != outputFile.Content
-                    && outputFile.CanOverrideExistingFile)
+                session[parameter.Key] = parameter.Value;
+            }
+            session["TemplateOutputFile"] = file;
+            templateWrapper.Session = session;
+            templateWrapper.Initialize(); // Must call this to transfer values.
+            file.Content = templateWrapper.TransformText();
+
+            this.CurrentOutputFile = file;
+            this.EndFile();
+        }
+
+        public void StartFile(OutputFile file)
+        {
+            this.EndFile();
+
+            this.CurrentOutputFile = file;
+            this.CurrentGenerationEnvironment = new StringBuilder();
+            this.Context.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
+        }
+
+        public void EndFile()
+        {
+            if (this.CurrentOutputFile != null)
+            {
+                this.CurrentOutputFile.Content = this.CurrentGenerationEnvironment.ToString();
+                this.CurrentGenerationEnvironment = this.CallingTemplateOriginalGenerationEnvironment;
+                this.Context.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
+                
+                // apply parameters to content
+                //
+                // 1) ensure directory exists       [DONE]
+                //      first within file system    [DONE]
+                //      then within Solution        [DONE]
+                //
+                // 2) check out from source control
+                //      check if file exists                        [DONE]
+                //      if exists, check if different               [DONE]
+                //      if different, check if allowed to overwrite [DONE]
+                //      if allowed, check out from source control   [DONE]
+                //
+                // 3) create the file
+                //      write the file to disk                  [DONE]
+                //      add file to folder project item         [DONE]
+                //      write VS properties (if each exists)    [DONE]
+                //          CustomTool                          [DONE]
+                //          ItemType                            [DONE]
+                //      check if autoformat                     [DONE]
+                //          format                              [DONE]
+                //
+                // clean up template placeholders
+
+                // TODO: use template placeholders if should
+
+                PathUtilities.EnsureDirectoryExists(this.CurrentOutputFile.FullFilePath);
+                var folder = this.CurrentOutputFile.DestinationProject.GetOrCreateProjectFolder(this.CurrentOutputFile.FolderPathWithinProject);
+
+                if (File.Exists(this.CurrentOutputFile.FullFilePath))
                 {
-                    if (this.Context.VisualStudio.SourceControl != null
-                        && this.Context.VisualStudio.SourceControl.IsItemUnderSCC(outputFile.FullFilePath)
-                        && !this.Context.VisualStudio.SourceControl.IsItemCheckedOut(outputFile.FullFilePath))
+                    if (File.ReadAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Encoding) != this.CurrentOutputFile.Content
+                        && this.CurrentOutputFile.CanOverrideExistingFile)
                     {
-                        this.Context.VisualStudio.SourceControl.CheckOutItem(outputFile.FullFilePath);
+                        if (this.Context.VisualStudio.SourceControl != null
+                            && this.Context.VisualStudio.SourceControl.IsItemUnderSCC(this.CurrentOutputFile.FullFilePath)
+                            && !this.Context.VisualStudio.SourceControl.IsItemCheckedOut(this.CurrentOutputFile.FullFilePath))
+                        {
+                            this.Context.VisualStudio.SourceControl.CheckOutItem(this.CurrentOutputFile.FullFilePath);
+                        }
                     }
                 }
-            }
 
-            File.WriteAllText(outputFile.FullFilePath, outputFile.Content);
-            outputFile.ProjectItem = folder.ProjectItems.AddFromFile(outputFile.FullFilePath);
+                File.WriteAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Content);
+                this.CurrentOutputFile.ProjectItem = folder.ProjectItems.AddFromFile(this.CurrentOutputFile.FullFilePath);
 
-            // set VS properties for the ProjectItem
-            //
-            if (!String.IsNullOrWhiteSpace(outputFile.CustomTool))
-            {
-                outputFile.ProjectItem.SetPropertyValue("CustomTool", outputFile.CustomTool);
-            }
-            if (!String.IsNullOrWhiteSpace(outputFile.BuildActionString))
-            {
-                outputFile.ProjectItem.SetPropertyValue("ItemType", outputFile.BuildActionString);
-            }
+                // set VS properties for the ProjectItem
+                //
+                if (!String.IsNullOrWhiteSpace(this.CurrentOutputFile.CustomTool))
+                {
+                    this.CurrentOutputFile.ProjectItem.SetPropertyValue("CustomTool", this.CurrentOutputFile.CustomTool);
+                }
+                if (!String.IsNullOrWhiteSpace(this.CurrentOutputFile.BuildActionString))
+                {
+                    this.CurrentOutputFile.ProjectItem.SetPropertyValue("ItemType", this.CurrentOutputFile.BuildActionString);
+                }
 
-            // autoformat 
-            //
-            if (outputFile.AutoFormat)
-            {
-                this.Context.VisualStudio.ExecuteVsCommand(outputFile.ProjectItem, "Edit.FormatDocument"); //, "Edit.RemoveAndSort"));
+                // autoformat 
+                //
+                if (this.CurrentOutputFile.AutoFormat)
+                {
+                    this.Context.VisualStudio.ExecuteVsCommand(this.CurrentOutputFile.ProjectItem, "Edit.FormatDocument"); //, "Edit.RemoveAndSort"));
+                }
+
+                this.CurrentOutputFile = null;
             }
         }
 
-        public void Finish()
+        public void Dispose()
         {
-            
+            this.EndFile();
         }
     }
 }

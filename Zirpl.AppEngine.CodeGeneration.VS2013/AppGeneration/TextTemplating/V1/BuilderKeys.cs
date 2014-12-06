@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
 {
-    public static class TemplateCategories
+    public static class BuilderKeys
     {
         public const String PersistableDomainClass = "PersistableDomainClass";
     }
