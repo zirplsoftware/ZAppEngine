@@ -1,6 +1,5 @@
 ﻿{
     "isExtensible": true,
-    "isDeletable": false,
     "isAbstract": true,
     "id": {
         "dataType": "Guid"

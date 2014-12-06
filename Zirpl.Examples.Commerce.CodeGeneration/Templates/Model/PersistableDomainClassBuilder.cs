@@ -74,7 +74,8 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
                 && (domainType.InheritsFrom == null
                     || !domainType.InheritsFrom.IsStaticLookup))
             {
-                classToGenerate.InterfaceDeclarations.Add(String.Format("IStaticLookup<{0},{1}>", domainType.IdProperty.DataTypeString, domainType.DescribedByEnum.FullName));
+                classToGenerate.InterfaceDeclarations.Add(String.Format("IStaticLookup", domainType.IdProperty.DataTypeString, domainType.DescribedByEnum.FullName));
+                classToGenerate.InterfaceDeclarations.Add(String.Format("IEnumDescribed<{0},{1}>", domainType.IdProperty.DataTypeString, domainType.DescribedByEnum.FullName));
             }
             if (domainType.IsVersionable
                 && (domainType.InheritsFrom == null

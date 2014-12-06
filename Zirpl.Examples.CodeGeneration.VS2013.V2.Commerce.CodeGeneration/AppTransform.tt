@@ -7,6 +7,9 @@
 <#
 	using (var appGenerator = new AppGenerator(this))
 	{
-		appGenerator.GenerateFiles(new IOutputFileBuilder[] { new Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.PersistableDomainClassBuilder() });
+		appGenerator.GenerateFiles(new IOutputFileBuilder[] { 
+			new Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.PersistableDomainClassBuilder(),
+			new Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.ModelExtensionsClassBuilder(),
+			new Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.EnumBuilder() });
 	}
 #>

@@ -26,6 +26,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         public bool IsAbstract { get; set; }
         public bool IsPartial { get; set; }
         public bool IsSealed { get; set; }
+        public bool IsStatic { get; set; }
         public AccessibilityModifierTypeEnum AccessibilityModifier { get; set; }
     }
 }

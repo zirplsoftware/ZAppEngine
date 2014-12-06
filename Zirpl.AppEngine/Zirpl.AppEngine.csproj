@@ -85,7 +85,6 @@
     <Compile Include="DataService\ICompleteDataService.cs" />
     <Compile Include="DataService\IDataService.cs" />
     <Compile Include="DataService\IDataService_generic.cs" />
-    <Compile Include="DataService\IDictionaryEntityDataService.cs" />
     <Compile Include="DataService\IReadOnlyDataService.cs" />
     <Compile Include="DataService\ISequenceValueProvider.cs" />
     <Compile Include="DataService\SqlServer\SqlAzure\SqlDatabaseTransientErrorDetectionRetryPolicyFactory.cs" />
@@ -114,6 +113,7 @@
     <Compile Include="Mapping\AutoMapper\MappingUtils.cs" />
     <Compile Include="Mapping\AutoMapper\ValueResolverBase.cs" />
     <Compile Include="Mapping\InvalidMappingDataException.cs" />
+    <Compile Include="Model\IEnumDescribed.cs" />
     <Compile Include="Model\Metadata\AutoGenerationBehaviorTypeEnum.cs" />
     <Compile Include="Model\Metadata\IMetadataDescribed.cs" />
     <Compile Include="Model\Metadata\MetadataNotFoundException.cs" />
@@ -134,11 +134,9 @@
     <Compile Include="Model\Extensibility\IExtendedEntityFieldValue.cs" />
     <Compile Include="Model\Extensibility\IExtensible.cs" />
     <Compile Include="Model\Search\DefaultSearchCriteria.cs" />
-    <Compile Include="Model\StaticLookupEntityBase.cs" />
     <Compile Include="Model\EntityBase.cs" />
     <Compile Include="Model\IAuditable.cs" />
     <Compile Include="Model\IMarkDeletable.cs" />
-    <Compile Include="Model\IStaticLookupEntityExtensions.cs" />
     <Compile Include="Model\IIdable.cs" />
     <Compile Include="Model\IStaticLookup.cs" />
     <Compile Include="Model\IPersistable.cs" />
@@ -166,7 +164,6 @@
     <Compile Include="Service\BusinessRuleException.cs" />
     <Compile Include="Service\CachingServiceBase.cs" />
     <Compile Include="Service\ICompleteService.cs" />
-    <Compile Include="Service\IDictionaryEntityService.cs" />
     <Compile Include="Service\IReadOnlyService.cs" />
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\IServiceFactory.cs" />
@@ -181,6 +178,7 @@
     <Compile Include="Service\ISupportsExists.cs" />
     <Compile Include="Service\ISupportsGetAll.cs" />
     <Compile Include="Service\ISupportsGetById.cs" />
+    <Compile Include="Service\ISupportsGetByIdExtensions.cs" />
     <Compile Include="Service\ISupportsGetTotalCount.cs" />
     <Compile Include="Service\ISupportsInsert.cs" />
     <Compile Include="Service\ISupportsInsertList.cs" />

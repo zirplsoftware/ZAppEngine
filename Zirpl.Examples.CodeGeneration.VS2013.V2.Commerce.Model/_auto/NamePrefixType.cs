@@ -9,7 +9,8 @@ namespace Zirpl.Examples.Commerce.Model
 {
     public partial class NamePrefixType :
             IPersistable<int>,
-            IStaticLookup<int, Zirpl.Examples.Commerce.Model.NamePrefixTypeEnum>
+            IStaticLookup,
+            IEnumDescribed<int, Zirpl.Examples.Commerce.Model.NamePrefixTypeEnum>
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }

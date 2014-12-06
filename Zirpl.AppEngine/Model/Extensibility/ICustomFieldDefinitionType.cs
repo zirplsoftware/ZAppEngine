@@ -2,9 +2,8 @@
 
 namespace Zirpl.AppEngine.Model.Extensibility
 {
-    public interface ICustomFieldDefinitionType<TId, TEnum> : IStaticLookup<TId, TEnum>, ICustomFieldDefinitionType
+    public interface ICustomFieldDefinitionType<TId> : IPersistable<TId>, ICustomFieldDefinitionType
         where TId : IEquatable<TId>
-        where TEnum : struct
     {
     }
 

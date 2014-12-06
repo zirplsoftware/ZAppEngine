@@ -69,7 +69,6 @@
     <Compile Include="DataService\EntityFramework\IDbContextCudHandler.cs" />
     <Compile Include="DataService\EntityFramework\Mapping\IEntityMapping.cs" />
     <Compile Include="DataService\EntityFramework\ISearchCriteriaTranslator.cs" />
-    <Compile Include="DataService\EntityFramework\Mapping\DictionaryEntityMapping.cs" />
     <Compile Include="DataService\EntityFramework\Mapping\MappingUtils.cs" />
     <Compile Include="DataService\EntityFramework\Migrations\AspNetMembershipMigratorBase.cs" />
     <Compile Include="DataService\EntityFramework\Migrations\DbMigrationProvider.cs" />
@@ -90,7 +89,6 @@
     <Compile Include="Service\EntityFramework\DbContextServiceBase.cs" />
     <Compile Include="Service\EntityFramework\DbContextUnitOfWork.cs" />
     <Compile Include="Service\EntityFramework\DbContextUnitOfWorkFactory.cs" />
-    <Compile Include="Service\EntityFramework\DictionaryEntityService.cs" />
     <Compile Include="Service\EntityFramework\ReadOnlyDbContextServiceBase.cs" />
     <Compile Include="Validation\EntityFramework\FluentValidation\DbEntityValidatorBase.cs" />
     <Compile Include="Validation\EntityFramework\FluentValidation\FluentValidationHelper.cs" />

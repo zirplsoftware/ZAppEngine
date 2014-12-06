@@ -53,7 +53,13 @@
     <Compile Include="_auto\InternationalAddress.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="_auto\ModelExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="_auto\NamePrefixType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\NamePrefixTypeEnum.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

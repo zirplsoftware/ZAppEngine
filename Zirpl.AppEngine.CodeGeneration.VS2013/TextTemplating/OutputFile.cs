@@ -39,7 +39,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 return Path.Combine(
                     Path.GetDirectoryName(this.DestinationProject.FullName),
-                    this.FolderPathWithinProject,
+                    this.FolderPathWithinProject ?? "",
                     this.FileName);
             }
         }

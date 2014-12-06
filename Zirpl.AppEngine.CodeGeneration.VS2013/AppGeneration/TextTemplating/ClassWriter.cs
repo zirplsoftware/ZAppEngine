@@ -63,6 +63,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             {
                 this.generationEnvironment.Append("sealed ");
             }
+            if (this.outputClass.IsStatic)
+            {
+                this.generationEnvironment.Append("static ");
+            }
             if (this.outputClass.IsPartial)
             {
                 this.generationEnvironment.Append("partial ");

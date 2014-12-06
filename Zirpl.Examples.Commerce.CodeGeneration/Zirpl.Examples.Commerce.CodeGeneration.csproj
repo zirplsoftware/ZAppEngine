@@ -74,7 +74,19 @@
   <ItemGroup>
     <Compile Include="BuilderKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\Model\EnumBuilder.cs" />
+    <Compile Include="Templates\Model\ModelExtensionsClassBuilder.cs" />
+    <Compile Include="Templates\Model\EnumTemplate.cs">
+      <DependentUpon>EnumTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Model\PersistableDomainClassBuilder.cs" />
+    <Compile Include="Templates\Model\ModelExtensionsClassTemplate.cs">
+      <DependentUpon>ModelExtensionsClassTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Model\PersistableDomainClassTemplate.cs">
       <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -88,6 +100,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\Model\EnumTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Model\ModelExtensionsClassTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ModelExtensionsClassTemplate.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Model\PersistableDomainClassTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>PersistableDomainClassTemplate.cs</LastGenOutput>

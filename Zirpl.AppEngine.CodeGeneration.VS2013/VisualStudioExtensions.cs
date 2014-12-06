@@ -73,11 +73,17 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
 
         private static ProjectItem GetOrCreateProjectFolder(this ProjectItems projectItems, string projectPath)
         {
+            if (String.IsNullOrEmpty(projectPath))
+            {
+                projectPath = @"\";
+            }
             projectPath = projectPath.Replace("/", @"\");
             projectPath = projectPath.Replace("//", @"\");
             projectPath = projectPath.Replace(@"\\", @"\");
             projectPath = projectPath.IndexOf(@"\") == 0 ? projectPath.Substring(1) : projectPath;
-            projectPath = projectPath.IndexOf(@"\") == projectPath.Length - 1 ? projectPath.Substring(0, projectPath.Length - 1) : projectPath;
+            projectPath = projectPath.IndexOf(@"\") == projectPath.Length - 1
+                ? projectPath.Substring(0, projectPath.Length - 1)
+                : projectPath;
 
             var folderName = projectPath;
             if (projectPath.Contains(@"\"))

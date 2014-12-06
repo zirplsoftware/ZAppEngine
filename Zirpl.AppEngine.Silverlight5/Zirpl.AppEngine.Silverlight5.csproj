@@ -99,9 +99,6 @@
     <Compile Include="..\Zirpl.AppEngine\DataService\IDataService_generic.cs">
       <Link>DataService\IDataService_generic.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\DataService\IDictionaryEntityDataService.cs">
-      <Link>DataService\IDictionaryEntityDataService.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\DataService\IReadOnlyDataService.cs">
       <Link>DataService\IReadOnlyDataService.cs</Link>
     </Compile>
@@ -213,6 +210,9 @@
     <Compile Include="..\Zirpl.AppEngine\Model\IAuditable.cs">
       <Link>Model\IAuditable.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Model\IEnumDescribed.cs">
+      <Link>Model\IEnumDescribed.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IIdable.cs">
       <Link>Model\IIdable.cs</Link>
     </Compile>
@@ -227,9 +227,6 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IStaticLookup.cs">
       <Link>Model\IStaticLookup.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\IStaticLookupEntityExtensions.cs">
-      <Link>Model\IStaticLookupEntityExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\IVersionable.cs">
       <Link>Model\IVersionable.cs</Link>
@@ -291,9 +288,6 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Search\SearchResults.cs">
       <Link>Model\Search\SearchResults.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\StaticLookupEntityBase.cs">
-      <Link>Model\StaticLookupEntityBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo_common.cs">
       <Link>Properties\AssemblyInfo_common.cs</Link>
     </Compile>
@@ -323,9 +317,6 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Service\ICompleteService.cs">
       <Link>Service\ICompleteService.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Service\IDictionaryEntityService.cs">
-      <Link>Service\IDictionaryEntityService.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Service\IReadOnlyService.cs">
       <Link>Service\IReadOnlyService.cs</Link>
@@ -368,6 +359,9 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Service\ISupportsGetById.cs">
       <Link>Service\ISupportsGetById.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\Service\ISupportsGetByIdExtensions.cs">
+      <Link>Service\ISupportsGetByIdExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Service\ISupportsGetTotalCount.cs">
       <Link>Service\ISupportsGetTotalCount.cs</Link>

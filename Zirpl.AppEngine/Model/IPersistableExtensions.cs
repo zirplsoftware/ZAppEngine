@@ -6,6 +6,25 @@ namespace Zirpl.AppEngine.Model
 {
     public static class IPersistableExtensions
     {
+        public static TEnum? GetEnumValue<TEnum, TId>(this IEnumDescribed<TId, TEnum> entity)
+            where TEnum : struct
+            where TId : IEquatable<TId>
+        {
+            return entity.GetEnumValue<TEnum>();
+        }
+
+        public static TEnum? GetEnumValue<TEnum>(this IPersistable entity)
+            where TEnum : struct
+        {
+            TEnum? value = null;
+            if (entity != null
+                && entity.IsPersisted)
+            {
+                value = (TEnum?)Enum.Parse(typeof(TEnum), Enum.GetName(typeof(TEnum), entity.GetId()), true);
+            }
+            return value;
+        }
+
         public static bool EvaluateIsPersisted(this IPersistable persistable)
         {
             if (persistable == null)
