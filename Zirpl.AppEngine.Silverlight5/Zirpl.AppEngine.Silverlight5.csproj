@@ -198,9 +198,6 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\CustomFieldDefinitionTypeEnum.cs">
       <Link>Model\Extensibility\CustomFieldDefinitionTypeEnum.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\ExtendedEntityFieldValueBase.cs">
-      <Link>Model\Extensibility\ExtendedEntityFieldValueBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Extensibility\ICustomFieldDefinition.cs">
       <Link>Model\Extensibility\ICustomFieldDefinition.cs</Link>
     </Compile>
@@ -489,7 +486,7 @@
       <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
         <SilverlightProjectProperties />
       </FlavorProperties>
-      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

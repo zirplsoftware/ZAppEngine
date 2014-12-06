@@ -29,28 +29,27 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         public void WriteFile(OutputFile outputFile)
         {
-            this.EndFile();
-            this.CurrentOutputFile = outputFile;
-            this.EndFile();
-        }
+            this.StartFile(outputFile);
 
-        public void WriteFile(PreprocessedTextTransformationOutputFile file)
-        {
-            this.EndFile();
-
-            var template = Activator.CreateInstance(file.TemplateType);
-            var templateWrapper = new PreprocessedTextTransformationWrapper(template);
-            var session = new TextTemplatingSession();
-            foreach (var parameter in file.TemplateParameters)
+            var preprocessFile = outputFile as PreprocessedTextTransformationOutputFile;
+            if (preprocessFile != null)
             {
-                session[parameter.Key] = parameter.Value;
-            }
-            session["TemplateOutputFile"] = file;
-            templateWrapper.Session = session;
-            templateWrapper.Initialize(); // Must call this to transfer values.
-            file.Content = templateWrapper.TransformText();
 
-            this.CurrentOutputFile = file;
+                var template = Activator.CreateInstance(preprocessFile.TemplateType);
+                var templateWrapper = new PreprocessedTextTransformationWrapper(template);
+                var session = new TextTemplatingSession();
+                foreach (var parameter in preprocessFile.TemplateParameters)
+                {
+                    session[parameter.Key] = parameter.Value;
+                }
+                session["TemplateOutputFile"] = preprocessFile;
+                templateWrapper.Session = session;
+                templateWrapper.Initialize(); // Must call this to transfer values.
+
+                this.Context.LogLineToBuildPane("Transforming text for file: " + this.CurrentOutputFile.FullFilePath);
+                this.CurrentGenerationEnvironment.Append(templateWrapper.TransformText());
+            }
+
             this.EndFile();
         }
 
@@ -101,7 +100,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
                 if (File.Exists(this.CurrentOutputFile.FullFilePath))
                 {
-                    if (File.ReadAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Encoding) != this.CurrentOutputFile.Content
+                    var isDifferent =
+                        File.ReadAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Encoding) !=
+                        this.CurrentOutputFile.Content;
+                    if (isDifferent
                         && this.CurrentOutputFile.CanOverrideExistingFile)
                     {
                         if (this.Context.VisualStudio.SourceControl != null
@@ -111,10 +113,28 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                             this.Context.VisualStudio.SourceControl.CheckOutItem(this.CurrentOutputFile.FullFilePath);
                         }
                     }
+                    else if (isDifferent)
+                    {
+                        throw new Exception("Could not overwrite file: " + this.CurrentOutputFile.FullFilePath);
+                    }
                 }
 
-                File.WriteAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Content);
-                this.CurrentOutputFile.ProjectItem = folder.ProjectItems.AddFromFile(this.CurrentOutputFile.FullFilePath);
+                this.Context.LogLineToBuildPane("Writing file: " + this.CurrentOutputFile.FullFilePath);
+                var item = this.Context.VisualStudio.GetProjectItem(this.CurrentOutputFile.FullFilePath);
+                if (item != null)
+                {
+                    item.Remove();
+                    //this.CurrentOutputFile.ProjectItem = item;
+                    //item.Open();
+                    //var td = (TextDocument) item.Document.Object();
+                    //td.
+                }
+                //else
+                {
+                    File.WriteAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Content);
+                    this.CurrentOutputFile.ProjectItem =
+                        folder.ProjectItems.AddFromFile(this.CurrentOutputFile.FullFilePath);
+                }
 
                 // set VS properties for the ProjectItem
                 //

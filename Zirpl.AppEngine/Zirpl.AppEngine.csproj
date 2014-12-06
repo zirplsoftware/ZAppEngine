@@ -129,7 +129,6 @@
     <Compile Include="Model\BatchProcessing\IBatchItemError.cs" />
     <Compile Include="Model\Extensibility\CustomFieldDefinitionBase.cs" />
     <Compile Include="Model\Extensibility\CustomFieldDefinitionTypeEnum.cs" />
-    <Compile Include="Model\Extensibility\ExtendedEntityFieldValueBase.cs" />
     <Compile Include="Model\Extensibility\ICustomFieldDefinition.cs" />
     <Compile Include="Model\Extensibility\ICustomFieldDefinitionType.cs" />
     <Compile Include="Model\Extensibility\IExtendedEntityFieldValue.cs" />

@@ -14,6 +14,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             this.CanOverrideExistingFile = true;
             this.Encoding = Encoding.UTF8;
             this.BuildAction = BuildActionTypeEnum.Compile;
+            this.AutoFormat = true;
         }
         public String FileNameWithoutExtension { get; set; }
         public String FileExtension { get; set; }

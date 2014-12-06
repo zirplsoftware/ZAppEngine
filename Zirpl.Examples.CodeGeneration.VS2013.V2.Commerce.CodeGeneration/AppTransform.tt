@@ -2,10 +2,11 @@
 <#@ output extension=".txt" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating" #>
 <#@ assembly name="$(SolutionDir)Zirpl.AppEngine.CodeGeneration.VS2013\bin\$(Configuration)\Zirpl.AppEngine.VisualStudioAutomation.dll" #>
+<#@ assembly name="$(SolutionDir)Zirpl.Examples.Commerce.CodeGeneration\bin\$(Configuration)\Zirpl.Examples.Commerce.CodeGeneration.dll" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#
 	using (var appGenerator = new AppGenerator(this))
 	{
-		appGenerator.GenerateFiles(new IOutputFileBuilder[0]);
+		appGenerator.GenerateFiles(new IOutputFileBuilder[] { new Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.PersistableDomainClassBuilder() });
 	}
 #>

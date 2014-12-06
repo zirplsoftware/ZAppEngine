@@ -47,6 +47,10 @@
       <Project>{f8855f9a-35d1-4c30-bb53-1fd89a984989}</Project>
       <Name>Zirpl.AppEngine.VisualStudioAutomation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Examples.Commerce.CodeGeneration\Zirpl.Examples.Commerce.CodeGeneration.csproj">
+      <Project>{06f3d16b-a4fc-4fb1-9cdd-55b39ee7fafc}</Project>
+      <Name>Zirpl.Examples.Commerce.CodeGeneration</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppTransform.txt">

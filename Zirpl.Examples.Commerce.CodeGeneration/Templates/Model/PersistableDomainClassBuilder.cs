@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EnvDTE;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1.Templates.Model
+namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
 {
     public class PersistableDomainClassBuilder : IOutputClassBuilder
     {
@@ -35,58 +35,55 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
             var classToGenerate = new OutputClass(outputFile)
             {
                 ClassName = domainType.Name,
-                ClassFullName = domainType.FullName,
                 Namespace = domainType.Namespace,
                 BaseClass = domainType.InheritsFrom == null ? null : domainType.InheritsFrom.FullName,
                 IsAbstract = domainType.IsAbstract
             };
 
-            // TODO: I think from here down belongs in the template???
-
             if (domainType.IsPersistable
                 && domainType.InheritsFrom == null)
             {
                 // this MUST have the ID property
-                classToGenerate.InterfaceDeclarations.Add(String.Format("Zirpl.AppEngine.Model.IPersistable<{0}>", domainType.IdProperty.DataTypeString));
+                classToGenerate.InterfaceDeclarations.Add(String.Format("IPersistable<{0}>", domainType.IdProperty.DataTypeString));
             }
             if (domainType.IsAuditable
                 && (domainType.InheritsFrom == null
                     || !domainType.InheritsFrom.IsAuditable))
             {
-                classToGenerate.InterfaceDeclarations.Add("Zirpl.AppEngine.Model.IAuditable");
+                classToGenerate.InterfaceDeclarations.Add("IAuditable");
             }
             if (domainType.IsExtensible
                 && (domainType.InheritsFrom == null
                     || !domainType.InheritsFrom.IsExtensible))
             {
-                classToGenerate.InterfaceDeclarations.Add(String.Format("Zirpl.AppEngine.Model.Extensibility.IExtensible<{0},{1},{2}>", domainType.FullName, domainType.ExtendedBy.FullName, domainType.IdProperty.DataTypeString));
+                classToGenerate.InterfaceDeclarations.Add(String.Format("IExtensible<{0},{1},{2}>", domainType.Name, domainType.ExtendedBy.Name, domainType.IdProperty.DataTypeString));
             }
             if (domainType.IsExtendedEntityFieldValue
                 && (domainType.InheritsFrom == null
                     || !domainType.InheritsFrom.IsExtendedEntityFieldValue))
             {
-                classToGenerate.InterfaceDeclarations.Add(String.Format("Zirpl.AppEngine.Model.Extensibility.IExtendedEntityFieldValue<{0},{1}>", domainType.Extends.FullName, domainType.IdProperty.DataTypeString));
+                classToGenerate.InterfaceDeclarations.Add(String.Format("IExtendedEntityFieldValue<{0},{1}, {2}>", domainType.Name, domainType.Extends.Name, domainType.IdProperty.DataTypeString));
             }
             if (domainType.IsMarkDeletable
                 && (domainType.InheritsFrom == null
                     || !domainType.InheritsFrom.IsMarkDeletable))
             {
-                classToGenerate.InterfaceDeclarations.Add("Zirpl.AppEngine.Model.IMarkDeletable");
+                classToGenerate.InterfaceDeclarations.Add("IMarkDeletable");
             }
             if (domainType.IsStaticLookup
                 && (domainType.InheritsFrom == null
                     || !domainType.InheritsFrom.IsStaticLookup))
             {
-                classToGenerate.InterfaceDeclarations.Add(String.Format("Zirpl.AppEngine.Model.IStaticLookup<{0},{1}>", domainType.IdProperty.DataTypeString, domainType.DescribedByEnum.FullName));
+                classToGenerate.InterfaceDeclarations.Add(String.Format("IStaticLookup<{0},{1}>", domainType.IdProperty.DataTypeString, domainType.DescribedByEnum.FullName));
             }
             if (domainType.IsVersionable
                 && (domainType.InheritsFrom == null
                     || !domainType.InheritsFrom.IsVersionable))
             {
-                classToGenerate.InterfaceDeclarations.Add("Zirpl.AppEngine.Model.IVersionable");
+                classToGenerate.InterfaceDeclarations.Add("IVersionable");
             }
             outputFile.TemplateParameters.Add("DomainType", domainType);
-            outputFile.TemplateParameters.Add("ClassToGenerate", classToGenerate);
+            outputFile.TemplateParameters.Add("OutputClass", classToGenerate);
             return classToGenerate;
         }
 

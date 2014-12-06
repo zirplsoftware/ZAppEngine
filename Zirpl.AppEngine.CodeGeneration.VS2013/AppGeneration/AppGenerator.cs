@@ -11,8 +11,6 @@ using Newtonsoft.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1.Templates.Model;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.Collections;
 
@@ -76,7 +74,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             {
                 // create all of the Template output files
                 //
-                var filesToGenerate = new List<PreprocessedTextTransformationOutputFile>();
+                var filesToGenerate = new List<OutputFile>();
                 foreach (var strategy in factory.GetAllBuilders())
                 {
                     filesToGenerate.AddRange(strategy.BuildOutputFiles(this.App));
@@ -88,17 +86,27 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 //
                 foreach (var file in filesToGenerate)
                 {
-                    foreach (var parameter in this.App.Settings.GlobalTemplateParameters)
+                    var preprocessedFile = file as PreprocessedTextTransformationOutputFile;
+                    if (preprocessedFile != null)
                     {
-                        if (file.TemplateParameters.ContainsKey(parameter.Key))
+                        foreach (var parameter in this.App.Settings.GlobalTemplateParameters)
                         {
-                            throw new Exception("Global GlobalTemplateParameters in Settings conflict with parameters a file to generate. Key = " + parameter.Key);
+                            if (preprocessedFile.TemplateParameters.ContainsKey(parameter.Key))
+                            {
+                                throw new Exception(
+                                    "Global GlobalTemplateParameters in Settings conflict with parameters a file to generate. Key = " +
+                                    parameter.Key);
+                            }
+                            preprocessedFile.TemplateParameters.Add(parameter.Key, parameter.Value);
                         }
-                        file.TemplateParameters.Add(parameter.Key, parameter.Value);
+                        // finally the App
+                        preprocessedFile.TemplateParameters.Add("App", this.App);
+                        this.Context.WriteFile(file);
                     }
-                    // finally the App
-                    file.TemplateParameters.Add("App", this.App);
-                    this.Context.WriteFile(file);
+                    else
+                    {
+                        this.Context.WriteFile(file);
+                    }
                 }
             }
             catch (Exception e)

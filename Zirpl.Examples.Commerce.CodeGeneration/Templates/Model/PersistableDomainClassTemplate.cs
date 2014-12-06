@@ -7,24 +7,23 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1.Templates.Model
+namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Zirpl.AppEngine.Model;
-    using Zirpl.AppEngine.Model.Metadata;
     using Zirpl.AppEngine.VisualStudioAutomation;
     using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
+    using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class PersistableDomainClassTemplate : PersistableDomainClassTemplateBase
     {
@@ -35,66 +34,169 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
         public virtual string TransformText()
         {
             
-            #line 21 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 20 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
 
 
 
             
             #line default
             #line hidden
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing Zirpl.AppEngine.Model;\r\nu" +
-                    "sing Zirpl.AppEngine.Model.Extensibility;\r\n\r\nnamespace ");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
+                    ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
+                    "ctions;\r\n\r\n");
             
-            #line 29 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassToGenerate.Namespace));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n{\r\n\t");
-            
-            #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassToGenerate.ClassDeclaration));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t{\r\n");
-            
-            #line 33 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
 
-	foreach (var property in this.DomainType.Properties)
+	using (var writer = new ClassWriter(this, this.OutputClass))
     {
+		foreach (var property in this.DomainType.Properties)
+		{
 
             
             #line default
             #line hidden
             this.Write("\t\tpublic virtual ");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 38 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
 
-    }
+		}
 
             
             #line default
             #line hidden
-            this.Write("\t}\r\n}\r\n");
+            this.Write("\r\n\t\t#region Interface implementations\r\n\r\n");
             
-            #line 43 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+            #line 43 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
 
+		if (this.DomainType.IsPersistable
+			&& this.DomainType.InheritsFrom == null)
+        {
 
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic virtual Object GetId()\r\n        {\r\n            return Id;\r\n        }\r\n\r\n" +
+                    "        public virtual void SetId(Object id)\r\n        {\r\n            Id = (");
+            
+            #line 55 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            
+            #line default
+            #line hidden
+            this.Write(@")id;
+        }
+
+        public virtual bool IsPersisted
+        {
+            get { return this.EvaluateIsPersisted(); }
+        }
+
+		public override bool Equals(object other)
+        {
+            return this.EvaluateEquals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.EvaluateGetHashCode();
+        }
+");
+            
+            #line 72 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
+
+        }
+		
+		if (this.DomainType.IsExtensible
+                && (this.DomainType.InheritsFrom == null
+                    || !this.DomainType.InheritsFrom.IsExtensible))
+        {
+
+            
+            #line default
+            #line hidden
+            this.Write(@"		public virtual IList<IExtendedEntityFieldValue> GetExtendedFieldValues()
+		{
+            return this.ExtendedFieldValues.Cast<IExtendedEntityFieldValue>().ToList();
+		}
+        public virtual void SetExtendedFieldValues(IList<IExtendedEntityFieldValue> list)
+		{
+            this.ExtendedFieldValues.Clear();
+            this.ExtendedFieldValues.AddRange(list.Cast<");
+            
+            #line 87 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.FullName));
+            
+            #line default
+            #line hidden
+            this.Write(">());\r\n\t\t}\r\n");
+            
+            #line 89 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
+
+        }
+
+		if (this.DomainType.IsExtendedEntityFieldValue
+			&& (this.DomainType.InheritsFrom == null
+			|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
+        {
+
+            
+            #line default
+            #line hidden
+            this.Write(@"        public virtual object GetExtendedEntityId()
+        {
+            return this.ExtendedEntityId;
+        }
+
+        public virtual IExtensible GetExtendedEntity()
+        {
+            return this.ExtendedEntity;
+        }
+
+        public virtual void SetExtendedEntityId(object id)
+        {
+            this.ExtendedEntityId = (");
+            
+            #line 109 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            
+            #line default
+            #line hidden
+            this.Write(")id;\r\n        }\r\n\r\n        public virtual void SetExtendedEntity(IExtensible enti" +
+                    "ty)\r\n        {\r\n            this.ExtendedEntity = (");
+            
+            #line 114 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.FullName));
+            
+            #line default
+            #line hidden
+            this.Write(")entity;\r\n        }\r\n\t\t\r\n");
+            
+            #line 117 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
+
+        }
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t#endregion\t\t\r\n");
+            
+            #line 121 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
+
+    }
 
             
             #line default
@@ -117,7 +219,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.V1
             }
         }
         
-        #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\TextTemplating\V1\Templates\Model\PersistableDomainClassTemplate.tt"
+        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\PersistableDomainClassTemplate.tt"
 
 private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile _TemplateOutputFileField;
 
@@ -158,16 +260,16 @@ private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Doma
     }
 }
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass _ClassToGenerateField;
+private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass _OutputClassField;
 
 /// <summary>
-/// Access the ClassToGenerate parameter of the template.
+/// Access the OutputClass parameter of the template.
 /// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass ClassToGenerate
+private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass OutputClass
 {
     get
     {
-        return this._ClassToGenerateField;
+        return this._OutputClassField;
     }
 }
 
@@ -199,9 +301,9 @@ if ((TemplateOutputFileValueAcquired == false))
         }
         else
         {
-            this.Error("The type \'Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateOutputFil" +
-                    "e\' of the parameter \'TemplateOutputFile\' did not match the type of the data pass" +
-                    "ed to the template.");
+            this.Error("The type \'Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextT" +
+                    "ransformationOutputFile\' of the parameter \'TemplateOutputFile\' did not match the" +
+                    " type of the data passed to the template.");
         }
     }
 }
@@ -280,38 +382,38 @@ if ((DomainTypeValueAcquired == false))
         this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(data));
     }
 }
-bool ClassToGenerateValueAcquired = false;
-if (this.Session.ContainsKey("ClassToGenerate"))
+bool OutputClassValueAcquired = false;
+if (this.Session.ContainsKey("OutputClass"))
 {
-    this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(this.Session["ClassToGenerate"]));
-    ClassToGenerateValueAcquired = true;
+    this._OutputClassField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(this.Session["OutputClass"]));
+    OutputClassValueAcquired = true;
 }
-if ((ClassToGenerateValueAcquired == false))
+if ((OutputClassValueAcquired == false))
 {
-    string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "ClassToGenerate");
+    string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "OutputClass");
     if ((string.IsNullOrEmpty(parameterValue) == false))
     {
         global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass));
         if (((tc != null) 
                     && tc.CanConvertFrom(typeof(string))))
         {
-            this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(tc.ConvertFrom(parameterValue)));
-            ClassToGenerateValueAcquired = true;
+            this._OutputClassField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(tc.ConvertFrom(parameterValue)));
+            OutputClassValueAcquired = true;
         }
         else
         {
-            this.Error("The type \'Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.Cla" +
-                    "ssToGenerate\' of the parameter \'ClassToGenerate\' did not match the type of the d" +
-                    "ata passed to the template.");
+            this.Error("The type \'Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.Out" +
+                    "putClass\' of the parameter \'OutputClass\' did not match the type of the data pass" +
+                    "ed to the template.");
         }
     }
 }
-if ((ClassToGenerateValueAcquired == false))
+if ((OutputClassValueAcquired == false))
 {
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ClassToGenerate");
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("OutputClass");
     if ((data != null))
     {
-        this._ClassToGenerateField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(data));
+        this._OutputClassField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass)(data));
     }
 }
 

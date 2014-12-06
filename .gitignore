@@ -92,3 +92,5 @@
 /Zirpl.AppEngine.CodeGeneration.VS2013/Zirpl.AppEngine.VisualStudioAutomation.csproj.DotSettings
 /Zirpl.AppEngine.CodeGeneration.VS2013/Zirpl.AppEngine.VisualStudioAutomation.csproj.user
 Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model/Zirpl.Examples.Commerce.Model.csproj.user
+/Zirpl.Examples.Commerce.CodeGeneration/bin
+/Zirpl.Examples.Commerce.CodeGeneration/obj

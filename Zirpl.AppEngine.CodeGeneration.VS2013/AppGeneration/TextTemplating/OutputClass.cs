@@ -12,67 +12,20 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         {
             this.OutputFile = outputFile;
             this.InterfaceDeclarations = new List<string>();
+            this.IsPartial = true;
+            this.AccessibilityModifier = AccessibilityModifierTypeEnum.Public;
         }
 
         public OutputFile OutputFile { get; private set; }
         public String ClassName { get; set; }
-        public String ClassFullName { get; set; }
+        public String ClassFullName { get { return this.Namespace + "." + this.ClassName; } }
         public String Namespace { get; set; }
         public String BaseClass { get; set; }
         public IList<String> InterfaceDeclarations { get; set; }
         //public String NameWithoutGenericParameters { get; set; }
         public bool IsAbstract { get; set; }
-
-        public String ClassDeclaration
-        {
-            get
-            {
-                var sb = new StringBuilder();
-                sb.Append("public ");
-                if (this.IsAbstract)
-                {
-                    sb.Append("abstract ");
-                }
-                sb.Append("partial class ");
-                sb.Append(this.ClassName);
-                if (!String.IsNullOrEmpty(this.BaseClass)
-                    || this.InterfaceDeclarations.Any())
-                    //|| this.GenericConstraintDeclarations.Any())
-                {
-                    sb.AppendLine(" : ");
-                    bool useCommaIfAnother = false;
-                    if (!String.IsNullOrEmpty(this.BaseClass))
-                    {
-                        sb.Append(this.BaseClass);
-                        useCommaIfAnother = true;
-                    }
-                    if (this.InterfaceDeclarations.Any())
-                    {
-                        foreach (var interfaceDeclaration in this.InterfaceDeclarations)
-                        {
-                            if (useCommaIfAnother)
-                            {
-                                sb.AppendLine(",");
-                            }
-                            sb.Append(interfaceDeclaration);
-                            useCommaIfAnother = true;
-                        }
-                    }
-                    //if (this.GenericConstraintDeclarations.Any())
-                    //{
-                    //    foreach (var genericConstraintDeclaration in this.GenericConstraintDeclarations)
-                    //    {
-                    //        if (useCommaIfAnother)
-                    //        {
-                    //            sb.AppendLine(",");
-                    //        }
-                    //        sb.Append(genericConstraintDeclaration);
-                    //        useCommaIfAnother = true;
-                    //    }
-                    //}
-                }
-                return sb.ToString();
-            }
-        }
+        public bool IsPartial { get; set; }
+        public bool IsSealed { get; set; }
+        public AccessibilityModifierTypeEnum AccessibilityModifier { get; set; }
     }
 }

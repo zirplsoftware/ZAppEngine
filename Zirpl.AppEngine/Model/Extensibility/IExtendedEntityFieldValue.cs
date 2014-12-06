@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.Model.Extensibility
 {
-    public interface IExtendedEntityFieldValue<TExtendedEntity, TId> : IExtendedEntityFieldValue, IPersistable<TId> where TId : IEquatable<TId>
+    public interface IExtendedEntityFieldValue<TExtendedEntityFieldValue, TExtendedEntity, TId> : 
+        IExtendedEntityFieldValue,
+        IPersistable<TId>
+        where TExtendedEntity : IExtensible<TExtendedEntity, TExtendedEntityFieldValue, TId>
+        where TExtendedEntityFieldValue : IExtendedEntityFieldValue<TExtendedEntityFieldValue, TExtendedEntity, TId>
+        where TId : IEquatable<TId>
     {
         TId ExtendedEntityId { get; set; }
         TExtendedEntity ExtendedEntity { get; set; }
@@ -16,6 +21,8 @@ namespace Zirpl.AppEngine.Model.Extensibility
     {
         String Value { get; set; }
         Object GetExtendedEntityId();
-        Object GetExtendedEntity();
+        IExtensible GetExtendedEntity();
+        void SetExtendedEntityId(Object id);
+        void SetExtendedEntity(IExtensible entity);
     }
 }

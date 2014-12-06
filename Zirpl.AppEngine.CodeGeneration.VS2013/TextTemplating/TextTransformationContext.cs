@@ -79,11 +79,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             this.FileManager.WriteFile(outputFile);
         }
 
-        public void WriteFile(PreprocessedTextTransformationOutputFile outputFile)
-        {
-            this.FileManager.WriteFile(outputFile);
-        }
-
         public void StartFile(String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
             var project = String.IsNullOrEmpty(destinationProjectName)
