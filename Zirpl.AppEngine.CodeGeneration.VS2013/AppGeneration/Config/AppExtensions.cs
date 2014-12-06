@@ -2,16 +2,22 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EnvDTE;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {
     public static class AppExtensions
     {
+        public static IEnumerable<DomainProperty> GetAllPropertiesIncludingInherited(this App app, DomainType domainType)
+        {
+            var list = new List<DomainProperty>();
+            while (domainType != null)
+            {
+                list.AddRange(domainType.Properties);
+                domainType = domainType.InheritsFrom;
+            }
+            return list;
+        }
         public static String GetFolderPathFromNamespace(this App app, Project project, String nameSpace)
         {
             String folderPath = nameSpace;

@@ -122,7 +122,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                         }
                         // finally the App
                         file.TemplateParameters.Add("App", app);
-                        this.Context.TransformAndCreateFile(file);
+                        this.Context.WriteFile(file);
                     }
             }
             catch (Exception e)

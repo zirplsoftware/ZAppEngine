@@ -58,8 +58,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 instance.CallingTemplate = callingTemplateWrapper;
                 instance.CallingTemplateOriginalGenerationEnvironment = instance.CallingTemplate.GenerationEnvironment;
                 instance.CurrentGenerationEnvironment = instance.CallingTemplateOriginalGenerationEnvironment;
-                instance.FileManager = new OutputFileManager();
                 instance.VisualStudio = dte2;
+                instance.FileManager = new OutputFileManager(instance);
                 Instance = instance;
             }
             return Instance;
@@ -78,7 +78,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         }
 
 
-        public void TransformAndCreateFile(PreprocessedTextTransformationOutputFile file)
+        public void WriteFile(PreprocessedTextTransformationOutputFile file)
         {
             if (file == this.CurrentOutputFile)
             {
@@ -107,7 +107,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
         }
 
-        public void CreateFile(OutputFile file)
+        public void WriteFile(OutputFile file)
         {
             if (file == this.CurrentOutputFile)
             {

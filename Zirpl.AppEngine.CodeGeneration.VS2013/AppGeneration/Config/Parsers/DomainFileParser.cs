@@ -871,8 +871,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             }
             foreach (var domainType in app.DomainTypes)
             {
-                // TODO: this only checks per class, not per heirarchy
-                if (domainType.Properties.GroupBy(p => p.Name).Where(g => g.Count() > 1).Any())
+                if (app.GetAllPropertiesIncludingInherited(domainType).GroupBy(p => p.Name).Where(g => g.Count() > 1).Any())
                 {
                     throw new Exception("2 Properties with the same name resulted in: " + domainType.ConfigFilePath);
                 }
