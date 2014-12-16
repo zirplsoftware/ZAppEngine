@@ -21,7 +21,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         }
 
         public ClassWriter(Object callingTemplate, OutputClass outputClass)
-            : this(new PreprocessedTextTransformationWrapper(callingTemplate), outputClass)
+            : this(new TextTransformationWrapper(callingTemplate), outputClass)
         {
             
         }

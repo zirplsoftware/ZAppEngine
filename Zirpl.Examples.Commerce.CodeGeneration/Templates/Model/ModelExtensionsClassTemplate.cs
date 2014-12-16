@@ -86,7 +86,7 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
             
             #line default
             #line hidden
-            this.Write("\t}\r\n}");
+            this.Write("\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
         private global::Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost hostValue;
@@ -104,6 +104,14 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
                 this.hostValue = value;
             }
         }
+        
+        #line 49 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\ModelExtensionsClassTemplate.tt"
+
+public string TemplateKey { get { return "Test";}}
+
+        
+        #line default
+        #line hidden
         
         #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\ModelExtensionsClassTemplate.tt"
 

@@ -55,12 +55,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo_common.cs" />
     <Compile Include="Reflection\AssemblyExtensions.cs" />
-    <Compile Include="Reflection\DynamicAccessor.cs" />
-    <Compile Include="Reflection\DynamicAccessorFactory.cs" />
-    <Compile Include="Reflection\DynamicAccessorWrapper.cs" />
-    <Compile Include="Reflection\IDynamicAccessor.cs" />
-    <Compile Include="Reflection\IDynamicAccessorWrapper.cs" />
-    <Compile Include="Reflection\ReflectionUtilities.cs" />
+    <Compile Include="Reflection\DynamicTypeAccessor.cs" />
+    <Compile Include="Reflection\ReflectionTypeAccessor.cs" />
+    <Compile Include="Reflection\TypeAccessorFactory.cs" />
+    <Compile Include="Reflection\ITypeAccessor.cs" />
+    <Compile Include="Reflection\ObjectExtensions.cs" />
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Stats\EloRating\EloMatch.cs" />
     <Compile Include="Stats\EloRating\EloMatchResult.cs" />

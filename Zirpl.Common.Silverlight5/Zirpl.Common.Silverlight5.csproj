@@ -102,23 +102,20 @@
     <Compile Include="..\Zirpl.Common\Reflection\AssemblyExtensions.cs">
       <Link>Reflection\AssemblyExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\DynamicAccessor.cs">
-      <Link>Reflection\DynamicAccessor.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\DynamicTypeAccessor.cs">
+      <Link>Reflection\DynamicTypeAccessor.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\DynamicAccessorFactory.cs">
-      <Link>Reflection\DynamicAccessorFactory.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\ITypeAccessor.cs">
+      <Link>Reflection\ITypeAccessor.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\DynamicAccessorWrapper.cs">
-      <Link>Reflection\DynamicAccessorWrapper.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\ObjectExtensions.cs">
+      <Link>Reflection\ObjectExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\IDynamicAccessor.cs">
-      <Link>Reflection\IDynamicAccessor.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\ReflectionTypeAccessor.cs">
+      <Link>Reflection\ReflectionTypeAccessor.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\IDynamicAccessorWrapper.cs">
-      <Link>Reflection\IDynamicAccessorWrapper.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\ReflectionUtilities.cs">
-      <Link>Reflection\ReflectionUtilities.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\TypeAccessorFactory.cs">
+      <Link>Reflection\TypeAccessorFactory.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\TypeExtensions.cs">
       <Link>Reflection\TypeExtensions.cs</Link>
@@ -175,7 +172,7 @@
       <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
         <SilverlightProjectProperties />
       </FlavorProperties>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="0402a91f-2a69-447c-bb2b-64d5af155105" />
+      <UserProperties ProjectLinkReference="0402a91f-2a69-447c-bb2b-64d5af155105" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

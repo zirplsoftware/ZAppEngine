@@ -1,11 +1,12 @@
-﻿#if !SILVERLIGHT && !PORTABLE
+﻿using System;
+
 namespace Zirpl.Reflection
 {
     /// <summary>
     /// Represents a dynamic property and field accessor that implements functions to dynamically get 
     /// and set property and field values on an object. 
     /// </summary>    
-    public interface IDynamicAccessor
+    public interface ITypeAccessor
     {
         /// <summary>
         /// Gets a field member value.
@@ -39,13 +40,17 @@ namespace Zirpl.Reflection
         /// <param name="value">The property value to set.</param>
         void SetPropertyValue(object target, string propertyName, object value);
 
-        /// <summary>
-        /// Gets or sets the value on the provided target and property name.
-        /// </summary>
-        /// <param name="target">The target object.</param>
-        /// <param name="propertyName">Tha name of the property.</param>
-        /// <returns></returns>
-        object this[object target, string propertyName] { get; set; }
+        bool HasPropertySetter(string propertyName);
+        bool HasPropertySetter(string propertyName, Type valueType);
+        bool HasPropertySetter<T>(String propertyName);
+        bool HasPropertyGetter(String propertyName);
+        bool HasPropertyGetter(string propertyName, Type valueType);
+        bool HasPropertyGetter<T>(String propertyName);
+        bool HasField(string fieldName);
+        bool HasField(string fieldName, Type valueType);
+        bool HasField<T>(string fieldName);
+
+        void InvokeMethod(Object target, String methodName, params Object[] parameters);
+        bool HasMethod(String methodName);
     }
 }
-#endif

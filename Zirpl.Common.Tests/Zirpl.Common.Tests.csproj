@@ -59,6 +59,9 @@
     <Compile Include="NumberExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\AssemblyExtensionsTests.cs" />
+    <Compile Include="Reflection\ObjectExtensionsTests.cs" />
+    <Compile Include="Reflection\DynamicTypeAccessorTests.cs" />
+    <Compile Include="Reflection\ReflectionTypeAccessorTests.cs" />
     <Compile Include="StringUtilitiesTests.cs" />
     <Compile Include="Text\TextCrawling\TextCrawlerTests.cs" />
   </ItemGroup>
@@ -72,6 +75,10 @@
     <ProjectReference Include="..\Zirpl.Common\Zirpl.Common.csproj">
       <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
       <Name>Zirpl.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Testing\Zirpl.Testing.csproj">
+      <Project>{f4fbe07d-ed80-4a72-9f19-90d15979fa0a}</Project>
+      <Name>Zirpl.Testing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

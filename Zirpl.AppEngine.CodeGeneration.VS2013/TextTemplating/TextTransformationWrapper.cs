@@ -1,143 +1,240 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class TextTransformationWrapper :ITextTransformation
+    public class TextTransformationWrapper : ITextTransformation
     {
+        private readonly Object _preProcessedTextTransformation;
         private readonly TextTransformation _textTransformation;
-        public TextTransformationWrapper(TextTransformation textTransformation)
+        
+        public TextTransformationWrapper(Object textTransformation)
         {
-            this._textTransformation = textTransformation;
+            if (textTransformation == null)
+            {
+                throw new ArgumentNullException("textTransformation");
+            }
+            if (textTransformation is TextTransformation)
+            {
+                this._textTransformation = (TextTransformation)textTransformation;
+            }
+            else
+            {
+                this._preProcessedTextTransformation = textTransformation;
+            }
+        }
+
+        public bool IsPreProcessed
+        {
+            get { return this._preProcessedTextTransformation != null; }
         }
 
         public StringBuilder GenerationEnvironment
         {
             get
             {
-                return (StringBuilder)this._textTransformation.GetType()
-                    .GetProperty("GenerationEnvironment",
-                  BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy)
-                    .GetValue(this._textTransformation);
+                return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<StringBuilder>("GenerationEnvironment");
             }
             set
             {
-                this._textTransformation.GetType()
-                       .GetProperty("GenerationEnvironment",
-                     BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy)
-                       .SetValue(this._textTransformation, value);
+                (this._textTransformation ?? this._preProcessedTextTransformation).SetProperty("GenerationEnvironment", value);
             }
         }
 
-        public System.CodeDom.Compiler.CompilerErrorCollection Errors
+        public CompilerErrorCollection Errors
         {
-            get { return this._textTransformation.Errors; }
+            get
+            {
+                return this._textTransformation != null ? this._textTransformation.Errors : this._preProcessedTextTransformation.GetProperty<CompilerErrorCollection>("Errors");
+            }
         }
 
         public ITextTemplatingEngineHost Host
         {
-            get 
+            get
             {
-                return (ITextTemplatingEngineHost)this._textTransformation.GetType()
-                .GetProperty("Host",
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
-                .GetValue(this._textTransformation); 
+                return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<ITextTemplatingEngineHost>("Host");
             }
             set
             {
-                this._textTransformation.GetType()
-                   .GetProperty("Host",
-                       BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
-                   .SetValue(this._textTransformation, value); 
+                (this._textTransformation ?? this._preProcessedTextTransformation).SetProperty("Host", value);
             }
         }
 
         public string CurrentIndent
         {
-            get { return this._textTransformation.CurrentIndent; }
+            get
+            {
+                return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<String>("CurrentIndent");
+            }
         }
 
         public IDictionary<string, object> Session
         {
-            get { return this._textTransformation.Session; }
-            set { this._textTransformation.Session = value; }
+            get
+            {
+                return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<IDictionary<string, object>>("Session");
+            }
+            set
+            {
+                (this._textTransformation ?? this._preProcessedTextTransformation).SetProperty("Session", value);
+            }
         }
 
         public void ClearIndent()
         {
-            this._textTransformation.ClearIndent();
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.ClearIndent();
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("ClearIndent");
+            }
         }
 
         public void Dispose()
         {
-            this._textTransformation.Dispose();
         }
 
         public void Error(string message)
         {
-            this._textTransformation.Error(message);
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.Error(message);
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("Error", message);
+            }
         }
 
         public void Initialize()
         {
-            this._textTransformation.Initialize();
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.Initialize();
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("Initialize");
+            }
         }
 
         public string PopIndent()
         {
-            return this._textTransformation.PopIndent();
+            if (this._textTransformation != null)
+            {
+                return this._textTransformation.PopIndent();
+            }
+            else
+            {
+                return this._preProcessedTextTransformation.InvokeMethod<String>("PopIndent");
+            }
         }
 
         public void PushIndent(string indent)
         {
-            this._textTransformation.PushIndent(indent);
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.PushIndent(indent);
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("PushIndent", indent);
+            }
         }
 
         public string TransformText()
         {
-           return  this._textTransformation.TransformText();
+            if (this._textTransformation != null)
+            {
+                return this._textTransformation.TransformText();
+            }
+            else
+            {
+                return this._preProcessedTextTransformation.InvokeMethod<String>("TransformText");
+            }
         }
 
         public void Warning(string message)
         {
-            this._textTransformation.Warning(message);
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.Warning(message);
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("Warning", message);
+            }
         }
 
         public void Write(string text)
         {
-            this._textTransformation.Write(text);
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.Write(text);
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("Write", text);
+            }
         }
 
         public void Write(string format, params object[] args)
         {
-            this._textTransformation.Write(format, args);
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.Write(format, args);
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("Write", format, args);
+            }
         }
 
         public void WriteLine(string text)
         {
-            this._textTransformation.WriteLine(text);
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.WriteLine(text);
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("WriteLine", text);
+            }
         }
 
         public void WriteLine(string format, params object[] args)
         {
-            this._textTransformation.WriteLine(format, args);
+            if (this._textTransformation != null)
+            {
+                this._textTransformation.WriteLine(format, args);
+            }
+            else
+            {
+                this._preProcessedTextTransformation.InvokeMethod("WriteLine", format, args);
+            }
         }
 
         public override bool Equals(object obj)
         {
-            return this._textTransformation.Equals(obj);
+            return (this._textTransformation ?? this._preProcessedTextTransformation).Equals(obj);
         }
 
         public override int GetHashCode()
         {
-            return this._textTransformation.GetHashCode();
+            return (this._textTransformation ?? this._preProcessedTextTransformation).GetHashCode();
         }
 
         public override string ToString()
         {
-            return this._textTransformation.ToString();
+            return (this._textTransformation ?? this._preProcessedTextTransformation).ToString();
         }
     }
 }

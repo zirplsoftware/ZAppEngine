@@ -36,7 +36,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
 
                 var template = Activator.CreateInstance(preprocessFile.TemplateType);
-                var templateWrapper = new PreprocessedTextTransformationWrapper(template);
+                var templateWrapper = new TextTransformationWrapper(template);
                 var session = new TextTemplatingSession();
                 foreach (var parameter in preprocessFile.TemplateParameters)
                 {

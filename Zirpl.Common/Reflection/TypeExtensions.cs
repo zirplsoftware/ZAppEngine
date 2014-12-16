@@ -36,12 +36,10 @@ namespace Zirpl.Reflection
         }
 
 
-#if !SILVERLIGHT && !PORTABLE
-        public static IDynamicAccessor GetDynamicAccessor(this Type type)
+        public static ITypeAccessor GetTypeAccessor(this Type type)
         {
-            return DynamicAccessorFactory.GetDynamicAccessor(type);
+            return TypeAccessorFactory.GetTypeAccessor(type);
         }
-#endif
 
         public static bool HasDefaultConstructor(this Type type)
         {
