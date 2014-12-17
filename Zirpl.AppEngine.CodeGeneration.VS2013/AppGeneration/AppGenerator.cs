@@ -10,9 +10,9 @@ using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.Collections;
+using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
@@ -59,55 +59,60 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             new DomainFileParser().ParseDomainTypes(this.App, paths);
         }
 
-
-        public void GenerateFiles(IEnumerable<IOutputFileBuilder> builders)
-        {
-            var factory = new DefaultOutputFileBuilderFactory();
-            factory.AddBuilders(builders);
-
-            this.GenerateFiles(factory);
-        }
-
-        public void GenerateFiles(IOutputFileBuilderFactory factory)
+        public void TransformTemplates(IEnumerable<Type> preProcessedFileTemplateTypes)
         {
             try
             {
-                // create all of the Template output files
-                //
-                var filesToGenerate = new List<OutputFile>();
-                foreach (var strategy in factory.GetAllBuilders())
+                foreach (var preProcessedFileTemplateType in preProcessedFileTemplateTypes)
                 {
-                    filesToGenerate.AddRange(strategy.BuildOutputFiles(this.App));
-                }
-
-                //session.CallingTemplate.WriteLine(JsonConvert.SerializeObject(app, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects }));
-
-                // call the templates to build the files
-                //
-                foreach (var file in filesToGenerate)
-                {
-                    var preprocessedFile = file as PreprocessedTextTransformationOutputFile;
-                    if (preprocessedFile != null)
+                    var template = Activator.CreateInstance(preProcessedFileTemplateType);
+                    if (template.GetTypeAccessor().HasPropertyGetter<DomainType>("DomainType"))
                     {
-                        foreach (var parameter in this.App.Settings.GlobalTemplateParameters)
+                        // once per DomainType
+                        //
+                        this.Context.LogLineToBuildPane("Transforming template once per domain type: " + preProcessedFileTemplateType.Name);
+                        foreach (var domainType in App.DomainTypes)
                         {
-                            if (preprocessedFile.TemplateParameters.ContainsKey(parameter.Key))
+                            template = Activator.CreateInstance(preProcessedFileTemplateType);
+                            var templateWrapper = new TextTransformationWrapper(template);
+                            var session = new TextTemplatingSession();              
+                            foreach (var globalTemplateParameter in this.App.Settings.GlobalTemplateParameters)
                             {
-                                throw new Exception(
-                                    "Global GlobalTemplateParameters in Settings conflict with parameters a file to generate. Key = " +
-                                    parameter.Key);
+                                templateWrapper.Session.Add(globalTemplateParameter);
                             }
-                            preprocessedFile.TemplateParameters.Add(parameter.Key, parameter.Value);
+                            session.Add("AppGenerator", this);
+                            session.Add("App", this.App);
+                            session.Add("DomainType", domainType);
+                            templateWrapper.Session = session;
+                            templateWrapper.Initialize();
+
+                            // run the template
+                            templateWrapper.TransformText();
                         }
-                        // finally the App
-                        preprocessedFile.TemplateParameters.Add("App", this.App);
-                        this.Context.WriteFile(file);
                     }
                     else
                     {
-                        this.Context.WriteFile(file);
+                        // once per App
+                        //
+                        this.Context.LogLineToBuildPane("Transforming template once: " + preProcessedFileTemplateType.Name);
+                        template = Activator.CreateInstance(preProcessedFileTemplateType);
+                        var templateWrapper = new TextTransformationWrapper(template);
+                        var session = new TextTemplatingSession();
+                        foreach (var globalTemplateParameter in this.App.Settings.GlobalTemplateParameters)
+                        {
+                            templateWrapper.Session.Add(globalTemplateParameter);
+                        }
+                        session.Add("AppGenerator", this);
+                        session.Add("App", this.App);
+                        templateWrapper.Session = session;
+                        templateWrapper.Initialize();
+
+                        // run the template
+                        templateWrapper.TransformText();
                     }
                 }
+
+                this.EndFile();
             }
             catch (Exception e)
             {
@@ -125,29 +130,19 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             }
         }
 
-        public void WriteFile(OutputFile outputFile)
+        public void StartFile(Object textTransformation, String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
-            this.Context.WriteFile(outputFile);
+            this.Context.StartFile(new TextTransformationWrapper(textTransformation), fileName, folderWithinProject, destinationProjectName, buildAction, customTool, autoFormat, overwrite, encoding);
         }
 
-        public void WriteFile(PreprocessedTextTransformationOutputFile outputFile)
+        public void StartFile(Object textTransformation, String fileName, String folderWithinProject = null, Project destinationProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
-            this.Context.WriteFile(outputFile);
+            this.Context.StartFile(new TextTransformationWrapper(textTransformation), fileName, folderWithinProject, destinationProject, buildAction, customTool, autoFormat, overwrite, encoding);
         }
 
-        public void StartFile(String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
+        public void StartFile(Object textTransformation, OutputFile outputFile)
         {
-            this.Context.StartFile(fileName, folderWithinProject, destinationProjectName, buildAction, customTool, autoFormat, overwrite, encoding);
-        }
-
-        public void StartFile(String fileName, String folderWithinProject = null, Project destinationProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
-        {
-            this.Context.StartFile(fileName, folderWithinProject, destinationProject, buildAction, customTool, autoFormat, overwrite, encoding);
-        }
-
-        public void StartFile(OutputFile outputFile)
-        {
-            this.Context.StartFile(outputFile);
+            this.Context.StartFile(new TextTransformationWrapper(textTransformation), outputFile);
         }
 
         public void EndFile()

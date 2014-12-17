@@ -6,7 +6,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.Collections;
 using Zirpl.IO;
 

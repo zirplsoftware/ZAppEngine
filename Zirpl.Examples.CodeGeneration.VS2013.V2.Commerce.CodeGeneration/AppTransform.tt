@@ -1,15 +1,15 @@
 ﻿<#@ template  debug="true" hostSpecific="true" #>
 <#@ output extension=".txt" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ assembly name="$(SolutionDir)Zirpl.AppEngine.CodeGeneration.VS2013\bin\$(Configuration)\Zirpl.AppEngine.VisualStudioAutomation.dll" #>
 <#@ assembly name="$(SolutionDir)Zirpl.Examples.Commerce.CodeGeneration\bin\$(Configuration)\Zirpl.Examples.Commerce.CodeGeneration.dll" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#
 	using (var appGenerator = new AppGenerator(this))
 	{
-		appGenerator.GenerateFiles(new IOutputFileBuilder[] { 
-			new Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.PersistableDomainClassBuilder(),
-			new Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.ModelExtensionsClassBuilder(),
-			new Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.EnumBuilder() });
+		appGenerator.TransformTemplates(new Type[] { 
+			typeof(Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.EnumTemplate),
+			typeof(Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.ModelExtensionsClassTemplate) });
 	}
 #>

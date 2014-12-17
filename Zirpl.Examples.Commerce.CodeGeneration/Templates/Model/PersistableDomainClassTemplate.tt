@@ -13,10 +13,8 @@
 <#@ assembly name="VSLangProj80" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile" name="TemplateOutputFile" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OutputClass" name="OutputClass" #>
 <#
 
 #>

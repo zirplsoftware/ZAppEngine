@@ -7,15 +7,26 @@
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating" #>
 <#@ assembly name="EnvDTE" #>
 <#@ assembly name="VSLangProj" #>
 <#@ assembly name="VSLangProj80" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.PreprocessedTextTransformationOutputFile" name="TemplateOutputFile" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.AppGenerator" name="AppGenerator" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
+<#
+	if (this.DomainType.IsEnum)
+    {
+		this.AppGenerator.StartFile(this, new OutputFile()
+                {
+                    FileNameWithoutExtension = this.DomainType.Name,
+                    FileExtension = ".cs",
+                    DestinationProject = this.DomainType.DestinationProject,
+                    FolderPathWithinProject = this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace),
+                    BuildAction = BuildActionTypeEnum.Compile
+                });
+#>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +39,15 @@ namespace <#= this.DomainType.Namespace #>
 	public enum <#= this.DomainType.Name #> : <#= this.DomainType.EnumDescribes.IdProperty.DataTypeString #>
 	{
 <#
-	foreach (var enumValue in this.DomainType.EnumValues)
-	{
+		foreach (var enumValue in this.DomainType.EnumValues)
+		{
 #>
 		<#= enumValue.Name #> = <#= enumValue.Id #>,
 <#	
-    }
+		}
 #>
 	}
 }
+<#
+    }
+#>

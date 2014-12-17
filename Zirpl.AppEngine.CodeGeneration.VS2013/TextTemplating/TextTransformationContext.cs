@@ -72,23 +72,16 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
         }
 
-
-
-        public void WriteFile(OutputFile outputFile)
-        {
-            this.FileManager.WriteFile(outputFile);
-        }
-
-        public void StartFile(String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
+        public void StartFile(ITextTransformation textTransformation, String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
             var project = String.IsNullOrEmpty(destinationProjectName)
                 ? null
                 : this.VisualStudio.GetProject(destinationProjectName);
 
-            this.StartFile(fileName, folderWithinProject, project, buildAction, customTool, autoFormat, overwrite, encoding);
+            this.StartFile(textTransformation, fileName, folderWithinProject, project, buildAction, customTool, autoFormat, overwrite, encoding);
         }
 
-        public void StartFile(String fileName, String folderWithinProject = null, Project destinationProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
+        public void StartFile(ITextTransformation textTransformation, String fileName, String folderWithinProject = null, Project destinationProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
             var outputFile = new OutputFile()
             {
@@ -103,12 +96,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             outputFile.AutoFormat = autoFormat ?? outputFile.AutoFormat;
             outputFile.Encoding = encoding ?? outputFile.Encoding;
 
-            this.StartFile(outputFile);
+            this.StartFile(textTransformation, outputFile);
         }
 
-        public void StartFile(OutputFile outputFile)
+        public void StartFile(ITextTransformation textTransformation, OutputFile outputFile)
         {
-            this.FileManager.StartFile(outputFile);
+            this.FileManager.StartFile(textTransformation, outputFile);
         }
 
         public void EndFile()

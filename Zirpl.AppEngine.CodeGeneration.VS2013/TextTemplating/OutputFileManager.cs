@@ -27,38 +27,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             this.CompletedFiles = new List<OutputFile>();
         }
 
-        public void WriteFile(OutputFile outputFile)
-        {
-            this.StartFile(outputFile);
-
-            var preprocessFile = outputFile as PreprocessedTextTransformationOutputFile;
-            if (preprocessFile != null)
-            {
-
-                var template = Activator.CreateInstance(preprocessFile.TemplateType);
-                var templateWrapper = new TextTransformationWrapper(template);
-                var session = new TextTemplatingSession();
-                foreach (var parameter in preprocessFile.TemplateParameters)
-                {
-                    session[parameter.Key] = parameter.Value;
-                }
-                session["TemplateOutputFile"] = preprocessFile;
-                templateWrapper.Session = session;
-                templateWrapper.Initialize(); // Must call this to transfer values.
-
-                this.Context.LogLineToBuildPane("Transforming text for file: " + this.CurrentOutputFile.FullFilePath);
-                this.CurrentGenerationEnvironment.Append(templateWrapper.TransformText());
-            }
-
-            this.EndFile();
-        }
-
-        public void StartFile(OutputFile file)
+        public void StartFile(ITextTransformation template, OutputFile file)
         {
             this.EndFile();
 
             this.CurrentOutputFile = file;
-            this.CurrentGenerationEnvironment = new StringBuilder();
+            this.CurrentGenerationEnvironment = template.GenerationEnvironment;
             this.Context.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
         }
 
@@ -66,7 +40,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             if (this.CurrentOutputFile != null)
             {
-                this.CurrentOutputFile.Content = this.CurrentGenerationEnvironment.ToString();
+                var content = this.CurrentGenerationEnvironment.ToString();
                 this.CurrentGenerationEnvironment = this.CallingTemplateOriginalGenerationEnvironment;
                 this.Context.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
                 
@@ -100,9 +74,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
                 if (File.Exists(this.CurrentOutputFile.FullFilePath))
                 {
-                    var isDifferent =
-                        File.ReadAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Encoding) !=
-                        this.CurrentOutputFile.Content;
+                    var isDifferent = File.ReadAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Encoding) != content;
                     if (isDifferent
                         && this.CurrentOutputFile.CanOverrideExistingFile)
                     {
@@ -131,9 +103,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
                 //else
                 {
-                    File.WriteAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Content);
-                    this.CurrentOutputFile.ProjectItem =
-                        folder.ProjectItems.AddFromFile(this.CurrentOutputFile.FullFilePath);
+                    File.WriteAllText(this.CurrentOutputFile.FullFilePath, content);
+                    this.CurrentOutputFile.ProjectItem = folder.ProjectItems.AddFromFile(this.CurrentOutputFile.FullFilePath);
                 }
 
                 // set VS properties for the ProjectItem
