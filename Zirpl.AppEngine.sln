@@ -80,7 +80,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.Cod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.Model", "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model\Zirpl.Examples.Commerce.Model.csproj", "{84E18337-0043-464A-B9D9-D4B3F4B849CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.CodeGeneration", "Zirpl.Examples.Commerce.CodeGeneration\Zirpl.Examples.Commerce.CodeGeneration.csproj", "{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.Templates", "Zirpl.Examples.Commerce.CodeGeneration\Zirpl.Examples.Commerce.Templates.csproj", "{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

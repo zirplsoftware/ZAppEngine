@@ -43,6 +43,3 @@ namespace <#= App.ModelProject.GetDefaultNamespace() #>
 #>
 	}
 }
-<#+
-public string TemplateKey { get { return "Test";}}
-#>

@@ -7,8 +7,8 @@
     <ProjectGuid>{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zirpl.Examples.Commerce.CodeGeneration</RootNamespace>
-    <AssemblyName>Zirpl.Examples.Commerce.CodeGeneration</AssemblyName>
+    <RootNamespace>Zirpl.Examples.Commerce.Templates</RootNamespace>
+    <AssemblyName>Zirpl.Examples.Commerce.Templates</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -72,15 +72,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuilderKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\Model\EnumTemplate.cs">
+    <Compile Include="Model\EnumTemplate.cs">
       <DependentUpon>EnumTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\Model\ModelExtensionsClassTemplate.cs">
-      <DependentUpon>ModelExtensionsClassTemplate.tt</DependentUpon>
+    <Compile Include="Model\PersistableDomainClassTemplate.cs">
+      <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -92,18 +91,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\Model\EnumTemplate.tt">
+    <None Include="Model\EnumTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EnumTemplate.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Model\ModelExtensionsClassTemplate.tt">
+    <None Include="Model\PersistableDomainClassTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelExtensionsClassTemplate.cs</LastGenOutput>
+      <LastGenOutput>PersistableDomainClassTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

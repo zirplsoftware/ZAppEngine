@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
+namespace Zirpl.Examples.Commerce.Templates.Model
 {
     using System;
     using System.Collections;
@@ -22,7 +22,7 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class EnumTemplate : EnumTemplateBase
     {
@@ -33,7 +33,7 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 13 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 13 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
 
 	if (this.DomainType.IsEnum)
     {
@@ -46,28 +46,28 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
                     ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
                     "ctions;\r\n\r\nnamespace ");
             
-            #line 25 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 25 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic enum ");
             
-            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.EnumDescribes.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 29 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 29 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
 
 		foreach (var enumValue in this.DomainType.EnumValues)
 		{
@@ -77,21 +77,21 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
             #line hidden
             this.Write("\t\t");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
 	
 		}
 
@@ -100,7 +100,7 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
             #line hidden
             this.Write("\t}\r\n}\r\n");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
 
     }
 
@@ -110,7 +110,7 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\EnumTemplate.tt"
 
 private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext _ContextField;
 
