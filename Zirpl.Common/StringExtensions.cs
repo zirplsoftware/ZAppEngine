@@ -12,6 +12,11 @@ namespace Zirpl
 {
     public static class StringExtensions
     {
+        public static string Or(this string text, string alternative)
+        {
+            return string.IsNullOrWhiteSpace(text) ? alternative : text;
+        }
+
         public static String SubstringUntilNthInstanceOf(this string originalText, String search, int nthInstance,      
 #if !PORTABLE
             StringComparison stringComparison = StringComparison.InvariantCulture)

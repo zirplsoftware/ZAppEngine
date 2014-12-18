@@ -1,10 +1,12 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using EnvDTE;
+using Microsoft.CSharp;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
@@ -22,65 +24,144 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
         public static void GenerateApp(this TextTransformation callingTemplate,
             String preprocessedTemplatesAssemblyFileName, AppGenerationSettings settings = null)
         {
-            GenerateApp(callingTemplate, new string[] { preprocessedTemplatesAssemblyFileName}, settings);
+            using (TextTransformationContext.Create(callingTemplate))
+            {
+                GenerateApp(callingTemplate, new string[] {preprocessedTemplatesAssemblyFileName}, settings);
+            }
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate,
            IEnumerable<String> preprocessedTemplatesAssemblyFileNames, AppGenerationSettings settings = null)
         {
-            var list = from fileName in preprocessedTemplatesAssemblyFileNames
-                where
-                    AppDomain.CurrentDomain.GetAssemblies().Count(o => !o.IsDynamic && o.Location.Contains(fileName)) == 1
-                select
-                    AppDomain.CurrentDomain.GetAssemblies()
-                        .Where(o => !o.IsDynamic && o.Location.Contains(fileName))
-                        .Single();
+            using (TextTransformationContext.Create(callingTemplate))
+            {
+                var list = from fileName in preprocessedTemplatesAssemblyFileNames
+                    where
+                        AppDomain.CurrentDomain.GetAssemblies()
+                            .Count(o => !o.IsDynamic && o.Location.Contains(fileName)) == 1
+                    select
+                        AppDomain.CurrentDomain.GetAssemblies()
+                            .Where(o => !o.IsDynamic && o.Location.Contains(fileName))
+                            .Single();
 
-            GenerateApp(callingTemplate, list, settings);
+                GenerateApp(callingTemplate, list, settings);
+            }
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate, Assembly preprocessedTemplatesAssembly, AppGenerationSettings settings = null)
         {
-            var list = new List<Assembly>();
-            if (preprocessedTemplatesAssembly != null)
+            using (TextTransformationContext.Create(callingTemplate))
             {
-                list.Add(preprocessedTemplatesAssembly);
+                var list = new List<Assembly>();
+                if (preprocessedTemplatesAssembly != null)
+                {
+                    list.Add(preprocessedTemplatesAssembly);
+                }
+                GenerateApp(callingTemplate, list, settings);
             }
-            GenerateApp(callingTemplate, list, settings);
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> preprocessedTemplatesAssemblies = null, AppGenerationSettings settings = null)
         {
-            var assemblyList = new List<Assembly>();
-            if (preprocessedTemplatesAssemblies != null)
-            {
-                assemblyList.AddRange(preprocessedTemplatesAssemblies);
-            }
-            if (!assemblyList.Any())
-            {
-                assemblyList.AddRange(AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic));
-            }
-
-            //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-
-            var templateTypesList = from assembly in assemblyList
-                                    from o in assembly.GetTypes()
-                                    where o.IsClass
-                                            && !o.IsAbstract
-                                            && Attribute.GetCustomAttribute(o, typeof (System.CodeDom.Compiler.GeneratedCodeAttribute)) != null
-                                            && o.FullName.ToLowerInvariant().Contains("._templates.")
-                                            && o.GetMethod("TransformText") != null
-                                            && o.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof (String))
-                                            && o.GetMethod("Initialize") != null
-                                    select o;
-            GenerateApp(callingTemplate, templateTypesList, settings);
-        }
-
-        private static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Type> preProcessedFileTemplateTypes, AppGenerationSettings settings = null)
-        {
-            settings = settings ?? new AppGenerationSettings();
             using (TextTransformationContext.Create(callingTemplate))
             {
+                var assemblyList = new List<Assembly>();
+                if (preprocessedTemplatesAssemblies != null)
+                {
+                    assemblyList.AddRange(preprocessedTemplatesAssemblies);
+                }
+                if (TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject
+                        .GetAllProjectItemsRecursive().Where(o => Path.GetExtension(o.GetFullPath()) == ".tt").Any())
+                {
+                    CompilePreProcessedTemplatesInCallingTemplateProject();
+                }
+                if (!assemblyList.Any())
+                {
+                    assemblyList.AddRange(AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic));
+                }
+
+                //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
+
+                var templateTypesList = from assembly in assemblyList
+                    from o in assembly.GetTypes()
+                    where o.IsClass
+                          && !o.IsAbstract
+                          &&
+                          Attribute.GetCustomAttribute(o, typeof (System.CodeDom.Compiler.GeneratedCodeAttribute)) !=
+                          null
+                          && o.FullName.ToLowerInvariant().Contains("._templates.")
+                          && o.GetMethod("TransformText") != null
+                          && o.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof (String))
+                          && o.GetMethod("Initialize") != null
+                    select o;
+                GenerateApp(callingTemplate, templateTypesList, settings);
+            }
+        }
+
+        private static void CompilePreProcessedTemplatesInCallingTemplateProject()
+        {
+            var codeList = new List<String>();
+            foreach (var item in TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject.GetAllProjectItemsRecursive())
+            {
+                if (item.GetFullPath().EndsWith(".cs"))
+                {
+                    codeList.Add(File.ReadAllText(item.GetFullPath()));
+                }
+            }
+
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+            CompilerParameters parameters = new CompilerParameters();
+            // True - memory generation, false - external file generation
+            parameters.GenerateInMemory = true;
+            // True - exe file generation, false - dll file generation
+            parameters.GenerateExecutable = false;
+            parameters.ReferencedAssemblies.Clear();
+
+
+            var vsproject = TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject.Object as VSLangProj.VSProject;
+            // note: you could also try casting to VsWebSite.VSWebSite
+
+            foreach (VSLangProj.Reference reference in vsproject.References)
+            {
+                if (reference.Name != "mscorlib")
+                {
+                    parameters.ReferencedAssemblies.Add(reference.Path);
+                    TextTransformationContext.Instance.LogLineToBuildPane("Adding reference: " + reference.Path);
+                }
+                //if (reference.SourceProject == null)
+                //{
+                //}
+                //else
+                //{
+                //    // This is a project reference
+                //}
+            }
+            CompilerResults results = provider.CompileAssemblyFromSource(parameters, codeList.ToArray());
+            if (results.Errors.HasErrors)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (CompilerError error in results.Errors)
+                {
+                    sb.AppendLine(String.Format("Error ({0}): {1}", error.ErrorNumber, error.ErrorText));
+                }
+
+                throw new InvalidOperationException(sb.ToString());
+            }
+        }
+ 
+        private static string GetFullName(VSLangProj.Reference reference)
+        {
+            return string.Format("{0}, Version={1}.{2}.{3}.{4}, Culture={5}, PublicKeyToken={6}",
+                                    reference.Name,
+                                    reference.MajorVersion, reference.MinorVersion, reference.BuildNumber, reference.RevisionNumber,
+                                    reference.Culture.Or("neutral"),
+                                    reference.PublicKeyToken.Or("null"));
+        }
+
+        private static void GenerateApp(TextTransformation callingTemplate, IEnumerable<Type> preProcessedFileTemplateTypes, AppGenerationSettings settings = null)
+        {
+            settings = settings ?? new AppGenerationSettings();
                 try
                 {
 
@@ -158,8 +239,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     }
                     throw;
                 }
-
-            }
         }
 
         private static void TransformTemplate(Type preProcessedFileTemplateType, App app, DomainType domainType = null)
