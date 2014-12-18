@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using EnvDTE;
 using Microsoft.VisualStudio.OLE.Interop;
@@ -18,7 +19,58 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {
-        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Type> preProcessedFileTemplateTypes, AppGenerationSettings settings = null)
+        public static void GenerateApp(this TextTransformation callingTemplate, AppGenerationSettings settings = null)
+        {
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic))
+            {
+                GenerateApp(callingTemplate, assembly, settings);
+            }
+        }
+        public static void GenerateApp(this TextTransformation callingTemplate,
+            String preprocessedTemplatesAssemblyFileName, AppGenerationSettings settings = null)
+        {
+            Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic && o.Location.Contains(preprocessedTemplatesAssemblyFileName)).SingleOrDefault();
+            GenerateApp(callingTemplate, assembly, settings);
+        }
+
+        public static void GenerateApp(this TextTransformation callingTemplate,
+           IEnumerable<String> preprocessedTemplatesAssemblyFileNames, AppGenerationSettings settings = null)
+        {
+            foreach (var assemblyFileName in preprocessedTemplatesAssemblyFileNames)
+            {
+                GenerateApp(callingTemplate, assemblyFileName, settings);
+            }
+        }
+
+        public static void GenerateApp(this TextTransformation callingTemplate, Assembly preprocessedTemplatesAssembly,
+            AppGenerationSettings settings = null)
+        {
+            var listOfTemplateTypes = new List<Type>();
+            //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
+            foreach (var type in preprocessedTemplatesAssembly.GetTypes().Where(o => o.IsClass 
+                && !o.IsAbstract 
+                && Attribute.GetCustomAttribute(o, typeof(System.CodeDom.Compiler.GeneratedCodeAttribute)) != null))
+            {       
+                // ok, we have a likely candidate- let's runs some tests
+                if (type.GetMethod("TransformText") != null
+                    && type.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof(String))
+                    && type.GetMethod("Initialize") != null)
+                {
+                    listOfTemplateTypes.Add(type);
+                }
+            }
+
+            GenerateApp(callingTemplate, listOfTemplateTypes, settings);
+        }
+        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> preprocessedTemplatesAssemblies, AppGenerationSettings settings = null)
+        {
+            foreach (var assembly in preprocessedTemplatesAssemblies)
+            {
+                GenerateApp(callingTemplate, assembly, settings);
+            }
+        }
+
+        private static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Type> preProcessedFileTemplateTypes, AppGenerationSettings settings = null)
         {
             settings = settings ?? new AppGenerationSettings();
             using (TextTransformationContext.Create(callingTemplate))
@@ -71,21 +123,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                                 "Transforming template once per domain type: " + preProcessedFileTemplateType.Name);
                             foreach (var domainType in app.DomainTypes)
                             {
-                                template = Activator.CreateInstance(preProcessedFileTemplateType);
-                                var templateWrapper = new TextTransformationWrapper(template);
-                                var session = new TextTemplatingSession();
-                                foreach (var globalTemplateParameter in app.Settings.GlobalTemplateParameters)
-                                {
-                                    templateWrapper.Session.Add(globalTemplateParameter);
-                                }
-                                session.Add("Context", TextTransformationContext.Instance);
-                                session.Add("App", app);
-                                session.Add("DomainType", domainType);
-                                templateWrapper.Session = session;
-                                templateWrapper.Initialize();
-
-                                // run the template
-                                templateWrapper.TransformText();
+                                TransformTemplate(preProcessedFileTemplateType, app, domainType);
                             }
                         }
                         else
@@ -94,20 +132,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                             //
                             TextTransformationContext.Instance.LogLineToBuildPane("Transforming template once: " +
                                                                                   preProcessedFileTemplateType.Name);
-                            template = Activator.CreateInstance(preProcessedFileTemplateType);
-                            var templateWrapper = new TextTransformationWrapper(template);
-                            var session = new TextTemplatingSession();
-                            foreach (var globalTemplateParameter in app.Settings.GlobalTemplateParameters)
-                            {
-                                templateWrapper.Session.Add(globalTemplateParameter);
-                            }
-                            session.Add("Context", TextTransformationContext.Instance);
-                            session.Add("App", app);
-                            templateWrapper.Session = session;
-                            templateWrapper.Initialize();
-
-                            // run the template
-                            templateWrapper.TransformText();
+                            TransformTemplate(preProcessedFileTemplateType, app);
                         }
                     }
                 }
@@ -117,14 +142,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     {
                         try
                         {
-                            TextTransformationContext.Instance.CallingTemplate.WriteLine(e.ToString());
-                        }
-                        catch (Exception)
-                        {
-                        }
-                        try
-                        {
                             TextTransformationContext.Instance.LogLineToBuildPane(e.ToString());
+                            TextTransformationContext.Instance.CallingTemplate.WriteLine(e.ToString());
                         }
                         catch (Exception)
                         {
@@ -134,6 +153,28 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 }
 
             }
+        }
+
+        private static void TransformTemplate(Type preProcessedFileTemplateType, App app, DomainType domainType = null)
+        {
+            var template = Activator.CreateInstance(preProcessedFileTemplateType);
+            var templateWrapper = new TextTransformationWrapper(template);
+            var session = new TextTemplatingSession();
+            foreach (var globalTemplateParameter in app.Settings.GlobalTemplateParameters)
+            {
+                templateWrapper.Session.Add(globalTemplateParameter);
+            }
+            session.Add("Context", TextTransformationContext.Instance);
+            session.Add("App", app);
+            if (domainType != null)
+            {
+                session.Add("DomainType", domainType);
+            }
+            templateWrapper.Session = session;
+            templateWrapper.Initialize();
+
+            // run the template
+            templateWrapper.TransformText();
         }
     }
 }

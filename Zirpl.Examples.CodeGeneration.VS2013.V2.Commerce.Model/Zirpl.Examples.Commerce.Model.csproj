@@ -41,8 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_auto\ModelExtensions.cs" />
-    <Compile Include="_auto\NamePrefixTypeEnum.cs" />
+    <Compile Include="_auto\ModelExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\NamePrefixTypeEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">

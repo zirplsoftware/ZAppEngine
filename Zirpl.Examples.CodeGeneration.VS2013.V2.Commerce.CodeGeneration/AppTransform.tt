@@ -1,12 +1,8 @@
 ﻿<#@ template  debug="true" hostSpecific="true" #>
 <#@ output extension=".txt" #>
-<#@ import namespace="System.Reflection" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ assembly name="$(SolutionDir)Zirpl.AppEngine.CodeGeneration.VS2013\bin\$(Configuration)\Zirpl.AppEngine.VisualStudioAutomation.dll" #>
 <#@ assembly name="$(SolutionDir)Zirpl.Examples.Commerce.CodeGeneration\bin\$(Configuration)\Zirpl.Examples.Commerce.CodeGeneration.dll" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#
-this.GenerateApp(new Type[] { 
-			typeof(Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.EnumTemplate),
-			typeof(Zirpl.Examples.Commerce.CodeGeneration.Templates.Model.ModelExtensionsClassTemplate) });
+this.GenerateApp();
 #>

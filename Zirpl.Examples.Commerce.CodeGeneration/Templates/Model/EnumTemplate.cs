@@ -14,9 +14,9 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
     using System.Collections.Generic;
     using System.Linq;
     using Zirpl.AppEngine.VisualStudioAutomation;
-    using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
+    using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
     
     /// <summary>
     /// Class to produce the template output
@@ -33,7 +33,7 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 19 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 13 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
 
 	if (this.DomainType.IsEnum)
     {
@@ -46,28 +46,28 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
                     ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
                     "ctions;\r\n\r\nnamespace ");
             
-            #line 31 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 25 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic enum ");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.EnumDescribes.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 29 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
 
 		foreach (var enumValue in this.DomainType.EnumValues)
 		{
@@ -77,21 +77,21 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
             #line hidden
             this.Write("\t\t");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 39 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 40 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 34 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
 	
 		}
 
@@ -100,7 +100,7 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
             #line hidden
             this.Write("\t}\r\n}\r\n");
             
-            #line 45 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
+            #line 39 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
 
     }
 
@@ -108,21 +108,6 @@ namespace Zirpl.Examples.Commerce.CodeGeneration.Templates.Model
             #line default
             #line hidden
             return this.GenerationEnvironment.ToString();
-        }
-        private global::Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost hostValue;
-        /// <summary>
-        /// The current host for the text templating engine
-        /// </summary>
-        public virtual global::Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost Host
-        {
-            get
-            {
-                return this.hostValue;
-            }
-            set
-            {
-                this.hostValue = value;
-            }
         }
         
         #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Templates\Model\EnumTemplate.tt"
@@ -182,26 +167,6 @@ if (this.Session.ContainsKey("Context"))
 }
 if ((ContextValueAcquired == false))
 {
-    string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "Context");
-    if ((string.IsNullOrEmpty(parameterValue) == false))
-    {
-        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext));
-        if (((tc != null) 
-                    && tc.CanConvertFrom(typeof(string))))
-        {
-            this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(tc.ConvertFrom(parameterValue)));
-            ContextValueAcquired = true;
-        }
-        else
-        {
-            this.Error("The type \'Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformatio" +
-                    "nContext\' of the parameter \'Context\' did not match the type of the data passed t" +
-                    "o the template.");
-        }
-    }
-}
-if ((ContextValueAcquired == false))
-{
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Context");
     if ((data != null))
     {
@@ -216,25 +181,6 @@ if (this.Session.ContainsKey("App"))
 }
 if ((AppValueAcquired == false))
 {
-    string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "App");
-    if ((string.IsNullOrEmpty(parameterValue) == false))
-    {
-        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App));
-        if (((tc != null) 
-                    && tc.CanConvertFrom(typeof(string))))
-        {
-            this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(tc.ConvertFrom(parameterValue)));
-            AppValueAcquired = true;
-        }
-        else
-        {
-            this.Error("The type \'Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App\' of the" +
-                    " parameter \'App\' did not match the type of the data passed to the template.");
-        }
-    }
-}
-if ((AppValueAcquired == false))
-{
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("App");
     if ((data != null))
     {
@@ -246,26 +192,6 @@ if (this.Session.ContainsKey("DomainType"))
 {
     this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(this.Session["DomainType"]));
     DomainTypeValueAcquired = true;
-}
-if ((DomainTypeValueAcquired == false))
-{
-    string parameterValue = this.Host.ResolveParameterValue("Property", "PropertyDirectiveProcessor", "DomainType");
-    if ((string.IsNullOrEmpty(parameterValue) == false))
-    {
-        global::System.ComponentModel.TypeConverter tc = global::System.ComponentModel.TypeDescriptor.GetConverter(typeof(global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType));
-        if (((tc != null) 
-                    && tc.CanConvertFrom(typeof(string))))
-        {
-            this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(tc.ConvertFrom(parameterValue)));
-            DomainTypeValueAcquired = true;
-        }
-        else
-        {
-            this.Error("The type \'Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType\'" +
-                    " of the parameter \'DomainType\' did not match the type of the data passed to the " +
-                    "template.");
-        }
-    }
 }
 if ((DomainTypeValueAcquired == false))
 {

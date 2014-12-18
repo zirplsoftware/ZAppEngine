@@ -1,18 +1,12 @@
-﻿<#@ template language="C#" hostSpecific="true" #>
-<#@ output extension=".txt" #>
+﻿<#@ template language="C#" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config" #>
-<#@ assembly name="EnvDTE" #>
-<#@ assembly name="VSLangProj" #>
-<#@ assembly name="VSLangProj80" #>
-<#@ assembly name="System.Xml" #>
-<#@ assembly name="System.Xml.Serialization" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext" name="Context" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>

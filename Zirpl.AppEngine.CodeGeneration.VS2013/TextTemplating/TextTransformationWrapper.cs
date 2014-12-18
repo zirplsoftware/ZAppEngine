@@ -58,10 +58,21 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
+                if (this._preProcessedTextTransformation != null
+                    && !this._preProcessedTextTransformation.GetTypeAccessor().HasPropertyGetter<ITextTemplatingEngineHost>("Host"))
+                {
+                    throw new InvalidOperationException("Template is not Host-specific");
+                }
+
                 return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<ITextTemplatingEngineHost>("Host");
             }
             set
             {
+                if (this._preProcessedTextTransformation != null
+                    && !this._preProcessedTextTransformation.GetTypeAccessor().HasPropertySetter<ITextTemplatingEngineHost>("Host"))
+                {
+                    throw new InvalidOperationException("Template is not Host-specific");
+                }
                 (this._textTransformation ?? this._preProcessedTextTransformation).SetProperty("Host", value);
             }
         }

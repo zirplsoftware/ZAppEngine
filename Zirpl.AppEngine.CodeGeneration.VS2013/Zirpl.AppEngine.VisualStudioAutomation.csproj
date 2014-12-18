@@ -97,6 +97,7 @@
     <Compile Include="AppGeneration\Config\Parsers\Json\PropertyJson.cs" />
     <Compile Include="AppGeneration\Config\Parsers\Json\RelationshipJson.cs" />
     <Compile Include="AppGeneration\Config\Relationship.cs" />
+    <Compile Include="AppGeneration\PreProcessedTemplateBase.cs" />
     <Compile Include="TextTemplating\ITextTransformation.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
     <Compile Include="TextTemplating\TextTransformationExtensions.cs" />
