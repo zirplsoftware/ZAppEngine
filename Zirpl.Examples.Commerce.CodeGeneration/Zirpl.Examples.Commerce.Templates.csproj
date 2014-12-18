@@ -78,8 +78,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Model\PersistableDomainClassTemplate.cs">
-      <DependentUpon>PersistableDomainClassTemplate.tt</DependentUpon>
+    <Compile Include="Model\DomainClassTemplate.cs">
+      <DependentUpon>DomainClassTemplate.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -95,15 +95,17 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EnumTemplate.cs</LastGenOutput>
     </None>
-    <None Include="Model\PersistableDomainClassTemplate.tt">
+    <None Include="Model\DomainClassTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>PersistableDomainClassTemplate.cs</LastGenOutput>
+      <LastGenOutput>DomainClassTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\Metadata\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

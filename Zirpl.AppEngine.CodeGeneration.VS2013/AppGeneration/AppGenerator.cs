@@ -18,56 +18,62 @@ using Zirpl.Reflection;
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
-    {
-        public static void GenerateApp(this TextTransformation callingTemplate, AppGenerationSettings settings = null)
-        {
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic))
-            {
-                GenerateApp(callingTemplate, assembly, settings);
-            }
-        }
+    {   
         public static void GenerateApp(this TextTransformation callingTemplate,
             String preprocessedTemplatesAssemblyFileName, AppGenerationSettings settings = null)
         {
-            Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic && o.Location.Contains(preprocessedTemplatesAssemblyFileName)).SingleOrDefault();
-            GenerateApp(callingTemplate, assembly, settings);
+            GenerateApp(callingTemplate, new string[] { preprocessedTemplatesAssemblyFileName}, settings);
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate,
            IEnumerable<String> preprocessedTemplatesAssemblyFileNames, AppGenerationSettings settings = null)
         {
-            foreach (var assemblyFileName in preprocessedTemplatesAssemblyFileNames)
-            {
-                GenerateApp(callingTemplate, assemblyFileName, settings);
-            }
+            var list = from fileName in preprocessedTemplatesAssemblyFileNames
+                where
+                    AppDomain.CurrentDomain.GetAssemblies().Count(o => !o.IsDynamic && o.Location.Contains(fileName)) == 1
+                select
+                    AppDomain.CurrentDomain.GetAssemblies()
+                        .Where(o => !o.IsDynamic && o.Location.Contains(fileName))
+                        .Single();
+
+            GenerateApp(callingTemplate, list, settings);
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, Assembly preprocessedTemplatesAssembly,
-            AppGenerationSettings settings = null)
+        public static void GenerateApp(this TextTransformation callingTemplate, Assembly preprocessedTemplatesAssembly, AppGenerationSettings settings = null)
         {
-            var listOfTemplateTypes = new List<Type>();
+            var list = new List<Assembly>();
+            if (preprocessedTemplatesAssembly != null)
+            {
+                list.Add(preprocessedTemplatesAssembly);
+            }
+            GenerateApp(callingTemplate, list, settings);
+        }
+
+        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> preprocessedTemplatesAssemblies = null, AppGenerationSettings settings = null)
+        {
+            var assemblyList = new List<Assembly>();
+            if (preprocessedTemplatesAssemblies != null)
+            {
+                assemblyList.AddRange(preprocessedTemplatesAssemblies);
+            }
+            if (!assemblyList.Any())
+            {
+                assemblyList.AddRange(AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic));
+            }
+
             //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-            foreach (var type in preprocessedTemplatesAssembly.GetTypes().Where(o => o.IsClass 
-                && !o.IsAbstract 
-                && Attribute.GetCustomAttribute(o, typeof(System.CodeDom.Compiler.GeneratedCodeAttribute)) != null))
-            {       
-                // ok, we have a likely candidate- let's runs some tests
-                if (type.GetMethod("TransformText") != null
-                    && type.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof(String))
-                    && type.GetMethod("Initialize") != null)
-                {
-                    listOfTemplateTypes.Add(type);
-                }
-            }
 
-            GenerateApp(callingTemplate, listOfTemplateTypes, settings);
-        }
-        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> preprocessedTemplatesAssemblies, AppGenerationSettings settings = null)
-        {
-            foreach (var assembly in preprocessedTemplatesAssemblies)
-            {
-                GenerateApp(callingTemplate, assembly, settings);
-            }
+            var templateTypesList = from assembly in assemblyList
+                                    from o in assembly.GetTypes()
+                                    where o.IsClass
+                                            && !o.IsAbstract
+                                            && Attribute.GetCustomAttribute(o, typeof (System.CodeDom.Compiler.GeneratedCodeAttribute)) != null
+                                            && o.Name.EndsWith("Template")
+                                            && o.GetMethod("TransformText") != null
+                                            && o.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof (String))
+                                            && o.GetMethod("Initialize") != null
+                                    select o;
+            GenerateApp(callingTemplate, templateTypesList, settings);
         }
 
         private static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Type> preProcessedFileTemplateTypes, AppGenerationSettings settings = null)
@@ -175,6 +181,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
             // run the template
             templateWrapper.TransformText();
+            TextTransformationContext.Instance.EndFile();
         }
     }
 }
+    

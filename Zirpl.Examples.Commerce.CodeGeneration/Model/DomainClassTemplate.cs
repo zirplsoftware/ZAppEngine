@@ -22,9 +22,9 @@ namespace Zirpl.Examples.Commerce.Templates.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class PersistableDomainClassTemplate : PersistableDomainClassTemplateBase
+    public partial class DomainClassTemplate : DomainClassTemplateBase
     {
 #line hidden
         /// <summary>
@@ -33,7 +33,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 13 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 13 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 	if (!this.DomainType.IsEnum)
     {
@@ -43,38 +43,38 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line default
             #line hidden
             this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
-                    ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
-                    "ctions;\r\n\r\nnamespace ");
+                    ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Metadata;\r\nusing Zirpl.AppEngine." +
+                    "Model.Extensibility;\r\nusing Zirpl.Collections;\r\n\r\nnamespace ");
             
-            #line 25 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 26 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic ");
             
-            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IsAbstract ? "abstract" : ""));
             
             #line default
             #line hidden
             this.Write(" partial class ");
             
-            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : "System.Object"));
             
             #line default
             #line hidden
-            this.Write("\r\n");
+            this.Write("\r\n\t\t\t, IMetadataDescribed\r\n");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 		if (this.DomainType.IsPersistable
                 && (this.DomainType.InheritsFrom == null
@@ -86,14 +86,14 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IPersistable<");
             
-            #line 34 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write(">\r\n");
             
-            #line 35 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
         } 
 		if (this.DomainType.IsAuditable
@@ -106,7 +106,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IAuditable\r\n");
             
-            #line 43 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 45 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
         } 
 		if (this.DomainType.IsExtensible
@@ -119,28 +119,28 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IExtensible<");
             
-            #line 50 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 50 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.Name));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 50 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write(">\r\n");
             
-            #line 51 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 53 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
         }
 		if (this.DomainType.IsExtendedEntityFieldValue
@@ -153,28 +153,28 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IExtendedEntityFieldValue<");
             
-            #line 58 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 58 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.Name));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 58 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write(">\r\n");
             
-            #line 59 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 61 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
         }
 		if (this.DomainType.IsMarkDeletable
@@ -187,7 +187,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IsMarkDeletable\r\n");
             
-            #line 67 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 69 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
         }
 		if (this.DomainType.IsStaticLookup
@@ -200,21 +200,21 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IStaticLookup\r\n\t\t\t, IEnumDescribed<");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 77 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 75 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 77 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.DescribedByEnum.FullName));
             
             #line default
             #line hidden
             this.Write(">\r\n");
             
-            #line 76 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 78 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
         }
 
@@ -223,7 +223,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t{\r\n");
             
-            #line 80 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 82 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 			foreach (var property in this.DomainType.Properties)
 			{
@@ -233,21 +233,21 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\tpublic virtual ");
             
-            #line 84 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 86 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 84 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 86 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 85 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 87 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 			}
 
@@ -256,7 +256,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\r\n\t\t#region Interface implementations\r\n\r\n");
             
-            #line 91 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 93 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 			if (this.DomainType.IsPersistable
 				&& (this.DomainType.InheritsFrom == null
@@ -269,7 +269,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             this.Write("\t\tpublic virtual Object GetId()\r\n        {\r\n            return Id;\r\n        }\r\n\r\n" +
                     "        public virtual void SetId(Object id)\r\n        {\r\n            Id = (");
             
-            #line 104 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 106 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
@@ -293,7 +293,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
         }
 ");
             
-            #line 121 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 123 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 			}
 		
@@ -314,14 +314,14 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             this.ExtendedFieldValues.Clear();
             this.ExtendedFieldValues.AddRange(list.Cast<");
             
-            #line 136 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 138 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.FullName));
             
             #line default
             #line hidden
             this.Write(">());\r\n\t\t}\r\n");
             
-            #line 138 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 140 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 			}
 
@@ -347,7 +347,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
         {
             this.ExtendedEntityId = (");
             
-            #line 158 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 160 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
@@ -355,14 +355,14 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             this.Write(")id;\r\n        }\r\n\r\n        public virtual void SetExtendedEntity(IExtensible enti" +
                     "ty)\r\n        {\r\n            this.ExtendedEntity = (");
             
-            #line 163 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 165 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.FullName));
             
             #line default
             #line hidden
             this.Write(")entity;\r\n        }\r\n\t\t\r\n");
             
-            #line 166 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 168 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 			}
 
@@ -371,7 +371,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t#endregion\r\n\t}\r\n}\t\r\n");
             
-            #line 172 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+            #line 174 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
     }
 
@@ -381,7 +381,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\PersistableDomainClassTemplate.tt"
+        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
 
 private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext _ContextField;
 
@@ -490,7 +490,7 @@ if ((DomainTypeValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class PersistableDomainClassTemplateBase
+    public class DomainClassTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

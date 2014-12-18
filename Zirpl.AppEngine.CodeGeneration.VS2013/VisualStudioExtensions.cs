@@ -60,18 +60,88 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
 
         public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this ProjectItems projectItems)
         {
-            foreach (ProjectItem projectItem in projectItems)
+            var list = new List<ProjectItem>();
+            GetAllProjectItemsRecursive(list, projectItems);
+            return list;
+        }
+        public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this Project project)
+        {
+            var list = new List<ProjectItem>();
+            GetAllProjectItemsRecursive(list, project.ProjectItems);
+            return list;
+        }
+        public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this Solution solution)
+        {
+            var list = new List<ProjectItem>();
+            foreach (Project project in solution.GetAllProjectsRecursive())
             {
-                if (projectItem.ProjectItems == null) continue;
+                GetAllProjectItemsRecursive(list, project.ProjectItems);
+            }
+            return list;
+        }
 
-                foreach (ProjectItem subItem in projectItem.ProjectItems.GetAllProjectItemsRecursive())
+        public static IEnumerable<Project> GetAllProjectsRecursive(this Solution solution)
+        {
+            List<Project> list = new List<Project>();
+            var item = solution.Projects.GetEnumerator();
+            while (item.MoveNext())
+            {
+                var project = item.Current as Project;
+                if (project == null)
                 {
-                    yield return subItem;
+                    continue;
                 }
 
-                yield return projectItem;
+                if (project.Kind == ProjectKinds.vsProjectKindSolutionFolder)
+                {
+                    list.AddRange(GetSolutionFolderProjects(project));
+                }
+                else
+                {
+                    list.Add(project);
+                }
+            }
+
+            return list;
+        }
+
+        private static IEnumerable<Project> GetSolutionFolderProjects(Project solutionFolder)
+        {
+            var list = new List<Project>();
+            for (var i = 1; i <= solutionFolder.ProjectItems.Count; i++)
+            {
+                var subProject = solutionFolder.ProjectItems.Item(i).SubProject;
+                if (subProject == null)
+                {
+                    continue;
+                }
+
+                // If this is another solution folder, do a recursive call, otherwise add
+                if (subProject.Kind == ProjectKinds.vsProjectKindSolutionFolder)
+                {
+                    list.AddRange(GetSolutionFolderProjects(subProject));
+                }
+                else
+                {
+                    list.Add(subProject);
+                }
+            }
+            return list;
+        }
+
+        private static void GetAllProjectItemsRecursive(IList<ProjectItem> list, ProjectItems projectItems)
+        {
+            foreach (ProjectItem projectItem in projectItems)
+            {
+                list.Add(projectItem);
+                if (projectItem.ProjectItems != null)
+                {
+                    GetAllProjectItemsRecursive(list, projectItem.ProjectItems);
+                }
             }
         }
+
+        
 
         private static ProjectItem GetOrCreateProjectItem(this ProjectItems items, string fullName) //, bool canCreateIfNotExists)
         {

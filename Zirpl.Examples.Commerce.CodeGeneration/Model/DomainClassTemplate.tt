@@ -19,12 +19,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.Model.Extensibility;
 using Zirpl.Collections;
 
 namespace <#= this.DomainType.Namespace #>
 {
 	public <#= this.DomainType.IsAbstract ? "abstract" : "" #> partial class <#= this.DomainType.Name #> : <#= this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : "System.Object" #>
+			, IMetadataDescribed
 <#
 		if (this.DomainType.IsPersistable
                 && (this.DomainType.InheritsFrom == null

@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.Model.Extensibility;
 using Zirpl.Collections;
 
 namespace Zirpl.Examples.Commerce.Model
 {
     public partial class AddressBaseExtendedFieldValue : System.Object
+            , IMetadataDescribed
             , IPersistable<Guid>
             , IExtendedEntityFieldValue<AddressBaseExtendedFieldValue, AddressBase, Guid>
     {
