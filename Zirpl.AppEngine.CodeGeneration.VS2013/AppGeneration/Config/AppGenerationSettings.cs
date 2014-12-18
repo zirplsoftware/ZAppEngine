@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {
@@ -12,7 +13,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
             this.GlobalTemplateParameters = new Dictionary<string, object>();
         }
         public String ProjectNamespacePrefix { get; set; }
-        public String GeneratedContentRootFolderName { get; set; }
         public String DataContextName { get; set; }
         public IDictionary<String, Object> GlobalTemplateParameters { get; private set; }
     }

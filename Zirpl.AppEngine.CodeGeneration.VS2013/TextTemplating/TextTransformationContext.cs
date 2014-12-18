@@ -20,6 +20,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         public ITextTemplatingEngineHost Host { get { return this.CallingTemplate.Host; } }
         public DTE2 VisualStudio { get; private set; }
+        public ProjectItem CallingTemplateProjectItem { get; private set; }
         internal ITextTransformation CallingTemplate { get; private set; }
         private OutputFileManager FileManager { get; set; }
 
@@ -55,6 +56,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 instance.CallingTemplate = callingTemplateWrapper;
                 instance.VisualStudio = dte2;
                 instance.FileManager = new OutputFileManager(instance);
+                instance.CallingTemplateProjectItem = dte2.GetProjectItem(callingTemplateWrapper.Host.TemplateFile);
                 Instance = instance;
             }
             return Instance;
@@ -72,39 +74,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
         }
 
-        public void StartFile(ITextTransformation textTransformation, String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
-        {
-            var project = String.IsNullOrEmpty(destinationProjectName)
-                ? null
-                : this.VisualStudio.GetProject(destinationProjectName);
-
-            this.StartFile(textTransformation, fileName, folderWithinProject, project, buildAction, customTool, autoFormat, overwrite, encoding);
-        }
-
-        public void StartFile(ITextTransformation textTransformation, String fileName, String folderWithinProject = null, Project destinationProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
-        {
-            var outputFile = new OutputFile()
-            {
-                FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
-                FileExtension = Path.GetExtension(fileName),
-                DestinationProject = destinationProject ?? this.VisualStudio.GetProjectItem(this.Host.TemplateFile).ContainingProject,
-                FolderPathWithinProject = folderWithinProject,
-                CustomTool = customTool
-            };
-            outputFile.BuildAction = buildAction ?? outputFile.BuildAction;
-            outputFile.CanOverrideExistingFile = overwrite ?? outputFile.CanOverrideExistingFile;
-            outputFile.AutoFormat = autoFormat ?? outputFile.AutoFormat;
-            outputFile.Encoding = encoding ?? outputFile.Encoding;
-
-            this.StartFile(textTransformation, outputFile);
-        }
-
-        public void StartFile(ITextTransformation textTransformation, OutputFile outputFile)
+        internal void StartFile(ITextTransformation textTransformation, OutputFile outputFile)
         {
             this.FileManager.StartFile(textTransformation, outputFile);
         }
 
-        public void EndFile()
+        internal void EndFile()
         {
             this.FileManager.EndFile();
         }
@@ -124,7 +99,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         /// <param name="message">Text to output</param>
         public void LogToBuildPane(string message)
         {
-            IVsOutputWindow outWindow = (this.CallingTemplate.Host as IServiceProvider).GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+            IVsOutputWindow outWindow = (this.Host as IServiceProvider).GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
             Guid generalPaneGuid = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.BuildOutputPane_guid;
             // P.S. There's also the GUID_OutWindowDebugPane available.
             IVsOutputWindowPane generalPane;

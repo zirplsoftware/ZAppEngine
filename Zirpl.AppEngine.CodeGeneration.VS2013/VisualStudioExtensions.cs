@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using EnvDTE;
 using EnvDTE80;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation
 {
@@ -16,13 +18,27 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
         public static void SetPropertyValue(this ProjectItem item, string propertyName, object value)
         {
             Property property = item.Properties.Item(propertyName);
+
+            if (property == null)
+            {
+                throw new ArgumentException(String.Format("The property {0} was not found.", propertyName));
+            }
+            else
+            { 
+                property.Value = value;
+            }
+        }
+        public static T GetPropertyValue<T>(this ProjectItem item, string propertyName)
+        {
+            Property property = item.Properties.Item(propertyName);
+
             if (property == null)
             {
                 throw new ArgumentException(String.Format("The property {0} was not found.", propertyName));
             }
             else
             {
-                property.Value = value;
+                return (T)property.Value;
             }
         }
 
@@ -71,7 +87,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
             return item;
         }
 
-        private static ProjectItem GetOrCreateProjectFolder(this ProjectItems projectItems, string projectPath)
+        private static ProjectItem GetOrCreateProjectFolder(this ProjectItems projectItems, string projectPath, bool isNamespaceProvider = true)
         {
             if (String.IsNullOrEmpty(projectPath))
             {
@@ -98,12 +114,31 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
             var folderProjectItem = projectItems.GetByName(folderName);
             if (folderProjectItem == null)
             {
-                //WriteLineToBuildPane("Creating folder: " + folderName);
                 folderProjectItem = projectItems.AddFolder(folderName);
+                if (!isNamespaceProvider)
+                {
+                    // this functionality is ONLY specific to Resharper, but lots of people use it (including me)
+                    // and it is REALLY nice to turn off namespace providers for these auto folders
+
+                    List<String> lines = null;
+                    if (File.Exists(folderProjectItem.GetFullPath() + ".DotSettings"))
+                    {
+                        lines = File.ReadLines(folderProjectItem.GetFullPath() + ".DotSettings").ToList();
+                    }
+                    else
+                    {
+                        lines = new List<string>();
+                        lines.Add("<wpf:ResourceDictionary xml:space=\"preserve\" xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" xmlns:s=\"clr-namespace:System;assembly=mscorlib\" xmlns:ss=\"urn:shemas-jetbrains-com:settings-storage-xaml\" xmlns:wpf=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">");
+	                    lines.Add("</wpf:ResourceDictionary>");
+                    }
+                    lines.Insert(1, String.Format("<s:Boolean x:Key=\"/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/={0}/@EntryIndexedValue\">True</s:Boolean>",
+                            folderName.Replace("_", "_005F")));
+                    File.WriteAllLines(folderProjectItem.GetFullPath() + ".DotSettings", lines);
+                }
             }
             if (projectPath != null)
             {
-                return GetOrCreateProjectFolder(folderProjectItem.ProjectItems, projectPath);
+                return GetOrCreateProjectFolder(folderProjectItem.ProjectItems, projectPath, isNamespaceProvider);
             }
             else
             {
@@ -132,9 +167,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
             return project.Properties.Item("DefaultNamespace").Value.ToString();
         }
 
-        public static ProjectItem GetOrCreateProjectFolder(this Project project, String folderPath)
+        public static ProjectItem GetOrCreateProjectFolder(this Project project, String folderPath, bool isNamespaceProvider = true)
         {
-            return GetOrCreateProjectFolder(project.ProjectItems, folderPath);
+            return GetOrCreateProjectFolder(project.ProjectItems, folderPath, isNamespaceProvider);
         }
 
         public static Guid? GetUniqueGuid(this Project proj)

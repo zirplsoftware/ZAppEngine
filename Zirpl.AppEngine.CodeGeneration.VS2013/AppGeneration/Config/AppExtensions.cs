@@ -23,7 +23,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
             String folderPath = nameSpace;
             folderPath = folderPath.SubstringAfterFirstInstanceOf(project.GetDefaultNamespace() + ".");
             folderPath = folderPath.Replace('.', '\\');
-            folderPath = app.Settings.GeneratedContentRootFolderName + folderPath;
             return folderPath;
         }
 

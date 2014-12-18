@@ -12,16 +12,10 @@
 <#@ assembly name="VSLangProj80" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.AppGenerator" name="AppGenerator" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext" name="Context" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
 <#
-this.AppGenerator.StartFile(this, new OutputFile() {
-				FileNameWithoutExtension = "ModelExtensions",
-                FileExtension = ".cs",
-                FolderPathWithinProject = this.App.Settings.GeneratedContentRootFolderName,
-                DestinationProject = this.App.ModelProject,
-                BuildAction = BuildActionTypeEnum.Compile,
-});
+	this.UseNewCSharpFile("ModelExtensions", this.App.ModelProject);
 #>
 using System;
 using System.Collections.Generic;

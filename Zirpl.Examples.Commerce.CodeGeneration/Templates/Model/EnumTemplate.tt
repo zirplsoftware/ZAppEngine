@@ -1,4 +1,5 @@
 ﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".txt" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -12,20 +13,13 @@
 <#@ assembly name="VSLangProj80" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Serialization" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.AppGenerator" name="AppGenerator" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext" name="Context" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
 <#
 	if (this.DomainType.IsEnum)
     {
-		this.AppGenerator.StartFile(this, new OutputFile()
-                {
-                    FileNameWithoutExtension = this.DomainType.Name,
-                    FileExtension = ".cs",
-                    DestinationProject = this.DomainType.DestinationProject,
-                    FolderPathWithinProject = this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace),
-                    BuildAction = BuildActionTypeEnum.Compile
-                });
+		this.UseNewCSharpFile(this.DomainType.Name, this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
 #>
 using System;
 using System.Collections.Generic;

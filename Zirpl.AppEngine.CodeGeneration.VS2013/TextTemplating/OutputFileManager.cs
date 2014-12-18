@@ -11,7 +11,7 @@ using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class OutputFileManager : IDisposable
+    internal class OutputFileManager : IDisposable
     {
         private IList<OutputFile> CompletedFiles { get; set; }
         private TextTransformationContext Context { get; set; }
@@ -68,31 +68,36 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 // clean up template placeholders
 
                 // TODO: use template placeholders if should
+                var fullFilePath = Path.Combine(
+                    Path.GetDirectoryName(this.CurrentOutputFile.DestinationProject.FullName),
+                    @"_auto\", 
+                    this.CurrentOutputFile.FolderPathWithinProject ?? "",
+                    this.CurrentOutputFile.FileName);
+                PathUtilities.EnsureDirectoryExists(fullFilePath);
+                this.CurrentOutputFile.DestinationProject.GetOrCreateProjectFolder(@"_auto\", false);
+                var folder = this.CurrentOutputFile.DestinationProject.GetOrCreateProjectFolder(@"_auto\" + this.CurrentOutputFile.FolderPathWithinProject);
 
-                PathUtilities.EnsureDirectoryExists(this.CurrentOutputFile.FullFilePath);
-                var folder = this.CurrentOutputFile.DestinationProject.GetOrCreateProjectFolder(this.CurrentOutputFile.FolderPathWithinProject);
-
-                if (File.Exists(this.CurrentOutputFile.FullFilePath))
+                if (File.Exists(fullFilePath))
                 {
-                    var isDifferent = File.ReadAllText(this.CurrentOutputFile.FullFilePath, this.CurrentOutputFile.Encoding) != content;
+                    var isDifferent = File.ReadAllText(fullFilePath, this.CurrentOutputFile.Encoding) != content;
                     if (isDifferent
                         && this.CurrentOutputFile.CanOverrideExistingFile)
                     {
                         if (this.Context.VisualStudio.SourceControl != null
-                            && this.Context.VisualStudio.SourceControl.IsItemUnderSCC(this.CurrentOutputFile.FullFilePath)
-                            && !this.Context.VisualStudio.SourceControl.IsItemCheckedOut(this.CurrentOutputFile.FullFilePath))
+                            && this.Context.VisualStudio.SourceControl.IsItemUnderSCC(fullFilePath)
+                            && !this.Context.VisualStudio.SourceControl.IsItemCheckedOut(fullFilePath))
                         {
-                            this.Context.VisualStudio.SourceControl.CheckOutItem(this.CurrentOutputFile.FullFilePath);
+                            this.Context.VisualStudio.SourceControl.CheckOutItem(fullFilePath);
                         }
                     }
                     else if (isDifferent)
                     {
-                        throw new Exception("Could not overwrite file: " + this.CurrentOutputFile.FullFilePath);
+                        throw new Exception("Could not overwrite file: " + fullFilePath);
                     }
                 }
 
-                this.Context.LogLineToBuildPane("Writing file: " + this.CurrentOutputFile.FullFilePath);
-                var item = this.Context.VisualStudio.GetProjectItem(this.CurrentOutputFile.FullFilePath);
+                this.Context.LogLineToBuildPane("Writing file: " + fullFilePath);
+                var item = this.Context.VisualStudio.GetProjectItem(fullFilePath);
                 if (item != null)
                 {
                     item.Remove();
@@ -103,8 +108,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
                 //else
                 {
-                    File.WriteAllText(this.CurrentOutputFile.FullFilePath, content);
-                    this.CurrentOutputFile.ProjectItem = folder.ProjectItems.AddFromFile(this.CurrentOutputFile.FullFilePath);
+                    File.WriteAllText(fullFilePath, content);
+                    this.CurrentOutputFile.ProjectItem = folder.ProjectItems.AddFromFile(fullFilePath);
                 }
 
                 // set VS properties for the ProjectItem
@@ -113,9 +118,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 {
                     this.CurrentOutputFile.ProjectItem.SetPropertyValue("CustomTool", this.CurrentOutputFile.CustomTool);
                 }
-                if (!String.IsNullOrWhiteSpace(this.CurrentOutputFile.BuildActionString))
+                var buildActionString = this.GetBuildActionString(this.CurrentOutputFile.BuildAction);
+                if (!String.IsNullOrWhiteSpace(buildActionString))
                 {
-                    this.CurrentOutputFile.ProjectItem.SetPropertyValue("ItemType", this.CurrentOutputFile.BuildActionString);
+                    this.CurrentOutputFile.ProjectItem.SetPropertyValue("ItemType", buildActionString);
                 }
 
                 // autoformat 
@@ -132,6 +138,24 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         public void Dispose()
         {
             this.EndFile();
+        }
+
+        private string GetBuildActionString(BuildActionTypeEnum buidlAction)
+        {
+            switch (buidlAction)
+            {
+                case BuildActionTypeEnum.Compile:
+                    return "Compile";
+                case BuildActionTypeEnum.Content:
+                    return "Content";
+                case BuildActionTypeEnum.EmbeddedResource:
+                    return "EmbeddedResource";
+                case BuildActionTypeEnum.EntityDeploy:
+                    return "EntityDeploy";
+                case BuildActionTypeEnum.None:
+                default:
+                    return "None";
+            }
         }
     }
 }

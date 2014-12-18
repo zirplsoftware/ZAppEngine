@@ -32,44 +32,5 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get { return this.FileNameWithoutExtension + this.FileExtension; }
         }
-        public String FullFilePath
-        {
-            get
-            {
-                return Path.Combine(
-                    Path.GetDirectoryName(this.DestinationProject.FullName),
-                    this.FolderPathWithinProject ?? "",
-                    this.FileName);
-            }
-        }
-        public String FilePathWithinProject
-        {
-            get
-            {
-                return Path.Combine(
-                    this.FolderPathWithinProject,
-                    this.FileName);
-            }
-        }
-        internal string BuildActionString
-        {
-            get
-            {
-                switch (BuildAction)
-                {
-                    case BuildActionTypeEnum.Compile:
-                        return "Compile";
-                    case BuildActionTypeEnum.Content:
-                        return "Content";
-                    case BuildActionTypeEnum.EmbeddedResource:
-                        return "EmbeddedResource";
-                    case BuildActionTypeEnum.EntityDeploy:
-                        return "EntityDeploy";
-                    case BuildActionTypeEnum.None:
-                    default:
-                        return "None";
-                }
-            }
-        }
     }
 }
