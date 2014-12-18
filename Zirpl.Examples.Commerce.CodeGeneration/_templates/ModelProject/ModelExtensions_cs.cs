@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.Examples.Commerce.Templates.Model
+namespace Zirpl.Examples.Commerce.CodeGeneration._templates.ModelProject
 {
     using System;
     using System.Collections;
@@ -17,14 +17,14 @@ namespace Zirpl.Examples.Commerce.Templates.Model
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
     using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
-    
+
     /// <summary>
     /// Class to produce the template output
     /// </summary>
-    
-    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
+
+#line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ModelExtensionsClassTemplate : ModelExtensionsClassTemplateBase
+    public partial class ModelExtensions_cs : ModelExtensions_csBase
     {
 #line hidden
         /// <summary>
@@ -32,154 +32,146 @@ namespace Zirpl.Examples.Commerce.Templates.Model
         /// </summary>
         public virtual string TransformText()
         {
-            
-            #line 12 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
-
-	this.UseNewCSharpFile("ModelExtensions", this.App.ModelProject);
-
-            
-            #line default
-            #line hidden
             this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
                     ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
                     "ctions;\r\n\r\nnamespace ");
-            
-            #line 22 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
+
+#line 19 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(App.ModelProject.GetDefaultNamespace()));
-            
-            #line default
-            #line hidden
+
+#line default
+#line hidden
             this.Write("\r\n{\r\n\tpublic static partial class ModelExtensions\r\n\t{\r\n");
-            
-            #line 26 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
 
-	foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && !o.IsEnum && (o.IsUpdatable || o.IsInsertable)))
-	{
+#line 23 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
 
-            
-            #line default
-            #line hidden
-            this.Write("\t\tpublic static void Save(this ");
-            
-            #line 30 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" entity)\r\n\t\t{\r\n\t\t}\r\n");
-            
-            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
-	
-    }
-	foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && !o.IsEnum && (o.IsDeletable || o.IsMarkDeletable)))
-	{
+            foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && !o.IsEnum && (o.IsUpdatable || o.IsInsertable)))
+            {
 
-            
-            #line default
-            #line hidden
-            this.Write("\t\tpublic static void Delete(this ");
-            
-            #line 38 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" entity)\r\n\t\t{\r\n\t\t}\r\n");
-            
-            #line 41 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
-	
-    }
 
-            
-            #line default
-            #line hidden
+#line default
+#line hidden
+                this.Write("\t\tpublic static void Save(this ");
+
+#line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
+
+#line default
+#line hidden
+                this.Write(" entity)\r\n\t\t{\r\n\t\t}\r\n");
+
+#line 30 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+
+            }
+            foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && !o.IsEnum && (o.IsDeletable || o.IsMarkDeletable)))
+            {
+
+
+#line default
+#line hidden
+                this.Write("\t\tpublic static void Delete(this ");
+
+#line 35 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
+
+#line default
+#line hidden
+                this.Write(" entity)\r\n\t\t{\r\n\t\t}\r\n");
+
+#line 38 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+
+            }
+
+
+#line default
+#line hidden
             this.Write("\t}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
-        
-        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\ModelExtensionsClassTemplate.tt"
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext _ContextField;
+#line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
 
-/// <summary>
-/// Access the Context parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext Context
-{
-    get
-    {
-        return this._ContextField;
+        private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext _ContextField;
+
+        /// <summary>
+        /// Access the Context parameter of the template.
+        /// </summary>
+        private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext Context
+        {
+            get
+            {
+                return this._ContextField;
+            }
+        }
+
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App _AppField;
+
+        /// <summary>
+        /// Access the App parameter of the template.
+        /// </summary>
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App App
+        {
+            get
+            {
+                return this._AppField;
+            }
+        }
+
+
+        /// <summary>
+        /// Initialize the template
+        /// </summary>
+        public virtual void Initialize()
+        {
+            if ((this.Errors.HasErrors == false))
+            {
+                bool ContextValueAcquired = false;
+                if (this.Session.ContainsKey("Context"))
+                {
+                    this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(this.Session["Context"]));
+                    ContextValueAcquired = true;
+                }
+                if ((ContextValueAcquired == false))
+                {
+                    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Context");
+                    if ((data != null))
+                    {
+                        this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(data));
+                    }
+                }
+                bool AppValueAcquired = false;
+                if (this.Session.ContainsKey("App"))
+                {
+                    this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(this.Session["App"]));
+                    AppValueAcquired = true;
+                }
+                if ((AppValueAcquired == false))
+                {
+                    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("App");
+                    if ((data != null))
+                    {
+                        this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(data));
+                    }
+                }
+
+
+            }
+        }
+
+
+
+#line default
+#line hidden
     }
-}
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App _AppField;
-
-/// <summary>
-/// Access the App parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App App
-{
-    get
-    {
-        return this._AppField;
-    }
-}
-
-
-/// <summary>
-/// Initialize the template
-/// </summary>
-public virtual void Initialize()
-{
-    if ((this.Errors.HasErrors == false))
-    {
-bool ContextValueAcquired = false;
-if (this.Session.ContainsKey("Context"))
-{
-    this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(this.Session["Context"]));
-    ContextValueAcquired = true;
-}
-if ((ContextValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Context");
-    if ((data != null))
-    {
-        this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(data));
-    }
-}
-bool AppValueAcquired = false;
-if (this.Session.ContainsKey("App"))
-{
-    this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(this.Session["App"]));
-    AppValueAcquired = true;
-}
-if ((AppValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("App");
-    if ((data != null))
-    {
-        this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(data));
-    }
-}
-
-
-    }
-}
-
-
-        
-        #line default
-        #line hidden
-    }
-    
-    #line default
-    #line hidden
+#line default
+#line hidden
     #region Base class
     /// <summary>
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class ModelExtensionsClassTemplateBase
+    public class ModelExtensions_csBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
@@ -273,7 +265,7 @@ if ((AppValueAcquired == false))
             }
             // If we're starting off, or if the previous text ended with a newline,
             // we have to append the current indent first.
-            if (((this.GenerationEnvironment.Length == 0) 
+            if (((this.GenerationEnvironment.Length == 0)
                         || this.endsWithNewline))
             {
                 this.GenerationEnvironment.Append(this.currentIndentField);
@@ -391,7 +383,7 @@ if ((AppValueAcquired == false))
         /// </summary>
         public class ToStringInstanceHelper
         {
-            private System.IFormatProvider formatProviderField  = global::System.Globalization.CultureInfo.InvariantCulture;
+            private System.IFormatProvider formatProviderField = global::System.Globalization.CultureInfo.InvariantCulture;
             /// <summary>
             /// Gets or sets format provider to be used by ToStringWithCulture method.
             /// </summary>
@@ -399,13 +391,13 @@ if ((AppValueAcquired == false))
             {
                 get
                 {
-                    return this.formatProviderField ;
+                    return this.formatProviderField;
                 }
                 set
                 {
                     if ((value != null))
                     {
-                        this.formatProviderField  = value;
+                        this.formatProviderField = value;
                     }
                 }
             }

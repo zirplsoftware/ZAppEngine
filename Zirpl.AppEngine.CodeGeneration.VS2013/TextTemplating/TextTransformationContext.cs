@@ -105,7 +105,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             // P.S. There's also the GUID_OutWindowDebugPane available.
             IVsOutputWindowPane generalPane;
             outWindow.GetPane(ref generalPaneGuid, out generalPane);
-            generalPane.OutputString(message);
+            generalPane.OutputString("ZAE: " + message);
             generalPane.Activate(); // Brings this pane into view
         }
 

@@ -41,12 +41,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_auto\AddressBase.cs" />
-    <Compile Include="_auto\AddressBaseExtendedFieldValue.cs" />
-    <Compile Include="_auto\DomesticAddress.cs" />
-    <Compile Include="_auto\InternationalAddress.cs" />
-    <Compile Include="_auto\NamePrefixType.cs" />
-    <Compile Include="_auto\NamePrefixTypeEnumEnum.cs" />
+    <Compile Include="_auto\AddressBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\AddressBaseExtendedFieldValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\DomesticAddress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\InternationalAddress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\ModelExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\NamePrefixType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_auto\NamePrefixTypeEnumEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">

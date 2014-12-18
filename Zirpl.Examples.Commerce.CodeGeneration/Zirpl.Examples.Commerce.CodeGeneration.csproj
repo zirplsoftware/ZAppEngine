@@ -7,8 +7,8 @@
     <ProjectGuid>{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zirpl.Examples.Commerce.Templates</RootNamespace>
-    <AssemblyName>Zirpl.Examples.Commerce.Templates</AssemblyName>
+    <RootNamespace>Zirpl.Examples.Commerce.CodeGeneration</RootNamespace>
+    <AssemblyName>Zirpl.Examples.Commerce.CodeGeneration</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -83,6 +83,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="_templates\ModelProject\ModelExtensions_cs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelExtensions_cs.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.VisualStudioAutomation.csproj">
@@ -91,6 +96,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>App.txt</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
+    </None>
     <None Include="_config\ModelProject\AddressBase.domain.zae">
       <SubType>Designer</SubType>
     </None>
@@ -115,6 +125,12 @@
       <TransformOnBuild>True</TransformOnBuild>
       <FormatOutput>True</FormatOutput>
     </None>
+    <None Include="_templates\ModelProject\ModelExtensions_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ModelExtensions_cs.cs</LastGenOutput>
+      <FormatOutput>True</FormatOutput>
+      <TransformOnBuild>True</TransformOnBuild>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -124,6 +140,11 @@
     <Folder Include="_templates\ModelProject\Metadata\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App.txt">
+      <DependentUpon>App.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
     <Content Include="_config\ModelProject\Catalog\Brand.model.xml" />
     <Content Include="_config\ModelProject\Catalog\Category.model.xml" />
     <Content Include="_config\ModelProject\Catalog\DisplayProduct.model.xml" />

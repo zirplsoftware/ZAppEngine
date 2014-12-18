@@ -126,7 +126,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 if (reference.Name != "mscorlib")
                 {
                     parameters.ReferencedAssemblies.Add(reference.Path);
-                    TextTransformationContext.Instance.LogLineToBuildPane("Adding reference: " + reference.Path);
                 }
                 //if (reference.SourceProject == null)
                 //{
@@ -136,6 +135,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 //    // This is a project reference
                 //}
             }
+
+
             CompilerResults results = provider.CompileAssemblyFromSource(parameters, codeList.ToArray());
             if (results.Errors.HasErrors)
             {
@@ -200,6 +201,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
                     // run the preprocessed templates
                     //
+                    foreach (var templateType in preProcessedFileTemplateTypes)
+                    {
+                        TextTransformationContext.Instance.LogLineToBuildPane(
+                            "Found preprocessed template: " + templateType.FullName);
+                    }
                     foreach (var preProcessedFileTemplateType in preProcessedFileTemplateTypes)
                     {
                         var template = Activator.CreateInstance(preProcessedFileTemplateType);
@@ -259,8 +265,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             templateWrapper.Session = session;
             templateWrapper.Initialize();
 
-            if (template.GetTypeAccessor().HasPropertyGetter<bool>("ShouldTransform")
-                && template.GetProperty<bool>("ShouldTransform"))
+            if (!template.GetTypeAccessor().HasPropertyGetter<bool>("ShouldTransform")
+                || template.GetProperty<bool>("ShouldTransform"))
             {
                 var fileName = GetFileNameFromPreProcessedTemplateType(preProcessedFileTemplateType, domainType);
                 var destinationProject = GetProjectFromPreProcessedTemplateType(app, preProcessedFileTemplateType);

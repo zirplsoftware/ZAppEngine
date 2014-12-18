@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.Examples.Commerce.Templates._templates.ModelProject
+namespace Zirpl.Examples.Commerce.CodeGeneration._templates.ModelProject
 {
     using System;
     using System.Collections;
@@ -32,85 +32,67 @@ namespace Zirpl.Examples.Commerce.Templates._templates.ModelProject
         /// </summary>
         public virtual string TransformText()
         {
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
+                    ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
+                    "ctions;\r\n\r\nnamespace ");
 
-#line 13 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+#line 20 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
 
-            if (this.DomainType.IsEnum)
+#line default
+#line hidden
+            this.Write("\r\n{\r\n\tpublic enum ");
+
+#line 22 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
+
+#line default
+#line hidden
+            this.Write(" : ");
+
+#line 22 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.EnumDescribes.IdProperty.DataTypeString));
+
+#line default
+#line hidden
+            this.Write("\r\n\t{\r\n");
+
+#line 24 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+
+            foreach (var enumValue in this.DomainType.EnumValues)
             {
-                //this.UseNewCSharpFile(this.DomainType.Name, this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
 
 
 #line default
 #line hidden
-                this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
-                        ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
-                        "ctions;\r\n\r\nnamespace ");
+                this.Write("\t\t");
 
-#line 25 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-                this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
+#line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
 
 #line default
 #line hidden
-                this.Write("\r\n{\r\n\tpublic enum ");
+                this.Write(" = ");
 
-#line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-                this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
-
-#line default
-#line hidden
-                this.Write(" : ");
-
-#line 27 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-                this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.EnumDescribes.IdProperty.DataTypeString));
+#line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
 
 #line default
 #line hidden
-                this.Write("\r\n\t{\r\n");
+                this.Write(",\r\n");
 
 #line 29 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-
-                foreach (var enumValue in this.DomainType.EnumValues)
-                {
-
-
-#line default
-#line hidden
-                    this.Write("\t\t");
-
-#line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-                    this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
-
-#line default
-#line hidden
-                    this.Write(" = ");
-
-#line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-                    this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
-
-#line default
-#line hidden
-                    this.Write(",\r\n");
-
-#line 34 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-
-                }
-
-
-#line default
-#line hidden
-                this.Write("\t}\r\n}\r\n");
-
-#line 39 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 
             }
 
 
 #line default
 #line hidden
+            this.Write("\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
 
-#line 42 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+#line 34 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 
         public bool ShouldTransform { get { return this.DomainType.IsEnum; } }
 

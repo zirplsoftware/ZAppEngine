@@ -9,9 +9,6 @@
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext" name="Context" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
-<#
-	this.UseNewCSharpFile("ModelExtensions", this.App.ModelProject);
-#>
 using System;
 using System.Collections.Generic;
 using System.Linq;

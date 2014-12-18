@@ -10,11 +10,6 @@
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext" name="Context" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
-<#
-	if (!this.DomainType.IsEnum)
-    {
-		//this.UseNewCSharpFile(this.DomainType.Name, this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
-#>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -170,10 +165,7 @@ namespace <#= this.DomainType.Namespace #>
 #>
 		#endregion
 	}
-}	
-<#
-    }
-#>
+}
 <#+
 public bool ShouldTransform { get { return !this.DomainType.IsEnum; } }
 #>
