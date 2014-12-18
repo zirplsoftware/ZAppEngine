@@ -1,0 +1,179 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext" name="Context" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
+<#
+	if (!this.DomainType.IsEnum)
+    {
+		//this.UseNewCSharpFile(this.DomainType.Name, this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Metadata;
+using Zirpl.AppEngine.Model.Extensibility;
+using Zirpl.Collections;
+
+namespace <#= this.DomainType.Namespace #>
+{
+	public <#= this.DomainType.IsAbstract ? "abstract" : "" #> partial class <#= this.DomainType.Name #> : <#= this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : "System.Object" #>
+			, IMetadataDescribed
+<#
+		if (this.DomainType.IsPersistable
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsPersistable))
+        {
+#>
+			, IPersistable<<#= this.DomainType.IdProperty.DataTypeString #>>
+<#
+        } 
+		if (this.DomainType.IsAuditable
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsAuditable))
+        {
+#>
+			, IAuditable
+<#
+        } 
+		if (this.DomainType.IsExtensible
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsExtensible))
+        {
+#>
+			, IExtensible<<#= this.DomainType.Name #>,<#= this.DomainType.ExtendedBy.Name #>,<#= this.DomainType.IdProperty.DataTypeString #>>
+<#
+        }
+		if (this.DomainType.IsExtendedEntityFieldValue
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
+        {
+#>
+			, IExtendedEntityFieldValue<<#= this.DomainType.Name #>,<#= this.DomainType.Extends.Name #>,<#= this.DomainType.IdProperty.DataTypeString #>>
+<#
+        }
+		if (this.DomainType.IsMarkDeletable
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsMarkDeletable))
+        {
+#>
+			, IsMarkDeletable
+<#
+        }
+		if (this.DomainType.IsStaticLookup
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsStaticLookup))
+        {
+#>
+			, IStaticLookup
+			, IEnumDescribed<<#= this.DomainType.IdProperty.DataTypeString #>,<#= this.DomainType.DescribedByEnum.FullName #>>
+<#
+        }
+#>
+	{
+<#
+			foreach (var property in this.DomainType.Properties)
+			{
+#>
+		public virtual <#= property.DataTypeString #> <#= property.Name #> { get; set; }
+<#
+			}
+#>
+
+		#region Interface implementations
+
+<#
+			if (this.DomainType.IsPersistable
+				&& (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsPersistable))
+			{
+#>
+		public virtual Object GetId()
+        {
+            return Id;
+        }
+
+        public virtual void SetId(Object id)
+        {
+            Id = (<#= this.DomainType.IdProperty.DataTypeString      #>)id;
+        }
+
+        public virtual bool IsPersisted
+        {
+            get { return this.EvaluateIsPersisted(); }
+        }
+
+		public override bool Equals(object other)
+        {
+            return this.EvaluateEquals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.EvaluateGetHashCode();
+        }
+<#
+			}
+		
+			if (this.DomainType.IsExtensible
+					&& (this.DomainType.InheritsFrom == null
+						|| !this.DomainType.InheritsFrom.IsExtensible))
+			{
+#>
+		public virtual IList<IExtendedEntityFieldValue> GetExtendedFieldValues()
+		{
+            return this.ExtendedFieldValues.Cast<IExtendedEntityFieldValue>().ToList();
+		}
+        public virtual void SetExtendedFieldValues(IList<IExtendedEntityFieldValue> list)
+		{
+            this.ExtendedFieldValues.Clear();
+            this.ExtendedFieldValues.AddRange(list.Cast<<#= this.DomainType.ExtendedBy.FullName #>>());
+		}
+<#
+			}
+
+			if (this.DomainType.IsExtendedEntityFieldValue
+				&& (this.DomainType.InheritsFrom == null
+				|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
+			{
+#>
+        public virtual object GetExtendedEntityId()
+        {
+            return this.ExtendedEntityId;
+        }
+
+        public virtual IExtensible GetExtendedEntity()
+        {
+            return this.ExtendedEntity;
+        }
+
+        public virtual void SetExtendedEntityId(object id)
+        {
+            this.ExtendedEntityId = (<#= this.DomainType.IdProperty.DataTypeString      #>)id;
+        }
+
+        public virtual void SetExtendedEntity(IExtensible entity)
+        {
+            this.ExtendedEntity = (<#= this.DomainType.Extends.FullName #>)entity;
+        }
+		
+<#
+			}
+#>
+		#endregion
+	}
+}	
+<#
+    }
+#>
+<#+
+public bool ShouldTransform { get { return !this.DomainType.IsEnum; } }
+#>

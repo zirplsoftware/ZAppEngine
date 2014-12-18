@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.Examples.Commerce.Templates.Model
+namespace Zirpl.Examples.Commerce.Templates._templates.DataServiceProject
 {
     using System;
     using System.Collections;
@@ -22,9 +22,9 @@ namespace Zirpl.Examples.Commerce.Templates.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class DomainClassTemplate : DomainClassTemplateBase
+    public partial class DT_Repository_cs : DT_Repository_csBase
     {
 #line hidden
         /// <summary>
@@ -33,11 +33,11 @@ namespace Zirpl.Examples.Commerce.Templates.Model
         public virtual string TransformText()
         {
             
-            #line 13 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 13 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 	if (!this.DomainType.IsEnum)
     {
-		this.UseNewCSharpFile(this.DomainType.Name, this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
+		this.UseNewCSharpFile(this.DomainType.Name, "DS\\" + this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
 
             
             #line default
@@ -46,35 +46,35 @@ namespace Zirpl.Examples.Commerce.Templates.Model
                     ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Metadata;\r\nusing Zirpl.AppEngine." +
                     "Model.Extensibility;\r\nusing Zirpl.Collections;\r\n\r\nnamespace ");
             
-            #line 26 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 26 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic ");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IsAbstract ? "abstract" : ""));
             
             #line default
             #line hidden
             this.Write(" partial class ");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
             
             #line default
             #line hidden
-            this.Write(" : ");
+            this.Write("Repository : ");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : "System.Object"));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t, IMetadataDescribed\r\n");
             
-            #line 30 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 30 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 		if (this.DomainType.IsPersistable
                 && (this.DomainType.InheritsFrom == null
@@ -86,14 +86,14 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IPersistable<");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write(">\r\n");
             
-            #line 37 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 37 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
         } 
 		if (this.DomainType.IsAuditable
@@ -106,7 +106,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IAuditable\r\n");
             
-            #line 45 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 45 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
         } 
 		if (this.DomainType.IsExtensible
@@ -119,28 +119,28 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IExtensible<");
             
-            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.Name));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 52 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write(">\r\n");
             
-            #line 53 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 53 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
         }
 		if (this.DomainType.IsExtendedEntityFieldValue
@@ -153,28 +153,28 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IExtendedEntityFieldValue<");
             
-            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.Name));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 60 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write(">\r\n");
             
-            #line 61 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 61 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
         }
 		if (this.DomainType.IsMarkDeletable
@@ -187,7 +187,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IsMarkDeletable\r\n");
             
-            #line 69 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 69 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
         }
 		if (this.DomainType.IsStaticLookup
@@ -200,21 +200,21 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t\t, IStaticLookup\r\n\t\t\t, IEnumDescribed<");
             
-            #line 77 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 77 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 77 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 77 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.DescribedByEnum.FullName));
             
             #line default
             #line hidden
             this.Write(">\r\n");
             
-            #line 78 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 78 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
         }
 
@@ -223,7 +223,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t{\r\n");
             
-            #line 82 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 82 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 			foreach (var property in this.DomainType.Properties)
 			{
@@ -233,21 +233,21 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\tpublic virtual ");
             
-            #line 86 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 86 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 86 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 86 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 87 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 87 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 			}
 
@@ -256,7 +256,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\r\n\t\t#region Interface implementations\r\n\r\n");
             
-            #line 93 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 93 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 			if (this.DomainType.IsPersistable
 				&& (this.DomainType.InheritsFrom == null
@@ -269,7 +269,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             this.Write("\t\tpublic virtual Object GetId()\r\n        {\r\n            return Id;\r\n        }\r\n\r\n" +
                     "        public virtual void SetId(Object id)\r\n        {\r\n            Id = (");
             
-            #line 106 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 106 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
@@ -293,7 +293,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
         }
 ");
             
-            #line 123 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 123 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 			}
 		
@@ -314,14 +314,14 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             this.ExtendedFieldValues.Clear();
             this.ExtendedFieldValues.AddRange(list.Cast<");
             
-            #line 138 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 138 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.FullName));
             
             #line default
             #line hidden
             this.Write(">());\r\n\t\t}\r\n");
             
-            #line 140 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 140 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 			}
 
@@ -347,7 +347,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
         {
             this.ExtendedEntityId = (");
             
-            #line 160 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 160 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             
             #line default
@@ -355,14 +355,14 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             this.Write(")id;\r\n        }\r\n\r\n        public virtual void SetExtendedEntity(IExtensible enti" +
                     "ty)\r\n        {\r\n            this.ExtendedEntity = (");
             
-            #line 165 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 165 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.FullName));
             
             #line default
             #line hidden
             this.Write(")entity;\r\n        }\r\n\t\t\r\n");
             
-            #line 168 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 168 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 			}
 
@@ -371,7 +371,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             #line hidden
             this.Write("\t\t#endregion\r\n\t}\r\n}\t\r\n");
             
-            #line 174 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+            #line 174 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
     }
 
@@ -381,7 +381,7 @@ namespace Zirpl.Examples.Commerce.Templates.Model
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\Model\DomainClassTemplate.tt"
+        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\DataServiceProject\DT_Repository_cs.tt"
 
 private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext _ContextField;
 
@@ -490,7 +490,7 @@ if ((DomainTypeValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class DomainClassTemplateBase
+    public class DT_Repository_csBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

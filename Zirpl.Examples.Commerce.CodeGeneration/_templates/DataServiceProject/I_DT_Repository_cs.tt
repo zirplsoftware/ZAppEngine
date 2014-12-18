@@ -13,7 +13,7 @@
 <#
 	if (!this.DomainType.IsEnum)
     {
-		this.UseNewCSharpFile(this.DomainType.Name, this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
+		this.UseNewCSharpFile(this.DomainType.Name, "DS2\\" + this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
 #>
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ using Zirpl.Collections;
 
 namespace <#= this.DomainType.Namespace #>
 {
-	public <#= this.DomainType.IsAbstract ? "abstract" : "" #> partial class <#= this.DomainType.Name #> : <#= this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : "System.Object" #>
+	public <#= this.DomainType.IsAbstract ? "abstract" : "" #> partial class <#= this.DomainType.Name #>Repository : <#= this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : "System.Object" #>
 			, IMetadataDescribed
 <#
 		if (this.DomainType.IsPersistable

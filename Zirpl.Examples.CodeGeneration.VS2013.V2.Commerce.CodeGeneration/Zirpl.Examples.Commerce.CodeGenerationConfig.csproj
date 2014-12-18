@@ -47,101 +47,26 @@
       <Project>{f8855f9a-35d1-4c30-bb53-1fd89a984989}</Project>
       <Name>Zirpl.AppEngine.VisualStudioAutomation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zirpl.Examples.Commerce.CodeGeneration\Zirpl.Examples.Commerce.Templates.csproj">
+    <ProjectReference Include="..\Zirpl.Examples.Commerce.CodeGeneration\Zirpl.Examples.Commerce.CodeGeneration.csproj">
       <Project>{06f3d16b-a4fc-4fb1-9cdd-55b39ee7fafc}</Project>
       <Name>Zirpl.Examples.Commerce.Templates</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppTransform.txt">
+    <Content Include="App.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AppTransform.tt</DependentUpon>
+      <DependentUpon>App.tt</DependentUpon>
     </Content>
-    <Content Include="_config\ModelProject\Tag.model.xml" />
-    <None Include="_config\AppDefinition.app.zae">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="_config\ModelProject\AddressBase.domain.zae">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="_config\ModelProject\InternationalAddress.domain.zae">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="_config\ModelProject\DomesticAddress.domain.zae">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="_config\ModelProject\Catalog\Brand.model.xml" />
-    <Content Include="_config\ModelProject\Catalog\Category.model.xml" />
-    <Content Include="_config\ModelProject\Catalog\DisplayProduct.model.xml" />
-    <Content Include="_config\ModelProject\Catalog\ProductReview.model.xml" />
-    <Content Include="_config\ModelProject\Catalog\SubscriptionChoice.model.xml" />
-    <Content Include="_config\ModelProject\Catalog\SubscriptionChoiceTierPriceCombination.model.xml" />
-    <Content Include="_config\ModelProject\Catalog\TierPrice.model.xml" />
-    <Content Include="_config\ModelProject\Catalog\TierShipment.model.xml" />
-    <Content Include="_config\ModelProject\Customers\Customer.model.xml" />
-    <Content Include="_config\ModelProject\Customers\CustomerChargeOption.model.xml" />
-    <Content Include="_config\ModelProject\Customers\CustomerReferral.model.xml" />
-    <Content Include="_config\ModelProject\Customers\CustomerTag.model.xml" />
-    <Content Include="_config\ModelProject\Customers\CustomerRegistrationRequest.model.xml" />
-    <Content Include="_config\ModelProject\Membership\ResetLostPasswordRequest.model.xml" />
-    <Content Include="_config\ModelProject\Membership\PasswordResetLink.model.xml" />
-    <Content Include="_config\ModelProject\Membership\User.model.xml" />
-    <Content Include="_config\ModelProject\Membership\SupportUserRegistrationRequest.model.xml" />
-    <Content Include="_config\ModelProject\Membership\LogInRequest.model.xml" />
-    <Content Include="_config\ModelProject\Membership\UserRegistrationRequestBase.model.xml" />
-    <Content Include="_config\ModelProject\Membership\Visitor.model.xml" />
-    <Content Include="_config\ModelProject\NamePrefixType.model.xml" />
-    <Content Include="_config\ModelProject\NameSuffixType.model.xml" />
-    <Content Include="_config\ModelProject\Notifications\EmailEvent.model.xml" />
-    <Content Include="_config\ModelProject\Notifications\EmailEventType.model.xml" />
-    <Content Include="_config\ModelProject\Orders\Charge.model.xml" />
-    <Content Include="_config\ModelProject\Orders\ChargeMethodType.model.xml" />
-    <Content Include="_config\ModelProject\Orders\ChargeStatusType.model.xml" />
-    <Content Include="_config\ModelProject\Orders\ChargeType.model.xml" />
-    <Content Include="_config\ModelProject\Orders\DiscountUsage.model.xml" />
-    <Content Include="_config\ModelProject\Orders\DiscountUsageRestrictionType.model.xml" />
-    <Content Include="_config\ModelProject\Orders\Order.model.xml" />
-    <Content Include="_config\ModelProject\Orders\OrderChargeStatusType.model.xml" />
-    <Content Include="_config\ModelProject\Orders\OrderItem.model.xml" />
-    <Content Include="_config\ModelProject\Orders\OrderStatusType.model.xml" />
-    <Content Include="_config\ModelProject\Orders\ShoppingCartItem.model.xml" />
-    <Content Include="_config\ModelProject\Orders\StripeCharge.model.xml" />
-    <Content Include="_config\ModelProject\Orders\StripeCustomerChargeOption.model.xml" />
-    <Content Include="_config\ModelProject\Orders\SubscriptionOrderItem.model.xml" />
-    <Content Include="_config\ModelProject\Orders\SubscriptionOrderItemType.model.xml" />
-    <Content Include="_config\ModelProject\Partners\PartnerRegistrationRequest.model.xml" />
-    <Content Include="_config\ModelProject\Partners\Partner.model.xml" />
-    <Content Include="_config\ModelProject\Partners\PartnerReferral.model.xml" />
-    <Content Include="_config\ModelProject\Partners\PartnerReferralCouponRequest.model.xml" />
-    <Content Include="_config\ModelProject\Partners\PartnerReferralCouponRequestStatusType.model.xml" />
-    <Content Include="_config\ModelProject\Partners\PartnerReferralPlan.model.xml" />
-    <Content Include="_config\ModelProject\Promotions\Discount.model.xml" />
-    <Content Include="_config\ModelProject\Promotions\DiscountAmountType.model.xml" />
-    <Content Include="_config\ModelProject\Promotions\DiscountApplicabilityType.model.xml" />
-    <Content Include="_config\ModelProject\Promotions\PromoCode.model.xml" />
-    <Content Include="_config\ModelProject\Promotions\Referral.model.xml" />
-    <Content Include="_config\ModelProject\Settings\StateProvinceType.model.xml" />
-    <Content Include="_config\ModelProject\Settings\SystemSetting.model.xml" />
-    <Content Include="_config\ModelProject\Settings\TaxRule.model.xml" />
-    <Content Include="_config\ModelProject\Subscriptions\PendingSubscriptionChange.model.xml" />
-    <Content Include="_config\ModelProject\Subscriptions\Subscription.model.xml" />
-    <Content Include="_config\ModelProject\Subscriptions\SubscriptionInstance.model.xml" />
-    <Content Include="_config\ModelProject\Subscriptions\SubscriptionPeriod.model.xml" />
-    <Content Include="_config\ModelProject\Subscriptions\SubscriptionPeriodType.model.xml" />
-    <Content Include="_config\ModelProject\Subscriptions\SubscriptionStatusType.model.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AppTransform.tt">
+    <None Include="App.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <TransformOnBuild>True</TransformOnBuild>
       <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
 &lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
-      <LastGenOutput>AppTransform.txt</LastGenOutput>
+      <LastGenOutput>App.txt</LastGenOutput>
     </None>
-    <None Include="_config\ModelProject\NamePrefixType.domain.zae" />
-    <None Include="_config\ModelProject\Orders\ShipBatch.model.xml.exclude" />
-    <None Include="_config\ModelProject\Orders\ShipBatchItem.model.xml.exclude" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

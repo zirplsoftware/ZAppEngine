@@ -123,9 +123,6 @@
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\Model\EntityFramework\LinqExpressionSearchCriteria.cs">
       <Link>Model\EntityFramework\LinqExpressionSearchCriteria.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.EntityFramework\Model\EntityFramework\PersistableEntityBase.cs">
-      <Link>Model\EntityFramework\PersistableEntityBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
@@ -241,7 +238,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="b23590ec-7c8d-4bd4-bfee-77c0f0d821a7" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="b23590ec-7c8d-4bd4-bfee-77c0f0d821a7" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

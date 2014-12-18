@@ -13,7 +13,7 @@
 <#
 	if (this.DomainType.IsEnum)
     {
-		this.UseNewCSharpFile(this.DomainType.Name, this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
+		//this.UseNewCSharpFile(this.DomainType.Name, this.App.GetFolderPathFromNamespace(this.DomainType.DestinationProject, this.DomainType.Namespace), this.DomainType.DestinationProject);
 #>
 using System;
 using System.Collections.Generic;
@@ -38,4 +38,7 @@ namespace <#= this.DomainType.Namespace #>
 }
 <#
     }
+#>
+<#+
+public bool ShouldTransform { get { return this.DomainType.IsEnum; } }
 #>

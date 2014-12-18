@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zirpl.Examples.Commerce.Templates</RootNamespace>
+    <AssemblyName>Zirpl.Examples.Commerce.Templates</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="envdte100, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="envdte80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE90a, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_templates\ModelProject\DT_Enum_cs.cs">
+      <DependentUpon>DT_Enum_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="_templates\ModelProject\DT_cs.cs">
+      <DependentUpon>DT_cs.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.VisualStudioAutomation.csproj">
+      <Project>{f8855f9a-35d1-4c30-bb53-1fd89a984989}</Project>
+      <Name>Zirpl.AppEngine.VisualStudioAutomation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_config\ModelProject\AddressBase.domain.zae">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_config\ModelProject\DomesticAddress.domain.zae">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_config\ModelProject\InternationalAddress.domain.zae">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_config\ModelProject\NamePrefixType.domain.zae" />
+    <None Include="_config\ModelProject\Orders\ShipBatch.model.xml.exclude" />
+    <None Include="_config\ModelProject\Orders\ShipBatchItem.model.xml.exclude" />
+    <None Include="_templates\ModelProject\DT_Enum_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
+      <FormatOutput>True</FormatOutput>
+      <TransformOnBuild>True</TransformOnBuild>
+    </None>
+    <None Include="_templates\ModelProject\DT_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DT_cs.cs</LastGenOutput>
+      <TransformOnBuild>True</TransformOnBuild>
+      <FormatOutput>True</FormatOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_templates\DataServiceProject\" />
+    <Folder Include="_templates\ModelProject\Metadata\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_config\ModelProject\Catalog\Brand.model.xml" />
+    <Content Include="_config\ModelProject\Catalog\Category.model.xml" />
+    <Content Include="_config\ModelProject\Catalog\DisplayProduct.model.xml" />
+    <Content Include="_config\ModelProject\Catalog\ProductReview.model.xml" />
+    <Content Include="_config\ModelProject\Catalog\SubscriptionChoice.model.xml" />
+    <Content Include="_config\ModelProject\Catalog\SubscriptionChoiceTierPriceCombination.model.xml" />
+    <Content Include="_config\ModelProject\Catalog\TierPrice.model.xml" />
+    <Content Include="_config\ModelProject\Catalog\TierShipment.model.xml" />
+    <Content Include="_config\ModelProject\Customers\Customer.model.xml" />
+    <Content Include="_config\ModelProject\Customers\CustomerChargeOption.model.xml" />
+    <Content Include="_config\ModelProject\Customers\CustomerReferral.model.xml" />
+    <Content Include="_config\ModelProject\Customers\CustomerRegistrationRequest.model.xml" />
+    <Content Include="_config\ModelProject\Customers\CustomerTag.model.xml" />
+    <Content Include="_config\ModelProject\Membership\LogInRequest.model.xml" />
+    <Content Include="_config\ModelProject\Membership\PasswordResetLink.model.xml" />
+    <Content Include="_config\ModelProject\Membership\ResetLostPasswordRequest.model.xml" />
+    <Content Include="_config\ModelProject\Membership\SupportUserRegistrationRequest.model.xml" />
+    <Content Include="_config\ModelProject\Membership\User.model.xml" />
+    <Content Include="_config\ModelProject\Membership\UserRegistrationRequestBase.model.xml" />
+    <Content Include="_config\ModelProject\Membership\Visitor.model.xml" />
+    <Content Include="_config\ModelProject\NamePrefixType.model.xml" />
+    <Content Include="_config\ModelProject\NameSuffixType.model.xml" />
+    <Content Include="_config\ModelProject\Notifications\EmailEvent.model.xml" />
+    <Content Include="_config\ModelProject\Notifications\EmailEventType.model.xml" />
+    <Content Include="_config\ModelProject\Orders\Charge.model.xml" />
+    <Content Include="_config\ModelProject\Orders\ChargeMethodType.model.xml" />
+    <Content Include="_config\ModelProject\Orders\ChargeStatusType.model.xml" />
+    <Content Include="_config\ModelProject\Orders\ChargeType.model.xml" />
+    <Content Include="_config\ModelProject\Orders\DiscountUsage.model.xml" />
+    <Content Include="_config\ModelProject\Orders\DiscountUsageRestrictionType.model.xml" />
+    <Content Include="_config\ModelProject\Orders\Order.model.xml" />
+    <Content Include="_config\ModelProject\Orders\OrderChargeStatusType.model.xml" />
+    <Content Include="_config\ModelProject\Orders\OrderItem.model.xml" />
+    <Content Include="_config\ModelProject\Orders\OrderStatusType.model.xml" />
+    <Content Include="_config\ModelProject\Orders\ShoppingCartItem.model.xml" />
+    <Content Include="_config\ModelProject\Orders\StripeCharge.model.xml" />
+    <Content Include="_config\ModelProject\Orders\StripeCustomerChargeOption.model.xml" />
+    <Content Include="_config\ModelProject\Orders\SubscriptionOrderItem.model.xml" />
+    <Content Include="_config\ModelProject\Orders\SubscriptionOrderItemType.model.xml" />
+    <Content Include="_config\ModelProject\Partners\Partner.model.xml" />
+    <Content Include="_config\ModelProject\Partners\PartnerReferral.model.xml" />
+    <Content Include="_config\ModelProject\Partners\PartnerReferralCouponRequest.model.xml" />
+    <Content Include="_config\ModelProject\Partners\PartnerReferralCouponRequestStatusType.model.xml" />
+    <Content Include="_config\ModelProject\Partners\PartnerReferralPlan.model.xml" />
+    <Content Include="_config\ModelProject\Partners\PartnerRegistrationRequest.model.xml" />
+    <Content Include="_config\ModelProject\Promotions\Discount.model.xml" />
+    <Content Include="_config\ModelProject\Promotions\DiscountAmountType.model.xml" />
+    <Content Include="_config\ModelProject\Promotions\DiscountApplicabilityType.model.xml" />
+    <Content Include="_config\ModelProject\Promotions\PromoCode.model.xml" />
+    <Content Include="_config\ModelProject\Promotions\Referral.model.xml" />
+    <Content Include="_config\ModelProject\Settings\StateProvinceType.model.xml" />
+    <Content Include="_config\ModelProject\Settings\SystemSetting.model.xml" />
+    <Content Include="_config\ModelProject\Settings\TaxRule.model.xml" />
+    <Content Include="_config\ModelProject\Subscriptions\PendingSubscriptionChange.model.xml" />
+    <Content Include="_config\ModelProject\Subscriptions\Subscription.model.xml" />
+    <Content Include="_config\ModelProject\Subscriptions\SubscriptionInstance.model.xml" />
+    <Content Include="_config\ModelProject\Subscriptions\SubscriptionPeriod.model.xml" />
+    <Content Include="_config\ModelProject\Subscriptions\SubscriptionPeriodType.model.xml" />
+    <Content Include="_config\ModelProject\Subscriptions\SubscriptionStatusType.model.xml" />
+    <Content Include="_config\ModelProject\Tag.model.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

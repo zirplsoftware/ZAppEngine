@@ -68,7 +68,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                                     where o.IsClass
                                             && !o.IsAbstract
                                             && Attribute.GetCustomAttribute(o, typeof (System.CodeDom.Compiler.GeneratedCodeAttribute)) != null
-                                            && o.Name.EndsWith("Template")
+                                            && o.FullName.ToLowerInvariant().Contains("._templates.")
                                             && o.GetMethod("TransformText") != null
                                             && o.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof (String))
                                             && o.GetMethod("Initialize") != null
@@ -110,9 +110,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
                     // create all of the domain types
                     //
-                    var projectItems = app.AppGenerationConfigProject.ProjectItems.GetAllProjectItemsRecursive();
+                    var projectItems = TextTransformationContext.Instance.VisualStudio.Solution.GetAllProjectItemsRecursive();
                     var paths = from p in projectItems
                                 where p.GetFullPath().ToLowerInvariant().EndsWith(".domain.zae")
+                                    //&& p.GetFullPath().ToLowerInvariant().Contains("_config")
                                 select p.GetFullPath();
                     new DomainFileParser().ParseDomainTypes(app, paths);
 
@@ -179,9 +180,131 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             templateWrapper.Session = session;
             templateWrapper.Initialize();
 
-            // run the template
-            templateWrapper.TransformText();
-            TextTransformationContext.Instance.EndFile();
+            if (template.GetTypeAccessor().HasPropertyGetter<bool>("ShouldTransform")
+                && template.GetProperty<bool>("ShouldTransform"))
+            {
+                var fileName = GetFileNameFromPreProcessedTemplateType(preProcessedFileTemplateType, domainType);
+                var destinationProject = GetProjectFromPreProcessedTemplateType(app, preProcessedFileTemplateType);
+                var folder = GetFolderPathFromPreProcessedTemplateType(app, preProcessedFileTemplateType, domainType);
+
+                if (destinationProject != null
+                    && !String.IsNullOrEmpty(fileName))
+                {
+                    templateWrapper.UseNewFile(fileName, folder, destinationProject,
+                        GetBuildActionFromFileName(fileName));
+                }
+
+                // run the template
+                templateWrapper.TransformText();
+                TextTransformationContext.Instance.EndFile();
+            }
+        }
+
+        private static String GetFileNameFromPreProcessedTemplateType(Type preProcessedFileTemplateType,DomainType domainType)
+        {
+            // let's see if we can determine the filename, folder, and project by convention
+            String fileName = null;
+            var tokens = preProcessedFileTemplateType.Name.Split('_');
+            if (tokens.Count() >= 2
+                || tokens.Count() <= 4)
+            {
+                // yes, we can determine the fileName
+                for (int i = 0; i < tokens.Length; i++)
+                {
+                    if (i != tokens.Length - 1
+                        && domainType != null
+                        && tokens[i].ToLowerInvariant() == "dt")
+                    {
+                        tokens[i] = domainType.Name;
+                    }
+                    if (i == tokens.Length - 1)
+                    {
+                        tokens[i] = tokens[i].SubstringUntilLastInstanceOf("template", StringComparison.InvariantCultureIgnoreCase);
+                        tokens[i] = "." + tokens[i];
+                        if (String.IsNullOrEmpty(tokens[i]))
+                        {
+                            // assume it is CSharp
+                            tokens[i] = ".cs";
+                        }
+                    }
+                }
+                foreach (var token in tokens)
+                {
+                    fileName += token;
+                }
+            }
+            return fileName;
+        }
+
+        private static Project GetProjectFromPreProcessedTemplateType(App app, Type preProcessedFileTemplateType)
+        {
+            var whichProject = (preProcessedFileTemplateType.Namespace + "." + preProcessedFileTemplateType.Name)
+                .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase)
+                .SubstringUntilFirstInstanceOf("Project", StringComparison.InvariantCultureIgnoreCase);
+            var whichProjectLower = whichProject.ToLower();
+            if (whichProjectLower == "model")
+            {
+                return app.ModelProject;
+            }
+            else if (whichProjectLower == "dataservice")
+            {
+                return app.DataServiceProject;
+            }
+            else if (whichProjectLower == "service")
+            {
+                return app.ServiceProject;
+            }
+            else if (whichProjectLower == "webcommon")
+            {
+                return app.WebCommonProject;
+            }
+            else if (whichProjectLower == "web")
+            {
+                return app.WebProject;
+            }
+            else if (whichProjectLower == "testscommon")
+            {
+                return app.TestsCommonProject;
+            }
+            else if (whichProjectLower == "dataservicetests")
+            {
+                return app.DataServiceTestsProject;
+            }
+            else if (whichProjectLower == "servicetests")
+            {
+                return app.ServiceTestsProject;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static String GetFolderPathFromPreProcessedTemplateType(App app, Type preProcessedTemplateType, DomainType domainType)
+        {
+            var immediateFolder = preProcessedTemplateType.Namespace
+                .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase)
+                .SubstringAfterFirstInstanceOf("Project.", StringComparison.InvariantCultureIgnoreCase)
+                .Replace('.', '\\');
+            if (domainType != null)
+            {
+                // combine the immediate folder of the template
+                // with the subnamespace of the DomainType
+                //
+                immediateFolder = Path.Combine(immediateFolder, app.GetFolderPathFromNamespace(domainType.DestinationProject, domainType.Namespace).Replace('.', '\\'));
+            }
+            return immediateFolder;
+        }
+
+        private static BuildActionTypeEnum? GetBuildActionFromFileName(String fileName)
+        {
+            switch (Path.GetExtension(fileName).ToLowerInvariant())
+            {
+                case ".cs":
+                    return BuildActionTypeEnum.Compile;
+                default:
+                    return BuildActionTypeEnum.None;
+            }
         }
     }
 }
