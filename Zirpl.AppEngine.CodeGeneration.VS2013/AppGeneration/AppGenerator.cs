@@ -66,39 +66,46 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             using (TextTransformationContext.Create(callingTemplate))
             {
                 var assemblyList = new List<Assembly>();
-                if (preprocessedTemplatesAssemblies != null)
+                if (preprocessedTemplatesAssemblies != null
+                    && preprocessedTemplatesAssemblies.Any())
                 {
                     assemblyList.AddRange(preprocessedTemplatesAssemblies);
                 }
-                if (TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject
+                else
+                {
+                    if (TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject
                         .GetAllProjectItemsRecursive().Where(o => Path.GetExtension(o.GetFullPath()) == ".tt").Any())
-                {
-                    TextTransformationContext.Instance
-                        .CallingTemplateProjectItem
-                        .ContainingProject
-                        .CompileCSharpProjectInMemory();
-                }
-                if (!assemblyList.Any())
-                {
+                    {
+                        TextTransformationContext.Instance
+                            .CallingTemplateProjectItem
+                            .ContainingProject
+                            .CompileCSharpProjectInMemory();
+                    }
                     assemblyList.AddRange(AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic));
                 }
 
-                //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-
                 var templateTypesList = from assembly in assemblyList
                     from o in assembly.GetTypes()
-                    where o.IsClass
-                          && !o.IsAbstract
-                          && Attribute.GetCustomAttribute(o, typeof (GeneratedCodeAttribute)) != null
-                          && o.FullName.ToLowerInvariant().Contains("._templates.")
-                          && o.GetMethod("TransformText") != null
-                          && o.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof (String))
-                          && o.GetMethod("Initialize") != null
-                          && o.GetProperty("App", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public) != null
-                          && o.GetProperty("App", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).PropertyType.IsAssignableFrom(typeof(App))
+                    where IsAppTemplate(o)
                     select o;
                 GenerateApp(callingTemplate, templateTypesList, settings);
             }
+        }
+
+        private static bool IsAppTemplate(Type o)
+        {
+            //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
+
+            return o.IsClass
+                && !o.IsAbstract
+                && Attribute.GetCustomAttribute(o, typeof (GeneratedCodeAttribute)) != null
+                && o.FullName.ToLowerInvariant().Contains("._templates.")
+                && o.GetMethod("TransformText") != null
+                && o.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof (String))
+                && o.GetMethod("Initialize") != null
+                && o.GetProperty("App", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public) != null
+                && o.GetProperty("App", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+                    .PropertyType.IsAssignableFrom(typeof (App));
         }
 
         private static void GenerateApp(TextTransformation callingTemplate, IEnumerable<Type> preProcessedFileTemplateTypes, AppGenerationSettings settings = null)
@@ -226,37 +233,41 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             }
         }
 
-        private static String GetFileNameFromPreProcessedTemplateType(Type preProcessedFileTemplateType,DomainType domainType)
+        private static String GetFileNameFromPreProcessedTemplateType(Type preProcessedFileTemplateType, DomainType domainType)
         {
             // let's see if we can determine the filename, folder, and project by convention
             String fileName = null;
-            var tokens = preProcessedFileTemplateType.Name.Split('_');
-            if (tokens.Count() >= 2
-                || tokens.Count() <= 4)
+            if (preProcessedFileTemplateType.Name.Contains("_"))
             {
-                // yes, we can determine the fileName
-                for (int i = 0; i < tokens.Length; i++)
+                var tokens = preProcessedFileTemplateType.Name.Split('_');
+                if (tokens.Count() >= 2
+                    || tokens.Count() <= 4)
                 {
-                    if (i != tokens.Length - 1
-                        && domainType != null
-                        && tokens[i].ToLowerInvariant() == "dt")
+                    // yes, we can determine the fileName
+                    for (int i = 0; i < tokens.Length; i++)
                     {
-                        tokens[i] = domainType.Name;
-                    }
-                    if (i == tokens.Length - 1)
-                    {
-                        tokens[i] = tokens[i].SubstringUntilLastInstanceOf("template", StringComparison.InvariantCultureIgnoreCase);
-                        tokens[i] = "." + tokens[i];
-                        if (String.IsNullOrEmpty(tokens[i]))
+                        if (i != tokens.Length - 1
+                            && domainType != null
+                            && tokens[i].ToLowerInvariant() == "dt")
                         {
-                            // assume it is CSharp
-                            tokens[i] = ".cs";
+                            tokens[i] = domainType.Name;
+                        }
+                        if (i == tokens.Length - 1)
+                        {
+                            tokens[i] = tokens[i].SubstringUntilLastInstanceOf("template",
+                                StringComparison.InvariantCultureIgnoreCase);
+                            tokens[i] = "." + tokens[i];
+                            if (tokens[i] == ".")
+                            {
+                                // assume it is CSharp
+                                tokens[i] = ".cs";
+                            }
                         }
                     }
-                }
-                foreach (var token in tokens)
-                {
-                    fileName += token;
+                    foreach (var token in tokens)
+                    {
+                        fileName += token;
+                    }
                 }
             }
             return fileName;
