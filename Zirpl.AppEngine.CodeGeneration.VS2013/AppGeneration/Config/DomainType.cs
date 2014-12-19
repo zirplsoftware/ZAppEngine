@@ -30,7 +30,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public bool IsAbstract { get; set; }
         public bool IsPersistable { get; set; }
         public bool IsStaticLookup { get; set; }
-        public bool IsEnum { get; set; }
         public bool IsVersionable { get; set; }
         public bool IsAuditable { get; set; }
         public bool IsExtensible { get; set; }
@@ -45,9 +44,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public IList<DomainType> InheritedBy { get; private set; }
         public DomainType Extends { get; set; }
         public DomainType ExtendedBy { get; set; }
-        public DomainType EnumDescribes { get; set; }
-        public DomainType DescribedByEnum { get; set; }
-        public DataTypeEnum EnumDataType { get; set; }
         public IList<EnumValue> EnumValues { get; private set; }
         public IList<Relationship> Relationships { get; private set; } 
     }

@@ -21,7 +21,7 @@ namespace <#= App.ModelProject.GetDefaultNamespace() #>
 	public static partial class ModelExtensions
 	{
 <#
-	foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && !o.IsEnum && (o.IsUpdatable || o.IsInsertable)))
+	foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && (o.IsUpdatable || o.IsInsertable)))
 	{
 #>
 		public static void Save(this <#= domainType.Name #> entity)
@@ -29,7 +29,7 @@ namespace <#= App.ModelProject.GetDefaultNamespace() #>
 		}
 <#	
     }
-	foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && !o.IsEnum && (o.IsDeletable || o.IsMarkDeletable)))
+	foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && (o.IsDeletable || o.IsMarkDeletable)))
 	{
 #>
 		public static void Delete(this <#= domainType.Name #> entity)

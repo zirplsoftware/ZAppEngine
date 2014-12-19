@@ -69,7 +69,7 @@ namespace <#= this.DomainType.Namespace #>
         {
 #>
 			, IStaticLookup
-			, IEnumDescribed<<#= this.DomainType.IdProperty.DataTypeString #>,<#= this.DomainType.DescribedByEnum.FullName #>>
+			, IEnumDescribed<<#= this.DomainType.IdProperty.DataTypeString #>,<#= this.DomainType.FullName #>Enum>
 <#
         }
 #>
@@ -166,6 +166,3 @@ namespace <#= this.DomainType.Namespace #>
 		#endregion
 	}
 }
-<#+
-public bool ShouldTransform { get { return !this.DomainType.IsEnum; } }
-#>

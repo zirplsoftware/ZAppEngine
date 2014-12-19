@@ -200,6 +200,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 {
                     throw new Exception(String.Format("Invalid resulting PluralName of '{0}' at: {1}", domainType.PluralName, domainType.ConfigFilePath));
                 }
+                if (json.EnumValues.Any())
+                {
+                    foreach (var enumValue in json.EnumValues)
+                    {
+                        domainType.EnumValues.Add(new EnumValue() { Id = Int32.Parse(enumValue.Id), Name = enumValue.Name });
+                    }
+                }
 
                 app.DomainTypes.Add(domainType);
                 #endregion
@@ -242,10 +249,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 if (domainType.InheritsFrom.IsStaticLookup)
                 {
                     throw new Exception("StaticLookups cannot be used as InheritsFrom in: " + domainType.ConfigFilePath);
-                }
-                if (domainType.InheritsFrom.IsEnum)
-                {
-                    throw new Exception("Enums cannot be used as InheritsFrom in: " + domainType.ConfigFilePath);
                 }
                 if (domainType.InheritsFrom.IsExtendedEntityFieldValue)
                 {
@@ -291,29 +294,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                     extendedFieldValueDomainType.IsMarkDeletable = false; //domainType.IsMarkDeletable;
 
                     newDomainTypes.Add(extendedFieldValueDomainType);
-                }
-                if (domainType.Config.EnumValues.Any())
-                {
-                    // create DomainTypeInfo for the enum
-                    //
-                    var enumDomainType = new DomainType();
-                    enumDomainType.DestinationProject = domainType.DestinationProject;
-                    enumDomainType.Name = domainType.Name + "Enum";
-                    enumDomainType.Namespace = domainType.Namespace;
-                    enumDomainType.PluralName = enumDomainType.Name + "s";
-                    enumDomainType.IsEnum = true;
-                    enumDomainType.EnumDescribes = domainType;
-                    domainType.DescribedByEnum = enumDomainType;
-                    enumDomainType.EnumDataType = (domainType.Config != null 
-                                                    && domainType.Config.Id != null 
-                                                    && domainType.Config.Id.DataType.HasValue) 
-                                                   ? domainType.Config.Id.DataType.Value 
-                                                   : DataTypeEnum.Byte;
-                    foreach (var enumValue in domainType.Config.EnumValues)
-                    {
-                        enumDomainType.EnumValues.Add(new EnumValue() {Id = Int32.Parse(enumValue.Id), Name = enumValue.Name});
-                    }
-                    newDomainTypes.Add(enumDomainType);
                 }
             }
             app.DomainTypes.AddRange(newDomainTypes);

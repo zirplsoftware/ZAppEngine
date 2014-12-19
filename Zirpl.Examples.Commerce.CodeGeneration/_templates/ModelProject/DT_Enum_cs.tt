@@ -19,7 +19,7 @@ using Zirpl.Collections;
 
 namespace <#= this.DomainType.Namespace #>
 {
-	public enum <#= this.DomainType.Name #> : <#= this.DomainType.EnumDescribes.IdProperty.DataTypeString #>
+	public enum <#= this.DomainType.Name #>Enum : <#= this.DomainType.IdProperty.DataTypeString #>
 	{
 <#
 		foreach (var enumValue in this.DomainType.EnumValues)
@@ -32,5 +32,5 @@ namespace <#= this.DomainType.Namespace #>
 	}
 }
 <#+
-public bool ShouldTransform { get { return this.DomainType.IsEnum; } }
+public bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
 #>

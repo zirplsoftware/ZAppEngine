@@ -17,12 +17,12 @@ namespace Zirpl.Examples.Commerce.CodeGeneration._templates.ModelProject
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
     using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
-    
+
     /// <summary>
     /// Class to produce the template output
     /// </summary>
-    
-    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+
+#line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class DT_Enum_cs : DT_Enum_csBase
     {
@@ -35,175 +35,175 @@ namespace Zirpl.Examples.Commerce.CodeGeneration._templates.ModelProject
             this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
                     ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
                     "ctions;\r\n\r\nnamespace ");
-            
-            #line 20 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+
+#line 20 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
-            
-            #line default
-            #line hidden
+
+#line default
+#line hidden
             this.Write("\r\n{\r\n\tpublic enum ");
-            
-            #line 22 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+
+#line 22 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" : ");
-            
-            #line 22 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.EnumDescribes.IdProperty.DataTypeString));
-            
-            #line default
-            #line hidden
+
+#line default
+#line hidden
+            this.Write("Enum : ");
+
+#line 22 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+
+#line default
+#line hidden
             this.Write("\r\n\t{\r\n");
-            
-            #line 24 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 
-		foreach (var enumValue in this.DomainType.EnumValues)
-		{
+#line 24 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t");
-            
-            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" = ");
-            
-            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
-            
-            #line default
-            #line hidden
-            this.Write(",\r\n");
-            
-            #line 29 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
-	
-		}
+            foreach (var enumValue in this.DomainType.EnumValues)
+            {
 
-            
-            #line default
-            #line hidden
+
+#line default
+#line hidden
+                this.Write("\t\t");
+
+#line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
+
+#line default
+#line hidden
+                this.Write(" = ");
+
+#line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
+
+#line default
+#line hidden
+                this.Write(",\r\n");
+
+#line 29 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+
+            }
+
+
+#line default
+#line hidden
             this.Write("\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
-        
-        #line 34 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 
-public bool ShouldTransform { get { return this.DomainType.IsEnum; } }
+#line 34 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 
-        
-        #line default
-        #line hidden
-        
-        #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+        public bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext _ContextField;
 
-/// <summary>
-/// Access the Context parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext Context
-{
-    get
-    {
-        return this._ContextField;
+#line default
+#line hidden
+
+#line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\DT_Enum_cs.tt"
+
+        private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext _ContextField;
+
+        /// <summary>
+        /// Access the Context parameter of the template.
+        /// </summary>
+        private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext Context
+        {
+            get
+            {
+                return this._ContextField;
+            }
+        }
+
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App _AppField;
+
+        /// <summary>
+        /// Access the App parameter of the template.
+        /// </summary>
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App App
+        {
+            get
+            {
+                return this._AppField;
+            }
+        }
+
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType _DomainTypeField;
+
+        /// <summary>
+        /// Access the DomainType parameter of the template.
+        /// </summary>
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType DomainType
+        {
+            get
+            {
+                return this._DomainTypeField;
+            }
+        }
+
+
+        /// <summary>
+        /// Initialize the template
+        /// </summary>
+        public virtual void Initialize()
+        {
+            if ((this.Errors.HasErrors == false))
+            {
+                bool ContextValueAcquired = false;
+                if (this.Session.ContainsKey("Context"))
+                {
+                    this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(this.Session["Context"]));
+                    ContextValueAcquired = true;
+                }
+                if ((ContextValueAcquired == false))
+                {
+                    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Context");
+                    if ((data != null))
+                    {
+                        this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(data));
+                    }
+                }
+                bool AppValueAcquired = false;
+                if (this.Session.ContainsKey("App"))
+                {
+                    this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(this.Session["App"]));
+                    AppValueAcquired = true;
+                }
+                if ((AppValueAcquired == false))
+                {
+                    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("App");
+                    if ((data != null))
+                    {
+                        this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(data));
+                    }
+                }
+                bool DomainTypeValueAcquired = false;
+                if (this.Session.ContainsKey("DomainType"))
+                {
+                    this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(this.Session["DomainType"]));
+                    DomainTypeValueAcquired = true;
+                }
+                if ((DomainTypeValueAcquired == false))
+                {
+                    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainType");
+                    if ((data != null))
+                    {
+                        this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(data));
+                    }
+                }
+
+
+            }
+        }
+
+
+
+#line default
+#line hidden
     }
-}
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App _AppField;
-
-/// <summary>
-/// Access the App parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App App
-{
-    get
-    {
-        return this._AppField;
-    }
-}
-
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType _DomainTypeField;
-
-/// <summary>
-/// Access the DomainType parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType DomainType
-{
-    get
-    {
-        return this._DomainTypeField;
-    }
-}
-
-
-/// <summary>
-/// Initialize the template
-/// </summary>
-public virtual void Initialize()
-{
-    if ((this.Errors.HasErrors == false))
-    {
-bool ContextValueAcquired = false;
-if (this.Session.ContainsKey("Context"))
-{
-    this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(this.Session["Context"]));
-    ContextValueAcquired = true;
-}
-if ((ContextValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Context");
-    if ((data != null))
-    {
-        this._ContextField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext)(data));
-    }
-}
-bool AppValueAcquired = false;
-if (this.Session.ContainsKey("App"))
-{
-    this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(this.Session["App"]));
-    AppValueAcquired = true;
-}
-if ((AppValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("App");
-    if ((data != null))
-    {
-        this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(data));
-    }
-}
-bool DomainTypeValueAcquired = false;
-if (this.Session.ContainsKey("DomainType"))
-{
-    this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(this.Session["DomainType"]));
-    DomainTypeValueAcquired = true;
-}
-if ((DomainTypeValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainType");
-    if ((data != null))
-    {
-        this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(data));
-    }
-}
-
-
-    }
-}
-
-
-        
-        #line default
-        #line hidden
-    }
-    
-    #line default
-    #line hidden
+#line default
+#line hidden
     #region Base class
     /// <summary>
     /// Base class for this transformation
@@ -303,7 +303,7 @@ if ((DomainTypeValueAcquired == false))
             }
             // If we're starting off, or if the previous text ended with a newline,
             // we have to append the current indent first.
-            if (((this.GenerationEnvironment.Length == 0) 
+            if (((this.GenerationEnvironment.Length == 0)
                         || this.endsWithNewline))
             {
                 this.GenerationEnvironment.Append(this.currentIndentField);
@@ -421,7 +421,7 @@ if ((DomainTypeValueAcquired == false))
         /// </summary>
         public class ToStringInstanceHelper
         {
-            private System.IFormatProvider formatProviderField  = global::System.Globalization.CultureInfo.InvariantCulture;
+            private System.IFormatProvider formatProviderField = global::System.Globalization.CultureInfo.InvariantCulture;
             /// <summary>
             /// Gets or sets format provider to be used by ToStringWithCulture method.
             /// </summary>
@@ -429,13 +429,13 @@ if ((DomainTypeValueAcquired == false))
             {
                 get
                 {
-                    return this.formatProviderField ;
+                    return this.formatProviderField;
                 }
                 set
                 {
                     if ((value != null))
                     {
-                        this.formatProviderField  = value;
+                        this.formatProviderField = value;
                     }
                 }
             }

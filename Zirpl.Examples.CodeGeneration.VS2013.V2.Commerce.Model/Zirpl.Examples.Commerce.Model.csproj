@@ -47,7 +47,7 @@
     <Compile Include="_auto\InternationalAddress.cs" />
     <Compile Include="_auto\ModelExtensions.cs" />
     <Compile Include="_auto\NamePrefixType.cs" />
-    <Compile Include="_auto\NamePrefixTypeEnumEnum.cs" />
+    <Compile Include="_auto\NamePrefixTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
