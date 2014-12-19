@@ -1,11 +1,15 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.CSharp;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.Reflection;
 
@@ -193,7 +197,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
                     List<String> lines = null;
                     if (File.Exists(folderProjectItem.GetFullPath() + ".DotSettings"))
                     {
-                        lines = File.ReadLines(folderProjectItem.GetFullPath() + ".DotSettings").ToList();
+                        lines = File.ReadLines(folderProjectItem.ContainingProject.FullName + ".DotSettings").ToList();
                     }
                     else
                     {
@@ -201,9 +205,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
                         lines.Add("<wpf:ResourceDictionary xml:space=\"preserve\" xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" xmlns:s=\"clr-namespace:System;assembly=mscorlib\" xmlns:ss=\"urn:shemas-jetbrains-com:settings-storage-xaml\" xmlns:wpf=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">");
 	                    lines.Add("</wpf:ResourceDictionary>");
                     }
+                    // TODO: this could add infinite lines... see if there is a way to do this through Resharper, IF it is installed
                     lines.Insert(1, String.Format("<s:Boolean x:Key=\"/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/={0}/@EntryIndexedValue\">True</s:Boolean>",
                             folderName.Replace("_", "_005F")));
-                    File.WriteAllLines(folderProjectItem.GetFullPath() + ".DotSettings", lines);
+                    File.WriteAllLines(folderProjectItem.ContainingProject.FullName + ".DotSettings", lines);
                 }
             }
             if (projectPath != null)
@@ -266,6 +271,64 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
             }
 
             return guid;
+        }
+
+        public static Assembly CompileCSharpProjectInMemory(this Project project, bool suppressCompilerErrors = false)
+        {
+            var codeList = new List<String>();
+            foreach (var item in project.GetAllProjectItemsRecursive())
+            {
+                if (item.GetFullPath().EndsWith(".cs"))
+                {
+                    codeList.Add(File.ReadAllText(item.GetFullPath()));
+                }
+            }
+
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+            CompilerParameters parameters = new CompilerParameters();
+            // True - memory generation, false - external file generation
+            parameters.GenerateInMemory = true;
+            // True - exe file generation, false - dll file generation
+            parameters.GenerateExecutable = false;
+            parameters.ReferencedAssemblies.Clear();
+
+            var vsproject = (VSLangProj.VSProject)project.Object;
+            // note: you could also try casting to VsWebSite.VSWebSite
+
+            foreach (VSLangProj.Reference reference in vsproject.References)
+            {
+                if (reference.Name != "mscorlib")
+                {
+                    parameters.ReferencedAssemblies.Add(reference.Path);
+                }
+                //string.Format("{0}, Version={1}.{2}.{3}.{4}, Culture={5}, PublicKeyToken={6}",
+                //                    reference.Name,
+                //                    reference.MajorVersion, reference.MinorVersion, reference.BuildNumber, reference.RevisionNumber,
+                //                    reference.Culture.Or("neutral"),
+                //                    reference.PublicKeyToken.Or("null"));
+                //if (reference.SourceProject == null)
+                //{
+                //}
+                //else
+                //{
+                //    // This is a project reference
+                //}
+            }
+
+            CompilerResults results = provider.CompileAssemblyFromSource(parameters, codeList.ToArray());
+            if (results.Errors.HasErrors
+                && !suppressCompilerErrors)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (CompilerError error in results.Errors)
+                {
+                    sb.AppendLine(String.Format("Error ({0}): {1}", error.ErrorNumber, error.ErrorText));
+                }
+
+                throw new InvalidOperationException(sb.ToString());
+            }
+            return results.CompiledAssembly;
         }
 
         #endregion

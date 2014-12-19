@@ -73,7 +73,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 if (TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject
                         .GetAllProjectItemsRecursive().Where(o => Path.GetExtension(o.GetFullPath()) == ".tt").Any())
                 {
-                    CompilePreProcessedTemplatesInCallingTemplateProject();
+                    TextTransformationContext.Instance
+                        .CallingTemplateProjectItem
+                        .ContainingProject
+                        .CompileCSharpProjectInMemory();
                 }
                 if (!assemblyList.Any())
                 {
@@ -86,78 +89,16 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     from o in assembly.GetTypes()
                     where o.IsClass
                           && !o.IsAbstract
-                          &&
-                          Attribute.GetCustomAttribute(o, typeof (System.CodeDom.Compiler.GeneratedCodeAttribute)) !=
-                          null
+                          && Attribute.GetCustomAttribute(o, typeof (GeneratedCodeAttribute)) != null
                           && o.FullName.ToLowerInvariant().Contains("._templates.")
                           && o.GetMethod("TransformText") != null
                           && o.GetMethod("TransformText").ReturnType.IsAssignableFrom(typeof (String))
                           && o.GetMethod("Initialize") != null
+                          && o.GetProperty("App", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public) != null
+                          && o.GetProperty("App", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).PropertyType.IsAssignableFrom(typeof(App))
                     select o;
                 GenerateApp(callingTemplate, templateTypesList, settings);
             }
-        }
-
-        private static void CompilePreProcessedTemplatesInCallingTemplateProject()
-        {
-            var codeList = new List<String>();
-            foreach (var item in TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject.GetAllProjectItemsRecursive())
-            {
-                if (item.GetFullPath().EndsWith(".cs"))
-                {
-                    codeList.Add(File.ReadAllText(item.GetFullPath()));
-                }
-            }
-
-            CSharpCodeProvider provider = new CSharpCodeProvider();
-            CompilerParameters parameters = new CompilerParameters();
-            // True - memory generation, false - external file generation
-            parameters.GenerateInMemory = true;
-            // True - exe file generation, false - dll file generation
-            parameters.GenerateExecutable = false;
-            parameters.ReferencedAssemblies.Clear();
-
-
-            var vsproject = TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject.Object as VSLangProj.VSProject;
-            // note: you could also try casting to VsWebSite.VSWebSite
-
-            foreach (VSLangProj.Reference reference in vsproject.References)
-            {
-                if (reference.Name != "mscorlib")
-                {
-                    parameters.ReferencedAssemblies.Add(reference.Path);
-                }
-                //if (reference.SourceProject == null)
-                //{
-                //}
-                //else
-                //{
-                //    // This is a project reference
-                //}
-            }
-
-
-            CompilerResults results = provider.CompileAssemblyFromSource(parameters, codeList.ToArray());
-            if (results.Errors.HasErrors)
-            {
-                StringBuilder sb = new StringBuilder();
-
-                foreach (CompilerError error in results.Errors)
-                {
-                    sb.AppendLine(String.Format("Error ({0}): {1}", error.ErrorNumber, error.ErrorText));
-                }
-
-                throw new InvalidOperationException(sb.ToString());
-            }
-        }
- 
-        private static string GetFullName(VSLangProj.Reference reference)
-        {
-            return string.Format("{0}, Version={1}.{2}.{3}.{4}, Culture={5}, PublicKeyToken={6}",
-                                    reference.Name,
-                                    reference.MajorVersion, reference.MinorVersion, reference.BuildNumber, reference.RevisionNumber,
-                                    reference.Culture.Or("neutral"),
-                                    reference.PublicKeyToken.Or("null"));
         }
 
         private static void GenerateApp(TextTransformation callingTemplate, IEnumerable<Type> preProcessedFileTemplateTypes, AppGenerationSettings settings = null)
