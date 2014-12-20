@@ -8,24 +8,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {
     public static class AppExtensions
     {
-        public static IEnumerable<DomainProperty> GetAllPropertiesIncludingInherited(this App app, DomainType domainType)
-        {
-            var list = new List<DomainProperty>();
-            while (domainType != null)
-            {
-                list.AddRange(domainType.Properties);
-                domainType = domainType.InheritsFrom;
-            }
-            return list;
-        }
-        public static String GetFolderPathFromNamespace(this App app, Project project, String nameSpace)
-        {
-            String folderPath = nameSpace;
-            folderPath = folderPath.SubstringAfterFirstInstanceOf(project.GetDefaultNamespace() + ".");
-            folderPath = folderPath.Replace('.', '\\');
-            return folderPath;
-        }
-
         public static IEnumerable<DomainType> FindDomainTypes(this App app, String partialFullName)
         {
             var partialFullNameTokens = partialFullName.Split('.').Reverse().ToList();
@@ -63,52 +45,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
             }
             return potentialMatches;
         }
+       
 
-        public static DomainType GetBaseMostDomainType(this DomainType domainType)
-        {
-            if (domainType.InheritsFrom != null)
-            {
-                domainType = domainType.InheritsFrom;
-            }
-            return domainType;
-        }
 
-        public static String GetPluralName(this App app, String className)
-        {
-            if (className.EndsWith("s"))
-            {
-                return className + "es";
-            }
-            else if (className.EndsWith("y"))
-            {
-                return className.Substring(0, className.Length - 1) + "ies";
-            }
-            else
-            {
-                return className + "s";
-            }
-        }
-
-        public static bool IsValidTypeName(this App app, String typeName)
-        {
-            return CodeGenerator.IsValidLanguageIndependentIdentifier(typeName);
-        }
-
-        public static bool IsValidNamespace(this App app, String nameSpace)
-        {
-            if (String.IsNullOrWhiteSpace(nameSpace))
-            {
-                return false;
-            }
-            var tokens = nameSpace.Split('.');
-            foreach (var token in tokens)
-            {
-                if (!app.IsValidTypeName(token))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
     }
 }

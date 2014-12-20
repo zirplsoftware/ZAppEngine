@@ -12,7 +12,7 @@ using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
 {
-    public class DomainFileParser
+    internal class DomainFileParser
     {
         /// <summary> 
         /// This method currently assumes the following conventions
@@ -25,7 +25,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
         /// <param name="app"></param>
         /// <param name="domainFilePaths"></param>
         /// <returns></returns>
-        public void ParseDomainTypes(App app, IEnumerable<string> domainFilePaths)
+        internal void ParseDomainTypes(App app, IEnumerable<string> domainFilePaths)
         {
             #region create DomainTypeInfos specified by directly by the files
             foreach (var path in domainFilePaths)
@@ -135,7 +135,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 domainType.IsMarkDeletable = json.IsMarkDeletable.GetValueOrDefault();
 
                 domainType.Name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path));
-                if (!app.IsValidTypeName(domainType.Name))
+                if (!IsValidTypeName(domainType.Name))
                 {
                     throw new Exception(String.Format("Invalid resulting class name of '{0}'. Rename file to be in format 'ValidClassName.domain.zae': {1}", domainType.Name, domainType.ConfigFilePath));
                 }
@@ -189,7 +189,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                                                         .SubstringUntilLastInstanceOf(domainType.Name);
                 domainType.Namespace = domainType.DestinationProject.GetDefaultNamespace() +
                                         (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
-                if (!app.IsValidNamespace(domainType.Namespace))
+                if (!IsValidNamespace(domainType.Namespace))
                 {
                     throw new Exception(String.Format("Invalid resulting Namespace of '{0}' at: {1}", domainType.Namespace, domainType.ConfigFilePath));
                 }
@@ -199,9 +199,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 }
                 else
                 {
-                    domainType.PluralName = app.GetPluralName(domainType.Name);
+                    domainType.PluralName = GetPluralName(domainType.Name);
                 }
-                if (!app.IsValidTypeName(domainType.PluralName))
+                if (!IsValidTypeName(domainType.PluralName))
                 {
                     throw new Exception(String.Format("Invalid resulting PluralName of '{0}' at: {1}", domainType.PluralName, domainType.ConfigFilePath));
                 }
@@ -814,6 +814,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                                 if (property.Relationship.Type == RelationshipTypeEnum.OneToMany)
                                 {
                                     property.DataTypeString = String.Format("System.Collections.Generic.IList<{0}>", property.Relationship.To.FullName);
+                                    property.InitializationDataTypeString = String.Format("System.Collections.Generic.List<{0}>", property.Relationship.To.FullName);
                                 }
                                 else
                                 {
@@ -829,6 +830,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                                 else
                                 {
                                     property.DataTypeString = String.Format("System.Collections.Generic.IList<{0}>", property.Relationship.From.FullName);
+                                    property.InitializationDataTypeString = String.Format("System.Collections.Generic.List<{0}>", property.Relationship.From.FullName);
                                 }
                             }
                             break;
@@ -857,7 +859,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             }
             foreach (var domainType in app.DomainTypes)
             {
-                if (app.GetAllPropertiesIncludingInherited(domainType).GroupBy(p => p.Name).Where(g => g.Count() > 1).Any())
+                if (domainType.GetAllPropertiesIncludingInherited().GroupBy(p => p.Name).Where(g => g.Count() > 1).Any())
                 {
                     throw new Exception("2 Properties with the same name resulted in: " + domainType.ConfigFilePath);
                 }
@@ -887,6 +889,44 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 this.AlignInterfacePropertiesInHeirarchy(child);
                 // TODO: if we start using IsDeletable, IsUpdatable, IsInsertable as interfaces on the domain type, then we need to apply those here
             }
+        }
+
+        private String GetPluralName(String className)
+        {
+            if (className.EndsWith("s"))
+            {
+                return className + "es";
+            }
+            else if (className.EndsWith("y"))
+            {
+                return className.Substring(0, className.Length - 1) + "ies";
+            }
+            else
+            {
+                return className + "s";
+            }
+        }
+
+        private bool IsValidTypeName(String typeName)
+        {
+            return CodeGenerator.IsValidLanguageIndependentIdentifier(typeName);
+        }
+
+        private bool IsValidNamespace(String nameSpace)
+        {
+            if (String.IsNullOrWhiteSpace(nameSpace))
+            {
+                return false;
+            }
+            var tokens = nameSpace.Split('.');
+            foreach (var token in tokens)
+            {
+                if (!IsValidTypeName(token))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

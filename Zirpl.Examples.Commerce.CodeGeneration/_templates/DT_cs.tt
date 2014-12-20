@@ -72,21 +72,37 @@ namespace <#= this.DomainType.Namespace #>
 #>
 	{
 <#
-			foreach (var property in this.DomainType.Properties)
-			{
+		if (this.DomainType.Properties.GetCollectionProperties().Any())
+        {
+#>
+		<#= this.DomainType.IsAbstract ? "protected" : "public" #> <#= this.DomainType.Name #>()
+		{
+<#
+			foreach (var collectionProperty in this.DomainType.Properties.GetCollectionProperties())
+            {
+#>
+				this.<#= collectionProperty.Name #> = this.<#= collectionProperty.Name #> ?? new <#= collectionProperty.InitializationDataTypeString #>();
+<#
+            }
+#>
+		}
+<#
+        }
+		foreach (var property in this.DomainType.Properties)
+		{
 #>
 		public virtual <#= property.DataTypeString #> <#= property.Name #> { get; set; }
 <#
-			}
+		}
 #>
 
 		#region Interface implementations
 
 <#
-			if (this.DomainType.IsPersistable
-				&& (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsPersistable))
-			{
+		if (this.DomainType.IsPersistable
+			&& (this.DomainType.InheritsFrom == null
+				|| !this.DomainType.InheritsFrom.IsPersistable))
+		{
 #>
 		public virtual Object GetId()
         {
@@ -113,12 +129,12 @@ namespace <#= this.DomainType.Namespace #>
             return this.EvaluateGetHashCode();
         }
 <#
-			}
+		}
 		
-			if (this.DomainType.IsExtensible
-					&& (this.DomainType.InheritsFrom == null
-						|| !this.DomainType.InheritsFrom.IsExtensible))
-			{
+		if (this.DomainType.IsExtensible
+				&& (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsExtensible))
+		{
 #>
 		public virtual IList<IExtendedEntityFieldValue> GetExtendedFieldValues()
 		{
@@ -130,12 +146,12 @@ namespace <#= this.DomainType.Namespace #>
             this.ExtendedFieldValues.AddRange(list.Cast<<#= this.DomainType.ExtendedBy.FullName #>>());
 		}
 <#
-			}
+		}
 
-			if (this.DomainType.IsExtendedEntityFieldValue
-				&& (this.DomainType.InheritsFrom == null
-				|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
-			{
+		if (this.DomainType.IsExtendedEntityFieldValue
+			&& (this.DomainType.InheritsFrom == null
+			|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
+		{
 #>
         public virtual object GetExtendedEntityId()
         {
@@ -158,7 +174,7 @@ namespace <#= this.DomainType.Namespace #>
         }
 		
 <#
-			}
+		}
 #>
 		#endregion
 	}

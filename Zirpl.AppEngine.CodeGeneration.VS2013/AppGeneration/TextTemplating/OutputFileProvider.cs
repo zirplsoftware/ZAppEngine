@@ -7,13 +7,13 @@ using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    public class OutputFileProvider
+    internal class OutputFileProvider
     {
         private Type type;
         private App app;
         private DomainType domainType;
 
-        public OutputFileProvider(TemplateBase template)
+        internal OutputFileProvider(TemplateBase template)
         {
             this.type = template.GetType();
             this.app = template.App;
@@ -23,7 +23,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
         }
 
-        public OutputFile Create()
+        internal OutputFile GetOutputFile()
         {
             var fileName = GetFileName();
             var destinationProject = GetProject();
@@ -140,7 +140,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 // combine the immediate folder of the template
                 // with the subnamespace of the DomainType
                 //
-                immediateFolder = Path.Combine(immediateFolder, app.GetFolderPathFromNamespace(domainType.DestinationProject, domainType.Namespace).Replace('.', '\\'));
+                immediateFolder = Path.Combine(immediateFolder, domainType.DestinationProject.GetFolderPathFromNamespace(domainType.Namespace).Replace('.', '\\'));
             }
             return immediateFolder;
         }

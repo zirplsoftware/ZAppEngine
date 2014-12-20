@@ -14,6 +14,10 @@ namespace Zirpl.Examples.Commerce.Model
             , IAuditable
             , IExtensible<AddressBase, AddressBaseExtendedFieldValue, Guid>
     {
+        protected AddressBase()
+        {
+            this.ExtendedFieldValues = this.ExtendedFieldValues ?? new System.Collections.Generic.List<Zirpl.Examples.Commerce.Model.AddressBaseExtendedFieldValue>();
+        }
         public virtual Guid Id { get; set; }
         public virtual byte[] RowVersion { get; set; }
         public virtual string CreatedUserId { get; set; }

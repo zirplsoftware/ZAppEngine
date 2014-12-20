@@ -19,7 +19,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         private StringBuilder CurrentGenerationEnvironment { get; set; }
         private OutputFile CurrentOutputFile { get; set; }
 
-        public OutputFileManager(TextTransformationContext context)
+        internal OutputFileManager(TextTransformationContext context)
         {
             this.CallingTemplateOriginalGenerationEnvironment = context.CallingTemplate.GenerationEnvironment;
             this.CurrentGenerationEnvironment = context.CallingTemplate.GenerationEnvironment;
@@ -27,7 +27,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             this.CompletedFiles = new List<OutputFile>();
         }
 
-        public void StartFile(ITextTransformation template, OutputFile file)
+        internal void StartFile(ITextTransformation template, OutputFile file)
         {
             this.EndFile();
 
@@ -36,7 +36,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             this.Context.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
         }
 
-        public void EndFile()
+        internal void EndFile()
         {
             if (this.CurrentOutputFile != null)
             {
@@ -96,7 +96,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     }
                 }
 
-                this.Context.LogLineToBuildPane("Writing file: " + fullFilePath);
+                this.Context.LogLineToBuildPane("   Writing file: " + fullFilePath);
                 var item = this.Context.VisualStudio.Solution.GetProjectItem(fullFilePath);
                 if (item != null)
                 {

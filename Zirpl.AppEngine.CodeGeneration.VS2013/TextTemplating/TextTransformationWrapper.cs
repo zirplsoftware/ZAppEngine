@@ -8,12 +8,12 @@ using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class TextTransformationWrapper : ITextTransformation
+    internal class TextTransformationWrapper : ITextTransformation
     {
         private readonly Object _preProcessedTextTransformation;
         private readonly TextTransformation _textTransformation;
-        
-        public TextTransformationWrapper(Object textTransformation)
+
+        internal TextTransformationWrapper(Object textTransformation)
         {
             if (textTransformation == null)
             {

@@ -24,7 +24,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         internal ITextTransformation CallingTemplate { get; private set; }
         private OutputFileManager FileManager { get; set; }
 
-        public static TextTransformationContext Create(TextTransformation callingTemplate)
+        internal static TextTransformationContext Create(TextTransformation callingTemplate)
         {
             if (callingTemplate == null)
             {

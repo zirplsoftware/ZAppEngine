@@ -8,6 +8,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public String Name { get; set; }
         public DataTypeEnum DataType { get; set; }
         public String DataTypeString { get; set; }
+        public String InitializationDataTypeString { get; set; }
         public bool IsPrimaryKey { get; set; }
         public bool IsForeignKey { get; set; }
         public AutoGenerationBehaviorTypeEnum AutoGenerationBehavior { get; set; }

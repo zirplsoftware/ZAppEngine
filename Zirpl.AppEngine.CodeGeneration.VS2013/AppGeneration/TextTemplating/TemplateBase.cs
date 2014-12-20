@@ -37,7 +37,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         public virtual void Initialize()
         {
 
-            this.outputFile = new OutputFileProvider(this).Create();
+            this.outputFile = new OutputFileProvider(this).GetOutputFile();
         }
 
 

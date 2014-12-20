@@ -10,7 +10,6 @@ using System.Text;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSharp;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.IO;
 using Zirpl.Reflection;
 
@@ -192,6 +191,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
 
         #region Project extension methods
 
+        public static String GetFolderPathFromNamespace(this Project project, String nameSpace)
+        {
+            String folderPath = nameSpace;
+            folderPath = folderPath.SubstringAfterFirstInstanceOf(project.GetDefaultNamespace() + ".");
+            folderPath = folderPath.Replace('.', '\\');
+            return folderPath;
+        }
+
         public static IEnumerable<ProjectItem> GetAllProjectItems(this Project project)
         {
             var list = new List<ProjectItem>();
@@ -303,6 +310,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
 
         #endregion
 
+
         #region Solution methods
 
         public static IEnumerable<ProjectItem> GetAllProjectItems(this Solution solution)
@@ -354,6 +362,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
         }
 
         #endregion
+
 
         #region DTE2 extension methods
 
@@ -429,6 +438,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
         }
 
         #endregion
+
 
         #region Helper methods
         private static IEnumerable<Project> GetSolutionFolderProjects(Project solutionFolder)
