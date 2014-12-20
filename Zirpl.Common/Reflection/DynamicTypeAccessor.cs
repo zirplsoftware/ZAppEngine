@@ -56,7 +56,7 @@ namespace Zirpl.Reflection
             }
             else
             {
-                throw new ArgumentOutOfRangeException("propertyName", propertyName, "Property not found");
+                throw new ArgumentOutOfRangeException("propertyName", propertyName, "Property not found on " + target.GetType());
             }
         }
 
@@ -74,7 +74,7 @@ namespace Zirpl.Reflection
             }
             else
             {
-                throw new ArgumentOutOfRangeException("propertyName", propertyName, "Property not found");
+                throw new ArgumentOutOfRangeException("propertyName", propertyName, "Property not found on " + target.GetType());
             }
         }
 
@@ -93,7 +93,7 @@ namespace Zirpl.Reflection
             }
             else
             {
-                throw new ArgumentOutOfRangeException("fieldName", fieldName, "Field not found");
+                throw new ArgumentOutOfRangeException("fieldName", fieldName, "Field not found on " + target.GetType());
             }
         }
 
@@ -111,7 +111,7 @@ namespace Zirpl.Reflection
             }
             else
             {
-                throw new ArgumentOutOfRangeException("fieldName", fieldName, "Field not found");
+                throw new ArgumentOutOfRangeException("fieldName", fieldName, "Field not found on " + target.GetType());
             }
         }
 

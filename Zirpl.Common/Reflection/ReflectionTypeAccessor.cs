@@ -36,7 +36,7 @@ namespace Zirpl.Reflection
             }
             else
             {
-                throw new ArgumentOutOfRangeException("fieldName", "Field not found: " + fieldName);
+                throw new ArgumentOutOfRangeException("fieldName", "Field " + fieldName + " not found on " + target.GetType());
             }
         }
 
@@ -54,7 +54,7 @@ namespace Zirpl.Reflection
             }
             else
             {
-                throw new ArgumentOutOfRangeException("fieldName", "Field not found: " + fieldName);
+                throw new ArgumentOutOfRangeException("fieldName", "Field " + fieldName + " not found on " + target.GetType());
             }
         }
 
@@ -88,7 +88,7 @@ namespace Zirpl.Reflection
             }
             else
             {
-                throw new ArgumentOutOfRangeException("propertyName", "Property not found: " + propertyName);
+                throw new ArgumentOutOfRangeException("propertyName", "Property " + propertyName + " not found on " + target.GetType());
             }
         }
 
@@ -106,7 +106,7 @@ namespace Zirpl.Reflection
             }
             else
             {
-                throw new ArgumentOutOfRangeException("propertyName", "Property not found: "+ propertyName);
+                throw new ArgumentOutOfRangeException("propertyName", "Property " + propertyName + " not found on " + target.GetType());
             }
         }
 
@@ -134,7 +134,7 @@ namespace Zirpl.Reflection
             }
 
             parameters = parameters ?? new object[1] { null };
-            var methodInfos = GetMethodInfos(this._type, methodName, parameters, true);
+            var methodInfos = GetMethodInfos(this._type, methodName, parameters, null, true);
             if (!methodInfos.Any())
             {
                 if (this._baseTypeAccessor != null)
@@ -143,16 +143,46 @@ namespace Zirpl.Reflection
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("methodName", "Method not found: " + methodName);
+                    throw new ArgumentOutOfRangeException("methodName", "Method " + methodName + " not found on " + target.GetType());
                 }
             }
             else if (methodInfos.Count() > 1)
             {
-                throw new ArgumentException("found more than 1 method: " + methodName, "methodName");
+                throw new ArgumentException("Found more than 1 method " + methodName + " on " + target.GetType(), "methodName");
             }
             else
             {
                 methodInfos.Single().Invoke(target, parameters);
+            }
+        }
+
+        public T InvokeMethod<T>(Object target, String methodName, params Object[] parameters)
+        {
+            if (String.IsNullOrEmpty(methodName))
+            {
+                throw new ArgumentNullException("methodName");
+            }
+
+            parameters = parameters ?? new object[1] { null };
+            var methodInfos = GetMethodInfos(this._type, methodName, parameters, typeof(T), true);
+            if (!methodInfos.Any())
+            {
+                if (this._baseTypeAccessor != null)
+                {
+                    return this._baseTypeAccessor.InvokeMethod<T>(target, methodName, parameters);
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("methodName", "Method " + methodName + " not found on " + target.GetType());
+                }
+            }
+            else if (methodInfos.Count() > 1)
+            {
+                throw new ArgumentException("Found more than 1 method " + methodName + " on " + target.GetType(), "methodName");
+            }
+            else
+            {
+                return (T)methodInfos.Single().Invoke(target, parameters);
             }
         }
 
@@ -165,7 +195,7 @@ namespace Zirpl.Reflection
             }
 
             //parameters = parameters ?? new object[1] { null };
-            var methodInfos = GetMethodInfos(this._type, methodName, null, false);
+            var methodInfos = GetMethodInfos(this._type, methodName, null, null, false);
             if (!methodInfos.Any())
             {
                 if (this._baseTypeAccessor != null)
@@ -180,7 +210,7 @@ namespace Zirpl.Reflection
             return true;
         }
 
-        private IEnumerable<MethodInfo> GetMethodInfos(Type type, String methodName, Object[] parameters, bool restrictByParameters = false)
+        private IEnumerable<MethodInfo> GetMethodInfos(Type type, String methodName, Object[] parameters, Type returnType = null, bool restrictByParameters = false)
         {
             // TODO: support optional arguments
 
@@ -191,14 +221,14 @@ namespace Zirpl.Reflection
                 methodInfos = methodInfos.Where(o => DoParameterTypesMatch(o, parameters));
                 if (methodInfos.Count() > 1)
                 {
-                    methodInfos = methodInfos.Where(o => DoParameterTypesMatch(o, parameters, true));
+                    methodInfos = methodInfos.Where(o => DoParameterTypesMatch(o, parameters, returnType, true));
                 }
             }
 
             return methodInfos;
         }
 
-        private bool DoParameterTypesMatch(MethodInfo methodInfo, Object[] parameters, bool strict = false)
+        private bool DoParameterTypesMatch(MethodInfo methodInfo, Object[] parameters, Type returnType = null, bool strict = false)
         {
             bool parameterTypesMatch = true;
             var parameterInfos = methodInfo.GetParameters();
@@ -230,6 +260,14 @@ namespace Zirpl.Reflection
                             parameterTypesMatch = false;
                         }
                     }
+                }
+            }
+            if (parameterTypesMatch
+                && returnType != null)
+            {
+                if (!methodInfo.ReturnType.Equals(returnType))
+                {
+                    parameterTypesMatch = false;
                 }
             }
             return parameterTypesMatch;

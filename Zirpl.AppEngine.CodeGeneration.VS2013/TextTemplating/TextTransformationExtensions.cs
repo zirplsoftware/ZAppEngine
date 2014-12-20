@@ -28,7 +28,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 if (textTransformation is TextTransformation)
                 {
-                    ((TextTransformation) textTransformation).CreateContext();
+                    ((TextTransformation)textTransformation).CreateContext();
                 }
                 else
                 {

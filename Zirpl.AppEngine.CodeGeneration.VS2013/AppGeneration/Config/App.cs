@@ -16,7 +16,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public IList<DomainType> DomainTypes { get; private set; }
 
 
-        public Project AppGenerationConfigProject { get; internal set; }
+        public Project CodeGenerationProject { get; internal set; }
         public Project ModelProject { get; internal set; }
         public Project DataServiceProject { get; internal set; }
         public Project DataServiceTestsProject { get; internal set; }

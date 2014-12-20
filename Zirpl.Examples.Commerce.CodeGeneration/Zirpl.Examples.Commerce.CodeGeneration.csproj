@@ -78,7 +78,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="_templates\ModelProject\DT_cs.cs">
+    <Compile Include="_templates\DT_cs.cs">
       <DependentUpon>DT_cs.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -119,7 +119,7 @@
       <FormatOutput>True</FormatOutput>
       <TransformOnBuild>True</TransformOnBuild>
     </None>
-    <None Include="_templates\ModelProject\DT_cs.tt">
+    <None Include="_templates\DT_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_cs.cs</LastGenOutput>
       <TransformOnBuild>True</TransformOnBuild>

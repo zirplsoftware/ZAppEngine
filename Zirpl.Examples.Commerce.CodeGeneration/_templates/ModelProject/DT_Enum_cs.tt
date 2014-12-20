@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" #>
+﻿<#@ template language="C#" inherits="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OncePerDomainTypeTemplate" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -7,9 +7,6 @@
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TextTransformationContext" name="Context" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,5 +29,5 @@ namespace <#= this.DomainType.Namespace #>
 	}
 }
 <#+
-public bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
+public override bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
 #>

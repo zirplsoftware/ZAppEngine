@@ -1,21 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    public abstract class PreProcessedTemplateBase : ITextTransformation
+    public abstract class TemplateBase
     {
+        private OutputFile outputFile;
+        
+        public App App
+        {
+            get
+            {
+                return (App)this.Session["App"];
+            }
+        }
+        public TextTransformationContext Context
+        {
+            get
+            {
+                return (TextTransformationContext)this.Session["Context"];
+            }
+        }
+        public virtual bool ShouldTransform
+        {
+            get { return true; }
+        }
+
+        public virtual OutputFile OutputFile
+        {
+            get { return this.outputFile; }
+        }
+
         public abstract String TransformText();
 
         public virtual void Initialize()
         {
 
+            this.outputFile = new OutputFileProvider(this).Create();
         }
+
+
+        #region Directly copied from generated code
 
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
@@ -281,31 +307,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
         }
         #endregion
 
-        bool ITextTransformation.IsPreProcessed
-        {
-            get { return true; }
-        }
-
-        // NOTE: the problem here is that there will be 2 of these properties and no way to connect them
-        ITextTemplatingEngineHost ITextTransformation.Host { get; set; }
-        StringBuilder ITextTransformation.GenerationEnvironment
-        {
-            get { return this.GenerationEnvironment; }
-            set { this.GenerationEnvironment = value; }
-        }
-
-        public void Dispose()
-        {
-        }
-
-        public virtual String FileNameFormatString
-        {
-            get { return this.GetType().Name; }
-        }
-
-        public virtual bool ShouldTransform
-        {
-            get { return true; }
-        }
+        #endregion
     }
 }

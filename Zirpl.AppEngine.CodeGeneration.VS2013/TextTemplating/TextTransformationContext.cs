@@ -115,6 +115,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             try
             {
                 this.FileManager.Dispose();
+                this.LogLineToBuildPane("Complete");
             }
             finally
             {

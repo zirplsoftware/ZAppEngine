@@ -49,9 +49,7 @@ namespace Zirpl.Reflection
 
         public static T InvokeMethod<T>(this Object obj, String methodName, params Object[] parameters)
         {
-            return (T)obj.GetType()
-                    .GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                    .Invoke(obj, parameters);
+            return TypeAccessorFactory.GetReflectionTypeAccessor(obj.GetType()).InvokeMethod<T>(obj, methodName, parameters);
         }
     }
 }
