@@ -11,6 +11,7 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSharp;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.IO;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation
@@ -19,9 +20,24 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
     {
         #region ProjectItem extension methods
 
-        public static void SetPropertyValue(this ProjectItem item, string propertyName, object value)
+        public static IEnumerable<ProjectItem> GetAllProjectItems(this ProjectItem projectItem)
         {
-            Property property = item.Properties.Item(propertyName);
+            var list = new List<ProjectItem>();
+            GetAllProjectItems(list, projectItem.ProjectItems);
+            return list;
+        }
+
+        public static ProjectItem GetProjectItem(this ProjectItem projectItem, string fullPath)
+        {
+            ProjectItem item = (from i in projectItem.GetAllProjectItems()
+                                where PathUtilities.NormalizePath(i.GetFullPath()) == PathUtilities.NormalizePath(fullPath)
+                                select i).FirstOrDefault();
+            return item;
+        }
+
+        public static void SetPropertyValue(this ProjectItem projectItem, string propertyName, object value)
+        {
+            Property property = projectItem.Properties.Item(propertyName);
 
             if (property == null)
             {
@@ -32,9 +48,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
                 property.Value = value;
             }
         }
-        public static T GetPropertyValue<T>(this ProjectItem item, string propertyName)
+
+        public static T GetPropertyValue<T>(this ProjectItem projectItem, string propertyName)
         {
-            Property property = item.Properties.Item(propertyName);
+            Property property = projectItem.Properties.Item(propertyName);
 
             if (property == null)
             {
@@ -46,146 +63,95 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
             }
         }
 
+        public static string GetFullPath(this ProjectItem projectItem)
+        {
+            if (projectItem != null
+                && projectItem.Properties != null
+                && projectItem.Properties.Item("FullPath") != null
+                && projectItem.Properties.Item("FullPath").Value != null)
+            {
+                return projectItem.Properties.Item("FullPath").Value.ToString();
+            }
+            return "";
+        }
+
+        public static bool IsPhysicalFile(this ProjectItem projectItem)
+        {
+            return projectItem.Kind == "{6BB5F8EE-4483-11D3-8BCF-00C04F8EC28C}";
+        }
+
+        public static bool IsPhysicalFolder(this ProjectItem projectItem)
+        {
+            return projectItem.Kind == "{6BB5F8EF-4483-11D3-8BCF-00C04F8EC28C}";
+        }
+
+        public static bool IsVirtualFolder(this ProjectItem projectItem)
+        {
+            return projectItem.Kind == "{6BB5F8F0-4483-11D3-8BCF-00C04F8EC28C}";
+        }
+
+        public static bool IsSubProject(this ProjectItem projectItem)
+        {
+            return projectItem.Kind == "{EA6618E8-6E24-4528-94BE-6889FE16485C}";
+        }
+
         #endregion
+
 
         #region ProjectItems extension methods
 
-        public static ProjectItem GetByName(this ProjectItems projectItems, string name)
+        public static IEnumerable<ProjectItem> GetAllProjectItems(this ProjectItems projectItems)
         {
-            foreach (ProjectItem innerProjectItem in projectItems)
+            var list = new List<ProjectItem>();
+            GetAllProjectItems(list, projectItems);
+            return list;
+        }
+
+        public static ProjectItem GetProjectItem(this ProjectItems projectItems, string fullPath)
+        {
+            ProjectItem item = (from i in projectItems.GetAllProjectItems()
+                                where PathUtilities.NormalizePath(i.GetFullPath()) == PathUtilities.NormalizePath(fullPath)
+                                select i).FirstOrDefault();
+            return item;
+        }
+
+        public static ProjectItem GetChild(this ProjectItems projectItems, string name)
+        {
+            foreach (ProjectItem projectItem in projectItems)
             {
-                if (innerProjectItem.Name == name)
+                if (projectItem.Name == name)
                 {
-                    return innerProjectItem;
+                    return projectItem;
                 }
             }
             return null;
         }
 
-        public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this ProjectItems projectItems)
+        public static ProjectItem GetOrCreateFolder(this ProjectItems projectItems, string relativeFolderPath, bool isNamespaceProvider = true)
         {
-            var list = new List<ProjectItem>();
-            GetAllProjectItemsRecursive(list, projectItems);
-            return list;
-        }
-        public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this Project project)
-        {
-            var list = new List<ProjectItem>();
-            GetAllProjectItemsRecursive(list, project.ProjectItems);
-            return list;
-        }
-        public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this Solution solution)
-        {
-            var list = new List<ProjectItem>();
-            foreach (Project project in solution.GetAllProjectsRecursive())
+            if (String.IsNullOrEmpty(relativeFolderPath))
             {
-                GetAllProjectItemsRecursive(list, project.ProjectItems);
+                relativeFolderPath = @"\";
             }
-            return list;
-        }
+            relativeFolderPath = relativeFolderPath.Replace("/", @"\");
+            relativeFolderPath = relativeFolderPath.Replace("//", @"\");
+            relativeFolderPath = relativeFolderPath.Replace(@"\\", @"\");
+            relativeFolderPath = relativeFolderPath.IndexOf(@"\") == 0 ? relativeFolderPath.Substring(1) : relativeFolderPath;
+            relativeFolderPath = relativeFolderPath.IndexOf(@"\") == relativeFolderPath.Length - 1
+                ? relativeFolderPath.Substring(0, relativeFolderPath.Length - 1)
+                : relativeFolderPath;
 
-        public static IEnumerable<Project> GetAllProjectsRecursive(this Solution solution)
-        {
-            List<Project> list = new List<Project>();
-            var item = solution.Projects.GetEnumerator();
-            while (item.MoveNext())
+            var folderName = relativeFolderPath;
+            if (relativeFolderPath.Contains(@"\"))
             {
-                var project = item.Current as Project;
-                if (project == null)
-                {
-                    continue;
-                }
-
-                if (project.Kind == ProjectKinds.vsProjectKindSolutionFolder)
-                {
-                    list.AddRange(GetSolutionFolderProjects(project));
-                }
-                else
-                {
-                    list.Add(project);
-                }
-            }
-
-            return list;
-        }
-
-        private static IEnumerable<Project> GetSolutionFolderProjects(Project solutionFolder)
-        {
-            var list = new List<Project>();
-            for (var i = 1; i <= solutionFolder.ProjectItems.Count; i++)
-            {
-                var subProject = solutionFolder.ProjectItems.Item(i).SubProject;
-                if (subProject == null)
-                {
-                    continue;
-                }
-
-                // If this is another solution folder, do a recursive call, otherwise add
-                if (subProject.Kind == ProjectKinds.vsProjectKindSolutionFolder)
-                {
-                    list.AddRange(GetSolutionFolderProjects(subProject));
-                }
-                else
-                {
-                    list.Add(subProject);
-                }
-            }
-            return list;
-        }
-
-        private static void GetAllProjectItemsRecursive(IList<ProjectItem> list, ProjectItems projectItems)
-        {
-            foreach (ProjectItem projectItem in projectItems)
-            {
-                list.Add(projectItem);
-                if (projectItem.ProjectItems != null)
-                {
-                    GetAllProjectItemsRecursive(list, projectItem.ProjectItems);
-                }
-            }
-        }
-
-        
-
-        private static ProjectItem GetOrCreateProjectItem(this ProjectItems items, string fullName) //, bool canCreateIfNotExists)
-        {
-            ProjectItem item = (from i in items.Cast<ProjectItem>()
-                                where i.Name == Path.GetFileName(fullName)
-                                select i).FirstOrDefault();
-            if (item == null)
-            {
-                File.CreateText(fullName);
-                item = items.AddFromFile(fullName);
-            }
-
-            return item;
-        }
-
-        private static ProjectItem GetOrCreateProjectFolder(this ProjectItems projectItems, string projectPath, bool isNamespaceProvider = true)
-        {
-            if (String.IsNullOrEmpty(projectPath))
-            {
-                projectPath = @"\";
-            }
-            projectPath = projectPath.Replace("/", @"\");
-            projectPath = projectPath.Replace("//", @"\");
-            projectPath = projectPath.Replace(@"\\", @"\");
-            projectPath = projectPath.IndexOf(@"\") == 0 ? projectPath.Substring(1) : projectPath;
-            projectPath = projectPath.IndexOf(@"\") == projectPath.Length - 1
-                ? projectPath.Substring(0, projectPath.Length - 1)
-                : projectPath;
-
-            var folderName = projectPath;
-            if (projectPath.Contains(@"\"))
-            {
-                folderName = projectPath.Substring(0, projectPath.IndexOf(@"\"));
-                projectPath = projectPath.Substring(folderName.Length);
+                folderName = relativeFolderPath.Substring(0, relativeFolderPath.IndexOf(@"\"));
+                relativeFolderPath = relativeFolderPath.Substring(folderName.Length);
             }
             else
             {
-                projectPath = null;
+                relativeFolderPath = null;
             }
-            var folderProjectItem = projectItems.GetByName(folderName);
+            var folderProjectItem = projectItems.GetChild(folderName);
             if (folderProjectItem == null)
             {
                 folderProjectItem = projectItems.AddFolder(folderName);
@@ -203,7 +169,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
                     {
                         lines = new List<string>();
                         lines.Add("<wpf:ResourceDictionary xml:space=\"preserve\" xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" xmlns:s=\"clr-namespace:System;assembly=mscorlib\" xmlns:ss=\"urn:shemas-jetbrains-com:settings-storage-xaml\" xmlns:wpf=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">");
-	                    lines.Add("</wpf:ResourceDictionary>");
+                        lines.Add("</wpf:ResourceDictionary>");
                     }
                     // TODO: this could add infinite lines... see if there is a way to do this through Resharper, IF it is installed
                     lines.Insert(1, String.Format("<s:Boolean x:Key=\"/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/={0}/@EntryIndexedValue\">True</s:Boolean>",
@@ -211,30 +177,34 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
                     File.WriteAllLines(folderProjectItem.ContainingProject.FullName + ".DotSettings", lines);
                 }
             }
-            if (projectPath != null)
+            if (relativeFolderPath != null)
             {
-                return GetOrCreateProjectFolder(folderProjectItem.ProjectItems, projectPath, isNamespaceProvider);
+                return GetOrCreateFolder(folderProjectItem.ProjectItems, relativeFolderPath, isNamespaceProvider);
             }
             else
             {
                 return folderProjectItem;
             }
         }
-
+        
         #endregion
+
 
         #region Project extension methods
 
-        public static string GetFullPath(this ProjectItem item)
+        public static IEnumerable<ProjectItem> GetAllProjectItems(this Project project)
         {
-            if (item != null
-                && item.Properties != null
-                && item.Properties.Item("FullPath") != null
-                && item.Properties.Item("FullPath").Value != null)
-            {
-                return item.Properties.Item("FullPath").Value.ToString();
-            }
-            return "";
+            var list = new List<ProjectItem>();
+            GetAllProjectItems(list, project.ProjectItems);
+            return list;
+        }
+
+        public static ProjectItem GetProjectItem(this Project project, string fullPath)
+        {
+            ProjectItem item = (from i in project.GetAllProjectItems()
+                                where PathUtilities.NormalizePath(i.GetFullPath()) == PathUtilities.NormalizePath(fullPath)
+                                select i).FirstOrDefault();
+            return item;
         }
 
         public static String GetDefaultNamespace(this Project project)
@@ -242,9 +212,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
             return project.Properties.Item("DefaultNamespace").Value.ToString();
         }
 
-        public static ProjectItem GetOrCreateProjectFolder(this Project project, String folderPath, bool isNamespaceProvider = true)
+        public static ProjectItem GetOrCreateFolder(this Project project, String relativeFolderPath, bool isNamespaceProvider = true)
         {
-            return GetOrCreateProjectFolder(project.ProjectItems, folderPath, isNamespaceProvider);
+            return GetOrCreateFolder(project.ProjectItems, relativeFolderPath, isNamespaceProvider);
         }
 
         public static Guid? GetUniqueGuid(this Project proj)
@@ -276,7 +246,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
         public static Assembly CompileCSharpProjectInMemory(this Project project, bool suppressCompilerErrors = false)
         {
             var codeList = new List<String>();
-            foreach (var item in project.GetAllProjectItemsRecursive())
+            foreach (var item in project.GetAllProjectItems())
             {
                 if (item.GetFullPath().EndsWith(".cs"))
                 {
@@ -333,20 +303,61 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
 
         #endregion
 
-        #region DTE2 extension methods
+        #region Solution methods
 
-        public static ProjectItem GetProjectItem(this DTE2 dte, string fullName)
+        public static IEnumerable<ProjectItem> GetAllProjectItems(this Solution solution)
         {
-            ProjectItem item = (from i in dte.GetAllProjectItemsRecursive()
-                                where i.Name == Path.GetFileName(fullName)
+            var list = new List<ProjectItem>();
+            foreach (Project project in solution.GetAllProjects())
+            {
+                GetAllProjectItems(list, project.ProjectItems);
+            }
+            return list;
+        }
+
+        public static ProjectItem GetProjectItem(this Solution solution, string fullPath)
+        {
+            ProjectItem item = (from i in solution.GetAllProjectItems()
+                                where PathUtilities.NormalizePath(i.GetFullPath()) == PathUtilities.NormalizePath(fullPath)
                                 select i).FirstOrDefault();
             return item;
         }
 
-        public static Project GetProject(this DTE2 dte, string projectName)
+        public static IEnumerable<Project> GetAllProjects(this Solution solution)
         {
-            return dte.GetAllProjects().FirstOrDefault(p => p.Name == projectName);
+            List<Project> list = new List<Project>();
+            var item = solution.Projects.GetEnumerator();
+            while (item.MoveNext())
+            {
+                var project = item.Current as Project;
+                if (project == null)
+                {
+                    continue;
+                }
+
+                if (project.Kind == ProjectKinds.vsProjectKindSolutionFolder)
+                {
+                    list.AddRange(GetSolutionFolderProjects(project));
+                }
+                else
+                {
+                    list.Add(project);
+                }
+            }
+
+            return list;
         }
+
+        public static Project GetProject(this Solution solution, string projectName)
+        {
+            return solution.GetAllProjects().FirstOrDefault(p => p.Name == projectName);
+        }
+
+        #endregion
+
+        #region DTE2 extension methods
+
+
 
         public static IEnumerable<Project> GetAllProjects(this DTE2 dte)
         {
@@ -372,20 +383,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
 
             return projectList;
         }
-     
-        public static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(this DTE2 dte)
-        {
-            List<ProjectItem> itemList = new List<ProjectItem>();
 
-            foreach (Project item in dte.GetAllProjects())
-            {
-                if (item == null || item.ProjectItems == null) continue;
-
-                itemList.AddRange(item.ProjectItems.GetAllProjectItemsRecursive());
-            }
-
-            return itemList;
-        }
 
         /// <summary>
         /// Execute Visual VisualStudio commands against the project item.
@@ -432,6 +430,59 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
 
         #endregion
 
+        #region Helper methods
+        private static IEnumerable<Project> GetSolutionFolderProjects(Project solutionFolder)
+        {
+            var list = new List<Project>();
+            for (var i = 1; i <= solutionFolder.ProjectItems.Count; i++)
+            {
+                var subProject = solutionFolder.ProjectItems.Item(i).SubProject;
+                if (subProject == null)
+                {
+                    continue;
+                }
+
+                // If this is another solution folder, do a recursive call, otherwise add
+                if (subProject.Kind == ProjectKinds.vsProjectKindSolutionFolder)
+                {
+                    list.AddRange(GetSolutionFolderProjects(subProject));
+                }
+                else
+                {
+                    list.Add(subProject);
+                }
+            }
+            return list;
+        }
+
+        private static void GetAllProjectItems(IList<ProjectItem> list, ProjectItems projectItems)
+        {
+            foreach (ProjectItem projectItem in projectItems)
+            {
+                list.Add(projectItem);
+                if (projectItem.ProjectItems != null)
+                {
+                    GetAllProjectItems(list, projectItem.ProjectItems);
+                }
+            }
+        }
+
+        private static ProjectItem GetOrCreateProjectItem(this ProjectItems items, string fullName) //, bool canCreateIfNotExists)
+        {
+            ProjectItem item = (from i in items.Cast<ProjectItem>()
+                                where i.Name == Path.GetFileName(fullName)
+                                select i).FirstOrDefault();
+            if (item == null)
+            {
+                File.CreateText(fullName);
+                item = items.AddFromFile(fullName);
+            }
+
+            return item;
+        }
+
+
+        #endregion
 
 
 

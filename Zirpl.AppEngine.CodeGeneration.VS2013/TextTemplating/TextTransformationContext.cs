@@ -56,7 +56,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 instance.CallingTemplate = callingTemplateWrapper;
                 instance.VisualStudio = dte2;
                 instance.FileManager = new OutputFileManager(instance);
-                instance.CallingTemplateProjectItem = dte2.GetProjectItem(callingTemplateWrapper.Host.TemplateFile);
+                instance.CallingTemplateProjectItem = dte2.Solution.GetProjectItem(callingTemplateWrapper.Host.TemplateFile);
                 Instance = instance;
             }
             Instance.LogLineToBuildPane(null);

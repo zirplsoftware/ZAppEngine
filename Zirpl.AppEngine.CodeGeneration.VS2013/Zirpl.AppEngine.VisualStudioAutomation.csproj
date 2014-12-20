@@ -105,7 +105,6 @@
     <Compile Include="AppGeneration\Config\DomainType.cs" />
     <Compile Include="AppGeneration\Config\EnumValue.cs" />
     <Compile Include="AppGeneration\Config\AppExtensions.cs" />
-    <Compile Include="AppGeneration\Config\AppGenerationSettings.cs" />
     <Compile Include="AppGeneration\Config\Parsers\ConfigFileException.cs" />
     <Compile Include="AppGeneration\Config\Parsers\DomainFileParser.cs" />
     <Compile Include="AppGeneration\Config\Parsers\Json\AppJson.cs" />

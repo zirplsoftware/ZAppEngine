@@ -74,8 +74,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     this.CurrentOutputFile.FolderPathWithinProject ?? "",
                     this.CurrentOutputFile.FileName);
                 PathUtilities.EnsureDirectoryExists(fullFilePath);
-                this.CurrentOutputFile.DestinationProject.GetOrCreateProjectFolder(@"_auto\", false);
-                var folder = this.CurrentOutputFile.DestinationProject.GetOrCreateProjectFolder(@"_auto\" + this.CurrentOutputFile.FolderPathWithinProject);
+                this.CurrentOutputFile.DestinationProject.GetOrCreateFolder(@"_auto\", false);
+                var folder = this.CurrentOutputFile.DestinationProject.GetOrCreateFolder(@"_auto\" + this.CurrentOutputFile.FolderPathWithinProject);
 
                 if (File.Exists(fullFilePath))
                 {
@@ -97,7 +97,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
 
                 this.Context.LogLineToBuildPane("Writing file: " + fullFilePath);
-                var item = this.Context.VisualStudio.GetProjectItem(fullFilePath);
+                var item = this.Context.VisualStudio.Solution.GetProjectItem(fullFilePath);
                 if (item != null)
                 {
                     item.Remove();
@@ -131,6 +131,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     this.Context.VisualStudio.ExecuteVsCommand(this.CurrentOutputFile.ProjectItem, "Edit.FormatDocument"); //, "Edit.RemoveAndSort"));
                 }
 
+                this.CompletedFiles.Add(this.CurrentOutputFile);
                 this.CurrentOutputFile = null;
             }
         }
@@ -138,6 +139,25 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         public void Dispose()
         {
             this.EndFile();
+            foreach (Project project in this.Context.VisualStudio.Solution.GetAllProjects())
+            {
+                var autoFolder = project.ProjectItems.GetChild("_auto");
+                if (autoFolder != null)
+                {
+                    foreach (var projectItem in autoFolder.GetAllProjectItems())
+                    {
+                        if (projectItem.IsPhysicalFile()
+                            && !this.CompletedFiles.Any(o => o.ProjectItem == projectItem))
+                        {
+                            // this seemns to work ok the first time, then removed EVERYTHING after that
+                            // additionally, this way of handling stale items makes it so that only 1 master t4 template can be used in the solution at a time, which is not ok.
+                            // TODO: need to figure out a better way to handle, probably with subitems of the templates name
+                            //
+                            //projectItem.Delete();
+                        }
+                    }
+                }
+            }
         }
 
         private string GetBuildActionString(BuildActionTypeEnum buidlAction)

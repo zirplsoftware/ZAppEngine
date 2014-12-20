@@ -22,21 +22,19 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {   
-        public static void GenerateApp(this TextTransformation callingTemplate,
-            String preprocessedTemplatesAssemblyFileName, AppGenerationSettings settings = null)
+        public static void GenerateApp(this TextTransformation callingTemplate, String templateAssemblyName)
         {
             using (TextTransformationContext.Create(callingTemplate))
             {
-                GenerateApp(callingTemplate, new string[] {preprocessedTemplatesAssemblyFileName}, settings);
+                GenerateApp(callingTemplate, new string[] {templateAssemblyName});
             }
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate,
-           IEnumerable<String> preprocessedTemplatesAssemblyFileNames, AppGenerationSettings settings = null)
+        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<String> templateAssemblyNames)
         {
             using (TextTransformationContext.Create(callingTemplate))
             {
-                var list = from fileName in preprocessedTemplatesAssemblyFileNames
+                var list = from fileName in templateAssemblyNames
                     where
                         AppDomain.CurrentDomain.GetAssemblies()
                             .Count(o => !o.IsDynamic && o.Location.Contains(fileName)) == 1
@@ -45,37 +43,37 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                             .Where(o => !o.IsDynamic && o.Location.Contains(fileName))
                             .Single();
 
-                GenerateApp(callingTemplate, list, settings);
+                GenerateApp(callingTemplate, list);
             }
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, Assembly preprocessedTemplatesAssembly, AppGenerationSettings settings = null)
+        public static void GenerateApp(this TextTransformation callingTemplate, Assembly templateAssembly)
         {
             using (TextTransformationContext.Create(callingTemplate))
             {
                 var list = new List<Assembly>();
-                if (preprocessedTemplatesAssembly != null)
+                if (templateAssembly != null)
                 {
-                    list.Add(preprocessedTemplatesAssembly);
+                    list.Add(templateAssembly);
                 }
-                GenerateApp(callingTemplate, list, settings);
+                GenerateApp(callingTemplate, list);
             }
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> preprocessedTemplatesAssemblies = null, AppGenerationSettings settings = null)
+        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> templateAssemblies = null)
         {
             using (TextTransformationContext.Create(callingTemplate))
             {
                 var assemblyList = new List<Assembly>();
-                if (preprocessedTemplatesAssemblies != null
-                    && preprocessedTemplatesAssemblies.Any())
+                if (templateAssemblies != null
+                    && templateAssemblies.Any())
                 {
-                    assemblyList.AddRange(preprocessedTemplatesAssemblies);
+                    assemblyList.AddRange(templateAssemblies);
                 }
                 else
                 {
                     if (TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject
-                        .GetAllProjectItemsRecursive().Where(o => Path.GetExtension(o.GetFullPath()) == ".tt").Any())
+                        .GetAllProjectItems().Where(o => Path.GetExtension(o.GetFullPath()) == ".tt").Any())
                     {
                         TextTransformationContext.Instance
                             .CallingTemplateProjectItem
@@ -89,7 +87,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     from o in assembly.GetTypes()
                     where IsAppTemplate(o)
                     select o;
-                GenerateApp(callingTemplate, templateTypesList, settings);
+                GenerateApp(templateTypesList);
             }
         }
 
@@ -104,17 +102,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                         || typeof(OncePerDomainTypeTemplate).IsAssignableFrom(o));
         }
 
-        private static void GenerateApp(TextTransformation callingTemplate, IEnumerable<Type> preProcessedFileTemplateTypes, AppGenerationSettings settings = null)
+        private static void GenerateApp(IEnumerable<Type> templateTypes)
         {
-            settings = settings ?? new AppGenerationSettings();
                 try
                 {
-
                     // set all of the settings defaults
                     //
-                    settings.DataContextName = settings.DataContextName ?? "AppDataContext";
-                    settings.ProjectNamespacePrefix = settings.ProjectNamespacePrefix
-                                                      ?? TextTransformationContext.Instance.CallingTemplateProjectItem
+                    var projectNamespacePrefix = TextTransformationContext.Instance.CallingTemplateProjectItem
                                                           .ContainingProject.GetDefaultNamespace()
                                                           .SubstringUntilLastInstanceOf(".");
 
@@ -122,21 +116,20 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                     //
                     var app = new App()
                     {
-                        Settings = settings,
                         CodeGenerationProject = TextTransformationContext.Instance.CallingTemplateProjectItem.ContainingProject,
-                        ModelProject = TextTransformationContext.Instance.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Model"),
-                        DataServiceProject = TextTransformationContext.Instance.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".DataService"),
-                        ServiceProject = TextTransformationContext.Instance.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Service"),
-                        WebCommonProject = TextTransformationContext.Instance.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Web.Common"),
-                        WebProject = TextTransformationContext.Instance.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Web"),
-                        TestsCommonProject = TextTransformationContext.Instance.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Tests.Common"),
-                        DataServiceTestsProject = TextTransformationContext.Instance.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Tests.DataService"),
-                        ServiceTestsProject = TextTransformationContext.Instance.VisualStudio.GetProject(settings.ProjectNamespacePrefix + ".Tests.Service"),
+                        ModelProject = TextTransformationContext.Instance.VisualStudio.Solution.GetProject(projectNamespacePrefix + ".Model"),
+                        DataServiceProject = TextTransformationContext.Instance.VisualStudio.Solution.GetProject(projectNamespacePrefix + ".DataService"),
+                        ServiceProject = TextTransformationContext.Instance.VisualStudio.Solution.GetProject(projectNamespacePrefix + ".Service"),
+                        WebCommonProject = TextTransformationContext.Instance.VisualStudio.Solution.GetProject(projectNamespacePrefix + ".Web.Common"),
+                        WebProject = TextTransformationContext.Instance.VisualStudio.Solution.GetProject(projectNamespacePrefix + ".Web"),
+                        TestsCommonProject = TextTransformationContext.Instance.VisualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.Common"),
+                        DataServiceTestsProject = TextTransformationContext.Instance.VisualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.DataService"),
+                        ServiceTestsProject = TextTransformationContext.Instance.VisualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.Service"),
                     };
 
                     // create all of the domain types
                     //
-                    var projectItems = TextTransformationContext.Instance.VisualStudio.Solution.GetAllProjectItemsRecursive();
+                    var projectItems = TextTransformationContext.Instance.VisualStudio.Solution.GetAllProjectItems();
                     var paths = from p in projectItems
                                 where p.GetFullPath().ToLowerInvariant().EndsWith(".domain.zae")
                                     && p.GetFullPath().ToLowerInvariant().Contains("_config")
@@ -145,12 +138,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
                     // run the preprocessed templates
                     //
-                    foreach (var templateType in preProcessedFileTemplateTypes)
+                    foreach (var templateType in templateTypes)
                     {
-                        TextTransformationContext.Instance.LogLineToBuildPane(
-                            "Found preprocessed template: " + templateType.FullName);
+                        TextTransformationContext.Instance.LogLineToBuildPane("Found preprocessed template: " + templateType.FullName);
                     }
-                    foreach (var templateType in preProcessedFileTemplateTypes)
+                    foreach (var templateType in templateTypes)
                     {
                         if (typeof(OncePerDomainTypeTemplate).IsAssignableFrom(templateType))
                         {
@@ -193,10 +185,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             var template = Activator.CreateInstance(preProcessedFileTemplateType);
             var templateWrapper = new TextTransformationWrapper(template);
             var session = new TextTemplatingSession();
-            foreach (var globalTemplateParameter in app.Settings.GlobalTemplateParameters)
-            {
-                templateWrapper.Session.Add(globalTemplateParameter);
-            }
+            //foreach (var globalTemplateParameter in app.GlobalTemplateParameters)
+            //{
+            //    templateWrapper.Session.Add(globalTemplateParameter);
+            //}
             session.Add("Context", TextTransformationContext.Instance);
             session.Add("App", app);
             if (domainType != null)

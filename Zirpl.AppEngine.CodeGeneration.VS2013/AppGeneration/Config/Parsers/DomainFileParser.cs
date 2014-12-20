@@ -179,6 +179,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 {
                     throw new Exception("DestinationProject unknown: " + whichProject);
                 }
+                if (domainType.IsPersistable
+                    && domainType.DestinationProject != app.ModelProject)
+                {
+                    throw new Exception("Persistable DomainTypes must be in the Model project");
+                }
                 var subNamespace = tempUniqueName.SubstringAfterFirstInstanceOf(whichProject + "Project.", StringComparison.InvariantCultureIgnoreCase)
                                                         .SubstringUntilLastInstanceOf("." + domainType.Name)
                                                         .SubstringUntilLastInstanceOf(domainType.Name);

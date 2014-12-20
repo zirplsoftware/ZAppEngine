@@ -11,8 +11,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
             this.DomainTypes = new List<DomainType>();
         }
 
-        public AppGenerationSettings Settings { get; internal set; }
-
         public IList<DomainType> DomainTypes { get; private set; }
 
 
