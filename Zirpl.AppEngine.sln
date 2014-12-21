@@ -76,7 +76,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing", "Zirpl.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Testing.Net45", "Zirpl.Testing.Net45\Zirpl.Testing.Net45.csproj", "{716DCDAD-3F27-4C3C-8F2B-4BE6E6C670E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.Model", "Zirpl.Examples.CodeGeneration.VS2013.V2.Commerce.Model\Zirpl.Examples.Commerce.Model.csproj", "{84E18337-0043-464A-B9D9-D4B3F4B849CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.Model", "Zirpl.Examples.Commerce.Model\Zirpl.Examples.Commerce.Model.csproj", "{84E18337-0043-464A-B9D9-D4B3F4B849CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.CodeGeneration", "Zirpl.Examples.Commerce.CodeGeneration\Zirpl.Examples.Commerce.CodeGeneration.csproj", "{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}"
 EndProject
