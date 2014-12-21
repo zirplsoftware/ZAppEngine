@@ -1,8 +1,0 @@
-﻿<#@ template  debug="true" hostSpecific="true" #>
-<#@ output extension=".txt" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
-<#@ assembly name="$(SolutionDir)Zirpl.AppEngine.CodeGeneration.VS2013\bin\$(Configuration)\Zirpl.AppEngine.VisualStudioAutomation.dll" #>
-<#@ assembly name="$(SolutionDir)Zirpl.Examples.Commerce.CodeGeneration\bin\$(Configuration)\Zirpl.Examples.Commerce.Templates.dll" #>
-<#
-this.GenerateApp();
-#>

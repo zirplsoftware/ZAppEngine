@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
-<Type Name="CustomerReferral" BaseClassOverride="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.Referral" SubNamespace="Customers">
-		<Properties>
-			<Property Name="ReferringCustomer" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.Customer" IsRelationship="true" IsRequired="true" />
-			<Property Name="ReferringCustomerDiscountAward" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.Discount" IsRelationship="true" IsRequired="false" />
-			<Property Name="ReferringCustomerDiscountAwardUsage" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Orders.DiscountUsage" IsRelationship="true" IsRequired="false" />
-		</Properties>
-</Type>

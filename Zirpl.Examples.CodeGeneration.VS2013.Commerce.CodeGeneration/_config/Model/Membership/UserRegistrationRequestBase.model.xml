@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Type Name="UserRegistrationRequestBase" BaseClassOverride="" SubNamespace="Membership" IsPersistable="false" IsAbstract="true">
-  <Properties>
-    <Property Name="EmailAddress" Type="string" IsRequired="true" MinLength="3" MaxLength="1024" />
-    <Property Name="Password" Type="string" IsRequired="true" MinLength="6" MaxLength="1024" />
-  </Properties>
-</Type>

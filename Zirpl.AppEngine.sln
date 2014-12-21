@@ -68,7 +68,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Silverlight
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.Testing.Net45", "Zirpl.AppEngine.Testing.Net45\Zirpl.AppEngine.Testing.Net45.csproj", "{15590AA5-04CE-4ADD-AEB3-8ED12BF3C1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.VisualStudioAutomation", "Zirpl.AppEngine.CodeGeneration.VS2013\Zirpl.AppEngine.VisualStudioAutomation.csproj", "{F8855F9A-35D1-4C30-BB53-1FD89A984989}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.VisualStudioAutomation", "Zirpl.AppEngine.VisualStudioAutomation\Zirpl.AppEngine.VisualStudioAutomation.csproj", "{F8855F9A-35D1-4C30-BB53-1FD89A984989}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}"
 EndProject

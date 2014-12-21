@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
-<Type Name="CustomerChargeOption" BaseClassOverride="" SubNamespace="Customers" IsAbstract="true">
-  <Properties>
-    <Property Name="Customer" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.Customer" IsRelationship="true" IsRequired="true" />
-  </Properties>
-</Type>

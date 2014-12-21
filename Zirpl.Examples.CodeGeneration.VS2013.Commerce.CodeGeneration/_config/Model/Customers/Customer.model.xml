@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
-<Type Name="Customer" BaseClassOverride="" SubNamespace="Customers" IsCustomizable="true">
-  <Properties>
-    <Property Name="Visitor" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Membership.Visitor" IsRelationship="true" IsRequired="true" />
-    <Property Name="PromoCode" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Promotions.PromoCode" IsRelationship="true" IsRequired="true" CreateOnNullPost="true" />
-    <Property Name="CurrentShippingAddress" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Address" IsRelationship="true" IsRequired="false" />
-    <Property Name="CurrentCustomerChargeOption" Type="Zirpl.Examples.CodeGeneration.VS2013.Commerce.Model.Customers.CustomerChargeOption" IsRelationship="true" IsRequired="false" />
-  </Properties>
-</Type>
