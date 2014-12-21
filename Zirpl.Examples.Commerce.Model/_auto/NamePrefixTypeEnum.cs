@@ -7,9 +7,9 @@ using Zirpl.Collections;
 
 namespace Zirpl.Examples.Commerce.Model
 {
-	public enum NamePrefixTypeEnum : int
-	{
-		Dr = 1,
-		Mr = 2,
-	}
+    public enum NamePrefixTypeEnum : int
+    {
+        Dr = 1,
+        Mr = 2,
+    }
 }

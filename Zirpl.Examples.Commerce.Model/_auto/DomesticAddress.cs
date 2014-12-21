@@ -8,12 +8,12 @@ using Zirpl.Collections;
 
 namespace Zirpl.Examples.Commerce.Model
 {
-	public  partial class DomesticAddress : Zirpl.Examples.Commerce.Model.AddressBase
-			, IMetadataDescribed
-	{
+    public partial class DomesticAddress : Zirpl.Examples.Commerce.Model.AddressBase
+            , IMetadataDescribed
+    {
 
-		#region Interface implementations
+        #region Interface implementations
 
-		#endregion
-	}
+        #endregion
+    }
 }

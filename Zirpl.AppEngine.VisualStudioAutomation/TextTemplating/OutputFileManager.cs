@@ -89,7 +89,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 if (placeHolderItem == null)
                 {
                     var fullPlaceHolderPath = Path.Combine(folder.GetFullPath(), this.PlaceHolderFileName);
-                    File.Create(fullPlaceHolderPath);
+                    File.Create(fullPlaceHolderPath).Dispose();
                     placeHolderItem = folder.ProjectItems.AddFromFile(fullPlaceHolderPath);
                 }
 
@@ -115,9 +115,30 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
 
                 this.Context.LogLineToBuildPane("   Writing file: " + fullFilePath);
-                File.WriteAllText(fullFilePath, content);
+                //File.WriteAllText(fullFilePath, content);
                 var item = this.Context.VisualStudio.Solution.GetProjectItem(fullFilePath);
-                this.CurrentOutputFile.ProjectItem = item ?? placeHolderItem.ProjectItems.AddFromFile(fullFilePath);
+                if (item == null)
+                {
+                    File.Create(fullFilePath).Dispose();
+                    item = placeHolderItem.ProjectItems.AddFromFile(fullFilePath);
+                }
+                Window window = item.Open(Constants.vsext_vk_Code);
+                window.Visible = false; //hide editor window
+                var document = (TextDocument)window.Document.Object("TextDocument");
+                var editPoint = document.CreateEditPoint();
+                editPoint.Delete(document.EndPoint);
+                editPoint.Insert(content);
+                if (this.CurrentOutputFile.AutoFormat)
+                {
+                    editPoint.StartOfDocument();
+                    editPoint.SmartFormat(document.EndPoint);
+                }
+                window.Document.Save();
+                window.Document.Close();
+                window.Close();
+
+
+                this.CurrentOutputFile.ProjectItem = item;
 
                 // set VS properties for the ProjectItem
                 //
@@ -129,13 +150,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 if (!String.IsNullOrWhiteSpace(buildActionString))
                 {
                     this.CurrentOutputFile.ProjectItem.SetPropertyValue("ItemType", buildActionString);
-                }
-
-                // autoformat 
-                //
-                if (this.CurrentOutputFile.AutoFormat)
-                {
-                    this.Context.VisualStudio.ExecuteVsCommand(this.CurrentOutputFile.ProjectItem, "Edit.FormatDocument"); //, "Edit.RemoveAndSort"));
                 }
 
                 this.CompletedFiles.Add(this.CurrentOutputFile);

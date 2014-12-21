@@ -8,18 +8,18 @@ using Zirpl.Collections;
 
 namespace Zirpl.Examples.Commerce.Model
 {
-	public  partial class NamePrefixType : System.Object
-			, IMetadataDescribed
-			, IPersistable<int>
-			, IStaticLookup
-			, IEnumDescribed<int,Zirpl.Examples.Commerce.Model.NamePrefixTypeEnum>
-	{
-		public virtual int Id { get; set; }
-		public virtual string Name { get; set; }
+    public partial class NamePrefixType : System.Object
+            , IMetadataDescribed
+            , IPersistable<int>
+            , IStaticLookup
+            , IEnumDescribed<int, Zirpl.Examples.Commerce.Model.NamePrefixTypeEnum>
+    {
+        public virtual int Id { get; set; }
+        public virtual string Name { get; set; }
 
-		#region Interface implementations
+        #region Interface implementations
 
-		public virtual Object GetId()
+        public virtual Object GetId()
         {
             return Id;
         }
@@ -34,7 +34,7 @@ namespace Zirpl.Examples.Commerce.Model
             get { return this.EvaluateIsPersisted(); }
         }
 
-		public override bool Equals(object other)
+        public override bool Equals(object other)
         {
             return this.EvaluateEquals(other);
         }
@@ -43,6 +43,6 @@ namespace Zirpl.Examples.Commerce.Model
         {
             return this.EvaluateGetHashCode();
         }
-		#endregion
-	}
+        #endregion
+    }
 }
