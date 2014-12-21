@@ -68,13 +68,13 @@ namespace Zirpl
             return result;
         }
 
-        public static int DecimalPlacesCount(this decimal value)
+        public static int DecimalPlacesCount(this decimal value, CultureInfo cultureInfo = null)
         {
             //Get the decimal separator the specified culture
-            char[] sep = CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator.ToCharArray();
+            char[] sep = cultureInfo.Or(CultureInfo.InvariantCulture).NumberFormat.NumberDecimalSeparator.ToCharArray();
 
             //Split the string on the separator 
-            string[] segments = value.ToString(CultureInfo.InvariantCulture).Split(sep);
+            string[] segments = value.ToString(cultureInfo.Or(CultureInfo.InvariantCulture)).Split(sep);
 
             switch (segments.Length)
             {
@@ -91,13 +91,13 @@ namespace Zirpl
             }
         }
 
-        public static int DecimalPlacesCount(this double value)
+        public static int DecimalPlacesCount(this double value, CultureInfo cultureInfo = null)
         {
             //Get the decimal separator the specified culture
-            char[] sep = CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator.ToCharArray();
+            char[] sep = cultureInfo.Or(CultureInfo.InvariantCulture).NumberFormat.NumberDecimalSeparator.ToCharArray();
 
             //Split the string on the separator 
-            string[] segments = value.ToString(CultureInfo.InvariantCulture).Split(sep);
+            string[] segments = value.ToString(cultureInfo.Or(CultureInfo.InvariantCulture)).Split(sep);
 
             switch (segments.Length)
             {
@@ -114,13 +114,13 @@ namespace Zirpl
             }
         }
 
-        public static int DecimalPlacesCount(this float value)
+        public static int DecimalPlacesCount(this float value, CultureInfo cultureInfo = null)
         {
             //Get the decimal separator the specified culture
-            char[] sep = CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator.ToCharArray();
+            char[] sep = cultureInfo.Or(CultureInfo.InvariantCulture).NumberFormat.NumberDecimalSeparator.ToCharArray();
 
             //Split the string on the separator 
-            string[] segments = value.ToString(CultureInfo.InvariantCulture).Split(sep);
+            string[] segments = value.ToString(cultureInfo.Or(CultureInfo.InvariantCulture)).Split(sep);
 
             switch (segments.Length)
             {

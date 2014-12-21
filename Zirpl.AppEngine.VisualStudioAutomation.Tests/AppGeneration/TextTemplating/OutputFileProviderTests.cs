@@ -80,22 +80,22 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.Tests.AppGeneration.TextTemplat
         [Test]
         public void TestGetFileName_OncePerApp()
         {
-            new OutputFileProvider(new OncePerAppTypes._()).InvokeMethod<String>("GetFileName").Should().Be("_.cs");
-            new OutputFileProvider(new OncePerAppTypes.__()).InvokeMethod<String>("GetFileName").Should().Be("__.cs");
-            new OutputFileProvider(new OncePerAppTypes.___()).InvokeMethod<String>("GetFileName").Should().Be("___.cs");
-            new OutputFileProvider(new OncePerAppTypes.Service()).InvokeMethod<String>("GetFileName").Should().Be("Service.cs");
-            new OutputFileProvider(new OncePerAppTypes._Service()).InvokeMethod<String>("GetFileName").Should().Be("_Service.cs");
-            new OutputFileProvider(new OncePerAppTypes.__Service()).InvokeMethod<String>("GetFileName").Should().Be("__Service.cs");
-            new OutputFileProvider(new OncePerAppTypes._Service_()).InvokeMethod<String>("GetFileName").Should().Be("_Service_.cs");
-            new OutputFileProvider(new OncePerAppTypes.Service_()).InvokeMethod<String>("GetFileName").Should().Be("Service_.cs");
-            new OutputFileProvider(new OncePerAppTypes.Service__()).InvokeMethod<String>("GetFileName").Should().Be("Service__.cs");
-            new OutputFileProvider(new OncePerAppTypes.Service_txt()).InvokeMethod<String>("GetFileName").Should().Be("Service.txt");
-            new OutputFileProvider(new OncePerAppTypes.Service__txt()).InvokeMethod<String>("GetFileName").Should().Be("Service_.txt");
-            new OutputFileProvider(new OncePerAppTypes.Service_txt_()).InvokeMethod<String>("GetFileName").Should().Be("Service_txt_.cs");
-            new OutputFileProvider(new OncePerAppTypes.dt()).InvokeMethod<String>("GetFileName").Should().Be("dt.cs");
-            new OutputFileProvider(new OncePerAppTypes.dt_ext()).InvokeMethod<String>("GetFileName").Should().Be("dt.ext");
-            new OutputFileProvider(new OncePerAppTypes.Service_dt_ext()).InvokeMethod<String>("GetFileName").Should().Be("Service_dt.ext");
-            new OutputFileProvider(new OncePerAppTypes.Service_dt()).InvokeMethod<String>("GetFileName").Should().Be("Service.dt");
+            new OutputFileProvider(new OncePerAppTypes._()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("_.cs");
+            new OutputFileProvider(new OncePerAppTypes.__()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("__.cs");
+            new OutputFileProvider(new OncePerAppTypes.___()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("___.cs");
+            new OutputFileProvider(new OncePerAppTypes.Service()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Service.cs");
+            new OutputFileProvider(new OncePerAppTypes._Service()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("_Service.cs");
+            new OutputFileProvider(new OncePerAppTypes.__Service()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("__Service.cs");
+            new OutputFileProvider(new OncePerAppTypes._Service_()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("_Service_.cs");
+            new OutputFileProvider(new OncePerAppTypes.Service_()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Service_.cs");
+            new OutputFileProvider(new OncePerAppTypes.Service__()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Service__.cs");
+            new OutputFileProvider(new OncePerAppTypes.Service_txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Service.txt");
+            new OutputFileProvider(new OncePerAppTypes.Service__txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Service_.txt");
+            new OutputFileProvider(new OncePerAppTypes.Service_txt_()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Service_txt_.cs");
+            new OutputFileProvider(new OncePerAppTypes.dt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("dt.cs");
+            new OutputFileProvider(new OncePerAppTypes.dt_ext()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("dt.ext");
+            new OutputFileProvider(new OncePerAppTypes.Service_dt_ext()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Service_dt.ext");
+            new OutputFileProvider(new OncePerAppTypes.Service_dt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Service.dt");
         }
 
         public class OncePerDomainTypeTypes : OncePerDomainTypeTemplate
@@ -211,73 +211,73 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.Tests.AppGeneration.TextTemplat
         [Test]
         public void TestGetFileName_OncePerDomainType()
         {
-            new OutputFileProvider(new OncePerDomainTypeTypes.dT()).InvokeMethod<String>("GetFileName").Should().Be("Address.cs");
-            new OutputFileProvider(new OncePerDomainTypeTypes._dT()).InvokeMethod<String>("GetFileName").Should().Be("Address.cs");
-            new OutputFileProvider(new OncePerDomainTypeTypes.__dT()).InvokeMethod<String>("GetFileName").Should().Be("_Address.cs");
-            new OutputFileProvider(new OncePerDomainTypeTypes._dT_()).InvokeMethod<String>("GetFileName").Should().Be("Address.cs");
-            new OutputFileProvider(new OncePerDomainTypeTypes.__dT__()).InvokeMethod<String>("GetFileName").Should().Be("_Address_.cs");
-            new OutputFileProvider(new OncePerDomainTypeTypes.dT_()).InvokeMethod<String>("GetFileName").Should().Be("Address.cs");
-            new OutputFileProvider(new OncePerDomainTypeTypes.dT__()).InvokeMethod<String>("GetFileName").Should().Be("Address_.cs");
-            new OutputFileProvider(new OncePerDomainTypeTypes.dT_txt()).InvokeMethod<String>("GetFileName").Should().Be("Address.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes.dT__txt()).InvokeMethod<String>("GetFileName").Should().Be("Address.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes.dT___txt()).InvokeMethod<String>("GetFileName").Should().Be("Address_.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes._dT_txt()).InvokeMethod<String>("GetFileName").Should().Be("Address.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes.__dT_txt()).InvokeMethod<String>("GetFileName").Should().Be("_Address.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes._dT__txt()).InvokeMethod<String>("GetFileName").Should().Be("Address.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes.__dT__txt()).InvokeMethod<String>("GetFileName").Should().Be("_Address.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes._dT___txt()).InvokeMethod<String>("GetFileName").Should().Be("Address_.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes.__dT___txt()).InvokeMethod<String>("GetFileName").Should().Be("_Address_.txt");
-            new OutputFileProvider(new OncePerDomainTypeTypes.dT_Service()).InvokeMethod<String>("GetFileName").Should().Be("Address.Service");
-            new OutputFileProvider(new OncePerDomainTypeTypes.dT_Service_cs()).InvokeMethod<String>("GetFileName").Should().Be("AddressService.cs");
+            new OutputFileProvider(new OncePerDomainTypeTypes.dT()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.cs");
+            new OutputFileProvider(new OncePerDomainTypeTypes._dT()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.cs");
+            new OutputFileProvider(new OncePerDomainTypeTypes.__dT()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("_Address.cs");
+            new OutputFileProvider(new OncePerDomainTypeTypes._dT_()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.cs");
+            new OutputFileProvider(new OncePerDomainTypeTypes.__dT__()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("_Address_.cs");
+            new OutputFileProvider(new OncePerDomainTypeTypes.dT_()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.cs");
+            new OutputFileProvider(new OncePerDomainTypeTypes.dT__()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address_.cs");
+            new OutputFileProvider(new OncePerDomainTypeTypes.dT_txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes.dT__txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes.dT___txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address_.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes._dT_txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes.__dT_txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("_Address.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes._dT__txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes.__dT__txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("_Address.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes._dT___txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address_.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes.__dT___txt()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("_Address_.txt");
+            new OutputFileProvider(new OncePerDomainTypeTypes.dT_Service()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("Address.Service");
+            new OutputFileProvider(new OncePerDomainTypeTypes.dT_Service_cs()).GetAccessor().InvokeMethod<String>("GetFileName").Should().Be("AddressService.cs");
 
             #region Exceptions
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes._()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes._()).GetAccessor().InvokeMethod<String>("GetFileName");
             }); 
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.__()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.__()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.___()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.___()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.Service()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.Service()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes._Service()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes._Service()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.__Service()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.__Service()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes._Service_()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes._Service_()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.Service_()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.Service_()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.Service__()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.Service__()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.Service_txt()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.Service_txt()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.Service__txt()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.Service__txt()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             AssertThrowsException<Exception>(() =>
             {
-                new OutputFileProvider(new OncePerDomainTypeTypes.Service_txt_()).InvokeMethod<String>("GetFileName");
+                new OutputFileProvider(new OncePerDomainTypeTypes.Service_txt_()).GetAccessor().InvokeMethod<String>("GetFileName");
             });
             #endregion
         }

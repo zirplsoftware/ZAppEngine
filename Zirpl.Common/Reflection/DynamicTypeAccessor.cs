@@ -14,7 +14,7 @@ namespace Zirpl.Reflection
     /// <remarks>The first time you attempt to get or set a property, it will dynamically generate the get and/or set 
     /// methods and cache them internally.  Subsequent calls uses the dynamic methods without having to query the type's 
     /// meta data.</remarks>
-    public sealed class DynamicTypeAccessor : ITypeAccessor
+    internal sealed class DynamicTypeAccessor : ITypeAccessor
     {
         #region Private Fields
         private readonly Type _type;
@@ -42,7 +42,7 @@ namespace Zirpl.Reflection
         #region Public Accessors
 
         
-        public void SetPropertyValue(object target, string propertyName, object value)
+        public void SetPropertyValue<T>(object target, string propertyName, T value)
         {
             EnsurePropertySetterKey(propertyName);
             var handler = _propertySetters[propertyName];
@@ -60,17 +60,17 @@ namespace Zirpl.Reflection
             }
         }
 
-        public object GetPropertyValue(object target, string propertyName)
+        public T GetPropertyValue<T>(object target, string propertyName)
         {
             EnsurePropertyGetterKey(propertyName);
             var handler = _propertyGetters[propertyName];
             if (handler != null)
             {
-                return handler(target);
+                return (T)handler(target);
             }
             else if (this._baseTypeAccessor != null)
             {
-                return this._baseTypeAccessor.GetPropertyValue(target, propertyName);
+                return this._baseTypeAccessor.GetPropertyValue<T>(target, propertyName);
             }
             else
             {
@@ -79,7 +79,7 @@ namespace Zirpl.Reflection
         }
 
 
-        public void SetFieldValue(object target, string fieldName, object value)
+        public void SetFieldValue<T>(object target, string fieldName, T value)
         {
             EnsureFieldSetterKey(fieldName);
             var handler = _fieldSetters[fieldName];
@@ -97,17 +97,17 @@ namespace Zirpl.Reflection
             }
         }
 
-        public object GetFieldValue(object target, string fieldName)
+        public T GetFieldValue<T>(object target, string fieldName)
         {
             EnsureFieldGetterKey(fieldName);
             var handler = _fieldGetters[fieldName];
             if (handler != null)
             {
-                return handler(target);
+                return (T)handler(target);
             }
             else if (this._baseTypeAccessor != null)
             {
-                return this._baseTypeAccessor.GetFieldValue(target, fieldName);
+                return this._baseTypeAccessor.GetFieldValue<T>(target, fieldName);
             }
             else
             {
@@ -437,6 +437,13 @@ namespace Zirpl.Reflection
         public bool HasMethod(string methodName)
         {
             return TypeAccessorFactory.GetReflectionTypeAccessor(this._type).HasMethod(methodName);
+        }
+
+
+        public T InvokeMethod<T>(object target, string methodName, params object[] parameters)
+        {
+            return TypeAccessorFactory.GetReflectionTypeAccessor(this._type)
+                .InvokeMethod<T>(target, methodName, parameters);
         }
     }
 }

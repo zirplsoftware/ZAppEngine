@@ -44,7 +44,9 @@
     <Compile Include="Collections\EnumeratorWrapper.cs" />
     <Compile Include="Collections\ICollectionExtensions.cs" />
     <Compile Include="Collections\IDictionaryExtensions.cs" />
+    <Compile Include="Collections\IEnumerableExtensions.cs" />
     <Compile Include="Collections\IListExtensions.cs" />
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DateTimeUtilities.cs" />
     <Compile Include="IO\PathUtilities.cs" />
     <Compile Include="IO\StreamExtensions.cs" />
@@ -52,10 +54,17 @@
     <Compile Include="Linq\QueryableWrapper.cs" />
     <Compile Include="Linq\QueryProviderWrapper.cs" />
     <Compile Include="NumberExtensions.cs" />
+    <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo_common.cs" />
+    <Compile Include="Reflection\Accessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Reflection\AssemblyExtensions.cs" />
     <Compile Include="Reflection\DynamicTypeAccessor.cs" />
+    <Compile Include="Reflection\IAccessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Reflection\ReflectionTypeAccessor.cs" />
     <Compile Include="Reflection\TypeAccessorFactory.cs" />
     <Compile Include="Reflection\ITypeAccessor.cs" />
@@ -65,14 +74,14 @@
     <Compile Include="Stats\EloRating\EloMatchResult.cs" />
     <Compile Include="Stats\EloRating\EloRatingEngine.cs" />
     <Compile Include="StringExtensions.cs" />
-    <Compile Include="StringUtilities.cs" />
     <Compile Include="Text\StringBuilderExtensions.cs" />
     <Compile Include="Text\TextCrawling\TextCrawler.cs" />
     <Compile Include="Text\TextCrawling\TextPosition.cs" />
     <Compile Include="Text\TextCrawling\TextPositionType.cs" />
     <Compile Include="Text\TextUtilities.cs" />
-    <Compile Include="TimeAgo.cs" />
-    <Compile Include="TimeAgoType.cs" />
+    <Compile Include="TimeSpanEstimation.cs" />
+    <Compile Include="TimeSpanEstimationType.cs" />
+    <Compile Include="TimeSpanExtensions.cs" />
     <Compile Include="Xml\Serialization\SerializationUtilities.cs" />
     <Compile Include="Xml\Serialization\XmlSerializableBase.cs" />
   </ItemGroup>

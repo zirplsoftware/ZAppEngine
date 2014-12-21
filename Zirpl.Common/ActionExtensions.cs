@@ -1,47 +1,37 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Zirpl
 {
     public static class ActionExtensions
     {
-        public static bool Try(this Action action, Action<Exception> errorHandler = null)
+        public static ActionRunner GetRunner(this Action action)
         {
-            bool succeessful = false;
-
-            try
+            if (action == null) throw new ArgumentNullException("action");
+            return new ActionRunner(action);
+        }
+        public static void ForEach<T>(this Action<T> action, IEnumerable<T> enumerable)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            if (enumerable != null)
             {
-                action();
-                succeessful = true;
-            }
-            catch (Exception e)
-            {
-                if (errorHandler != null)
+                foreach (var item in enumerable)
                 {
-                    try
-                    {
-                        errorHandler(e);
-                    }
-                    catch (Exception ex)
-                    {
-                        // nothing we can do about this- eat it
-                    }
+                    action(item);
                 }
             }
-            //finally
-            //{
-            //    if (completeHandler != null)
-            //    {
-            //        try
-            //        {
-            //            completeHandler(succeessful);
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            // nothing we can do about this- eat it
-            //        }
-            //    }
-            //}
-            return succeessful;
+        }
+        public static void ForEach<T>(this Action<T> action, IEnumerable enumerable)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            if (enumerable != null)
+            {
+                foreach (var item in enumerable)
+                {
+                    action((T) item);
+                }
+            }
         }
     }
 }

@@ -48,10 +48,10 @@ namespace Zirpl
             StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
-            if (nthInstance < 1)
-            {
-                throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
-            }
+            if (nthInstance < 1) throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             int startIndex = 0;
             int foundIndex = -1;
             for (int i = 1; i <= nthInstance; i++)
@@ -86,10 +86,10 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
-            if (nthInstance < 1)
-            {
-                throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
-            }
+            if (nthInstance < 1) throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             int startIndex = 0;
             int foundIndex = -1;
             for (int i = 1; i <= nthInstance; i++)
@@ -120,10 +120,10 @@ namespace Zirpl
             StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
-            if (nthInstance < 1)
-            {
-                throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
-            }
+            if (nthInstance < 1) throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             int startIndex = 0;
             int foundIndex = -1;
             for (int i = 1; i <= nthInstance; i++)
@@ -154,10 +154,10 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
-            if (nthInstance < 1)
-            {
-                throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
-            }
+            if (nthInstance < 1) throw new ArgumentOutOfRangeException("nthInstance", "Must be 1 or greater");
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             int startIndex = 0;
             int foundIndex = -1;
             for (int i = 1; i <= nthInstance; i++)
@@ -345,6 +345,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
             {
@@ -363,6 +366,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
             {
@@ -381,6 +387,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
             {
@@ -398,6 +407,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             var index = originalText.LastIndexOf(search, stringComparison);
             if (index == -1)
             {
@@ -416,6 +428,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
             {
@@ -434,6 +449,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
             {
@@ -452,6 +470,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
             {
@@ -469,6 +490,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (search.IsNullOrEmpty()) throw new ArgumentNullException("search");
+
             var index = originalText.IndexOf(search, stringComparison);
             if (index == -1)
             {
@@ -482,6 +506,10 @@ namespace Zirpl
         }
         public static String Replace(this String originalText, int startIndex, int length, String newToken)
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (startIndex < 0 || startIndex >= originalText.Length) throw new ArgumentOutOfRangeException("startIndex");
+            if (length <= 0 || startIndex + length > originalText.Length) throw new ArgumentOutOfRangeException("length");
+
             var sb = new StringBuilder();
             if (startIndex > 0)
             {
@@ -502,7 +530,10 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
-            if (!String.IsNullOrEmpty(originalText)
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (searchToken.IsNullOrEmpty()) throw new ArgumentNullException("searchToken");
+
+            if (!originalText.IsNullOrEmpty()
                 && originalText.StartsWith(searchToken, stringComparison))
             {
                 return replacementText + (originalText.Length > searchToken.Length ? originalText.Substring(searchToken.Length) : null);
@@ -516,6 +547,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (searchToken.IsNullOrEmpty()) throw new ArgumentNullException("searchToken");
+
             if (!String.IsNullOrEmpty(originalText))
             {
                 var index = originalText.IndexOf(searchToken, stringComparison);
@@ -547,6 +581,9 @@ namespace Zirpl
  StringComparison stringComparison = StringComparison.CurrentCulture)
 #endif
         {
+            if (originalText.IsNull()) throw new ArgumentNullException("originalText");
+            if (searchToken.IsNullOrEmpty()) throw new ArgumentNullException("searchToken");
+
             if (!String.IsNullOrEmpty(originalText)
                 && originalText.EndsWith(searchToken, stringComparison))
             {
@@ -775,18 +812,5 @@ namespace Zirpl
             words.CopyTo(wordArray, 0);
             return wordArray;
         }
-
-        ///// <summary>
-        ///// Parses a camel cased or pascal cased string and returns a new string with spaces between the words in the string.
-        ///// </summary>
-        ///// <example>
-        ///// The string "PascalCasing" will return an array with two elements, "Pascal" and "Casing".
-        ///// </example>
-        ///// <param name="source">The string that is camel cased that needs to be split</param>
-        ///// <returns>A string with spaces between each word part</returns>
-        //public static string ToCamelCase(this string[] source)
-        //{
-        //    return string.Join("", SplitCamelOrPascalCase(source));
-        //}
     }
 }

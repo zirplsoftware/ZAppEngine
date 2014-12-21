@@ -57,8 +57,14 @@
     <Compile Include="..\Zirpl.Common\Collections\IListExtensions.cs">
       <Link>Collections\IListExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\DateTimeExtensions.cs">
+      <Link>DateTimeExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\DateTimeUtilities.cs">
       <Link>DateTimeUtilities.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\ObjectExtensions.cs">
+      <Link>ObjectExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\IO\PathUtilities.cs">
       <Link>IO\PathUtilities.cs</Link>
@@ -84,11 +90,17 @@
     <Compile Include="..\Zirpl.Common\Properties\AssemblyInfo_common.cs">
       <Link>Properties\AssemblyInfo_common.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Accessor.cs">
+      <Link>Reflection\Accessor.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\AssemblyExtensions.cs">
       <Link>Reflection\AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\DynamicTypeAccessor.cs">
       <Link>Reflection\DynamicTypeAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\IAccessor.cs">
+      <Link>Reflection\IAccessor.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\ITypeAccessor.cs">
       <Link>Reflection\ITypeAccessor.cs</Link>
@@ -132,11 +144,14 @@
     <Compile Include="..\Zirpl.Common\Text\TextUtilities.cs">
       <Link>Text\TextUtilities.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\TimeAgo.cs">
-      <Link>TimeAgo.cs</Link>
+    <Compile Include="..\Zirpl.Common\TimeSpanEstimation.cs">
+      <Link>TimeSpanEstimation.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\TimeAgoType.cs">
-      <Link>TimeAgoType.cs</Link>
+    <Compile Include="..\Zirpl.Common\TimeSpanEstimationType.cs">
+      <Link>TimeSpanEstimationType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\TimeSpanExtensions.cs">
+      <Link>TimeSpanExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Xml\Serialization\SerializationUtilities.cs">
       <Link>Xml\Serialization\SerializationUtilities.cs</Link>
@@ -153,7 +168,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="0402a91f-2a69-447c-bb2b-64d5af155105" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="0402a91f-2a69-447c-bb2b-64d5af155105" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

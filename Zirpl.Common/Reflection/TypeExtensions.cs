@@ -38,6 +38,8 @@ namespace Zirpl.Reflection
 
         public static ITypeAccessor GetTypeAccessor(this Type type)
         {
+            if (type == null) throw new ArgumentNullException("type");
+
             return TypeAccessorFactory.GetTypeAccessor(type);
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace Zirpl
 {
-    public enum TimeAgoType
+    public enum TimeSpanEstimationType
     {
         Seconds = 0,
         Minutes = 1,

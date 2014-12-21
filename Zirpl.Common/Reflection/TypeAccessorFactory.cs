@@ -10,7 +10,7 @@ namespace Zirpl.Reflection
     /// The factory class will only create a DynamicTypeAccessor once for each type.
     /// If the request for a type is made twice, the cached DynamicTypeAccessor will be returned.
     /// </remarks>
-    public static class TypeAccessorFactory
+    internal static class TypeAccessorFactory
     {
         internal class TypeAccessorContainer
         {
@@ -37,7 +37,7 @@ namespace Zirpl.Reflection
             }
         }
 
-        public static ITypeAccessor GetTypeAccessor(Type type)
+        internal static ITypeAccessor GetTypeAccessor(Type type)
         {
 #if !SILVERLIGHT && !PORTABLE
             return GetDynamicTypeAccessor(type);
@@ -51,7 +51,7 @@ namespace Zirpl.Reflection
         /// </summary>
         /// <param name="type">The for to get the DynamicTypeAccessor</param>
         /// <returns><see cref="DynamicTypeAccessor"/></returns>
-        public static ReflectionTypeAccessor GetReflectionTypeAccessor(Type type)
+        internal static ITypeAccessor GetReflectionTypeAccessor(Type type)
         {   
             EnsureContainer(type);
             var container = TypeAccessors[type];
@@ -61,7 +61,7 @@ namespace Zirpl.Reflection
                 {
                     if (container.ReflectionTypeAccessor == null)
                     {
-                        container.ReflectionTypeAccessor = new ReflectionTypeAccessor(type, type.BaseType == null ? null : GetReflectionTypeAccessor(type.BaseType));
+                        container.ReflectionTypeAccessor = new ReflectionTypeAccessor(type, type.BaseType == null ? null : (ReflectionTypeAccessor)GetReflectionTypeAccessor(type.BaseType));
                     }
                 }
             }
@@ -75,7 +75,7 @@ namespace Zirpl.Reflection
         /// </summary>
         /// <param name="type">The for to get the DynamicTypeAccessor</param>
         /// <returns><see cref="DynamicTypeAccessor"/></returns>
-        public static DynamicTypeAccessor GetDynamicTypeAccessor(Type type)
+        internal static ITypeAccessor GetDynamicTypeAccessor(Type type)
         {
             EnsureContainer(type);
             var container = TypeAccessors[type];
@@ -85,7 +85,7 @@ namespace Zirpl.Reflection
                 {
                     if (container.DynamicTypeAccessor == null)
                     {
-                        container.DynamicTypeAccessor = new DynamicTypeAccessor(type, type.BaseType == null ? null : GetDynamicTypeAccessor(type.BaseType));
+                        container.DynamicTypeAccessor = new DynamicTypeAccessor(type, type.BaseType == null ? null : (DynamicTypeAccessor)GetDynamicTypeAccessor(type.BaseType));
                     }
                 }
             }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection
 {
-    public sealed class ReflectionTypeAccessor : ITypeAccessor
+    internal sealed class ReflectionTypeAccessor : ITypeAccessor
     {
         private readonly Type _type;
         private readonly Dictionary<string, PropertyInfo> _propertyInfos;
@@ -22,17 +22,17 @@ namespace Zirpl.Reflection
             this._fieldInfos = new Dictionary<string, FieldInfo>();
         }
 
-        public object GetFieldValue(object target, string fieldName)
+        public T GetFieldValue<T>(object target, string fieldName)
         {
             this.EnsureFieldInfoKey(fieldName);
             var fieldInfo = this._fieldInfos[fieldName];
             if (fieldInfo != null)
             {
-                return fieldInfo.GetValue(target);
+                return (T)fieldInfo.GetValue(target);
             }
             else if (this._baseTypeAccessor != null)
             {
-                return this._baseTypeAccessor.GetFieldValue(target, fieldName);
+                return this._baseTypeAccessor.GetFieldValue<T>(target, fieldName);
             }
             else
             {
@@ -40,7 +40,7 @@ namespace Zirpl.Reflection
             }
         }
 
-        public void SetFieldValue(object target, string fieldName, object value)
+        public void SetFieldValue<T>(object target, string fieldName, T value)
         {
             this.EnsureFieldInfoKey(fieldName);
             var fieldInfo = this._fieldInfos[fieldName];
@@ -74,17 +74,17 @@ namespace Zirpl.Reflection
             }
         }
 
-        public object GetPropertyValue(object target, string propertyName)
+        public T GetPropertyValue<T>(object target, string propertyName)
         {
             this.EnsurePropertyInfoKey(propertyName);
             var propertyInfo = this._propertyInfos[propertyName];
             if (propertyInfo != null)
             {
-                return propertyInfo.GetValue(target, null);
+                return (T)propertyInfo.GetValue(target, null);
             }
             else if (this._baseTypeAccessor != null)
             {
-                return this._baseTypeAccessor.GetPropertyValue(target, propertyName);
+                return this._baseTypeAccessor.GetPropertyValue<T>(target, propertyName);
             }
             else
             {
@@ -92,7 +92,7 @@ namespace Zirpl.Reflection
             }
         }
 
-        public void SetPropertyValue(object target, string propertyName, object value)
+        public void SetPropertyValue<T>(object target, string propertyName, T value)
         {
             this.EnsurePropertyInfoKey(propertyName);
             var propertyInfo = this._propertyInfos[propertyName];
@@ -396,7 +396,5 @@ namespace Zirpl.Reflection
         {
             return this.HasField(fieldName, typeof(T));
         }
-
-
     }
 }

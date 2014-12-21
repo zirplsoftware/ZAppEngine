@@ -20,11 +20,13 @@ namespace Zirpl.IO
         public static bool EnsureDirectoryExists(String filePath)
         {
             bool hadToCreate = false;
-            String backupDirectory = Path.GetDirectoryName(filePath);
-            if (!Directory.Exists(backupDirectory))
+            String directory = Path.GetDirectoryName(filePath);
+
+            if (!directory.IsNull()
+                && !Directory.Exists(directory))
             {
                 hadToCreate = true;
-                Directory.CreateDirectory(backupDirectory);
+                Directory.CreateDirectory(directory);
             }
             return hadToCreate;
         }

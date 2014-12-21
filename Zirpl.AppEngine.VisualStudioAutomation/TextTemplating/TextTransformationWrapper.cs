@@ -38,11 +38,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<StringBuilder>("GenerationEnvironment");
+                return (this._textTransformation ?? this._preProcessedTextTransformation).GetAccessor().GetProperty<StringBuilder>("GenerationEnvironment");
             }
             set
             {
-                (this._textTransformation ?? this._preProcessedTextTransformation).SetProperty("GenerationEnvironment", value);
+                (this._textTransformation ?? this._preProcessedTextTransformation).GetAccessor().SetProperty("GenerationEnvironment", value);
             }
         }
 
@@ -50,7 +50,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                return this._textTransformation != null ? this._textTransformation.Errors : this._preProcessedTextTransformation.GetProperty<CompilerErrorCollection>("Errors");
+                return this._textTransformation != null ? this._textTransformation.Errors : this._preProcessedTextTransformation.GetAccessor().GetProperty<CompilerErrorCollection>("Errors");
             }
         }
 
@@ -64,7 +64,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     throw new InvalidOperationException("Template is not Host-specific");
                 }
 
-                return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<ITextTemplatingEngineHost>("Host");
+                return (this._textTransformation ?? this._preProcessedTextTransformation).GetAccessor().GetProperty<ITextTemplatingEngineHost>("Host");
             }
             set
             {
@@ -73,7 +73,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 {
                     throw new InvalidOperationException("Template is not Host-specific");
                 }
-                (this._textTransformation ?? this._preProcessedTextTransformation).SetProperty("Host", value);
+                (this._textTransformation ?? this._preProcessedTextTransformation).GetAccessor().SetProperty("Host", value);
             }
         }
 
@@ -81,7 +81,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<String>("CurrentIndent");
+                return (this._textTransformation ?? this._preProcessedTextTransformation).GetAccessor().GetProperty<String>("CurrentIndent");
             }
         }
 
@@ -89,11 +89,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                return (this._textTransformation ?? this._preProcessedTextTransformation).GetProperty<IDictionary<string, object>>("Session");
+                return (this._textTransformation ?? this._preProcessedTextTransformation).GetAccessor().GetProperty<IDictionary<string, object>>("Session");
             }
             set
             {
-                (this._textTransformation ?? this._preProcessedTextTransformation).SetProperty("Session", value);
+                (this._textTransformation ?? this._preProcessedTextTransformation).GetAccessor().SetProperty("Session", value);
             }
         }
 
@@ -105,7 +105,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("ClearIndent");
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("ClearIndent");
             }
         }
 
@@ -121,7 +121,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("Error", message);
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("Error", message);
             }
         }
 
@@ -133,7 +133,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("Initialize");
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("Initialize");
             }
         }
 
@@ -145,7 +145,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                return this._preProcessedTextTransformation.InvokeMethod<String>("PopIndent");
+                return this._preProcessedTextTransformation.GetAccessor().InvokeMethod<String>("PopIndent");
             }
         }
 
@@ -157,7 +157,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("PushIndent", indent);
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("PushIndent", indent);
             }
         }
 
@@ -169,7 +169,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                return this._preProcessedTextTransformation.InvokeMethod<String>("TransformText");
+                return this._preProcessedTextTransformation.GetAccessor().InvokeMethod<String>("TransformText");
             }
         }
 
@@ -181,7 +181,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("Warning", message);
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("Warning", message);
             }
         }
 
@@ -193,7 +193,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("Write", text);
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("Write", text);
             }
         }
 
@@ -205,7 +205,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("Write", format, args);
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("Write", format, args);
             }
         }
 
@@ -217,7 +217,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("WriteLine", text);
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("WriteLine", text);
             }
         }
 
@@ -229,7 +229,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
             else
             {
-                this._preProcessedTextTransformation.InvokeMethod("WriteLine", format, args);
+                this._preProcessedTextTransformation.GetAccessor().InvokeMethod("WriteLine", format, args);
             }
         }
 
