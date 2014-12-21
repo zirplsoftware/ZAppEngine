@@ -84,7 +84,6 @@
     <Compile Include="DataService\Excel\ExcelExporter.cs" />
     <Compile Include="DataService\ICompleteDataService.cs" />
     <Compile Include="DataService\IDataService.cs" />
-    <Compile Include="DataService\IDataService_generic.cs" />
     <Compile Include="DataService\IReadOnlyDataService.cs" />
     <Compile Include="DataService\ISequenceValueProvider.cs" />
     <Compile Include="DataService\SqlServer\SqlAzure\SqlDatabaseTransientErrorDetectionRetryPolicyFactory.cs" />
