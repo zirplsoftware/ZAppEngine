@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Zirpl.Testing
+namespace Zirpl
 {
-    public static class UnitTestUtilities
+    public static class StringUtilities
     {
-        public static String CreateStringLongerThan(this Object context, long length)
+        public static String CreateStringLongerThan(long length)
         {
 
             StringBuilder sb = new StringBuilder();
@@ -17,7 +20,7 @@ namespace Zirpl.Testing
             return sb.ToString();
         }
 
-        public static String CreateStringShorterThan(this Object context, long length)
+        public static String CreateStringShorterThan(long length)
         {
             if (length == 0)
             {

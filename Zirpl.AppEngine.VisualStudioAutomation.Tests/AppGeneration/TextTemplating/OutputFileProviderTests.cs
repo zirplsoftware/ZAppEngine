@@ -8,7 +8,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.Reflection;
-using Zirpl.AppEngine.Testing;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.Tests.AppGeneration.TextTemplating

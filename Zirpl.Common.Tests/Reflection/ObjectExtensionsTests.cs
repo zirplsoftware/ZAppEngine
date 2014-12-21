@@ -8,7 +8,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using Telerik.JustMock;
 using Zirpl.Reflection;
-using Zirpl.Testing;
 
 namespace Zirpl.Common.Tests.Reflection
 {
@@ -190,12 +189,13 @@ namespace Zirpl.Common.Tests.Reflection
             parent.parameter1Value.Should().Be(0);
             parent.parameter2Value.Should().Be(0);
 
-            this.AssertThrowsException<ArgumentOutOfRangeException>(() => new MockParent().InvokeMethod("NonExistentMethod"));
-            this.AssertThrowsException<ArgumentNullException>(() => new MockParent().InvokeMethod(null));
+            new Action(() => new MockParent().InvokeMethod("NonExistentMethod")).ShouldThrow<ArgumentOutOfRangeException>();
+            new Action(() => new MockParent().InvokeMethod(null)).ShouldThrow<ArgumentNullException>();
             // wrong param type
-            this.AssertThrowsException<ArgumentException>(() => new MockParent().InvokeMethod("PublicMethodWith1Parameter", "test"));
+            new Action(() => new MockParent().InvokeMethod("PublicMethodWith1Parameter", "test"))
+                .ShouldThrow<ArgumentException>();
             // wrong number of parameters
-            this.AssertThrowsException<ArgumentOutOfRangeException>(() => new MockParent().InvokeMethod("PublicMethodWith1Parameter", 1, 2));
+            new Action(() => new MockParent().InvokeMethod("PublicMethodWith1Parameter", 1, 2)).ShouldThrow<ArgumentOutOfRangeException>();
 
 
             parent = new MockParent();
@@ -319,14 +319,14 @@ namespace Zirpl.Common.Tests.Reflection
         {
             var parent = new MockParent();
 
-            this.AssertThrowsException<InvalidCastException>(() => parent.GetProperty<String>("PublicProperty"));
-            this.AssertThrowsException<InvalidCastException>(() => parent.SetProperty("PublicProperty", "test"));
+            new Action(() => parent.GetProperty<String>("PublicProperty")).ShouldThrow<InvalidCastException>();
+            new Action(() => parent.SetProperty("PublicProperty", "test")).ShouldThrow<InvalidCastException>();
 
-            this.AssertThrowsException<ArgumentOutOfRangeException>(() => parent.GetProperty<String>("NonExistentProperty"));
-            this.AssertThrowsException<ArgumentOutOfRangeException>(() => parent.SetProperty("NonExistentProperty", "test"));
+            new Action(() => parent.GetProperty<String>("NonExistentProperty")).ShouldThrow<ArgumentOutOfRangeException>();
+            new Action(() => parent.SetProperty("NonExistentProperty", "test")).ShouldThrow<ArgumentOutOfRangeException>();
 
-            this.AssertThrowsException<ArgumentNullException>(() => parent.GetProperty<String>(null));
-            this.AssertThrowsException<ArgumentNullException>(() => parent.SetProperty(null, "test"));
+            new Action(() => parent.GetProperty<String>(null)).ShouldThrow<ArgumentNullException>();
+            new Action(() => parent.SetProperty(null, "test")).ShouldThrow<ArgumentNullException>();
 
             parent.PublicProperty = 1;
             parent.GetProperty<int>("PublicProperty").Should().Be(1);
@@ -406,14 +406,14 @@ namespace Zirpl.Common.Tests.Reflection
             var parent = new MockParent();
             var parentAccessor = TypeAccessorFactory.GetDynamicTypeAccessor(parent.GetType());
 
-            this.AssertThrowsException<InvalidCastException>(() => parent.GetField<String>("PublicField"));
-            this.AssertThrowsException<InvalidCastException>(() => parent.SetField("PublicField", "test"));
+            new Action(() => parent.GetField<String>("PublicField")).ShouldThrow<InvalidCastException>();
+            new Action(() => parent.SetField("PublicField", "test")).ShouldThrow<InvalidCastException>();
 
-            this.AssertThrowsException<ArgumentOutOfRangeException>(() => parent.GetField<String>("NonExistentField"));
-            this.AssertThrowsException<ArgumentOutOfRangeException>(() => parent.SetField("NonExistentField", "test"));
+            new Action(() => parent.GetField<String>("NonExistentField")).ShouldThrow<ArgumentOutOfRangeException>();
+            new Action(() => parent.SetField("NonExistentField", "test")).ShouldThrow<ArgumentOutOfRangeException>();
 
-            this.AssertThrowsException<ArgumentNullException>(() => parent.GetField<String>(null));
-            this.AssertThrowsException<ArgumentNullException>(() => parent.SetField(null, "test"));
+            new Action(() => parent.GetField<String>(null)).ShouldThrow<ArgumentNullException>();
+            new Action(() => parent.SetField(null, "test")).ShouldThrow<ArgumentNullException>();
 
             parent.PublicField = 1;
             parent.GetField<int>("PublicField").Should().Be(1);

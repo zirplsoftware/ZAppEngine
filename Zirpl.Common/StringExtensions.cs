@@ -21,6 +21,26 @@ namespace Zirpl
             return string.IsNullOrWhiteSpace(text) ? String.Empty : text;
         }
 
+        public static bool IsNull(this string text)
+        {
+            return text == null;
+        }
+
+        public static bool IsNullOrEmpty(this string text)
+        {
+            return String.IsNullOrEmpty(text);
+        }
+
+        public static bool IsNullOrWhiteSpace(this string text)
+        {
+            return String.IsNullOrWhiteSpace(text);
+        }
+
+        public static bool HasContent(this string text)
+        {
+            return !text.IsNullOrWhiteSpace();
+        }
+
         public static String SubstringUntilNthInstanceOf(this string originalText, String search, int nthInstance,      
 #if !PORTABLE
             StringComparison stringComparison = StringComparison.InvariantCulture)

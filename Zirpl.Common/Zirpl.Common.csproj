@@ -65,6 +65,7 @@
     <Compile Include="Stats\EloRating\EloMatchResult.cs" />
     <Compile Include="Stats\EloRating\EloRatingEngine.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="StringUtilities.cs" />
     <Compile Include="Text\StringBuilderExtensions.cs" />
     <Compile Include="Text\TextCrawling\TextCrawler.cs" />
     <Compile Include="Text\TextCrawling\TextPosition.cs" />

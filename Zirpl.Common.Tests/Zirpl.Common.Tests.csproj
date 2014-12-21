@@ -34,10 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentAssertions">
-      <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.dll</HintPath>
+      <HintPath>..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions.Core">
-      <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <HintPath>..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -75,10 +75,6 @@
     <ProjectReference Include="..\Zirpl.Common\Zirpl.Common.csproj">
       <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
       <Name>Zirpl.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zirpl.Testing\Zirpl.Testing.csproj">
-      <Project>{f4fbe07d-ed80-4a72-9f19-90d15979fa0a}</Project>
-      <Name>Zirpl.Testing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
