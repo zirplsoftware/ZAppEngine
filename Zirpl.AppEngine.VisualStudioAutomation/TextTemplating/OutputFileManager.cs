@@ -18,12 +18,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         private StringBuilder CallingTemplateOriginalGenerationEnvironment { get; set; }
         private StringBuilder CurrentGenerationEnvironment { get; set; }
         private OutputFile CurrentOutputFile { get; set; }
+        private String PlaceHolderFileName { get; set; }
 
         internal OutputFileManager(TextTransformationContext context)
         {
             this.CallingTemplateOriginalGenerationEnvironment = context.CallingTemplate.GenerationEnvironment;
             this.CurrentGenerationEnvironment = context.CallingTemplate.GenerationEnvironment;
             this.Context = context;
+            var placeholder = context.CallingTemplateProjectItem.ProjectItems.ToEnumerable().SingleOrDefault();
+            this.PlaceHolderFileName = placeholder == null ? null : placeholder.Name;
             this.CompletedFiles = new List<OutputFile>();
         }
 
@@ -82,6 +85,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 PathUtilities.EnsureDirectoryExists(fullFilePath);
                 this.CurrentOutputFile.DestinationProject.GetOrCreateFolder(@"_auto\", false);
                 var folder = this.CurrentOutputFile.DestinationProject.GetOrCreateFolder(@"_auto\" + this.CurrentOutputFile.FolderPathWithinProject);
+                var placeHolderItem = folder.ProjectItems.ToEnumerable().SingleOrDefault(o => o.Name == this.PlaceHolderFileName);
+                if (placeHolderItem == null)
+                {
+                    var fullPlaceHolderPath = Path.Combine(folder.GetFullPath(), this.PlaceHolderFileName);
+                    File.Create(fullPlaceHolderPath);
+                    placeHolderItem = folder.ProjectItems.AddFromFile(fullPlaceHolderPath);
+                }
+
+
 
                 if (File.Exists(fullFilePath))
                 {
@@ -103,20 +115,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
 
                 this.Context.LogLineToBuildPane("   Writing file: " + fullFilePath);
+                File.WriteAllText(fullFilePath, content);
                 var item = this.Context.VisualStudio.Solution.GetProjectItem(fullFilePath);
-                if (item != null)
-                {
-                    item.Remove();
-                    //this.CurrentOutputFile.ProjectItem = item;
-                    //item.Open();
-                    //var td = (TextDocument) item.Document.Object();
-                    //td.
-                }
-                //else
-                {
-                    File.WriteAllText(fullFilePath, content);
-                    this.CurrentOutputFile.ProjectItem = folder.ProjectItems.AddFromFile(fullFilePath);
-                }
+                this.CurrentOutputFile.ProjectItem = item ?? placeHolderItem.ProjectItems.AddFromFile(fullFilePath);
 
                 // set VS properties for the ProjectItem
                 //
@@ -150,19 +151,36 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 var autoFolder = project.ProjectItems.GetChild("_auto");
                 if (autoFolder != null)
                 {
-                    foreach (var projectItem in autoFolder.GetAllProjectItems())
+                    var placeHolderList = from o in autoFolder.GetAllProjectItems()
+                        where o.Name == this.PlaceHolderFileName 
+                            && ((ProjectItem) o.Collection.Parent).IsPhysicalFolder()
+                        select o;
+                    foreach (var placeHolderItem in placeHolderList.ToList())
                     {
-                        if (projectItem.IsPhysicalFile()
-                            && !this.CompletedFiles.Any(o => o.ProjectItem == projectItem))
+                        foreach (var projectItem in placeHolderItem.ProjectItems.ToEnumerable())
                         {
-                            // this seemns to work ok the first time, then removed EVERYTHING after that
-                            // additionally, this way of handling stale items makes it so that only 1 master t4 template can be used in the solution at a time, which is not ok.
-                            // TODO: need to figure out a better way to handle, probably with subitems of the templates name
-                            //
-                            //projectItem.Delete();
+                            if (!this.CompletedFiles.Any(o => o.ProjectItem == projectItem))
+                            {
+                                this.Context.LogLineToBuildPane("Deleting stale auto-generated file: " + projectItem.GetFullPath());
+                                projectItem.Delete();
+                            }
                         }
                     }
+                    placeHolderList = from o in autoFolder.GetAllProjectItems()
+                                      where o.Name == this.PlaceHolderFileName
+                                          && ((ProjectItem)o.Collection.Parent).IsPhysicalFolder()
+                                      select o;
+                    foreach (var placeHolderItem in placeHolderList.Where(o => o.ProjectItems.Count == 0).ToList())
+                    {
+                        placeHolderItem.Delete();
+                    }
+                    if (autoFolder.ProjectItems.Count == 0
+                        || autoFolder.GetAllProjectItems().All(o => o.IsPhysicalFolder()))
+                    {
+                        autoFolder.Delete();
+                    }
                 }
+
             }
         }
 

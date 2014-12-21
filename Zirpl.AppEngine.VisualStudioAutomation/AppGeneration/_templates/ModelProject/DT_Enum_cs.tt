@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" inherits="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OncePerDomainTypeTemplate" #>
+﻿<#@ template language="C#" linePragmas="false" inherits="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OncePerDomainTypeTemplate" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>

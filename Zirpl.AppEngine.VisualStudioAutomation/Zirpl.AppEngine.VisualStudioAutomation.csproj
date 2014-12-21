@@ -125,14 +125,14 @@
     <Compile Include="AppGeneration\TextTemplating\OutputFileProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateBase.cs" />
     <Compile Include="AppGeneration\_templates\DT_cs.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>DT_cs.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="AppGeneration\_templates\ModelProject\DT_Enum_cs.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>DT_Enum_cs.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="TextTemplating\ITextTransformation.cs" />
     <Compile Include="TextTemplating\OutputFileExtensions.cs" />
@@ -162,12 +162,13 @@
     <None Include="AppGeneration\_templates\DT_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_cs.cs</LastGenOutput>
+      <FormatOutput>True</FormatOutput>
     </None>
     <None Include="AppGeneration\_templates\ModelProject\DT_Enum_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
+      <FormatOutput>True</FormatOutput>
     </None>
-    <None Include="AppGeneration\_templates\sample override.tt" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

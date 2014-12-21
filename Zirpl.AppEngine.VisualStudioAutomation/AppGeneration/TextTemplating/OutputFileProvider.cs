@@ -46,10 +46,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             if (this.domainType != null)
             {
                 // rules for OncePerDomainType file name:
-                //      - if does not contain _dt_ (or variation), throw Exception as the file names will all be the same (Example: ModelExtensions -> throws Exception, ModelExtensions_cs -> throws Exception)
-                //      - replace the _dt_ (or variation) with the DomainType Name (Example: DT_DataService_cs -> AddressDataService.cs)
-                //      - if has other _ replace the last with . for the extension and leave the rest (Example: DT__Data_Service_cs -> Address_Data_Service.cs)
-                //      - default to .cs file extension if there is not one or only partial (Example: DT_DataService -> AddressDataService.cs)
+                //      - see unit tests for rules
                 if (type.Name.IndexOf("_dt_", 0, StringComparison.InvariantCultureIgnoreCase) < 0
                         && !type.Name.StartsWith("dt_", StringComparison.InvariantCultureIgnoreCase)
                         && !type.Name.EndsWith("_dt", StringComparison.InvariantCultureIgnoreCase)

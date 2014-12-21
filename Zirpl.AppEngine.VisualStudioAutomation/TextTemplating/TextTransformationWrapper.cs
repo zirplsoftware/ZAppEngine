@@ -247,5 +247,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             return (this._textTransformation ?? this._preProcessedTextTransformation).ToString();
         }
+
+
+        public string FileExtension
+        {
+            get
+            {
+                if (this.Host != null)
+                {
+                    return this.Host.GetAccessor().GetProperty<String>("FileExtension");
+                }
+                return null;
+            }
+        }
     }
 }

@@ -21,12 +21,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration._templates.ModelP
     /// <summary>
     /// Class to produce the template output
     /// </summary>
-    
-    #line 1 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class DT_Enum_cs : Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OncePerDomainTypeTemplate
     {
-#line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
@@ -35,72 +32,29 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration._templates.ModelP
             this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
                     ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
                     "ctions;\r\n\r\nnamespace ");
-            
-            #line 17 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
-            
-            #line default
-            #line hidden
             this.Write("\r\n{\r\n\tpublic enum ");
-            
-            #line 19 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
-            
-            #line default
-            #line hidden
             this.Write("Enum : ");
-            
-            #line 19 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
-            
-            #line default
-            #line hidden
             this.Write("\r\n\t{\r\n");
-            
-            #line 21 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 
 		foreach (var enumValue in this.DomainType.EnumValues)
 		{
 
-            
-            #line default
-            #line hidden
             this.Write("\t\t");
-            
-            #line 25 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
-            
-            #line default
-            #line hidden
             this.Write(" = ");
-            
-            #line 25 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
-            
-            #line default
-            #line hidden
             this.Write(",\r\n");
-            
-            #line 26 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 	
 		}
 
-            
-            #line default
-            #line hidden
             this.Write("\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
-        
-        #line 31 "E:\projects\ZAppEngine\Zirpl.AppEngine.CodeGeneration.VS2013\AppGeneration\_templates\ModelProject\DT_Enum_cs.tt"
 
 public override bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
 
-        
-        #line default
-        #line hidden
     }
-    
-    #line default
-    #line hidden
 }

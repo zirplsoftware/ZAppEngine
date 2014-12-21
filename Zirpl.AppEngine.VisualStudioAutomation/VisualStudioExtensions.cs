@@ -185,6 +185,19 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
                 return folderProjectItem;
             }
         }
+
+        public static IEnumerable<ProjectItem> ToEnumerable(this ProjectItems projectItems)
+        {
+            var list = new List<ProjectItem>();
+            if (projectItems != null)
+            {
+                foreach (ProjectItem item in projectItems)
+                {
+                    list.Add(item);
+                }
+            }
+            return list;
+        }
         
         #endregion
 
@@ -412,11 +425,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation
             try
             {
                 Window window = item.Open();
-                window.Activate();
+                window.Visible = false;
+                
+                //window.Activate();
 
                 foreach (var cmd in command)
                 {
-                    if (String.IsNullOrWhiteSpace(cmd) == true)
+                    if (String.IsNullOrWhiteSpace(cmd))
                     {
                         continue;
                     }

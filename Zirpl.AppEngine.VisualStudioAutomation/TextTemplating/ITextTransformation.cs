@@ -9,6 +9,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
     internal interface ITextTransformation : IDisposable
     {
         bool IsPreProcessed { get; }
+        String FileExtension { get; }
         StringBuilder GenerationEnvironment { get; set; }
         CompilerErrorCollection Errors { get; }
         ITextTemplatingEngineHost Host { get; set; }

@@ -42,6 +42,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                             && p.GetFullPath().ToLowerInvariant().Contains("_config")
                         select p.GetFullPath();
             new DomainFileParser().ParseDomainTypes(app, paths);
+
+            foreach (var domainType in app.DomainTypes.OrderBy(o => o.FullName))
+            {
+                TextTransformationContext.Instance.LogLineToBuildPane("Resulting DomainType: " + domainType.FullName);
+            }
             return app;
         }
     }

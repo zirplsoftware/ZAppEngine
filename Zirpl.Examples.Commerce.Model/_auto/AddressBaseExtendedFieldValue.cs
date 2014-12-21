@@ -8,20 +8,20 @@ using Zirpl.Collections;
 
 namespace Zirpl.Examples.Commerce.Model
 {
-    public partial class AddressBaseExtendedFieldValue : System.Object
-            , IMetadataDescribed
-            , IPersistable<Guid>
-            , IExtendedEntityFieldValue<AddressBaseExtendedFieldValue, AddressBase, Guid>
-    {
-        public virtual Guid Id { get; set; }
-        public virtual byte[] RowVersion { get; set; }
-        public virtual Zirpl.Examples.Commerce.Model.AddressBase ExtendedEntity { get; set; }
-        public virtual Guid ExtendedEntityId { get; set; }
-        public virtual string Value { get; set; }
+	public  partial class AddressBaseExtendedFieldValue : System.Object
+			, IMetadataDescribed
+			, IPersistable<Guid>
+			, IExtendedEntityFieldValue<AddressBaseExtendedFieldValue,AddressBase,Guid>
+	{
+		public virtual Guid Id { get; set; }
+		public virtual byte[] RowVersion { get; set; }
+		public virtual Zirpl.Examples.Commerce.Model.AddressBase ExtendedEntity { get; set; }
+		public virtual Guid ExtendedEntityId { get; set; }
+		public virtual string Value { get; set; }
 
-        #region Interface implementations
+		#region Interface implementations
 
-        public virtual Object GetId()
+		public virtual Object GetId()
         {
             return Id;
         }
@@ -36,7 +36,7 @@ namespace Zirpl.Examples.Commerce.Model
             get { return this.EvaluateIsPersisted(); }
         }
 
-        public override bool Equals(object other)
+		public override bool Equals(object other)
         {
             return this.EvaluateEquals(other);
         }
@@ -64,7 +64,7 @@ namespace Zirpl.Examples.Commerce.Model
         {
             this.ExtendedEntity = (Zirpl.Examples.Commerce.Model.AddressBase)entity;
         }
-
-        #endregion
-    }
+		
+		#endregion
+	}
 }
