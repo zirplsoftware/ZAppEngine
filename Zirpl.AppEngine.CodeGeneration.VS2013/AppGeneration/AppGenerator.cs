@@ -33,7 +33,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
         {
             using (TextTransformationContext.Create(callingTemplate))
             {
-                GenerateApp(new TemplateProvider(templateAssemblyName));
+                GenerateApp(new TemplateProvider(new [] {templateAssemblyName}));
             }
         }
 
@@ -49,7 +49,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
         {
             using (TextTransformationContext.Create(callingTemplate))
             {
-                GenerateApp(new TemplateProvider(templateAssembly));
+                GenerateApp(new TemplateProvider(new[] { templateAssembly }));
             }
         }
 

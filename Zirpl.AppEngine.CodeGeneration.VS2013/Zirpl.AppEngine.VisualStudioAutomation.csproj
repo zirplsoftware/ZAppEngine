@@ -123,6 +123,11 @@
     <Compile Include="AppGeneration\TextTemplating\OncePerDomainTypeTemplate.cs" />
     <Compile Include="AppGeneration\TextTemplating\OutputFileProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateBase.cs" />
+    <Compile Include="AppGeneration\_templates\DT_cs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DT_cs.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppGeneration\_templates\ModelProject\DT_Enum_cs.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,10 +158,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AppGeneration\Config\Parsers\Json\sample domain.zae" />
+    <None Include="AppGeneration\_templates\DT_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DT_cs.cs</LastGenOutput>
+    </None>
     <None Include="AppGeneration\_templates\ModelProject\DT_Enum_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
     </None>
+    <None Include="AppGeneration\_templates\sample override.tt" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

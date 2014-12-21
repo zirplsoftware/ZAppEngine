@@ -73,15 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_templates\DT_cs.cs">
-      <DependentUpon>DT_cs.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="_templates\ModelProject\ModelExtensions_cs.cs">
+    <Compile Include="_templates\ModelProject\ModelExtensions.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelExtensions_cs.tt</DependentUpon>
+      <DependentUpon>ModelExtensions.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -108,15 +103,9 @@
     <EmbeddedResource Include="_config\ModelProject\NamePrefixType.domain.zae" />
     <None Include="_config\ModelProject\Orders\ShipBatch.model.xml.exclude" />
     <None Include="_config\ModelProject\Orders\ShipBatchItem.model.xml.exclude" />
-    <None Include="_templates\DT_cs.tt">
+    <None Include="_templates\ModelProject\ModelExtensions.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DT_cs.cs</LastGenOutput>
-      <TransformOnBuild>True</TransformOnBuild>
-      <FormatOutput>True</FormatOutput>
-    </None>
-    <None Include="_templates\ModelProject\ModelExtensions_cs.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelExtensions_cs.cs</LastGenOutput>
+      <LastGenOutput>ModelExtensions.cs</LastGenOutput>
       <FormatOutput>True</FormatOutput>
       <TransformOnBuild>True</TransformOnBuild>
     </None>

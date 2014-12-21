@@ -19,7 +19,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         public static OutputFile MatchBuildActionToFileExtension(this OutputFile outputFile)
         {
-            switch (outputFile.FileExtension.ToLowerInvariant())
+            var extension = outputFile.FileExtension.OrEmpty().ToLowerInvariant();
+            switch (extension)
             {
                 case ".cs":
                     outputFile.BuildAction = BuildActionTypeEnum.Compile;

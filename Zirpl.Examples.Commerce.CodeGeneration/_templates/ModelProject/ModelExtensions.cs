@@ -22,9 +22,9 @@ namespace Zirpl.Examples.Commerce.CodeGeneration._templates.ModelProject
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+    #line 1 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ModelExtensions_cs : Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OncePerAppTemplate
+    public partial class ModelExtensions : Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OncePerAppTemplate
     {
 #line hidden
         /// <summary>
@@ -36,14 +36,14 @@ namespace Zirpl.Examples.Commerce.CodeGeneration._templates.ModelProject
                     ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
                     "ctions;\r\n\r\nnamespace ");
             
-            #line 17 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+            #line 17 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(App.ModelProject.GetDefaultNamespace()));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic static partial class ModelExtensions\r\n\t{\r\n");
             
-            #line 21 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+            #line 21 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions.tt"
 
 	foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && (o.IsUpdatable || o.IsInsertable)))
 	{
@@ -53,14 +53,14 @@ namespace Zirpl.Examples.Commerce.CodeGeneration._templates.ModelProject
             #line hidden
             this.Write("\t\tpublic static void Save(this ");
             
-            #line 25 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+            #line 25 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write(" entity)\r\n\t\t{\r\n\t\t}\r\n");
             
-            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+            #line 28 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions.tt"
 	
     }
 	foreach (var domainType in this.App.DomainTypes.Where(o => o.IsPersistable && (o.IsDeletable || o.IsMarkDeletable)))
@@ -71,14 +71,14 @@ namespace Zirpl.Examples.Commerce.CodeGeneration._templates.ModelProject
             #line hidden
             this.Write("\t\tpublic static void Delete(this ");
             
-            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+            #line 33 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.Name));
             
             #line default
             #line hidden
             this.Write(" entity)\r\n\t\t{\r\n\t\t}\r\n");
             
-            #line 36 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions_cs.tt"
+            #line 36 "E:\projects\ZAppEngine\Zirpl.Examples.Commerce.CodeGeneration\_templates\ModelProject\ModelExtensions.tt"
 	
     }
 

@@ -16,6 +16,10 @@ namespace Zirpl
         {
             return string.IsNullOrWhiteSpace(text) ? alternative : text;
         }
+        public static string OrEmpty(this string text)
+        {
+            return string.IsNullOrWhiteSpace(text) ? String.Empty : text;
+        }
 
         public static String SubstringUntilNthInstanceOf(this string originalText, String search, int nthInstance,      
 #if !PORTABLE
@@ -456,7 +460,7 @@ namespace Zirpl
             }
             return originalText.Substring(index + search.Length);
         }
-        public static String Substitute(this String originalText, int startIndex, int length, String newToken)
+        public static String Replace(this String originalText, int startIndex, int length, String newToken)
         {
             var sb = new StringBuilder();
             if (startIndex > 0)
@@ -469,6 +473,92 @@ namespace Zirpl
                 sb.Append(originalText.Substring(startIndex + length));
             }
             return sb.ToString();
+        }
+
+        public static String ReplaceAtStart(this String originalText, String searchToken, String replacementText,
+#if !PORTABLE
+            StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
+        {
+            if (!String.IsNullOrEmpty(originalText)
+                && originalText.StartsWith(searchToken, stringComparison))
+            {
+                return replacementText + (originalText.Length > searchToken.Length ? originalText.Substring(searchToken.Length) : null);
+            }
+            return originalText;
+        }
+        public static String ReplaceFirstInstanceOf(this String originalText, String searchToken, String replacementText,
+#if !PORTABLE
+ StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
+        {
+            if (!String.IsNullOrEmpty(originalText))
+            {
+                var index = originalText.IndexOf(searchToken, stringComparison);
+                if (index == -1)
+                {
+                    return originalText;
+                }
+                else if (index == 0)
+                {
+                    return ReplaceAtStart(originalText, searchToken, replacementText, stringComparison);
+                }
+                else if (index + searchToken.Length == originalText.Length)
+                {
+                    return ReplaceAtEnd(originalText, searchToken, replacementText, stringComparison);
+                }
+                else
+                {
+                    return originalText.Substring(0, index) + replacementText +
+                           originalText.Substring(index + searchToken.Length);
+                }
+            }
+            return originalText;
+        }
+
+        public static String ReplaceAtEnd(this String originalText, String searchToken, String replacementText,
+#if !PORTABLE
+ StringComparison stringComparison = StringComparison.InvariantCulture)
+#else
+ StringComparison stringComparison = StringComparison.CurrentCulture)
+#endif
+        {
+            if (!String.IsNullOrEmpty(originalText)
+                && originalText.EndsWith(searchToken, stringComparison))
+            {
+                return (originalText.Length > searchToken.Length ? originalText.Substring(0, originalText.Length - searchToken.Length) : null) + replacementText;
+            }
+            return originalText;
+        }
+
+        public static String JoinToString(this IEnumerable<String> tokens, String token)
+        {
+            if (tokens == null)
+            {
+                return null;
+            }
+            else if (tokens.Count() == 1)
+            {
+                return tokens.Single();
+            }
+            else
+            {
+                var sb = new StringBuilder();
+                var tokensArray = tokens.ToArray();
+                for (int i = 0; i < tokensArray.Length; i++)
+                {
+                    if (i > 0)
+                    {
+                        sb.Append(token);
+                    }
+                    sb.Append(tokensArray[i]);
+                }
+                return sb.ToString();
+            }
         }
 
         public static string Base64Encode(this string toEncode)

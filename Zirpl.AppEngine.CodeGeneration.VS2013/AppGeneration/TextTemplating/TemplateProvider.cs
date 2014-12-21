@@ -18,19 +18,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             this.Initialize(null);
         }
 
-        internal TemplateProvider(Assembly templateAssembly)
-            : this(new Assembly[] { templateAssembly })
-        {
-        }
-
         internal TemplateProvider(IEnumerable<Assembly> templateAssemblies)
         {
             this.Initialize(templateAssemblies);
-        }
-
-        internal TemplateProvider(String templateAssemblyName)
-            : this(new string[] { templateAssemblyName})
-        {
         }
 
         internal TemplateProvider(IEnumerable<String> templateAssemblyNames)
@@ -109,15 +99,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                                     select template;
 
             // these are the stock templates that have been replaced
-            var defaultTemplatesThatAreBeingReplaced = from template in allTemplates
-                                                where template.Assembly == Assembly.GetExecutingAssembly()
-                                                      && otherTemplates.Any(o => o.FullName.SubstringAfterLastInstanceOf("_templates.").Equals(template.FullName.SubstringAfterLastInstanceOf("_templates."), StringComparison.InvariantCultureIgnoreCase))
+            var defaultTemplatesThatAreBeingReplaced = from template in defaultTemplates
+                                                where otherTemplates.Any(o => o.FullName.SubstringAfterLastInstanceOf("_templates.").Equals(template.FullName.SubstringAfterLastInstanceOf("_templates."), StringComparison.InvariantCultureIgnoreCase))
+                                                    || otherTemplates.Any(o => template.IsAssignableFrom(o))
                                                 select template;
 
             // these are the templates that are specifically REPLACING default templates
-            var otherTemplatesThatAreReplacingDefaultTemplates = from template in allTemplates
-                                                where template.Assembly != Assembly.GetExecutingAssembly()
-                                                      && defaultTemplates.Any(o => o.FullName.SubstringAfterLastInstanceOf("_templates.").Equals(template.FullName.SubstringAfterLastInstanceOf("_templates."), StringComparison.InvariantCultureIgnoreCase))
+            var otherTemplatesThatAreReplacingDefaultTemplates = from template in otherTemplates
+                                                where defaultTemplates.Any(d => d.FullName.SubstringAfterLastInstanceOf("_templates.").Equals(template.FullName.SubstringAfterLastInstanceOf("_templates."), StringComparison.InvariantCultureIgnoreCase))
+                                                      || defaultTemplates.Any(d => d.IsAssignableFrom(template))
                                                 select template;
 
 

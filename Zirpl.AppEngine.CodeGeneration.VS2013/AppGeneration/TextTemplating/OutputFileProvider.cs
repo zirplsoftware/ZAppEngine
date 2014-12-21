@@ -43,42 +43,133 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 
         private String GetFileName()
         {
-            // let's see if we can determine the filename, folder, and project by convention
-            String fileName = null;
-            if (type.Name.Contains("_"))
+            if (this.domainType != null)
             {
-                var tokens = type.Name.Split('_');
-                if (tokens.Count() >= 2
-                    || tokens.Count() <= 4)
+                // rules for OncePerDomainType file name:
+                //      - if does not contain _dt_ (or variation), throw Exception as the file names will all be the same (Example: ModelExtensions -> throws Exception, ModelExtensions_cs -> throws Exception)
+                //      - replace the _dt_ (or variation) with the DomainType Name (Example: DT_DataService_cs -> AddressDataService.cs)
+                //      - if has other _ replace the last with . for the extension and leave the rest (Example: DT__Data_Service_cs -> Address_Data_Service.cs)
+                //      - default to .cs file extension if there is not one or only partial (Example: DT_DataService -> AddressDataService.cs)
+                if (type.Name.IndexOf("_dt_", 0, StringComparison.InvariantCultureIgnoreCase) < 0
+                        && !type.Name.StartsWith("dt_", StringComparison.InvariantCultureIgnoreCase)
+                        && !type.Name.EndsWith("_dt", StringComparison.InvariantCultureIgnoreCase)
+                        && !type.Name.ToLowerInvariant().Equals("dt"))
                 {
-                    // yes, we can determine the fileName
-                    for (int i = 0; i < tokens.Length; i++)
+                    throw new Exception("A OncePerDomainTypeTemplate has been named without a DomainType replacement token (_dt_, _dt, or dt_): " + type.FullName);
+                }
+                // check if there are characters after the dt
+                if (type.Name.ToLowerInvariant().Equals("dt"))
+                {
+                    return this.domainType.Name + ".cs";
+                }
+                else if (type.Name.EndsWith("_dt", StringComparison.InvariantCultureIgnoreCase)
+                    || type.Name.EndsWith("_", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    // we will be supplying the default extension, so just replace
+                    if (type.Name.StartsWith("dt_", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (i != tokens.Length - 1
-                            && tokens[i].ToLowerInvariant() == "dt")
-                        {
-                            tokens[i] = domainType != null ? domainType.Name : null;
-                        }
-                        if (i == tokens.Length - 1)
-                        {
-                            // remove "template" at the end if it was included in the name
-                            tokens[i] = tokens[i].SubstringUntilLastInstanceOf("template",
-                                StringComparison.InvariantCultureIgnoreCase);
-                            tokens[i] = "." + tokens[i];
-                            if (tokens[i] == ".")
-                            {
-                                // assume it is CSharp
-                                tokens[i] = ".cs";
-                            }
-                        }
+                        return type.Name
+                            .ReplaceAtStart("dt_", domainType.Name, StringComparison.InvariantCultureIgnoreCase) 
+                            + ".cs";
                     }
-                    foreach (var token in tokens)
+                    else if (type.Name.IndexOf("_dt_", 0, StringComparison.InvariantCultureIgnoreCase) >= 0)
                     {
-                        fileName += token;
+                        return
+                            type.Name
+                            .ReplaceFirstInstanceOf("_dt_", domainType.Name,StringComparison.InvariantCultureIgnoreCase)
+                            + ".cs";
+                    }
+                    else //type.Name.EndsWith("_dt", StringComparison.InvariantCultureIgnoreCase)
+                    {
+                        return type.Name
+                            .ReplaceAtEnd("_dt", domainType.Name, StringComparison.InvariantCultureIgnoreCase) 
+                            + ".cs";
+                    }
+                }
+                else
+                {
+                    // now it ALWAYS ends in some ALPHANUMERIC text OTHER than _dt, 
+                    // so we have an extension too, so we need to pay attention to how we replace
+                    var typeNameWithExtension = type.Name.Replace(type.Name.LastIndexOf("_", StringComparison.InvariantCultureIgnoreCase), 1, ".");
+                    if (typeNameWithExtension.StartsWith("dt_", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return typeNameWithExtension.ReplaceAtStart("dt_", domainType.Name,
+                            StringComparison.InvariantCultureIgnoreCase);
+                    }
+                    else if (typeNameWithExtension.StartsWith("dt.", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return typeNameWithExtension.ReplaceAtStart("dt.", domainType.Name + ".",
+                            StringComparison.InvariantCultureIgnoreCase);
+                    }
+                    else if (typeNameWithExtension.IndexOf("_dt_", 0, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        return typeNameWithExtension.ReplaceFirstInstanceOf("_dt_", domainType.Name,
+                            StringComparison.InvariantCultureIgnoreCase);
+                    }
+                    else //if (typeNameWithExtension.IndexOf("_dt.", 0, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        return typeNameWithExtension.ReplaceFirstInstanceOf("_dt.", domainType.Name + ".",
+                            StringComparison.InvariantCultureIgnoreCase);
                     }
                 }
             }
-            return fileName;
+            else
+            {
+                // rules for OncePerApp file name (taken from the unit tests)
+                //new OutputFileProvider(new OncePerAppTypes._()).InvokeMethod<String>("GetFileName").Should().Be("_.cs");
+                //new OutputFileProvider(new OncePerAppTypes.__()).InvokeMethod<String>("GetFileName").Should().Be("__.cs");
+                //new OutputFileProvider(new OncePerAppTypes.___()).InvokeMethod<String>("GetFileName").Should().Be("___.cs");
+                //new OutputFileProvider(new OncePerAppTypes.Service()).InvokeMethod<String>("GetFileName").Should().Be("Service.cs");
+                //new OutputFileProvider(new OncePerAppTypes._Service()).InvokeMethod<String>("GetFileName").Should().Be("_Service.cs");
+                //new OutputFileProvider(new OncePerAppTypes.__Service()).InvokeMethod<String>("GetFileName").Should().Be("__Service.cs");
+                //new OutputFileProvider(new OncePerAppTypes._Service_()).InvokeMethod<String>("GetFileName").Should().Be("_Service_.cs");
+                //new OutputFileProvider(new OncePerAppTypes.Service_()).InvokeMethod<String>("GetFileName").Should().Be("Service_.cs");
+                //new OutputFileProvider(new OncePerAppTypes.Service__()).InvokeMethod<String>("GetFileName").Should().Be("Service__.cs");
+                //new OutputFileProvider(new OncePerAppTypes.Service_txt()).InvokeMethod<String>("GetFileName").Should().Be("Service.txt");
+                //new OutputFileProvider(new OncePerAppTypes.Service__txt()).InvokeMethod<String>("GetFileName").Should().Be("Service_.txt");
+                //new OutputFileProvider(new OncePerAppTypes.Service_txt_()).InvokeMethod<String>("GetFileName").Should().Be("Service_txt_.cs");
+                //new OutputFileProvider(new OncePerAppTypes.dt()).InvokeMethod<String>("GetFileName").Should().Be("dt.cs");
+                //new OutputFileProvider(new OncePerAppTypes.dt_ext()).InvokeMethod<String>("GetFileName").Should().Be("dt.ext");
+                //new OutputFileProvider(new OncePerAppTypes.Service_dt_ext()).InvokeMethod<String>("GetFileName").Should().Be("Service_dt.ext");
+                //new OutputFileProvider(new OncePerAppTypes.Service_dt()).InvokeMethod<String>("GetFileName").Should().Be("Service.dt");
+                if (type.Name.Contains("_"))
+                {
+                    if (type.Name.EndsWith("_"))
+                    {
+                        return type.Name + ".cs";
+                    }
+                    else
+                    {
+                        // get the index of the last _
+                        // and make sure there is at least 1 alphanumeric char before that
+                        var index = type.Name.LastIndexOf("_", StringComparison.InvariantCultureIgnoreCase);
+                        var foundOneAlphaNumericCharBeforeIt = false;
+                        while (index >= 0
+                            && !foundOneAlphaNumericCharBeforeIt)
+                        {
+                            if (Char.IsLetterOrDigit(type.Name[index]))
+                            {
+                                foundOneAlphaNumericCharBeforeIt = true;
+                            }
+                            index--;
+                        }
+                        if (foundOneAlphaNumericCharBeforeIt)
+                        {
+                            // okay, we have a valid . substitution
+                            return type.Name.Replace(type.Name.LastIndexOf("_", StringComparison.InvariantCultureIgnoreCase), 1,
+                                    ".");
+                        }
+                        else
+                        {
+                            return type.Name + ".cs";
+                        }
+                    }
+                }
+                else
+                {
+                    return type.Name + ".cs";
+                }
+            }
         }
 
         private Project GetProject()

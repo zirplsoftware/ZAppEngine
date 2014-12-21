@@ -31,6 +31,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             this.EndFile();
 
+            if (String.IsNullOrEmpty(file.FileNameWithoutExtension)
+                || file.DestinationProject == null)
+            {
+                throw new ArgumentException("Cannot start a file without at least a file name and a Destination project");
+            }
+
             this.CurrentOutputFile = file;
             this.CurrentGenerationEnvironment = template.GenerationEnvironment;
             this.Context.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
