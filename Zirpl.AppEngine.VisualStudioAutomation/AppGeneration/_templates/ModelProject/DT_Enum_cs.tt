@@ -3,7 +3,6 @@
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>

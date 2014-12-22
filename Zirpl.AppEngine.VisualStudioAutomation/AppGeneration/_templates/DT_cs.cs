@@ -13,7 +13,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration._templates
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Zirpl.AppEngine.VisualStudioAutomation;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
     using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
