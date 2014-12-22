@@ -12,7 +12,6 @@ using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.Reflection;
 
@@ -22,7 +21,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
     {
         public static void SetUp(this TextTransformation textTransformation)
         {
-            LogFactory.Initialize(textTransformation);
+            LogFactory.Initialize(textTransformation.Wrap().Host as IServiceProvider);
         }
 
         public static void CleanUp(this TextTransformation textTransformation)
