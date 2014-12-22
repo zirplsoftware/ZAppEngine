@@ -209,6 +209,28 @@ namespace Zirpl.Reflection
             }
             return true;
         }
+        public bool HasMethod<T>(string methodName)
+        {
+            if (String.IsNullOrEmpty(methodName))
+            {
+                throw new ArgumentNullException("methodName");
+            }
+
+            //parameters = parameters ?? new object[1] { null };
+            var methodInfos = GetMethodInfos(this._type, methodName, null, typeof(T), false);
+            if (!methodInfos.Any())
+            {
+                if (this._baseTypeAccessor != null)
+                {
+                    return this._baseTypeAccessor.HasMethod(methodName);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         private IEnumerable<MethodInfo> GetMethodInfos(Type type, String methodName, Object[] parameters, Type returnType = null, bool restrictByParameters = false)
         {

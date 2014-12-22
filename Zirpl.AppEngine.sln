@@ -71,11 +71,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.VisualStudi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.Model", "Zirpl.Examples.Commerce.Model\Zirpl.Examples.Commerce.Model.csproj", "{84E18337-0043-464A-B9D9-D4B3F4B849CD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.Commerce.CodeGeneration", "Zirpl.Examples.Commerce.CodeGeneration\Zirpl.Examples.Commerce.CodeGeneration.csproj", "{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.AppEngine.VisualStudioAutomation.Tests", "Zirpl.AppEngine.VisualStudioAutomation.Tests\Zirpl.AppEngine.VisualStudioAutomation.Tests.csproj", "{677D8E03-964A-468E-ACE8-22F5E60C5D82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zirpl.Examples.ContactManager.CodeGeneration", "Zirpl.Examples.ContactManager.CodeGeneration\Zirpl.Examples.ContactManager.CodeGeneration.csproj", "{1BD4D8BA-B4C7-4677-BE02-514F2D736767}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,18 +149,14 @@ Global
 		{F8855F9A-35D1-4C30-BB53-1FD89A984989}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8855F9A-35D1-4C30-BB53-1FD89A984989}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8855F9A-35D1-4C30-BB53-1FD89A984989}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84E18337-0043-464A-B9D9-D4B3F4B849CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84E18337-0043-464A-B9D9-D4B3F4B849CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84E18337-0043-464A-B9D9-D4B3F4B849CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84E18337-0043-464A-B9D9-D4B3F4B849CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{677D8E03-964A-468E-ACE8-22F5E60C5D82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{677D8E03-964A-468E-ACE8-22F5E60C5D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{677D8E03-964A-468E-ACE8-22F5E60C5D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{677D8E03-964A-468E-ACE8-22F5E60C5D82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BD4D8BA-B4C7-4677-BE02-514F2D736767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD4D8BA-B4C7-4677-BE02-514F2D736767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD4D8BA-B4C7-4677-BE02-514F2D736767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD4D8BA-B4C7-4677-BE02-514F2D736767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -179,9 +173,8 @@ Global
 		{7F18B53C-542A-4499-91D9-C2B8E56648DD} = {53E45F83-AEF0-4176-93F2-DE7C8822D920}
 		{373F2A7C-B29D-44FA-B096-031E70DEB2A2} = {53E45F83-AEF0-4176-93F2-DE7C8822D920}
 		{15590AA5-04CE-4ADD-AEB3-8ED12BF3C1CA} = {53E45F83-AEF0-4176-93F2-DE7C8822D920}
-		{84E18337-0043-464A-B9D9-D4B3F4B849CD} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
-		{06F3D16B-A4FC-4FB1-9CDD-55B39EE7FAFC} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 		{677D8E03-964A-468E-ACE8-22F5E60C5D82} = {14D5F7E3-9B6E-4419-9752-2CED48920251}
+		{1BD4D8BA-B4C7-4677-BE02-514F2D736767} = {87F0397C-5CFC-4AD4-8DB9-1AC7384E78A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45

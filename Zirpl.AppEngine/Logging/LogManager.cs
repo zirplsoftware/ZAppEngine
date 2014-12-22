@@ -7,7 +7,7 @@ namespace Zirpl.AppEngine.Logging
     /// </summary>
     public static class LogManager
     {
-        private static ILogFactory _logFactory;
+        public static ILogFactory LogFactory { get; set; }
 
 #if !NET35CLIENT && !NET40CLIENT && !SILVERLIGHT
         /// <summary>
@@ -15,7 +15,7 @@ namespace Zirpl.AppEngine.Logging
         /// </summary>
         static LogManager()
         {
-            _logFactory = new Zirpl.AppEngine.Logging.Common.CommonLogFactory();
+            LogFactory = new Zirpl.AppEngine.Logging.Common.CommonLogFactory();
         }
 #endif
 
@@ -35,7 +35,7 @@ namespace Zirpl.AppEngine.Logging
         /// <returns>The ILog</returns>
         public static ILog GetLog(String name)
         {
-            return _logFactory == null ? new NullLog() : _logFactory.GetLog(name);
+            return LogFactory == null ? new NullLog() : LogFactory.GetLog(name);
         }
 
         /// <summary>

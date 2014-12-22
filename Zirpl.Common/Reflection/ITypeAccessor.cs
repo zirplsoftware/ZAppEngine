@@ -25,5 +25,6 @@ namespace Zirpl.Reflection
         bool HasField(string fieldName, Type valueType);
         bool HasField<T>(string fieldName);
         bool HasMethod(String methodName);
+        bool HasMethod<T>(string methodName);
     }
 }

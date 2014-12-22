@@ -45,6 +45,27 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public DomainType Extends { get; set; }
         public DomainType ExtendedBy { get; set; }
         public IList<EnumValue> EnumValues { get; private set; }
-        public IList<Relationship> Relationships { get; private set; } 
+        public IList<Relationship> Relationships { get; private set; }
+        
+        public IEnumerable<DomainProperty> GetAllPropertiesIncludingInherited()
+        {
+            var list = new List<DomainProperty>();
+            var domainType = this;
+            while (domainType != null)
+            {
+                list.AddRange(domainType.Properties);
+                domainType = domainType.InheritsFrom;
+            }
+            return list;
+        }
+
+        public DomainType GetBaseMostDomainType()
+        {
+            if (InheritsFrom != null)
+            {
+                return InheritsFrom.GetBaseMostDomainType();
+            }
+            return this;
+        }
     }
 }

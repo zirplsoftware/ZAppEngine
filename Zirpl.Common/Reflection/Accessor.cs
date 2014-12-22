@@ -17,62 +17,62 @@ namespace Zirpl.Reflection
             this._obj = obj;
             this._typeAccessor = typeAccessor;
         }
-        public T GetField<T>(string fieldName)
+        public T Field<T>(string fieldName)
         {
             return this._typeAccessor.GetFieldValue<T>(this._obj, fieldName);
         }
 
-        public T GetProperty<T>(string propertyName)
+        public T Property<T>(string propertyName)
         {
             return this._typeAccessor.GetPropertyValue<T>(this._obj, propertyName);
         }
 
-        public void SetField<T>(string fieldName, T value)
+        public void Field<T>(string fieldName, T value)
         {
             this._typeAccessor.SetFieldValue<T>(this._obj, fieldName, value);
         }
 
-        public void SetProperty<T>(string propertyName, T value)
+        public void Property<T>(string propertyName, T value)
         {
             this._typeAccessor.SetPropertyValue<T>(this._obj, propertyName, value);
         }
 
-        public void InvokeMethod(string methodName, params object[] parameters)
+        public void Invoke(string methodName, params object[] parameters)
         {
             this._typeAccessor.InvokeMethod(this._obj, methodName, parameters);
         }
 
-        public T InvokeMethod<T>(string methodName, params object[] parameters)
+        public T Invoke<T>(string methodName, params object[] parameters)
         {
             return this._typeAccessor.InvokeMethod<T>(this._obj, methodName, parameters);
         }
 
-        public bool HasPropertySetter(string propertyName)
+        public bool HasSet(string propertyName)
         {
             return this._typeAccessor.HasPropertySetter(propertyName);
         }
 
-        public bool HasPropertySetter(string propertyName, Type valueType)
+        public bool HasSet(string propertyName, Type valueType)
         {
             return this._typeAccessor.HasPropertySetter(propertyName, valueType);
         }
 
-        public bool HasPropertySetter<T>(string propertyName)
+        public bool HasSet<T>(string propertyName)
         {
             return this._typeAccessor.HasPropertySetter<T>(propertyName);
         }
 
-        public bool HasPropertyGetter(string propertyName)
+        public bool HasGet(string propertyName)
         {
             return this._typeAccessor.HasPropertyGetter(propertyName);
         }
 
-        public bool HasPropertyGetter(string propertyName, Type valueType)
+        public bool HasGet(string propertyName, Type valueType)
         {
             return this._typeAccessor.HasPropertyGetter(propertyName, valueType);
         }
 
-        public bool HasPropertyGetter<T>(string propertyName)
+        public bool HasGet<T>(string propertyName)
         {
             return this._typeAccessor.HasPropertyGetter<T>(propertyName);
         }
@@ -95,6 +95,11 @@ namespace Zirpl.Reflection
         public bool HasMethod(string methodName)
         {
             return this._typeAccessor.HasMethod(methodName);
+        }
+
+        public bool HasMethod<T>(string methodName)
+        {
+            return this._typeAccessor.HasMethod<T>(methodName);
         }
     }
 }

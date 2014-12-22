@@ -8,22 +8,24 @@ namespace Zirpl.Reflection
 {
     public interface IAccessor
     {
-        T GetField<T>(string fieldName);
-        T GetProperty<T>(string propertyName);
-        void SetField<T>(string fieldName, T value);
-        void SetProperty<T>(string propertyName, T value);
-        void InvokeMethod(String methodName, params Object[] parameters);
-        T InvokeMethod<T>(String methodName, params Object[] parameters);
+        T Field<T>(string fieldName);
+        void Field<T>(string fieldName, T value);
+        T Property<T>(string propertyName);
+        void Property<T>(string propertyName, T value);
+        void Invoke(String methodName, params Object[] parameters);
+        T Invoke<T>(String methodName, params Object[] parameters);
 
-        bool HasPropertySetter(string propertyName);
-        bool HasPropertySetter(string propertyName, Type valueType);
-        bool HasPropertySetter<T>(String propertyName);
-        bool HasPropertyGetter(String propertyName);
-        bool HasPropertyGetter(string propertyName, Type valueType);
-        bool HasPropertyGetter<T>(String propertyName);
+
         bool HasField(string fieldName);
         bool HasField(string fieldName, Type valueType);
         bool HasField<T>(string fieldName);
+        bool HasGet(String propertyName);
+        bool HasGet(string propertyName, Type valueType);
+        bool HasGet<T>(String propertyName);
+        bool HasSet(string propertyName);
+        bool HasSet(string propertyName, Type valueType);
+        bool HasSet<T>(String propertyName);
         bool HasMethod(String methodName);
+        bool HasMethod<T>(string methodName);
     }
 }

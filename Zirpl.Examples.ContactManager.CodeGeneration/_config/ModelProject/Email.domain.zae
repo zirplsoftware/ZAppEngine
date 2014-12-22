@@ -1,0 +1,7 @@
+﻿{
+    "isExtensible": true,
+    "properties": [ 
+        {"name":  "Label", "maxLength": 256},
+        {"name":  "EmailAddress", "maxLength": 1024}
+    ]
+}

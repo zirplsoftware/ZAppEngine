@@ -32,5 +32,27 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get { return this.FileNameWithoutExtension + this.FileExtension; }
         }
+
+        public OutputFile AsCSharpFile()
+        {
+            FileExtension = ".cs";
+            BuildAction = BuildActionTypeEnum.Compile;
+            return this;
+        }
+
+        public OutputFile MatchBuildActionToFileExtension()
+        {
+            var extension = FileExtension.OrEmpty().ToLowerInvariant();
+            switch (extension)
+            {
+                case ".cs":
+                    BuildAction = BuildActionTypeEnum.Compile;
+                    break;
+                default:
+                    BuildAction = BuildActionTypeEnum.None;
+                    break;
+            }
+            return this;
+        }
     }
 }

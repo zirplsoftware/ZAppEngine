@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
@@ -30,7 +31,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             #region create DomainTypeInfos specified by directly by the files
             foreach (var path in domainFilePaths)
             {
-                TextTransformationContext.Instance.LogLineToBuildPane("Parsing domain file: " + path);
+                this.GetLog().Debug("Parsing domain file: " + path);
                 DomainTypeJson json = null;
                 using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {

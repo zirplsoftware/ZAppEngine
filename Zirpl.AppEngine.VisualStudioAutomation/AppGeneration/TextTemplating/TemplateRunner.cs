@@ -1,50 +1,46 @@
 ﻿using System;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    internal class TemplateRunner
+    internal class TemplateRunner : ITemplateRunner
     {
-        private App app;
-        private TemplateProvider templateProvider;
+        private readonly App _app;
 
-        internal TemplateRunner(App app, TemplateProvider templateProvider)
+        internal TemplateRunner(App app)
         {
-            this.app = app;
-            this.templateProvider = templateProvider;
+            this._app = app;
         }
 
-        internal void RunTemplates()
+        public void RunTemplates(IOutputFileManager outputFileManager, ITemplateProvider templateProvider, IOutputFileProvider outputFileProvider)
         {
             foreach (var templateType in templateProvider.GetTemplates())
             {
-                if (typeof(OncePerDomainTypeTemplate).IsAssignableFrom(templateType))
+                if (templateType.GetTypeAccessor().HasPropertyGetter<DomainType>("DomainType"))
                 {
                     // once per DomainType
                     //
-                    TextTransformationContext.Instance.LogLineToBuildPane("Calling template once per domain type: " + templateType.FullName);
-                    foreach (var domainType in app.DomainTypes)
+                    this.GetLog().Debug("Calling template once per domain type: " + templateType.FullName);
+                    foreach (var domainType in _app.DomainTypes)
                     {
-                        TransformTemplate(templateType, domainType);
+                        TransformTemplate(outputFileManager, outputFileProvider, templateType, domainType);
                     }
-                }
-                else if (typeof(OncePerAppTemplate).IsAssignableFrom(templateType))
-                {
-                    // once per App
-                    //
-                    TextTransformationContext.Instance.LogLineToBuildPane("Calling template once: " + templateType.FullName);
-                    TransformTemplate(templateType);
                 }
                 else
                 {
-                    throw new Exception("Could not determine how to run template. Ensure all templates inherit from OncePerDomainTypeTemplate or OncePerAppTemplate");
+                    // once per App
+                    //
+                    this.GetLog().Debug("Calling template once: " + templateType.FullName);
+                    TransformTemplate(outputFileManager, outputFileProvider, templateType);
                 }
             }
         }
 
-        private void TransformTemplate(Type templateType, DomainType domainType = null)
+        private void TransformTemplate(IOutputFileManager outputFileManager, IOutputFileProvider outputFileProvider, Type templateType, DomainType domainType = null)
         {
             var template = Activator.CreateInstance(templateType);
             var templateWrapper = new TextTransformationWrapper(template);
@@ -53,8 +49,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             //{
             //    templateWrapper.Session.Add(globalTemplateParameter);
             //}
-            session.Add("Context", TextTransformationContext.Instance);
-            session.Add("App", app);
+            session.Add("App", _app);
             if (domainType != null)
             {
                 session.Add("DomainType", domainType);
@@ -62,33 +57,42 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             templateWrapper.Session = session;
             templateWrapper.Initialize();
 
-            var templateBase = template as TemplateBase;
-            if (templateBase != null)
+            if (!template.Access().HasGet<bool>("ShouldTransform")
+                || template.Access().Property<bool>("ShouldTransform"))
             {
-                if (!templateBase.ShouldTransform)
+                OutputFile outputFile = null;
+                if (template.Access().HasGet<OutputFile>("OutputFile"))
                 {
-                    if (domainType != null)
-                    {
-                        TextTransformationContext.Instance.LogLineToBuildPane(String.Format("      ShouldTransform == false. Not transforming for {0}", domainType.FullName));
-                    }
-                    else
-                    {
-                        TextTransformationContext.Instance.LogLineToBuildPane(String.Format("      ShouldTransform == false. Not transforming"));
-                    }
-                    return;
+                    outputFile = template.Access().Property<OutputFile>("OutputFile");
+                }
+                if (outputFile == null)
+                {
+                    outputFile = outputFileProvider.GetOutputFile(template);
+                }
+                if (outputFile != null)
+                {
+                    outputFileManager.StartFile(template, outputFile);
+                    // run the template
+                    templateWrapper.TransformText();
+                    outputFileManager.EndFile();
                 }
                 else
                 {
-                    var outputFile = templateBase.OutputFile;
-                    if (outputFile != null)
-                    {
-                        TextTransformationContext.Instance.StartFile(templateWrapper, outputFile);
-                    }
+                    // we are counting on the template itself to manage it, otherwise it will be going directly to the calling template
+                    templateWrapper.TransformText();
                 }
             }
-            // run the template
-            templateWrapper.TransformText();
-            TextTransformationContext.Instance.EndFile();
+            else
+            {
+                if (domainType != null)
+                {
+                    this.GetLog().Debug(String.Format("      ShouldTransform == false. Not transforming for {0}", domainType.FullName));
+                }
+                else
+                {
+                    this.GetLog().Debug(String.Format("      ShouldTransform == false. Not transforming"));
+                }
+            }
         }
     }
 }

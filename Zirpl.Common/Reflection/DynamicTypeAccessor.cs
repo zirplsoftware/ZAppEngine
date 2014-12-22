@@ -439,6 +439,11 @@ namespace Zirpl.Reflection
             return TypeAccessorFactory.GetReflectionTypeAccessor(this._type).HasMethod(methodName);
         }
 
+        public bool HasMethod<T>(string methodName)
+        {
+            return TypeAccessorFactory.GetReflectionTypeAccessor(this._type).HasMethod<T>(methodName);
+        }
+
 
         public T InvokeMethod<T>(object target, string methodName, params object[] parameters)
         {

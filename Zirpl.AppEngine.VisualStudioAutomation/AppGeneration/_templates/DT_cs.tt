@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" linePragmas="false" inherits="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating.OncePerDomainTypeTemplate" #>
+﻿<#@ template language="C#" linePragmas="false" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -7,6 +7,8 @@
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,23 +81,21 @@ namespace <#= this.DomainType.Namespace #>
         }
 #>
 	{
+		<#= this.DomainType.IsAbstract || this.DomainType.IsPersistable ? "protected" : "public" #> <#= this.DomainType.Name #>()
+		{
 <#
 		if (this.DomainType.Properties.GetCollectionProperties().Any())
         {
-#>
-		<#= this.DomainType.IsAbstract ? "protected" : "public" #> <#= this.DomainType.Name #>()
-		{
-<#
 			foreach (var collectionProperty in this.DomainType.Properties.GetCollectionProperties())
             {
 #>
 			this.<#= collectionProperty.Name #> = this.<#= collectionProperty.Name #> ?? new <#= collectionProperty.InitializationDataTypeString #>();
 <#
             }
+        }
 #>
 		}
 <#
-        }
 		foreach (var property in this.DomainType.Properties)
 		{
 #>

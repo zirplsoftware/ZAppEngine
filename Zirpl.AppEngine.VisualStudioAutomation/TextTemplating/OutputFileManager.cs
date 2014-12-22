@@ -7,32 +7,42 @@ using System.Threading.Tasks;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.AppEngine.Logging;
 using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    internal class OutputFileManager : IDisposable
+    public class OutputFileManager : IOutputFileManager
     {
-        private IList<OutputFile> CompletedFiles { get; set; }
-        private TextTransformationContext Context { get; set; }
-        private StringBuilder CallingTemplateOriginalGenerationEnvironment { get; set; }
-        private StringBuilder CurrentGenerationEnvironment { get; set; }
-        private OutputFile CurrentOutputFile { get; set; }
-        private String PlaceHolderFileName { get; set; }
+        private readonly IList<OutputFile> _completedFiles;
+        private readonly DTE2 _visualStudio;
+        private readonly TextTransformation _callingTemplate;
+        private readonly String _placeHolderName;
+        private readonly StringBuilder _callingTemplateOriginalGenerationEnvironment;
+        private StringBuilder _currentGenerationEnvironment;
+        private OutputFile _currentOutputFile;
 
-        internal OutputFileManager(TextTransformationContext context)
+        internal OutputFileManager(TextTransformation callingTemplate)
         {
-            this.CallingTemplateOriginalGenerationEnvironment = context.CallingTemplate.GenerationEnvironment;
-            this.CurrentGenerationEnvironment = context.CallingTemplate.GenerationEnvironment;
-            this.Context = context;
-            var placeholder = context.CallingTemplateProjectItem.ProjectItems.ToEnumerable().SingleOrDefault();
-            this.PlaceHolderFileName = placeholder == null ? null : placeholder.Name;
-            this.CompletedFiles = new List<OutputFile>();
+            this._visualStudio = callingTemplate.GetVisualStudio();
+            this._callingTemplate = callingTemplate;
+
+            var callingTemplateProjectItem = callingTemplate.GetProjectItem();
+
+            this._callingTemplateOriginalGenerationEnvironment = callingTemplate.GetGenerationEnvironment();
+            this._currentGenerationEnvironment = callingTemplate.GetGenerationEnvironment();
+            var placeholder = callingTemplateProjectItem.ProjectItems.ToEnumerable().SingleOrDefault();
+            this._placeHolderName = placeholder == null ? null : placeholder.Name;
+            this._completedFiles = new List<OutputFile>();
         }
 
-        internal void StartFile(ITextTransformation template, OutputFile file)
+        public void StartFile(Object template, OutputFile file)
         {
+            // we end it first, only because it will make logging easier to follow/debug
             this.EndFile();
+
+            if (template == null) throw new ArgumentNullException("template");
+            if (file == null) throw new ArgumentNullException("file");
 
             if (String.IsNullOrEmpty(file.FileNameWithoutExtension)
                 || file.DestinationProject == null)
@@ -40,18 +50,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 throw new ArgumentException("Cannot start a file without at least a file name and a Destination project");
             }
 
-            this.CurrentOutputFile = file;
-            this.CurrentGenerationEnvironment = template.GenerationEnvironment;
-            this.Context.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
+            this._currentOutputFile = file;
+            this._currentGenerationEnvironment = new TextTransformationWrapper(template).GenerationEnvironment;
+            this._callingTemplate.SetGenerationEnvironment(this._currentGenerationEnvironment);
         }
 
-        internal void EndFile()
+        public void EndFile()
         {
-            if (this.CurrentOutputFile != null)
+            if (this._currentOutputFile != null)
             {
-                var content = this.CurrentGenerationEnvironment.ToString();
-                this.CurrentGenerationEnvironment = this.CallingTemplateOriginalGenerationEnvironment;
-                this.Context.CallingTemplate.GenerationEnvironment = this.CurrentGenerationEnvironment;
+                var content = this._currentGenerationEnvironment.ToString();
+                this._currentGenerationEnvironment = this._callingTemplateOriginalGenerationEnvironment;
+                this._callingTemplate.SetGenerationEnvironment(this._currentGenerationEnvironment);
                 
                 // apply parameters to content
                 //
@@ -76,19 +86,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 //
                 // clean up template placeholders
 
-                // TODO: use template placeholders if should
                 var fullFilePath = Path.Combine(
-                    Path.GetDirectoryName(this.CurrentOutputFile.DestinationProject.FullName),
+                    Path.GetDirectoryName(this._currentOutputFile.DestinationProject.FullName),
                     @"_auto\", 
-                    this.CurrentOutputFile.FolderPathWithinProject ?? "",
-                    this.CurrentOutputFile.FileName);
+                    this._currentOutputFile.FolderPathWithinProject ?? "",
+                    this._currentOutputFile.FileName);
                 PathUtilities.EnsureDirectoryExists(fullFilePath);
-                this.CurrentOutputFile.DestinationProject.GetOrCreateFolder(@"_auto\", false);
-                var folder = this.CurrentOutputFile.DestinationProject.GetOrCreateFolder(@"_auto\" + this.CurrentOutputFile.FolderPathWithinProject);
-                var placeHolderItem = folder.ProjectItems.ToEnumerable().SingleOrDefault(o => o.Name == this.PlaceHolderFileName);
+                this._currentOutputFile.DestinationProject.GetOrCreateFolder(@"_auto\", false);
+                var folder = this._currentOutputFile.DestinationProject.GetOrCreateFolder(@"_auto\" + this._currentOutputFile.FolderPathWithinProject);
+                var placeHolderItem = folder.ProjectItems.ToEnumerable().SingleOrDefault(o => o.Name == this._placeHolderName);
                 if (placeHolderItem == null)
                 {
-                    var fullPlaceHolderPath = Path.Combine(folder.GetFullPath(), this.PlaceHolderFileName);
+                    var fullPlaceHolderPath = Path.Combine(folder.GetFullPath(), this._placeHolderName);
                     File.Create(fullPlaceHolderPath).Dispose();
                     placeHolderItem = folder.ProjectItems.AddFromFile(fullPlaceHolderPath);
                 }
@@ -97,15 +106,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
                 if (File.Exists(fullFilePath))
                 {
-                    var isDifferent = File.ReadAllText(fullFilePath, this.CurrentOutputFile.Encoding) != content;
+                    var isDifferent = File.ReadAllText(fullFilePath, this._currentOutputFile.Encoding) != content;
                     if (isDifferent
-                        && this.CurrentOutputFile.CanOverrideExistingFile)
+                        && this._currentOutputFile.CanOverrideExistingFile)
                     {
-                        if (this.Context.VisualStudio.SourceControl != null
-                            && this.Context.VisualStudio.SourceControl.IsItemUnderSCC(fullFilePath)
-                            && !this.Context.VisualStudio.SourceControl.IsItemCheckedOut(fullFilePath))
+                        if (this._visualStudio.SourceControl != null
+                            && this._visualStudio.SourceControl.IsItemUnderSCC(fullFilePath)
+                            && !this._visualStudio.SourceControl.IsItemCheckedOut(fullFilePath))
                         {
-                            this.Context.VisualStudio.SourceControl.CheckOutItem(fullFilePath);
+                            this._visualStudio.SourceControl.CheckOutItem(fullFilePath);
                         }
                     }
                     else if (isDifferent)
@@ -114,9 +123,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     }
                 }
 
-                this.Context.LogLineToBuildPane("   Writing file: " + fullFilePath);
+                this.GetLog().Debug("   Writing file: " + fullFilePath);
                 //File.WriteAllText(fullFilePath, content);
-                var item = this.Context.VisualStudio.Solution.GetProjectItem(fullFilePath);
+                var item = this._visualStudio.Solution.GetProjectItem(fullFilePath);
                 if (item == null)
                 {
                     File.Create(fullFilePath).Dispose();
@@ -128,7 +137,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 var editPoint = document.CreateEditPoint();
                 editPoint.Delete(document.EndPoint);
                 editPoint.Insert(content);
-                if (this.CurrentOutputFile.AutoFormat)
+                if (this._currentOutputFile.AutoFormat)
                 {
                     editPoint.StartOfDocument();
                     editPoint.SmartFormat(document.EndPoint);
@@ -138,50 +147,50 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 window.Close();
 
 
-                this.CurrentOutputFile.ProjectItem = item;
+                this._currentOutputFile.ProjectItem = item;
 
                 // set VS properties for the ProjectItem
                 //
-                if (!String.IsNullOrWhiteSpace(this.CurrentOutputFile.CustomTool))
+                if (!String.IsNullOrWhiteSpace(this._currentOutputFile.CustomTool))
                 {
-                    this.CurrentOutputFile.ProjectItem.SetPropertyValue("CustomTool", this.CurrentOutputFile.CustomTool);
+                    this._currentOutputFile.ProjectItem.SetPropertyValue("CustomTool", this._currentOutputFile.CustomTool);
                 }
-                var buildActionString = this.GetBuildActionString(this.CurrentOutputFile.BuildAction);
+                var buildActionString = this.GetBuildActionString(this._currentOutputFile.BuildAction);
                 if (!String.IsNullOrWhiteSpace(buildActionString))
                 {
-                    this.CurrentOutputFile.ProjectItem.SetPropertyValue("ItemType", buildActionString);
+                    this._currentOutputFile.ProjectItem.SetPropertyValue("ItemType", buildActionString);
                 }
 
-                this.CompletedFiles.Add(this.CurrentOutputFile);
-                this.CurrentOutputFile = null;
+                this._completedFiles.Add(this._currentOutputFile);
+                this._currentOutputFile = null;
             }
         }
 
         public void Dispose()
         {
             this.EndFile();
-            foreach (Project project in this.Context.VisualStudio.Solution.GetAllProjects())
+            foreach (Project project in this._visualStudio.Solution.GetAllProjects())
             {
                 var autoFolder = project.ProjectItems.GetChild("_auto");
                 if (autoFolder != null)
                 {
                     var placeHolderList = from o in autoFolder.GetAllProjectItems()
-                        where o.Name == this.PlaceHolderFileName 
+                        where o.Name == this._placeHolderName 
                             && ((ProjectItem) o.Collection.Parent).IsPhysicalFolder()
                         select o;
                     foreach (var placeHolderItem in placeHolderList.ToList())
                     {
                         foreach (var projectItem in placeHolderItem.ProjectItems.ToEnumerable())
                         {
-                            if (!this.CompletedFiles.Any(o => o.ProjectItem == projectItem))
+                            if (!this._completedFiles.Any(o => o.ProjectItem == projectItem))
                             {
-                                this.Context.LogLineToBuildPane("Deleting stale auto-generated file: " + projectItem.GetFullPath());
+                                this.GetLog().Debug("Deleting stale auto-generated file: " + projectItem.GetFullPath());
                                 projectItem.Delete();
                             }
                         }
                     }
                     placeHolderList = from o in autoFolder.GetAllProjectItems()
-                                      where o.Name == this.PlaceHolderFileName
+                                      where o.Name == this._placeHolderName
                                           && ((ProjectItem)o.Collection.Parent).IsPhysicalFolder()
                                       select o;
                     foreach (var placeHolderItem in placeHolderList.Where(o => o.ProjectItems.Count == 0).ToList())
@@ -198,9 +207,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
         }
 
-        private string GetBuildActionString(BuildActionTypeEnum buidlAction)
+        private string GetBuildActionString(BuildActionTypeEnum buildAction)
         {
-            switch (buidlAction)
+            switch (buildAction)
             {
                 case BuildActionTypeEnum.Compile:
                     return "Compile";

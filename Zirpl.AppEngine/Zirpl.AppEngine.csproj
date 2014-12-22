@@ -99,6 +99,7 @@
     <Compile Include="Ioc\Autofac\IAutofacDependencyResolver.cs" />
     <Compile Include="Ioc\DependencyResolverBase.cs" />
     <Compile Include="Ioc\IDependencyResolver.cs" />
+    <Compile Include="Logging\LogBase.cs" />
     <Compile Include="Logging\Common\CommonLogFactory.cs" />
     <Compile Include="Logging\Common\CommonLogWrapper.cs" />
     <Compile Include="Logging\ILog.cs" />

@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
+using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
@@ -24,57 +25,42 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
     {
         public static void GenerateApp(this TextTransformation callingTemplate)
         {
-            using (TextTransformationContext.Create(callingTemplate))
-            {
-                GenerateApp(new TemplateProvider());
-            }
+                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate));
         }
         public static void GenerateApp(this TextTransformation callingTemplate, String templateAssemblyName)
         {
-            using (TextTransformationContext.Create(callingTemplate))
-            {
-                GenerateApp(new TemplateProvider(new [] {templateAssemblyName}));
-            }
+            GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssemblyName }));
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<String> templateAssemblyNames)
         {
-            using (TextTransformationContext.Create(callingTemplate))
-            {
-                GenerateApp(new TemplateProvider(templateAssemblyNames));
-            }
+            GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblyNames));
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate, Assembly templateAssembly)
         {
-            using (TextTransformationContext.Create(callingTemplate))
-            {
-                GenerateApp(new TemplateProvider(new[] { templateAssembly }));
-            }
+            GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssembly }));
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> templateAssemblies)
         {
-            using (TextTransformationContext.Create(callingTemplate))
-            {
-                GenerateApp(new TemplateProvider(templateAssemblies));
-            }
+            GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblies));
         }
 
 
-        private static void GenerateApp(TemplateProvider templateProvider)
+        private static void GenerateApp(this TextTransformation callingTemplate, TemplateProvider templateProvider)
         {
             try
             {
-                var app = new AppProvider().GetApp();
-                new TemplateRunner(app, templateProvider).RunTemplates();
+                var app = new AppProvider(callingTemplate).GetApp();
+                new TemplateRunner(app).RunTemplates(callingTemplate.Access().Property<IOutputFileManager>("FileManager"), templateProvider, new OutputFileProvider());
             }
             catch (Exception e)
             {
                 try
                 {
-                    TextTransformationContext.Instance.LogLineToBuildPane(e.ToString());
-                    TextTransformationContext.Instance.CallingTemplate.WriteLine(e.ToString());
+                    LogManager.GetLog().Debug(e.ToString());
+                    callingTemplate.WriteLine(e.ToString());
                 }
                 catch (Exception)
                 {
