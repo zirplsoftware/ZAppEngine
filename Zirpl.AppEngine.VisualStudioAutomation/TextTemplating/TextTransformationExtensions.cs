@@ -27,20 +27,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         public static void CleanUp(this TextTransformation textTransformation)
         {
             textTransformation.SetUp();
-            textTransformation.GetFileManager().EndFile();
-        }
-
-        public static void LogException(this TextTransformation textTransformation, Exception e)
-        {
-            textTransformation.SetUp();
-            try
-            {
-                LogManager.GetLog().Debug(e.ToString());
-                textTransformation.WriteLine(e.ToString());
-            }
-            catch (Exception)
-            {
-            }
+            textTransformation.Wrap().FileManager.EndFile();
         }
 
         public static ITextTransformation Wrap(this TextTransformation textTransformation)
@@ -61,43 +48,30 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             return textTransformation.GetVisualStudio().Solution.GetProjectItem(textTransformation.Wrap().Host.TemplateFile);
         }
 
-        public static IOutputFileManager GetFileManager(this TextTransformation textTransformation)
-        {
-            textTransformation.SetUp();
-            if (textTransformation.Access().HasGet<IOutputFileManager>("FileManager"))
-            {
-                return textTransformation.Access().Property<IOutputFileManager>("FileManager");
-            }
-            else if (textTransformation.Access().HasField<IOutputFileManager>("FileManager"))
-            {
-                return textTransformation.Access().Field<IOutputFileManager>("FileManager");
-            }
-            else // okay, we're going to use the session
-            {
-                textTransformation.Session = textTransformation.Session ?? new ConcurrentDictionary<string, object>();
-                if (!textTransformation.Session.ContainsKey("FileManager"))
-                {
-                    // first choice since it will also make sense in terms of clear API
-                    textTransformation.Session["___FileManagerKey"] = "FileManager";
-                    textTransformation.Session["FileManager"] = new OutputFileManager(textTransformation);
-                }
-                else if (!(textTransformation.Session["FileManager"] is IOutputFileManager))
-                {
-                    // just in case it's being used for something else entirely
-                    textTransformation.Session["___FileManagerKey"] = "___FileManager";
-                    textTransformation.Session["___FileManager"] = new OutputFileManager(textTransformation);
-                }
-
-                return (IOutputFileManager)textTransformation.Session[(String) textTransformation.Session["___FileManagerKey"]];
-            }
-        }
-
         public static void RunTemplates(this TextTransformation textTransformation, ITemplateRunner templateRunner, ITemplateProvider templateProvider, IOutputFileProvider outputFileProvider)
         {
-            textTransformation.SetUp();
-            var fileManager = textTransformation.GetFileManager();
-            templateRunner.RunTemplates(fileManager, templateProvider, outputFileProvider);
-            textTransformation.CleanUp();
+            try
+            {
+                //textTransformation.SetUp();
+                var fileManager = textTransformation.Wrap().FileManager;
+                templateRunner.RunTemplates(fileManager, templateProvider, outputFileProvider);
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    LogManager.GetLog().Debug(e.ToString());
+                    textTransformation.WriteLine(e.ToString());
+                }
+                catch (Exception)
+                {
+                }
+                throw;
+            }
+            finally
+            {
+                textTransformation.CleanUp();
+            }
         }
 
         //private static void AssertContext(Object textTransformation)

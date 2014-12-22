@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom.Compiler;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -27,11 +28,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 this._preProcessedTextTransformation = textTransformation;
             }
-        }
-
-        public bool IsPreProcessed
-        {
-            get { return this._preProcessedTextTransformation != null; }
         }
 
         public StringBuilder GenerationEnvironment
@@ -81,7 +77,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                return (this._textTransformation ?? this._preProcessedTextTransformation).Access().Property<String>("CurrentIndent");
+                return this._textTransformation != null ? this._textTransformation.CurrentIndent : this._preProcessedTextTransformation.Access().Property<String>("CurrentIndent");
             }
         }
 
@@ -89,11 +85,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                return (this._textTransformation ?? this._preProcessedTextTransformation).Access().Property<IDictionary<string, object>>("Session");
+                return this._textTransformation != null ? this._textTransformation.Session : this._preProcessedTextTransformation.Access().Property<IDictionary<string, object>>("Session");
             }
             set
             {
-                (this._textTransformation ?? this._preProcessedTextTransformation).Access().Property("Session", value);
+                if (this._textTransformation != null)
+                {
+                    this._textTransformation.Session = value;
+                }
+                else
+                {
+                    this._preProcessedTextTransformation.Access().Property("Session", value);
+                }
             }
         }
 
@@ -108,11 +111,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 this._preProcessedTextTransformation.Access().Invoke("ClearIndent");
             }
         }
-
-        public void Dispose()
-        {
-        }
-
+        
         public void Error(string message)
         {
             if (this._textTransformation != null)
@@ -248,16 +247,119 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             return (this._textTransformation ?? this._preProcessedTextTransformation).ToString();
         }
 
-
-        public string FileExtension
+        public IOutputFileManager FileManager
         {
             get
             {
-                if (this.Host != null)
+                var outputFileManager =  GetFileManager();
+                if (outputFileManager == null)
                 {
-                    return this.Host.Access().Property<String>("FileExtension");
+                    throw new Exception("A PreProcessedTemplate MUST be passed the IOutputFileManager either in the Session under key 'FileManager' or to a Field or Property named 'FileManager'");
                 }
-                return null;
+                return outputFileManager;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+                if (this._textTransformation != null)
+                {
+                    throw new InvalidOperationException("Cannot set on a non-preprocessed template. Getter will auto-instantiate.");
+                }
+                var outputFileManager = this.GetFileManager();
+                if (outputFileManager != null
+                    && value != outputFileManager)
+                {
+                    throw new InvalidOperationException("Already has a different instance of an IOutputFileManager");
+                }
+
+                if (_preProcessedTextTransformation.Access().HasSet<IOutputFileManager>("FileManager")
+                    && _preProcessedTextTransformation.Access().HasGet<IOutputFileManager>("FileManager"))
+                {
+                    _preProcessedTextTransformation.Access().Property("FileManager", value);
+                }
+                else if (_preProcessedTextTransformation.Access().HasField<IOutputFileManager>("FileManager"))
+                {
+                    _preProcessedTextTransformation.Access().Field("FileManager", value);
+                }
+                else // okay, we're going to use the session
+                {
+                    this.EnsureFileManagerKey();
+                    Session[(String)Session["___FileManagerKey"]] = value;
+                }
+            }
+        }
+
+        private IOutputFileManager GetFileManager()
+        {
+            IOutputFileManager outputFileManager = null;
+            if (_textTransformation != null)
+            {
+                if (_textTransformation.Access().HasGet<IOutputFileManager>("FileManager"))
+                {
+                    outputFileManager = _textTransformation.Access().Property<IOutputFileManager>("FileManager");
+                    if (outputFileManager == null)
+                    {
+                        if (!_textTransformation.Access().HasSet<IOutputFileManager>("FileManager"))
+                        {
+                            throw new Exception("Has a FileManager property without a setter that returns null: " + _textTransformation.GetType());
+                        }
+                        outputFileManager = new OutputFileManager(_textTransformation);
+                        _textTransformation.Access().Property("FileManager", outputFileManager);
+                    }
+                }
+                else if (_textTransformation.Access().HasField<IOutputFileManager>("FileManager"))
+                {
+                    outputFileManager = _textTransformation.Access().Field<IOutputFileManager>("FileManager");
+                    if (outputFileManager == null)
+                    {
+                        outputFileManager = new OutputFileManager(_textTransformation);
+                        _textTransformation.Access().Field("FileManager", outputFileManager);
+                    }
+                }
+                else // okay, we're going to use the session
+                {
+                    this.EnsureFileManagerKey();
+                    outputFileManager = (IOutputFileManager)Session[(String)Session["___FileManagerKey"]];
+                    if (outputFileManager == null)
+                    {
+                        outputFileManager = new OutputFileManager(_textTransformation);
+                        Session[(String)Session["___FileManagerKey"]] = outputFileManager;
+                    }
+                }
+            }
+            else // preprocessed template- in this case we can ONLY get, not create
+            {
+                if (_preProcessedTextTransformation.Access().HasGet<IOutputFileManager>("FileManager"))
+                {
+                    outputFileManager = _preProcessedTextTransformation.Access().Property<IOutputFileManager>("FileManager");
+                }
+                else if (_preProcessedTextTransformation.Access().HasField<IOutputFileManager>("FileManager"))
+                {
+                    outputFileManager = _textTransformation.Access().Field<IOutputFileManager>("FileManager");
+                }
+                else // okay, we're going to use the session
+                {
+                    this.EnsureFileManagerKey();
+                    outputFileManager = (IOutputFileManager)Session[(String)Session["___FileManagerKey"]];
+                }
+            }
+            return outputFileManager;
+        }
+
+        private void EnsureFileManagerKey()
+        {
+            Session = Session ?? new Dictionary<string, object>();
+            if (!Session.ContainsKey("___FileManagerKey"))
+            {
+                Session["___FileManagerKey"] =
+                    (!Session.ContainsKey("FileManager")
+                     || Session["FileManager"] == null
+                     || Session["FileManager"] is IOutputFileManager)
+                        ? "FileManager"
+                        : "___FileManager";
             }
         }
     }

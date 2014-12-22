@@ -32,7 +32,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 GenerateApp(callingTemplate, new TemplateProvider(callingTemplate));
             })
             .GetRunner()
-            .OnError(callingTemplate.LogException)
+            .OnError((e) => HandleException(callingTemplate, e))
             .OnComplete((passed) => callingTemplate.CleanUp())
             .Run();
         }
@@ -45,12 +45,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssemblyName }));
             })
             .GetRunner()
-            .OnError(callingTemplate.LogException)
+            .OnError((e) => HandleException(callingTemplate, e))
             .OnComplete((passed) => callingTemplate.CleanUp())
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<String> templateAssemblyNames)
+        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<string> templateAssemblyNames)
         {
             new Action(() =>
             {
@@ -58,7 +58,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblyNames));
             })
             .GetRunner()
-            .OnError(callingTemplate.LogException)
+            .OnError((e) => HandleException(callingTemplate, e))
             .OnComplete((passed) => callingTemplate.CleanUp())
             .Run();
         }
@@ -71,7 +71,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssembly }));
             })
             .GetRunner()
-            .OnError(callingTemplate.LogException)
+            .OnError((e) => HandleException(callingTemplate, e))
             .OnComplete((passed) => callingTemplate.CleanUp())
             .Run();
         }
@@ -84,7 +84,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblies));
             })
             .GetRunner()
-            .OnError(callingTemplate.LogException)
+            .OnError((e) => HandleException(callingTemplate, e))
             .OnComplete((passed) => callingTemplate.CleanUp())
             .Run();
         }
@@ -95,6 +95,19 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             var outputFileProvider = new OutputFileProvider();
             var templateRunner = new TemplateRunner(app);
             callingTemplate.RunTemplates(templateRunner, templateProvider, outputFileProvider);
+        }
+
+
+        private static void HandleException(TextTransformation textTransformation, Exception e)
+        {
+            try
+            {
+                LogManager.GetLog().Debug(e.ToString());
+                textTransformation.WriteLine(e.ToString());
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

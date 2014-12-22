@@ -136,6 +136,7 @@
     <Compile Include="TextTemplating\ITemplateProvider.cs" />
     <Compile Include="TextTemplating\ITemplateRunner.cs" />
     <Compile Include="TextTemplating\ITextTransformation.cs" />
+    <Compile Include="TextTemplating\ObjectExtensions.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
     <Compile Include="TextTemplating\TextTransformationExtensions.cs" />
     <Compile Include="TextTemplating\TextTransformationWrapper.cs" />

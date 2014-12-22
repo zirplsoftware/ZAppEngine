@@ -6,10 +6,9 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public interface ITextTransformation : IDisposable
+    public interface ITextTransformation
     {
-        //bool IsPreProcessed { get; }
-        //String FileExtension { get; }
+        IOutputFileManager FileManager { get; set; }
         StringBuilder GenerationEnvironment { get; set; }
         CompilerErrorCollection Errors { get; }
         ITextTemplatingEngineHost Host { get; set; }
