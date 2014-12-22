@@ -8,6 +8,7 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
@@ -24,7 +25,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         internal OutputFileManager(TextTransformation callingTemplate)
         {
-            this._visualStudio = callingTemplate.GetVisualStudio();
+            this._visualStudio = callingTemplate.GetDTE();
             this._callingTemplate = callingTemplate;
 
             var callingTemplateProjectItem = callingTemplate.GetProjectItem();

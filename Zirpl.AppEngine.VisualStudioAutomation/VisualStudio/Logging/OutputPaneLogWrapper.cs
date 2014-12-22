@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.Logging
+namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging
 {
     internal class OutputPaneLogWrapper : LogBase
     {

@@ -4,16 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSharp;
 using Zirpl.IO;
-using Zirpl.Reflection;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation
+namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
 {
     public static class VisualStudioExtensions
     {

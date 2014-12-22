@@ -15,7 +15,6 @@ using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
-using Zirpl.AppEngine.VisualStudioAutomation.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.Collections;
 using Zirpl.Reflection;

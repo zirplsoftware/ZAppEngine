@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.Logging
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.Logging
 {
     internal sealed class LogFactory : ILogFactory
     {

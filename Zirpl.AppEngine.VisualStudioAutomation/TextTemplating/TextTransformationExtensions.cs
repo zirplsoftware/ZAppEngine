@@ -12,7 +12,8 @@ using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
-using Zirpl.AppEngine.VisualStudioAutomation.Logging;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.Logging;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
@@ -34,18 +35,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             textTransformation.SetUp();
             return new TextTransformationWrapper(textTransformation);
-        }
-
-        public static DTE2 GetVisualStudio(this TextTransformation textTransformation)
-        {
-            textTransformation.SetUp();
-            return (DTE2)((IServiceProvider)textTransformation.Wrap().Host).GetCOMService(typeof(DTE));
-        }
-
-        public static ProjectItem GetProjectItem(this TextTransformation textTransformation)
-        {
-            textTransformation.SetUp();
-            return textTransformation.GetVisualStudio().Solution.GetProjectItem(textTransformation.Wrap().Host.TemplateFile);
         }
 
         public static void RunTemplates(this TextTransformation textTransformation, ITemplateRunner templateRunner, ITemplateProvider templateProvider, IOutputFileProvider outputFileProvider)

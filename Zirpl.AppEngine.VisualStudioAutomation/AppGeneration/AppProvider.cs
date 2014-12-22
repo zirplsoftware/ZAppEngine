@@ -10,6 +10,7 @@ using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
@@ -20,7 +21,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
         internal AppProvider(TextTransformation callingTemplate)
         {
-            this._visualStudio = callingTemplate.GetVisualStudio();
+            this._visualStudio = callingTemplate.GetDTE();
             this._callingTemplateProject = callingTemplate.GetProjectItem().ContainingProject;
         }
 
