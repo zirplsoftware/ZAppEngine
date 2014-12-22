@@ -27,6 +27,16 @@ namespace Zirpl
 
         public void TryRun()
         {
+            Run(false);
+        }
+
+        public void Run()
+        {
+            Run(true);
+        }
+
+        private void Run(bool rethrow)
+        {
             bool failed = false;
             Action<Exception> errorHandler = this.ErrorHandler;
             Action<Boolean> completeHandler = this.CompleteHandler;
@@ -49,6 +59,10 @@ namespace Zirpl
                     {
                         // nothing we can do about this- eat it
                     }
+                }
+                if (rethrow)
+                {
+                    throw;
                 }
             }
             finally

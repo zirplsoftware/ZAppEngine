@@ -6,12 +6,23 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.Logging
 {
-    internal class LogFactory : ILogFactory
+    internal sealed class LogFactory : ILogFactory
     {
         private readonly IVsOutputWindowPane _outputWindow;
+        private static bool _isInitialized;
+
+        internal static void Initialize(TextTransformation textTransformation)
+        {
+            if (!_isInitialized)
+            {
+                LogManager.LogFactory = new LogFactory(textTransformation.Wrap().Host);
+                _isInitialized = true;
+            }
+        }
 
         internal LogFactory(ITextTemplatingEngineHost host)
         {

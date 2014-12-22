@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,48 +9,95 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.AppEngine.Logging;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.Logging;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public static class TextTransformationExtensions
     {
-        public static ITextTemplatingEngineHost GetHost(this TextTransformation textTransformation)
+        public static void SetUp(this TextTransformation textTransformation)
         {
-            return new TextTransformationWrapper(textTransformation).Host;
+            LogFactory.Initialize(textTransformation);
+        }
+
+        public static void CleanUp(this TextTransformation textTransformation)
+        {
+            textTransformation.SetUp();
+            textTransformation.GetFileManager().EndFile();
+        }
+
+        public static void LogException(this TextTransformation textTransformation, Exception e)
+        {
+            textTransformation.SetUp();
+            try
+            {
+                LogManager.GetLog().Debug(e.ToString());
+                textTransformation.WriteLine(e.ToString());
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public static ITextTransformation Wrap(this TextTransformation textTransformation)
+        {
+            textTransformation.SetUp();
+            return new TextTransformationWrapper(textTransformation);
         }
 
         public static DTE2 GetVisualStudio(this TextTransformation textTransformation)
         {
-            return (DTE2)((IServiceProvider)textTransformation.GetHost()).GetCOMService(typeof(DTE));
+            textTransformation.SetUp();
+            return (DTE2)((IServiceProvider)textTransformation.Wrap().Host).GetCOMService(typeof(DTE));
         }
 
         public static ProjectItem GetProjectItem(this TextTransformation textTransformation)
         {
-            return textTransformation.GetVisualStudio().Solution.GetProjectItem(textTransformation.GetHost().TemplateFile);
+            textTransformation.SetUp();
+            return textTransformation.GetVisualStudio().Solution.GetProjectItem(textTransformation.Wrap().Host.TemplateFile);
         }
 
-        public static StringBuilder GetGenerationEnvironment(this TextTransformation textTransformation)
+        public static IOutputFileManager GetFileManager(this TextTransformation textTransformation)
         {
-            return new TextTransformationWrapper(textTransformation).GenerationEnvironment;
-        }
-
-        public static StringBuilder SetGenerationEnvironment(this TextTransformation textTransformation, StringBuilder generationEnvironment)
-        {
-            return new TextTransformationWrapper(textTransformation).GenerationEnvironment = generationEnvironment;
-        }
-
-        public static OutputFileManager GetFileManager(this TextTransformation textTransformation)
-        {
-            if (textTransformation.Access().HasGet<OutputFileManager>("FileManager"))
+            textTransformation.SetUp();
+            if (textTransformation.Access().HasGet<IOutputFileManager>("FileManager"))
             {
-                return textTransformation.Access().Property<OutputFileManager>("FileManager");
+                return textTransformation.Access().Property<IOutputFileManager>("FileManager");
             }
-            else if (textTransformation.Access().HasField<OutputFileManager>("FileManager"))
+            else if (textTransformation.Access().HasField<IOutputFileManager>("FileManager"))
             {
-                return textTransformation.Access().Field<OutputFileManager>("FileManager");
+                return textTransformation.Access().Field<IOutputFileManager>("FileManager");
             }
-            return null;
+            else // okay, we're going to use the session
+            {
+                textTransformation.Session = textTransformation.Session ?? new ConcurrentDictionary<string, object>();
+                if (!textTransformation.Session.ContainsKey("FileManager"))
+                {
+                    // first choice since it will also make sense in terms of clear API
+                    textTransformation.Session["___FileManagerKey"] = "FileManager";
+                    textTransformation.Session["FileManager"] = new OutputFileManager(textTransformation);
+                }
+                else if (!(textTransformation.Session["FileManager"] is IOutputFileManager))
+                {
+                    // just in case it's being used for something else entirely
+                    textTransformation.Session["___FileManagerKey"] = "___FileManager";
+                    textTransformation.Session["___FileManager"] = new OutputFileManager(textTransformation);
+                }
+
+                return (IOutputFileManager)textTransformation.Session[(String) textTransformation.Session["___FileManagerKey"]];
+            }
+        }
+
+        public static void RunTemplates(this TextTransformation textTransformation, ITemplateRunner templateRunner, ITemplateProvider templateProvider, IOutputFileProvider outputFileProvider)
+        {
+            textTransformation.SetUp();
+            var fileManager = textTransformation.GetFileManager();
+            templateRunner.RunTemplates(fileManager, templateProvider, outputFileProvider);
+            textTransformation.CleanUp();
         }
 
         //private static void AssertContext(Object textTransformation)

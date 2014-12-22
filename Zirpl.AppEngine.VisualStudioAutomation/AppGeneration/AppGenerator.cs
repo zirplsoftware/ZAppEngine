@@ -15,6 +15,7 @@ using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.Collections;
 using Zirpl.Reflection;
@@ -25,48 +26,75 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
     {
         public static void GenerateApp(this TextTransformation callingTemplate)
         {
+            new Action(() =>
+            {
+                callingTemplate.SetUp();
                 GenerateApp(callingTemplate, new TemplateProvider(callingTemplate));
+            })
+            .GetRunner()
+            .OnError(callingTemplate.LogException)
+            .OnComplete((passed) => callingTemplate.CleanUp())
+            .Run();
         }
+
         public static void GenerateApp(this TextTransformation callingTemplate, String templateAssemblyName)
         {
-            GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssemblyName }));
+            new Action(() =>
+            {
+                callingTemplate.SetUp();
+                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssemblyName }));
+            })
+            .GetRunner()
+            .OnError(callingTemplate.LogException)
+            .OnComplete((passed) => callingTemplate.CleanUp())
+            .Run();
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<String> templateAssemblyNames)
         {
-            GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblyNames));
+            new Action(() =>
+            {
+                callingTemplate.SetUp();
+                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblyNames));
+            })
+            .GetRunner()
+            .OnError(callingTemplate.LogException)
+            .OnComplete((passed) => callingTemplate.CleanUp())
+            .Run();
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate, Assembly templateAssembly)
         {
-            GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssembly }));
+            new Action(() =>
+            {
+                callingTemplate.SetUp();
+                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssembly }));
+            })
+            .GetRunner()
+            .OnError(callingTemplate.LogException)
+            .OnComplete((passed) => callingTemplate.CleanUp())
+            .Run();
         }
 
         public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> templateAssemblies)
         {
-            GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblies));
+            new Action(() =>
+            {
+                callingTemplate.SetUp();
+                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblies));
+            })
+            .GetRunner()
+            .OnError(callingTemplate.LogException)
+            .OnComplete((passed) => callingTemplate.CleanUp())
+            .Run();
         }
 
-
-        private static void GenerateApp(this TextTransformation callingTemplate, TemplateProvider templateProvider)
+        private static void GenerateApp(TextTransformation callingTemplate, ITemplateProvider templateProvider)
         {
-            try
-            {
-                var app = new AppProvider(callingTemplate).GetApp();
-                new TemplateRunner(app).RunTemplates(callingTemplate.Access().Property<IOutputFileManager>("FileManager"), templateProvider, new OutputFileProvider());
-            }
-            catch (Exception e)
-            {
-                try
-                {
-                    LogManager.GetLog().Debug(e.ToString());
-                    callingTemplate.WriteLine(e.ToString());
-                }
-                catch (Exception)
-                {
-                }
-                throw;
-            }
+            var app = new AppProvider(callingTemplate).GetApp();
+            var outputFileProvider = new OutputFileProvider();
+            var templateRunner = new TemplateRunner(app);
+            callingTemplate.RunTemplates(templateRunner, templateProvider, outputFileProvider);
         }
     }
 }

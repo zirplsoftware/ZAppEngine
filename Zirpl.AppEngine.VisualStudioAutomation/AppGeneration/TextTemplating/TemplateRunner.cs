@@ -78,7 +78,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 }
                 else
                 {
-                    // we are counting on the template itself to manage it, otherwise it will be going directly to the calling template
+                    outputFileManager.UseDefaultFile(template);
                     templateWrapper.TransformText();
                 }
             }

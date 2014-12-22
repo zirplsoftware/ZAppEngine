@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    internal interface ITextTransformation : IDisposable
+    public interface ITextTransformation : IDisposable
     {
         //bool IsPreProcessed { get; }
         //String FileExtension { get; }

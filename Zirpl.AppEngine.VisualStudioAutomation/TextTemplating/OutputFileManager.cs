@@ -12,7 +12,7 @@ using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class OutputFileManager : IOutputFileManager
+    internal class OutputFileManager : IOutputFileManager
     {
         private readonly IList<OutputFile> _completedFiles;
         private readonly DTE2 _visualStudio;
@@ -29,8 +29,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
             var callingTemplateProjectItem = callingTemplate.GetProjectItem();
 
-            this._callingTemplateOriginalGenerationEnvironment = callingTemplate.GetGenerationEnvironment();
-            this._currentGenerationEnvironment = callingTemplate.GetGenerationEnvironment();
+            this._callingTemplateOriginalGenerationEnvironment = callingTemplate.Wrap().GenerationEnvironment;
+            this._currentGenerationEnvironment = callingTemplate.Wrap().GenerationEnvironment;
             var placeholder = callingTemplateProjectItem.ProjectItems.ToEnumerable().SingleOrDefault();
             this._placeHolderName = placeholder == null ? null : placeholder.Name;
             this._completedFiles = new List<OutputFile>();
@@ -52,7 +52,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
             this._currentOutputFile = file;
             this._currentGenerationEnvironment = new TextTransformationWrapper(template).GenerationEnvironment;
-            this._callingTemplate.SetGenerationEnvironment(this._currentGenerationEnvironment);
+            this._callingTemplate.Wrap().GenerationEnvironment = this._currentGenerationEnvironment;
+        }
+
+        public void UseDefaultFile(Object template)
+        {
+            this.EndFile();
+            new TextTransformationWrapper(template).GenerationEnvironment =
+                this._callingTemplateOriginalGenerationEnvironment;
         }
 
         public void EndFile()
@@ -61,7 +68,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 var content = this._currentGenerationEnvironment.ToString();
                 this._currentGenerationEnvironment = this._callingTemplateOriginalGenerationEnvironment;
-                this._callingTemplate.SetGenerationEnvironment(this._currentGenerationEnvironment);
+                this._callingTemplate.Wrap().GenerationEnvironment = this._currentGenerationEnvironment;
                 
                 // apply parameters to content
                 //
