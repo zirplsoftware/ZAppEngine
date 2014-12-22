@@ -21,7 +21,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
     {
         public static void SetUp(this TextTransformation textTransformation)
         {
-            LogFactory.Initialize(textTransformation.Wrap().Host as IServiceProvider);
+            LogFactory.Initialize((IServiceProvider)textTransformation.Wrap().Host);
         }
 
         public static void CleanUp(this TextTransformation textTransformation)
