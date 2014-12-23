@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.Collections;
 using Zirpl.IO;

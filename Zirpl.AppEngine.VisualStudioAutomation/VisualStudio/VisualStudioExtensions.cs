@@ -8,6 +8,8 @@ using System.Text;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSharp;
+using Microsoft.VisualStudio.PlatformUI;
+using Zirpl.AppEngine.Logging;
 using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
@@ -200,6 +202,17 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
 
 
         #region Project extension methods
+
+        public static void LogAllProperties(this Project project)
+        {
+            if (project.Properties != null)
+            {
+                foreach (var property in project.Properties)
+                {
+                    LogManager.GetLog().Debug("Property " + property.ToString());
+                }
+            }
+        }
 
         public static String GetFolderPathFromNamespace(this Project project, String nameSpace)
         {

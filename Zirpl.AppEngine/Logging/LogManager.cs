@@ -8,17 +8,7 @@ namespace Zirpl.AppEngine.Logging
     public static class LogManager
     {
         public static ILogFactory LogFactory { get; set; }
-
-#if !NET35CLIENT && !NET40CLIENT && !SILVERLIGHT
-        /// <summary>
-        /// Initializes the LogManager
-        /// </summary>
-        static LogManager()
-        {
-            LogFactory = new Zirpl.AppEngine.Logging.Common.CommonLogFactory();
-        }
-#endif
-
+        
         /// <summary>
         /// Gets the default Log
         /// </summary>

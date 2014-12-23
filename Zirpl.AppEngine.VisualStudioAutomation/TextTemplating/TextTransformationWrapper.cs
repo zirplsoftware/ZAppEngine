@@ -1,8 +1,6 @@
 ﻿using System;
 using System.CodeDom.Compiler;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.Reflection;
@@ -30,6 +28,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
         }
 
+        public bool IsPreProcessed
+        {
+            get { return this._textTransformation == null; }
+        }
+
         public StringBuilder GenerationEnvironment
         {
             get
@@ -55,9 +58,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             get
             {
                 if (this._preProcessedTextTransformation != null
-                    && !this._preProcessedTextTransformation.Access().HasGet<ITextTemplatingEngineHost>("Host"))
+                    && this._preProcessedTextTransformation.Access().HasGet<ITextTemplatingEngineHost>("Host"))
                 {
-                    return (this._textTransformation ?? this._preProcessedTextTransformation).Access().Property<ITextTemplatingEngineHost>("Host");
+                    return _preProcessedTextTransformation.Access().Property<ITextTemplatingEngineHost>("Host");
+                }
+                else if (this._textTransformation != null
+                    && this._textTransformation.Access().HasGet<ITextTemplatingEngineHost>("Host"))
+                {
+                    return _textTransformation.Access().Property<ITextTemplatingEngineHost>("Host");
                 }
                 return null;
             }

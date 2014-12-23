@@ -9,12 +9,12 @@ namespace Zirpl.AppEngine.Logging.Common
 {
     public class CommonLogFactory : ILogFactory
     {
-        private static Boolean initialized;
+        private static Boolean _initialized;
 
         /// <summary>
         /// Initializes the LogManager
         /// </summary>
-        static CommonLogFactory()
+        internal CommonLogFactory()
         {
             if (!log4net.LogManager.GetRepository().Configured)
             {
@@ -25,12 +25,19 @@ namespace Zirpl.AppEngine.Logging.Common
             {
                 LogManager.GetLog<CommonLogFactory>().DebugFormat("log4net already configured.");
             }
-            initialized = true;
         }
 
+        public static void Initialize()
+        {
+            if (!_initialized)
+            {
+                LogManager.LogFactory = new CommonLogFactory();
+                _initialized = true;
+            }
+        }
         public ILog GetLog(string name)
         {
-            if (!initialized)
+            if (!_initialized)
                 return new NullLog();
             else
                 return new CommonLogWrapper(global::Common.Logging.LogManager.GetLogger(name));

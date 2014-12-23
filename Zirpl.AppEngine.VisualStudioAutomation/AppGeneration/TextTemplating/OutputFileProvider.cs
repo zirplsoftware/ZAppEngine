@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;

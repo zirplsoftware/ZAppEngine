@@ -37,6 +37,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +56,36 @@
     <EmbeddedResource Include="_config\ModelProject\ContactType.domain.zae">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine.VisualStudioAutomation\Zirpl.AppEngine.VisualStudioAutomation.csproj">
+      <Project>{f8855f9a-35d1-4c30-bb53-1fd89a984989}</Project>
+      <Name>Zirpl.AppEngine.VisualStudioAutomation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
+      <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
+      <Name>Zirpl.AppEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Common\Zirpl.Common.csproj">
+      <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
+      <Name>Zirpl.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>App.txt</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.txt">
+      <DependentUpon>App.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

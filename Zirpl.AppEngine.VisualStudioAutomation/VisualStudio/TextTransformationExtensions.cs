@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EnvDTE;
 using EnvDTE80;
-using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
-using Zirpl.AppEngine.Logging;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
-using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
 {

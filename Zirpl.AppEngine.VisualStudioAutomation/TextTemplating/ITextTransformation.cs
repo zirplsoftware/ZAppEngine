@@ -8,6 +8,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public interface ITextTransformation
     {
+        bool IsPreProcessed { get; }
         IOutputFileManager FileManager { get; set; }
         StringBuilder GenerationEnvironment { get; set; }
         CompilerErrorCollection Errors { get; }

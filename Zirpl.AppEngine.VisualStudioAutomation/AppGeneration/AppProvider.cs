@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Versioning;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
@@ -37,7 +35,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             var app = new App()
             {
                 CodeGenerationProject = this._callingTemplateProject,
-                ModelProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Model"),
+                ModelProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Model") ?? this.CreateProject(projectNamespacePrefix + ".Model"),
                 DataServiceProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".DataService"),
                 ServiceProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Service"),
                 WebCommonProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Web.Common"),
@@ -61,6 +59,21 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 this.GetLog().Debug("Resulting DomainType: " + domainType.FullName);
             }
             return app;
+        }
+
+        private Project CreateProject(String projectName)
+        {
+            var csTemplatePath = ((Solution2)_visualStudio.Solution).GetProjectTemplate("ClassLibrary.zip", "CSharp"); // "vbproj"
+            //LogManager.GetLog().Debug("C# template path: " + csTemplatePath);
+            var folder = Path.GetDirectoryName(_visualStudio.Solution.FullName);
+            LogManager.GetLog().Debug("Solution folder: " + folder);
+            //_visualStudio.Solution.AddFromTemplate(csTemplatePath, Path.Combine(folder, projectName), projectName, false);
+            //var project = (Project)((Array)(_visualStudio.ActiveSolutionProjects)).GetValue(0);
+            var project = _visualStudio.Solution.GetProject(projectName);
+            //project.Properties.Item("TargetFrameworkMoniker").Value = _callingTemplateProject.Properties.Item("TargetFrameworkMoniker");
+            project.LogAllProperties();
+            project.Properties.Item("TargetFrameworkMoniker").Value = new FrameworkName(".NETFramework", new Version(4, 5, 1)).FullName;
+            return project;
         }
     }
 }

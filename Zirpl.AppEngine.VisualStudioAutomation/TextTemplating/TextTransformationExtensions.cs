@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EnvDTE;
-using EnvDTE80;
-using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
-using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
@@ -26,13 +15,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         public static void CleanUp(this TextTransformation textTransformation)
         {
-            textTransformation.SetUp();
             textTransformation.Wrap().FileManager.EndFile();
         }
 
         public static ITextTransformation Wrap(this TextTransformation textTransformation)
         {
-            textTransformation.SetUp();
             return new TextTransformationWrapper(textTransformation);
         }
 

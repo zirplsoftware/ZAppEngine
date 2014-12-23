@@ -1,24 +1,14 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Data.Odbc;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using EnvDTE;
-using Microsoft.CSharp;
-using Microsoft.VisualStudio.OLE.Interop;
+using EnvDTE80;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
-using Newtonsoft.Json;
 using Zirpl.AppEngine.Logging;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
-using Zirpl.Collections;
-using Zirpl.Reflection;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
