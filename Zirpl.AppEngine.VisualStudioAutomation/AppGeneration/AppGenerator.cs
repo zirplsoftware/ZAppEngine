@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -23,12 +24,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {
-        public static void GenerateApp(this TextTransformation callingTemplate)
+        public static void GenerateApp(this TextTransformation callingTemplate, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
         {
             new Action(() =>
             {
                 callingTemplate.SetUp();
-                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate));
+                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate));
             })
             .GetRunner()
             .OnError((e) => HandleException(callingTemplate, e))
@@ -36,12 +37,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, String templateAssemblyName)
+        public static void GenerateApp(this TextTransformation callingTemplate, String templateAssemblyName, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
         {
             new Action(() =>
             {
                 callingTemplate.SetUp();
-                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssemblyName }));
+                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate, new[] { templateAssemblyName }));
             })
             .GetRunner()
             .OnError((e) => HandleException(callingTemplate, e))
@@ -49,12 +50,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<string> templateAssemblyNames)
+        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<string> templateAssemblyNames, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
         {
             new Action(() =>
             {
                 callingTemplate.SetUp();
-                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblyNames));
+                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate, templateAssemblyNames));
             })
             .GetRunner()
             .OnError((e) => HandleException(callingTemplate, e))
@@ -62,12 +63,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, Assembly templateAssembly)
+        public static void GenerateApp(this TextTransformation callingTemplate, Assembly templateAssembly, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
         {
             new Action(() =>
             {
                 callingTemplate.SetUp();
-                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, new[] { templateAssembly }));
+                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate, new[] { templateAssembly }));
             })
             .GetRunner()
             .OnError((e) => HandleException(callingTemplate, e))
@@ -75,12 +76,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> templateAssemblies)
+        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> templateAssemblies, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
         {
             new Action(() =>
             {
                 callingTemplate.SetUp();
-                GenerateApp(callingTemplate, new TemplateProvider(callingTemplate, templateAssemblies));
+                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate, templateAssemblies));
             })
             .GetRunner()
             .OnError((e) => HandleException(callingTemplate, e))
@@ -88,12 +89,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             .Run();
         }
 
-        private static void GenerateApp(TextTransformation callingTemplate, ITemplateProvider templateProvider)
+        public static void GenerateApp(this TextTransformation callingTemplate, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
         {
             var app = new AppProvider(callingTemplate).GetApp();
-            var outputFileProvider = new OutputFileProvider();
-            var templateRunner = new TemplateRunner(app);
-            callingTemplate.RunTemplates(templateRunner, templateProvider, outputFileProvider);
+            outputFileProvider = outputFileProvider ?? new OutputFileProvider();
+            callingTemplate.RunTemplates(new AppGeneration.TextTemplating.TemplateRunner(app), templateProvider, sessionParameters, outputFileProvider);
         }
 
 

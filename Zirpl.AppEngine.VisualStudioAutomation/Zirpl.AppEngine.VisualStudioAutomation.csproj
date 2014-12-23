@@ -129,11 +129,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="TextTemplating\TemplateRunner.cs" />
     <Compile Include="VisualStudio\Logging\LogFactory.cs" />
     <Compile Include="VisualStudio\Logging\OutputPaneLogWrapper.cs" />
     <Compile Include="TextTemplating\IOutputFileManager.cs" />
     <Compile Include="TextTemplating\IOutputFileProvider.cs" />
-    <Compile Include="TextTemplating\ITemplateProvider.cs" />
+    <Compile Include="AppGeneration\TextTemplating\ITemplateProvider.cs" />
     <Compile Include="TextTemplating\ITemplateRunner.cs" />
     <Compile Include="TextTemplating\ITextTransformation.cs" />
     <Compile Include="TextTemplating\ObjectExtensions.cs" />
@@ -173,9 +174,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TextTemplating\Logging\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

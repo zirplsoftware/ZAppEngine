@@ -36,29 +36,182 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             return new TextTransformationWrapper(textTransformation);
         }
 
-        public static void RunTemplates(this TextTransformation textTransformation, ITemplateRunner templateRunner, ITemplateProvider templateProvider, IOutputFileProvider outputFileProvider)
+        public static void RunTemplates(this TextTransformation textTransformation, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                textTransformation.RunTemplates(new TemplateRunner(), templateProvider, sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplates(this TextTransformation textTransformation, IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                textTransformation.RunTemplate(new TemplateRunner(), templateTypes, sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplate(this TextTransformation textTransformation, Type templateType, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                textTransformation.RunTemplate(new TemplateRunner(), templateType, sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplate<T>(this TextTransformation textTransformation, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                textTransformation.RunTemplate(new TemplateRunner(), typeof(T), sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplates(this TextTransformation textTransformation, IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                textTransformation.RunTemplates(new TemplateRunner(), templates, sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+        
+        public static void RunTemplate(this TextTransformation textTransformation, Object template, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                textTransformation.RunTemplate(new TemplateRunner(), template, sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplates(this TextTransformation textTransformation, ITemplateRunner templateRunner, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                textTransformation.RunTemplates(
+                    templateRunner,
+                    templateProvider.GetTemplates(textTransformation),
+                    sessionParameters,
+                    outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplates(this TextTransformation textTransformation, ITemplateRunner templateRunner, IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                foreach (var templateType in templateTypes)
+                {
+                    textTransformation.RunTemplate(templateRunner, templateType, sessionParameters, outputFileProvider);
+                }
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplate(this TextTransformation textTransformation, ITemplateRunner templateRunner, Type templateType, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                var template = Activator.CreateInstance(templateType);
+                textTransformation.RunTemplate(templateRunner, template, sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplate<T>(this TextTransformation textTransformation, ITemplateRunner templateRunner, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                textTransformation.RunTemplate(templateRunner, typeof(T), sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplates(this TextTransformation textTransformation, ITemplateRunner templateRunner, IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                foreach (var template in templates)
+                {
+                    textTransformation.RunTemplate(templateRunner, template, sessionParameters, outputFileProvider);
+                }
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        public static void RunTemplate(this TextTransformation textTransformation, ITemplateRunner templateRunner, Object template, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        {
+            new Action(() =>
+            {
+                textTransformation.SetUp();
+                templateRunner.RunTemplate(textTransformation, template, sessionParameters, outputFileProvider);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(textTransformation, e))
+            .OnComplete((passed) => textTransformation.CleanUp())
+            .Run();
+        }
+
+        private static void HandleException(TextTransformation textTransformation, Exception e)
         {
             try
             {
-                //textTransformation.SetUp();
-                var fileManager = textTransformation.Wrap().FileManager;
-                templateRunner.RunTemplates(fileManager, templateProvider, outputFileProvider);
+                LogManager.GetLog().Debug(e.ToString());
+                textTransformation.WriteLine(e.ToString());
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                try
-                {
-                    LogManager.GetLog().Debug(e.ToString());
-                    textTransformation.WriteLine(e.ToString());
-                }
-                catch (Exception)
-                {
-                }
-                throw;
-            }
-            finally
-            {
-                textTransformation.CleanUp();
             }
         }
 

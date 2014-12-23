@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using EnvDTE;
+using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
@@ -10,7 +11,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
     internal class OutputFileProvider : IOutputFileProvider
     {
-        public OutputFile GetOutputFile(Object template)
+        public OutputFile GetOutputFile(TextTransformation textTransformation, Object template)
         {
             var wrapper = new TextTransformationWrapper(template);
             App app = null;

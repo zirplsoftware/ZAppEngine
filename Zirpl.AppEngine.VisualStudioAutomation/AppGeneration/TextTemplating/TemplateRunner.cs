@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
@@ -7,7 +8,7 @@ using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    internal class TemplateRunner : ITemplateRunner
+    internal class TemplateRunner : Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateRunner
     {
         private readonly App _app;
 
@@ -16,82 +17,43 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             this._app = app;
         }
 
-        public void RunTemplates(IOutputFileManager outputFileManager, ITemplateProvider templateProvider, IOutputFileProvider outputFileProvider)
+        public override void RunTemplate(TextTransformation textTransformation, object template, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
         {
-            foreach (var templateType in templateProvider.GetTemplates())
+            if (template.Access().HasGet<DomainType>("DomainType"))
             {
-                if (templateType.GetTypeAccessor().HasPropertyGetter<DomainType>("DomainType"))
+                // once per DomainType
+                //
+                this.GetLog().Debug("Calling template once per domain type: " + template.GetType().FullName);
+                foreach (var domainType in _app.DomainTypes)
                 {
-                    // once per DomainType
-                    //
-                    this.GetLog().Debug("Calling template once per domain type: " + templateType.FullName);
-                    foreach (var domainType in _app.DomainTypes)
+                    var session = new Dictionary<String, Object>();
+                    if (sessionParameters != null)
                     {
-                        TransformTemplate(outputFileManager, outputFileProvider, templateType, domainType);
+                        foreach (var pair in sessionParameters)
+                        {
+                            session.Add(pair.Key, pair.Value);
+                        }
                     }
-                }
-                else
-                {
-                    // once per App
-                    //
-                    this.GetLog().Debug("Calling template once: " + templateType.FullName);
-                    TransformTemplate(outputFileManager, outputFileProvider, templateType);
-                }
-            }
-        }
-
-        private void TransformTemplate(IOutputFileManager outputFileManager, IOutputFileProvider outputFileProvider, Type templateType, DomainType domainType = null)
-        {
-            var template = Activator.CreateInstance(templateType);
-            var templateWrapper = new TextTransformationWrapper(template);
-            var session = new TextTemplatingSession();
-            //foreach (var globalTemplateParameter in app.GlobalTemplateParameters)
-            //{
-            //    templateWrapper.Session.Add(globalTemplateParameter);
-            //}
-            session.Add("App", _app);
-            if (domainType != null)
-            {
-                session.Add("DomainType", domainType);
-            }
-            templateWrapper.Session = session;
-            templateWrapper.Initialize();
-
-            if (!template.Access().HasGet<bool>("ShouldTransform")
-                || template.Access().Property<bool>("ShouldTransform"))
-            {
-                OutputFile outputFile = null;
-                if (template.Access().HasGet<OutputFile>("OutputFile"))
-                {
-                    outputFile = template.Access().Property<OutputFile>("OutputFile");
-                }
-                if (outputFile == null)
-                {
-                    outputFile = outputFileProvider.GetOutputFile(template);
-                }
-                if (outputFile != null)
-                {
-                    outputFileManager.StartFile(template, outputFile);
-                    // run the template
-                    templateWrapper.TransformText();
-                    outputFileManager.EndFile();
-                }
-                else
-                {
-                    outputFileManager.UseDefaultFile(template);
-                    templateWrapper.TransformText();
+                    session.Add("App", _app);
+                    session.Add("DomainType", domainType);
+                    base.RunTemplate(textTransformation, template, session, outputFileProvider);
                 }
             }
             else
             {
-                if (domainType != null)
+                // once per App
+                //
+                this.GetLog().Debug("Calling template once: " + template.GetType().FullName);
+                var session = new Dictionary<String, Object>();
+                if (sessionParameters != null)
                 {
-                    this.GetLog().Debug(String.Format("      ShouldTransform == false. Not transforming for {0}", domainType.FullName));
+                    foreach (var pair in sessionParameters)
+                    {
+                        session.Add(pair.Key, pair.Value);
+                    }
                 }
-                else
-                {
-                    this.GetLog().Debug(String.Format("      ShouldTransform == false. Not transforming"));
-                }
+                session.Add("App", _app);
+                base.RunTemplate(textTransformation, template, session, outputFileProvider);
             }
         }
     }

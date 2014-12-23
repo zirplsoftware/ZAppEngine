@@ -73,7 +73,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
         }
 
-        public IEnumerable<Type> GetTemplates()
+        public IEnumerable<Type> GetTemplates(TextTransformation textTransformation)
         {
 
             // find ALL templates
