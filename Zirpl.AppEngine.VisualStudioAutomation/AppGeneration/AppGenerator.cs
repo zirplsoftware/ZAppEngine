@@ -97,7 +97,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
         }
 
 
-        private static void HandleException(ITransform transform, Exception e)
+        private static Exception HandleException(ITransform transform, Exception e)
         {
             try
             {
@@ -107,6 +107,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             catch (Exception)
             {
             }
+            return e;
         }
     }
 }

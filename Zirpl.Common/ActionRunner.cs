@@ -5,7 +5,7 @@ namespace Zirpl
     public class ActionRunner
     {
         public Action Action { get; private set; }
-        public Action<Exception> ErrorHandler { get; set; }
+        public Func<Exception, Exception> ErrorHandler { get; set; }
         public Action<bool> CompleteHandler { get; set; }
 
         public ActionRunner(Action action)
@@ -14,7 +14,7 @@ namespace Zirpl
             this.Action = action;
         }
 
-        public ActionRunner OnError(Action<Exception> action)
+        public ActionRunner OnError(Func<Exception, Exception> action)
         {
             this.ErrorHandler = action;
             return this;
@@ -38,7 +38,7 @@ namespace Zirpl
         private void Run(bool rethrow)
         {
             bool failed = false;
-            Action<Exception> errorHandler = this.ErrorHandler;
+            Func<Exception, Exception> errorHandler = this.ErrorHandler;
             Action<Boolean> completeHandler = this.CompleteHandler;
             Action action = this.Action;
 
@@ -49,11 +49,12 @@ namespace Zirpl
             catch (Exception e)
             {
                 failed = true;
+                Exception newException = null;
                 if (errorHandler != null)
                 {
                     try
                     {
-                        errorHandler(e);
+                        newException = errorHandler(e);
                     }
                     catch (Exception ex)
                     {
@@ -62,7 +63,15 @@ namespace Zirpl
                 }
                 if (rethrow)
                 {
-                    throw;
+                    if (newException != null
+                        && newException != e)
+                    {
+                        throw newException;
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
             finally

@@ -239,7 +239,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        private void HandleException(Exception e)
+        private Exception HandleException(Exception e)
         {
             try
             {
@@ -249,6 +249,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             catch (Exception)
             {
             }
+            return e;
         }
         
 
