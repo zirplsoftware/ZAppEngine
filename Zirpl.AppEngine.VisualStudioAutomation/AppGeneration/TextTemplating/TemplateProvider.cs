@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;

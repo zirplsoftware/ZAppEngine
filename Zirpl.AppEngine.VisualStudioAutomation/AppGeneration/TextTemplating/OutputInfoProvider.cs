@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using EnvDTE;
-using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;

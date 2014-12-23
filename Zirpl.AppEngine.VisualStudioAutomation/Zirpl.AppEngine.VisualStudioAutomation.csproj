@@ -144,9 +144,10 @@
     <Compile Include="TextTemplating\ITemplateRunner.cs" />
     <Compile Include="TextTemplating\ITransform.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
-    <Compile Include="VisualStudio\TextTransformationExtensions.cs" />
+    <Compile Include="VisualStudio\TransformExtensions.cs" />
     <Compile Include="TextTemplating\ChildTransform.cs" />
     <Compile Include="TextTemplating\BuildActionTypeEnum.cs" />
+    <Compile Include="VisualStudio\TransformHostExtensions.cs" />
     <Compile Include="VisualStudio\VisualStudioExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextTemplating\OutputInfo.cs" />

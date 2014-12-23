@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;

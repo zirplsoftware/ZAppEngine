@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {

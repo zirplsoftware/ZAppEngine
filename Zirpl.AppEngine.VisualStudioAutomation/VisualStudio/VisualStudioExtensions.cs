@@ -8,7 +8,6 @@ using System.Text;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSharp;
-using Microsoft.VisualStudio.PlatformUI;
 using Zirpl.AppEngine.Logging;
 using Zirpl.IO;
 

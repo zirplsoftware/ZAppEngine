@@ -1,10 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Runtime.Versioning;
 using EnvDTE;
 using EnvDTE80;
-using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
