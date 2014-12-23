@@ -21,18 +21,19 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             this._template = template;
         }
 
-
-        public abstract bool IsMaster { get; }
-        public abstract IMasterTransform Master { get; }
-
         public object Template
         {
             get { return this._template; }
         }
 
-        public T TemplateAs<T>()
+        public abstract ITransformHost Host { get; }
+        public abstract IOutputFileManager FileManager { get; }
+
+        public ITransform GetChild(Object childTemplate)
         {
-            return (T)this._template;
+            if (childTemplate == null) throw new ArgumentNullException("childTemplate");
+
+            return new ChildTransform(this.Host, childTemplate);
         }
 
         public StringBuilder GenerationEnvironment
@@ -140,5 +141,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         //    this._transform.Access().Invoke("WriteLine", format, args);
         //}
         #endregion
+
+
     }
 }

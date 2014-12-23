@@ -13,13 +13,13 @@ using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio
 {
-    internal class SolutionBuilder
+    internal sealed class SolutionBuilder
     {
         internal void GenerateProjects(ITransform transform)
         {
             if (transform == null) throw new ArgumentNullException("transform");
 
-            var projectNamespacePrefix = transform.Master
+            var projectNamespacePrefix = transform.Host
                 .GetProjectItem()
                 .ContainingProject
                 .GetDefaultNamespace()
@@ -69,7 +69,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio
             var project = (Project)((Array)(transform.GetDTE().ActiveSolutionProjects)).GetValue(0);
             project.Save();
             //LogManager.GetLog().Debug(project.FullName);
-            project.Properties.Item("TargetFrameworkMoniker").Value = transform.Master.GetProjectItem().ContainingProject.Properties.Item("TargetFrameworkMoniker");
+            project.Properties.Item("TargetFrameworkMoniker").Value = transform.Host.GetProjectItem().ContainingProject.Properties.Item("TargetFrameworkMoniker");
             //project.Properties.Item("TargetFrameworkMoniker").Value = new FrameworkName(".NETFramework", new Version(4, 5, 1)).FullName;
             //textTransformation.GetProjectItem().ContainingProject.ParentProjectItem.Collection.project
             //project.Save();

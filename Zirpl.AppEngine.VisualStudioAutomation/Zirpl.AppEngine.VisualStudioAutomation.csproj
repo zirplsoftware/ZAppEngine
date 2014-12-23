@@ -130,11 +130,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="TextTemplating\IMasterTransform.cs" />
+    <Compile Include="TextTemplating\ITransformHost.cs" />
     <Compile Include="TextTemplating\MasterTransform.cs" />
     <Compile Include="TextTemplating\TemplateRunner.cs" />
     <Compile Include="TextTemplating\TemplateUtilities.cs" />
     <Compile Include="TextTemplating\TransformBase.cs" />
+    <Compile Include="TextTemplating\TransformHost.cs" />
     <Compile Include="VisualStudio\Logging\LogFactory.cs" />
     <Compile Include="VisualStudio\Logging\OutputPaneLogWrapper.cs" />
     <Compile Include="TextTemplating\IOutputFileManager.cs" />

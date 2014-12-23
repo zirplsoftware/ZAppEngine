@@ -7,10 +7,9 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public interface IMasterTransform : ITransform
+    public interface ITransformHost
     {
         ITextTemplatingEngineHost Host { get; }
-        IOutputFileManager FileManager { get; }
-        ITransform GetChild(Object childTemplate);
+        ITransform HostTransform { get; }
     }
 }

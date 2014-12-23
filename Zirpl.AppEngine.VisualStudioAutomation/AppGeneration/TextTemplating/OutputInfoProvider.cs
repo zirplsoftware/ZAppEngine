@@ -8,7 +8,7 @@ using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    internal class OutputInfoProvider : IOutputInfoProvider
+    internal sealed class OutputInfoProvider : IOutputInfoProvider
     {
         public OutputInfo GetOutputInfo(ITransform transform)
         {

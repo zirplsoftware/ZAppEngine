@@ -14,7 +14,7 @@ using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    internal class TemplateProvider : ITemplateProvider
+    internal sealed class TemplateProvider : ITemplateProvider
     {
         private readonly IList<Assembly> _assembliesToCheck;
         private readonly Assembly _thisAssembly;
@@ -58,13 +58,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 // if none were specified
                 // then we should use all current assemblies
                 // PLUS we should compile running template project into memory if it has templates
-                if (transform.Master.GetProjectItem().ContainingProject
+                if (transform.Host.GetProjectItem().ContainingProject
                     .GetAllProjectItems()
                     .Any(o => Path.GetExtension(o.GetFullPath()) == ".tt"))
                 {
                     // running template project DOES have templates, let's compile and use it
                     //
-                    transform.Master.GetProjectItem().ContainingProject
+                    transform.Host.GetProjectItem().ContainingProject
                         .CompileCSharpProjectInMemory();
                 }
 

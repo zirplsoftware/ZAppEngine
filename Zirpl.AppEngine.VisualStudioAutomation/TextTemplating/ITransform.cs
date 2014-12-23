@@ -8,10 +8,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public interface ITransform
     {
-        IMasterTransform Master { get; }
-        bool IsMaster { get; }
+        IOutputFileManager FileManager { get; }
+        ITransform GetChild(Object childTemplate);
+        ITransformHost Host { get; }
         Object Template { get; }
-        T TemplateAs<T>();
         StringBuilder GenerationEnvironment { get; set; }
         IDictionary<string, Object> Session { get; }
         void Initialize();

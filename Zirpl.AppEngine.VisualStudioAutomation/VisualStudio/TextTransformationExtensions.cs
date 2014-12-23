@@ -10,12 +10,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
     {
         public static DTE2 GetDTE(this ITransform textTransformation)
         {
-            return (DTE2)((IServiceProvider)textTransformation.Master.Host).GetCOMService(typeof(DTE));
+            return (DTE2)((IServiceProvider)textTransformation.Host.Host).GetCOMService(typeof(DTE));
         }
 
-        public static ProjectItem GetProjectItem(this IMasterTransform textTransformation)
+        public static ProjectItem GetProjectItem(this ITransformHost host)
         {
-            return textTransformation.GetDTE().Solution.GetProjectItem(textTransformation.Host.TemplateFile);
+            return host.HostTransform.GetDTE().Solution.GetProjectItem(host.Host.TemplateFile);
         }
     }
 }

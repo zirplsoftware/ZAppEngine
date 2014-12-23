@@ -32,7 +32,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             if (master == null)
             {
                 // it is not initialized, so we have a problem
-                throw new Exception("An IMasterTransform was not found in the Session. Call InitializeChild() from the IMasterTransform. You only need to use that method once, and the Master will be retrievable from the child after that.");
+                throw new Exception("An Host was not found in the Session. Call the following code from inside the main template to propertyly initialize the child template: 'this.AsTemplate().GetChild(childTemplate)'. Once initialized in this way, you can call 'this.AsTransform()' inside the child template.");
             }
             return master.GetChild(template);
         }

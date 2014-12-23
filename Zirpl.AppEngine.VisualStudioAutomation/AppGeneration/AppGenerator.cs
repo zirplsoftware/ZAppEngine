@@ -18,7 +18,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
         public static void GenerateApp(this ITransform transform, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
@@ -29,7 +29,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -41,7 +41,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -53,7 +53,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -65,7 +65,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -77,7 +77,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -88,11 +88,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 var app = new AppProvider(transform).GetApp();
                 outputFileProvider = outputFileProvider ?? new OutputInfoProvider();
                 transform.RunTemplates(new AppGeneration.TextTemplating.TemplateRunner(app), templateProvider, sessionParameters, outputFileProvider);
-                transform.Master.FileManager.EndFile();
+                transform.FileManager.EndFile();
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -102,7 +102,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             try
             {
                 LogManager.GetLog().Debug(e.ToString());
-                transform.GenerationEnvironment.Append(e);
+                transform.Host.HostTransform.GenerationEnvironment.Append(e);
             }
             catch (Exception)
             {

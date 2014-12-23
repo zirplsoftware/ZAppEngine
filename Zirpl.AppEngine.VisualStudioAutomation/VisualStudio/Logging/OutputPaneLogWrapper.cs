@@ -4,7 +4,7 @@ using Zirpl.AppEngine.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging
 {
-    internal class OutputPaneLogWrapper : LogBase
+    internal sealed class OutputPaneLogWrapper : LogBase
     {
         private readonly IVsOutputWindowPane _outputWindow;
         internal OutputPaneLogWrapper(IVsOutputWindowPane outputWindow)

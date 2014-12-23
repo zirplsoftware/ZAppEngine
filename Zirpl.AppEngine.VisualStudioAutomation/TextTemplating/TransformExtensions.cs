@@ -18,7 +18,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -30,7 +30,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -42,7 +42,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -54,7 +54,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -66,7 +66,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -78,7 +78,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -94,7 +94,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -109,7 +109,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -122,7 +122,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -134,7 +134,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -149,7 +149,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -161,7 +161,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             })
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
-            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .OnComplete((passed) => transform.FileManager.EndFile())
             .Run();
         }
 
@@ -170,7 +170,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             try
             {
                 LogManager.GetLog().Debug(e.ToString());
-                transform.GenerationEnvironment.Append(e);
+                transform.Host.HostTransform.GenerationEnvironment.Append(e);
             }
             catch (Exception)
             {

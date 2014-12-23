@@ -9,58 +9,28 @@ using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    internal class MasterTransform : TransformBase, IMasterTransform
+    internal sealed class MasterTransform : TransformBase
     {
+        private readonly ITransformHost _host;
+
         internal MasterTransform(Object masterTemplate)
             : base(masterTemplate)
         {
+            this._host = new TransformHost(this);
+
             var session = this.Session;
             // initialize the master if not done already
             if (!session.ContainsKey("_Initialized"))
             {
-                session.Add("IsMaster", true);
-                session.Add("IsChild", false);
-                session.Add("FileManager", new OutputFileManager(this));
-
+                session.Add("_IsMaster", true);
+                session.Add("_IsChild", false);
+                session.Add("_FileManager", new OutputFileManager(this));
                 session.Add("_Initialized", true);
             }
-            else if ((bool)session["IsChild"])
+            else if ((bool)session["_IsChild"])
             {
                 throw new ArgumentException("masterTransform is already a Child", "masterTemplate");
             }
-        }
-
-        public override IMasterTransform Master
-        {
-            get { return this; }
-        }
-
-        public override bool IsMaster
-        {
-            get { return true; }
-        }
-
-        public IOutputFileManager FileManager
-        {
-            get
-            {
-                return (IOutputFileManager)this.Session["FileManager"];
-            }
-        }
-        
-        public ITextTemplatingEngineHost Host
-        {
-            get
-            {
-                return this.Template.Access().Property<ITextTemplatingEngineHost>("Host");
-            }
-        }
-
-        public ITransform GetChild(Object childTemplate)
-        {
-            if (childTemplate == null) throw new ArgumentNullException("childTemplate");
-
-            return new ChildTransform(this, childTemplate);
         }
 
         internal static bool EvaluateIsMaster(Object template)
@@ -70,9 +40,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 var session = accessor.Property<IDictionary<String, Object>>("Session");
                 if (session != null
-                    && session.ContainsKey("IsMaster"))
+                    && session.ContainsKey("_IsMaster"))
                 {
-                    return (bool)session["IsMaster"];
+                    return (bool)session["_IsMaster"];
                 }
             }
             else
@@ -86,6 +56,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                    && fullName.EndsWith(".GeneratedTextTransformation")
                    && accessor.HasGet<ITextTemplatingEngineHost>("Host")
                    && accessor.Property<ITextTemplatingSession>("Host") != null;
+        }
+
+        public override ITransformHost Host
+        {
+            get { return this._host; }
+        }
+        public override IOutputFileManager FileManager
+        {
+            get
+            {
+                return (IOutputFileManager)this.Session["_FileManager"];
+            }
         }
     }
 }

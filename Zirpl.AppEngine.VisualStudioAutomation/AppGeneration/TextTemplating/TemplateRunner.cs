@@ -8,12 +8,14 @@ using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    internal class TemplateRunner : Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateRunner
+    internal sealed class TemplateRunner : Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.TemplateRunner
     {
         private readonly App _app;
 
         internal TemplateRunner(App app)
         {
+            if (app == null) throw new ArgumentNullException("app");
+
             this._app = app;
         }
 

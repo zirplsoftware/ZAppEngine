@@ -13,15 +13,17 @@ using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
-    internal class AppProvider
+    internal sealed class AppProvider
     {
         private readonly DTE2 _visualStudio;
         private readonly Project _callingTemplateProject;
 
         internal AppProvider(ITransform transform)
         {
+            if (transform == null) throw new ArgumentNullException("transform");
+
             this._visualStudio = transform.GetDTE();
-            this._callingTemplateProject = transform.Master.GetProjectItem().ContainingProject;
+            this._callingTemplateProject = transform.Host.GetProjectItem().ContainingProject;
         }
 
         internal App GetApp()

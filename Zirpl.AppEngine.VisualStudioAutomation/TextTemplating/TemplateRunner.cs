@@ -15,7 +15,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
             try
             {
-                var childTransform = transform.Master.GetChild(template);
+                var childTransform = transform.GetChild(template);
                 var session = childTransform.Session;
                 if (sessionParameters != null)
                 {
@@ -43,14 +43,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     this.GetLog().Debug(String.Format("      Transforming template: " + template.GetType().FullName));
                     if (outputFile != null)
                     {
-                        childTransform.Master.FileManager.StartFile(childTransform, outputFile);
+                        childTransform.FileManager.StartFile(childTransform, outputFile);
                         // run the template
                         childTransform.TransformText();
-                        childTransform.Master.FileManager.EndFile();
+                        childTransform.FileManager.EndFile();
                     }
                     else
                     {
-                        childTransform.Master.FileManager.UseDefaultFile(childTransform);
+                        childTransform.FileManager.UseDefaultFile(childTransform);
                         childTransform.TransformText();
                     }
                 }
@@ -65,7 +65,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 try
                 {
                     LogManager.GetLog().Debug(e.ToString());
-                    transform.Master.GenerationEnvironment.Append(e);
+                    transform.Host.HostTransform.GenerationEnvironment.Append(e);
                 }
                 catch (Exception)
                 {
