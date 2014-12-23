@@ -3,8 +3,8 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public interface IOutputFileProvider
+    public interface IOutputInfoProvider
     {
-        OutputFile GetOutputFile(TextTransformation textTransformation, Object template);
+        OutputInfo GetOutputInfo(ITransform transform);
     }
 }

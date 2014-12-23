@@ -8,16 +8,18 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio
 {
-    public class SolutionBuilder
+    internal class SolutionBuilder
     {
-        public void GenerateProjects(TextTransformation textTransformation)
+        internal void GenerateProjects(ITransform transform)
         {
-            
-            var projectNamespacePrefix = textTransformation
+            if (transform == null) throw new ArgumentNullException("transform");
+
+            var projectNamespacePrefix = transform.Master
                 .GetProjectItem()
                 .ContainingProject
                 .GetDefaultNamespace()
@@ -41,22 +43,22 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio
             foreach (var suffix in projectSuffixes)
             {
                 var projectName = projectNamespacePrefix + suffix;
-                if (textTransformation.GetDTE().Solution.GetProject(projectName) == null)
+                if (transform.GetDTE().Solution.GetProject(projectName) == null)
                 {
-                    this.CreateProject(textTransformation, projectName, projectName.EndsWith(".Web"));
+                    this.CreateProject(transform, projectName);
                 }
             }
         }
 
-        private Project CreateProject(TextTransformation textTransformation, String projectName, bool isWeb)
+        private Project CreateProject(ITransform transform, String projectName)
         {
-            var csTemplatePath = ((Solution2)textTransformation.GetDTE().Solution).GetProjectTemplate("ClassLibrary.zip", "CSharp"); // "vbproj"
-            var folder = Path.Combine(Path.GetDirectoryName(textTransformation.GetDTE().Solution.FullName), projectName);
+            var csTemplatePath = ((Solution2)transform.GetDTE().Solution).GetProjectTemplate("ClassLibrary.zip", "CSharp"); // "vbproj"
+            var folder = Path.Combine(Path.GetDirectoryName(transform.GetDTE().Solution.FullName), projectName);
             LogManager.GetLog().DebugFormat("Creating new project: {0} at {1}", projectName, folder);
 
             // the project returned by this line is null for some strange reason
             //
-            textTransformation.GetDTE().Solution.AddFromTemplate(csTemplatePath, Path.Combine(folder, projectName), projectName, false);
+            transform.GetDTE().Solution.AddFromTemplate(csTemplatePath, Path.Combine(folder, projectName), projectName, false);
 
             // and this seems to return an error "Project Unavailable"
             //
@@ -64,10 +66,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio
             // 
             // so we use this instead, which works
             //
-            var project = (Project)((Array)(textTransformation.GetDTE().ActiveSolutionProjects)).GetValue(0);
+            var project = (Project)((Array)(transform.GetDTE().ActiveSolutionProjects)).GetValue(0);
             project.Save();
             //LogManager.GetLog().Debug(project.FullName);
-            project.Properties.Item("TargetFrameworkMoniker").Value = textTransformation.GetProjectItem().ContainingProject.Properties.Item("TargetFrameworkMoniker");
+            project.Properties.Item("TargetFrameworkMoniker").Value = transform.Master.GetProjectItem().ContainingProject.Properties.Item("TargetFrameworkMoniker");
             //project.Properties.Item("TargetFrameworkMoniker").Value = new FrameworkName(".NETFramework", new Version(4, 5, 1)).FullName;
             //textTransformation.GetProjectItem().ContainingProject.ParentProjectItem.Collection.project
             //project.Save();

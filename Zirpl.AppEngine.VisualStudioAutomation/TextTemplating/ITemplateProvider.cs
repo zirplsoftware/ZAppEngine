@@ -6,6 +6,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public interface ITemplateProvider
     {
-        IEnumerable<Type> GetTemplates(TextTransformation textTransformation);
+        IEnumerable<Type> GetTemplateTypes();
     }
 }

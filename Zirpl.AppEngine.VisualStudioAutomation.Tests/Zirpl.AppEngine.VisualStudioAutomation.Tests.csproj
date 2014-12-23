@@ -62,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine.VisualStudioAutomation.Testing\Zirpl.AppEngine.VisualStudioAutomation.Testing.csproj">
+      <Project>{a6adc6ce-6d3d-409e-9ed3-cb0ac9cb8e8f}</Project>
+      <Name>Zirpl.AppEngine.VisualStudioAutomation.Testing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zirpl.AppEngine.VisualStudioAutomation\Zirpl.AppEngine.VisualStudioAutomation.csproj">
       <Project>{f8855f9a-35d1-4c30-bb53-1fd89a984989}</Project>
       <Name>Zirpl.AppEngine.VisualStudioAutomation</Name>
@@ -78,6 +82,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TextTemplating\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

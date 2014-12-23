@@ -118,7 +118,7 @@
     <Compile Include="AppGeneration\Config\Relationship.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateRunner.cs" />
-    <Compile Include="AppGeneration\TextTemplating\OutputFileProvider.cs" />
+    <Compile Include="AppGeneration\TextTemplating\OutputInfoProvider.cs" />
     <Compile Include="AppGeneration\VisualStudio\SolutionBuilder.cs" />
     <Compile Include="AppGeneration\_templates\DT_cs.cs">
       <DependentUpon>DT_cs.tt</DependentUpon>
@@ -130,23 +130,25 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="TextTemplating\IMasterTransform.cs" />
+    <Compile Include="TextTemplating\MasterTransform.cs" />
     <Compile Include="TextTemplating\TemplateRunner.cs" />
+    <Compile Include="TextTemplating\TransformBase.cs" />
     <Compile Include="VisualStudio\Logging\LogFactory.cs" />
     <Compile Include="VisualStudio\Logging\OutputPaneLogWrapper.cs" />
     <Compile Include="TextTemplating\IOutputFileManager.cs" />
-    <Compile Include="TextTemplating\IOutputFileProvider.cs" />
+    <Compile Include="TextTemplating\IOutputInfoProvider.cs" />
     <Compile Include="TextTemplating\ITemplateProvider.cs" />
     <Compile Include="TextTemplating\ITemplateRunner.cs" />
-    <Compile Include="TextTemplating\ITextTransformation.cs" />
-    <Compile Include="TextTemplating\ObjectExtensions.cs" />
+    <Compile Include="TextTemplating\ITransform.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
     <Compile Include="VisualStudio\TextTransformationExtensions.cs" />
-    <Compile Include="TextTemplating\TextTransformationWrapper.cs" />
+    <Compile Include="TextTemplating\ChildTransform.cs" />
     <Compile Include="TextTemplating\BuildActionTypeEnum.cs" />
-    <Compile Include="TextTemplating\TextTransformationExtensions.cs" />
+    <Compile Include="TextTemplating\TransformUtilities.cs" />
     <Compile Include="VisualStudio\VisualStudioExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextTemplating\OutputFile.cs" />
+    <Compile Include="TextTemplating\OutputInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

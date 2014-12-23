@@ -4,8 +4,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public interface IOutputFileManager : IDisposable
     {
-        void UseDefaultFile(Object template);
-        void StartFile(Object template, OutputFile file);
+        void UseDefaultFile(ITransform currentTransform);
+        void StartFile(ITransform currentTransform, OutputInfo file);
         void EndFile();
     }
 }

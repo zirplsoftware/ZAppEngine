@@ -1,7 +1,8 @@
-﻿<#@ template  debug="true" hostSpecific="true" #>
+﻿<#@ template  debug="true" hostSpecific="true" inherits="Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation" #>
 <#@ output extension=".txt" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
+<#@ assembly name="C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.TextTemplating.Modeling.12.0.dll" #>
 <#@ assembly name="$(SolutionDir)Zirpl.AppEngine.VisualStudioAutomation\bin\$(Configuration)\Zirpl.AppEngine.VisualStudioAutomation.dll" #>
 <#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
 <#

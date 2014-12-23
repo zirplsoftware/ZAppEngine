@@ -14,34 +14,38 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     internal class OutputFileManager : IOutputFileManager
     {
-        private readonly IList<OutputFile> _completedFiles;
+        private readonly IList<OutputInfo> _completedFiles;
         private readonly DTE2 _visualStudio;
-        private readonly TextTransformation _callingTemplate;
+        private readonly IMasterTransform _masterTransform;
         private readonly String _placeHolderName;
         private readonly StringBuilder _callingTemplateOriginalGenerationEnvironment;
         private StringBuilder _currentGenerationEnvironment;
-        private OutputFile _currentOutputFile;
+        private OutputInfo _currentOutputFile;
 
-        internal OutputFileManager(TextTransformation callingTemplate)
+        internal OutputFileManager(IMasterTransform masterTransform)
         {
-            this._visualStudio = callingTemplate.GetDTE();
-            this._callingTemplate = callingTemplate;
+            if (masterTransform == null) throw new ArgumentNullException("masterTransform");
+            if (!masterTransform.IsMaster) throw new ArgumentException("IsMaster returned false", "masterTransform");
 
-            var callingTemplateProjectItem = callingTemplate.GetProjectItem();
+            this._visualStudio = masterTransform.GetDTE();
+            this._masterTransform = masterTransform;
 
-            this._callingTemplateOriginalGenerationEnvironment = callingTemplate.Wrap().GenerationEnvironment;
-            this._currentGenerationEnvironment = callingTemplate.Wrap().GenerationEnvironment;
+            var callingTemplateProjectItem = masterTransform.GetProjectItem();
+
+            this._callingTemplateOriginalGenerationEnvironment = this._masterTransform.GenerationEnvironment;
+            this._currentGenerationEnvironment = this._masterTransform.GenerationEnvironment;
             var placeholder = callingTemplateProjectItem.ProjectItems.ToEnumerable().SingleOrDefault();
             this._placeHolderName = placeholder == null ? null : placeholder.Name;
-            this._completedFiles = new List<OutputFile>();
+            this._completedFiles = new List<OutputInfo>();
         }
 
-        public void StartFile(Object template, OutputFile file)
+        public void StartFile(ITransform currentTransform, OutputInfo file)
         {
             // we end it first, only because it will make logging easier to follow/debug
             this.EndFile();
 
-            if (template == null) throw new ArgumentNullException("template");
+            if (currentTransform == null) throw new ArgumentNullException("currentTransform");
+
             if (file == null) throw new ArgumentNullException("file");
 
             if (String.IsNullOrEmpty(file.FileNameWithoutExtension)
@@ -51,15 +55,17 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             }
 
             this._currentOutputFile = file;
-            this._currentGenerationEnvironment = new TextTransformationWrapper(template).GenerationEnvironment;
-            this._callingTemplate.Wrap().GenerationEnvironment = this._currentGenerationEnvironment;
+            this._currentGenerationEnvironment = currentTransform.GenerationEnvironment;
+            this._masterTransform.GenerationEnvironment = this._currentGenerationEnvironment;
         }
 
-        public void UseDefaultFile(Object template)
+        public void UseDefaultFile(ITransform currentTransform)
         {
             this.EndFile();
-            new TextTransformationWrapper(template).GenerationEnvironment =
-                this._callingTemplateOriginalGenerationEnvironment;
+
+            if (currentTransform == null) throw new ArgumentNullException("currentTransform");
+
+            currentTransform.GenerationEnvironment = this._callingTemplateOriginalGenerationEnvironment;
         }
 
         public void EndFile()
@@ -68,7 +74,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 var content = this._currentGenerationEnvironment.ToString();
                 this._currentGenerationEnvironment = this._callingTemplateOriginalGenerationEnvironment;
-                this._callingTemplate.Wrap().GenerationEnvironment = this._currentGenerationEnvironment;
+                this._masterTransform.GenerationEnvironment = this._currentGenerationEnvironment;
                 
                 // apply parameters to content
                 //

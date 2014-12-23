@@ -8,22 +8,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public class TemplateRunner : ITemplateRunner
     {
-        public virtual void RunTemplate(TextTransformation textTransformation, Object template, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        public virtual void RunTemplate(ITransform transform, Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
+            if (transform == null) throw new ArgumentNullException("transform");
+            if (template == null) throw new ArgumentNullException("template");
+
             try
             {
-                if (textTransformation == null) throw new ArgumentNullException("textTransformation");
-                if (template == null) throw new ArgumentNullException("template");
-
-                var templateWrapper = new TextTransformationWrapper(template);
-                var session = templateWrapper.Session ?? new TextTemplatingSession();
-                if (textTransformation.Session != null)
-                {
-                    foreach (var pair in textTransformation.Session)
-                    {
-                        session.Add("ParentTemplate." + pair.Key, pair.Value);
-                    }
-                }
+                var childTransform = transform.Master.GetChild(template);
+                var session = childTransform.Session;
                 if (sessionParameters != null)
                 {
                     foreach (var pair in sessionParameters)
@@ -31,37 +24,34 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                         session.Add(pair.Key, pair.Value);
                     }
                 }
-                session.Add("ParentTemplate", textTransformation);
-                session.Add("FileManager", textTransformation.Wrap().FileManager);
-                templateWrapper.Session = session;
-                templateWrapper.Initialize();
+                childTransform.Initialize();
 
                 if (!template.Access().HasGet<bool>("ShouldTransform")
                     || template.Access().Property<bool>("ShouldTransform"))
                 {
-                    OutputFile outputFile = null;
-                    if (template.Access().HasGet<OutputFile>("OutputFile"))
+                    OutputInfo outputFile = null;
+                    if (template.Access().HasGet<OutputInfo>("OutputFile"))
                     {
-                        outputFile = template.Access().Property<OutputFile>("OutputFile");
+                        outputFile = template.Access().Property<OutputInfo>("OutputFile");
                     }
                     if (outputFile == null
                         && outputFileProvider != null)
                     {
-                        outputFile = outputFileProvider.GetOutputFile(textTransformation, template);
+                        outputFile = outputFileProvider.GetOutputInfo(childTransform);
                     }
 
                     this.GetLog().Debug(String.Format("      Transforming template: " + template.GetType().FullName));
                     if (outputFile != null)
                     {
-                        textTransformation.Wrap().FileManager.StartFile(template, outputFile);
+                        childTransform.Master.FileManager.StartFile(childTransform, outputFile);
                         // run the template
-                        templateWrapper.TransformText();
-                        textTransformation.Wrap().FileManager.EndFile();
+                        childTransform.TransformText();
+                        childTransform.Master.FileManager.EndFile();
                     }
                     else
                     {
-                        textTransformation.Wrap().FileManager.UseDefaultFile(template);
-                        templateWrapper.TransformText();
+                        childTransform.Master.FileManager.UseDefaultFile(childTransform);
+                        childTransform.TransformText();
                     }
                 }
                 else
@@ -75,7 +65,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 try
                 {
                     LogManager.GetLog().Debug(e.ToString());
-                    textTransformation.WriteLine(e.ToString());
+                    transform.Master.GenerationEnvironment.Append(e);
                 }
                 catch (Exception)
                 {

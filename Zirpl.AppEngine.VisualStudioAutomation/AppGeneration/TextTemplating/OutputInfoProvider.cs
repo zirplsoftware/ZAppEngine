@@ -8,28 +8,29 @@ using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
-    internal class OutputFileProvider : IOutputFileProvider
+    internal class OutputInfoProvider : IOutputInfoProvider
     {
-        public OutputFile GetOutputFile(TextTransformation textTransformation, Object template)
+        public OutputInfo GetOutputInfo(ITransform transform)
         {
-            var wrapper = new TextTransformationWrapper(template);
+            if (transform == null) throw new ArgumentNullException("transform");
+
             App app = null;
             DomainType domainType = null;
 
-            if (wrapper.Session.ContainsKey("App"))
+            if (transform.Session.ContainsKey("App"))
             {
-                app = (App)wrapper.Session["App"];
+                app = (App)transform.Session["App"];
             }
-            if (wrapper.Session.ContainsKey("DomainType"))
+            if (transform.Session.ContainsKey("DomainType"))
             {
-                domainType = (DomainType)wrapper.Session["DomainType"];
+                domainType = (DomainType)transform.Session["DomainType"];
             }
 
-            var fileName = GetFileName(template.GetType().Name, domainType == null ? null : domainType.Name);
-            var destinationProject = GetProject(app, template.GetType().Namespace, domainType);
-            var folder = GetFolderPathWithinProject(template.GetType().Name, domainType);
+            var fileName = GetFileName(transform.Template.GetType().Name, domainType == null ? null : domainType.Name);
+            var destinationProject = GetProject(app, transform.Template.GetType().Namespace, domainType);
+            var folder = GetFolderPathWithinProject(transform.Template.GetType().Name, domainType);
 
-            var outputFile = new OutputFile()
+            var outputFile = new OutputInfo()
             {
                 FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
                 FileExtension = Path.GetExtension(fileName),

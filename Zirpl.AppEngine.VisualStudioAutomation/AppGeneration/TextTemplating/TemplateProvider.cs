@@ -19,21 +19,23 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         private readonly IList<Assembly> _assembliesToCheck;
         private readonly Assembly _thisAssembly;
 
-        internal TemplateProvider(TextTransformation callingTemplate)
-            : this(callingTemplate, new Assembly[0])
+        internal TemplateProvider(ITransform transform)
+            : this(transform, new Assembly[0])
         {
         }
 
-        internal TemplateProvider(TextTransformation callingTemplate, IEnumerable<String> templateAssemblyNames)
-            : this(callingTemplate, 
+        internal TemplateProvider(ITransform transform, IEnumerable<String> templateAssemblyNames)
+            : this(transform, 
                     from fileName in templateAssemblyNames
                    where AppDomain.CurrentDomain.GetAssemblies().Count(o => !o.IsDynamic && o.Location.Contains(fileName)) == 1
                    select AppDomain.CurrentDomain.GetAssemblies().Single(o => !o.IsDynamic && o.Location.Contains(fileName)))
         {
         }
 
-        internal TemplateProvider(TextTransformation callingTemplate, IEnumerable<Assembly> templateAssemblies)
+        internal TemplateProvider(ITransform transform, IEnumerable<Assembly> templateAssemblies)
         {
+            if (transform == null) throw new ArgumentNullException("transform");
+
             this._assembliesToCheck = new List<Assembly>();
             this._thisAssembly = this.GetType().Assembly;
 
@@ -56,13 +58,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 // if none were specified
                 // then we should use all current assemblies
                 // PLUS we should compile running template project into memory if it has templates
-                if (callingTemplate.GetProjectItem().ContainingProject
+                if (transform.Master.GetProjectItem().ContainingProject
                     .GetAllProjectItems()
                     .Any(o => Path.GetExtension(o.GetFullPath()) == ".tt"))
                 {
                     // running template project DOES have templates, let's compile and use it
                     //
-                    callingTemplate.GetProjectItem().ContainingProject
+                    transform.Master.GetProjectItem().ContainingProject
                         .CompileCSharpProjectInMemory();
                 }
 
@@ -72,9 +74,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
         }
 
-        public IEnumerable<Type> GetTemplates(TextTransformation textTransformation)
+        public IEnumerable<Type> GetTemplateTypes()
         {
-
             // find ALL templates
             var allTemplates = from assembly in _assembliesToCheck
                                from o in assembly.GetTypes()

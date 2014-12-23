@@ -4,11 +4,10 @@ using EnvDTE;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public class OutputFile
+    public class OutputInfo
     {
-        public OutputFile()
+        public OutputInfo()
         {
-            //this.ContentParameters = new Dictionary<string, string>();
             this.CanOverrideExistingFile = true;
             this.Encoding = Encoding.UTF8;
             this.BuildAction = BuildActionTypeEnum.Compile;
@@ -23,7 +22,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         public bool CanOverrideExistingFile { get; set; }
         public bool AutoFormat { get; set; }
         public Encoding Encoding { get; set; }
-        //public Dictionary<string, string> ContentParameters { get; set; }
 
         public ProjectItem ProjectItem { get; internal set; }
         public String FileName
@@ -31,14 +29,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             get { return this.FileNameWithoutExtension + this.FileExtension; }
         }
 
-        public OutputFile AsCSharpFile()
+        public OutputInfo AsCSharpFile()
         {
             FileExtension = ".cs";
             BuildAction = BuildActionTypeEnum.Compile;
             return this;
         }
 
-        public OutputFile MatchBuildActionToFileExtension()
+        public OutputInfo MatchBuildActionToFileExtension()
         {
             var extension = FileExtension.OrEmpty().ToLowerInvariant();
             switch (extension)

@@ -46,7 +46,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration._templates.ModelP
             this.Write(" = ");
             this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
             this.Write(",\r\n");
-	
+
 		}
 
             this.Write("\t}\r\n}\r\n");

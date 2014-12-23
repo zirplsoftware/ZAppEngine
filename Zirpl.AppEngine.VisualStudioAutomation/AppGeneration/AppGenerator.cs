@@ -1,111 +1,108 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using EnvDTE80;
-using Microsoft.VisualStudio.PlatformUI;
-using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
-using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {
-        public static void GenerateSolutionStructure(this TextTransformation callingTemplate)
+        public static void GenerateSolutionStructure(this ITransform transform)
         {
             new Action(() =>
             {
-                callingTemplate.SetUp();
-                new SolutionBuilder().GenerateProjects(callingTemplate);
+                new SolutionBuilder().GenerateProjects(transform);
             })
             .GetRunner()
-            .OnError((e) => HandleException(callingTemplate, e))
-            .OnComplete((passed) => callingTemplate.CleanUp())
+            .OnError((e) => HandleException(transform, e))
+            .OnComplete((passed) => transform.Master.FileManager.EndFile())
             .Run();
         }
-        public static void GenerateApp(this TextTransformation callingTemplate, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        public static void GenerateApp(this ITransform transform, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
             new Action(() =>
             {
-                callingTemplate.SetUp();
-                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate));
+                transform.GenerateApp(new TemplateProvider(transform));
             })
             .GetRunner()
-            .OnError((e) => HandleException(callingTemplate, e))
-            .OnComplete((passed) => callingTemplate.CleanUp())
+            .OnError((e) => HandleException(transform, e))
+            .OnComplete((passed) => transform.Master.FileManager.EndFile())
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, String templateAssemblyName, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        public static void GenerateApp(this ITransform transform, String templateAssemblyName, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
             new Action(() =>
             {
-                callingTemplate.SetUp();
-                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate, new[] { templateAssemblyName }));
+                transform.GenerateApp(new TemplateProvider(transform, new[] { templateAssemblyName }));
             })
             .GetRunner()
-            .OnError((e) => HandleException(callingTemplate, e))
-            .OnComplete((passed) => callingTemplate.CleanUp())
+            .OnError((e) => HandleException(transform, e))
+            .OnComplete((passed) => transform.Master.FileManager.EndFile())
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<string> templateAssemblyNames, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        public static void GenerateApp(this ITransform transform, IEnumerable<string> templateAssemblyNames, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
             new Action(() =>
             {
-                callingTemplate.SetUp();
-                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate, templateAssemblyNames));
+                transform.GenerateApp(new TemplateProvider(transform, templateAssemblyNames));
             })
             .GetRunner()
-            .OnError((e) => HandleException(callingTemplate, e))
-            .OnComplete((passed) => callingTemplate.CleanUp())
+            .OnError((e) => HandleException(transform, e))
+            .OnComplete((passed) => transform.Master.FileManager.EndFile())
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, Assembly templateAssembly, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        public static void GenerateApp(this ITransform transform, Assembly templateAssembly, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
             new Action(() =>
             {
-                callingTemplate.SetUp();
-                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate, new[] { templateAssembly }));
+                transform.GenerateApp(new TemplateProvider(transform, new[] { templateAssembly }));
             })
             .GetRunner()
-            .OnError((e) => HandleException(callingTemplate, e))
-            .OnComplete((passed) => callingTemplate.CleanUp())
+            .OnError((e) => HandleException(transform, e))
+            .OnComplete((passed) => transform.Master.FileManager.EndFile())
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, IEnumerable<Assembly> templateAssemblies, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        public static void GenerateApp(this ITransform transform, IEnumerable<Assembly> templateAssemblies, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
             new Action(() =>
             {
-                callingTemplate.SetUp();
-                callingTemplate.GenerateApp(new TemplateProvider(callingTemplate, templateAssemblies));
+                transform.GenerateApp(new TemplateProvider(transform, templateAssemblies));
             })
             .GetRunner()
-            .OnError((e) => HandleException(callingTemplate, e))
-            .OnComplete((passed) => callingTemplate.CleanUp())
+            .OnError((e) => HandleException(transform, e))
+            .OnComplete((passed) => transform.Master.FileManager.EndFile())
             .Run();
         }
 
-        public static void GenerateApp(this TextTransformation callingTemplate, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
+        public static void GenerateApp(this ITransform transform, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
-            var app = new AppProvider(callingTemplate).GetApp();
-            outputFileProvider = outputFileProvider ?? new OutputFileProvider();
-            callingTemplate.RunTemplates(new AppGeneration.TextTemplating.TemplateRunner(app), templateProvider, sessionParameters, outputFileProvider);
+            new Action(() =>
+            {
+                var app = new AppProvider(transform).GetApp();
+                outputFileProvider = outputFileProvider ?? new OutputInfoProvider();
+                transform.RunTemplates(new AppGeneration.TextTemplating.TemplateRunner(app), templateProvider, sessionParameters, outputFileProvider);
+                transform.Master.FileManager.EndFile();
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(transform, e))
+            .OnComplete((passed) => transform.Master.FileManager.EndFile())
+            .Run();
         }
 
 
-        private static void HandleException(TextTransformation textTransformation, Exception e)
+        private static void HandleException(ITransform transform, Exception e)
         {
             try
             {
                 LogManager.GetLog().Debug(e.ToString());
-                textTransformation.WriteLine(e.ToString());
+                transform.GenerationEnvironment.Append(e);
             }
             catch (Exception)
             {

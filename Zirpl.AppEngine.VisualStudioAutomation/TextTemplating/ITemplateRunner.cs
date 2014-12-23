@@ -6,6 +6,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public interface ITemplateRunner
     {
-        void RunTemplate(TextTransformation textTransformation, Object template, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null);
+        void RunTemplate(ITransform transform, Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null);
     }
 }

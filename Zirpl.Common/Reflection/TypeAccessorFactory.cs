@@ -40,7 +40,8 @@ namespace Zirpl.Reflection
         internal static ITypeAccessor GetTypeAccessor(Type type)
         {
 #if !SILVERLIGHT && !PORTABLE
-            return GetDynamicTypeAccessor(type);
+            //return GetDynamicTypeAccessor(type);
+            return GetReflectionTypeAccessor(type);
 #else
             return GetReflectionTypeAccessor(type);
 #endif
