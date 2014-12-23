@@ -67,6 +67,56 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             currentTransform.GenerationEnvironment = this._hostTransformOriginalGenerationEnvironment;
         }
 
+        public void StartCSharpFile(ITransform currentTransform, String fileName, Project destinationProject = null)
+        {
+            StartCSharpFile(currentTransform, fileName, null, destinationProject);
+        }
+
+        public void StartCSharpFile(ITransform currentTransform, String fileName, String folderWithinProject = null, Project destinationProject = null)
+        {
+            if (!Path.HasExtension(fileName))
+            {
+                fileName += ".cs";
+            }
+            StartFile(currentTransform, fileName, folderWithinProject, destinationProject, BuildActionTypeEnum.Compile);
+        }
+
+        public void StartCSharpFile(ITransform currentTransform, String fileName, String folderWithinProject = null, String destinationProjectName = null)
+        {
+            if (!Path.HasExtension(fileName))
+            {
+                fileName += ".cs";
+            }
+            StartFile(currentTransform, fileName, folderWithinProject, destinationProjectName, BuildActionTypeEnum.Compile);
+        }
+
+        public void StartFile(ITransform currentTransform, String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
+        {
+            var project = String.IsNullOrEmpty(destinationProjectName)
+                ? null
+                : currentTransform.GetDTE().Solution.GetProject(destinationProjectName);
+
+            StartFile(currentTransform, fileName, folderWithinProject, project, buildAction, customTool, autoFormat, overwrite, encoding);
+        }
+
+        public void StartFile(ITransform currentTransform, String fileName, String folderWithinProject = null, Project destinationProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
+        {
+            var outputFile = new OutputInfo()
+            {
+                FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
+                FileExtension = Path.GetExtension(fileName),
+                DestinationProject = destinationProject ?? currentTransform.Host.GetProjectItem().ContainingProject,
+                FolderPathWithinProject = folderWithinProject,
+                CustomTool = customTool
+            };
+            outputFile.BuildAction = buildAction ?? outputFile.BuildAction;
+            outputFile.CanOverrideExistingFile = overwrite ?? outputFile.CanOverrideExistingFile;
+            outputFile.AutoFormat = autoFormat ?? outputFile.AutoFormat;
+            outputFile.Encoding = encoding ?? outputFile.Encoding;
+
+            StartFile(currentTransform, outputFile);
+        }
+
         public void EndFile()
         {
             if (this._currentOutputInfo != null)

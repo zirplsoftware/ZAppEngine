@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.AppEngine.Logging;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
@@ -85,6 +86,173 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         public override string ToString()
         {
             return this._template.ToString();
+        }
+
+        public void RunTemplates(ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                RunTemplates(new TemplateRunner(), templateProvider, sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplates(IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                RunTemplate(new TemplateRunner(), templateTypes, sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplate(Type templateType, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                RunTemplate(new TemplateRunner(), templateType, sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplate<T>(IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                RunTemplate(new TemplateRunner(), typeof(T), sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplates(IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                RunTemplates(new TemplateRunner(), templates, sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplate(Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                RunTemplate(new TemplateRunner(), template, sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplates(ITemplateRunner templateRunner, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                RunTemplates(
+                    templateRunner,
+                    templateProvider.GetTemplateTypes(),
+                    sessionParameters,
+                    outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                foreach (var templateType in templateTypes)
+                {
+                    RunTemplate(templateRunner, templateType, sessionParameters, outputInfoProvider);
+                }
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplate(ITemplateRunner templateRunner, Type templateType, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                var template = Activator.CreateInstance(templateType);
+                RunTemplate(templateRunner, template, sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplate<T>(ITemplateRunner templateRunner, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                RunTemplate(templateRunner, typeof(T), sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                foreach (var template in templates)
+                {
+                    RunTemplate(templateRunner, template, sessionParameters, outputInfoProvider);
+                }
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        public void RunTemplate(ITemplateRunner templateRunner, Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        {
+            new Action(() =>
+            {
+                templateRunner.RunTemplate(this, template, sessionParameters, outputInfoProvider);
+            })
+            .GetRunner()
+            .OnError(HandleException)
+            .OnComplete((passed) => FileManager.EndFile())
+            .Run();
+        }
+
+        private void HandleException(Exception e)
+        {
+            try
+            {
+                LogManager.GetLog().Debug(e.ToString());
+                Host.HostTransform.GenerationEnvironment.Append(e);
+            }
+            catch (Exception)
+            {
+            }
         }
         
 
