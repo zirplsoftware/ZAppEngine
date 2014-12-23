@@ -1,19 +1,20 @@
 ﻿using System;
 using System.CodeDom.Compiler;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Model.Metadata;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.Collections;
 using Zirpl.IO;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing
 {
-    internal class DomainFileParser
+    internal sealed class DomainFileParser
     {
         /// <summary> 
         /// This method currently assumes the following conventions
@@ -28,15 +29,17 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
         /// <returns></returns>
         internal void ParseDomainTypes(App app, IEnumerable<string> domainFilePaths)
         {
+            var jsonDictionary = new Dictionary<DomainType, Config.Parsing.Json.JsonTypes.DomainTypeJson>();
+
             #region create DomainTypeInfos specified by directly by the files
             foreach (var path in domainFilePaths)
             {
                 this.GetLog().Debug("Parsing domain file: " + path);
-                DomainTypeJson json = null;
+                JsonTypes.DomainTypeJson json = null;
                 using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     var content = fileStream.ReadAllToString();
-                    json = JsonConvert.DeserializeObject<DomainTypeJson>(content);
+                    json = JsonConvert.DeserializeObject<JsonTypes.DomainTypeJson>(content);
                 }
 
                 
@@ -121,7 +124,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
 
                 #region create DomainType for the file
                 var domainType = new DomainType();
-                domainType.Config = json;
+                jsonDictionary.Add(domainType, json);
                 domainType.ConfigFilePath = path;
 
                 domainType.IsAbstract = json.IsAbstract.GetValueOrDefault();
@@ -146,49 +149,49 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 var whichProjectLower = whichProject.ToLower();
                 if (whichProjectLower == "model")
                 {
-                    domainType.DestinationProject = app.ModelProject;
+                    domainType.DestinationProjectIndex = app.ModelProjectIndex;
                 }
                 else if (whichProjectLower == "dataservice")
                 {
-                    domainType.DestinationProject = app.DataServiceProject;
+                    domainType.DestinationProjectIndex = app.DataServiceProjectIndex;
                 }
                 else if (whichProjectLower == "service")
                 {
-                    domainType.DestinationProject = app.ServiceProject;
+                    domainType.DestinationProjectIndex = app.ServiceProjectIndex;
                 }
                 else if (whichProjectLower == "webcommon")
                 {
-                    domainType.DestinationProject = app.WebCommonProject;
+                    domainType.DestinationProjectIndex = app.WebCommonProjectIndex;
                 }
                 else if (whichProjectLower == "web")
                 {
-                    domainType.DestinationProject = app.WebProject;
+                    domainType.DestinationProjectIndex = app.WebProjectIndex;
                 }
                 else if (whichProjectLower == "testscommon")
                 {
-                    domainType.DestinationProject = app.TestsCommonProject;
+                    domainType.DestinationProjectIndex = app.TestsCommonProjectIndex;
                 }
                 else if (whichProjectLower == "dataservicetests")
                 {
-                    domainType.DestinationProject = app.DataServiceTestsProject;
+                    domainType.DestinationProjectIndex = app.DataServiceTestsProjectIndex;
                 }
                 else if (whichProjectLower == "servicetests")
                 {
-                    domainType.DestinationProject = app.ServiceTestsProject;
+                    domainType.DestinationProjectIndex = app.ServiceTestsProjectIndex;
                 }
                 else
                 {
                     throw new Exception("DestinationProject unknown: " + whichProject);
                 }
                 if (domainType.IsPersistable
-                    && domainType.DestinationProject != app.ModelProject)
+                    && domainType.DestinationProjectIndex != app.ModelProjectIndex)
                 {
                     throw new Exception("Persistable DomainTypes must be in the Model project");
                 }
                 var subNamespace = tempUniqueName.SubstringAfterFirstInstanceOf(whichProject + "Project.", StringComparison.InvariantCultureIgnoreCase)
                                                         .SubstringUntilLastInstanceOf("." + domainType.Name)
                                                         .SubstringUntilLastInstanceOf(domainType.Name);
-                domainType.Namespace = domainType.DestinationProject.GetDefaultNamespace() +
+                domainType.Namespace = domainType.DestinationProjectIndex.Project.GetDefaultNamespace() +
                                         (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
                 if (!IsValidNamespace(domainType.Namespace))
                 {
@@ -221,12 +224,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
 
             #region handle inheritance
             //
-            foreach (var domainType in app.DomainTypes.Where(o => !String.IsNullOrEmpty(o.Config.InheritsFrom)).ToList())
+            foreach (var domainType in app.DomainTypes.Where(o => !String.IsNullOrEmpty(jsonDictionary[o].InheritsFrom)).ToList())
             {
-                var inheritsFromFullNameTokens = domainType.Config.InheritsFrom.Split('.').Reverse().ToList();
+                var inheritsFromFullNameTokens = jsonDictionary[domainType].InheritsFrom.Split('.').Reverse().ToList();
                 var inheritsFromClassName = inheritsFromFullNameTokens.First();
 
-                var potentialMatches = app.FindDomainTypes(domainType.Config.InheritsFrom);
+                var potentialMatches = app.FindDomainTypes(jsonDictionary[domainType].InheritsFrom);
                 if (!potentialMatches.Any())
                 {
                     throw new Exception("Could not find domain type matching InheritsFrom in: " + domainType.ConfigFilePath);
@@ -260,7 +263,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                 {
                     throw new Exception("CustomValue classes cannot be used as InheritsFrom in: " + domainType.ConfigFilePath);
                 }
-                if (domainType.Config.Id != null)
+                if (jsonDictionary[domainType].Id != null)
                 {
                     throw new Exception("Id, if defined, must be defined at the bottom of the Heirarchy: " + domainType.ConfigFilePath);
                 }
@@ -283,7 +286,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
                         || !domainType.InheritsFrom.IsExtensible))
                 {
                     var extendedFieldValueDomainType = new DomainType();
-                    extendedFieldValueDomainType.DestinationProject = domainType.DestinationProject;
+                    extendedFieldValueDomainType.DestinationProjectIndex = domainType.DestinationProjectIndex;
                     extendedFieldValueDomainType.Name = domainType.Name + "ExtendedFieldValue";
                     extendedFieldValueDomainType.PluralName = extendedFieldValueDomainType.Name + "s";
                     extendedFieldValueDomainType.Namespace = domainType.Namespace;
@@ -312,8 +315,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             foreach (var domainType in app.DomainTypes.Where(o => o.IsPersistable && o.InheritsFrom == null))
             {
                 var configToUse = domainType.IsExtendedEntityFieldValue
-                    ? domainType.Extends.GetBaseMostDomainType().Config
-                    : domainType.Config;
+                    ? jsonDictionary[domainType.Extends.GetBaseMostDomainType()]
+                    : jsonDictionary[domainType];
 
                 var property = new DomainProperty();
                 property.Name = "Id";
@@ -490,9 +493,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers
             #endregion
 
             #region create Properties specified by the file
-            foreach (var domainType in app.DomainTypes.Where(o => o.Config != null && o.Config.Properties.Any()))
+            foreach (var domainType in app.DomainTypes.Where(o => jsonDictionary.ContainsKey(o) && jsonDictionary[o].Properties.Any()))
             {
-                foreach (var json in domainType.Config.Properties)
+                foreach (var json in jsonDictionary[domainType].Properties)
                 {
                     #region Property validation
                     if (String.IsNullOrWhiteSpace(json.Name))

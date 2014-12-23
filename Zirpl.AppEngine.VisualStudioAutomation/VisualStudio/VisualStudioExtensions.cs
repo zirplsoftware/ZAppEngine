@@ -9,6 +9,7 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSharp;
 using Zirpl.AppEngine.Logging;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
@@ -90,6 +91,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
         public static bool IsSubProject(this ProjectItem projectItem)
         {
             return projectItem.Kind == "{EA6618E8-6E24-4528-94BE-6889FE16485C}";
+        }
+
+        public static ProjectItemIndex GetIndex(this ProjectItem projectItem)
+        {
+            return new ProjectItemIndex(projectItem);
         }
 
         #endregion
@@ -337,6 +343,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
             return results.CompiledAssembly;
         }
 
+        public static ProjectIndex GetIndex(this Project project)
+        {
+            return new ProjectIndex(project);
+        }
+
         #endregion
 
 
@@ -358,6 +369,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
                                 where PathUtilities.NormalizePath(i.GetFullPath()) == PathUtilities.NormalizePath(fullPath)
                                 select i).FirstOrDefault();
             return item;
+        }
+        public static ProjectItem GetProjectItem(this ProjectItemIndex index)
+        {
+            return index.ProjectItem;
         }
 
         public static IEnumerable<Project> GetAllProjects(this Solution solution)
@@ -388,6 +403,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
         public static Project GetProject(this Solution solution, string projectName)
         {
             return solution.GetAllProjects().FirstOrDefault(p => p.Name == projectName);
+        }
+        public static Project GetProject(this ProjectIndex index)
+        {
+            return index.Project;
         }
 
         #endregion

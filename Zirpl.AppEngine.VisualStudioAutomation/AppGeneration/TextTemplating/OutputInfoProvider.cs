@@ -26,14 +26,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
 
             var fileName = GetFileName(transform.Template.GetType().Name, domainType == null ? null : domainType.Name);
-            var destinationProject = GetProject(app, transform.Template.GetType().Namespace, domainType);
+            var destinationProject = GetProjectIndex(app, transform.Template.GetType().Namespace, domainType);
             var folder = GetFolderPathWithinProject(transform.Template.GetType().Name, domainType);
 
             var outputFile = new OutputInfo()
             {
                 FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
                 FileExtension = Path.GetExtension(fileName),
-                DestinationProject = destinationProject,
+                DestinationProjectIndex = destinationProject,
                 FolderPathWithinProject = folder
             };
             outputFile.MatchBuildActionToFileExtension();
@@ -154,7 +154,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
         }
 
-        private Project GetProject(App app, String templateTypeNamespace, DomainType domainType)
+        private ProjectIndex GetProjectIndex(App app, String templateTypeNamespace, DomainType domainType)
         {
             var whichProject = (templateTypeNamespace + ".")
                 .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase)
@@ -165,43 +165,43 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             var whichProjectLower = whichProject.ToLower();
             if (whichProjectLower == "model")
             {
-                return app.ModelProject;
+                return app.ModelProjectIndex;
             }
             else if (whichProjectLower == "dataservice")
             {
-                return app.DataServiceProject;
+                return app.DataServiceProjectIndex;
             }
             else if (whichProjectLower == "service")
             {
-                return app.ServiceProject;
+                return app.ServiceProjectIndex;
             }
             else if (whichProjectLower == "webcommon")
             {
-                return app.WebCommonProject;
+                return app.WebCommonProjectIndex;
             }
             else if (whichProjectLower == "web")
             {
-                return app.WebProject;
+                return app.WebProjectIndex;
             }
             else if (whichProjectLower == "testscommon")
             {
-                return app.TestsCommonProject;
+                return app.TestsCommonProjectIndex;
             }
             else if (whichProjectLower == "dataservicetests")
             {
-                return app.DataServiceTestsProject;
+                return app.DataServiceTestsProjectIndex;
             }
             else if (whichProjectLower == "servicetests")
             {
-                return app.ServiceTestsProject;
+                return app.ServiceTestsProjectIndex;
             }
             else if (domainType != null)
             {
-                return domainType.DestinationProject;
+                return domainType.DestinationProjectIndex;
             }
             else
             {
-                return app.CodeGenerationProject;
+                return app.CodeGenerationProjectIndex;
             }
         }
 
@@ -218,7 +218,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 // combine the immediate folder of the template
                 // with the subnamespace of the DomainType
                 //
-                immediateFolder = Path.Combine(immediateFolder, domainType.DestinationProject.GetFolderPathFromNamespace(domainType.Namespace).Replace('.', '\\'));
+                immediateFolder = Path.Combine(immediateFolder, domainType.DestinationProjectIndex.Project.GetFolderPathFromNamespace(domainType.Namespace).Replace('.', '\\'));
             }
             return immediateFolder;
         }

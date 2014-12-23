@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EnvDTE;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {
@@ -15,15 +15,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         public IList<DomainType> DomainTypes { get; private set; }
 
 
-        public Project CodeGenerationProject { get; internal set; }
-        public Project ModelProject { get; internal set; }
-        public Project DataServiceProject { get; internal set; }
-        public Project DataServiceTestsProject { get; internal set; }
-        public Project ServiceProject { get; internal set; }
-        public Project WebProject { get; internal set; }
-        public Project WebCommonProject { get; internal set; }
-        public Project ServiceTestsProject { get; internal set; }
-        public Project TestsCommonProject { get; internal set; }
+        public ProjectIndex CodeGenerationProjectIndex { get; internal set; }
+        public ProjectIndex ModelProjectIndex { get; internal set; }
+        public ProjectIndex DataServiceProjectIndex { get; internal set; }
+        public ProjectIndex DataServiceTestsProjectIndex { get; internal set; }
+        public ProjectIndex ServiceProjectIndex { get; internal set; }
+        public ProjectIndex WebProjectIndex { get; internal set; }
+        public ProjectIndex WebCommonProjectIndex { get; internal set; }
+        public ProjectIndex ServiceTestsProjectIndex { get; internal set; }
+        public ProjectIndex TestsCommonProjectIndex { get; internal set; }
 
 
         public IEnumerable<DomainType> FindDomainTypes(String partialFullName)

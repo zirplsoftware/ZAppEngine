@@ -47,7 +47,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             if (file == null) throw new ArgumentNullException("file");
 
             if (String.IsNullOrEmpty(file.FileNameWithoutExtension)
-                || file.DestinationProject == null)
+                || file.DestinationProjectIndex == null)
             {
                 throw new ArgumentException("Cannot start a file without at least a file name and a Destination project");
             }
@@ -66,18 +66,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             currentTransform.GenerationEnvironment = this._hostTransformOriginalGenerationEnvironment;
         }
 
-        public void StartCSharpFile(ITransform currentTransform, String fileName, Project destinationProject = null)
+        public void StartCSharpFile(ITransform currentTransform, String fileName, ProjectIndex destinationProjectIndex = null)
         {
-            StartCSharpFile(currentTransform, fileName, null, destinationProject);
+            StartCSharpFile(currentTransform, fileName, null, destinationProjectIndex);
         }
 
-        public void StartCSharpFile(ITransform currentTransform, String fileName, String folderWithinProject = null, Project destinationProject = null)
+        public void StartCSharpFile(ITransform currentTransform, String fileName, String folderWithinProject = null, ProjectIndex destinationProjectIndex = null)
         {
             if (!Path.HasExtension(fileName))
             {
                 fileName += ".cs";
             }
-            StartFile(currentTransform, fileName, folderWithinProject, destinationProject, BuildActionTypeEnum.Compile);
+            StartFile(currentTransform, fileName, folderWithinProject, destinationProjectIndex, BuildActionTypeEnum.Compile);
         }
 
         public void StartCSharpFile(ITransform currentTransform, String fileName, String folderWithinProject = null, String destinationProjectName = null)
@@ -93,18 +93,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             var project = String.IsNullOrEmpty(destinationProjectName)
                 ? null
-                : currentTransform.GetDTE().Solution.GetProject(destinationProjectName);
+                : currentTransform.GetDTE().Solution.GetProject(destinationProjectName).GetIndex();
 
             StartFile(currentTransform, fileName, folderWithinProject, project, buildAction, customTool, autoFormat, overwrite, encoding);
         }
 
-        public void StartFile(ITransform currentTransform, String fileName, String folderWithinProject = null, Project destinationProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
+        public void StartFile(ITransform currentTransform, String fileName, String folderWithinProject = null, ProjectIndex destinationProjectIndex = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
             var outputFile = new OutputInfo()
             {
                 FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
                 FileExtension = Path.GetExtension(fileName),
-                DestinationProject = destinationProject ?? currentTransform.Host.GetProjectItem().ContainingProject,
+                DestinationProjectIndex = destinationProjectIndex ?? currentTransform.Host.GetProjectItem().ContainingProject.GetIndex(),
                 FolderPathWithinProject = folderWithinProject,
                 CustomTool = customTool
             };
@@ -147,14 +147,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 //
                 // clean up template placeholders
 
-                var fullFilePath = Path.Combine(
-                    Path.GetDirectoryName(this._currentOutputInfo.DestinationProject.FullName),
+                var project = this._currentOutputInfo.DestinationProjectIndex.Project;
+                var fullFilePath = Path.Combine(Path.GetDirectoryName(project.FullName),
                     @"_auto\", 
                     this._currentOutputInfo.FolderPathWithinProject ?? "",
                     this._currentOutputInfo.FileName);
                 PathUtilities.EnsureDirectoryExists(fullFilePath);
-                this._currentOutputInfo.DestinationProject.GetOrCreateFolder(@"_auto\", false);
-                var folder = this._currentOutputInfo.DestinationProject.GetOrCreateFolder(@"_auto\" + this._currentOutputInfo.FolderPathWithinProject);
+                project.GetOrCreateFolder(@"_auto\", false);
+                var folder = project.GetOrCreateFolder(@"_auto\" + this._currentOutputInfo.FolderPathWithinProject);
                 var placeHolderItem = folder.ProjectItems.ToEnumerable().SingleOrDefault(o => o.Name == this._placeHolderName);
                 if (placeHolderItem == null)
                 {
@@ -208,18 +208,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 window.Close();
 
 
-                this._currentOutputInfo.ProjectItem = item;
+                this._currentOutputInfo.ProjectItemIndex = item.GetIndex();
 
                 // set VS properties for the ProjectItem
                 //
                 if (!String.IsNullOrWhiteSpace(this._currentOutputInfo.CustomTool))
                 {
-                    this._currentOutputInfo.ProjectItem.SetPropertyValue("CustomTool", this._currentOutputInfo.CustomTool);
+                    this._currentOutputInfo.ProjectItemIndex.ProjectItem.SetPropertyValue("CustomTool", this._currentOutputInfo.CustomTool);
                 }
                 var buildActionString = this.GetBuildActionString(this._currentOutputInfo.BuildAction);
                 if (!String.IsNullOrWhiteSpace(buildActionString))
                 {
-                    this._currentOutputInfo.ProjectItem.SetPropertyValue("ItemType", buildActionString);
+                    this._currentOutputInfo.ProjectItemIndex.ProjectItem.SetPropertyValue("ItemType", buildActionString);
                 }
 
                 this._completedFiles.Add(this._currentOutputInfo);
@@ -243,7 +243,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     {
                         foreach (var projectItem in placeHolderItem.ProjectItems.ToEnumerable())
                         {
-                            if (!this._completedFiles.Any(o => o.ProjectItem == projectItem))
+                            if (!this._completedFiles.Any(o => o.ProjectItemIndex.ProjectItem == projectItem))
                             {
                                 this.GetLog().Debug("Deleting stale auto-generated file: " + projectItem.GetFullPath());
                                 projectItem.Delete();

@@ -7,12 +7,16 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-using System.Linq;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
-
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration._templates
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
+    using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
+    using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+    
     /// <summary>
     /// Class to produce the template output
     /// </summary>

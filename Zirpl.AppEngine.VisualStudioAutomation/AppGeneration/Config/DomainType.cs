@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using EnvDTE;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.Json;
+using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
 {
@@ -15,9 +14,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
             this.EnumValues = new List<EnumValue>();
         }
 
-        public DomainTypeJson Config { get; set; }
         public String ConfigFilePath { get; set; }
-        public Project DestinationProject { get; set; }
+        public ProjectIndex DestinationProjectIndex { get; set; }
 
         public String Name { get; set; }
         public String Namespace { get; set; }

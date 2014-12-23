@@ -4,7 +4,7 @@ using EnvDTE;
 using EnvDTE80;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
@@ -34,15 +34,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             //
             var app = new App()
             {
-                CodeGenerationProject = this._callingTemplateProject,
-                ModelProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Model"),
-                DataServiceProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".DataService"),
-                ServiceProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Service"),
-                WebCommonProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Web.Common"),
-                WebProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Web"),
-                TestsCommonProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.Common"),
-                DataServiceTestsProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.DataService"),
-                ServiceTestsProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.Service"),
+                CodeGenerationProjectIndex = this._callingTemplateProject.GetIndex(),
+                ModelProjectIndex = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Model").GetIndex(),
+                DataServiceProjectIndex = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".DataService").GetIndex(),
+                ServiceProjectIndex = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Service").GetIndex(),
+                WebCommonProjectIndex = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Web.Common").GetIndex(),
+                WebProjectIndex = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Web").GetIndex(),
+                TestsCommonProjectIndex = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.Common").GetIndex(),
+                DataServiceTestsProjectIndex = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.DataService").GetIndex(),
+                ServiceTestsProjectIndex = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Tests.Service").GetIndex(),
             };
 
             // create all of the domain types
