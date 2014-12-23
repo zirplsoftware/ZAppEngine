@@ -70,7 +70,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
                 else
                 {
-                    this.GetLog().Debug(String.Format("      ShouldTransform == false. Not transforming"));
+                    this.GetLog().Debug("      ShouldTransform == false. Not transforming");
                 }
 
             }

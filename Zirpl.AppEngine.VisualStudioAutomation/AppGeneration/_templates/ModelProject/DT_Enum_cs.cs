@@ -16,7 +16,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration._templates.ModelP
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
     using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
-    
+
     /// <summary>
     /// Class to produce the template output
     /// </summary>
@@ -38,90 +38,90 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration._templates.ModelP
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             this.Write("\r\n\t{\r\n");
 
-		foreach (var enumValue in this.DomainType.EnumValues)
-		{
+            foreach (var enumValue in this.DomainType.EnumValues)
+            {
 
-            this.Write("\t\t");
-            this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
-            this.Write(" = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
-            this.Write(",\r\n");
-	
-		}
+                this.Write("\t\t");
+                this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
+                this.Write(" = ");
+                this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
+                this.Write(",\r\n");
+
+            }
 
             this.Write("\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
 
-public bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
+        public bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
 
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App _AppField;
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App _AppField;
 
-/// <summary>
-/// Access the App parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App App
-{
-    get
-    {
-        return this._AppField;
-    }
-}
+        /// <summary>
+        /// Access the App parameter of the template.
+        /// </summary>
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App App
+        {
+            get
+            {
+                return this._AppField;
+            }
+        }
 
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType _DomainTypeField;
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType _DomainTypeField;
 
-/// <summary>
-/// Access the DomainType parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType DomainType
-{
-    get
-    {
-        return this._DomainTypeField;
-    }
-}
-
-
-/// <summary>
-/// Initialize the template
-/// </summary>
-public virtual void Initialize()
-{
-    if ((this.Errors.HasErrors == false))
-    {
-bool AppValueAcquired = false;
-if (this.Session.ContainsKey("App"))
-{
-    this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(this.Session["App"]));
-    AppValueAcquired = true;
-}
-if ((AppValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("App");
-    if ((data != null))
-    {
-        this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(data));
-    }
-}
-bool DomainTypeValueAcquired = false;
-if (this.Session.ContainsKey("DomainType"))
-{
-    this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(this.Session["DomainType"]));
-    DomainTypeValueAcquired = true;
-}
-if ((DomainTypeValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainType");
-    if ((data != null))
-    {
-        this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(data));
-    }
-}
+        /// <summary>
+        /// Access the DomainType parameter of the template.
+        /// </summary>
+        private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType DomainType
+        {
+            get
+            {
+                return this._DomainTypeField;
+            }
+        }
 
 
-    }
-}
+        /// <summary>
+        /// Initialize the template
+        /// </summary>
+        public virtual void Initialize()
+        {
+            if ((this.Errors.HasErrors == false))
+            {
+                bool AppValueAcquired = false;
+                if (this.Session.ContainsKey("App"))
+                {
+                    this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(this.Session["App"]));
+                    AppValueAcquired = true;
+                }
+                if ((AppValueAcquired == false))
+                {
+                    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("App");
+                    if ((data != null))
+                    {
+                        this._AppField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App)(data));
+                    }
+                }
+                bool DomainTypeValueAcquired = false;
+                if (this.Session.ContainsKey("DomainType"))
+                {
+                    this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(this.Session["DomainType"]));
+                    DomainTypeValueAcquired = true;
+                }
+                if ((DomainTypeValueAcquired == false))
+                {
+                    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainType");
+                    if ((data != null))
+                    {
+                        this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType)(data));
+                    }
+                }
+
+
+            }
+        }
 
 
     }
@@ -224,7 +224,7 @@ if ((DomainTypeValueAcquired == false))
             }
             // If we're starting off, or if the previous text ended with a newline,
             // we have to append the current indent first.
-            if (((this.GenerationEnvironment.Length == 0) 
+            if (((this.GenerationEnvironment.Length == 0)
                         || this.endsWithNewline))
             {
                 this.GenerationEnvironment.Append(this.currentIndentField);
@@ -342,7 +342,7 @@ if ((DomainTypeValueAcquired == false))
         /// </summary>
         public class ToStringInstanceHelper
         {
-            private System.IFormatProvider formatProviderField  = global::System.Globalization.CultureInfo.InvariantCulture;
+            private System.IFormatProvider formatProviderField = global::System.Globalization.CultureInfo.InvariantCulture;
             /// <summary>
             /// Gets or sets format provider to be used by ToStringWithCulture method.
             /// </summary>
@@ -350,13 +350,13 @@ if ((DomainTypeValueAcquired == false))
             {
                 get
                 {
-                    return this.formatProviderField ;
+                    return this.formatProviderField;
                 }
                 set
                 {
                     if ((value != null))
                     {
-                        this.formatProviderField  = value;
+                        this.formatProviderField = value;
                     }
                 }
             }
