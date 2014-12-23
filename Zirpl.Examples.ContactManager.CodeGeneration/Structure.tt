@@ -1,0 +1,9 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".txt" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
+<#@ assembly name="$(SolutionDir)Zirpl.AppEngine.VisualStudioAutomation\bin\$(Configuration)\Zirpl.AppEngine.VisualStudioAutomation.dll" #>
+<#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
+<#
+this.GenerateSolutionStructure();
+#>

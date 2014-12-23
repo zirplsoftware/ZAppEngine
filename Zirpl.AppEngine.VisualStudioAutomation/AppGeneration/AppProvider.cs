@@ -35,7 +35,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
             var app = new App()
             {
                 CodeGenerationProject = this._callingTemplateProject,
-                ModelProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Model") ?? this.CreateProject(projectNamespacePrefix + ".Model"),
+                ModelProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Model"),
                 DataServiceProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".DataService"),
                 ServiceProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Service"),
                 WebCommonProject = _visualStudio.Solution.GetProject(projectNamespacePrefix + ".Web.Common"),
@@ -59,21 +59,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 this.GetLog().Debug("Resulting DomainType: " + domainType.FullName);
             }
             return app;
-        }
-
-        private Project CreateProject(String projectName)
-        {
-            var csTemplatePath = ((Solution2)_visualStudio.Solution).GetProjectTemplate("ClassLibrary.zip", "CSharp"); // "vbproj"
-            //LogManager.GetLog().Debug("C# template path: " + csTemplatePath);
-            var folder = Path.GetDirectoryName(_visualStudio.Solution.FullName);
-            LogManager.GetLog().Debug("Solution folder: " + folder);
-            //_visualStudio.Solution.AddFromTemplate(csTemplatePath, Path.Combine(folder, projectName), projectName, false);
-            //var project = (Project)((Array)(_visualStudio.ActiveSolutionProjects)).GetValue(0);
-            var project = _visualStudio.Solution.GetProject(projectName);
-            //project.Properties.Item("TargetFrameworkMoniker").Value = _callingTemplateProject.Properties.Item("TargetFrameworkMoniker");
-            project.LogAllProperties();
-            project.Properties.Item("TargetFrameworkMoniker").Value = new FrameworkName(".NETFramework", new Version(4, 5, 1)).FullName;
-            return project;
         }
     }
 }

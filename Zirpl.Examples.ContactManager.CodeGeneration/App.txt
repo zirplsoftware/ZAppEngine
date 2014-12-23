@@ -1,8 +1,7 @@
 ﻿System.Runtime.InteropServices.COMException (0x80004005): Project unavailable.
-   at EnvDTE.Project.get_Properties()
-   at Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.VisualStudioExtensions.GetDefaultNamespace(Project project) in e:\projects\ZAppEngine\Zirpl.AppEngine.VisualStudioAutomation\VisualStudio\VisualStudioExtensions.cs:line 242
-   at Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsers.DomainFileParser.ParseDomainTypes(App app, IEnumerable`1 domainFilePaths) in e:\projects\ZAppEngine\Zirpl.AppEngine.VisualStudioAutomation\AppGeneration\Config\Parsers\DomainFileParser.cs:line 191
-   at Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.AppProvider.GetApp() in e:\projects\ZAppEngine\Zirpl.AppEngine.VisualStudioAutomation\AppGeneration\AppProvider.cs:line 55
+   at EnvDTE.Project.Save(String FileName)
+   at Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.AppProvider.CreateProject(String projectName) in e:\projects\ZAppEngine\Zirpl.AppEngine.VisualStudioAutomation\AppGeneration\AppProvider.cs:line 84
+   at Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.AppProvider.GetApp() in e:\projects\ZAppEngine\Zirpl.AppEngine.VisualStudioAutomation\AppGeneration\AppProvider.cs:line 35
    at Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.AppGenerator.GenerateApp(TextTransformation callingTemplate, ITemplateProvider templateProvider, IDictionary`2 sessionParameters, IOutputFileProvider outputFileProvider) in e:\projects\ZAppEngine\Zirpl.AppEngine.VisualStudioAutomation\AppGeneration\AppGenerator.cs:line 84
    at Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.AppGenerator.<>c__DisplayClass3.<GenerateApp>b__2() in e:\projects\ZAppEngine\Zirpl.AppEngine.VisualStudioAutomation\AppGeneration\AppGenerator.cs:line 22
    at Zirpl.ActionRunner.Run(Boolean rethrow) in e:\projects\ZAppEngine\Zirpl.Common\ActionRunner.cs:line 47

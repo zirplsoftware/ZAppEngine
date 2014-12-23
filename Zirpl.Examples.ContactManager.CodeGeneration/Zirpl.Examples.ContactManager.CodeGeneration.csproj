@@ -75,12 +75,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Structure.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Structure.txt</LastGenOutput>
+    </None>
     <None Include="App.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>App.txt</LastGenOutput>
+      <TransformOnBuild>False</TransformOnBuild>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Structure.txt">
+      <DependentUpon>Structure.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
     <Content Include="App.txt">
       <DependentUpon>App.tt</DependentUpon>
       <DesignTime>True</DesignTime>

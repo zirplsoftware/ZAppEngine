@@ -203,13 +203,20 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
 
         #region Project extension methods
 
-        public static void LogAllProperties(this Project project)
+        public static void TryLogAllProperties(this Project project)
         {
             if (project.Properties != null)
             {
-                foreach (var property in project.Properties)
+                foreach (Property property in project.Properties)
                 {
-                    LogManager.GetLog().Debug("Property " + property.ToString());
+                    try
+                    {
+                        LogManager.GetLog().DebugFormat("Property {0}: {1}", property.Name, property.Value);
+                    }
+                    catch (Exception ex)
+                    {
+                        LogManager.GetLog().TryError(ex);
+                    }
                 }
             }
         }

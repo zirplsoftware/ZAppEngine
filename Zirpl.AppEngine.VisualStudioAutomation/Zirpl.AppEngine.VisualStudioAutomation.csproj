@@ -119,6 +119,7 @@
     <Compile Include="AppGeneration\TextTemplating\TemplateProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateRunner.cs" />
     <Compile Include="AppGeneration\TextTemplating\OutputFileProvider.cs" />
+    <Compile Include="AppGeneration\VisualStudio\SolutionBuilder.cs" />
     <Compile Include="AppGeneration\_templates\DT_cs.cs">
       <DependentUpon>DT_cs.tt</DependentUpon>
       <DesignTime>True</DesignTime>

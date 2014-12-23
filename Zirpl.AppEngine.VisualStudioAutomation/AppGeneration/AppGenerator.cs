@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
@@ -14,6 +15,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {
+        public static void GenerateSolutionStructure(this TextTransformation callingTemplate)
+        {
+            new Action(() =>
+            {
+                callingTemplate.SetUp();
+                new SolutionBuilder().GenerateProjects(callingTemplate);
+            })
+            .GetRunner()
+            .OnError((e) => HandleException(callingTemplate, e))
+            .OnComplete((passed) => callingTemplate.CleanUp())
+            .Run();
+        }
         public static void GenerateApp(this TextTransformation callingTemplate, IDictionary<string, object> sessionParameters = null, IOutputFileProvider outputFileProvider = null)
         {
             new Action(() =>
