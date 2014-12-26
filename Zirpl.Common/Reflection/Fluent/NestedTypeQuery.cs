@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class NestedTypeQuery : MemberInfoQueryBase<NestedTypeQuery, Type>
+    internal sealed class NestedTypeQuery : MemberQueryBase<Type, INestedTypeQuery, INestedTypeAccessibilityQuery>, 
+        INestedTypeQuery,
+        INestedTypeAccessibilityQuery
     {
         internal NestedTypeQuery(Type type)
             :base(type)

@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class ConstructorInfoQuery : MemberInfoQueryBase<ConstructorInfoQuery, ConstructorInfo>
+    internal sealed class FieldQuery : MemberQueryBase<FieldInfo, IFieldQuery, IFieldAccessibilityQuery>, 
+        IFieldQuery,
+        IFieldAccessibilityQuery
     {
-        internal ConstructorInfoQuery(Type type)
+        internal FieldQuery(Type type)
             :base(type)
         {
         }
@@ -23,7 +25,7 @@ namespace Zirpl.Reflection.Fluent
 
         protected override MemberTypeFlags MemberTypes
         {
-            get { return MemberTypeFlags.Constructor; }
+            get { return MemberTypeFlags.Field; }
         }
     }
 }

@@ -100,38 +100,86 @@
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\BindingFlagsBuilder.cs">
       <Link>Reflection\Fluent\BindingFlagsBuilder.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\ConstructorInfoQuery.cs">
-      <Link>Reflection\Fluent\ConstructorInfoQuery.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\ConstructorQuery.cs">
+      <Link>Reflection\Fluent\ConstructorQuery.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\EventInfoQuery.cs">
-      <Link>Reflection\Fluent\EventInfoQuery.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\EventQuery.cs">
+      <Link>Reflection\Fluent\EventQuery.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\ExtensionMethods.cs">
       <Link>Reflection\Fluent\ExtensionMethods.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\FieldInfoQuery.cs">
-      <Link>Reflection\Fluent\FieldInfoQuery.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\FieldQuery.cs">
+      <Link>Reflection\Fluent\FieldQuery.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\FluentType.cs">
       <Link>Reflection\Fluent\FluentType.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberInfoQuery.cs">
-      <Link>Reflection\Fluent\MemberInfoQuery.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberQuery.cs">
+      <Link>Reflection\Fluent\MemberQuery.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberInfoQueryBase.cs">
-      <Link>Reflection\Fluent\MemberInfoQueryBase.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberQueryBase.cs">
+      <Link>Reflection\Fluent\MemberQueryBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberTypeFlags.cs">
       <Link>Reflection\Fluent\MemberTypeFlags.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MethodInfoQuery.cs">
-      <Link>Reflection\Fluent\MethodInfoQuery.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MethodQuery.cs">
+      <Link>Reflection\Fluent\MethodQuery.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\NestedTypeQuery.cs">
       <Link>Reflection\Fluent\NestedTypeQuery.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\PropertyInfoQuery.cs">
-      <Link>Reflection\Fluent\PropertyInfoQuery.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\PropertyQuery.cs">
+      <Link>Reflection\Fluent\PropertyQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IAccessibilityQueryBase.cs">
+      <Link>Reflection\Fluent\_interfaces\IAccessibilityQueryBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IConstructorAccessibilityQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IConstructorAccessibilityQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IConstructorQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IConstructorQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IEventAccessibilityQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IEventAccessibilityQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IEventQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IEventQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IFieldAccessibilityQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IFieldAccessibilityQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IFieldQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IFieldQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IMemberAccessibilityQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IMemberAccessibilityQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IMemberQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IMemberQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IMemberQueryBase.cs">
+      <Link>Reflection\Fluent\_interfaces\IMemberQueryBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IMethodAccessibilityQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IMethodAccessibilityQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IMethodQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IMethodQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\INestedTypeAccessibilityQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\INestedTypeAccessibilityQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\INestedTypeQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\INestedTypeQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IPropertyAccessibilityQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IPropertyAccessibilityQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IPropertyQuery.cs">
+      <Link>Reflection\Fluent\_interfaces\IPropertyQuery.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\IAccessor.cs">
       <Link>Reflection\IAccessor.cs</Link>

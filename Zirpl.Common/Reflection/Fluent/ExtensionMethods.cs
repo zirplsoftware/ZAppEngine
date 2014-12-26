@@ -6,7 +6,7 @@ namespace Zirpl.Reflection.Fluent
 {
     public static class ExtensionMethods
     {
-        internal static FluentType Fluent(this Type type)
+        public static FluentType Fluent(this Type type)
         {
             if (type == null) throw new ArgumentNullException("type");
 

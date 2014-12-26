@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class PropertyInfoQuery : MemberInfoQueryBase<PropertyInfoQuery, PropertyInfo>
+    internal sealed class MemberQuery : MemberQueryBase<MemberInfo, IMemberQuery, IMemberAccessibilityQuery>,
+        IMemberQuery,
+        IMemberAccessibilityQuery
     {
-        internal PropertyInfoQuery(Type type)
+        internal MemberQuery(Type type)
             :base(type)
         {
         }
@@ -23,7 +25,7 @@ namespace Zirpl.Reflection.Fluent
 
         protected override MemberTypeFlags MemberTypes
         {
-            get { return MemberTypeFlags.Property; }
+            get { return MemberTypeFlags.All; }
         }
     }
 }

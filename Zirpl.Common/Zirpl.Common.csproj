@@ -66,25 +66,41 @@
     <Compile Include="Reflection\Fluent\BindingFlagsBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reflection\Fluent\ConstructorInfoQuery.cs" />
+    <Compile Include="Reflection\Fluent\ConstructorQuery.cs" />
     <Compile Include="Reflection\Fluent\ExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reflection\Fluent\EventInfoQuery.cs" />
+    <Compile Include="Reflection\Fluent\EventQuery.cs" />
     <Compile Include="Reflection\Fluent\MemberTypeFlags.cs" />
     <Compile Include="Reflection\Fluent\NestedTypeQuery.cs" />
-    <Compile Include="Reflection\Fluent\MemberInfoQuery.cs" />
-    <Compile Include="Reflection\Fluent\MethodInfoQuery.cs" />
-    <Compile Include="Reflection\Fluent\FieldInfoQuery.cs" />
-    <Compile Include="Reflection\Fluent\PropertyInfoQuery.cs">
+    <Compile Include="Reflection\Fluent\MemberQuery.cs" />
+    <Compile Include="Reflection\Fluent\MethodQuery.cs" />
+    <Compile Include="Reflection\Fluent\FieldQuery.cs" />
+    <Compile Include="Reflection\Fluent\PropertyQuery.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Reflection\Fluent\FluentType.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reflection\Fluent\MemberInfoQueryBase.cs">
+    <Compile Include="Reflection\Fluent\MemberQueryBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Reflection\Fluent\_interfaces\IAccessibilityQueryBase.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMethodAccessibilityQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMethodQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IPropertyAccessibilityQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IPropertyQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\INestedTypeAccessibilityQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMemberAccessibilityQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\INestedTypeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMemberQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IFieldAccessibilityQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IEventAccessibilityQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IConstructorAccessibilityQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IFieldQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IEventQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IConstructorQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMemberQueryBase.cs" />
     <Compile Include="Reflection\IAccessor.cs">
       <SubType>Code</SubType>
     </Compile>

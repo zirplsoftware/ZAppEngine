@@ -2,7 +2,7 @@
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class FluentType
+    public sealed class FluentType
     {
         private readonly Type _type;
 
@@ -11,39 +11,39 @@ namespace Zirpl.Reflection.Fluent
             _type = type;
         }
 
-        public PropertyInfoQuery Properties 
+        public IPropertyQuery Properties 
         {
             get
             {
-                return new PropertyInfoQuery(_type);
+                return new PropertyQuery(_type);
             }
         }
 
-        public FieldInfoQuery Fields
+        public IFieldQuery Fields
         {
             get
             {
-                return new FieldInfoQuery(_type);
+                return new FieldQuery(_type);
             }
         }
 
-        public MethodInfoQuery Methods
+        public IMethodQuery Methods
         {
             get
             {
-                return new MethodInfoQuery(_type);
+                return new MethodQuery(_type);
             }
         }
 
-        public ConstructorInfoQuery Constructors
+        public IConstructorQuery Constructors
         {
             get
             {
-                return new ConstructorInfoQuery(_type);
+                return new ConstructorQuery(_type);
             }
         }
 
-        public NestedTypeQuery NestedTypes
+        public INestedTypeQuery NestedTypes
         {
             get
             {
@@ -51,19 +51,19 @@ namespace Zirpl.Reflection.Fluent
             }
         }
 
-        public EventInfoQuery Events
+        public IEventQuery Events
         {
             get
             {
-                return new EventInfoQuery(_type);
+                return new EventQuery(_type);
             }
         }
 
-        public MemberInfoQuery Members
+        public IMemberQuery Members
         {
             get
             {
-                return new MemberInfoQuery(_type);
+                return new MemberQuery(_type);
             }
         }
         public FluentType FluentBaseType
