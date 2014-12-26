@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtensionsTests.cs" />
+    <Compile Include="Enums\EnumExtensionMethodsTests.cs" />
     <Compile Include="IO\StreamExtensionsTests.cs" />
     <Compile Include="Linq\QueryableWrapperTests.cs" />
     <Compile Include="NumberExtensionsTests.cs" />
@@ -81,7 +82,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reflection\Fluent\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

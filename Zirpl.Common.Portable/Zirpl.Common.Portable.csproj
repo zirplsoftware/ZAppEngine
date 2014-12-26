@@ -64,6 +64,9 @@
     <Compile Include="..\Zirpl.Common\DateTimeUtilities.cs">
       <Link>DateTimeUtilities.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\Enums\EnumExtensionMethods.cs">
+      <Link>Enums\EnumExtensionMethods.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\ObjectExtensions.cs">
       <Link>ObjectExtensions.cs</Link>
     </Compile>
@@ -93,6 +96,42 @@
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\DynamicTypeAccessor.cs">
       <Link>Reflection\DynamicTypeAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\BindingFlagsBuilder.cs">
+      <Link>Reflection\Fluent\BindingFlagsBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\ConstructorInfoQuery.cs">
+      <Link>Reflection\Fluent\ConstructorInfoQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\EventInfoQuery.cs">
+      <Link>Reflection\Fluent\EventInfoQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\ExtensionMethods.cs">
+      <Link>Reflection\Fluent\ExtensionMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\FieldInfoQuery.cs">
+      <Link>Reflection\Fluent\FieldInfoQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\FluentType.cs">
+      <Link>Reflection\Fluent\FluentType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberInfoQuery.cs">
+      <Link>Reflection\Fluent\MemberInfoQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberInfoQueryBase.cs">
+      <Link>Reflection\Fluent\MemberInfoQueryBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberTypeFlags.cs">
+      <Link>Reflection\Fluent\MemberTypeFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MethodInfoQuery.cs">
+      <Link>Reflection\Fluent\MethodInfoQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\NestedTypeQuery.cs">
+      <Link>Reflection\Fluent\NestedTypeQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\PropertyInfoQuery.cs">
+      <Link>Reflection\Fluent\PropertyInfoQuery.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\IAccessor.cs">
       <Link>Reflection\IAccessor.cs</Link>
@@ -157,6 +196,7 @@
     <Compile Include="Properties\AssemblyInfo_common_portable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

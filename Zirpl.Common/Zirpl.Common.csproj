@@ -48,6 +48,7 @@
     <Compile Include="Collections\IListExtensions.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DateTimeUtilities.cs" />
+    <Compile Include="Enums\EnumExtensionMethods.cs" />
     <Compile Include="IO\PathUtilities.cs" />
     <Compile Include="IO\StreamExtensions.cs" />
     <Compile Include="Linq\Dynamic.cs" />
@@ -62,6 +63,28 @@
     </Compile>
     <Compile Include="Reflection\AssemblyExtensions.cs" />
     <Compile Include="Reflection\DynamicTypeAccessor.cs" />
+    <Compile Include="Reflection\Fluent\BindingFlagsBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reflection\Fluent\ConstructorInfoQuery.cs" />
+    <Compile Include="Reflection\Fluent\ExtensionMethods.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reflection\Fluent\EventInfoQuery.cs" />
+    <Compile Include="Reflection\Fluent\MemberTypeFlags.cs" />
+    <Compile Include="Reflection\Fluent\NestedTypeQuery.cs" />
+    <Compile Include="Reflection\Fluent\MemberInfoQuery.cs" />
+    <Compile Include="Reflection\Fluent\MethodInfoQuery.cs" />
+    <Compile Include="Reflection\Fluent\FieldInfoQuery.cs" />
+    <Compile Include="Reflection\Fluent\PropertyInfoQuery.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reflection\Fluent\FluentType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reflection\Fluent\MemberInfoQueryBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Reflection\IAccessor.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +111,7 @@
   <ItemGroup>
     <Content Include="Linq\Dynamic Expressions.html" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
