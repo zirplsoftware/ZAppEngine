@@ -24,6 +24,8 @@ if not "%errorlevel%"=="0" goto failure
 if not "%errorlevel%"=="0" goto failure
 ..\.nuget\NuGet.exe pack "..\.nuget\Zirpl.AppEngine.Testing.nuspec" -Output ..\Download -Version "%version%" -Prop configuration=%configuration%
 if not "%errorlevel%"=="0" goto failure
+..\.nuget\NuGet.exe pack "..\.nuget\Zirpl.Common.nuspec" -Output ..\Download -Version "%version%" -Prop configuration=%configuration%
+if not "%errorlevel%"=="0" goto failure
 
 :success
 REM use github status API to indicate commit compile success
