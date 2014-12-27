@@ -10,6 +10,6 @@ namespace Zirpl.Reflection.Fluent
         TScopeQuery OfScope();
         TMemberQuery IgnoreCase();
         TMemberQuery Named(String name);
-        TMemberQuery NamedIn(IEnumerable<String> names);
+        TMemberQuery NamedAny(IEnumerable<String> names);
     }
 }

@@ -180,19 +180,22 @@ namespace Zirpl.Reflection.Fluent
         public TMemberQuery Named(String name)
         {
             if (String.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (_nameMatcher.Named != null) throw new InvalidOperationException("Cannot call Named twice. Use NamedAny instead.");
+            if (_nameMatcher.NamedAny != null) throw new InvalidOperationException("Cannot call both Named and NamedAny.");
 
-            if (!_nameMatcher.Names.Contains(name))
-            {
-                _nameMatcher.Names.Add(name);
-            }
+            _nameMatcher.Named = name;
             return (TMemberQuery)(Object)this;
         }
 
-        public TMemberQuery NamedIn(IEnumerable<String> names)
+        public TMemberQuery NamedAny(IEnumerable<String> names)
         {
             if (names == null) throw new ArgumentNullException("names");
+            if (!names.Any()) throw new ArgumentException("names must have at least one entry", "names");
+            if (names.Any(o => String.IsNullOrEmpty(o))) throw new ArgumentException("An entry in the names provided was null", "names");
+            if (_nameMatcher.NamedAny != null) throw new InvalidOperationException("Cannot call NamedAny twice.");
+            if (_nameMatcher.Named != null) throw new InvalidOperationException("Cannot call both Named and NamedAny.");
 
-            _nameMatcher.Names.AddRange(names.Where(o => !_nameMatcher.Names.Contains(o)));
+            _nameMatcher.NamedAny = names;
             return (TMemberQuery)(Object)this;
         }
 
@@ -267,8 +270,8 @@ namespace Zirpl.Reflection.Fluent
 
         private bool FindMemberMatch(MemberInfo memberInfo, Object searchCriteria)
         {
-            if (!_accessibilityMatcher.IsMatch(memberInfo)) return false;
             if (!_nameMatcher.IsMatch(memberInfo)) return false;
+            if (!_accessibilityMatcher.IsMatch(memberInfo)) return false;
             if (!_scopeMatcher.IsMatch(memberInfo)) return false;
             return IsMatch(memberInfo);
         }
@@ -387,25 +390,27 @@ namespace Zirpl.Reflection.Fluent
 
         private sealed class NameMatcher
         {
-            internal readonly IList<String> Names;
+            internal String Named { get; set; }
+            internal IEnumerable<String> NamedAny { get; set; }
             internal bool IgnoreCase { get; set; }
-
-            internal NameMatcher()
-            {
-                Names = new List<string>();
-            }
-
+            
             internal bool IsMatch(MemberInfo memberInfo)
             {
-                if (Names.Any())
+                if (NamedAny.Any())
                 {
                     var namesList = IgnoreCase
-                           ? from o in Names select o.ToLowerInvariant()
-                           : Names;
+                           ? from o in NamedAny select o.ToLowerInvariant()
+                           : NamedAny;
                     return namesList.Contains(IgnoreCase
                         ? memberInfo.Name.ToLowerInvariant()
                         : memberInfo.Name)
                            && IsMatch(memberInfo);
+                }
+                else if (Named != null)
+                {
+                    return IgnoreCase
+                        ? memberInfo.Name.ToLowerInvariant().Equals(Named.ToLowerInvariant())
+                        : memberInfo.Name.Equals(Named);
                 }
                 return true;
             }
