@@ -92,6 +92,10 @@ namespace Zirpl.Reflection.Fluent
             _accessibilityMatcher.ProtectedInternal = true;
             return (TMemberQuery)(Object)this;
         }
+        TMemberQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.And()
+        {
+            return (TMemberQuery)(Object)this;
+        }
         #endregion
 
         public TMemberQuery AreInstance()

@@ -12,5 +12,6 @@ namespace Zirpl.Reflection.Fluent
         TAccessibilityQuery Internal();
         TAccessibilityQuery ProtectedInternal();
         TMemberQuery All();
+        TMemberQuery And();
     }
 }
