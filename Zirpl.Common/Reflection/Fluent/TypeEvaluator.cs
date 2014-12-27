@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class MethodReturnTypeAssignabilityEvaluator :AssignabilityEvaluatorBase
+    internal sealed class TypeEvaluator :TypeEvaluatorBase
     {
         public override bool IsMatch(MemberInfo memberInfo)
         {
-            return IsTypeMatch(((MethodInfo)memberInfo).ReturnType);
+            return IsTypeMatch((Type)memberInfo);
         }
     }
 }

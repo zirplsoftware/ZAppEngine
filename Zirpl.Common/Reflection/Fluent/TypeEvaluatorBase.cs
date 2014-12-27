@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal abstract class AssignabilityEvaluatorBase : IMemberEvaluator
+    internal abstract class TypeEvaluatorBase : IMemberEvaluator
     {
         // TODO: how can these be used? Type.FindInterfaces, Type.IsIstanceOf, Type.IsSubClassOf
 
@@ -31,6 +31,8 @@ namespace Zirpl.Reflection.Fluent
         //private Type _implementingInterface;
         //private IEnumerable<Type> _implementingAllInterfaces;
         //private IEnumerable<Type> _implementingAnyInterfaces;
+        //private Type _exact;
+        //private IEnumerable<Type> _exactAny;
 
         public abstract bool IsMatch(MemberInfo memberInfo);
 

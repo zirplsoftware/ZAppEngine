@@ -460,9 +460,6 @@
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\AccessibilityEvaluator.cs">
       <Link>Reflection\Fluent\AccessibilityEvaluator.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\AssignabilityEvaluatorBase.cs">
-      <Link>Reflection\Fluent\AssignabilityEvaluatorBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\BindingFlagsBuilder.cs">
       <Link>Reflection\Fluent\BindingFlagsBuilder.cs</Link>
     </Compile>
@@ -478,8 +475,8 @@
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\FieldQuery.cs">
       <Link>Reflection\Fluent\FieldQuery.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\FieldTypeAssignabilityEvaluator.cs">
-      <Link>Reflection\Fluent\FieldTypeAssignabilityEvaluator.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\FieldTypeEvaluator.cs">
+      <Link>Reflection\Fluent\FieldTypeEvaluator.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\MemberQuery.cs">
       <Link>Reflection\Fluent\MemberQuery.cs</Link>
@@ -499,8 +496,8 @@
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\MethodQuery.cs">
       <Link>Reflection\Fluent\MethodQuery.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MethodReturnTypeAssignabilityEvaluator.cs">
-      <Link>Reflection\Fluent\MethodReturnTypeAssignabilityEvaluator.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\MethodReturnTypeEvaluator.cs">
+      <Link>Reflection\Fluent\MethodReturnTypeEvaluator.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\NameEvaluator.cs">
       <Link>Reflection\Fluent\NameEvaluator.cs</Link>
@@ -514,11 +511,17 @@
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\PropertyReadWriteEvaluator.cs">
       <Link>Reflection\Fluent\PropertyReadWriteEvaluator.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\PropertyTypeAssignabilityEvaluator.cs">
-      <Link>Reflection\Fluent\PropertyTypeAssignabilityEvaluator.cs</Link>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\PropertyTypeEvaluator.cs">
+      <Link>Reflection\Fluent\PropertyTypeEvaluator.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\ScopeEvaluator.cs">
       <Link>Reflection\Fluent\ScopeEvaluator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\TypeEvaluator.cs">
+      <Link>Reflection\Fluent\TypeEvaluator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\TypeEvaluatorBase.cs">
+      <Link>Reflection\Fluent\TypeEvaluatorBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IAccessibilityQueryBase.cs">
       <Link>Reflection\Fluent\_interfaces\IAccessibilityQueryBase.cs</Link>

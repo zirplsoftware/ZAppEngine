@@ -10,14 +10,14 @@ namespace Zirpl.Reflection.Fluent
         IFieldScopeQuery,
         IFieldAssignabilityQuery
     {
-        private readonly FieldTypeAssignabilityEvaluator _assignabilityEvaluator;
+        private readonly FieldTypeEvaluator _typeEvaluator;
 
         internal FieldQuery(Type type)
             :base(type)
         {
             _memberTypesBuilder.Field = true;
-            _assignabilityEvaluator = new FieldTypeAssignabilityEvaluator();
-            _memberEvaluators.Add(_assignabilityEvaluator);
+            _typeEvaluator = new FieldTypeEvaluator();
+            _memberEvaluators.Add(_typeEvaluator);
         }
 
         public IFieldAssignabilityQuery OfType()
@@ -27,37 +27,37 @@ namespace Zirpl.Reflection.Fluent
 
         public IFieldQuery AssignableFrom(Type type)
         {
-            _assignabilityEvaluator.AssignableFrom(type);
+            _typeEvaluator.AssignableFrom(type);
             return this;
         }
 
         public IFieldQuery AssignableFromAny(IEnumerable<Type> types)
         {
-            _assignabilityEvaluator.AssignableFromAny(types);
+            _typeEvaluator.AssignableFromAny(types);
             return this;
         }
 
         public IFieldQuery AssignableFromAll(IEnumerable<Type> types)
         {
-            _assignabilityEvaluator.AssignableFromAll(types);
+            _typeEvaluator.AssignableFromAll(types);
             return this;
         }
 
         public IFieldQuery AssignableTo(Type type)
         {
-            _assignabilityEvaluator.AssignableTo(type);
+            _typeEvaluator.AssignableTo(type);
             return this;
         }
 
         public IFieldQuery AssignableToAny(IEnumerable<Type> types)
         {
-            _assignabilityEvaluator.AssignableToAny(types);
+            _typeEvaluator.AssignableToAny(types);
             return this;
         }
 
         public IFieldQuery AssignableToAll(IEnumerable<Type> types)
         {
-            _assignabilityEvaluator.AssignableToAll(types);
+            _typeEvaluator.AssignableToAll(types);
             return this;
         }
     }

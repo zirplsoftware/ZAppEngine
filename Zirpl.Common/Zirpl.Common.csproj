@@ -181,16 +181,17 @@
     <Compile Include="Reflection\AssemblyExtensions.cs" />
     <Compile Include="Reflection\DynamicTypeAccessor.cs" />
     <Compile Include="Reflection\Fluent\AccessibilityEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\AssignabilityEvaluatorBase.cs" />
+    <Compile Include="Reflection\Fluent\TypeEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\TypeEvaluatorBase.cs" />
     <Compile Include="Reflection\Fluent\BindingFlagsBuilder.cs" />
     <Compile Include="Reflection\Fluent\ConstructorQuery.cs" />
     <Compile Include="Reflection\Fluent\ExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Reflection\Fluent\EventQuery.cs" />
-    <Compile Include="Reflection\Fluent\MethodReturnTypeAssignabilityEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\PropertyTypeAssignabilityEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\FieldTypeAssignabilityEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\MethodReturnTypeEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\PropertyTypeEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\FieldTypeEvaluator.cs" />
     <Compile Include="Reflection\Fluent\MemberQueryService.cs" />
     <Compile Include="Reflection\Fluent\MemberTypeFlags.cs" />
     <Compile Include="Reflection\Fluent\MemberTypesBuilder.cs" />

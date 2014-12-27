@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class PropertyTypeAssignabilityEvaluator :AssignabilityEvaluatorBase
+    internal sealed class PropertyTypeEvaluator :TypeEvaluatorBase
     {
         public override bool IsMatch(MemberInfo memberInfo)
         {

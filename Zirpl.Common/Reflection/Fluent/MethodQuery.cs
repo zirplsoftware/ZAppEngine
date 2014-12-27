@@ -10,14 +10,14 @@ namespace Zirpl.Reflection.Fluent
         IMethodScopeQuery,
         IMethodReturnTypeAssignabilityQuery
     {
-        private readonly AssignabilityEvaluatorBase _returnTypeAssignabilityEvaluator;
+        private readonly MethodReturnTypeEvaluator _returnTypeEvaluator;
 
         internal MethodQuery(Type type)
             :base(type)
         {
-            _returnTypeAssignabilityEvaluator = new MethodReturnTypeAssignabilityEvaluator();
+            _returnTypeEvaluator = new MethodReturnTypeEvaluator();
             _memberTypesBuilder.Method = true;
-            _memberEvaluators.Add(_returnTypeAssignabilityEvaluator);
+            _memberEvaluators.Add(_returnTypeEvaluator);
         }
 
         public IMethodReturnTypeAssignabilityQuery OfReturnType()
@@ -27,43 +27,43 @@ namespace Zirpl.Reflection.Fluent
 
         IMethodQuery IAssignabilityQueryBase<MethodInfo, IMethodQuery>.AssignableFrom(Type type)
         {
-            _returnTypeAssignabilityEvaluator.AssignableFrom(type);
+            _returnTypeEvaluator.AssignableFrom(type);
             return this;
         }
 
         IMethodQuery IAssignabilityQueryBase<MethodInfo, IMethodQuery>.AssignableFromAny(IEnumerable<Type> types)
         {
-            _returnTypeAssignabilityEvaluator.AssignableFromAny(types);
+            _returnTypeEvaluator.AssignableFromAny(types);
             return this;
         }
 
         IMethodQuery IAssignabilityQueryBase<MethodInfo, IMethodQuery>.AssignableFromAll(IEnumerable<Type> types)
         {
-            _returnTypeAssignabilityEvaluator.AssignableFromAll(types);
+            _returnTypeEvaluator.AssignableFromAll(types);
             return this;
         }
 
         IMethodQuery IAssignabilityQueryBase<MethodInfo, IMethodQuery>.AssignableTo(Type type)
         {
-            _returnTypeAssignabilityEvaluator.AssignableTo(type);
+            _returnTypeEvaluator.AssignableTo(type);
             return this;
         }
 
         IMethodQuery IAssignabilityQueryBase<MethodInfo, IMethodQuery>.AssignableToAny(IEnumerable<Type> types)
         {
-            _returnTypeAssignabilityEvaluator.AssignableToAny(types);
+            _returnTypeEvaluator.AssignableToAny(types);
             return this;
         }
 
         IMethodQuery IAssignabilityQueryBase<MethodInfo, IMethodQuery>.AssignableToAll(IEnumerable<Type> types)
         {
-            _returnTypeAssignabilityEvaluator.AssignableToAll(types);
+            _returnTypeEvaluator.AssignableToAll(types);
             return this;
         }
 
         IMethodQuery IMethodReturnTypeAssignabilityQuery.Void()
         {
-            _returnTypeAssignabilityEvaluator.Void();
+            _returnTypeEvaluator.Void();
             return this;
         }
     }
