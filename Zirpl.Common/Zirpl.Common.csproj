@@ -87,6 +87,7 @@
     <Compile Include="Reflection\Fluent\_interfaces\IMemberScopeQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IMethodScopeQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\INestedTypeScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMemberTypeQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IPropertyScopeQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IScopeQueryBase.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IAccessibilityQueryBase.cs" />

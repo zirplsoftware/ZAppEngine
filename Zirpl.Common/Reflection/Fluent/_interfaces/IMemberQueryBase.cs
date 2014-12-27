@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Zirpl.Reflection.Fluent
 {
     public interface IMemberQueryBase<out TMemberInfo, out TMemberQuery, out TAccessibilityQuery, out TScopeQuery> 
         : IEnumerable<TMemberInfo>
     {
-        TAccessibilityQuery WithAccessibility();
-        TScopeQuery WithScope();
+        TAccessibilityQuery OfAccessibility();
+        TScopeQuery OfScope();
         TMemberQuery IgnoreCase();
-        TMemberQuery ByName(String name);
+        TMemberQuery Named(String name);
+        TMemberQuery NamedIn(IEnumerable<String> names);
     }
 }

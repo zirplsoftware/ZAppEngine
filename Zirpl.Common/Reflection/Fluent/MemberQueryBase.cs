@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using Zirpl.Collections;
 
 namespace Zirpl.Reflection.Fluent
 {
@@ -27,7 +25,7 @@ namespace Zirpl.Reflection.Fluent
             _bindingFlagsBuilder = new BindingFlagsBuilder();
             _accessibilityMatcher = new AccessibilityMatcher();
             _nameMatcher = new NameMatcher();
-            _scopeMatcher = new ScopeMatcher();
+            _scopeMatcher = new ScopeMatcher(type);
         }
 
         #region Abstract methods
@@ -38,11 +36,11 @@ namespace Zirpl.Reflection.Fluent
         #endregion
 
         #region IMemberQuery implementation
-        public TAccessibilityQuery WithAccessibility()
+        public TAccessibilityQuery OfAccessibility()
         {
             return (TAccessibilityQuery)(Object)this;
         }
-        public TScopeQuery WithScope()
+        public TScopeQuery OfScope()
         {
             return (TScopeQuery)(Object)this;
         }
@@ -128,6 +126,8 @@ namespace Zirpl.Reflection.Fluent
 
         TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.DeclaredOnBaseTypes(int levelsDeep)
         {
+            if (levelsDeep <= 0) throw new ArgumentOutOfRangeException("levelsDeep", "Must be greater than 0");
+
             _scopeMatcher.DeclaredOnBaseTypes = true;
             _scopeMatcher.LevelsDeep = levelsDeep;
             return (TScopeQuery)(Object)this;
@@ -141,6 +141,8 @@ namespace Zirpl.Reflection.Fluent
 
         TMemberQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.All(int levelsDeep)
         {
+            if (levelsDeep <= 0) throw new ArgumentOutOfRangeException("levelsDeep", "Must be greater than 0");
+
             _bindingFlagsBuilder.Instance = true;
             _bindingFlagsBuilder.Static = true;
             _scopeMatcher.Instance = true;
@@ -175,7 +177,7 @@ namespace Zirpl.Reflection.Fluent
             return (TMemberQuery)(Object)this;
         }
 
-        public TMemberQuery ByName(String name)
+        public TMemberQuery Named(String name)
         {
             if (String.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
 
@@ -183,6 +185,14 @@ namespace Zirpl.Reflection.Fluent
             {
                 _nameMatcher.Names.Add(name);
             }
+            return (TMemberQuery)(Object)this;
+        }
+
+        public TMemberQuery NamedIn(IEnumerable<String> names)
+        {
+            if (names == null) throw new ArgumentNullException("names");
+
+            _nameMatcher.Names.AddRange(names.Where(o => !_nameMatcher.Names.Contains(o)));
             return (TMemberQuery)(Object)this;
         }
 
@@ -237,32 +247,108 @@ namespace Zirpl.Reflection.Fluent
         }
         #endregion
 
-        #region Nested classes
+        #region Nested types
 
         [Flags]
         internal enum MemberTypeFlags
         {
-            All = 0xbf,
             Constructor = 1,
-            Custom = 0x40,
             Event = 2,
             Field = 4,
             Method = 8,
-            NestedType = 0x80,
-            Property = 0x10,
-            TypeInfo = 0x20
+            NestedType = 128,
+            Property = 16,
+            TypeInfo = 32,
+            Custom = 64,
+            All = 191
         }
 
         private sealed class ScopeMatcher
         {
+            private readonly Type _refelctedType;
             internal bool Instance { get; set; }
             internal bool Static { get; set; }
             internal bool DeclaredOnThisType { get; set; }
             internal bool DeclaredOnBaseTypes { get; set; }
             internal int? LevelsDeep { get; set; }
 
+            internal ScopeMatcher(Type type)
+            {
+                _refelctedType = type;
+            }
+
+
             internal bool IsMatch(MemberInfo memberInfo)
             {
+                if (memberInfo is MethodBase)
+                {
+                    var method = (MethodBase)memberInfo;
+                    if (!IsMethodMatch(method)) return false;
+                }
+                else if (memberInfo is EventInfo)
+                {
+                    var eventInfo = (EventInfo)memberInfo;
+                    var addMethod = eventInfo.GetAddMethod(true);
+                    var removeMethod = eventInfo.GetRemoveMethod(true);
+                    if (!IsMethodMatch(addMethod) && !IsMethodMatch(removeMethod)) return false;
+                }
+                else if (memberInfo is FieldInfo)
+                {
+                    var field = (FieldInfo)memberInfo;
+                    if (!Instance && !field.IsStatic) return false;
+                    if (!Static && field.IsStatic) return false;
+                    if (!IsDeclaredTypeMatch(field)) return false;
+                }
+                else if (memberInfo is PropertyInfo)
+                {
+                    var propertyinfo = (PropertyInfo)memberInfo;
+                    var getMethod = propertyinfo.GetGetMethod(true);
+                    var setMethod = propertyinfo.GetSetMethod(true);
+                    if (!IsMethodMatch(getMethod) && !IsMethodMatch(setMethod)) return false;
+                }
+                else if (memberInfo is Type)
+                {
+                    // nested types
+                    var type = (Type)memberInfo;
+                    if (!IsDeclaredTypeMatch(memberInfo)) return false;
+                }
+                return true;
+            }
+
+            private bool IsMethodMatch(MethodBase method)
+            {
+                if (method == null) return false;
+                if (!Instance && !method.IsStatic) return false;
+                if (!Static && method.IsStatic) return false;
+                return IsDeclaredTypeMatch(method);
+            }
+
+            private bool IsDeclaredTypeMatch(MemberInfo memberInfo)
+            {
+                if (!DeclaredOnThisType && memberInfo.DeclaringType.Equals(_refelctedType)) return false;
+                if (!DeclaredOnBaseTypes && !memberInfo.DeclaringType.Equals(_refelctedType)) return false;
+                if (DeclaredOnBaseTypes
+                    && !memberInfo.DeclaringType.Equals(_refelctedType)
+                    && LevelsDeep.HasValue)
+                {
+                    var found = false;
+                    var type = _refelctedType.BaseType;
+                    int levelsDeeper = LevelsDeep.Value - 1;
+                    while (type != null)
+                    {
+                        if (memberInfo.DeclaringType.Equals(type))
+                        {
+                            found = true;
+                            type = null;
+                        }
+                        else
+                        {
+                            type = levelsDeeper == 0 ? null : type.BaseType;
+                            levelsDeeper -= 1;
+                        }
+                    }
+                    return found;
+                }
                 return true;
             }
         }

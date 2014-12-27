@@ -116,7 +116,7 @@ namespace Zirpl.Common.Tests.Reflection.Fluent
             // other randoms
             typeof(Mock).GetField("publicStaticField", BindingFlags.Public | BindingFlags.Instance).Should().BeNull();
 
-            typeof (Mock).Fluent().Fields.WithAccessibility().Protected().All().WithScope();
+            typeof (Mock).Fluent().Fields.OfAccessibility().Protected().All().OfScope();
         }
 
         //[Test]
