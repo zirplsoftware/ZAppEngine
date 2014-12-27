@@ -1,14 +1,18 @@
 ﻿using System;
-#if !NET35CLIENT
+#if !NET35 && !NET35CLIENT && !PORTABLE
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+#endif
+
+#if !NET35CLIENT
 #endif
 #if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT
-using System.ComponentModel.DataAnnotations.Schema;
+
 #endif
 
 namespace Zirpl.AppEngine.Model
 {
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
     [Serializable]
 #endif
     public abstract class EntityBase<TId> : IPersistable<TId>, IAuditable, IVersionable 
@@ -16,7 +20,7 @@ namespace Zirpl.AppEngine.Model
     {
         #region IPersistable
 
-#if !NET35 && !NET35CLIENT
+#if !NET35 && !NET35CLIENT && !PORTABLE
         [Key]
 #endif
         public virtual TId Id { get; set; }
@@ -32,7 +36,7 @@ namespace Zirpl.AppEngine.Model
         }
 
         //[ScaffoldColumn(false)]
-#if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT && !SILVERLIGHT
+#if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT && !SILVERLIGHT && !PORTABLE
         [NotMapped]
 #endif
         public virtual bool IsPersisted

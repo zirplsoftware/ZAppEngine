@@ -7,7 +7,7 @@ namespace Zirpl.AppEngine.Service.BatchProcessing
     /// <summary>
     /// An exception that occurs during a data import process
     /// </summary>
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
     [Serializable]
 #endif
     public class ImportValidationException : Exception
@@ -29,7 +29,7 @@ namespace Zirpl.AppEngine.Service.BatchProcessing
             this.Errors = new List<int>();
         }
 
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
         public ImportValidationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

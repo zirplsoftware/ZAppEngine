@@ -202,6 +202,10 @@
       <Project>{deafe47a-1239-4766-9a9e-ef7d318be0f7}</Project>
       <Name>Zirpl.AppEngine.Net45</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Common.Net45\Zirpl.Common.Net45.csproj">
+      <Project>{af50ac6e-a51d-4df7-8f8a-8dfb79030f5c}</Project>
+      <Name>Zirpl.Common.Net45</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Readme\" />
@@ -209,7 +213,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="9b6c4dba-94a5-4871-8fc5-a2bb2e91cc04" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="9b6c4dba-94a5-4871-8fc5-a2bb2e91cc04" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

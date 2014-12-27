@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Zirpl.AppEngine.DataService;
@@ -187,7 +188,10 @@ namespace Zirpl.AppEngine.Service
             }
             dataService.Delete(list);
             this.GetLog().Debug("Post-DeleteList");
-            list.ForEach(this.OnPostDelete);
+            foreach (var entity in list)
+            {
+                this.OnPostDelete(entity);
+            }
         }
 
         public virtual void DeleteById(IEnumerable<TId> ids)
@@ -219,7 +223,10 @@ namespace Zirpl.AppEngine.Service
             }
             dataService.DeleteById(list);
             this.GetLog().Debug("Post-DeleteListByIds");
-            list.ForEach(this.OnPostDeleteById);
+            foreach (var entity in list)
+            {
+                this.OnPostDeleteById(entity);
+            }
         }
 
         public virtual void Delete(ISearchCriteria searchCriteria)
@@ -381,11 +388,20 @@ namespace Zirpl.AppEngine.Service
 
                 this.OnPreInsertPreValidate(entity);
             }
-            list.ForEach(entity => this.Validate(ServiceAction.Insert, entity));
-            list.ForEach(this.OnPreInsertPostValidate);
+            foreach (var entity in list)
+            {
+                this.Validate(ServiceAction.Insert, entity);
+            }
+            foreach (var entity in list)
+            {
+                this.OnPreInsertPostValidate(entity);
+            }
             dataService.Insert(list);
             this.GetLog().Debug("Post-AddList");
-            list.ForEach(this.OnPostInsert);
+            foreach (var entity in list)
+            {
+                this.OnPostInsert(entity);
+            }
         }
 
         public virtual void Save(TEntity entity)
@@ -562,11 +578,20 @@ namespace Zirpl.AppEngine.Service
 
                 this.OnPreUpdatePreValidate(entity);
             }
-            list.ForEach(entity => this.Validate(ServiceAction.Update, entity));
-            list.ForEach(OnPreUpdatePostValidate);
+            foreach (var entity in list)
+            {
+                this.Validate(ServiceAction.Update, entity);
+            }
+            foreach (var entity in list)
+            {
+                this.OnPreUpdatePostValidate(entity);
+            }
             dataService.Update(list);
             this.GetLog().Debug("Post-Update");
-            list.ForEach(OnPostUpdate);
+            foreach (var entity in list)
+            {
+                this.OnPostUpdate(entity);
+            }
         }
 
         public virtual bool Exists(TId id)

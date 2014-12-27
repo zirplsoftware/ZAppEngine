@@ -6,7 +6,7 @@ namespace Zirpl.AppEngine
     /// <summary>
     /// Denotes an exception due to an unexpected data case
     /// </summary>
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
     [Serializable]
 #endif
     public class UnexpectedCaseException : System.Exception
@@ -45,7 +45,7 @@ namespace Zirpl.AppEngine
             this.CaseData = caseData;
         }
 
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
         protected UnexpectedCaseException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

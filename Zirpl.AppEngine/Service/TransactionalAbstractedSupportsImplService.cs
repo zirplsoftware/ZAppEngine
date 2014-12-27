@@ -8,7 +8,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.AppEngine.Service
 {
-    public class TransactionalAbstractedSupportsImplService<TEntity, TId> : AbstractedSupportsImplService<TEntity, TId> 
+    public class TransactionalAbstractedSupportsImplService<TEntity, TId> : AbstractedSupportsImplService<TEntity, TId>
         where TEntity : class, IPersistable<TId>
         where TId : IEquatable<TId>
     {
@@ -16,13 +16,13 @@ namespace Zirpl.AppEngine.Service
         public bool InsertRequiresNewTransaction { get; set; }
         public bool SaveRequiresNewTransaction { get; set; }
         public bool UpdateRequiresNewTransaction { get; set; }
-        
+
 
         public override void Delete(TEntity entity)
         {
             using (TransactionScope transaction = new TransactionScope(
-                                                    this.DeleteRequiresNewTransaction 
-                                                    ? TransactionScopeOption.RequiresNew : 
+                                                    this.DeleteRequiresNewTransaction
+                                                    ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
             {
                 base.Delete(entity);
@@ -86,7 +86,7 @@ namespace Zirpl.AppEngine.Service
         public override TEntity Get(TId id)
         {
             TEntity entity = default(TEntity);
-            
+
             using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 entity = base.Get(id);
@@ -192,7 +192,7 @@ namespace Zirpl.AppEngine.Service
         public override bool Exists(TId id)
         {
             bool exists = false;
-            
+
             using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 exists = base.Exists(id);
@@ -206,7 +206,7 @@ namespace Zirpl.AppEngine.Service
         public override int GetTotalCount(ISearchCriteria searchCriteria)
         {
             int totalCount = 0;
-            
+
             using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 totalCount = base.GetTotalCount(searchCriteria);
@@ -220,7 +220,7 @@ namespace Zirpl.AppEngine.Service
         public override SearchResults<TEntity> Search(ISearchCriteria searchCriteria)
         {
             SearchResults<TEntity> result = null;
-            
+
             using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 base.Search(searchCriteria);
@@ -234,7 +234,7 @@ namespace Zirpl.AppEngine.Service
         public override IQueryable<TEntity> GetQueryable()
         {
             IQueryable<TEntity> result = null;
-            
+
             using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 result = base.GetQueryable();
@@ -248,7 +248,7 @@ namespace Zirpl.AppEngine.Service
         public override TEntity SearchUnique(ISearchCriteria searchCriteria)
         {
             TEntity result = default(TEntity);
-            
+
             using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 result = base.SearchUnique(searchCriteria);

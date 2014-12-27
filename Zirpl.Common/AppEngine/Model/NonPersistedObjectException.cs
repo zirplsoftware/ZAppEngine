@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Zirpl.AppEngine.Model
 {
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
     [Serializable]
 #endif
     public class NonPersistedObjectException : Exception
@@ -22,8 +22,8 @@ namespace Zirpl.AppEngine.Model
         {
         }
 
-#if !SILVERLIGHT
-        public NonPersistedObjectException(SerializationInfo info, StreamingContext context)
+#if !SILVERLIGHT && !PORTABLE
+        protected NonPersistedObjectException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

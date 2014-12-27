@@ -146,6 +146,10 @@
       <Project>{b758daf8-a998-4482-b522-f48b4e83879e}</Project>
       <Name>Zirpl.AppEngine.Web.Net45</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zirpl.Common.Net45\Zirpl.Common.Net45.csproj">
+      <Project>{af50ac6e-a51d-4df7-8f8a-8dfb79030f5c}</Project>
+      <Name>Zirpl.Common.Net45</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Zirpl.AppEngine.Testing\App.config">
@@ -163,7 +167,7 @@
   </Target>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="366c5119-60f8-4c0b-9d03-fd423bd5b6c5" />
+      <UserProperties ProjectLinkReference="366c5119-60f8-4c0b-9d03-fd423bd5b6c5" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

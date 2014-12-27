@@ -39,6 +39,7 @@
         <dependency id="System.Spatial" version="5.6.0" />
         <dependency id="WindowsAzure.Storage" version="4.0.1" />
         <dependency id="Zirpl.AppEngine" version="$version$"  />
+        <dependency id="Zirpl.Common" version="$version$"  />
       </group>
       <group targetFramework="net45">
         <dependency id="Autofac" version="3.5.0" />
@@ -60,6 +61,7 @@
         <dependency id="System.Spatial" version="5.6.0" />
         <dependency id="WindowsAzure.Storage" version="4.0.1" />
         <dependency id="Zirpl.AppEngine" version="$version$"  />
+        <dependency id="Zirpl.Common" version="$version$"  />
       </group>
     </dependencies>
   </metadata>

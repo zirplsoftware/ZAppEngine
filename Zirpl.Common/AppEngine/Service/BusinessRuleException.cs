@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Zirpl.AppEngine.Service
 {
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
     [Serializable]
 #endif
     public class BusinessRuleException<TEnum> : Exception where TEnum : struct, IComparable, IConvertible, IFormattable
@@ -49,7 +49,7 @@ namespace Zirpl.AppEngine.Service
             this.BusinessRule = businessRule;
         }
 
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
         protected BusinessRuleException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

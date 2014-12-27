@@ -6,7 +6,7 @@ namespace Zirpl.AppEngine.Mapping
     /// <summary>
     /// Denotes an exception due to data being mapped incorrectly
     /// </summary>
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PORTABLE
     [Serializable]
 #endif
     public class InvalidMappingDataException : System.Exception
@@ -26,8 +26,8 @@ namespace Zirpl.AppEngine.Mapping
 
         }
 
-#if !SILVERLIGHT
-        public InvalidMappingDataException(SerializationInfo info, StreamingContext context)
+#if !SILVERLIGHT && !PORTABLE
+        protected InvalidMappingDataException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
