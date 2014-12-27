@@ -9,17 +9,34 @@ namespace Zirpl.Reflection.Fluent
 {
     internal sealed class AssignabilityEvaluator
     {
+        // TODO: how can these be used? Type.FindInterfaces, Type.IsIstanceOf, Type.IsSubClassOf
+
         private Type _assignableFrom;
         private IEnumerable<Type> _assignableFromAny;
         private IEnumerable<Type> _assignableFromAll;
         private Type _assignableTo;
         private IEnumerable<Type> _assignableToAny;
         private IEnumerable<Type> _assignableToAll;
-        private bool _void;
+        private bool _isVoid;
+
+        // TODO: implement all these
+        //private bool _isValueType;
+        //private bool _isNullableValueType;
+        //private bool _isValueTypeOrNullableValueType;
+        //private bool _isEnum;
+        //private bool _isNullableEnum;
+        //private bool _isEnumOrIsNullableEnum;
+        //private bool _isClass;
+        //private bool _isInterface;
+        //private bool _isClassOrInterface;
+        //private bool _isPrimtive;
+        //private Type _implementingInterface;
+        //private IEnumerable<Type> _implementingAllInterfaces;
+        //private IEnumerable<Type> _implementingAnyInterfaces;
 
         internal bool IsMatch(Type variableType)
         {
-            if (_void && variableType == null) return true;
+            if (_isVoid && variableType == null) return true;
             if (_assignableFrom != null && !variableType.IsAssignableFrom(_assignableFrom)) return false;
             if (_assignableTo != null && !_assignableTo.IsAssignableFrom(variableType)) return false;
             if (_assignableFromAll != null && !_assignableFromAll.All(variableType.IsAssignableFrom)) return false;
@@ -38,7 +55,7 @@ namespace Zirpl.Reflection.Fluent
             if (_assignableToAll != null) throw new InvalidOperationException("Cannot call both Void and AssignableToAll. Use 2 queries if needed.");
             if (_assignableToAny != null) throw new InvalidOperationException("Cannot call both Void and AssignableToAny. Use 2 queries if needed.");
 
-            _void = true;
+            _isVoid = true;
         }
 
         internal void AssignableFrom(Type type)
