@@ -1,8 +1,8 @@
 ﻿#if !NET35 && !NET35CLIENT
-using Autofac;
 using System;
 using System.Linq;
 using System.Reflection;
+using Autofac;
 
 namespace Zirpl.AppEngine.Ioc.Autofac
 {

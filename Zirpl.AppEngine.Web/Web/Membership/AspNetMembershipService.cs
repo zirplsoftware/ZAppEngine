@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Transactions;
 using System.Web.Security;
-using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Model.Membership;
 using Zirpl.AppEngine.Service;
 using Zirpl.AppEngine.Service.Membership;

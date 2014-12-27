@@ -1,6 +1,5 @@
 ﻿#if !NET35CLIENT && !NET40CLIENT && !SILVERLIGHT
 using System;
-using System.Globalization;
 using System.Reflection;
 using Zirpl.Logging;
 

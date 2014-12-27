@@ -1,6 +1,6 @@
 ﻿#if !NET35 && !NET35CLIENT
-using AutoMapper;
 using System;
+using AutoMapper;
 using Zirpl.AppEngine.Ioc;
 using Zirpl.AppEngine.Model;
 using Zirpl.AppEngine.Service;

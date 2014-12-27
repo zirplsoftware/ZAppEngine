@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using Zirpl.AppEngine.Logging;
 using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.Web.Mvc

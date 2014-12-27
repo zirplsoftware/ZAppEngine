@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Zirpl.AppEngine.DataService.EntityFramework;
@@ -11,7 +9,6 @@ using Zirpl.AppEngine.Model;
 using Zirpl.AppEngine.Model.EntityFramework;
 using Zirpl.AppEngine.Model.Search;
 using Zirpl.AppEngine.Service;
-using Zirpl.AppEngine.Testing;
 using Zirpl.AppEngine.Web.Mvc.Ioc.Autofac;
 
 namespace Zirpl.AppEngine.Testing

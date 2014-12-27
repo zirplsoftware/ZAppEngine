@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Mapping.AutoMapper;
 using Zirpl.AppEngine.Web.Mvc.Ioc.Autofac;
 using Zirpl.Logging;

@@ -1,8 +1,5 @@
 ﻿#if !NET35CLIENT && !NET40CLIENT && !SILVERLIGHT
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using log4net.Config;
 using Zirpl.Logging;
 

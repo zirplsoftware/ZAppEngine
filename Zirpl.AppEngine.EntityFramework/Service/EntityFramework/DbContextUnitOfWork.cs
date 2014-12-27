@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Transactions;
 using Zirpl.AppEngine.DataService.EntityFramework;
-using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Validation;
 using Zirpl.Logging;
 

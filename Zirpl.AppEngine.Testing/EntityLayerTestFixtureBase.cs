@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.Ioc;
-using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Model;
 using Zirpl.AppEngine.Model.EntityFramework;
 using Zirpl.AppEngine.Model.Search;
