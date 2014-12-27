@@ -32,7 +32,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +59,10 @@
     <Compile Include="AppEngine\DataService\StringReflectedRowMapper.cs" />
     <Compile Include="AppEngine\Ioc\DependencyResolverBase.cs" />
     <Compile Include="AppEngine\Ioc\IDependencyResolver.cs" />
+    <Compile Include="AppEngine\Model\EntityBase.cs" />
+    <Compile Include="AppEngine\Service\ITransactionalUnitOfWorkFactory.cs" />
+    <Compile Include="AppEngine\Service\TransactionalAbstractedSupportsImplService.cs" />
+    <Compile Include="AppEngine\Service\TransactionalUnitOfWorkFactoryBase.cs" />
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Logging\ILogFactory.cs" />
     <Compile Include="Logging\LogBase.cs" />

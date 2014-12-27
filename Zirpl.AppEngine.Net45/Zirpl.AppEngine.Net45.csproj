@@ -106,9 +106,6 @@
     <Compile Include="..\Zirpl.AppEngine\Mapping\AutoMapper\ValueResolverBase.cs">
       <Link>Mapping\AutoMapper\ValueResolverBase.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\EntityBase.cs">
-      <Link>Model\EntityBase.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
@@ -117,18 +114,6 @@
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\RetryPolicyFactory.cs">
       <Link>RetryPolicyFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Service\ITransactionalUnitOfWorkFactory.cs">
-      <Link>Service\ITransactionalUnitOfWorkFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Service\TransactionalAbstractedSupportsImplService.cs">
-      <Link>Service\TransactionalAbstractedSupportsImplService.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Service\TransactionalUnitOfWorkFactoryBase.cs">
-      <Link>Service\TransactionalUnitOfWorkFactoryBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Service\UnitOfWorkFactoryBase.cs">
-      <Link>Service\UnitOfWorkFactoryBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Validation\FluentValidation\AbstractValidatorExtensions.cs">
       <Link>Validation\FluentValidation\AbstractValidatorExtensions.cs</Link>

@@ -130,6 +130,9 @@
     <Compile Include="..\Zirpl.Common\AppEngine\Model\BatchProcessing\IBatchItemError.cs">
       <Link>AppEngine\Model\BatchProcessing\IBatchItemError.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\AppEngine\Model\EntityBase.cs">
+      <Link>AppEngine\Model\EntityBase.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\AppEngine\Model\Extensibility\CustomFieldDefinitionBase.cs">
       <Link>AppEngine\Model\Extensibility\CustomFieldDefinitionBase.cs</Link>
     </Compile>
@@ -334,6 +337,9 @@
     <Compile Include="..\Zirpl.Common\AppEngine\Service\ISupportsUpdateList.cs">
       <Link>AppEngine\Service\ISupportsUpdateList.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\AppEngine\Service\ITransactionalUnitOfWorkFactory.cs">
+      <Link>AppEngine\Service\ITransactionalUnitOfWorkFactory.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\AppEngine\Service\IUnitOfWork.cs">
       <Link>AppEngine\Service\IUnitOfWork.cs</Link>
     </Compile>
@@ -357,6 +363,12 @@
     </Compile>
     <Compile Include="..\Zirpl.Common\AppEngine\Service\ServiceAction.cs">
       <Link>AppEngine\Service\ServiceAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\AppEngine\Service\TransactionalAbstractedSupportsImplService.cs">
+      <Link>AppEngine\Service\TransactionalAbstractedSupportsImplService.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\AppEngine\Service\TransactionalUnitOfWorkFactoryBase.cs">
+      <Link>AppEngine\Service\TransactionalUnitOfWorkFactoryBase.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\AppEngine\Service\UnitOfWorkFactoryBase.cs">
       <Link>AppEngine\Service\UnitOfWorkFactoryBase.cs</Link>
