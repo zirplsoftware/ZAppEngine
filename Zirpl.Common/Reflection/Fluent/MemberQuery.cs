@@ -10,22 +10,22 @@ namespace Zirpl.Reflection.Fluent
         IMemberScopeQuery,
         IMemberTypeQuery
     {
-        private readonly MemberTypeFlagsBuilder _memberTypeFlagsBuilder;
+        private readonly MemberTypeEvaluator _memberTypeEvaluator;
 
         internal MemberQuery(Type type)
             :base(type)
         {
-            _memberTypeFlagsBuilder = new MemberTypeFlagsBuilder();
+            _memberTypeEvaluator = new MemberTypeEvaluator();
         }
 
         protected override bool IsMatch(MemberInfo memberInfo)
         {
-            return _memberTypeFlagsBuilder.IsMatch(memberInfo);
+            return _memberTypeEvaluator.IsMatch(memberInfo);
         }
 
         protected override MemberTypeFlags MemberTypes
         {
-            get { return _memberTypeFlagsBuilder.MemberTypes; }
+            get { return _memberTypeEvaluator.MemberTypes; }
         }
 
         public IMemberTypeQuery OfMemberType()
@@ -35,48 +35,48 @@ namespace Zirpl.Reflection.Fluent
 
         IMemberTypeQuery IMemberTypeQuery.Constructor()
         {
-            _memberTypeFlagsBuilder.Constructor = true;
+            _memberTypeEvaluator.Constructor = true;
             return this;
         }
 
         IMemberTypeQuery IMemberTypeQuery.Event()
         {
-            _memberTypeFlagsBuilder.Event = true;
+            _memberTypeEvaluator.Event = true;
             return this;
         }
 
         IMemberTypeQuery IMemberTypeQuery.Field()
         {
-            _memberTypeFlagsBuilder.Field = true;
+            _memberTypeEvaluator.Field = true;
             return this;
         }
 
         IMemberTypeQuery IMemberTypeQuery.Method()
         {
-            _memberTypeFlagsBuilder.Method = true;
+            _memberTypeEvaluator.Method = true;
             return this;
         }
 
         IMemberTypeQuery IMemberTypeQuery.NestedType()
         {
-            _memberTypeFlagsBuilder.NestedType = true;
+            _memberTypeEvaluator.NestedType = true;
             return this;
         }
 
         IMemberTypeQuery IMemberTypeQuery.Property()
         {
-            _memberTypeFlagsBuilder.Property = true;
+            _memberTypeEvaluator.Property = true;
             return this;
         }
 
         IMemberQuery IMemberTypeQuery.All()
         {
-            _memberTypeFlagsBuilder.Constructor = true;
-            _memberTypeFlagsBuilder.Event = true;
-            _memberTypeFlagsBuilder.Field = true;
-            _memberTypeFlagsBuilder.Method = true;
-            _memberTypeFlagsBuilder.NestedType = true;
-            _memberTypeFlagsBuilder.Property = true;
+            _memberTypeEvaluator.Constructor = true;
+            _memberTypeEvaluator.Event = true;
+            _memberTypeEvaluator.Field = true;
+            _memberTypeEvaluator.Method = true;
+            _memberTypeEvaluator.NestedType = true;
+            _memberTypeEvaluator.Property = true;
             return this;
         }
 
@@ -85,7 +85,7 @@ namespace Zirpl.Reflection.Fluent
             return this;
         }
 
-        private class MemberTypeFlagsBuilder
+        private class MemberTypeEvaluator
         {
             internal bool Constructor { get; set; }
             internal bool Event { get; set; }

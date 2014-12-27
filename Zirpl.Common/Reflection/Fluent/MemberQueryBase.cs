@@ -15,17 +15,17 @@ namespace Zirpl.Reflection.Fluent
     {
         private readonly Type _type;
         private readonly BindingFlagsBuilder _bindingFlagsBuilder;
-        private readonly AccessibilityMatcher _accessibilityMatcher;
-        private readonly NameMatcher _nameMatcher;
-        private readonly ScopeMatcher _scopeMatcher;
+        private readonly AccessibilityEvaluator _accessibilityEvaluator;
+        private readonly NameEvaluator _nameEvaluator;
+        private readonly ScopeEvaluator _scopeEvaluator;
 
         internal MemberQueryBase(Type type)
         {
             _type = type;
             _bindingFlagsBuilder = new BindingFlagsBuilder();
-            _accessibilityMatcher = new AccessibilityMatcher();
-            _nameMatcher = new NameMatcher();
-            _scopeMatcher = new ScopeMatcher(type);
+            _accessibilityEvaluator = new AccessibilityEvaluator();
+            _nameEvaluator = new NameEvaluator();
+            _scopeEvaluator = new ScopeEvaluator(type);
         }
 
         #region Abstract methods
@@ -50,51 +50,51 @@ namespace Zirpl.Reflection.Fluent
         TAccessibilityQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.Public()
         {
             _bindingFlagsBuilder.Public = true;
-            _accessibilityMatcher.Public = true;
+            _accessibilityEvaluator.Public = true;
             return (TAccessibilityQuery)(Object)this;
         }
         TAccessibilityQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.NotPublic()
         {
             _bindingFlagsBuilder.NonPublic = true;
-            _accessibilityMatcher.Private = true;
-            _accessibilityMatcher.Protected = true;
-            _accessibilityMatcher.Internal = true;
-            _accessibilityMatcher.ProtectedInternal = true;
+            _accessibilityEvaluator.Private = true;
+            _accessibilityEvaluator.Protected = true;
+            _accessibilityEvaluator.Internal = true;
+            _accessibilityEvaluator.ProtectedInternal = true;
             return (TAccessibilityQuery)(Object)this;
         }
         TAccessibilityQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.Private()
         {
             _bindingFlagsBuilder.NonPublic = true;
-            _accessibilityMatcher.Private = true;
+            _accessibilityEvaluator.Private = true;
             return (TAccessibilityQuery)(Object)this;
         }
         TAccessibilityQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.Protected()
         {
             _bindingFlagsBuilder.NonPublic = true;
-            _accessibilityMatcher.Protected = true;
+            _accessibilityEvaluator.Protected = true;
             return (TAccessibilityQuery)(Object)this;
         }
         TAccessibilityQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.Internal()
         {
             _bindingFlagsBuilder.NonPublic = true;
-            _accessibilityMatcher.Internal = true;
+            _accessibilityEvaluator.Internal = true;
             return (TAccessibilityQuery)(Object)this;
         }
         TAccessibilityQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.ProtectedInternal()
         {
             _bindingFlagsBuilder.NonPublic = true;
-            _accessibilityMatcher.ProtectedInternal = true;
+            _accessibilityEvaluator.ProtectedInternal = true;
             return (TAccessibilityQuery)(Object)this;
         }
         TMemberQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.All()
         {
             _bindingFlagsBuilder.Public = true;
             _bindingFlagsBuilder.NonPublic = true;
-            _accessibilityMatcher.Public = true;
-            _accessibilityMatcher.Private = true;
-            _accessibilityMatcher.Protected = true;
-            _accessibilityMatcher.Internal = true;
-            _accessibilityMatcher.ProtectedInternal = true;
+            _accessibilityEvaluator.Public = true;
+            _accessibilityEvaluator.Private = true;
+            _accessibilityEvaluator.Protected = true;
+            _accessibilityEvaluator.Internal = true;
+            _accessibilityEvaluator.ProtectedInternal = true;
             return (TMemberQuery)(Object)this;
         }
         TMemberQuery IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>.And()
@@ -107,20 +107,20 @@ namespace Zirpl.Reflection.Fluent
         TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.Instance()
         {
             _bindingFlagsBuilder.Instance = true;
-            _scopeMatcher.Instance = true;
+            _scopeEvaluator.Instance = true;
             return (TScopeQuery)(Object)this;
         }
 
         TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.Static()
         {
             _bindingFlagsBuilder.Static = true;
-            _scopeMatcher.Static = true;
+            _scopeEvaluator.Static = true;
             return (TScopeQuery)(Object)this;
         }
 
         TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.DeclaredOnThisType()
         {
-            _scopeMatcher.DeclaredOnThisType = true;
+            _scopeEvaluator.DeclaredOnThisType = true;
             return (TScopeQuery)(Object)this;
         }
 
@@ -128,14 +128,14 @@ namespace Zirpl.Reflection.Fluent
         {
             if (levelsDeep <= 0) throw new ArgumentOutOfRangeException("levelsDeep", "Must be greater than 0");
 
-            _scopeMatcher.DeclaredOnBaseTypes = true;
-            _scopeMatcher.LevelsDeep = levelsDeep;
+            _scopeEvaluator.DeclaredOnBaseTypes = true;
+            _scopeEvaluator.LevelsDeep = levelsDeep;
             return (TScopeQuery)(Object)this;
         }
 
         TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.DeclaredOnBaseTypes()
         {
-            _scopeMatcher.DeclaredOnBaseTypes = true;
+            _scopeEvaluator.DeclaredOnBaseTypes = true;
             return (TScopeQuery)(Object)this;
         }
 
@@ -145,11 +145,11 @@ namespace Zirpl.Reflection.Fluent
 
             _bindingFlagsBuilder.Instance = true;
             _bindingFlagsBuilder.Static = true;
-            _scopeMatcher.Instance = true;
-            _scopeMatcher.Static = true;
-            _scopeMatcher.DeclaredOnThisType = true;
-            _scopeMatcher.DeclaredOnBaseTypes = true;
-            _scopeMatcher.LevelsDeep = levelsDeep;
+            _scopeEvaluator.Instance = true;
+            _scopeEvaluator.Static = true;
+            _scopeEvaluator.DeclaredOnThisType = true;
+            _scopeEvaluator.DeclaredOnBaseTypes = true;
+            _scopeEvaluator.LevelsDeep = levelsDeep;
             return (TMemberQuery)(Object)this;
         }
 
@@ -157,10 +157,10 @@ namespace Zirpl.Reflection.Fluent
         {
             _bindingFlagsBuilder.Instance = true;
             _bindingFlagsBuilder.Static = true;
-            _scopeMatcher.Instance = true;
-            _scopeMatcher.Static = true;
-            _scopeMatcher.DeclaredOnThisType = true;
-            _scopeMatcher.DeclaredOnBaseTypes = true;
+            _scopeEvaluator.Instance = true;
+            _scopeEvaluator.Static = true;
+            _scopeEvaluator.DeclaredOnThisType = true;
+            _scopeEvaluator.DeclaredOnBaseTypes = true;
             return (TMemberQuery)(Object)this;
         }
 
@@ -173,17 +173,17 @@ namespace Zirpl.Reflection.Fluent
         public TMemberQuery IgnoreCase()
         {
             _bindingFlagsBuilder.IgnoreCase = true;
-            _nameMatcher.IgnoreCase = true;
+            _nameEvaluator.IgnoreCase = true;
             return (TMemberQuery)(Object)this;
         }
 
         public TMemberQuery Named(String name)
         {
             if (String.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            if (_nameMatcher.Named != null) throw new InvalidOperationException("Cannot call Named twice. Use NamedAny instead.");
-            if (_nameMatcher.NamedAny != null) throw new InvalidOperationException("Cannot call both Named and NamedAny.");
+            if (_nameEvaluator.Named != null) throw new InvalidOperationException("Cannot call Named twice. Use NamedAny instead.");
+            if (_nameEvaluator.NamedAny != null) throw new InvalidOperationException("Cannot call both Named and NamedAny.");
 
-            _nameMatcher.Named = name;
+            _nameEvaluator.Named = name;
             return (TMemberQuery)(Object)this;
         }
 
@@ -192,10 +192,10 @@ namespace Zirpl.Reflection.Fluent
             if (names == null) throw new ArgumentNullException("names");
             if (!names.Any()) throw new ArgumentException("names must have at least one entry", "names");
             if (names.Any(o => String.IsNullOrEmpty(o))) throw new ArgumentException("An entry in the names provided was null", "names");
-            if (_nameMatcher.NamedAny != null) throw new InvalidOperationException("Cannot call NamedAny twice.");
-            if (_nameMatcher.Named != null) throw new InvalidOperationException("Cannot call both Named and NamedAny.");
+            if (_nameEvaluator.NamedAny != null) throw new InvalidOperationException("Cannot call NamedAny twice.");
+            if (_nameEvaluator.Named != null) throw new InvalidOperationException("Cannot call both Named and NamedAny.");
 
-            _nameMatcher.NamedAny = names;
+            _nameEvaluator.NamedAny = names;
             return (TMemberQuery)(Object)this;
         }
 
@@ -203,12 +203,12 @@ namespace Zirpl.Reflection.Fluent
         public IEnumerator<TMemberInfo> GetEnumerator()
         {
             var list = new List<TMemberInfo>();
-            if (_scopeMatcher.DeclaredOnBaseTypes)
+            if (_scopeEvaluator.DeclaredOnBaseTypes)
             {
-                if (_scopeMatcher.LevelsDeep.HasValue)
+                if (_scopeEvaluator.LevelsDeep.HasValue)
                 {
                     var type = _type;
-                    var levelsDeeper = _scopeMatcher.LevelsDeep.Value;
+                    var levelsDeeper = _scopeEvaluator.LevelsDeep.Value;
                     while (type != null
                         && levelsDeeper > 0)
                     {
@@ -270,9 +270,9 @@ namespace Zirpl.Reflection.Fluent
 
         private bool FindMemberMatch(MemberInfo memberInfo, Object searchCriteria)
         {
-            if (!_nameMatcher.IsMatch(memberInfo)) return false;
-            if (!_accessibilityMatcher.IsMatch(memberInfo)) return false;
-            if (!_scopeMatcher.IsMatch(memberInfo)) return false;
+            if (!_nameEvaluator.IsMatch(memberInfo)) return false;
+            if (!_accessibilityEvaluator.IsMatch(memberInfo)) return false;
+            if (!_scopeEvaluator.IsMatch(memberInfo)) return false;
             return IsMatch(memberInfo);
         }
 
@@ -298,7 +298,7 @@ namespace Zirpl.Reflection.Fluent
             All = 191
         }
 
-        private sealed class ScopeMatcher
+        private sealed class ScopeEvaluator
         {
             private readonly Type _reflectedType;
             internal bool Instance { get; set; }
@@ -307,7 +307,7 @@ namespace Zirpl.Reflection.Fluent
             internal bool DeclaredOnBaseTypes { get; set; }
             internal int? LevelsDeep { get; set; }
 
-            internal ScopeMatcher(Type type)
+            internal ScopeEvaluator(Type type)
             {
                 _reflectedType = type;
             }
@@ -388,7 +388,7 @@ namespace Zirpl.Reflection.Fluent
             }
         }
 
-        private sealed class NameMatcher
+        private sealed class NameEvaluator
         {
             internal String Named { get; set; }
             internal IEnumerable<String> NamedAny { get; set; }
@@ -416,7 +416,7 @@ namespace Zirpl.Reflection.Fluent
             }
         }
 
-        private sealed class AccessibilityMatcher
+        private sealed class AccessibilityEvaluator
         {
             internal bool Public { get; set; }
             internal bool Private { get; set; }
