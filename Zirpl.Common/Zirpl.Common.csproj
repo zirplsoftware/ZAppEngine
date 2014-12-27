@@ -180,12 +180,21 @@
     </Compile>
     <Compile Include="Reflection\AssemblyExtensions.cs" />
     <Compile Include="Reflection\DynamicTypeAccessor.cs" />
-    <Compile Include="Reflection\Fluent\AssignabilityEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\AccessibilityEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\AssignabilityEvaluatorBase.cs" />
+    <Compile Include="Reflection\Fluent\BindingFlagsBuilder.cs" />
     <Compile Include="Reflection\Fluent\ConstructorQuery.cs" />
     <Compile Include="Reflection\Fluent\ExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Reflection\Fluent\EventQuery.cs" />
+    <Compile Include="Reflection\Fluent\MethodReturnTypeAssignabilityEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\PropertyTypeAssignabilityEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\FieldTypeAssignabilityEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\MemberQueryService.cs" />
+    <Compile Include="Reflection\Fluent\MemberTypeFlags.cs" />
+    <Compile Include="Reflection\Fluent\MemberTypesBuilder.cs" />
+    <Compile Include="Reflection\Fluent\NameEvaluator.cs" />
     <Compile Include="Reflection\Fluent\NestedTypeQuery.cs" />
     <Compile Include="Reflection\Fluent\MemberQuery.cs" />
     <Compile Include="Reflection\Fluent\MethodQuery.cs" />
@@ -193,17 +202,17 @@
     <Compile Include="Reflection\Fluent\PropertyQuery.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reflection\Fluent\FluentType.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Reflection\Fluent\MemberQueryBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Reflection\Fluent\PropertyReadWriteEvaluator.cs" />
+    <Compile Include="Reflection\Fluent\ScopeEvaluator.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IAssignabilityQueryBase.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IConstructorScopeQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IEventScopeQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IFieldAssignabilityQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IFieldScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMemberEvaluator.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IMemberScopeQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IMethodReturnTypeAssignabilityQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IMethodScopeQuery.cs" />

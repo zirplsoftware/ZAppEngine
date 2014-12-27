@@ -11,16 +11,7 @@ namespace Zirpl.Reflection.Fluent
         internal NestedTypeQuery(Type type)
             :base(type)
         {
-        }
-
-        protected override bool IsMatch(MemberInfo memberInfo)
-        {
-            return true;
-        }
-
-        protected override MemberTypeFlags MemberTypes
-        {
-            get { return MemberTypeFlags.NestedType; }
+            _memberTypesBuilder.NestedType = true;
         }
     }
 }

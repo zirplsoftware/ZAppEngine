@@ -10,22 +10,14 @@ namespace Zirpl.Reflection.Fluent
         IMethodScopeQuery,
         IMethodReturnTypeAssignabilityQuery
     {
-        private readonly AssignabilityEvaluator _returnTypeAssignabilityEvaluator;
+        private readonly AssignabilityEvaluatorBase _returnTypeAssignabilityEvaluator;
 
         internal MethodQuery(Type type)
             :base(type)
         {
-            _returnTypeAssignabilityEvaluator = new AssignabilityEvaluator();
-        }
-
-        protected override bool IsMatch(MemberInfo memberInfo)
-        {
-            return _returnTypeAssignabilityEvaluator.IsMatch(((MethodInfo)memberInfo).ReturnType);
-        }
-
-        protected override MemberTypeFlags MemberTypes
-        {
-            get { return MemberTypeFlags.Method; }
+            _returnTypeAssignabilityEvaluator = new MethodReturnTypeAssignabilityEvaluator();
+            _memberTypesBuilder.Method = true;
+            _memberEvaluators.Add(_returnTypeAssignabilityEvaluator);
         }
 
         public IMethodReturnTypeAssignabilityQuery OfReturnType()

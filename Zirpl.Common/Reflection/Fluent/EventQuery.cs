@@ -11,16 +11,7 @@ namespace Zirpl.Reflection.Fluent
         internal EventQuery(Type type)
             :base(type)
         {
-        }
-
-        protected override bool IsMatch(MemberInfo memberInfo)
-        {
-            return true;
-        }
-
-        protected override MemberTypeFlags MemberTypes
-        {
-            get { return MemberTypeFlags.Event; }
+            _memberTypesBuilder.Event = true;
         }
     }
 }

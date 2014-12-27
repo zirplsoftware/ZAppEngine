@@ -10,25 +10,17 @@ namespace Zirpl.Reflection.Fluent
         IPropertyScopeQuery,
         IPropertyAssignabilityQuery
     {
-        private readonly ReadWriteEvaluator _readWriteEvaluator;
-        private readonly AssignabilityEvaluator _assignabilityEvaluator;
+        private readonly PropertyReadWriteEvaluator _readWriteEvaluator;
+        private readonly PropertyTypeAssignabilityEvaluator _assignabilityEvaluator;
 
         internal PropertyQuery(Type type)
             :base(type)
         {
-            _readWriteEvaluator = new ReadWriteEvaluator();
-            _assignabilityEvaluator = new AssignabilityEvaluator();
-        }
-
-        protected override bool IsMatch(MemberInfo memberInfo)
-        {
-            return _readWriteEvaluator.IsMatch((PropertyInfo)memberInfo)
-                && _assignabilityEvaluator.IsMatch(((PropertyInfo)memberInfo).PropertyType);
-        }
-
-        protected override MemberTypeFlags MemberTypes
-        {
-            get { return MemberTypeFlags.Property; }
+            _readWriteEvaluator = new PropertyReadWriteEvaluator();
+            _assignabilityEvaluator = new PropertyTypeAssignabilityEvaluator();
+            _memberTypesBuilder.Property = true;
+            _memberEvaluators.Add(_readWriteEvaluator);
+            _memberEvaluators.Add(_assignabilityEvaluator);
         }
 
         public IPropertyQuery WithGetters()
@@ -89,19 +81,6 @@ namespace Zirpl.Reflection.Fluent
         {
             _assignabilityEvaluator.AssignableToAll(types);
             return this;
-        }
-
-        private class ReadWriteEvaluator
-        {
-            internal bool CanRead { get; set; }
-            internal bool CanWrite { get; set; }
-
-            internal bool IsMatch(PropertyInfo property)
-            {
-                if (CanRead && !property.CanRead) return false;
-                if (CanWrite && !property.CanWrite) return false;
-                return true;
-            }
         }
     }
 }

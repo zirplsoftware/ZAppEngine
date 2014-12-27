@@ -5,13 +5,41 @@ namespace Zirpl.Reflection.Fluent
 {
     public static class ExtensionMethods
     {
-        public static FluentType Fluent(this Type type)
+        public static IPropertyQuery PropertyQuery(this Type type)
         {
-            if (type == null) throw new ArgumentNullException("type");
-
-            return new FluentType(type);
+            return new PropertyQuery(type);
         }
-        
+
+        public static IFieldQuery FieldQuery(this Type type)
+        {
+            return new FieldQuery(type);
+        }
+
+        public static IMethodQuery MethodQuery(this Type type)
+        {
+            return new MethodQuery(type);
+        }
+
+        public static IConstructorQuery ConstructorQuery(this Type type)
+        {
+            return new ConstructorQuery(type);
+        }
+
+        public static INestedTypeQuery NestedTypeQuery(this Type type)
+        {
+            return new NestedTypeQuery(type);
+        }
+
+        public static IEventQuery EventQuery(this Type type)
+        {
+            return new EventQuery(type);
+        }
+
+        public static IMemberQuery MemberQuery(this Type type)
+        {
+            return new MemberQuery(type);
+        }
+
         public static Object GetStaticValue(this FieldInfo fieldInfo)
         {
             if (fieldInfo == null) throw new ArgumentNullException("fieldInfo");

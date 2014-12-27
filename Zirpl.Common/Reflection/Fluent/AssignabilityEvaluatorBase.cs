@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class AssignabilityEvaluator
+    internal abstract class AssignabilityEvaluatorBase : IMemberEvaluator
     {
         // TODO: how can these be used? Type.FindInterfaces, Type.IsIstanceOf, Type.IsSubClassOf
 
@@ -31,15 +32,41 @@ namespace Zirpl.Reflection.Fluent
         //private IEnumerable<Type> _implementingAllInterfaces;
         //private IEnumerable<Type> _implementingAnyInterfaces;
 
-        internal bool IsMatch(Type variableType)
+        public abstract bool IsMatch(MemberInfo memberInfo);
+
+        protected bool IsTypeMatch(Type variableType)
         {
-            if (_isVoid && variableType == null) return true;
-            if (_assignableFrom != null && !variableType.IsAssignableFrom(_assignableFrom)) return false;
-            if (_assignableTo != null && !_assignableTo.IsAssignableFrom(variableType)) return false;
-            if (_assignableFromAll != null && !_assignableFromAll.All(variableType.IsAssignableFrom)) return false;
-            if (_assignableToAll != null && !_assignableToAll.All(type => type.IsAssignableFrom(variableType))) return false;
-            if (_assignableFromAny != null && !_assignableFromAny.Any(variableType.IsAssignableFrom)) return false;
-            if (_assignableToAny != null && !_assignableToAny.All(type => type.IsAssignableFrom(variableType))) return false;
+            if (_isVoid
+                || _assignableFrom != null
+                || _assignableFromAny != null
+                || _assignableFromAll != null
+                || _assignableTo != null
+                || _assignableToAny != null
+                || _assignableToAll != null)
+            {
+                if (variableType == null)
+                {
+                    if (_assignableFrom != null
+                        || _assignableFromAny != null
+                        || _assignableFromAll != null
+                        || _assignableTo != null
+                        || _assignableToAny != null
+                        || _assignableToAll != null)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (_isVoid) return false;
+                    if (_assignableFrom != null && !variableType.IsAssignableFrom(_assignableFrom)) return false;
+                    if (_assignableTo != null && !_assignableTo.IsAssignableFrom(variableType)) return false;
+                    if (_assignableFromAll != null && !_assignableFromAll.All(variableType.IsAssignableFrom)) return false;
+                    if (_assignableToAll != null && !_assignableToAll.All(type => type.IsAssignableFrom(variableType))) return false;
+                    if (_assignableFromAny != null && !_assignableFromAny.Any(variableType.IsAssignableFrom)) return false;
+                    if (_assignableToAny != null && !_assignableToAny.All(type => type.IsAssignableFrom(variableType))) return false;
+                }
+            }
             return true;
         }
 

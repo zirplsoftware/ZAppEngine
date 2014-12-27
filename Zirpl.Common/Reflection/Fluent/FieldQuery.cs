@@ -10,22 +10,14 @@ namespace Zirpl.Reflection.Fluent
         IFieldScopeQuery,
         IFieldAssignabilityQuery
     {
-        private readonly AssignabilityEvaluator _assignabilityEvaluator;
+        private readonly FieldTypeAssignabilityEvaluator _assignabilityEvaluator;
 
         internal FieldQuery(Type type)
             :base(type)
         {
-            _assignabilityEvaluator = new AssignabilityEvaluator();
-        }
-
-        protected override bool IsMatch(MemberInfo memberInfo)
-        {
-            return _assignabilityEvaluator.IsMatch(((FieldInfo)memberInfo).FieldType);
-        }
-
-        protected override MemberTypeFlags MemberTypes
-        {
-            get { return MemberTypeFlags.Field; }
+            _memberTypesBuilder.Field = true;
+            _assignabilityEvaluator = new FieldTypeAssignabilityEvaluator();
+            _memberEvaluators.Add(_assignabilityEvaluator);
         }
 
         public IFieldAssignabilityQuery OfType()

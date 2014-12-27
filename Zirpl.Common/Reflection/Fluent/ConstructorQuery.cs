@@ -11,16 +11,7 @@ namespace Zirpl.Reflection.Fluent
         internal ConstructorQuery(Type type)
             :base(type)
         {
-        }
-
-        protected override bool IsMatch(MemberInfo memberInfo)
-        {
-            return true;
-        }
-
-        protected override MemberTypeFlags MemberTypes
-        {
-            get { return MemberTypeFlags.Constructor; }
+            _memberTypesBuilder.Constructor = true;
         }
     }
 }
