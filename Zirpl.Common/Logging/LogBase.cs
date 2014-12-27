@@ -1,9 +1,8 @@
 ﻿#if !NET35CLIENT && !NET40CLIENT && !SILVERLIGHT
 using System;
 using System.Globalization;
-using System.Reflection;
 
-namespace Zirpl.AppEngine.Logging
+namespace Zirpl.Logging
 {
     /// <summary>
     /// Log class that wraps a Common.Logging.ILog object

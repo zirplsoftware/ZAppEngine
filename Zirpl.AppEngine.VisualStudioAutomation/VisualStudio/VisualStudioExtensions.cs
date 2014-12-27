@@ -11,6 +11,7 @@ using Microsoft.CSharp;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.IO;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
 {

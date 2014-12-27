@@ -11,6 +11,7 @@ using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.Collections;
 using Zirpl.IO;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing
 {

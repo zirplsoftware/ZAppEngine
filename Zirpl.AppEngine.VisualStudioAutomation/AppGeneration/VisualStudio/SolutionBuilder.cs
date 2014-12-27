@@ -5,6 +5,7 @@ using EnvDTE80;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio
 {

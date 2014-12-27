@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Mapping.AutoMapper;
 using Zirpl.AppEngine.Web.Mvc.Ioc.Autofac;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.Testing
 {

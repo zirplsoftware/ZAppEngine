@@ -15,6 +15,7 @@ using Zirpl.AppEngine.Model.Search;
 using Zirpl.AppEngine.Service;
 using Zirpl.AppEngine.Validation;
 using Zirpl.AppEngine.Web.Mvc.Ioc.Autofac;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.Testing
 {

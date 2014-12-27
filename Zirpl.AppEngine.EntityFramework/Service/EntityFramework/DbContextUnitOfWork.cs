@@ -5,6 +5,7 @@ using System.Transactions;
 using Zirpl.AppEngine.DataService.EntityFramework;
 using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Validation;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.Service.EntityFramework
 {

@@ -7,6 +7,7 @@ using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {

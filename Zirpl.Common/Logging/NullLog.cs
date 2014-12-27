@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.Logging
+namespace Zirpl.Logging
 {
     public class NullLog : ILog
     {

@@ -6,6 +6,7 @@ using Zirpl.AppEngine.Model.Membership;
 using Zirpl.AppEngine.Service;
 using Zirpl.AppEngine.Service.Membership;
 using Zirpl.AppEngine.Validation;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.Web.Membership
 {

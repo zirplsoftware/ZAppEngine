@@ -6,9 +6,9 @@ using System.IO;
 using System.Threading;
 using Zirpl.AppEngine.DataService;
 using Zirpl.AppEngine.DataService.Excel;
-using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Mapping;
 using Zirpl.AppEngine.Model.BatchProcessing;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.Service.BatchProcessing
 {

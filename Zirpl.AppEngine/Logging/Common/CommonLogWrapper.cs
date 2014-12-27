@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.Reflection;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.Logging.Common
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-namespace Zirpl.AppEngine.Logging
+
+namespace Zirpl.Logging
 {
     /// <summary>
     /// Provides instances of ILog objects for logging

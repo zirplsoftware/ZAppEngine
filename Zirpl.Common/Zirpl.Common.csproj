@@ -56,11 +56,11 @@
     <Compile Include="AppEngine\DataService\StringReflectedRowMapper.cs" />
     <Compile Include="AppEngine\Ioc\DependencyResolverBase.cs" />
     <Compile Include="AppEngine\Ioc\IDependencyResolver.cs" />
-    <Compile Include="AppEngine\Logging\ILog.cs" />
-    <Compile Include="AppEngine\Logging\ILogFactory.cs" />
-    <Compile Include="AppEngine\Logging\LogBase.cs" />
-    <Compile Include="AppEngine\Logging\LogManager.cs" />
-    <Compile Include="AppEngine\Logging\NullLog.cs" />
+    <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Logging\ILogFactory.cs" />
+    <Compile Include="Logging\LogBase.cs" />
+    <Compile Include="Logging\LogManager.cs" />
+    <Compile Include="Logging\NullLog.cs" />
     <Compile Include="AppEngine\Mapping\InvalidMappingDataException.cs" />
     <Compile Include="AppEngine\Model\BatchProcessing\BatchItemResult.cs" />
     <Compile Include="AppEngine\Model\BatchProcessing\BatchStatus.cs" />

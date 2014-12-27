@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Zirpl.AppEngine
+namespace Zirpl
 {
     /// <summary>
     /// Denotes an exception due to an unexpected data case

@@ -91,21 +91,6 @@
     <Compile Include="..\Zirpl.Common\AppEngine\Ioc\IDependencyResolver.cs">
       <Link>AppEngine\Ioc\IDependencyResolver.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\AppEngine\Logging\ILog.cs">
-      <Link>AppEngine\Logging\ILog.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\AppEngine\Logging\ILogFactory.cs">
-      <Link>AppEngine\Logging\ILogFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\AppEngine\Logging\LogBase.cs">
-      <Link>AppEngine\Logging\LogBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\AppEngine\Logging\LogManager.cs">
-      <Link>AppEngine\Logging\LogManager.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\AppEngine\Logging\NullLog.cs">
-      <Link>AppEngine\Logging\NullLog.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.Common\AppEngine\Mapping\InvalidMappingDataException.cs">
       <Link>AppEngine\Mapping\InvalidMappingDataException.cs</Link>
     </Compile>
@@ -396,6 +381,21 @@
     </Compile>
     <Compile Include="..\Zirpl.Common\Enums\EnumExtensionMethods.cs">
       <Link>Enums\EnumExtensionMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Logging\ILog.cs">
+      <Link>Logging\ILog.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Logging\ILogFactory.cs">
+      <Link>Logging\ILogFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Logging\LogBase.cs">
+      <Link>Logging\LogBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Logging\LogManager.cs">
+      <Link>Logging\LogManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Logging\NullLog.cs">
+      <Link>Logging\NullLog.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\ObjectExtensions.cs">
       <Link>ObjectExtensions.cs</Link>

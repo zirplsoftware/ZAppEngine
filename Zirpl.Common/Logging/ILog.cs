@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.Logging
+namespace Zirpl.Logging
 {
     /// <summary>
     /// Interface that any Logging object must implement

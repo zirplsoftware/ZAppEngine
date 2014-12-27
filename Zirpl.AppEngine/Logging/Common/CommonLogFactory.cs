@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using log4net.Config;
+using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.Logging.Common
 {
