@@ -1,4 +1,4 @@
-﻿#if !SILVERLIGHT
+﻿#if !SILVERLIGHT && !PORTABLE
 using System.Transactions;
 
 namespace Zirpl.AppEngine.Service

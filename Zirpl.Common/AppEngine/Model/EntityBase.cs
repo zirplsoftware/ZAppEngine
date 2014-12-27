@@ -1,13 +1,7 @@
 ﻿using System;
-#if !NET35 && !NET35CLIENT && !PORTABLE
+#if !NET35 && !NET35CLIENT && !PORTABLE && !SILVERLIGHT
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-#endif
-
-#if !NET35CLIENT
-#endif
-#if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT
-
 #endif
 
 namespace Zirpl.AppEngine.Model
@@ -20,7 +14,7 @@ namespace Zirpl.AppEngine.Model
     {
         #region IPersistable
 
-#if !NET35 && !NET35CLIENT && !PORTABLE
+#if !NET35 && !NET35CLIENT && !PORTABLE && !SILVERLIGHT
         [Key]
 #endif
         public virtual TId Id { get; set; }

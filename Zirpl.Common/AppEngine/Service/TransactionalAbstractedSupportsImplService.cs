@@ -1,5 +1,5 @@
-﻿using Zirpl.AppEngine.Model.Search;
-#if !SILVERLIGHT
+﻿#if !SILVERLIGHT && !PORTABLE
+using Zirpl.AppEngine.Model.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
