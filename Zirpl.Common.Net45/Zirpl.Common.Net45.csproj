@@ -561,6 +561,9 @@
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IMemberQueryBase.cs">
       <Link>Reflection\Fluent\_interfaces\IMemberQueryBase.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IMemberQueryResult.cs">
+      <Link>Reflection\Fluent\_interfaces\IMemberQueryResult.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\_interfaces\IMemberScopeQuery.cs">
       <Link>Reflection\Fluent\_interfaces\IMemberScopeQuery.cs</Link>
     </Compile>

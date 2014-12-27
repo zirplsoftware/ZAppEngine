@@ -180,23 +180,32 @@ namespace Zirpl.Reflection.Fluent
             return (TMemberQuery)(Object)this;
         }
 
-        #region IEnumerable implementation
-        public IEnumerator<TMemberInfo> GetEnumerator()
+        public IEnumerable<TMemberInfo> Execute()
         {
             var matches = new MemberQueryService(_type).FindMembers(
-                (MemberTypes) _memberTypesBuilder.MemberTypes,
+                (MemberTypes)_memberTypesBuilder.MemberTypes,
                 _bindingFlagsBuilder.BindingFlags,
                 _nameEvaluator.Named,
                 _scopeEvaluator.DeclaredOnBaseTypes && _accessibilityEvaluator.Private);
-            return (from memberInfo in matches
-                   where _memberEvaluators.All(eval => eval.IsMatch(memberInfo))
-                   select (TMemberInfo)memberInfo).GetEnumerator();
+            return from memberInfo in matches
+                    where _memberEvaluators.All(eval => eval.IsMatch(memberInfo))
+                    select (TMemberInfo)memberInfo;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public TMemberInfo ExecuteSingle()
         {
-            return this.GetEnumerator();
+            var result = Execute();
+            if (result.Count() > 1) throw new AmbiguousMatchException("Found more than 1 member matching the criteria");
+
+            return result.Single();
         }
-        #endregion
+
+        public TMemberInfo ExecuteSingleOrDefault()
+        {
+            var result = Execute();
+            if (result.Count() > 1) throw new AmbiguousMatchException("Found more than 1 member matching the criteria");
+
+            return result.SingleOrDefault();
+        }
     }
 }

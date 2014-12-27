@@ -2,7 +2,7 @@
 
 namespace Zirpl.Reflection.Fluent
 {
-    public interface IAccessibilityQueryBase<out TMemberInfo, out TMemberQuery, out TAccessibilityQuery> : IEnumerable<TMemberInfo>
+    public interface IAccessibilityQueryBase<out TMemberInfo, out TMemberQuery, out TAccessibilityQuery> :IMemberQueryResult<TMemberInfo>
     {
         TAccessibilityQuery Public();
         TAccessibilityQuery Private();

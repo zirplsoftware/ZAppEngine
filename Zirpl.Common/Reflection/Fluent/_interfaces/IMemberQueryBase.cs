@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Zirpl.Reflection.Fluent
 {
-    public interface IMemberQueryBase<out TMemberInfo, out TMemberQuery, out TAccessibilityQuery, out TScopeQuery> 
-        : IEnumerable<TMemberInfo>
+    public interface IMemberQueryBase<out TMemberInfo, out TMemberQuery, out TAccessibilityQuery, out TScopeQuery> : IMemberQueryResult<TMemberInfo>
     {
         TAccessibilityQuery OfAccessibility();
         TScopeQuery OfScope();

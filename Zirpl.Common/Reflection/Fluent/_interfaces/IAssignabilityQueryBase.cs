@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Zirpl.Reflection.Fluent
 {
-    public interface IAssignabilityQueryBase<out TMemberInfo, out TMemberQuery> : IEnumerable<TMemberInfo>
+    public interface IAssignabilityQueryBase<out TMemberInfo, out TMemberQuery> : IMemberQueryResult<TMemberInfo>
     {
         TMemberQuery AssignableFrom(Type type);
         //TMemberQuery AssignableFrom<T>();

@@ -221,6 +221,7 @@
     <Compile Include="Reflection\Fluent\_interfaces\IMemberTypeQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IPropertyAssignabilityQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IPropertyScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMemberQueryResult.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IScopeQueryBase.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IAccessibilityQueryBase.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IMethodAccessibilityQuery.cs" />
