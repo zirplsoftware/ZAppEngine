@@ -51,7 +51,10 @@
   </metadata>
   <files>
     <file src="..\Zirpl.AppEngine\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net451\" />
+    <file src="..\Zirpl.AppEngine\bin\$configuration$\Zirpl.AppEngine.XML" target="lib\net451\" />
     <file src="..\Zirpl.AppEngine.Net45\bin\$configuration$\Zirpl.AppEngine.dll" target="lib\net45\" />
+    <file src="..\Zirpl.AppEngine.Net45\bin\$configuration$\Zirpl.AppEngine.XML" target="lib\net45\" />
     <file src="..\Zirpl.AppEngine.Silverlight5\bin\$configuration$\Zirpl.AppEngine.Silverlight.dll" target="lib\sl50\" />
+    <file src="..\Zirpl.AppEngine.Silverlight5\bin\$configuration$\Zirpl.AppEngine.Silverlight.XML" target="lib\sl50\" />
   </files>
 </package>

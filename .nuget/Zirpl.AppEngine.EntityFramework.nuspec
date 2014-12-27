@@ -37,6 +37,8 @@
   </metadata>
   <files>
     <file src="..\Zirpl.AppEngine.EntityFramework\bin\$configuration$\Zirpl.AppEngine.EntityFramework.dll" target="lib\net451\" />
+    <file src="..\Zirpl.AppEngine.EntityFramework\bin\$configuration$\Zirpl.AppEngine.EntityFramework.XML" target="lib\net451\" />
     <file src="..\Zirpl.AppEngine.EntityFramework.Net45\bin\$configuration$\Zirpl.AppEngine.EntityFramework.dll" target="lib\net45\" />
+    <file src="..\Zirpl.AppEngine.EntityFramework.Net45\bin\$configuration$\Zirpl.AppEngine.EntityFramework.XML" target="lib\net45\" />
   </files>
 </package>

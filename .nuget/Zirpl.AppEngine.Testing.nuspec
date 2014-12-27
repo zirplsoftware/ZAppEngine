@@ -51,6 +51,8 @@
   </metadata>
   <files>
     <file src="..\Zirpl.AppEngine.Testing\bin\$configuration$\Zirpl.AppEngine.Testing.dll" target="lib\net451\" />
+    <file src="..\Zirpl.AppEngine.Testing\bin\$configuration$\Zirpl.AppEngine.Testing.XML" target="lib\net451\" />
     <file src="..\Zirpl.AppEngine.Testing.Net45\bin\$configuration$\Zirpl.AppEngine.Testing.dll" target="lib\net45\" />
+    <file src="..\Zirpl.AppEngine.Testing.Net45\bin\$configuration$\Zirpl.AppEngine.Testing.XML" target="lib\net45\" />
   </files>
 </package>

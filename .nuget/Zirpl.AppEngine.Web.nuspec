@@ -67,6 +67,8 @@
   </metadata>
   <files>
     <file src="..\Zirpl.AppEngine.Web\bin\$configuration$\Zirpl.AppEngine.Web.dll" target="lib\net451\" />
+    <file src="..\Zirpl.AppEngine.Web\bin\$configuration$\Zirpl.AppEngine.Web.XML" target="lib\net451\" />
     <file src="..\Zirpl.AppEngine.Web.Net45\bin\$configuration$\Zirpl.AppEngine.Web.dll" target="lib\net45\" />
+    <file src="..\Zirpl.AppEngine.Web.Net45\bin\$configuration$\Zirpl.AppEngine.Web.XML" target="lib\net45\" />
   </files>
 </package>
