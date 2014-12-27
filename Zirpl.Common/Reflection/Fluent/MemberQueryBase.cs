@@ -9,15 +9,17 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal abstract class MemberQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery> : 
-        IMemberQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>,
-        IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>
+    internal abstract class MemberQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery, TScopeQuery> : 
+        IMemberQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery, TScopeQuery>,
+        IAccessibilityQueryBase<TMemberInfo, TMemberQuery, TAccessibilityQuery>,
+        IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>
         where TMemberInfo : MemberInfo
     {
         private readonly Type _type;
         private readonly BindingFlagsBuilder _bindingFlagsBuilder;
         private readonly AccessibilityMatcher _accessibilityMatcher;
         private readonly NameMatcher _nameMatcher;
+        private readonly ScopeMatcher _scopeMatcher;
 
         internal MemberQueryBase(Type type)
         {
@@ -25,6 +27,7 @@ namespace Zirpl.Reflection.Fluent
             _bindingFlagsBuilder = new BindingFlagsBuilder();
             _accessibilityMatcher = new AccessibilityMatcher();
             _nameMatcher = new NameMatcher();
+            _scopeMatcher = new ScopeMatcher();
         }
 
         #region Abstract methods
@@ -38,6 +41,10 @@ namespace Zirpl.Reflection.Fluent
         public TAccessibilityQuery WithAccessibility()
         {
             return (TAccessibilityQuery)(Object)this;
+        }
+        public TScopeQuery WithScope()
+        {
+            return (TScopeQuery)(Object)this;
         }
         #endregion
 
@@ -97,36 +104,70 @@ namespace Zirpl.Reflection.Fluent
             return (TMemberQuery)(Object)this;
         }
         #endregion
-
-        public TMemberQuery AreInstance()
+      
+        #region IScopeQuery implementation
+        TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.Instance()
         {
             _bindingFlagsBuilder.Instance = true;
-            return (TMemberQuery)(Object)this;
+            _scopeMatcher.Instance = true;
+            return (TScopeQuery)(Object)this;
         }
 
-        public TMemberQuery AreStatic()
+        TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.Static()
         {
             _bindingFlagsBuilder.Static = true;
-            return (TMemberQuery)(Object)this;
+            _scopeMatcher.Static = true;
+            return (TScopeQuery)(Object)this;
         }
 
-        public TMemberQuery AreStaticInBaseTypes()
+        TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.DeclaredOnThisType()
         {
-            if (_bindingFlagsBuilder.FlattenHeirarchy) throw new InvalidOperationException("Cannot call IncludeStaticInBaseTypes after IncludeDeclaredOnly");
+            _scopeMatcher.DeclaredOnThisType = true;
+            return (TScopeQuery)(Object)this;
+        }
 
+        TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.DeclaredOnBaseTypes(int levelsDeep)
+        {
+            _scopeMatcher.DeclaredOnBaseTypes = true;
+            _scopeMatcher.LevelsDeep = levelsDeep;
+            return (TScopeQuery)(Object)this;
+        }
+
+        TScopeQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.DeclaredOnBaseTypes()
+        {
+            _scopeMatcher.DeclaredOnBaseTypes = true;
+            return (TScopeQuery)(Object)this;
+        }
+
+        TMemberQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.All(int levelsDeep)
+        {
+            _bindingFlagsBuilder.Instance = true;
             _bindingFlagsBuilder.Static = true;
-            _bindingFlagsBuilder.FlattenHeirarchy = true;
+            _scopeMatcher.Instance = true;
+            _scopeMatcher.Static = true;
+            _scopeMatcher.DeclaredOnThisType = true;
+            _scopeMatcher.DeclaredOnBaseTypes = true;
+            _scopeMatcher.LevelsDeep = levelsDeep;
             return (TMemberQuery)(Object)this;
         }
 
-        public TMemberQuery AreDeclaredOnlyOnThisType()
+        TMemberQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.All()
         {
-            if (_bindingFlagsBuilder.FlattenHeirarchy) throw new InvalidOperationException("Cannot call IncludeDeclaredOnly after IncludeStaticInBaseTypes");
-
-            _bindingFlagsBuilder.DeclaredOnly = true;
+            _bindingFlagsBuilder.Instance = true;
+            _bindingFlagsBuilder.Static = true;
+            _scopeMatcher.Instance = true;
+            _scopeMatcher.Static = true;
+            _scopeMatcher.DeclaredOnThisType = true;
+            _scopeMatcher.DeclaredOnBaseTypes = true;
             return (TMemberQuery)(Object)this;
         }
 
+        TMemberQuery IScopeQueryBase<TMemberInfo, TMemberQuery, TScopeQuery>.And()
+        {
+            return (TMemberQuery)(Object)this;
+        }
+        #endregion
+        
         public TMemberQuery IgnoreCase()
         {
             _bindingFlagsBuilder.IgnoreCase = true;
@@ -186,6 +227,7 @@ namespace Zirpl.Reflection.Fluent
         {
             if (!_accessibilityMatcher.IsMatch(memberInfo)) return false;
             if (!_nameMatcher.IsMatch(memberInfo)) return false;
+            if (!_scopeMatcher.IsMatch(memberInfo)) return false;
             return IsMatch(memberInfo);
         }
 
@@ -197,7 +239,35 @@ namespace Zirpl.Reflection.Fluent
 
         #region Nested classes
 
-        private class NameMatcher
+        [Flags]
+        internal enum MemberTypeFlags
+        {
+            All = 0xbf,
+            Constructor = 1,
+            Custom = 0x40,
+            Event = 2,
+            Field = 4,
+            Method = 8,
+            NestedType = 0x80,
+            Property = 0x10,
+            TypeInfo = 0x20
+        }
+
+        private sealed class ScopeMatcher
+        {
+            internal bool Instance { get; set; }
+            internal bool Static { get; set; }
+            internal bool DeclaredOnThisType { get; set; }
+            internal bool DeclaredOnBaseTypes { get; set; }
+            internal int? LevelsDeep { get; set; }
+
+            internal bool IsMatch(MemberInfo memberInfo)
+            {
+                return true;
+            }
+        }
+
+        private sealed class NameMatcher
         {
             internal readonly IList<String> Names;
             internal bool IgnoreCase { get; set; }
@@ -223,7 +293,7 @@ namespace Zirpl.Reflection.Fluent
             }
         }
 
-        private class AccessibilityMatcher
+        private sealed class AccessibilityMatcher
         {
             internal bool Public { get; set; }
             internal bool Private { get; set; }
@@ -290,6 +360,29 @@ namespace Zirpl.Reflection.Fluent
                 if (!ProtectedInternal && method.IsFamilyAndAssembly) return false;
                 if (!Internal && method.IsAssembly) return false;
                 return true;
+            }
+        }
+
+        private sealed class BindingFlagsBuilder
+        {
+            internal bool Public { get; set; }
+            internal bool Instance { get; set; }
+            internal bool Static { get; set; }
+            internal bool NonPublic { get; set; }
+            internal bool IgnoreCase { get; set; }
+
+            internal BindingFlags BindingFlags
+            {
+                get
+                {
+                    var bindings = BindingFlags.DeclaredOnly;
+                    bindings = Public ? bindings | BindingFlags.Public : bindings;
+                    bindings = NonPublic ? bindings | BindingFlags.NonPublic : bindings;
+                    bindings = Instance ? bindings | BindingFlags.Instance : bindings;
+                    bindings = Static ? bindings | BindingFlags.Static : bindings;
+                    bindings = IgnoreCase ? bindings | BindingFlags.IgnoreCase : bindings;
+                    return bindings;
+                }
             }
         }
 

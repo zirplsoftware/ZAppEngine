@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class MethodQuery : MemberQueryBase<MethodInfo, IMethodQuery, IMethodAccessibilityQuery>, 
+    internal sealed class MethodQuery : MemberQueryBase<MethodInfo, IMethodQuery, IMethodAccessibilityQuery, IMethodScopeQuery>, 
         IMethodQuery,
-        IMethodAccessibilityQuery
+        IMethodAccessibilityQuery,
+        IMethodScopeQuery
     {
         internal MethodQuery(Type type)
             :base(type)

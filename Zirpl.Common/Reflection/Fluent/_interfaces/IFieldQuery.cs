@@ -2,7 +2,7 @@
 
 namespace Zirpl.Reflection.Fluent
 {
-    public interface IFieldQuery : IMemberQueryBase<FieldInfo, IFieldQuery, IFieldAccessibilityQuery>
+    public interface IFieldQuery : IMemberQueryBase<FieldInfo, IFieldQuery, IFieldAccessibilityQuery, IFieldScopeQuery>
     {
          
     }

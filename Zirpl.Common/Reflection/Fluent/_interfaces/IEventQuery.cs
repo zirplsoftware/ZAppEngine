@@ -2,7 +2,7 @@
 
 namespace Zirpl.Reflection.Fluent
 {
-    public interface IEventQuery : IMemberQueryBase<EventInfo, IEventQuery, IEventAccessibilityQuery>
+    public interface IEventQuery : IMemberQueryBase<EventInfo, IEventQuery, IEventAccessibilityQuery, IEventScopeQuery>
     {
          
     }

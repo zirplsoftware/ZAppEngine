@@ -4,14 +4,11 @@ using System.Reflection;
 
 namespace Zirpl.Reflection.Fluent
 {
-    public interface IMemberQueryBase<out TMemberInfo, out TMemberQuery, out TAccessibilityQuery> 
+    public interface IMemberQueryBase<out TMemberInfo, out TMemberQuery, out TAccessibilityQuery, out TScopeQuery> 
         : IEnumerable<TMemberInfo>
     {
         TAccessibilityQuery WithAccessibility();
-        TMemberQuery AreInstance();
-        TMemberQuery AreStatic();
-        TMemberQuery AreStaticInBaseTypes();
-        TMemberQuery AreDeclaredOnlyOnThisType();
+        TScopeQuery WithScope();
         TMemberQuery IgnoreCase();
         TMemberQuery ByName(String name);
     }

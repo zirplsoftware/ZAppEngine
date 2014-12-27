@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class FieldQuery : MemberQueryBase<FieldInfo, IFieldQuery, IFieldAccessibilityQuery>, 
+    internal sealed class FieldQuery : MemberQueryBase<FieldInfo, IFieldQuery, IFieldAccessibilityQuery, IFieldScopeQuery>, 
         IFieldQuery,
-        IFieldAccessibilityQuery
+        IFieldAccessibilityQuery,
+        IFieldScopeQuery
     {
         internal FieldQuery(Type type)
             :base(type)

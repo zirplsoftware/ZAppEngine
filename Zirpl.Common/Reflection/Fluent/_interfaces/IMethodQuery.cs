@@ -2,7 +2,7 @@
 
 namespace Zirpl.Reflection.Fluent
 {
-    public interface IMethodQuery : IMemberQueryBase<MethodInfo, IMethodQuery, IMethodAccessibilityQuery>
+    public interface IMethodQuery : IMemberQueryBase<MethodInfo, IMethodQuery, IMethodAccessibilityQuery, IMethodScopeQuery>
     {
          
     }

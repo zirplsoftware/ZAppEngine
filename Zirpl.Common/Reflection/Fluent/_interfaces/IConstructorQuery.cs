@@ -2,7 +2,7 @@
 
 namespace Zirpl.Reflection.Fluent
 {
-    public interface IConstructorQuery : IMemberQueryBase<ConstructorInfo, IConstructorQuery, IConstructorAccessibilityQuery>
+    public interface IConstructorQuery : IMemberQueryBase<ConstructorInfo, IConstructorQuery, IConstructorAccessibilityQuery, IConstructorScopeQuery>
     {
          
     }

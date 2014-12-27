@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class PropertyQuery : MemberQueryBase<PropertyInfo, IPropertyQuery, IPropertyAccessibilityQuery>, 
+    internal sealed class PropertyQuery : MemberQueryBase<PropertyInfo, IPropertyQuery, IPropertyAccessibilityQuery, IPropertyScopeQuery>, 
         IPropertyQuery,
-        IPropertyAccessibilityQuery
+        IPropertyAccessibilityQuery,
+        IPropertyScopeQuery
     {
         internal PropertyQuery(Type type)
             :base(type)

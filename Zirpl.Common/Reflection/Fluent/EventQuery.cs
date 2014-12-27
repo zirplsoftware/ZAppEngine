@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class EventQuery : MemberQueryBase<EventInfo, IEventQuery, IEventAccessibilityQuery>, 
+    internal sealed class EventQuery : MemberQueryBase<EventInfo, IEventQuery, IEventAccessibilityQuery, IEventScopeQuery>, 
         IEventQuery,
-        IEventAccessibilityQuery
+        IEventAccessibilityQuery,
+        IEventScopeQuery
     {
         internal EventQuery(Type type)
             :base(type)

@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Zirpl.Reflection.Fluent
 {
-    internal sealed class ConstructorQuery : MemberQueryBase<ConstructorInfo, IConstructorQuery, IConstructorAccessibilityQuery>, 
+    internal sealed class ConstructorQuery : MemberQueryBase<ConstructorInfo, IConstructorQuery, IConstructorAccessibilityQuery, IConstructorScopeQuery>, 
         IConstructorQuery,
-        IConstructorAccessibilityQuery
+        IConstructorAccessibilityQuery,
+        IConstructorScopeQuery
     {
         internal ConstructorQuery(Type type)
             :base(type)

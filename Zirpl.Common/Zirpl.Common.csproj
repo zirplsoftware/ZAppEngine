@@ -63,15 +63,11 @@
     </Compile>
     <Compile Include="Reflection\AssemblyExtensions.cs" />
     <Compile Include="Reflection\DynamicTypeAccessor.cs" />
-    <Compile Include="Reflection\Fluent\BindingFlagsBuilder.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Reflection\Fluent\ConstructorQuery.cs" />
     <Compile Include="Reflection\Fluent\ExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Reflection\Fluent\EventQuery.cs" />
-    <Compile Include="Reflection\Fluent\MemberTypeFlags.cs" />
     <Compile Include="Reflection\Fluent\NestedTypeQuery.cs" />
     <Compile Include="Reflection\Fluent\MemberQuery.cs" />
     <Compile Include="Reflection\Fluent\MethodQuery.cs" />
@@ -85,6 +81,14 @@
     <Compile Include="Reflection\Fluent\MemberQueryBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Reflection\Fluent\_interfaces\IConstructorScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IEventScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IFieldScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMemberScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IMethodScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\INestedTypeScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IPropertyScopeQuery.cs" />
+    <Compile Include="Reflection\Fluent\_interfaces\IScopeQueryBase.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IAccessibilityQueryBase.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IMethodAccessibilityQuery.cs" />
     <Compile Include="Reflection\Fluent\_interfaces\IMethodQuery.cs" />
