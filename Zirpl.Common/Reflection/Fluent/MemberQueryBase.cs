@@ -200,37 +200,69 @@ namespace Zirpl.Reflection.Fluent
         public IEnumerator<TMemberInfo> GetEnumerator()
         {
             var list = new List<TMemberInfo>();
-#if PORTABLE
+            if (_scopeMatcher.DeclaredOnBaseTypes)
+            {
+                if (_scopeMatcher.LevelsDeep.HasValue)
+                {
+                    var type = _type;
+                    var levelsDeeper = _scopeMatcher.LevelsDeep.Value;
+                    while (type != null
+                        && levelsDeeper > 0)
+                    {
+                        list.AddRange(GetMembers(_type));
+                        type = type.BaseType;
+                        levelsDeeper -= 1;
+                    }
+                }
+                else
+                {
+                    var type = _type;
+                    while (type != null)
+                    {
+                        list.AddRange(GetMembers(_type));
+                        type = type.BaseType;
+                    }
+                }
+            }
+            else
+            {
+                list.AddRange(GetMembers(_type));   
+            }
+            return list.GetEnumerator();
+        }
+
+        private IEnumerable<TMemberInfo> GetMembers(Type type)
+        {
             var found = new List<TMemberInfo>();
-            if (this.MemberTypes.HasFlag(MemberTypeFlags.Constructor))
+#if PORTABLE
+            if (MemberTypes.HasFlag(MemberTypeFlags.Constructor))
             {
-                found.AddRange(_type.GetConstructors(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
+                found.AddRange(type.GetConstructors(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
             }
-            if (this.MemberTypes.HasFlag(MemberTypeFlags.Event))
+            if (MemberTypes.HasFlag(MemberTypeFlags.Event))
             {
-                found.AddRange(_type.GetEvents(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
+                found.AddRange(type.GetEvents(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
             }
-            if (this.MemberTypes.HasFlag(MemberTypeFlags.Field))
+            if (MemberTypes.HasFlag(MemberTypeFlags.Field))
             {
-                found.AddRange(_type.GetFields(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
+                found.AddRange(type.GetFields(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
             }
-            if (this.MemberTypes.HasFlag(MemberTypeFlags.Method))
+            if (MemberTypes.HasFlag(MemberTypeFlags.Method))
             {
-                found.AddRange(_type.GetMethods(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
+                found.AddRange(type.GetMethods(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
             }
-            if (this.MemberTypes.HasFlag(MemberTypeFlags.NestedType))
+            if (MemberTypes.HasFlag(MemberTypeFlags.NestedType))
             {
-                found.AddRange(_type.GetNestedTypes(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
+                found.AddRange(type.GetNestedTypes(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
             }
-            if (this.MemberTypes.HasFlag(MemberTypeFlags.Property))
+            if (MemberTypes.HasFlag(MemberTypeFlags.Property))
             {
-                found.AddRange(_type.GetProperties(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
+                found.AddRange(type.GetProperties(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
             }
 #else
-            var found = _type.FindMembers((MemberTypes)MemberTypes, _bindingFlagsBuilder.BindingFlags, FindMemberMatch, null);
+            found.AddRange(type.FindMembers((MemberTypes)MemberTypes, _bindingFlagsBuilder.BindingFlags, FindMemberMatch, null));
 #endif
-            list.AddRange(found.Select(o => (TMemberInfo)o));
-            return list.GetEnumerator();
+            return found;
         }
 
         private bool FindMemberMatch(MemberInfo memberInfo, Object searchCriteria)
@@ -265,7 +297,7 @@ namespace Zirpl.Reflection.Fluent
 
         private sealed class ScopeMatcher
         {
-            private readonly Type _refelctedType;
+            private readonly Type _reflectedType;
             internal bool Instance { get; set; }
             internal bool Static { get; set; }
             internal bool DeclaredOnThisType { get; set; }
@@ -274,7 +306,7 @@ namespace Zirpl.Reflection.Fluent
 
             internal ScopeMatcher(Type type)
             {
-                _refelctedType = type;
+                _reflectedType = type;
             }
 
 
@@ -325,14 +357,14 @@ namespace Zirpl.Reflection.Fluent
 
             private bool IsDeclaredTypeMatch(MemberInfo memberInfo)
             {
-                if (!DeclaredOnThisType && memberInfo.DeclaringType.Equals(_refelctedType)) return false;
-                if (!DeclaredOnBaseTypes && !memberInfo.DeclaringType.Equals(_refelctedType)) return false;
+                if (!DeclaredOnThisType && memberInfo.DeclaringType.Equals(_reflectedType)) return false;
+                if (!DeclaredOnBaseTypes && !memberInfo.DeclaringType.Equals(_reflectedType)) return false;
                 if (DeclaredOnBaseTypes
-                    && !memberInfo.DeclaringType.Equals(_refelctedType)
+                    && !memberInfo.DeclaringType.Equals(_reflectedType)
                     && LevelsDeep.HasValue)
                 {
                     var found = false;
-                    var type = _refelctedType.BaseType;
+                    var type = _reflectedType.BaseType;
                     int levelsDeeper = LevelsDeep.Value - 1;
                     while (type != null)
                     {
