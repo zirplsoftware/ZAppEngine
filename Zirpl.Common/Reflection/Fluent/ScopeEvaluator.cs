@@ -15,6 +15,7 @@ namespace Zirpl.Reflection.Fluent
         internal bool Static { get; set; }
         internal bool DeclaredOnThisType { get; set; }
         internal bool DeclaredOnBaseTypes { get; set; }
+        // TODO: implement including hiddenBySignature members, and exclude them otherwise
         internal int? LevelsDeep
         {
             get

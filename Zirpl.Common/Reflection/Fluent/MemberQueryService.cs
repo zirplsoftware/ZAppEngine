@@ -17,78 +17,135 @@ namespace Zirpl.Reflection.Fluent
             _type = type;
         }
 
-        internal IEnumerable<MemberInfo> FindMembers(MemberTypes memberTypes, BindingFlags bindingFlags, String name = null, bool includePrivateOnBaseTypes = false, int? levelsDeep = null)
+        internal IEnumerable<MemberInfo> FindMembers(MemberTypeFlags memberTypes, BindingFlags bindingFlags, IEnumerable<String> names)
+        {
+            return GetMembers(_type, memberTypes, bindingFlags, names);
+        }
+
+        internal IEnumerable<MemberInfo> FindPrivateMembersOnBaseTypes(MemberTypeFlags memberTypes, BindingFlags bindingFlags, IEnumerable<String> names, int levelsDeep)
         {
             var list = new List<MemberInfo>();
-            if (includePrivateOnBaseTypes)
+            var accessibilityEvaluator = new AccessibilityEvaluator();
+            accessibilityEvaluator.Private = true;
+            if (levelsDeep > 0)
             {
-                // TODO: this is NOT correct, due to re-returning ALL on the base classes
-                if (levelsDeep.HasValue)
+                var type = _type;
+                var levelsDeeper = levelsDeep;
+                while (type != null
+                    && levelsDeeper > 0)
                 {
-                    var type = _type;
-                    var levelsDeeper = levelsDeep.Value;
-                    while (type != null
-                        && levelsDeeper > 0)
-                    {
-                        list.AddRange(GetMembers(_type).Where(o => !list.Contains(o)));
-                        type = type.BaseType;
-                        levelsDeeper -= 1;
-                    }
-                }
-                else
-                {
-                    var type = _type;
-                    while (type != null)
-                    {
-                        list.AddRange(GetMembers(_type).Where(o => !list.Contains(o)));
-                        type = type.BaseType;
-                    }
+                    list.AddRange(GetMembers(type, memberTypes, bindingFlags, names).Where(o => !list.Contains(o) && accessibilityEvaluator.IsMatch(o)));
+                    type = type.BaseType;
+                    levelsDeeper -= 1;
                 }
             }
             else
             {
-                list.AddRange(GetMembers(_type));
+                var type = _type;
+                while (type != null)
+                {
+                    list.AddRange(GetMembers(type, memberTypes, bindingFlags, names).Where(o => !list.Contains(o) && accessibilityEvaluator.IsMatch(o)));
+                    type = type.BaseType;
+                }
             }
+            // TODO: check for hidden by signature
             return list;
         }
 
-        private IEnumerable<MemberInfo> GetMembers(Type type)
+        private IEnumerable<MemberInfo> GetMembers(Type type, MemberTypeFlags memberTypes, BindingFlags bindingFlags, IEnumerable<String> names)
         {
             var found = new List<MemberInfo>();
-#if PORTABLE
-            if (MemberTypes.HasFlag(MemberTypeFlags.Constructor))
-            {
-                found.AddRange(type.GetConstructors(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
-            }
-            if (MemberTypes.HasFlag(MemberTypeFlags.Event))
-            {
-                found.AddRange(type.GetEvents(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
-            }
-            if (MemberTypes.HasFlag(MemberTypeFlags.Field))
-            {
-                found.AddRange(type.GetFields(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
-            }
-            if (MemberTypes.HasFlag(MemberTypeFlags.Method))
-            {
-                found.AddRange(type.GetMethods(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
-            }
-            if (MemberTypes.HasFlag(MemberTypeFlags.NestedType))
-            {
-                found.AddRange(type.GetNestedTypes(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
-            }
-            if (MemberTypes.HasFlag(MemberTypeFlags.Property))
-            {
-                found.AddRange(type.GetProperties(_bindingFlagsBuilder.BindingFlags).Where(o => FindMemberMatch(o, null)).Select(o => (TMemberInfo)(Object)o));
-            }
-#else
-            found.AddRange(type.FindMembers((MemberTypes)MemberTypesBuilder.MemberTypes, BindingFlagsBuilder.BindingFlags, FindMemberMatch, null));
-#endif
-            return found;
-        }
 
-        private bool FindMemberMatch(MemberInfo memberInfo, Object searchCriteria)
-        {
-            return true;
+            if (memberTypes.HasFlag(MemberTypeFlags.Constructor))
+            {
+                if (names != null
+                    && names.Any())
+                {
+                    // do nothing as there are no constructors by name
+                }
+                else
+                {
+                    found.AddRange(type.GetConstructors(bindingFlags));   
+                }
+            }
+            if (memberTypes.HasFlag(MemberTypeFlags.Event))
+            {
+                if (names != null
+                    && names.Any())
+                {
+                    foreach (var name in names)
+                    {
+                        found.Add(type.GetEvent(name, bindingFlags));
+                    }
+                }
+                else
+                {
+                    found.AddRange(type.GetEvents(bindingFlags));
+                }
+            }
+            if (memberTypes.HasFlag(MemberTypeFlags.Field))
+            {
+                if (names != null
+                    && names.Any())
+                {
+                    foreach (var name in names)
+                    {
+                        found.Add(type.GetField(name, bindingFlags));
+                    }
+                }
+                else
+                {
+                    found.AddRange(type.GetFields(bindingFlags));
+                }
+            }
+            if (memberTypes.HasFlag(MemberTypeFlags.Method))
+            {
+                if (names != null
+                    && names.Any())
+                {
+                    foreach (var name in names)
+                    {
+                        found.Add(type.GetMethod(name, bindingFlags));
+                    }
+                }
+                else
+                {
+                    found.AddRange(type.GetMethods(bindingFlags));
+                }
+            }
+            if (memberTypes.HasFlag(MemberTypeFlags.NestedType))
+            {
+                if (names != null
+                    && names.Any())
+                {
+                    foreach (var name in names)
+                    {
+                        found.Add(type.GetNestedType(name, bindingFlags));
+                    }
+                }
+                else
+                {
+                    found.AddRange(type.GetNestedTypes(bindingFlags));
+                }
+            }
+            if (memberTypes.HasFlag(MemberTypeFlags.Property))
+            {
+                if (names != null
+                    && names.Any())
+                {
+                    foreach (var name in names)
+                    {
+                        found.Add(type.GetProperty(name, bindingFlags));
+                    }
+                }
+                else
+                {
+                    found.AddRange(type.GetProperties(bindingFlags));
+                }
+            }
+
+            //found.AddRange(type.FindMembers(memberTypes, bindingFlags, FindMemberMatch, null));
+            return found;
         }
     }
 }

@@ -469,9 +469,6 @@
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\EventQuery.cs">
       <Link>Reflection\Fluent\EventQuery.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Fluent\ExtensionMethods.cs">
-      <Link>Reflection\Fluent\ExtensionMethods.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\FieldQuery.cs">
       <Link>Reflection\Fluent\FieldQuery.cs</Link>
     </Compile>
@@ -513,6 +510,9 @@
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\PropertyTypeEvaluator.cs">
       <Link>Reflection\Fluent\PropertyTypeEvaluator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.Common\Reflection\Fluent\ReflectionUtilities.cs">
+      <Link>Reflection\Fluent\ReflectionUtilities.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Fluent\ScopeEvaluator.cs">
       <Link>Reflection\Fluent\ScopeEvaluator.cs</Link>

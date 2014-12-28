@@ -182,11 +182,14 @@ namespace Zirpl.Reflection.Fluent
 
         public IEnumerable<TMemberInfo> Execute()
         {
-            var matches = new MemberQueryService(_type).FindMembers(
-                (MemberTypes)_memberTypesBuilder.MemberTypes,
-                _bindingFlagsBuilder.BindingFlags,
-                _nameEvaluator.Named,
-                _scopeEvaluator.DeclaredOnBaseTypes && _accessibilityEvaluator.Private);
+            var list = new List<TMemberInfo>();
+            var names = _nameEvaluator.NamedAny ?? (_nameEvaluator.Named != null ? new [] {_nameEvaluator.Named} : null);
+            var memberQueryService = new MemberQueryService(_type);
+            var matches = memberQueryService.FindMembers(_memberTypesBuilder.MemberTypes, _bindingFlagsBuilder.BindingFlags, names);
+            if (_scopeEvaluator.DeclaredOnBaseTypes && _accessibilityEvaluator.Private)
+            {
+                list.AddRange(memberQueryService.FindPrivateMembersOnBaseTypes(_memberTypesBuilder.MemberTypes, _bindingFlagsBuilder.BindingFlags, names, _scopeEvaluator.LevelsDeep.GetValueOrDefault()));
+            }
             return from memberInfo in matches
                     where _memberEvaluators.All(eval => eval.IsMatch(memberInfo))
                     select (TMemberInfo)memberInfo;

@@ -185,7 +185,7 @@
     <Compile Include="Reflection\Fluent\TypeEvaluatorBase.cs" />
     <Compile Include="Reflection\Fluent\BindingFlagsBuilder.cs" />
     <Compile Include="Reflection\Fluent\ConstructorQuery.cs" />
-    <Compile Include="Reflection\Fluent\ExtensionMethods.cs">
+    <Compile Include="Reflection\Fluent\ReflectionUtilities.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Reflection\Fluent\EventQuery.cs" />

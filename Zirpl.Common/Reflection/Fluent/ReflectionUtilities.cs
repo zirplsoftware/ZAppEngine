@@ -3,39 +3,39 @@ using System.Reflection;
 
 namespace Zirpl.Reflection.Fluent
 {
-    public static class ExtensionMethods
+    public static class ReflectionUtilities
     {
-        public static IPropertyQuery PropertyQuery(this Type type)
+        public static IPropertyQuery QueryProperties(this Type type)
         {
             return new PropertyQuery(type);
         }
 
-        public static IFieldQuery FieldQuery(this Type type)
+        public static IFieldQuery QueryFields(this Type type)
         {
             return new FieldQuery(type);
         }
 
-        public static IMethodQuery MethodQuery(this Type type)
+        public static IMethodQuery QueryMethods(this Type type)
         {
             return new MethodQuery(type);
         }
 
-        public static IConstructorQuery ConstructorQuery(this Type type)
+        public static IConstructorQuery QueryConstructors(this Type type)
         {
             return new ConstructorQuery(type);
         }
 
-        public static INestedTypeQuery NestedTypeQuery(this Type type)
+        public static INestedTypeQuery QueryNestedTypes(this Type type)
         {
             return new NestedTypeQuery(type);
         }
 
-        public static IEventQuery EventQuery(this Type type)
+        public static IEventQuery QueryEvents(this Type type)
         {
             return new EventQuery(type);
         }
 
-        public static IMemberQuery MemberQuery(this Type type)
+        public static IMemberQuery QueryMembers(this Type type)
         {
             return new MemberQuery(type);
         }
