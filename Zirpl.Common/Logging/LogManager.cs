@@ -72,7 +72,7 @@ namespace Zirpl.Logging
                                                         genericTypeName.IndexOf('`'));
             string genericArgs = String.Join(",",
                                              t.GetGenericArguments()
-                                              .Select(ta => ToGenericTypeString(ta)).ToArray());
+                                              .Select(ToGenericTypeString).ToArray());
             return genericTypeName + "<" + genericArgs + ">";
         }
     }
