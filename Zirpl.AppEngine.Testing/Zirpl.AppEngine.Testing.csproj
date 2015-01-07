@@ -106,7 +106,6 @@
     <Compile Include="SetAspNetMvcDependencyResolver.cs" />
     <Compile Include="MockHttpContextAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\AssemblyInfo_common.cs" />
     <Compile Include="UpdatableProperty.cs" />
   </ItemGroup>
   <ItemGroup>

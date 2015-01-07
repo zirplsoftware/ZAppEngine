@@ -125,9 +125,6 @@
     <Compile Include="..\Zirpl.AppEngine.Testing\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Testing\Properties\AssemblyInfo_common.cs">
-      <Link>Properties\AssemblyInfo_common.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine.Testing\SetAspNetMvcDependencyResolver.cs">
       <Link>SetAspNetMvcDependencyResolver.cs</Link>
     </Compile>

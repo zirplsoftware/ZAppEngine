@@ -128,9 +128,6 @@
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.EntityFramework\Properties\AssemblyInfo_common.cs">
-      <Link>Properties\AssemblyInfo_common.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine.EntityFramework\Service\EntityFramework\DbContextServiceBase.cs">
       <Link>Service\EntityFramework\DbContextServiceBase.cs</Link>
     </Compile>

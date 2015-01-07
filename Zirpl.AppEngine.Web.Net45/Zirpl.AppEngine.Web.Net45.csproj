@@ -131,9 +131,6 @@
     <Compile Include="..\Zirpl.AppEngine.Web\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine.Web\Properties\AssemblyInfo_common.cs">
-      <Link>Properties\AssemblyInfo_common.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine.Web\Web\Elmah\Azure\TableErrorEntity.cs">
       <Link>Web\Elmah\Azure\TableErrorEntity.cs</Link>
     </Compile>
@@ -214,7 +211,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="9b6c4dba-94a5-4871-8fc5-a2bb2e91cc04" />
+      <UserProperties ProjectLinkReference="9b6c4dba-94a5-4871-8fc5-a2bb2e91cc04" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -128,7 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logging\Log4Net\WebRollingFileAppender.cs" />
-    <Compile Include="Properties\AssemblyInfo_common.cs" />
     <Compile Include="Web\Elmah\Azure\TableErrorEntity.cs" />
     <Compile Include="Web\Elmah\Azure\TableErrorLog.cs" />
     <Compile Include="Web\Elmah\Log4Net\ElmahAppender.cs" />
