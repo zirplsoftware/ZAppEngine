@@ -436,9 +436,6 @@
     <Compile Include="..\Zirpl.Common\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Properties\AssemblyInfo_common.cs">
-      <Link>Properties\AssemblyInfo_common.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Accessor.cs">
       <Link>Reflection\Accessor.cs</Link>
     </Compile>

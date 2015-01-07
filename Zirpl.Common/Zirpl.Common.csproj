@@ -175,7 +175,6 @@
     <Compile Include="NumberExtensions.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\AssemblyInfo_common.cs" />
     <Compile Include="Reflection\Accessor.cs">
       <SubType>Code</SubType>
     </Compile>

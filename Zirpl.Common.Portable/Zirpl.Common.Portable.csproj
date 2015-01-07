@@ -432,6 +432,9 @@
     <Compile Include="..\Zirpl.Common\NumberExtensions.cs">
       <Link>NumberExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Zirpl.Common\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\Accessor.cs">
       <Link>Reflection\Accessor.cs</Link>
     </Compile>
@@ -504,8 +507,6 @@
     <Compile Include="..\Zirpl.Common\Xml\Serialization\XmlSerializableBase.cs">
       <Link>Xml\Serialization\XmlSerializableBase.cs</Link>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo_common_portable.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
