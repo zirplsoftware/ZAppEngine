@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Zirpl.Common.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -175,86 +176,19 @@
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo_common.cs" />
-    <Compile Include="Reflection\Fluent\Evaluators\AccessibilityEvaluator.cs">
+    <Compile Include="Reflection\Accessor.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reflection\Fluent\Evaluators\EventHandlerTypeEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\Evaluators\FieldTypeEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\Evaluators\IMatchEvaluator.cs">
+    <Compile Include="Reflection\AssemblyExtensions.cs" />
+    <Compile Include="Reflection\DynamicTypeAccessor.cs" />
+    <Compile Include="Reflection\IAccessor.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reflection\Fluent\Evaluators\MemberScopeEvaluator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Fluent\Evaluators\MemberTypeEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\Evaluators\MethodReturnTypeEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\Evaluators\NameEvaluator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Fluent\Evaluators\PropertyReadWriteEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\Evaluators\PropertyTypeEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\Evaluators\TypeEvaluator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Fluent\Evaluators\TypeFullNameEvaluator.cs" />
-    <Compile Include="Reflection\Fluent\Public\ITypeQuerry.cs" />
-    <Compile Include="Reflection\Fluent\Queries\TypeQuery.cs" />
-    <Compile Include="Reflection\Fluent\Queries\ConstructorQuery.cs" />
-    <Compile Include="Reflection\Fluent\Queries\EventQuery.cs" />
-    <Compile Include="Reflection\Fluent\Queries\FieldQuery.cs" />
-    <Compile Include="Reflection\Fluent\Helpers\BindingFlagsBuilder.cs" />
-    <Compile Include="Reflection\Fluent\Queries\SubQueries\MemberAccessibilitySubQuery.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Fluent\Queries\TypeMemberQueryBase.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Fluent\Helpers\MemberQueryService.cs" />
-    <Compile Include="Reflection\Fluent\Queries\NamedTypeMemberQueryBase.cs" />
-    <Compile Include="Reflection\Fluent\Queries\SubQueries\MemberTypeSubQuery.cs" />
-    <Compile Include="Reflection\Fluent\Queries\SubQueries\SubQueryBase.cs" />
-    <Compile Include="Reflection\Fluent\Queries\SubQueries\NameSubQuery.cs" />
-    <Compile Include="Reflection\Fluent\Queries\SubQueries\MemberScopeSubQuery.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Fluent\Helpers\MemberTypeFlags.cs" />
-    <Compile Include="Reflection\Fluent\Helpers\MemberTypeFlagsBuilder.cs" />
-    <Compile Include="Reflection\Fluent\Queries\SubQueries\TypeSubQuery.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Fluent\Queries\MemberQuery.cs" />
-    <Compile Include="Reflection\Fluent\Queries\MethodQuery.cs" />
-    <Compile Include="Reflection\Fluent\Queries\NestedTypeQuery.cs" />
-    <Compile Include="Reflection\Fluent\Queries\PropertyQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IFieldQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\INamedMemberQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IMemberQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\INestedTypeQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IPropertyQuery.cs" />
-    <Compile Include="Reflection\Fluent\ReflectionUtilities.cs" />
-    <Compile Include="Reflection\Old\Accessor.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Old\AssemblyExtensions.cs" />
-    <Compile Include="Reflection\Old\DynamicTypeAccessor.cs" />
-    <Compile Include="Reflection\Fluent\Public\INameQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IMemberTypeQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IQueryResult.cs" />
-    <Compile Include="Reflection\Fluent\Public\IMemberScopeQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IMemberAccessibilityQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IMethodQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IEventQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IConstructorQuery.cs" />
-    <Compile Include="Reflection\Fluent\Public\IMemberQuery_base.cs" />
-    <Compile Include="Reflection\Fluent\Public\ITypeQuery_base.cs" />
-    <Compile Include="Reflection\Old\IAccessor.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Reflection\Old\ReflectionTypeAccessor.cs" />
-    <Compile Include="Reflection\Old\TypeAccessorFactory.cs" />
-    <Compile Include="Reflection\Old\ITypeAccessor.cs" />
-    <Compile Include="Reflection\Old\ObjectExtensions.cs" />
-    <Compile Include="Reflection\Old\TypeExtensions.cs" />
+    <Compile Include="Reflection\ReflectionTypeAccessor.cs" />
+    <Compile Include="Reflection\TypeAccessorFactory.cs" />
+    <Compile Include="Reflection\ITypeAccessor.cs" />
+    <Compile Include="Reflection\ObjectExtensions.cs" />
+    <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Stats\EloRating\EloMatch.cs" />
     <Compile Include="Stats\EloRating\EloMatchResult.cs" />
     <Compile Include="Stats\EloRating\EloRatingEngine.cs" />

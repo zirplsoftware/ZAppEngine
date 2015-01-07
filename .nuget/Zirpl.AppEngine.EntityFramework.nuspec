@@ -3,19 +3,19 @@
   <metadata>
     <id>Zirpl.AppEngine.EntityFramework</id>
     <version>$version$</version>
-    <title>ZAppEngine- Entity Framework</title>
+    <title>Zirpl's AppEngine- Entity Framework</title>
     <authors>Zirpl Software</authors>
     <owners>Zirpl Software</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Extends ZAppEngine providing functionality to quickly create and deploy data-driven applications using Entity Framework.</description>
+    <description>Extends Zirpl AppEngine providing functionality to quickly create and deploy data-driven applications using Entity Framework.</description>
     <language>en-US</language>
     <copyright>Copyright 2014</copyright>
     <tags></tags>
-    <projectUrl>https://github.com/nlafratta/ZAppEngine</projectUrl>
-    <licenseUrl>https://github.com/nlafratta/ZAppEngine/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/zirplsoftware/ZAppEngine</projectUrl>
+    <licenseUrl>https://github.com/zirplsoftware/ZAppEngine/blob/master/LICENSE</licenseUrl>
     <releaseNotes>
       <![CDATA[
-            For full release notes see https://github.com/nlafratta/ZAppEngine/blob/master/releasenotes.md
+            For full release notes see https://github.com/zirplsoftware/ZAppEngine/blob/master/releasenotes.md
             ]]>
     </releaseNotes>
     <dependencies>
