@@ -324,7 +324,7 @@ namespace Zirpl.Common.Tests.Reflection
             var parent = new MockParent();
 
             new Action(() => parent.Access().Property<String>("PublicProperty")).ShouldThrow<InvalidCastException>();
-            new Action(() => parent.Access().Property("PublicProperty", "test")).ShouldThrow<InvalidCastException>();
+            new Action(() => parent.Access().Property("PublicProperty", "test")).ShouldThrow<ArgumentException>();
 
             new Action(() => parent.Access().Property<String>("NonExistentProperty")).ShouldThrow<ArgumentOutOfRangeException>();
             new Action(() => parent.Access().Property("NonExistentProperty", "test")).ShouldThrow<ArgumentOutOfRangeException>();
@@ -411,7 +411,7 @@ namespace Zirpl.Common.Tests.Reflection
             var parentAccessor = TypeAccessorFactory.GetDynamicTypeAccessor(parent.GetType());
 
             new Action(() => parent.Access().Field<String>("PublicField")).ShouldThrow<InvalidCastException>();
-            new Action(() => parent.Access().Field("PublicField", "test")).ShouldThrow<InvalidCastException>();
+            new Action(() => parent.Access().Field("PublicField", "test")).ShouldThrow<ArgumentException>();
 
             new Action(() => parent.Access().Field<String>("NonExistentField")).ShouldThrow<ArgumentOutOfRangeException>();
             new Action(() => parent.Access().Field("NonExistentField", "test")).ShouldThrow<ArgumentOutOfRangeException>();
