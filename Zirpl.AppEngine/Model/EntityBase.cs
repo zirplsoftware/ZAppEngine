@@ -1,12 +1,12 @@
 ﻿using System;
-#if !NET35 && !NET35CLIENT && !PORTABLE && !SILVERLIGHT
+#if !PORTABLE
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 #endif
 
 namespace Zirpl.AppEngine.Model
 {
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
     [Serializable]
 #endif
     public abstract class EntityBase<TId> : IPersistable<TId>, IAuditable, IVersionable 

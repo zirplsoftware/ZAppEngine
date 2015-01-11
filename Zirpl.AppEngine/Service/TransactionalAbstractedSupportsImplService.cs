@@ -1,10 +1,10 @@
-﻿#if !SILVERLIGHT && !PORTABLE
-using Zirpl.AppEngine.Model.Search;
+﻿#if !PORTABLE
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Search;
 
 namespace Zirpl.AppEngine.Service
 {

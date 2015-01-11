@@ -19,26 +19,16 @@
             ]]>
     </releaseNotes>
     <dependencies>
-      <group targetFramework="net451">
-        <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
-        <dependency id="EntityFramework" version="6.1.0"  />
-        <dependency id="FluentValidation" version="5.3.0.0"  />
-        <dependency id="Zirpl.AppEngine" version="$version$"  />
-        <dependency id="Zirpl.Common" version="$version$"  />
-      </group>
-      <group targetFramework="net45">
-        <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
-        <dependency id="EntityFramework" version="6.1.0"  />
-        <dependency id="FluentValidation" version="5.3.0.0"  />
-        <dependency id="Zirpl.AppEngine" version="$version$"  />
-        <dependency id="Zirpl.Common" version="$version$"  />
-      </group>
+      <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
+      <dependency id="EntityFramework" version="6.1.2"  />
+      <dependency id="FluentValidation" version="5.5.0.0"  />
+      <dependency id="Zirpl.Logging" version="2.1.2" />
+      <dependency id="Zirpl.AppEngine" version="$version$"  />
+      <dependency id="Zirpl.Common" version="$version$"  />
     </dependencies>
   </metadata>
   <files>
     <file src="..\Zirpl.AppEngine.EntityFramework\bin\$configuration$\Zirpl.AppEngine.EntityFramework.dll" target="lib\net451\" />
     <file src="..\Zirpl.AppEngine.EntityFramework\bin\$configuration$\Zirpl.AppEngine.EntityFramework.XML" target="lib\net451\" />
-    <file src="..\Zirpl.AppEngine.EntityFramework.Net45\bin\$configuration$\Zirpl.AppEngine.EntityFramework.dll" target="lib\net45\" />
-    <file src="..\Zirpl.AppEngine.EntityFramework.Net45\bin\$configuration$\Zirpl.AppEngine.EntityFramework.XML" target="lib\net45\" />
   </files>
 </package>

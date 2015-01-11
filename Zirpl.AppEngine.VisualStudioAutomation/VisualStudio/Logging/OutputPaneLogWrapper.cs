@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.Shell.Interop;
-using Zirpl.AppEngine.Logging;
 using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging
@@ -13,7 +12,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging
             this._outputWindow = outputWindow;
         }
 
-        protected override void WriteMessageToLog(LogBase.MessageType messageType, object message, Exception exception = null)
+        protected override void WriteMessageToLog(LogLevel logLevel, object message, Exception exception = null)
         {
             if (exception != null)
             {
@@ -26,7 +25,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging
             this._outputWindow.Activate(); // Brings this pane into view
         }
 
-        protected override bool IsLogEnabled(LogBase.MessageType messageType)
+        protected override bool IsLogLevelEnabled(LogLevel logLevel)
         {
             return true;
         }

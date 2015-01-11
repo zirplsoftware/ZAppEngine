@@ -1,4 +1,4 @@
-﻿#if !NET35 && !NET35CLIENT && !NET40 && !NET40CLIENT && !SILVERLIGHT
+﻿#if !PORTABLE
 using System;
 using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
 

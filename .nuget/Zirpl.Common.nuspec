@@ -20,13 +20,9 @@
     </releaseNotes>
   </metadata>
   <files>
-    <file src="..\Zirpl.Common\bin\$configuration$\Zirpl.Common.dll" target="lib\net451\" />
-    <file src="..\Zirpl.Common\bin\$configuration$\Zirpl.Common.XML" target="lib\net451\" />
-    <file src="..\Zirpl.Common.Net45\bin\$configuration$\Zirpl.Common.dll" target="lib\net45\" />
-    <file src="..\Zirpl.Common.Net45\bin\$configuration$\Zirpl.Common.XML" target="lib\net45\" />
-    <file src="..\Zirpl.Common.Portable\bin\$configuration$\Zirpl.Common.Portable.dll" target="lib\portable-net45+sl5+win8+wpa81+wp8\" />
-    <file src="..\Zirpl.Common.Portable\bin\$configuration$\Zirpl.Common.Portable.XML" target="lib\portable-net45+sl5+win8+wpa81+wp8\" />
-    <file src="..\Zirpl.Common.Silverlight5\bin\$configuration$\Zirpl.Common.Silverlight.dll" target="lib\sl50\" />
-    <file src="..\Zirpl.Common.Silverlight5\bin\$configuration$\Zirpl.Common.Silverlight.XML" target="lib\sl50\" />
+    <file src="..\Zirpl.Common\bin\$configuration$\Zirpl.Common.dll" target="lib\net40\" />
+    <file src="..\Zirpl.Common\bin\$configuration$\Zirpl.Common.XML" target="lib\net40\" />
+    <file src="..\Zirpl.Common.Portable\bin\$configuration$\Zirpl.Common.Portable.dll" target="lib\portable-net40+sl5+win8+wpa81+wp8\" />
+    <file src="..\Zirpl.Common.Portable\bin\$configuration$\Zirpl.Common.Portable.XML" target="lib\portable-net40+sl5+win8+wpa81+wp8\" />
   </files>
 </package>

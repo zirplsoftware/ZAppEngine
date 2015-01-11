@@ -1,5 +1,4 @@
-﻿#if !NET35 && !NET35CLIENT
-using Autofac;
+﻿using Autofac;
 
 namespace Zirpl.AppEngine.Ioc.Autofac
 {
@@ -8,4 +7,3 @@ namespace Zirpl.AppEngine.Ioc.Autofac
         IContainer Container { get; }
     }
 }
-#endif

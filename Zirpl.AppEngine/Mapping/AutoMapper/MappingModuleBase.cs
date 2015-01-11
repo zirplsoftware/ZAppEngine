@@ -1,5 +1,4 @@
-﻿#if !NET35 && !NET35CLIENT
-using Zirpl.AppEngine.Ioc;
+﻿using Zirpl.AppEngine.Ioc;
 
 namespace Zirpl.AppEngine.Mapping.AutoMapper
 {
@@ -39,5 +38,3 @@ namespace Zirpl.AppEngine.Mapping.AutoMapper
         public abstract void CreateMaps(IDependencyResolver dependencyResolver);
     }
 }
-
-#endif

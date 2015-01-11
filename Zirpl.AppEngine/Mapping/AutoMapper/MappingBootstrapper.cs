@@ -1,4 +1,4 @@
-﻿#if !NET35 && !NET35CLIENT
+﻿#if !PORTABLE
 using System;
 using System.Linq;
 using System.Reflection;

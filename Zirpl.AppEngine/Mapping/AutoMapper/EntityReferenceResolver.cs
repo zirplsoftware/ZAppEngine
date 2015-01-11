@@ -1,5 +1,4 @@
-﻿#if !NET35 && !NET35CLIENT
-using System;
+﻿using System;
 using AutoMapper;
 using Zirpl.AppEngine.Ioc;
 using Zirpl.AppEngine.Model;
@@ -36,4 +35,3 @@ namespace Zirpl.AppEngine.Mapping.AutoMapper
         }
     }
 }
-#endif

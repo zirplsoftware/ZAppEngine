@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Zirpl.AppEngine.Service.Membership
 {
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
     [Serializable]
 #endif
     public class ChangeUserNameException : Exception
@@ -43,7 +43,7 @@ namespace Zirpl.AppEngine.Service.Membership
             this.Error = error;
         }
 
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
         protected ChangeUserNameException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

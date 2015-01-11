@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.Shell.Interop;
-using Zirpl.AppEngine.Logging;
 using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging

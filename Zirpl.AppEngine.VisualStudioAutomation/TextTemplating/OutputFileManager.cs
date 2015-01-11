@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using EnvDTE;
 using EnvDTE80;
-using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.IO;
 using Zirpl.Logging;

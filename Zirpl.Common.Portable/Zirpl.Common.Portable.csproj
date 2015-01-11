@@ -13,7 +13,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile344</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -48,9 +48,6 @@
     <Compile Include="..\Zirpl.Common\ActionRunner.cs">
       <Link>ActionRunner.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Collections\EnumeratorWrapper.cs">
-      <Link>Collections\EnumeratorWrapper.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.Common\Collections\ICollectionExtensions.cs">
       <Link>Collections\ICollectionExtensions.cs</Link>
     </Compile>
@@ -68,21 +65,6 @@
     </Compile>
     <Compile Include="..\Zirpl.Common\Enums\EnumExtensionMethods.cs">
       <Link>Enums\EnumExtensionMethods.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Logging\ILog.cs">
-      <Link>Logging\ILog.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Logging\ILogFactory.cs">
-      <Link>Logging\ILogFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Logging\LogBase.cs">
-      <Link>Logging\LogBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Logging\LogManager.cs">
-      <Link>Logging\LogManager.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Logging\NullLog.cs">
-      <Link>Logging\NullLog.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\ObjectExtensions.cs">
       <Link>ObjectExtensions.cs</Link>
@@ -185,7 +167,7 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="0402a91f-2a69-447c-bb2b-64d5af155105" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="0402a91f-2a69-447c-bb2b-64d5af155105" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

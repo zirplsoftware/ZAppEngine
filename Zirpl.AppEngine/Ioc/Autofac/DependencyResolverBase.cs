@@ -1,4 +1,4 @@
-﻿#if !NET35 && !NET35CLIENT
+﻿#if !PORTABLE
 using System;
 using System.Linq;
 using System.Reflection;
@@ -29,12 +29,8 @@ namespace Zirpl.AppEngine.Ioc.Autofac
 
         protected virtual Assembly[] GetModuleAssemblies()
         {
-            
-#if !SILVERLIGHT
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(o => o.GetName().Name.StartsWith("Zirpl")).ToArray();
-#else
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(o => o.FullName.StartsWith("Zirpl")).ToArray();
-#endif
+            //var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(o => o.FullName.StartsWith("Zirpl")).ToArray();
             return assemblies;
         }
     }

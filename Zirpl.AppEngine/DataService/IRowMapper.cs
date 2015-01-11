@@ -1,4 +1,4 @@
-﻿#if !SILVERLIGHT && !PORTABLE
+﻿#if !PORTABLE
 using System.Data;
 
 namespace Zirpl.AppEngine.DataService

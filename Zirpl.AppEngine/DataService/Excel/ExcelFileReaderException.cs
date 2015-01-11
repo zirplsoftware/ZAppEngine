@@ -6,7 +6,7 @@ namespace Zirpl.AppEngine.DataService.Excel
     /// <summary>
     /// Denotes an exception that occurs within the ExcelFileReader
     /// </summary>
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
     [Serializable]
 #endif
     public class ExcelFileReaderException : System.Exception
@@ -27,7 +27,7 @@ namespace Zirpl.AppEngine.DataService.Excel
 
         }
 
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
         protected ExcelFileReaderException(SerializationInfo info, StreamingContext context)
             :base(info, context)
         {

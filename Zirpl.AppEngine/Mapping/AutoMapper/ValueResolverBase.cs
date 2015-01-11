@@ -1,5 +1,4 @@
-﻿#if !NET35 && !NET35CLIENT
-using AutoMapper;
+﻿using AutoMapper;
 
 namespace Zirpl.AppEngine.Mapping.AutoMapper
 {
@@ -13,4 +12,3 @@ namespace Zirpl.AppEngine.Mapping.AutoMapper
         protected abstract TProperty ResolveCore(ResolutionResult source, TSource contextSource, TDestination contextDestination);
     }
 }
-#endif

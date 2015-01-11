@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Zirpl.AppEngine.Service.Membership
 {
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
     [Serializable]
 #endif
     public class ChangePasswordException : Exception
@@ -24,7 +24,7 @@ namespace Zirpl.AppEngine.Service.Membership
         {
         }
 
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
         protected ChangePasswordException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

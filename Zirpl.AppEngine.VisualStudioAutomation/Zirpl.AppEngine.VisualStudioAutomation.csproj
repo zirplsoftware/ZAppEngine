@@ -70,7 +70,7 @@
     <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -98,6 +98,10 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="Zirpl.Logging.Portable, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Zirpl.Logging.2.1.2\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppGeneration\AppGenerator.cs">
@@ -163,9 +167,9 @@
       <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
       <Name>Zirpl.AppEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zirpl.Common\Zirpl.Common.csproj">
+    <ProjectReference Include="..\Zirpl.Common\Zirpl.Common %28Net40%29.csproj">
       <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
-      <Name>Zirpl.Common</Name>
+      <Name>Zirpl.Common %28Net40%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

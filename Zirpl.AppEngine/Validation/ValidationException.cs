@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Zirpl.AppEngine.Validation
 {
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
     [Serializable]
 #endif
     public class ValidationException : Exception
@@ -51,7 +51,7 @@ namespace Zirpl.AppEngine.Validation
             this.ValidationErrors = validationErrors;
         }
 
-#if !SILVERLIGHT && !PORTABLE
+#if !PORTABLE
         protected ValidationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

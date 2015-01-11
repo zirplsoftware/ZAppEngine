@@ -1,11 +1,9 @@
 ﻿using System;
 using System.CodeDom.Compiler;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using Zirpl.AppEngine.Logging;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
