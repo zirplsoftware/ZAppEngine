@@ -3,7 +3,7 @@
   <metadata>
     <id>Zirpl.AppEngine</id>
     <version>$version$</version>
-    <title>Zirpl's AppEngine</title>
+    <title>AppEngine</title>
     <authors>Zirpl Software</authors>
     <owners>Zirpl Software</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
