@@ -41,7 +41,6 @@ namespace Zirpl.AppEngine.DataService.EntityFramework.Migrations
 
         protected void ExecuteEmbeddedResourceAsSqlScript(String assemblyName, String sqlScriptResourcePath, bool suppressTransaction = false, Object anonymousArguments = null, params object[] formatArgs)
         {
-            String sql = null;
             var assembly = Assembly.Load(new AssemblyName(assemblyName));
             this.ExecuteEmbeddedResourceAsSqlScript(assembly, sqlScriptResourcePath, suppressTransaction, anonymousArguments, formatArgs);
         }

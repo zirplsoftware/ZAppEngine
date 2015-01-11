@@ -14,7 +14,7 @@ namespace Zirpl.AppEngine.DataService.Csv
         protected List<EntityPropertyDefinition<TObject>> ColumnDefinitions { get; private set; }
         private delegate void AsyncExportAsCsvFileCaller(IEnumerable enumerable, Stream stream);
 
-        public Action<Exception> ErrorHandler { get; set; }
+        public Func<Exception, Exception> ErrorHandler { get; set; }
         public Action<bool> CompleteHandler { get; set; }
         
         public EntityExporter()
@@ -80,43 +80,10 @@ namespace Zirpl.AppEngine.DataService.Csv
         {
             // TODO: test how this method performs with an exception
             
-            bool failed = false;
-            Action<Exception> errorHandler = this.ErrorHandler;
-            Action<Boolean> completeHandler = this.CompleteHandler;
-
-            try
-            {
-                this.ExportAsCsvFile(enumerable, file);
-            }
-            catch (Exception e)
-            {
-                failed = true;
-                if (errorHandler != null)
-                {
-                    try
-                    {
-                        errorHandler(e);
-                    }
-                    catch (Exception ex)
-                    {
-                        // nothing we can do about this- eat it
-                    }
-                }
-            }
-            finally
-            {
-                if (completeHandler != null)
-                {
-                    try
-                    {
-                        completeHandler(!failed);
-                    }
-                    catch (Exception ex)
-                    {
-                        // nothing we can do about this- eat it
-                    }
-                }
-            }
+            new ActionRunner(() => this.ExportAsCsvFile(enumerable, file))
+                .OnError(this.ErrorHandler)
+                .OnComplete(this.CompleteHandler)
+                .TryRun();
         }
 
         // TODO: this is not a viable method unless the calling method can get notified when finished

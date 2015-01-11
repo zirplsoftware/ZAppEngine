@@ -707,8 +707,6 @@ namespace Zirpl
         /// "FooBar" becomes "fooBar"
         /// "Foobar becomes "foobar"
         /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
         public static string ToCamelCase(this String source, CultureInfo cultureInfo)
         {
             if (String.IsNullOrEmpty(source))
@@ -755,8 +753,6 @@ namespace Zirpl
         /// "fooBar" becomes "FooBar"
         /// "foobar" becomes "Foobar"
         /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
         public static string ToPascalCase(this String source, CultureInfo cultureInfo)
         {
             if (String.IsNullOrEmpty(source))

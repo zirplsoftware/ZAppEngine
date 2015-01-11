@@ -265,7 +265,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
             object service = null;
             Microsoft.VisualStudio.Shell.Interop.IVsSolution solution = null;
             Microsoft.VisualStudio.Shell.Interop.IVsHierarchy hierarchy = null;
-            Microsoft.VisualStudio.Shell.Interop.IVsAggregatableProject aggregatableProject = null;
+            //Microsoft.VisualStudio.Shell.Interop.IVsAggregatableProject aggregatableProject = null;
             int result = 0;
             service = GetService(proj.DTE, typeof(Microsoft.VisualStudio.Shell.Interop.IVsSolution));
             solution = (Microsoft.VisualStudio.Shell.Interop.IVsSolution)service;
@@ -445,6 +445,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
         /// <summary>
         /// Execute Visual VisualStudio commands against the project item.
         /// </summary>
+        /// <param name="dte">VisualStudio instance</param>
         /// <param name="item">The current project item.</param>
         /// <param name="command">The vs command as string.</param>
         /// <returns>An error message if the command fails.</returns>

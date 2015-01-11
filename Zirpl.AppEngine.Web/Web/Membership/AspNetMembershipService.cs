@@ -86,13 +86,10 @@ namespace Zirpl.AppEngine.Web.Membership
                         break;
                     case 5: // oldemail not found
                         throw new ChangeUserNameException("Could not change username", ChangeUserNameError.UserNotFound);
-                        break;
                     case 10: // newemail taken
                         throw new ChangeUserNameException("Could not change username", ChangeUserNameError.NewUserNameAlreadyTaken);
-                        break;
                     default:
                         throw new UnexpectedCaseException("Unexpected ReturnValue", outValue);
-                        break;
                 }
 
                 var user = GetMembershipUser(request.NewUserName);
@@ -172,7 +169,6 @@ namespace Zirpl.AppEngine.Web.Membership
 
             this.ValidationHelper.AssertValid(request);
 
-            bool resetPasswordSucceeded = false;
             MembershipUser user = System.Web.Security.Membership.GetUser(request.UserId);
             if (user == null)
             {

@@ -27,7 +27,7 @@ namespace Zirpl.AppEngine.DataService
         /// Maps the row to the data object
         /// </summary>
         /// <param name="reader">The data reader with the row's info</param>
-        /// <param name="rowNumber">The row number being read</param>
+        /// <param name="rowNum">The row number being read</param>
         /// <returns>The data object</returns>
         public virtual TEntity MapRow(IDataReader reader, int rowNum)
         {

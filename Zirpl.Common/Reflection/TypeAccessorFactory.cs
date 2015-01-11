@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Zirpl.Reflection
 {
     /// <summary>
-    /// Factory class used to create new instances of the <seealso cref="DynamicTypeAccessor"/> class.
+    /// Factory class used to create new instances of the <seealso cref="ITypeAccessor"/> class.
     /// </summary>
     /// <remarks>
     /// The factory class will only create a DynamicTypeAccessor once for each type.
@@ -51,7 +51,6 @@ namespace Zirpl.Reflection
         /// Returns a reference to a DynamicTypeAccessor for the requested type represented by <seealso cref="ITypeAccessor"/>.
         /// </summary>
         /// <param name="type">The for to get the DynamicTypeAccessor</param>
-        /// <returns><see cref="DynamicTypeAccessor"/></returns>
         internal static ITypeAccessor GetReflectionTypeAccessor(Type type)
         {   
             EnsureContainer(type);

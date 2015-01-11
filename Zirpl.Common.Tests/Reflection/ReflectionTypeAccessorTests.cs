@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Zirpl.Reflection;
+#pragma warning disable 169
 
 namespace Zirpl.Common.Tests.Reflection
 {
@@ -76,6 +77,7 @@ namespace Zirpl.Common.Tests.Reflection
                 }
             }
 
+            // ReSharper disable once InconsistentNaming
             private int PrivateField;
         }
 

@@ -128,7 +128,7 @@ namespace Zirpl.AppEngine.Service.BatchProcessing
                 }
                 catch (Exception ex)
                 {
-                    this.GetLog().TryWarn("Could not Save Batch. There is no way to update the results of this Batch Import.");
+                    this.GetLog().TryWarn(ex, "Could not Save Batch. There is no way to update the results of this Batch Import.");
                 }
             }
             else

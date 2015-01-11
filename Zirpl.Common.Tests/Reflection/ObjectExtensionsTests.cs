@@ -47,7 +47,9 @@ namespace Zirpl.Common.Tests.Reflection
 
 
             public int PublicField;
+#pragma warning disable 169
             private int PrivateField;
+#pragma warning restore 169
             protected int ProtectedField;
 
 
@@ -156,7 +158,9 @@ namespace Zirpl.Common.Tests.Reflection
                 }
             }
 
+#pragma warning disable 169
             private int PrivateField;
+#pragma warning restore 169
 
 
             public bool childMethodCalled = false;

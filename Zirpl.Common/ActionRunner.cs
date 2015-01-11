@@ -56,7 +56,7 @@ namespace Zirpl
                     {
                         newException = errorHandler(e);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         // nothing we can do about this- eat it
                     }
@@ -82,7 +82,7 @@ namespace Zirpl
                     {
                         completeHandler(!failed);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         // nothing we can do about this- eat it
                     }
