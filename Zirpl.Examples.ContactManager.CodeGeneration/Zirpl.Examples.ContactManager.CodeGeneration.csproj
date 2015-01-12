@@ -43,19 +43,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_templates\DT_cs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DT_cs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="_templates\_Model\DT_Enum_cs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DT_Enum_cs.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="_config\ModelProject\Email.domain.zae">
+    <EmbeddedResource Include="_config\_Model\Email.domain.zae">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="_config\ModelProject\Contact.domain.zae">
+    <EmbeddedResource Include="_config\_Model\Contact.domain.zae">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="_config\ModelProject\ContactType.domain.zae">
+    <EmbeddedResource Include="_config\_Model\ContactType.domain.zae">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -77,22 +87,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Structure.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Structure.txt</LastGenOutput>
-    </None>
     <None Include="App.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>App.txt</LastGenOutput>
       <TransformOnBuild>False</TransformOnBuild>
     </None>
+    <None Include="_templates\DT_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DT_cs.cs</LastGenOutput>
+    </None>
+    <None Include="_templates\_Model\DT_Enum_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Structure.txt">
-      <DependentUpon>Structure.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
     <Content Include="App.txt">
       <DependentUpon>App.tt</DependentUpon>
       <DesignTime>True</DesignTime>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zirpl.FluentReflection;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
@@ -32,7 +33,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         internal static ITransform GetMasterFromSession(Object childTemplate)
         {
-            var session = childTemplate.Access().Property<IDictionary<string, object>>("Session");
+            var session = childTemplate.Property<IDictionary<string, object>>("Session").Value;
             if (session != null
                 && session.ContainsKey("_Master"))
             {

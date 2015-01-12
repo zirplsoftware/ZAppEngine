@@ -91,29 +91,8 @@
     <Compile Include="..\Zirpl.Common\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\Accessor.cs">
-      <Link>Reflection\Accessor.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\AssemblyExtensions.cs">
       <Link>Reflection\AssemblyExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\DynamicTypeAccessor.cs">
-      <Link>Reflection\DynamicTypeAccessor.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\IAccessor.cs">
-      <Link>Reflection\IAccessor.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\ITypeAccessor.cs">
-      <Link>Reflection\ITypeAccessor.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\ObjectExtensions.cs">
-      <Link>Reflection\ObjectExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\ReflectionTypeAccessor.cs">
-      <Link>Reflection\ReflectionTypeAccessor.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.Common\Reflection\TypeAccessorFactory.cs">
-      <Link>Reflection\TypeAccessorFactory.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.Common\Reflection\TypeExtensions.cs">
       <Link>Reflection\TypeExtensions.cs</Link>
@@ -168,7 +147,7 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="0402a91f-2a69-447c-bb2b-64d5af155105" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="0402a91f-2a69-447c-bb2b-64d5af155105" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

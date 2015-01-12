@@ -8,6 +8,7 @@ using System.Text;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.Collections;
+using Zirpl.FluentReflection;
 using Zirpl.Logging;
 using Zirpl.Reflection;
 
@@ -73,20 +74,30 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
         }
 
-        public IEnumerable<Type> GetTemplateTypes()
+        internal IEnumerable<Type> GetDefaultTemplateTypes()
         {
-            // find ALL templates
-            var allTemplates = from assembly in _assembliesToCheck
+            return from template in GetAllTemplateTypes()
+                   where template.Assembly == _thisAssembly
+                   orderby template.FullName
+                   select template;
+        }
+
+        private IEnumerable<Type> GetAllTemplateTypes()
+        {
+            return from assembly in _assembliesToCheck
                                from o in assembly.GetTypes()
                                where IsAppTemplate(o)
                                orderby o.FullName
                                select o;
+        }
+
+        public IEnumerable<Type> GetTemplateTypes()
+        {
+            // find ALL templates
+            var allTemplates = GetDefaultTemplateTypes();
 
             // stock templates
-            var defaultTemplates = from template in allTemplates
-                                 where template.Assembly == _thisAssembly
-                                 orderby template.FullName
-                                 select template;
+            var defaultTemplates = GetAllTemplateTypes();
 
             // these are the templates that are additional or possibly replacements
             var otherTemplates = from template in allTemplates
@@ -97,7 +108,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             // these are the stock templates that have been replaced
             var defaultTemplatesThatAreBeingReplaced = from template in defaultTemplates
                                                 where otherTemplates.Any(o => o.FullName.SubstringAfterLastInstanceOf("_templates.").Equals(template.FullName.SubstringAfterLastInstanceOf("_templates."), StringComparison.InvariantCultureIgnoreCase))
-                                                    || otherTemplates.Any(o => template.IsAssignableFrom(o))
+                                                    || otherTemplates.Any(template.IsAssignableFrom)
                                                 select template;
 
             // these are the templates that are specifically REPLACING default templates
@@ -105,9 +116,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                                                 where defaultTemplates.Any(d => d.FullName.SubstringAfterLastInstanceOf("_templates.").Equals(template.FullName.SubstringAfterLastInstanceOf("_templates."), StringComparison.InvariantCultureIgnoreCase))
                                                       || defaultTemplates.Any(d => d.IsAssignableFrom(template))
                                                 select template;
-
-
-
 
             var templatesToRun = allTemplates.Where(o => !defaultTemplatesThatAreBeingReplaced.Contains(o));
 
@@ -130,16 +138,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
 
             return o.IsClass
-                && !o.IsAbstract
-                && o.Namespace != null
-                && o.Namespace.Contains("_templates")
-                && Attribute.GetCustomAttribute(o, typeof (GeneratedCodeAttribute)) != null
-                && o.GetTypeAccessor().HasMethod<String>("TransformText")
-                && o.GetTypeAccessor().HasMethod("Initialize")
-                && o.GetTypeAccessor().HasPropertyGetter<StringBuilder>("GenerationEnvironment")
-                && o.GetTypeAccessor().HasPropertySetter<StringBuilder>("GenerationEnvironment")
-                && o.GetTypeAccessor().HasPropertyGetter<IDictionary<String, Object>>("Session")
-                && o.GetTypeAccessor().HasPropertySetter<IDictionary<String, Object>>("Session");
+                   && !o.IsAbstract
+                   && o.Namespace != null
+                   && o.Namespace.Contains("_templates")
+                   && Attribute.GetCustomAttribute(o, typeof (GeneratedCodeAttribute)) != null
+                   && o.Method("TransformText").Exists
+                   && o.Method("Initialize").Exists
+                   && o.Property("GenerationEnvironment").Exists
+                   && o.Property("GenerationEnvironment").PropertyInfo.CanRead
+                   && o.Property("GenerationEnvironment").PropertyInfo.CanWrite
+                   && o.Property("Session").Exists
+                   && o.Property("Session").PropertyInfo.CanRead
+                   && o.Property("Session").PropertyInfo.CanWrite;
         }
     }
 }

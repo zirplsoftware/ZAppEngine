@@ -10,12 +10,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     public static class AppGenerator
     {
+        public static void CopyDefaultTemplates(this ITransform transform)
+        {
+            new Action(() => new DefaultTemplateExporter().ExportDefaultTemplates(transform))
+            .GetRunner()
+            .OnError((e) => HandleException(transform, e))
+            .OnComplete((passed) => transform.FileManager.EndFile())
+            .Run();
+        }
+
         public static void GenerateSolutionStructure(this ITransform transform)
         {
-            new Action(() =>
-            {
-                new SolutionBuilder().GenerateProjects(transform);
-            })
+            new Action(() => new SolutionBuilder().GenerateProjects(transform))
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
             .OnComplete((passed) => transform.FileManager.EndFile())
@@ -23,10 +29,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
         }
         public static void GenerateApp(this ITransform transform, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
-            new Action(() =>
-            {
-                transform.GenerateApp(new TemplateProvider(transform));
-            })
+            new Action(() => transform.GenerateApp(new TemplateProvider(transform)))
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
             .OnComplete((passed) => transform.FileManager.EndFile())
@@ -35,10 +38,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
         public static void GenerateApp(this ITransform transform, String templateAssemblyName, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
-            new Action(() =>
-            {
-                transform.GenerateApp(new TemplateProvider(transform, new[] { templateAssemblyName }));
-            })
+            new Action(() => transform.GenerateApp(new TemplateProvider(transform, new[] { templateAssemblyName })))
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
             .OnComplete((passed) => transform.FileManager.EndFile())
@@ -47,10 +47,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
         public static void GenerateApp(this ITransform transform, IEnumerable<string> templateAssemblyNames, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
-            new Action(() =>
-            {
-                transform.GenerateApp(new TemplateProvider(transform, templateAssemblyNames));
-            })
+            new Action(() => transform.GenerateApp(new TemplateProvider(transform, templateAssemblyNames)))
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
             .OnComplete((passed) => transform.FileManager.EndFile())
@@ -59,10 +56,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
         public static void GenerateApp(this ITransform transform, Assembly templateAssembly, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
-            new Action(() =>
-            {
-                transform.GenerateApp(new TemplateProvider(transform, new[] { templateAssembly }));
-            })
+            new Action(() => transform.GenerateApp(new TemplateProvider(transform, new[] { templateAssembly })))
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
             .OnComplete((passed) => transform.FileManager.EndFile())
@@ -71,10 +65,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
         public static void GenerateApp(this ITransform transform, IEnumerable<Assembly> templateAssemblies, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
         {
-            new Action(() =>
-            {
-                transform.GenerateApp(new TemplateProvider(transform, templateAssemblies));
-            })
+            new Action(() => transform.GenerateApp(new TemplateProvider(transform, templateAssemblies)))
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
             .OnComplete((passed) => transform.FileManager.EndFile())
@@ -104,8 +95,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 LogManager.GetLog().Debug(e.ToString());
                 transform.Host.HostTransform.GenerationEnvironment.Append(e);
             }
-            catch (Exception)
+            // ReSharper disable once EmptyGeneralCatchClause
+            catch
             {
+                // eat this
             }
             return e;
         }

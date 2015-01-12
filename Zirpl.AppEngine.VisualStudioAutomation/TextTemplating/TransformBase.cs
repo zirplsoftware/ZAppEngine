@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.FluentReflection;
 using Zirpl.Logging;
 using Zirpl.Reflection;
 
@@ -37,11 +38,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                return this._template.Access().Property<StringBuilder>("GenerationEnvironment");
+                return this._template.Property<StringBuilder>("GenerationEnvironment").Value;
             }
             set
             {
-                this._template.Access().Property("GenerationEnvironment", value);
+                this._template.Property("GenerationEnvironment").Value = value;
             }
         }
 
@@ -49,11 +50,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                var session = this._template.Access().Property<IDictionary<string, object>>("Session");
+                var session = this._template.Property<IDictionary<string, object>>("Session").Value;
                 if (session == null)
                 {
                     session = new TextTemplatingSession();
-                    this._template.Access().Property("Session", session);
+                    this._template.Property<IDictionary<string, object>>("Session").Value = session;
                 }
                 return session;
             }
@@ -61,12 +62,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         public void Initialize()
         {
-            this._template.Access().Invoke("Initialize");
+            this._template.Method("Initialize").Invoke();
         }
 
         public string TransformText()
         {
-            return this._template.Access().Invoke<String>("TransformText");
+            return this._template.Method<String>("TransformText").Invoke();
         }
 
         public override bool Equals(object obj)

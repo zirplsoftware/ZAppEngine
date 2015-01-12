@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.FluentReflection;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
@@ -31,10 +33,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         internal static bool EvaluateIsMaster(Object template)
         {
-            var accessor = template.Access();
-            if (accessor.HasGet<IDictionary<String, Object>>("Session"))
+            if (template.Property<IDictionary<String, Object>>("Session").Exists)
             {
-                var session = accessor.Property<IDictionary<String, Object>>("Session");
+                var session = template.Property<IDictionary<String, Object>>("Session").Value;
                 if (session != null
                     && session.ContainsKey("_IsMaster"))
                 {
@@ -48,10 +49,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
             // okay, let's evaulate for the first time
             var fullName = template.GetType().FullName;
-            return fullName.StartsWith("Microsoft.VisualStudio.TextTemplating.")
+            return fullName.StartsWith("Microsoft.VisualStudio.TextTemplating")
                    && fullName.EndsWith(".GeneratedTextTransformation")
-                   && accessor.HasGet<ITextTemplatingEngineHost>("Host")
-                   && accessor.Property<ITextTemplatingSession>("Host") != null;
+                   && template.Property<ITextTemplatingEngineHost>("Host").Exists
+                   && template.Property<ITextTemplatingEngineHost>("Host").Value != null
+                   && template.Method("TransformText").Exists
+                   && template.Method("Initialize").Exists
+                   && template.Property<StringBuilder>("GenerationEnvironment").Exists
+                   && template.Property<IDictionary<String, Object>>("Session").Exists;
         }
 
         public override ITransformHost Host

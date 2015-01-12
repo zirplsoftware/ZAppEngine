@@ -99,6 +99,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="Zirpl.FluentReflection">
+      <HintPath>..\packages\Zirpl.FluentReflection.1.0.0-CI00023\lib\net451\Zirpl.FluentReflection.dll</HintPath>
+    </Reference>
     <Reference Include="Zirpl.Logging.Portable, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Zirpl.Logging.2.1.2\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
@@ -125,13 +128,14 @@
     <Compile Include="AppGeneration\TextTemplating\TemplateProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateRunner.cs" />
     <Compile Include="AppGeneration\TextTemplating\OutputInfoProvider.cs" />
+    <Compile Include="AppGeneration\VisualStudio\DefaultTemplateExporter.cs" />
     <Compile Include="AppGeneration\VisualStudio\SolutionBuilder.cs" />
     <Compile Include="AppGeneration\_templates\DT_cs.cs">
       <DependentUpon>DT_cs.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="AppGeneration\_templates\ModelProject\DT_Enum_cs.cs">
+    <Compile Include="AppGeneration\_templates\_Model\DT_Enum_cs.cs">
       <DependentUpon>DT_Enum_cs.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -175,18 +179,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AppGeneration\Config\Parsing\Json\sample domain.zae" />
-    <None Include="AppGeneration\_templates\DT_cs.tt">
+    <EmbeddedResource Include="AppGeneration\_templates\DT_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_cs.cs</LastGenOutput>
       <FormatOutput>True</FormatOutput>
       <TransformOnBuild>True</TransformOnBuild>
-    </None>
-    <None Include="AppGeneration\_templates\ModelProject\DT_Enum_cs.tt">
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppGeneration\_templates\_Model\DT_Enum_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
       <FormatOutput>True</FormatOutput>
       <TransformOnBuild>True</TransformOnBuild>
-    </None>
+    </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

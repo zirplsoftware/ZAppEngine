@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.FluentReflection;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
@@ -16,7 +17,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get
             {
-                return this._transform.Template.Access().Property<ITextTemplatingEngineHost>("Host");
+                return this._transform.Template.Property<ITextTemplatingEngineHost>("Host").Value;
             }
         }
 

@@ -144,52 +144,68 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing
                 }
                 var relativeDirectory = Path.GetDirectoryName(path).SubstringAfterLastInstanceOf("_config\\");
                 var tempUniqueName = relativeDirectory.Replace('\\', '.') + "." + domainType.Name;
-                var whichProject = tempUniqueName.SubstringUntilFirstInstanceOf("Project.", StringComparison.InvariantCultureIgnoreCase);
-                var whichProjectLower = whichProject.ToLower();
-                if (whichProjectLower == "model")
+                if (tempUniqueName.StartsWith("_"))
                 {
-                    domainType.DestinationProjectIndex = app.ModelProjectIndex;
-                }
-                else if (whichProjectLower == "dataservice")
-                {
-                    domainType.DestinationProjectIndex = app.DataServiceProjectIndex;
-                }
-                else if (whichProjectLower == "service")
-                {
-                    domainType.DestinationProjectIndex = app.ServiceProjectIndex;
-                }
-                else if (whichProjectLower == "webcommon")
-                {
-                    domainType.DestinationProjectIndex = app.WebCommonProjectIndex;
-                }
-                else if (whichProjectLower == "web")
-                {
-                    domainType.DestinationProjectIndex = app.WebProjectIndex;
-                }
-                else if (whichProjectLower == "testscommon")
-                {
-                    domainType.DestinationProjectIndex = app.TestsCommonProjectIndex;
-                }
-                else if (whichProjectLower == "dataservicetests")
-                {
-                    domainType.DestinationProjectIndex = app.DataServiceTestsProjectIndex;
-                }
-                else if (whichProjectLower == "servicetests")
-                {
-                    domainType.DestinationProjectIndex = app.ServiceTestsProjectIndex;
+                    var whichProjectLower = tempUniqueName
+                        .SubstringAfterFirstInstanceOf("_")
+                        .SubstringUntilFirstInstanceOf(".")
+                        .ToLower();
+                    if (whichProjectLower == "model")
+                    {
+                        domainType.DestinationProjectIndex = app.ModelProjectIndex;
+                    }
+                    else if (whichProjectLower == "dataservice")
+                    {
+                        domainType.DestinationProjectIndex = app.DataServiceProjectIndex;
+                    }
+                    else if (whichProjectLower == "service")
+                    {
+                        domainType.DestinationProjectIndex = app.ServiceProjectIndex;
+                    }
+                    else if (whichProjectLower == "webcommon")
+                    {
+                        domainType.DestinationProjectIndex = app.WebCommonProjectIndex;
+                    }
+                    else if (whichProjectLower == "web")
+                    {
+                        domainType.DestinationProjectIndex = app.WebProjectIndex;
+                    }
+                    else if (whichProjectLower == "testscommon")
+                    {
+                        domainType.DestinationProjectIndex = app.TestsCommonProjectIndex;
+                    }
+                    else if (whichProjectLower == "dataservicetests")
+                    {
+                        domainType.DestinationProjectIndex = app.DataServiceTestsProjectIndex;
+                    }
+                    else if (whichProjectLower == "servicetests")
+                    {
+                        domainType.DestinationProjectIndex = app.ServiceTestsProjectIndex;
+                    }
+                    else
+                    {
+                        throw new Exception("DestinationProject unknown: " + whichProjectLower);
+                    }
                 }
                 else
                 {
-                    throw new Exception("DestinationProject unknown: " + whichProject);
+                    // default to Model
+                    domainType.DestinationProjectIndex = app.ModelProjectIndex;
                 }
                 if (domainType.IsPersistable
                     && domainType.DestinationProjectIndex != app.ModelProjectIndex)
                 {
                     throw new Exception("Persistable DomainTypes must be in the Model project");
                 }
-                var subNamespace = tempUniqueName.SubstringAfterFirstInstanceOf(whichProject + "Project.", StringComparison.InvariantCultureIgnoreCase)
-                                                        .SubstringUntilLastInstanceOf("." + domainType.Name)
-                                                        .SubstringUntilLastInstanceOf(domainType.Name);
+                String subNamespace = tempUniqueName;
+                if (subNamespace.StartsWith("_"))
+                {
+                    subNamespace = tempUniqueName
+                        .SubstringAfterFirstInstanceOf("_")
+                        .SubstringUntilFirstInstanceOf(".");
+                }
+                subNamespace = subNamespace.SubstringUntilLastInstanceOf("." + domainType.Name)
+                                           .SubstringUntilLastInstanceOf(domainType.Name);
                 domainType.Namespace = domainType.DestinationProjectIndex.Project.GetDefaultNamespace() +
                                         (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
                 if (!IsValidNamespace(domainType.Namespace))
@@ -876,18 +892,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing
             {
                 // if inheriting an interface, then this class HAS to have it
                 //
-                child.IsVersionable = domainType.IsVersionable
-                    ? true
-                    : child.IsVersionable;
-                child.IsAuditable = domainType.IsAuditable
-                    ? true
-                    : child.IsAuditable;
-                child.IsExtensible = domainType.IsExtensible
-                    ? true
-                    : child.IsExtensible;
-                child.IsMarkDeletable = domainType.IsMarkDeletable
-                    ? true
-                    : child.IsMarkDeletable;
+                child.IsVersionable = domainType.IsVersionable || child.IsVersionable;
+                child.IsAuditable = domainType.IsAuditable || child.IsAuditable;
+                child.IsExtensible = domainType.IsExtensible || child.IsExtensible;
+                child.IsMarkDeletable = domainType.IsMarkDeletable || child.IsMarkDeletable;
 
                 this.AlignInterfacePropertiesInHeirarchy(child);
                 // TODO: if we start using IsDeletable, IsUpdatable, IsInsertable as interfaces on the domain type, then we need to apply those here

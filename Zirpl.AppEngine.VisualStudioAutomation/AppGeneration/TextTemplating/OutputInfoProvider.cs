@@ -155,62 +155,86 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 
         private ProjectIndex GetProjectIndex(App app, String templateTypeNamespace, DomainType domainType)
         {
-            var whichProject = (templateTypeNamespace + ".")
-                .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase)
-                .SubstringUntilFirstInstanceOf("Project.", StringComparison.InvariantCultureIgnoreCase)
-                .ReplaceAtEnd(".", null)
-                .ToLowerInvariant();
-
-            var whichProjectLower = whichProject.ToLower();
-            if (whichProjectLower == "model")
+            var subNamespace = (templateTypeNamespace + ".")
+                .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase);
+            if (subNamespace.StartsWith("_"))
             {
-                return app.ModelProjectIndex;
-            }
-            else if (whichProjectLower == "dataservice")
-            {
-                return app.DataServiceProjectIndex;
-            }
-            else if (whichProjectLower == "service")
-            {
-                return app.ServiceProjectIndex;
-            }
-            else if (whichProjectLower == "webcommon")
-            {
-                return app.WebCommonProjectIndex;
-            }
-            else if (whichProjectLower == "web")
-            {
-                return app.WebProjectIndex;
-            }
-            else if (whichProjectLower == "testscommon")
-            {
-                return app.TestsCommonProjectIndex;
-            }
-            else if (whichProjectLower == "dataservicetests")
-            {
-                return app.DataServiceTestsProjectIndex;
-            }
-            else if (whichProjectLower == "servicetests")
-            {
-                return app.ServiceTestsProjectIndex;
-            }
-            else if (domainType != null)
-            {
-                return domainType.DestinationProjectIndex;
+                var whichProjectLower = subNamespace
+                    .SubstringAfterFirstInstanceOf("_")
+                    .SubstringUntilFirstInstanceOf(".")
+                    .ToLower();
+                if (whichProjectLower == "model")
+                {
+                    return app.ModelProjectIndex;
+                }
+                else if (whichProjectLower == "dataservice")
+                {
+                    return app.DataServiceProjectIndex;
+                }
+                else if (whichProjectLower == "service")
+                {
+                    return app.ServiceProjectIndex;
+                }
+                else if (whichProjectLower == "webcommon")
+                {
+                    return app.WebCommonProjectIndex;
+                }
+                else if (whichProjectLower == "web")
+                {
+                    return app.WebProjectIndex;
+                }
+                else if (whichProjectLower == "testscommon")
+                {
+                    return app.TestsCommonProjectIndex;
+                }
+                else if (whichProjectLower == "dataservicetests")
+                {
+                    return app.DataServiceTestsProjectIndex;
+                }
+                else if (whichProjectLower == "servicetests")
+                {
+                    return app.ServiceTestsProjectIndex;
+                }
+                else if (domainType != null)
+                {
+                    return domainType.DestinationProjectIndex;
+                }
+                else
+                {
+                    return app.CodeGenerationProjectIndex;
+                }
             }
             else
             {
-                return app.CodeGenerationProjectIndex;
+                if (domainType != null)
+                {
+                    return domainType.DestinationProjectIndex;
+                }
+                else
+                {
+                    return app.CodeGenerationProjectIndex;
+                }
             }
         }
 
         private String GetFolderPathWithinProject(String templateTypeNamespace, DomainType domainType)
         {
-            var immediateFolder = (templateTypeNamespace + ".")
-                .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase)
-                .SubstringAfterFirstInstanceOf("Project.", StringComparison.InvariantCultureIgnoreCase)
-                .ReplaceAtEnd(".", null)
-                .Replace('.', '\\');
+            String immediateFolder;
+            var subNamespace = (templateTypeNamespace + ".")
+                .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase);
+            if (subNamespace.StartsWith("_"))
+            {
+                immediateFolder = subNamespace
+                    .SubstringAfterFirstInstanceOf(".")
+                    .ReplaceAtEnd(".", null)
+                    .Replace('.', '\\');
+            }
+            else
+            {
+                immediateFolder = subNamespace
+                    .ReplaceAtEnd(".", null)
+                    .Replace('.', '\\');
+            }
 
             if (domainType != null)
             {

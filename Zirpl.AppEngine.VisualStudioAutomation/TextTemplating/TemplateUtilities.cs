@@ -18,7 +18,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 var masterTransform = new MasterTransform(template);
                 if (!_initialized)
                 {
-                    LogFactory.Initialize((IServiceProvider)masterTransform.Host);
+                    LogFactory.Initialize((IServiceProvider)masterTransform.Host.Host);
                     _initialized = true;
                 }
                 return masterTransform;

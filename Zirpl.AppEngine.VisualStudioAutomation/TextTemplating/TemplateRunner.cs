@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zirpl.FluentReflection;
 using Zirpl.Logging;
 using Zirpl.Reflection;
 
@@ -25,13 +26,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
                 childTransform.Initialize();
 
-                if (!template.Access().HasGet<bool>("ShouldTransform")
-                    || template.Access().Property<bool>("ShouldTransform"))
+                if (!template.Property<bool>("ShouldTransform").Exists
+                    || template.Property<bool>("ShouldTransform").Value)
                 {
                     OutputInfo outputFile = null;
-                    if (template.Access().HasGet<OutputInfo>("OutputFile"))
+                    if (template.Property<OutputInfo>("OutputFile").Exists)
                     {
-                        outputFile = template.Access().Property<OutputInfo>("OutputFile");
+                        outputFile = template.Property<OutputInfo>("OutputFile").Value;
                     }
                     if (outputFile == null
                         && outputFileProvider != null)

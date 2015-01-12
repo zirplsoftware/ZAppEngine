@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.FluentReflection;
 using Zirpl.Logging;
 using Zirpl.Reflection;
 
@@ -23,7 +24,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             if (transform == null) throw new ArgumentNullException("transform");
             if (template == null) throw new ArgumentNullException("template");
 
-            if (template.Access().HasGet<DomainType>("DomainType"))
+            if (template.Property<DomainType>("DomainType").Exists)
             {
                 // once per DomainType
                 //
