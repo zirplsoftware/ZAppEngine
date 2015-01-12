@@ -25,14 +25,14 @@
         <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
         <dependency id="EnterpriseLibrary.TransientFaultHandling.Data" version="6.0.1304.1"  />
         <dependency id="FluentValidation" version="5.5.0.0" />
-        <dependency id="Zirpl.Logging" version="2.1.2"  />
+        <dependency id="Zirpl.Logging" version="2.1.4"  />
         <dependency id="Zirpl.Common" version="$version$"  />
       </group>
       <group targetFramework="portable-net40+sl5+win8+wpa81+wp8">
         <dependency id="Autofac" version="3.5.2"  />
         <dependency id="AutoMapper" version="3.3.0"  />
         <dependency id="FluentValidation" version="5.5.0.0" />
-        <dependency id="Zirpl.Logging" version="2.1.2"  />
+        <dependency id="Zirpl.Logging" version="2.1.4"  />
         <dependency id="Zirpl.Common" version="$version$"  />
       </group>
     </dependencies>

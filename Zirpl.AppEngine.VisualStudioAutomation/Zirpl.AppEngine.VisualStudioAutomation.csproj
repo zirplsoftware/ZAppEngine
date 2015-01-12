@@ -99,12 +99,13 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="Zirpl.FluentReflection">
-      <HintPath>..\packages\Zirpl.FluentReflection.1.0.0-CI00023\lib\net451\Zirpl.FluentReflection.dll</HintPath>
-    </Reference>
-    <Reference Include="Zirpl.Logging.Portable, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Zirpl.FluentReflection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Zirpl.Logging.2.1.2\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
+      <HintPath>..\packages\Zirpl.FluentReflection.1.0.0.25-beta\lib\net451\Zirpl.FluentReflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Zirpl.Logging.Portable, Version=2.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Zirpl.Logging.2.1.4\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

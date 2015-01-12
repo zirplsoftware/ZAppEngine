@@ -27,7 +27,7 @@
       <dependency id="Microsoft.AspNet.WebPages" version="3.2.2" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
       <dependency id="NUnit" version="2.6.3" />
-      <dependency id="Zirpl.Logging" version="2.1.2" />
+      <dependency id="Zirpl.Logging" version="2.1.4" />
       <dependency id="Zirpl.AppEngine" version="$version$"  />
       <dependency id="Zirpl.AppEngine.EntityFramework" version="$version$"  />
       <dependency id="Zirpl.AppEngine.Web" version="$version$"  />

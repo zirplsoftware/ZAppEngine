@@ -22,7 +22,7 @@
       <dependency id="EnterpriseLibrary.TransientFaultHandling" version="6.0.1304.0"  />
       <dependency id="EntityFramework" version="6.1.2"  />
       <dependency id="FluentValidation" version="5.5.0.0"  />
-      <dependency id="Zirpl.Logging" version="2.1.2" />
+      <dependency id="Zirpl.Logging" version="2.1.4" />
       <dependency id="Zirpl.AppEngine" version="$version$"  />
       <dependency id="Zirpl.Common" version="$version$"  />
     </dependencies>

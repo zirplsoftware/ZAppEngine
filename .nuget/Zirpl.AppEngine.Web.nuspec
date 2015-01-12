@@ -35,7 +35,7 @@
       <dependency id="Newtonsoft.Json" version="6.0.8" />
       <dependency id="System.Spatial" version="5.6.3" />
       <dependency id="WindowsAzure.Storage" version="4.3.0" />
-      <dependency id="Zirpl.Logging" version="2.1.2" />
+      <dependency id="Zirpl.Logging" version="2.1.4" />
       <dependency id="Zirpl.AppEngine" version="$version$"  />
       <dependency id="Zirpl.Common" version="$version$"  />
     </dependencies>

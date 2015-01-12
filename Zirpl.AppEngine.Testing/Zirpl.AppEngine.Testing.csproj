@@ -96,9 +96,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JustMock.2014.3.1204.3\lib\Net35\Telerik.JustMock.dll</HintPath>
     </Reference>
-    <Reference Include="Zirpl.Logging.Portable, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Zirpl.Logging.Portable, Version=2.1.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Zirpl.Logging.2.1.2\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
+      <HintPath>..\packages\Zirpl.Logging.2.1.4\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
