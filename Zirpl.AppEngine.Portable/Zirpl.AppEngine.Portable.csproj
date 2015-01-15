@@ -57,18 +57,6 @@
     <Compile Include="..\Zirpl.AppEngine\AppGeneration\Relationship.cs">
       <Link>AppGeneration\Relationship.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\AppGeneration\_templates\DT_cs.cs">
-      <Link>AppGeneration\_templates\DT_cs.cs</Link>
-      <DependentUpon>DT_cs.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\AppGeneration\_templates\_Model\DT_Enum_cs.cs">
-      <Link>AppGeneration\_templates\_Model\DT_Enum_cs.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DT_Enum_cs.tt</DependentUpon>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\DataService\Csv\EntityExporter.cs">
       <Link>DataService\Csv\EntityExporter.cs</Link>
     </Compile>
@@ -448,16 +436,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Zirpl.AppEngine\AppGeneration\_templates\DT_cs.tt">
-      <Link>AppGeneration\_templates\DT_cs.tt</Link>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DT_cs.cs</LastGenOutput>
-    </None>
-    <None Include="..\Zirpl.AppEngine\AppGeneration\_templates\_Model\DT_Enum_cs.tt">
-      <Link>AppGeneration\_templates\_Model\DT_Enum_cs.tt</Link>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -472,7 +450,7 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
+      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
