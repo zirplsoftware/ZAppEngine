@@ -1,13 +1,7 @@
-<#@ template language="C#" linePragmas="false" #>
-<#@ import namespace="System" #>
-<#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #>
+﻿<#@ template language="C#" linePragmas="false" #>
 <#@ import namespace="System.Linq" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config" #>
-<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.App" name="App" #>
-<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.DomainType" name="DomainType" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.DomainType" name="DomainType" #>
 using System;
 using System.Collections.Generic;
 using System.Linq;

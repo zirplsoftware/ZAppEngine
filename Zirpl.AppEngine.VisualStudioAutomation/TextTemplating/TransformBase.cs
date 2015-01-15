@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.FluentReflection;
 using Zirpl.Logging;
 using Zirpl.Reflection;
@@ -161,6 +162,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             new Action(() =>
             {
+                if (templateProvider is TemplateProvider)
+                {
+                    ((TemplateProvider)templateProvider).LogAssembliesToSearch();
+                }
                 RunTemplates(
                     templateRunner,
                     templateProvider.GetTemplateTypes(),

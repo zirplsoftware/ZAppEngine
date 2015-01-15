@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
+using Zirpl.AppEngine.AppGeneration;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.FluentReflection;
 using Zirpl.Logging;
@@ -31,6 +31,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 this.GetLog().Debug("Calling template once per domain type: " + template.GetType().FullName);
                 foreach (var domainType in _app.DomainTypes)
                 {
+                    transform.GetChild(template).Session.Clear();
+                    transform.GetChild(template).Initialize();
                     var session = new Dictionary<String, Object>();
                     if (sessionParameters != null)
                     {
@@ -49,6 +51,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 // once per App
                 //
                 this.GetLog().Debug("Calling template once: " + template.GetType().FullName);
+                transform.GetChild(template).Session.Clear();
+                transform.GetChild(template).Initialize();
                 var session = new Dictionary<String, Object>();
                 if (sessionParameters != null)
                 {
@@ -59,6 +63,30 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 }
                 session.Add("App", _app);
                 base.RunTemplate(transform, template, session, outputFileProvider);
+            }
+        }
+
+        protected override void LogShouldTransformAsFalse(ITransform childTransform)
+        {
+            if (childTransform.Template.Property<DomainType>("DomainType").Exists)
+            {
+                this.GetLog().DebugFormat("   Not Transforming for {0}", ((DomainType)childTransform.Session["DomainType"]).FullName);
+            }
+            else
+            {
+                base.LogShouldTransformAsFalse(childTransform);
+            }
+        }
+
+        protected override void LogTransforming(ITransform childTransform)
+        {
+            if (childTransform.Template.Property<DomainType>("DomainType").Exists)
+            {
+                this.GetLog().DebugFormat("   Transforming for {0}", ((DomainType)childTransform.Session["DomainType"]).FullName);
+            }
+            else
+            {
+                base.LogShouldTransformAsFalse(childTransform);
             }
         }
     }

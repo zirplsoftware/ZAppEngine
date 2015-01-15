@@ -14,7 +14,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         }
         public String FileNameWithoutExtension { get; set; }
         public String FileExtension { get; set; }
-        public ProjectIndex DestinationProjectIndex { get; set; }
+        public String DestinationProjectFullName { get; set; }
         public String FolderPathWithinProject { get; set; }
         public BuildActionTypeEnum BuildAction { get; set; }
         public string CustomTool { get; set; }

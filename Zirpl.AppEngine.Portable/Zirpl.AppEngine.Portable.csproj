@@ -39,6 +39,36 @@
     <DocumentationFile>bin\Release\Zirpl.AppEngine.Portable.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Zirpl.AppEngine\AppGeneration\App.cs">
+      <Link>AppGeneration\App.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\AppGeneration\DomainProperty.cs">
+      <Link>AppGeneration\DomainProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\AppGeneration\DomainPropertyExtensions.cs">
+      <Link>AppGeneration\DomainPropertyExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\AppGeneration\DomainType.cs">
+      <Link>AppGeneration\DomainType.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\AppGeneration\EnumValue.cs">
+      <Link>AppGeneration\EnumValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\AppGeneration\Relationship.cs">
+      <Link>AppGeneration\Relationship.cs</Link>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\AppGeneration\_templates\DT_cs.cs">
+      <Link>AppGeneration\_templates\DT_cs.cs</Link>
+      <DependentUpon>DT_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="..\Zirpl.AppEngine\AppGeneration\_templates\_Model\DT_Enum_cs.cs">
+      <Link>AppGeneration\_templates\_Model\DT_Enum_cs.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DT_Enum_cs.tt</DependentUpon>
+    </Compile>
     <Compile Include="..\Zirpl.AppEngine\DataService\Csv\EntityExporter.cs">
       <Link>DataService\Csv\EntityExporter.cs</Link>
     </Compile>
@@ -418,6 +448,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Zirpl.AppEngine\AppGeneration\_templates\DT_cs.tt">
+      <Link>AppGeneration\_templates\DT_cs.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DT_cs.cs</LastGenOutput>
+    </None>
+    <None Include="..\Zirpl.AppEngine\AppGeneration\_templates\_Model\DT_Enum_cs.tt">
+      <Link>AppGeneration\_templates\_Model\DT_Enum_cs.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -425,6 +465,9 @@
       <Project>{4f22a0b5-2fa7-42d2-b317-16ebf34782bd}</Project>
       <Name>Zirpl.Common.Portable</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ProjectExtensions>

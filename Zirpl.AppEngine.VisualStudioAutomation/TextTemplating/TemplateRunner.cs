@@ -16,15 +16,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             try
             {
                 var childTransform = transform.GetChild(template);
-                var session = childTransform.Session;
                 if (sessionParameters != null)
                 {
+                    var session = childTransform.Session;
                     foreach (var pair in sessionParameters)
                     {
                         session.Add(pair.Key, pair.Value);
                     }
+                    childTransform.Initialize();
                 }
-                childTransform.Initialize();
 
                 if (!template.Property<bool>("ShouldTransform").Exists
                     || template.Property<bool>("ShouldTransform").Value)
@@ -40,7 +40,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                         outputFile = outputFileProvider.GetOutputInfo(childTransform);
                     }
 
-                    this.GetLog().Debug(String.Format("      Transforming template: " + template.GetType().FullName));
+                    this.LogTransforming(childTransform);
                     if (outputFile != null)
                     {
                         childTransform.FileManager.StartFile(childTransform, outputFile);
@@ -56,7 +56,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
                 else
                 {
-                    this.GetLog().Debug("      ShouldTransform == false. Not transforming");
+                    this.LogShouldTransformAsFalse(childTransform);
                 }
 
             }
@@ -72,6 +72,16 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 }
                 throw;
             }
+        }
+
+        protected virtual void LogShouldTransformAsFalse(ITransform childTransform)
+        {
+            this.GetLog().Debug("   Not transforming");
+        }
+
+        protected virtual void LogTransforming(ITransform childTransform)
+        {
+            this.GetLog().Debug(String.Format("   Transforming"));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config;
+using System.Linq;
+using Zirpl.AppEngine.AppGeneration;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
@@ -25,14 +26,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
 
             var fileName = GetFileName(transform.Template.GetType().Name, domainType == null ? null : domainType.Name);
-            var destinationProject = GetProjectIndex(app, transform.Template.GetType().Namespace, domainType);
-            var folder = GetFolderPathWithinProject(transform.Template.GetType().Name, domainType);
+            var destinationProject = GetProjectFullName(transform, transform.Template.GetType().Namespace, domainType) ?? transform.Host.GetProjectItem().ContainingProject.FullName;
+            var folder = GetFolderPathWithinProject(transform, transform.Template.GetType().Name, domainType);
 
             var outputFile = new OutputInfo()
             {
                 FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
                 FileExtension = Path.GetExtension(fileName),
-                DestinationProjectIndex = destinationProject,
+                DestinationProjectFullName = destinationProject,
                 FolderPathWithinProject = folder
             };
             outputFile.MatchBuildActionToFileExtension();
@@ -153,71 +154,35 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
         }
 
-        private ProjectIndex GetProjectIndex(App app, String templateTypeNamespace, DomainType domainType)
+        private String GetProjectFullName(ITransform transform, String templateTypeNamespace, DomainType domainType)
         {
             var subNamespace = (templateTypeNamespace + ".")
                 .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase);
             if (subNamespace.StartsWith("_"))
-            {
-                var whichProjectLower = subNamespace
+            { 
+                subNamespace = subNamespace
                     .SubstringAfterFirstInstanceOf("_")
-                    .SubstringUntilFirstInstanceOf(".")
-                    .ToLower();
-                if (whichProjectLower == "model")
-                {
-                    return app.ModelProjectIndex;
-                }
-                else if (whichProjectLower == "dataservice")
-                {
-                    return app.DataServiceProjectIndex;
-                }
-                else if (whichProjectLower == "service")
-                {
-                    return app.ServiceProjectIndex;
-                }
-                else if (whichProjectLower == "webcommon")
-                {
-                    return app.WebCommonProjectIndex;
-                }
-                else if (whichProjectLower == "web")
-                {
-                    return app.WebProjectIndex;
-                }
-                else if (whichProjectLower == "testscommon")
-                {
-                    return app.TestsCommonProjectIndex;
-                }
-                else if (whichProjectLower == "dataservicetests")
-                {
-                    return app.DataServiceTestsProjectIndex;
-                }
-                else if (whichProjectLower == "servicetests")
-                {
-                    return app.ServiceTestsProjectIndex;
-                }
-                else if (domainType != null)
-                {
-                    return domainType.DestinationProjectIndex;
-                }
-                else
-                {
-                    return app.CodeGenerationProjectIndex;
-                }
+                    .SubstringUntilFirstInstanceOf(".");
+                var project = transform.GetDTE()
+                    .GetAllProjects()
+                    .SingleOrDefault(
+                        o => o.FullName.EndsWith(subNamespace + ".csproj", StringComparison.InvariantCultureIgnoreCase));
+                return project == null ? null : project.FullName;
             }
             else
             {
                 if (domainType != null)
                 {
-                    return domainType.DestinationProjectIndex;
+                    return domainType.DestinationProjectFullName;
                 }
                 else
                 {
-                    return app.CodeGenerationProjectIndex;
+                    return null;
                 }
             }
         }
 
-        private String GetFolderPathWithinProject(String templateTypeNamespace, DomainType domainType)
+        private String GetFolderPathWithinProject(ITransform transform, String templateTypeNamespace, DomainType domainType)
         {
             String immediateFolder;
             var subNamespace = (templateTypeNamespace + ".")
@@ -241,7 +206,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                 // combine the immediate folder of the template
                 // with the subnamespace of the DomainType
                 //
-                immediateFolder = Path.Combine(immediateFolder, domainType.DestinationProjectIndex.Project.GetFolderPathFromNamespace(domainType.Namespace).Replace('.', '\\'));
+                var project = transform.GetDTE().GetAllProjects().Single(o => o.FullName.ToLowerInvariant() == domainType.DestinationProjectFullName.ToLowerInvariant());
+                immediateFolder = Path.Combine(immediateFolder, project.GetFolderPathFromNamespace(domainType.Namespace).Replace('.', '\\'));
             }
             return immediateFolder;
         }

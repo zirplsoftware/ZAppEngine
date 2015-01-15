@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
+namespace Zirpl.AppEngine.AppGeneration
 {
     public class DomainType
     {
@@ -15,7 +14,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
         }
 
         public String ConfigFilePath { get; set; }
-        public ProjectIndex DestinationProjectIndex { get; set; }
+        public String DestinationProjectFullName { get; set; }
 
         public String Name { get; set; }
         public String Namespace { get; set; }

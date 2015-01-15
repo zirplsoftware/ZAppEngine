@@ -47,7 +47,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             if (file == null) throw new ArgumentNullException("file");
 
             if (String.IsNullOrEmpty(file.FileNameWithoutExtension)
-                || file.DestinationProjectIndex == null)
+                || file.DestinationProjectFullName == null)
             {
                 throw new ArgumentException("Cannot start a file without at least a file name and a Destination project");
             }
@@ -66,45 +66,23 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             currentTransform.GenerationEnvironment = this._hostTransformOriginalGenerationEnvironment;
         }
 
-        public void StartCSharpFile(ITransform currentTransform, String fileName, ProjectIndex destinationProjectIndex = null)
-        {
-            StartCSharpFile(currentTransform, fileName, null, destinationProjectIndex);
-        }
 
-        public void StartCSharpFile(ITransform currentTransform, String fileName, String folderWithinProject = null, ProjectIndex destinationProjectIndex = null)
+        public void StartCSharpFile(ITransform currentTransform, String fileName, String destinationProjectFullName = null, String folderWithinProject = null)
         {
             if (!Path.HasExtension(fileName))
             {
                 fileName += ".cs";
             }
-            StartFile(currentTransform, fileName, folderWithinProject, destinationProjectIndex, BuildActionTypeEnum.Compile);
+            StartFile(currentTransform, fileName, destinationProjectFullName, folderWithinProject, BuildActionTypeEnum.Compile);
         }
 
-        public void StartCSharpFile(ITransform currentTransform, String fileName, String folderWithinProject = null, String destinationProjectName = null)
-        {
-            if (!Path.HasExtension(fileName))
-            {
-                fileName += ".cs";
-            }
-            StartFile(currentTransform, fileName, folderWithinProject, destinationProjectName, BuildActionTypeEnum.Compile);
-        }
-
-        public void StartFile(ITransform currentTransform, String fileName, String folderWithinProject = null, String destinationProjectName = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
-        {
-            var project = String.IsNullOrEmpty(destinationProjectName)
-                ? null
-                : currentTransform.GetDTE().Solution.GetProject(destinationProjectName).GetIndex();
-
-            StartFile(currentTransform, fileName, folderWithinProject, project, buildAction, customTool, autoFormat, overwrite, encoding);
-        }
-
-        public void StartFile(ITransform currentTransform, String fileName, String folderWithinProject = null, ProjectIndex destinationProjectIndex = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
+        public void StartFile(ITransform currentTransform, String fileName, String destinationProjectFullName = null, String folderWithinProject = null, BuildActionTypeEnum? buildAction = null, String customTool = null, bool? autoFormat = null, bool? overwrite = null, Encoding encoding = null)
         {
             var outputFile = new OutputInfo()
             {
                 FileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName),
                 FileExtension = Path.GetExtension(fileName),
-                DestinationProjectIndex = destinationProjectIndex ?? currentTransform.Host.GetProjectItem().ContainingProject.GetIndex(),
+                DestinationProjectFullName = destinationProjectFullName ?? currentTransform.Host.GetProjectItem().ContainingProject.FullName,
                 FolderPathWithinProject = folderWithinProject,
                 CustomTool = customTool
             };
@@ -147,7 +125,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 //
                 // clean up template placeholders
 
-                var project = this._currentOutputInfo.DestinationProjectIndex.Project;
+                var project = _hostTransform.GetDTE().GetAllProjects().SingleOrDefault(o => o.FullName.ToLowerInvariant() == this._currentOutputInfo.DestinationProjectFullName.ToLowerInvariant());
+                if (project == null)
+                {
+                    throw new Exception("Could not find project: " + this._currentOutputInfo.DestinationProjectFullName);   
+                }
                 var fullFilePath = Path.Combine(Path.GetDirectoryName(project.FullName),
                     @"_auto\", 
                     this._currentOutputInfo.FolderPathWithinProject ?? "",
@@ -184,7 +166,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     }
                 }
 
-                this.GetLog().Debug("   Writing file: " + fullFilePath);
+                this.GetLog().Debug("      Writing file: " + fullFilePath);
                 //File.WriteAllText(fullFilePath, content);
                 var item = this._visualStudio.Solution.GetProjectItem(fullFilePath);
                 if (item == null)

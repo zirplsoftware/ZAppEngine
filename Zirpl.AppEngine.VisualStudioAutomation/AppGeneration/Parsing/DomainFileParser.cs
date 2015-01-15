@@ -3,18 +3,28 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using EnvDTE;
+using EnvDTE80;
 using Newtonsoft.Json;
+using Zirpl.AppEngine.AppGeneration;
 using Zirpl.AppEngine.Model.Metadata;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing.Json;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.Collections;
 using Zirpl.IO;
 using Zirpl.Logging;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
 {
     internal sealed class DomainFileParser
     {
+        private readonly DTE2 _visualStudio;
+
+        internal DomainFileParser(DTE2 visualStudio)
+        {
+            _visualStudio = visualStudio;
+        }
+
         /// <summary> 
         /// This method currently assumes the following conventions
         /// - all Domain types are defined in files with extension .domain.zae
@@ -28,12 +38,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing
         /// <returns></returns>
         internal void ParseDomainTypes(App app, IEnumerable<string> domainFilePaths)
         {
-            var jsonDictionary = new Dictionary<DomainType, Config.Parsing.Json.JsonTypes.DomainTypeJson>();
+            var jsonDictionary = new Dictionary<DomainType, JsonTypes.DomainTypeJson>();
 
             #region create DomainTypeInfos specified by directly by the files
             foreach (var path in domainFilePaths)
             {
-                this.GetLog().Debug("Parsing domain file: " + path);
                 JsonTypes.DomainTypeJson json = null;
                 using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
@@ -144,70 +153,47 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing
                 }
                 var relativeDirectory = Path.GetDirectoryName(path).SubstringAfterLastInstanceOf("_config\\");
                 var tempUniqueName = relativeDirectory.Replace('\\', '.') + "." + domainType.Name;
+                Project destinationProject;
                 if (tempUniqueName.StartsWith("_"))
                 {
-                    var whichProjectLower = tempUniqueName
+                    var projectSuffix = tempUniqueName
                         .SubstringAfterFirstInstanceOf("_")
                         .SubstringUntilFirstInstanceOf(".")
-                        .ToLower();
-                    if (whichProjectLower == "model")
+                        .Replace("_", ".");
+                    destinationProject = _visualStudio.GetAllProjects().SingleOrDefault(o => o.FullName.EndsWith(projectSuffix + ".csproj", StringComparison.InvariantCultureIgnoreCase));
+                    if (destinationProject == null)
                     {
-                        domainType.DestinationProjectIndex = app.ModelProjectIndex;
-                    }
-                    else if (whichProjectLower == "dataservice")
-                    {
-                        domainType.DestinationProjectIndex = app.DataServiceProjectIndex;
-                    }
-                    else if (whichProjectLower == "service")
-                    {
-                        domainType.DestinationProjectIndex = app.ServiceProjectIndex;
-                    }
-                    else if (whichProjectLower == "webcommon")
-                    {
-                        domainType.DestinationProjectIndex = app.WebCommonProjectIndex;
-                    }
-                    else if (whichProjectLower == "web")
-                    {
-                        domainType.DestinationProjectIndex = app.WebProjectIndex;
-                    }
-                    else if (whichProjectLower == "testscommon")
-                    {
-                        domainType.DestinationProjectIndex = app.TestsCommonProjectIndex;
-                    }
-                    else if (whichProjectLower == "dataservicetests")
-                    {
-                        domainType.DestinationProjectIndex = app.DataServiceTestsProjectIndex;
-                    }
-                    else if (whichProjectLower == "servicetests")
-                    {
-                        domainType.DestinationProjectIndex = app.ServiceTestsProjectIndex;
-                    }
-                    else
-                    {
-                        throw new Exception("DestinationProject unknown: " + whichProjectLower);
+                        throw new Exception("Could not find project ending with: " + projectSuffix);
                     }
                 }
                 else
                 {
                     // default to Model
-                    domainType.DestinationProjectIndex = app.ModelProjectIndex;
+                    destinationProject = _visualStudio.GetAllProjects().SingleOrDefault(o => o.FullName.EndsWith("Model.csproj", StringComparison.InvariantCultureIgnoreCase));
+                    if (destinationProject == null)
+                    {
+                        throw new Exception("Could not find project ending with 'Model'");
+                    }
                 }
+
+
                 if (domainType.IsPersistable
-                    && domainType.DestinationProjectIndex != app.ModelProjectIndex)
+                    && !destinationProject.FullName.EndsWith("Model.csproj", StringComparison.InvariantCultureIgnoreCase))
                 {
                     throw new Exception("Persistable DomainTypes must be in the Model project");
                 }
+                domainType.DestinationProjectFullName = destinationProject.FullName;
+
                 String subNamespace = tempUniqueName;
                 if (subNamespace.StartsWith("_"))
                 {
-                    subNamespace = tempUniqueName
-                        .SubstringAfterFirstInstanceOf("_")
-                        .SubstringUntilFirstInstanceOf(".");
+                    subNamespace = subNamespace.SubstringAfterFirstInstanceOf(".");
                 }
                 subNamespace = subNamespace.SubstringUntilLastInstanceOf("." + domainType.Name)
                                            .SubstringUntilLastInstanceOf(domainType.Name);
-                domainType.Namespace = domainType.DestinationProjectIndex.Project.GetDefaultNamespace() +
-                                        (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
+
+                domainType.Namespace = destinationProject.GetDefaultNamespace() + (String.IsNullOrEmpty(subNamespace) ? "" : ".") + subNamespace;
+    
                 if (!IsValidNamespace(domainType.Namespace))
                 {
                     throw new Exception(String.Format("Invalid resulting Namespace of '{0}' at: {1}", domainType.Namespace, domainType.ConfigFilePath));
@@ -301,7 +287,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing
                         || !domainType.InheritsFrom.IsExtensible))
                 {
                     var extendedFieldValueDomainType = new DomainType();
-                    extendedFieldValueDomainType.DestinationProjectIndex = domainType.DestinationProjectIndex;
+                    extendedFieldValueDomainType.DestinationProjectFullName = domainType.DestinationProjectFullName;
                     extendedFieldValueDomainType.Name = domainType.Name + "ExtendedFieldValue";
                     extendedFieldValueDomainType.PluralName = extendedFieldValueDomainType.Name + "s";
                     extendedFieldValueDomainType.Namespace = domainType.Namespace;

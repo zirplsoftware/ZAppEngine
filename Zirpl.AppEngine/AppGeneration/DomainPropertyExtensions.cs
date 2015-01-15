@@ -2,7 +2,7 @@
 using System.Linq;
 using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config
+namespace Zirpl.AppEngine.AppGeneration
 {
     public static class DomainPropertyExtensions
     {

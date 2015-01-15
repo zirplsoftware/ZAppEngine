@@ -1,6 +1,6 @@
 ﻿using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Config.Parsing.Json
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing.Json
 {
     internal sealed partial class JsonTypes
     {

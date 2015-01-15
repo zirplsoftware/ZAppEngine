@@ -6,7 +6,7 @@ using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.Logging;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
     internal sealed class SolutionBuilder
     {
@@ -35,12 +35,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.VisualStudio
                 //"Web.Tests",
             };
 
+            this.GetLog().Debug("Generating projects:");
+
             foreach (var suffix in projectSuffixes)
             {
                 var projectName = projectNamespacePrefix + suffix;
                 if (transform.GetDTE().Solution.GetProject(projectName) == null)
                 {
                     this.CreateProject(transform, projectName);
+                }
+                else
+                {
+                    this.GetLog().DebugFormat("   Project already exists: {0}", projectName);
                 }
             }
         }

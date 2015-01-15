@@ -101,7 +101,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="Zirpl.FluentReflection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Zirpl.FluentReflection.1.0.0.25-beta\lib\net451\Zirpl.FluentReflection.dll</HintPath>
+      <HintPath>..\packages\Zirpl.FluentReflection.1.0.0.29-beta\lib\net451\Zirpl.FluentReflection.dll</HintPath>
     </Reference>
     <Reference Include="Zirpl.Logging.Portable, Version=2.1.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,35 +112,19 @@
     <Compile Include="AppGeneration\AppGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AppGeneration\AppProvider.cs" />
-    <Compile Include="AppGeneration\Config\App.cs" />
-    <Compile Include="AppGeneration\Config\DomainProperty.cs" />
-    <Compile Include="AppGeneration\Config\DomainPropertyExtensions.cs" />
-    <Compile Include="AppGeneration\Config\DomainType.cs" />
-    <Compile Include="AppGeneration\Config\EnumValue.cs" />
-    <Compile Include="AppGeneration\Config\ConfigFileException.cs" />
-    <Compile Include="AppGeneration\Config\Parsing\DomainFileParser.cs" />
-    <Compile Include="AppGeneration\Config\Parsing\Json\DomainTypeJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsing\Json\EnumValueJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsing\Json\IdJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsing\Json\PropertyJson.cs" />
-    <Compile Include="AppGeneration\Config\Parsing\Json\RelationshipJson.cs" />
-    <Compile Include="AppGeneration\Config\Relationship.cs" />
+    <Compile Include="AppGeneration\Parsing\AppProvider.cs" />
+    <Compile Include="AppGeneration\Parsing\ConfigFileException.cs" />
+    <Compile Include="AppGeneration\Parsing\DomainFileParser.cs" />
+    <Compile Include="AppGeneration\Parsing\Json\DomainTypeJson.cs" />
+    <Compile Include="AppGeneration\Parsing\Json\EnumValueJson.cs" />
+    <Compile Include="AppGeneration\Parsing\Json\IdJson.cs" />
+    <Compile Include="AppGeneration\Parsing\Json\PropertyJson.cs" />
+    <Compile Include="AppGeneration\Parsing\Json\RelationshipJson.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateRunner.cs" />
     <Compile Include="AppGeneration\TextTemplating\OutputInfoProvider.cs" />
-    <Compile Include="AppGeneration\VisualStudio\DefaultTemplateExporter.cs" />
-    <Compile Include="AppGeneration\VisualStudio\SolutionBuilder.cs" />
-    <Compile Include="AppGeneration\_templates\DT_cs.cs">
-      <DependentUpon>DT_cs.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="AppGeneration\_templates\_Model\DT_Enum_cs.cs">
-      <DependentUpon>DT_Enum_cs.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
+    <Compile Include="AppGeneration\DefaultTemplateExporter.cs" />
+    <Compile Include="AppGeneration\SolutionBuilder.cs" />
     <Compile Include="TextTemplating\ITransformHost.cs" />
     <Compile Include="TextTemplating\MasterTransform.cs" />
     <Compile Include="TextTemplating\TemplateRunner.cs" />
@@ -156,7 +140,6 @@
     <Compile Include="TextTemplating\ITransform.cs" />
     <Compile Include="TextTemplating\OutputFileManager.cs" />
     <Compile Include="TextTemplating\ProjectItemIndex.cs" />
-    <Compile Include="TextTemplating\ProjectIndex.cs" />
     <Compile Include="VisualStudio\TransformExtensions.cs" />
     <Compile Include="TextTemplating\ChildTransform.cs" />
     <Compile Include="TextTemplating\BuildActionTypeEnum.cs" />
@@ -179,19 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AppGeneration\Config\Parsing\Json\sample domain.zae" />
-    <EmbeddedResource Include="AppGeneration\_templates\DT_cs.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DT_cs.cs</LastGenOutput>
-      <FormatOutput>True</FormatOutput>
-      <TransformOnBuild>True</TransformOnBuild>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AppGeneration\_templates\_Model\DT_Enum_cs.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
-      <FormatOutput>True</FormatOutput>
-      <TransformOnBuild>True</TransformOnBuild>
-    </EmbeddedResource>
+    <None Include="AppGeneration\Parsing\Json\sample domain.zae" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

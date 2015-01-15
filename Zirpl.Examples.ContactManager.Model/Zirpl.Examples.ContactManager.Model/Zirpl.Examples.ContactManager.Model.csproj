@@ -42,6 +42,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
+      <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
+      <Name>Zirpl.AppEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

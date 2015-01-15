@@ -343,11 +343,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
             return results.CompiledAssembly;
         }
 
-        public static ProjectIndex GetIndex(this Project project)
-        {
-            return new ProjectIndex(project);
-        }
-
         #endregion
 
 
@@ -403,10 +398,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
         public static Project GetProject(this Solution solution, string projectName)
         {
             return solution.GetAllProjects().FirstOrDefault(p => p.Name == projectName);
-        }
-        public static Project GetProject(this ProjectIndex index)
-        {
-            return index.Project;
         }
 
         #endregion

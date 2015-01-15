@@ -70,14 +70,33 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 
                 // okay, let's add all the assemblies currently in memory
                 //
-                _assembliesToCheck.AddRange(AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic));
+                _assembliesToCheck.AddRange(AppDomain.CurrentDomain.GetAssemblies().Where(o => !o.IsDynamic
+                    && !o.FullName.StartsWith("System", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("Microsoft", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("WindowsBase", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("EnvDTE", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("VSLangProj", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("mscorlib", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("CustomMarshalers", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("Zirpl.Common", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("Zirpl.FluentReflection", StringComparison.InvariantCultureIgnoreCase)
+                    && !o.FullName.StartsWith("Zirpl.Logging", StringComparison.InvariantCultureIgnoreCase)));
+            }
+        }
+
+        internal void LogAssembliesToSearch()
+        {
+            this.GetLog().Debug("Searching for templates in: ");
+            foreach (var assembly in _assembliesToCheck)
+            {
+                this.GetLog().Debug("   " + assembly.FullName);
             }
         }
 
         internal IEnumerable<Type> GetDefaultTemplateTypes()
         {
             return from template in GetAllTemplateTypes()
-                   where template.Assembly == _thisAssembly
+                   where template.Assembly.FullName.StartsWith("Zirpl.AppEngine")
                    orderby template.FullName
                    select template;
         }
@@ -125,9 +144,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                                     Name = o.FullName,
                                     Source = defaultTemplates.Contains(o) ? "Default" : (otherTemplatesThatAreReplacingDefaultTemplates.Contains(o) ? "Replacement" : "Additional")
                                 };
+
+            this.GetLog().DebugFormat("Found templates:");
             foreach (var loggingInfo in loggingInfos.OrderBy(o => o.Name))
             {
-                this.GetLog().DebugFormat("Found template: {0} ({1})", loggingInfo.Name, loggingInfo.Source);
+                this.GetLog().DebugFormat("   {0} ({1})", loggingInfo.Name, loggingInfo.Source);
             }
 
             return templatesToRun;
@@ -137,19 +158,29 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         {
             //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
 
-            return o.IsClass
-                   && !o.IsAbstract
-                   && o.Namespace != null
-                   && o.Namespace.Contains("_templates")
-                   && Attribute.GetCustomAttribute(o, typeof (GeneratedCodeAttribute)) != null
-                   && o.Method("TransformText").Exists
-                   && o.Method("Initialize").Exists
-                   && o.Property("GenerationEnvironment").Exists
-                   && o.Property("GenerationEnvironment").PropertyInfo.CanRead
-                   && o.Property("GenerationEnvironment").PropertyInfo.CanWrite
-                   && o.Property("Session").Exists
-                   && o.Property("Session").PropertyInfo.CanRead
-                   && o.Property("Session").PropertyInfo.CanWrite;
+            if (o.IsClass
+                && !o.IsAbstract
+                && o.Namespace != null
+                && o.Namespace.Contains("_templates")
+                && !o.IsNested)
+            {
+                // potential template, look for the necessary members
+                var isTemplate = Attribute.GetCustomAttribute(o, typeof (GeneratedCodeAttribute)) != null
+                                 && o.MethodInfos("TransformText").Any()
+                                 && o.MethodInfos("Initialize").Any()
+                                 && o.PropertyInfo("GenerationEnvironment") != null
+                                 && o.PropertyInfo("GenerationEnvironment").CanRead
+                                 && o.PropertyInfo("GenerationEnvironment").CanWrite
+                                 && o.PropertyInfo("Session") != null
+                                 && o.PropertyInfo("Session").CanRead
+                                 && o.PropertyInfo("Session").CanWrite;
+                //this.GetLog()
+                //    .DebugFormat("Type {0} in assembly {1} {2} a template", o.FullName, o.Assembly.FullName,
+                //        isTemplate ? "is" : "is not");
+
+                return isTemplate;
+            }
+            return false;
         }
     }
 }
