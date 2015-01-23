@@ -21,7 +21,8 @@ namespace Zirpl.AppEngine.AppGeneration
         {
             return properties.Where(o =>
                 o.DataType == DataTypeEnum.Relationship
-                && ((o.Relationship.Type == RelationshipTypeEnum.OneToMany
+                && (o.Relationship.Type == RelationshipTypeEnum.ManyToMany
+                    || (o.Relationship.Type == RelationshipTypeEnum.OneToMany
                         && o.Relationship.NavigationPropertyOnFrom == o)
                     || (o.Relationship.Type == RelationshipTypeEnum.ManyToOne
                         && o.Relationship.NavigationPropertyOnTo == o)));

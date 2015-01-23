@@ -8,6 +8,7 @@
         //ZeroOrOneToOne = 3,
         //ZeroOrOneToMany = 4,
         ManyToOne = 5,
-        //ManyToZeroOrOne = 6
+        //ManyToZeroOrOne = 6,
+        ManyToMany = 7
     }
 }

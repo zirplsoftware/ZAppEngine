@@ -680,6 +680,20 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
                         {
                             case RelationshipTypeEnum.None:
                                 throw new ConfigFileException("Invalid RelationShipType: " + json.Name, domainType.ConfigFilePath);
+                            case RelationshipTypeEnum.ManyToMany:
+                                // collection property on the to
+                                if (!String.IsNullOrEmpty(json.Relationship.ToPropertyName))
+                                {
+                                    toProperty = new DomainProperty();
+                                    toProperty.Name = json.Relationship.ToPropertyName;
+                                    toProperty.DataType = DataTypeEnum.Relationship;
+                                }
+
+                                relationship.Type = RelationshipTypeEnum.ManyToMany;
+                                relationship.DeletionBehavior = json.Relationship.DeletionBehavior.GetValueOrDefault(RelationshipDeletionBehaviorTypeEnum.CascadeDelete);
+                                relationship.ManyToManyTableName = fromEntity.Name + toEntity.Name + "Map";
+
+                                break;
                             case RelationshipTypeEnum.OneToMany:
 
                                 // collection property on the from
@@ -815,7 +829,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
                         case DataTypeEnum.Relationship:
                             if (property.Owner == property.Relationship.From)
                             {
-                                if (property.Relationship.Type == RelationshipTypeEnum.OneToMany)
+                                if (property.Relationship.Type == RelationshipTypeEnum.OneToMany
+                                    || property.Relationship.Type == RelationshipTypeEnum.ManyToMany)
                                 {
                                     property.DataTypeString = String.Format("System.Collections.Generic.IList<{0}>", property.Relationship.To.FullName);
                                     property.InitializationDataTypeString = String.Format("System.Collections.Generic.List<{0}>", property.Relationship.To.FullName);

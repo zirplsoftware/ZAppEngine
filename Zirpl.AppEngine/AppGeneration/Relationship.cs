@@ -1,4 +1,5 @@
-﻿using Zirpl.AppEngine.Model.Metadata;
+﻿using System;
+using Zirpl.AppEngine.Model.Metadata;
 
 namespace Zirpl.AppEngine.AppGeneration
 {
@@ -12,5 +13,6 @@ namespace Zirpl.AppEngine.AppGeneration
         public DomainProperty ForeignKeyOnTo { get; set; }
         public DomainProperty NavigationPropertyOnFrom { get; set; }
         public DomainProperty NavigationPropertyOnTo { get; set; }
+        public String ManyToManyTableName { get; set; }
     }
 }
