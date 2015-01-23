@@ -545,15 +545,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
 	                {
                         case DataTypeEnum.None:
                         case DataTypeEnum.Object:
-                        case DataTypeEnum.SByte:
-                        case DataTypeEnum.UShort:
-                        case DataTypeEnum.UInt:
-                        case DataTypeEnum.ULong:
                             throw new ConfigFileException("Unsupported or invalid Property DataType: " + json.Name, domainType.ConfigFilePath);
                         case DataTypeEnum.Byte:
                         case DataTypeEnum.Short:
                         case DataTypeEnum.Int:
                         case DataTypeEnum.Long:
+                        case DataTypeEnum.SByte:
+                        case DataTypeEnum.UShort:
+                        case DataTypeEnum.UInt:
+                        case DataTypeEnum.ULong:
 	                        verifyMinMaxLengthPropertiesNotUsed();
 	                        verifyRelationshipPropertiesNotUsed();
 	                        verifyPrecisionPropertiesNotUsed();
