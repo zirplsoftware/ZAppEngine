@@ -515,7 +515,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
                     {
                         if (json.Relationship != null)
                         {
-                            throw new ConfigFileException("Cannot use RelationshipTo, NavigationPropertyName, RelationshipDeletionBehavior or RelationshipType with non-relationship DataTypes: " + json.Name, domainType.ConfigFilePath);
+                            throw new ConfigFileException("Cannot use Relationship for non-relationship DataTypes: " + json.Name, domainType.ConfigFilePath);
                         }
                     };
                     Action verifyNullablePropertyNotUsed = delegate()
@@ -603,7 +603,6 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
                             break;
                         case DataTypeEnum.Relationship:
                             verifyMinMaxLengthPropertiesNotUsed();
-	                        verifyRelationshipPropertiesNotUsed();
 	                        verifyNullablePropertyNotUsed();
 	                        verifyMinMaxValuePropertiesNotUsed();
 	                        verifyPrecisionPropertiesNotUsed();
@@ -696,7 +695,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
                                             UniquenessTypeEnum.NotUnique);
 
                                     foreignKeyOnTo = new DomainProperty();
-                                    foreignKeyOnTo.Name = json.Relationship.ToPropertyName + "Id";
+                                    foreignKeyOnTo.Name = json.Name + "Id";
                                     foreignKeyOnTo.DataType = fromEntity.IdProperty.DataType;
                                     foreignKeyOnTo.IsForeignKey = true;
                                     foreignKeyOnTo.IsRequired = json.Relationship.ToProperyIsRequired.GetValueOrDefault();
@@ -717,7 +716,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
                                 fromProperty.UniquenessType = json.Uniqueness.GetValueOrDefault(UniquenessTypeEnum.NotUnique);
 
                                 foreignKeyOnFrom = new DomainProperty();
-                                foreignKeyOnFrom.Name = json.Relationship.ToPropertyName + "Id";
+                                foreignKeyOnFrom.Name = json.Name + "Id";
                                 foreignKeyOnFrom.DataType = fromEntity.IdProperty.DataType;
                                 foreignKeyOnFrom.IsForeignKey = true;
                                 foreignKeyOnFrom.IsRequired = json.IsRequired.GetValueOrDefault();

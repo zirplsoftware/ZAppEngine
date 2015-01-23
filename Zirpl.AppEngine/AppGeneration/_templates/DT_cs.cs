@@ -25,7 +25,7 @@ namespace Zirpl.AppEngine.AppGeneration._templates
         {
             this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
                     ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Metadata;\r\nusing Zirpl.AppEngine." +
-                    "Model.Extensibility;\r\nusing Zirpl.Collections;\r\n\r\nnamespace ");
+                    "Model.Extensibility;\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
             this.Write("\r\n{\r\n\tpublic ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IsAbstract ? "abstract" : ""));

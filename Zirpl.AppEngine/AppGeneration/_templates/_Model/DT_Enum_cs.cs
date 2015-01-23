@@ -23,9 +23,7 @@ namespace Zirpl.AppEngine.AppGeneration._templates._Model
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
-                    ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Extensibility;\r\nusing Zirpl.Colle" +
-                    "ctions;\r\n\r\nnamespace ");
+            this.Write("using System;\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
             this.Write("\r\n{\r\n\tpublic enum ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));

@@ -3,11 +3,6 @@
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.DomainType" name="DomainType" #>
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Zirpl.AppEngine.Model;
-using Zirpl.AppEngine.Model.Extensibility;
-using Zirpl.Collections;
 
 namespace <#= this.DomainType.Namespace #>
 {

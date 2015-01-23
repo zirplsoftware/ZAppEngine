@@ -19,12 +19,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 if (sessionParameters != null)
                 {
                     var session = childTransform.Session;
+                    session.Clear();
                     foreach (var pair in sessionParameters)
                     {
                         session.Add(pair.Key, pair.Value);
                     }
-                    childTransform.Initialize();
                 }
+                childTransform.Initialize();
 
                 if (!template.Property<bool>("ShouldTransform").Exists
                     || template.Property<bool>("ShouldTransform").Value)
@@ -47,11 +48,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                         // run the template
                         childTransform.TransformText();
                         childTransform.FileManager.EndFile();
+                        childTransform.GenerationEnvironment.Clear();
                     }
                     else
                     {
                         childTransform.FileManager.UseDefaultFile(childTransform);
                         childTransform.TransformText();
+                        childTransform.GenerationEnvironment.Clear();
                     }
                 }
                 else
