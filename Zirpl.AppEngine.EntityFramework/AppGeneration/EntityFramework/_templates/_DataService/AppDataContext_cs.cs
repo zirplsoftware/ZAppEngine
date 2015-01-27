@@ -23,7 +23,7 @@ namespace Zirpl.AppEngine.AppGeneration.EntityFramework._templates._DataService
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System.Data.Entity;\r\n\r\nnamespace ");
+            this.Write("using System;\r\nusing System.Data.Entity;\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Namespace));
             this.Write("\r\n{\r\n    public partial class ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
@@ -39,6 +39,26 @@ namespace Zirpl.AppEngine.AppGeneration.EntityFramework._templates._DataService
             this.Write("> ");
             this.Write(this.ToStringHelper.ToStringWithCulture(domainType.PluralName));
             this.Write(" { get; set; }\r\n");
+
+    }
+
+            this.Write("\r\n");
+
+	if (App.DomainTypes.Any(o => o.IsPersistable && !o.IsUpdatable))
+    {
+
+            this.Write("\t\tprotected override bool IsModifiable(Object obj)\r\n\t\t{\r\n");
+
+		foreach (var domainType in App.DomainTypes.Where(o => o.IsPersistable && !o.IsUpdatable))
+		{
+
+            this.Write("\t\t\tif (obj is ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.FullName));
+            this.Write(") return false;\r\n");
+
+		}
+
+            this.Write("\t\t\treturn true;\r\n\t\t}\r\n");
 
     }
 

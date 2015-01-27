@@ -3,6 +3,7 @@
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
 <#@ parameter type="System.String" name="Namespace" #>
 <#@ parameter type="System.String" name="ClassName" #>
+using System;
 using System.Data.Entity;
 
 namespace <#= this.Namespace #>
@@ -14,6 +15,26 @@ namespace <#= this.Namespace #>
     {
 #>
 		public DbSet<<#= domainType.FullName #>> <#= domainType.PluralName #> { get; set; }
+<#
+    }
+#>
+
+<#
+	if (App.DomainTypes.Any(o => o.IsPersistable && !o.IsUpdatable))
+    {
+#>
+		protected override bool IsModifiable(Object obj)
+		{
+<#
+		foreach (var domainType in App.DomainTypes.Where(o => o.IsPersistable && !o.IsUpdatable))
+		{
+#>
+			if (obj is <#= domainType.FullName #>) return false;
+<#
+		}
+#>
+			return true;
+		}
 <#
     }
 #>
