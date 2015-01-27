@@ -1,6 +1,6 @@
 ﻿namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsDeleteById<TId> : ISupports
+    public interface ISupportsDeleteById<in TId> : ISupports
     {
         void DeleteById(TId id);
     }

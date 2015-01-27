@@ -2,8 +2,8 @@
 
 namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsGetAll<TEntity> : ISupports
+    public interface ISupportsGetAll<out TEntity> : ISupports
     {
-        ICollection<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll();
     }
 }

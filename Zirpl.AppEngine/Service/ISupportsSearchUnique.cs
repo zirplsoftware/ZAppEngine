@@ -2,7 +2,7 @@
 
 namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsSearchUnique<TEntity> : ISupports
+    public interface ISupportsSearchUnique<out TEntity> : ISupports
     {
         TEntity SearchUnique(ISearchCriteria searchCriteria);
     }

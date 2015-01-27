@@ -20,7 +20,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Delete(TEntity entity)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.DeleteRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -33,7 +33,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void DeleteById(TId id)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.DeleteRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -46,7 +46,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Delete(IEnumerable<TEntity> entities)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.DeleteRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -59,7 +59,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void DeleteById(IEnumerable<TId> ids)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.DeleteRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -72,7 +72,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Delete(ISearchCriteria searchCriteria)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.DeleteRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -87,7 +87,7 @@ namespace Zirpl.AppEngine.Service
         {
             TEntity entity = default(TEntity);
 
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 entity = base.Get(id);
 
@@ -97,11 +97,11 @@ namespace Zirpl.AppEngine.Service
             return entity;
         }
 
-        public override ICollection<TEntity> GetAll()
+        public override IEnumerable<TEntity> GetAll()
         {
-            ICollection<TEntity> entities = null;
+            IEnumerable<TEntity> entities = null;
 
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 entities = base.GetAll();
 
@@ -113,7 +113,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Insert(TEntity entity)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.InsertRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -126,7 +126,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Insert(IEnumerable<TEntity> entities)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.InsertRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -139,7 +139,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Save(TEntity entity)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.SaveRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -152,7 +152,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Save(IEnumerable<TEntity> entities)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.SaveRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -165,7 +165,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Update(TEntity entity)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.UpdateRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -178,7 +178,7 @@ namespace Zirpl.AppEngine.Service
 
         public override void Update(IEnumerable<TEntity> entities)
         {
-            using (TransactionScope transaction = new TransactionScope(
+            using (var transaction = new TransactionScope(
                                                     this.UpdateRequiresNewTransaction
                                                     ? TransactionScopeOption.RequiresNew :
                                                     TransactionScopeOption.Required))
@@ -193,7 +193,7 @@ namespace Zirpl.AppEngine.Service
         {
             bool exists = false;
 
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 exists = base.Exists(id);
 
@@ -207,7 +207,7 @@ namespace Zirpl.AppEngine.Service
         {
             int totalCount = 0;
 
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 totalCount = base.GetTotalCount(searchCriteria);
 
@@ -221,9 +221,9 @@ namespace Zirpl.AppEngine.Service
         {
             SearchResults<TEntity> result = null;
 
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
-                base.Search(searchCriteria);
+                result = base.Search(searchCriteria);
 
                 transaction.Complete();
             }
@@ -235,7 +235,7 @@ namespace Zirpl.AppEngine.Service
         {
             IQueryable<TEntity> result = null;
 
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 result = base.GetQueryable();
 
@@ -249,7 +249,7 @@ namespace Zirpl.AppEngine.Service
         {
             TEntity result = default(TEntity);
 
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress))
             {
                 result = base.SearchUnique(searchCriteria);
 

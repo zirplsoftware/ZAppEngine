@@ -1,6 +1,6 @@
 ﻿namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsUpdate<TEntity> : ISupports
+    public interface ISupportsUpdate<in TEntity> : ISupports
     {
         void Update(TEntity entity);
     }

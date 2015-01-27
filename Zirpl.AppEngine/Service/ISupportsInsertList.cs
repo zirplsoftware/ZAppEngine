@@ -2,7 +2,7 @@
 
 namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsInsertList<TEntity> :ISupports
+    public interface ISupportsInsertList<in TEntity> :ISupports
     {
         void Insert(IEnumerable<TEntity> entities);
     }

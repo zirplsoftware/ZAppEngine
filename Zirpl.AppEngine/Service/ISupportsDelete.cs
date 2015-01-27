@@ -1,6 +1,6 @@
 ﻿namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsDelete<TEntity> :ISupports
+    public interface ISupportsDelete<in TEntity> :ISupports
     {
         void Delete(TEntity entity);
     }

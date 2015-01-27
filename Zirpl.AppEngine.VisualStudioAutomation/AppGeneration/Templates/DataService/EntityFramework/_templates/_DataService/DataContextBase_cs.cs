@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.AppGeneration._templates._Model
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.DataService.EntityFramework._templates._DataService
 {
     using System.Linq;
     using System;
@@ -16,38 +16,99 @@ namespace Zirpl.AppEngine.AppGeneration._templates._Model
     /// Class to produce the template output
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class DT_Enum_cs : DT_Enum_csBase
+    public partial class DataContextBase_cs : DataContextBase_csBase
     {
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\n\r\nnamespace ");
+            this.Write(@"using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Reflection;
+using Zirpl.AppEngine;
+using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Session;
+using Zirpl.AppEngine.Validation;
+using Zirpl.Logging;
+
+namespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Namespace));
-            this.Write("\r\n{\r\n\tpublic enum ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
-            this.Write(" : ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
-            this.Write("\r\n\t{\r\n");
+            this.Write("\r\n{\r\n    public abstract partial class ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TypeName));
+            this.Write(@" : global::System.Data.Entity.DbContext
+    {
+        public IValidationHelper ValidationHelper { get; set; }
+        public ICurrentUserKeyProvider CurrentUserKeyProvider { get; set; }
+        public IRetryPolicyFactory RetryPolicyFactory { get; set; }
 
-		foreach (var enumValue in this.DomainType.EnumValues)
-		{
-
-            this.Write("\t\t");
-            this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
-            this.Write(" = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
-            this.Write(",\r\n");
-
-		}
-
-            this.Write("\t}\r\n}\r\n");
+		protected ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TypeName));
+            this.Write("()\r\n\t\t{\r\n\t\t\tthis.Database.Log = s => this.GetLog().Debug(s);\r\n\t\t}\r\n        \r\n    " +
+                    "    //protected override void OnModelCreating(DbModelBuilder modelBuilder)\r\n    " +
+                    "    //{\r\n        //    base.OnModelCreating(modelBuilder);\r\n\r\n        //    this" +
+                    ".GetObjectContext().Connection.Open();\r\n        //}\r\n\r\n        protected virtual" +
+                    " bool IsModifiable(Object obj)\r\n\t\t{\r\n\t\t\treturn true;\r\n\t\t}\r\n    \r\n        public " +
+                    "override int SaveChanges()\r\n        {\r\n            // make sure we aren\'t trying" +
+                    " to work with any objects that shouldn\'t be persisted through EF\r\n            //" +
+                    "\r\n            var objStateEntries = this.GetObjectContext().ObjectStateManager.G" +
+                    "etObjectStateEntries(\r\n                EntityState.Added | EntityState.Modified " +
+                    "| EntityState.Deleted);\r\n            foreach (ObjectStateEntry entry in objState" +
+                    "Entries)\r\n            {\r\n                if (!this.IsModifiable(entry.Entity))\r\n" +
+                    "                {\r\n                    throw new Exception(String.Format(\"Cannot" +
+                    " persist entity type directly through DbContext: {0}\", entry.Entity.GetType()));" +
+                    "\r\n                }\r\n            }\r\n\r\n            // call OnSaveChanges to set t" +
+                    "he automatic properties\r\n            //\r\n            objStateEntries = this.GetO" +
+                    "bjectContext().ObjectStateManager.GetObjectStateEntries(\r\n               EntityS" +
+                    "tate.Added | EntityState.Modified);\r\n\r\n            foreach (ObjectStateEntry ent" +
+                    "ry in objStateEntries)\r\n            {\r\n                this.OnSaveChanges(entry)" +
+                    ";\r\n            }\r\n\r\n            // Retry Save if specified\r\n            //\r\n    " +
+                    "        return this.RetryPolicyFactory != null\r\n                ? this.RetryPoli" +
+                    "cyFactory.CreateRetryPolicy().ExecuteAction<int>(base.SaveChanges)\r\n            " +
+                    "    : base.SaveChanges();\r\n        }\r\n\r\n        protected virtual void OnSaveCha" +
+                    "nges(ObjectStateEntry entry)\r\n        {\r\n            DateTime now = DateTime.Now" +
+                    ";\r\n            var auditable = entry.Entity as IAuditable;\r\n            if (audi" +
+                    "table != null)\r\n            {\r\n                auditable.UpdatedDate = now;\r\n   " +
+                    "             var id = this.CurrentUserKeyProvider.GetCurrentUserKey();\r\n        " +
+                    "        String idAsString = id == null ? null : id.ToString();\r\n                " +
+                    "auditable.UpdatedUserId = idAsString;\r\n                if (entry.State == Entity" +
+                    "State.Added)\r\n                {\r\n                    auditable.CreatedDate = now" +
+                    ";\r\n                    auditable.CreatedUserId = idAsString;\r\n                }\r" +
+                    "\n            }\r\n\r\n            // this block rejects ALL changes to properties wh" +
+                    "ere the old and new values are the same\r\n            // as otherwise SQL could b" +
+                    "e run that attempts to update a column to the same value.\r\n            // This w" +
+                    "ill fail in cases where Update has been denied on that column\r\n            //\r\n " +
+                    "           if (entry.State == EntityState.Modified)\r\n            {\r\n            " +
+                    "    foreach (var propertyName in entry.GetModifiedProperties())\r\n               " +
+                    " {\r\n                    if (Object.Equals(entry.OriginalValues[propertyName], en" +
+                    "try.CurrentValues[propertyName]))\r\n                    {\r\n                      " +
+                    "  entry.RejectPropertyChanges(propertyName);\r\n                    }\r\n           " +
+                    "     }\r\n            }\r\n        }\r\n\r\n\r\n        protected override DbEntityValidat" +
+                    "ionResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> " +
+                    "items)\r\n        {\r\n            List<DbValidationError> errors = new List<DbValid" +
+                    "ationError>();\r\n\r\n            //if (entityEntry.State == EntityState.Added\r\n    " +
+                    "        //    || entityEntry.State == EntityState.Modified)\r\n            //{\r\n  " +
+                    "              if (this.ValidationHelper != null)\r\n                {\r\n           " +
+                    "         if (this.ValidationHelper.IsValidatable(entityEntry))\r\n                " +
+                    "    {\r\n                        foreach (var error in this.ValidationHelper.Valid" +
+                    "ate(entityEntry))\r\n                        {\r\n                            errors" +
+                    ".Add(new DbValidationError(error.PropertyName, error.ErrorMessage));\r\n          " +
+                    "              }\r\n                    }\r\n                }\r\n            //}\r\n    " +
+                    "        errors.AddRange(base.ValidateEntity(entityEntry, items).ValidationErrors" +
+                    ");\r\n\r\n            return new DbEntityValidationResult(entityEntry, errors);\r\n   " +
+                    "     }\r\n\r\n        public ObjectContext GetObjectContext()\r\n        {\r\n          " +
+                    "  return ((IObjectContextAdapter) this).ObjectContext;\r\n        }\r\n\r\n\t\tprotected" +
+                    " override void OnModelCreating(DbModelBuilder modelBuilder)\r\n\t\t{\r\n            mo" +
+                    "delBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());\r\n\t\t\t" +
+                    "\r\n\t\t\tthis.OnOnModelCreating(modelBuilder);\r\n\r\n            base.OnModelCreating(m" +
+                    "odelBuilder);\r\n\t\t}\r\n\r\n\t\tpartial void OnOnModelCreating(DbModelBuilder modelBuild" +
+                    "er);\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
-
-public bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
-
 
 private global::Zirpl.AppEngine.AppGeneration.App _AppField;
 
@@ -59,19 +120,6 @@ private global::Zirpl.AppEngine.AppGeneration.App App
     get
     {
         return this._AppField;
-    }
-}
-
-private global::Zirpl.AppEngine.AppGeneration.DomainType _DomainTypeField;
-
-/// <summary>
-/// Access the DomainType parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.AppGeneration.DomainType DomainType
-{
-    get
-    {
-        return this._DomainTypeField;
     }
 }
 
@@ -88,16 +136,16 @@ private string Namespace
     }
 }
 
-private string _ClassNameField;
+private string _TypeNameField;
 
 /// <summary>
-/// Access the ClassName parameter of the template.
+/// Access the TypeName parameter of the template.
 /// </summary>
-private string ClassName
+private string TypeName
 {
     get
     {
-        return this._ClassNameField;
+        return this._TypeNameField;
     }
 }
 
@@ -123,20 +171,6 @@ if ((AppValueAcquired == false))
         this._AppField = ((global::Zirpl.AppEngine.AppGeneration.App)(data));
     }
 }
-bool DomainTypeValueAcquired = false;
-if (this.Session.ContainsKey("DomainType"))
-{
-    this._DomainTypeField = ((global::Zirpl.AppEngine.AppGeneration.DomainType)(this.Session["DomainType"]));
-    DomainTypeValueAcquired = true;
-}
-if ((DomainTypeValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainType");
-    if ((data != null))
-    {
-        this._DomainTypeField = ((global::Zirpl.AppEngine.AppGeneration.DomainType)(data));
-    }
-}
 bool NamespaceValueAcquired = false;
 if (this.Session.ContainsKey("Namespace"))
 {
@@ -151,18 +185,18 @@ if ((NamespaceValueAcquired == false))
         this._NamespaceField = ((string)(data));
     }
 }
-bool ClassNameValueAcquired = false;
-if (this.Session.ContainsKey("ClassName"))
+bool TypeNameValueAcquired = false;
+if (this.Session.ContainsKey("TypeName"))
 {
-    this._ClassNameField = ((string)(this.Session["ClassName"]));
-    ClassNameValueAcquired = true;
+    this._TypeNameField = ((string)(this.Session["TypeName"]));
+    TypeNameValueAcquired = true;
 }
-if ((ClassNameValueAcquired == false))
+if ((TypeNameValueAcquired == false))
 {
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ClassName");
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("TypeName");
     if ((data != null))
     {
-        this._ClassNameField = ((string)(data));
+        this._TypeNameField = ((string)(data));
     }
 }
 
@@ -177,7 +211,7 @@ if ((ClassNameValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class DT_Enum_csBase
+    public class DataContextBase_csBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

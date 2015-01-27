@@ -2,7 +2,7 @@
 
 namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsQueryable<TEntity> : ISupports
+    public interface ISupportsQueryable<out TEntity> : ISupports
     {
         IQueryable<TEntity> GetQueryable();
     }

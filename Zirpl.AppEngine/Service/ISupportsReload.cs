@@ -1,6 +1,6 @@
 ﻿namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsReload<TEntity> : ISupports
+    public interface ISupportsReload<in TEntity> : ISupports
     {
         void Reload(TEntity entity);
     }

@@ -12,7 +12,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
     {
         public static void CopyDefaultTemplates(this ITransform transform)
         {
-            new Action(() => new DefaultTemplateExporter().ExportDefaultTemplates(transform))
+            new Action(() => new TemplateExporter().ExportDefaultTemplates(transform))
             .GetRunner()
             .OnError((e) => HandleException(transform, e))
             .OnComplete((passed) => transform.FileManager.EndFile())

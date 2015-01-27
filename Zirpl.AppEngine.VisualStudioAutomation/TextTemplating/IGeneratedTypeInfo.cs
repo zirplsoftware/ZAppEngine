@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
-    public interface IClassInfoProvider
+    public interface IGeneratedTypeInfo
     {
-        String GetNamespace();
-        String GetClassName();
+        String Namespace { get; }
+        String TypeName { get; }
+        String FullTypeName { get; }
     }
 }

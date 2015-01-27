@@ -4,6 +4,7 @@ using System.Linq;
 using Zirpl.AppEngine.AppGeneration;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
+using Zirpl.FluentReflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
@@ -20,7 +21,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             {
                 app = (App)transform.Session["App"];
             }
-            if (transform.Session.ContainsKey("DomainType"))
+            if (transform.Template.Property<DomainType>("DomainType").Exists)
             {
                 domainType = (DomainType)transform.Session["DomainType"];
             }

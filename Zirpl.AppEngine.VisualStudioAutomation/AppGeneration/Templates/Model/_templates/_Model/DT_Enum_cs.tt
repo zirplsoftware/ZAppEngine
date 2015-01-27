@@ -3,12 +3,12 @@
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.DomainType" name="DomainType" #>
 <#@ parameter type="System.String" name="Namespace" #>
-<#@ parameter type="System.String" name="ClassName" #>
+<#@ parameter type="System.String" name="TypeName" #>
 using System;
 
 namespace <#= this.Namespace #>
 {
-	public enum <#= this.ClassName #> : <#= this.DomainType.IdProperty.DataTypeString #>
+	public enum <#= this.TypeName #> : <#= this.DomainType.IdProperty.DataTypeString #>
 	{
 <#
 		foreach (var enumValue in this.DomainType.EnumValues)

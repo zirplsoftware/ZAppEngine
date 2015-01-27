@@ -81,16 +81,6 @@
     <Compile Include="AppGeneration\DomainType.cs" />
     <Compile Include="AppGeneration\EnumValue.cs" />
     <Compile Include="AppGeneration\Relationship.cs" />
-    <Compile Include="AppGeneration\_templates\DT_cs.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DT_cs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppGeneration\_templates\_Model\DT_Enum_cs.cs">
-      <DependentUpon>DT_Enum_cs.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="DataService\Csv\EntityExporter.cs" />
     <Compile Include="DataService\Csv\EntityPropertyDefinition.cs" />
     <Compile Include="DataService\Csv\PropertyType.cs" />
@@ -214,14 +204,6 @@
     <Compile Include="Validation\ValidationUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AppGeneration\_templates\_Model\DT_Enum_cs.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AppGeneration\_templates\DT_cs.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DT_cs.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

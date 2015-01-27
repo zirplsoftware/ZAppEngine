@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Zirpl.AppEngine.Model;
 
 namespace Zirpl.AppEngine.Service
@@ -11,16 +12,9 @@ namespace Zirpl.AppEngine.Service
         {
             var array = Enum.GetValues(typeof(TEnum));
 
-            TEntity entity = null;
-            foreach (var value in array)
-            {
-                if (value.Equals(enumValue))
-                {
-                    entity = service.Get((TId)value);
-                    break;
-                }
-            }
-            return entity;
+            return (from object value in array 
+                    where value.Equals(enumValue) 
+                    select service.Get((TId) value)).FirstOrDefault();
         }
     }
 }

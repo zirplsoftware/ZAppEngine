@@ -11,7 +11,7 @@ using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
-    internal sealed class DefaultTemplateExporter
+    internal sealed class TemplateExporter
     {
         internal void ExportDefaultTemplates(ITransform transform)
         {

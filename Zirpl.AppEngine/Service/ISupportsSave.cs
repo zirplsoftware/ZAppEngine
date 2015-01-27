@@ -1,6 +1,6 @@
 ﻿namespace Zirpl.AppEngine.Service
 {
-    public interface ISupportsSave<TEntity> : ISupports
+    public interface ISupportsSave<in TEntity> : ISupports
     {
         void Save(TEntity entity);
     }

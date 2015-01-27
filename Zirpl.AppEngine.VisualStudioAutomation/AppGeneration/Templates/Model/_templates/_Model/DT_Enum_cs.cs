@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.AppGeneration.EntityFramework._templates._DataService
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates._Model
 {
     using System.Linq;
     using System;
@@ -16,55 +16,38 @@ namespace Zirpl.AppEngine.AppGeneration.EntityFramework._templates._DataService
     /// Class to produce the template output
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class AppDataContext_cs : AppDataContext_csBase
+    public partial class DT_Enum_cs : DT_Enum_csBase
     {
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Data.Entity;\r\n\r\nnamespace ");
+            this.Write("using System;\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Namespace));
-            this.Write("\r\n{\r\n    public partial class ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
+            this.Write("\r\n{\r\n\tpublic enum ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TypeName));
             this.Write(" : ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Namespace));
-            this.Write(".DataContextBase\r\n    {\r\n");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            this.Write("\r\n\t{\r\n");
 
-	foreach (var domainType in App.DomainTypes.Where(o => o.IsPersistable))
-    {
-
-            this.Write("\t\tpublic DbSet<");
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.FullName));
-            this.Write("> ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.PluralName));
-            this.Write(" { get; set; }\r\n");
-
-    }
-
-            this.Write("\r\n");
-
-	if (App.DomainTypes.Any(o => o.IsPersistable && !o.IsUpdatable))
-    {
-
-            this.Write("\t\tprotected override bool IsModifiable(Object obj)\r\n\t\t{\r\n");
-
-		foreach (var domainType in App.DomainTypes.Where(o => o.IsPersistable && !o.IsUpdatable))
+		foreach (var enumValue in this.DomainType.EnumValues)
 		{
 
-            this.Write("\t\t\tif (obj is ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.FullName));
-            this.Write(") return false;\r\n");
+            this.Write("\t\t");
+            this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Name));
+            this.Write(" = ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.Id));
+            this.Write(",\r\n");
 
 		}
 
-            this.Write("\t\t\treturn true;\r\n\t\t}\r\n");
-
-    }
-
-            this.Write("    }\r\n}\r\n");
+            this.Write("\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
+
+public bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
+
 
 private global::Zirpl.AppEngine.AppGeneration.App _AppField;
 
@@ -76,6 +59,19 @@ private global::Zirpl.AppEngine.AppGeneration.App App
     get
     {
         return this._AppField;
+    }
+}
+
+private global::Zirpl.AppEngine.AppGeneration.DomainType _DomainTypeField;
+
+/// <summary>
+/// Access the DomainType parameter of the template.
+/// </summary>
+private global::Zirpl.AppEngine.AppGeneration.DomainType DomainType
+{
+    get
+    {
+        return this._DomainTypeField;
     }
 }
 
@@ -92,16 +88,16 @@ private string Namespace
     }
 }
 
-private string _ClassNameField;
+private string _TypeNameField;
 
 /// <summary>
-/// Access the ClassName parameter of the template.
+/// Access the TypeName parameter of the template.
 /// </summary>
-private string ClassName
+private string TypeName
 {
     get
     {
-        return this._ClassNameField;
+        return this._TypeNameField;
     }
 }
 
@@ -127,6 +123,20 @@ if ((AppValueAcquired == false))
         this._AppField = ((global::Zirpl.AppEngine.AppGeneration.App)(data));
     }
 }
+bool DomainTypeValueAcquired = false;
+if (this.Session.ContainsKey("DomainType"))
+{
+    this._DomainTypeField = ((global::Zirpl.AppEngine.AppGeneration.DomainType)(this.Session["DomainType"]));
+    DomainTypeValueAcquired = true;
+}
+if ((DomainTypeValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainType");
+    if ((data != null))
+    {
+        this._DomainTypeField = ((global::Zirpl.AppEngine.AppGeneration.DomainType)(data));
+    }
+}
 bool NamespaceValueAcquired = false;
 if (this.Session.ContainsKey("Namespace"))
 {
@@ -141,18 +151,18 @@ if ((NamespaceValueAcquired == false))
         this._NamespaceField = ((string)(data));
     }
 }
-bool ClassNameValueAcquired = false;
-if (this.Session.ContainsKey("ClassName"))
+bool TypeNameValueAcquired = false;
+if (this.Session.ContainsKey("TypeName"))
 {
-    this._ClassNameField = ((string)(this.Session["ClassName"]));
-    ClassNameValueAcquired = true;
+    this._TypeNameField = ((string)(this.Session["TypeName"]));
+    TypeNameValueAcquired = true;
 }
-if ((ClassNameValueAcquired == false))
+if ((TypeNameValueAcquired == false))
 {
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ClassName");
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("TypeName");
     if ((data != null))
     {
-        this._ClassNameField = ((string)(data));
+        this._TypeNameField = ((string)(data));
     }
 }
 
@@ -167,7 +177,7 @@ if ((ClassNameValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class AppDataContext_csBase
+    public class DT_Enum_csBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

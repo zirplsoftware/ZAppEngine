@@ -163,12 +163,12 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
                 : this.DbSet.Find(id);
         }
 
-        public virtual ICollection<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             var query = from o in this.DbSet
                         select o;
             query = this.ApplyDefaultSort(query);
-            var returnCollection = query.ToList();
+            var returnCollection = query.ToArray();
             return returnCollection;
         }
 

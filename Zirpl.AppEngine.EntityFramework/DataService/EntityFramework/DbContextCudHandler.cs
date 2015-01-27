@@ -17,10 +17,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
             {
                 context.Set<TEntity>().Attach(entity);
             }
-            if (entry.State != EntityState.Added)
-            {
-                entry.State = EntityState.Added;
-            }
+            entry.State = EntityState.Added;
         }
 
         public void MarkUpdated<TContext, TEntity, TId>(TContext context, TEntity entity)
@@ -46,7 +43,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
             where TId : IEquatable<TId>
             where TContext : DbContext
         {
-            IMarkDeletable entityDeletable = entity as IMarkDeletable;
+            var entityDeletable = entity as IMarkDeletable;
             if (entityDeletable != null)
             {
                 entityDeletable.IsMarkedDeleted = true;
@@ -59,10 +56,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
                 {
                     context.Set<TEntity>().Attach(entity);
                 }
-                if (entry.State != EntityState.Deleted)
-                {
-                    entry.State = EntityState.Deleted;
-                }
+                entry.State = EntityState.Deleted;
             }
         }
     }

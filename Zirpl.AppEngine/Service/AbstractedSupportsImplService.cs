@@ -287,7 +287,7 @@ namespace Zirpl.AppEngine.Service
             
         }
 
-        public virtual ICollection<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             var dataService = this.DataService as ISupportsGetAll<TEntity>;
             if (dataService == null)
@@ -296,7 +296,7 @@ namespace Zirpl.AppEngine.Service
             }
             this.GetLog().Debug("Pre-GetAll");
             this.OnPreGetAll();
-            var entities = dataService.GetAll();
+            var entities = dataService.GetAll().ToArray();
             this.GetLog().Debug("Post-GetAll");
             this.OnPostGetAll(entities);
 
@@ -308,7 +308,7 @@ namespace Zirpl.AppEngine.Service
 
         }
 
-        protected virtual void OnPostGetAll(ICollection<TEntity> entities)
+        protected virtual void OnPostGetAll(IEnumerable<TEntity> entities)
         {
 
         }

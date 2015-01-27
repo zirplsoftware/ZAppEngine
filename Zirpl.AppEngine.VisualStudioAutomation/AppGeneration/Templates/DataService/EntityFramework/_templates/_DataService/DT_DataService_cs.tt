@@ -1,0 +1,442 @@
+﻿<#@ template language="C#" linePragmas="false" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.DomainType" name="DomainType" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="TypeName" #>
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using Zirpl.AppEngine;
+using Zirpl.AppEngine.DataService.EntityFramework;
+using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Search;
+
+namespace <#= this.Namespace #>
+{
+    public partial class <#= this.TypeName #> : <#= DataServiceInterfaceFullTypeName #>
+    {
+        public <#= DataContextFullTypeName #> DataContext {get; set;}
+        public ISearchCriteriaTranslator<<#= DomainType.FullName #>> SearchCriteriaTranslator { get; set; }
+        public IDbContextCudHandler DataContextCudHandler { get; set; }
+        public IRetryPolicyFactory RetryPolicyFactory { get; set; }
+        
+        public <#= this.TypeName #>()
+        {
+        }
+
+        public <#= this.TypeName #>(<#= DataContextFullTypeName #> dataContext)
+        {
+            this.DataContext = dataContext;
+        }
+
+        protected IDbSet<<#= DomainType.FullName #>> DbSet { get { return this.DataContext.<#= DomainType.PluralName #>; } }
+        
+<# 
+	if (DomainType.IsInsertable)
+    {
+#>
+        public virtual <#= DomainType.FullName #> Create()
+        {
+            var entity = this.DbSet.Create();
+            this.DataContextCudHandler.MarkInserted<<#= DataContextFullTypeName #>, <#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(this.DataContext, entity);
+            return entity;
+        }
+
+        public virtual TDerivedEntity Create<TDerivedEntity>() where TDerivedEntity : <#= DomainType.FullName #>
+        {
+            var entity = this.DbSet.Create<TDerivedEntity>();
+            this.DataContextCudHandler.MarkInserted<<#= DataContextFullTypeName #>, <#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(this.DataContext, entity);
+            return entity;
+        }
+		
+        public virtual void Insert(<#= DomainType.FullName #> entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            if (this.IsPersisted(entity))
+            {
+                throw new ArgumentException("Cannot insert persisted entity", "entity");
+            }
+
+            this.DoInsert(entity);
+        }
+		private void DoInsert(<#= DomainType.FullName #> entity)
+        {
+            this.DataContextCudHandler.MarkInserted<<#= DataContextFullTypeName #>, <#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(this.DataContext, entity);
+        }
+
+        public virtual void Insert(IEnumerable<<#= DomainType.FullName #>> entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException("entities");
+            }
+            var list = entities.ToList();
+            if (!list.Any())
+            {
+                throw new ArgumentException("Cannot Insert empty list", "entities");
+            }
+
+            foreach (var entity in list)
+            {
+                if (entity == null
+                    || this.IsPersisted(entity))
+                {
+                    throw new ArgumentException("Cannot insert a null or persisted entity", "entities");
+                }
+
+                this.DoInsert(entity);
+            }
+        }
+<# 
+	}
+
+	if (this.DomainType.IsDeletable)
+    {
+#>
+        public virtual void Delete(<#= DomainType.FullName #> entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            if (!this.IsPersisted(entity))
+            {
+                throw new ArgumentException("Cannot Delete an unpersisted entity", "entity");
+            }
+
+            this.DoDelete(entity);
+        }
+
+        private void DoDelete(<#= DomainType.FullName #> entity)
+        {
+            this.DataContextCudHandler.MarkDeleted<<#= DataContextFullTypeName #>, <#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(this.DataContext, entity);
+        }
+
+        public virtual void DeleteById(<#= DomainType.IdProperty.DataTypeString #> id)
+        {
+            if (id.IsNullId())
+            {
+                throw new ArgumentException("Cannot delete by nonpersisted id", "id");
+            }
+
+            this.DoDeleteById(id);
+        }
+
+        private void DoDeleteById(<#= DomainType.IdProperty.DataTypeString #> id)
+        {
+            var entity = this.DbSet.Find(id);
+            if (entity != null)
+            {
+                this.DoDelete(entity);
+            }
+        }
+           
+        public virtual void Delete(IEnumerable<<#= DomainType.FullName #>> entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException("entities");
+            }
+            var list = entities.ToList();
+            if (!list.Any())
+            {
+                throw new ArgumentException("Cannot delete from an empty list", "entities");
+            }
+
+            foreach (var entity in list)
+            {
+                if (entity == null
+                    || !this.IsPersisted(entity))
+                {
+                    throw new ArgumentException("Cannot Delete a null or unpersisted entity", "entities");
+                }
+
+                this.DoDelete(entity);
+            }
+        }
+
+        public virtual void DeleteById(IEnumerable<<#= DomainType.IdProperty.DataTypeString #>> ids)
+        {
+            if (ids == null)
+            {
+                throw new ArgumentNullException("ids");
+            }
+            var list = ids.ToList();
+            if (!list.Any())
+            {
+                throw new ArgumentException("Cannot delete from an empty list", "ids");
+            }
+
+            foreach (var id in list)
+            {
+                if (id.IsNullId())
+                {
+                    throw new ArgumentException("Cannot delete by a nonpersisted id value", "ids");
+                }
+
+                this.DoDeleteById(id);
+            }
+        }
+		
+		public virtual void Delete(ISearchCriteria searchCriteria)
+        {
+            if (searchCriteria == null)
+            {
+                throw new ArgumentNullException("searchCriteria");
+            }
+
+            var query = this.DbSet.ApplyNonBoundingSearchCriteria<<#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(searchCriteria, this.SearchCriteriaTranslator);
+            foreach (var entity in query.ToList())
+            {
+                this.DoDelete(entity);
+            }
+        }
+
+<#
+    }
+
+	if (this.DomainType.IsUpdatable || this.DomainType.IsInsertable)
+    {
+#>
+        public virtual void Save(<#= DomainType.FullName #> entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+
+            if (entity.IsPersisted)
+            {
+                this.DoUpdate(entity);
+            }
+            else
+            {
+                this.DoInsert(entity);
+            }
+        }
+
+        public virtual void Save(IEnumerable<<#= DomainType.FullName #>> entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException("entities");
+            }
+            var list = entities.ToList();
+            if (!list.Any())
+            {
+                throw new ArgumentException("Cannot Save empty list", "entities");
+            }
+
+            foreach (var entity in list)
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentException("Cannot Save null entity", "entities");
+                }
+
+                if (entity.IsPersisted)
+                {
+                    this.DoUpdate(entity);
+                }
+                else
+                {
+                    this.DoInsert(entity);
+                }
+            }
+        }
+<#
+    } 
+
+	if (this.DomainType.IsUpdatable)
+    {
+#>
+
+        public virtual void Update(<#= DomainType.FullName #> entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            if (!this.IsPersisted(entity))
+            {
+                throw new ArgumentException("Cannot update nonpersisted entity", "entity");
+            }
+
+            this.DoUpdate(entity);
+        }
+
+        private void DoUpdate(<#= DomainType.FullName #> entity)
+        {
+            this.DataContextCudHandler.MarkUpdated<<#= DataContextFullTypeName #>, <#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(this.DataContext, entity);
+        }
+
+        public virtual void Update(IEnumerable<<#= DomainType.FullName #>> entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException("entities");
+            }
+            var list = entities.ToList();
+            if (!list.Any())
+            {
+                throw  new ArgumentException("Cannot Update empty list", "entities");
+            }
+
+            foreach (var entity in list)
+            {
+                if (entity == null
+                    || !this.IsPersisted(entity))
+                {
+                    throw  new ArgumentException("Cannot update null or nonpersisted entity", "entities");
+                }
+
+                this.DoUpdate(entity);
+            }
+        }
+<#
+	}
+#>
+		
+		public virtual void Reload(<#= DomainType.FullName #> entity)
+        {
+            // TOTEST: test
+            // TODO: add support for reloading a list
+
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            if (!this.IsPersisted(entity))
+            {
+                throw new ArgumentException("Cannot Reload an unpersisted entity", "entity");
+            }
+
+            if (this.RetryPolicyFactory != null)
+            {
+                this.RetryPolicyFactory.CreateRetryPolicy().ExecuteAction(() => this.DataContext.Entry(entity).Reload());
+            }
+            else
+            {
+                this.DataContext.Entry(entity).Reload();   
+            }
+        }
+
+        public virtual <#= DomainType.FullName #> Get(<#= DomainType.IdProperty.DataTypeString #> id)
+        {
+            if (id.IsNullId())
+            {
+                throw new ArgumentException("Cannot get by unpersisted id", "id");
+            }
+
+            return this.RetryPolicyFactory != null
+                ? this.RetryPolicyFactory.CreateRetryPolicy().ExecuteAction<<#= DomainType.FullName #>>(() => this.DbSet.Find(id))
+                : this.DbSet.Find(id);
+        }
+
+        public virtual IEnumerable<<#= DomainType.FullName #>> GetAll()
+        {
+            var query = from o in this.DbSet
+                        select o;
+            query = this.ApplyDefaultSort(query);
+            var returnCollection = query.ToArray();
+            return returnCollection;
+        }
+
+
+        protected virtual bool IsPersisted(<#= DomainType.FullName #> entity)
+        {
+            return entity.IsPersisted;
+        }
+
+        public virtual bool Exists(<#= DomainType.IdProperty.DataTypeString #> id)
+        {
+            if (id.IsNullId())
+            {
+                throw new ArgumentException("Cannot check for nonpersisted id", "id");
+            }
+
+            var exists = this.Get(id) != null;
+            return exists;
+        }
+
+        public virtual int GetTotalCount(ISearchCriteria searchCriteria)
+        {
+            if (searchCriteria == null)
+            {
+                throw new ArgumentNullException("searchCriteria");
+            }
+
+            var query = this.DbSet.ApplyNonBoundingSearchCriteria<<#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(searchCriteria, this.SearchCriteriaTranslator);
+
+            return this.RetryPolicyFactory != null 
+                ? this.RetryPolicyFactory.CreateRetryPolicy().ExecuteAction<int>(query.Count)
+                : query.Count();
+        }
+
+        public virtual SearchResults<<#= DomainType.FullName #>> Search(ISearchCriteria searchCriteria)
+        {
+            if (searchCriteria == null)
+            {
+                throw new ArgumentNullException("searchCriteria");
+            }
+
+            var searchResults = new SearchResults<<#= DomainType.FullName #>> {SearchCriteria = searchCriteria};
+
+            var query = this.DbSet.ApplyNonBoundingSearchCriteria<<#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(searchCriteria, this.SearchCriteriaTranslator);
+            query = this.ApplyDefaultSort(query);
+            searchResults.TotalCount = query.Count();
+            query = query.ApplyBoundingSearchCriteria<<#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(searchCriteria);
+
+            searchResults.Results = this.RetryPolicyFactory != null
+                ? this.RetryPolicyFactory.CreateRetryPolicy().ExecuteAction<IList<<#= DomainType.FullName #>>>(query.ToList)
+                : query.ToList();
+            
+            return searchResults;
+        }
+
+        public virtual <#= DomainType.FullName #> SearchUnique(ISearchCriteria searchCriteria)
+        {
+            if (searchCriteria == null)
+            {
+                throw new ArgumentNullException("searchCriteria");
+            }
+
+            var query = this.DbSet.ApplyNonBoundingSearchCriteria<<#= DomainType.FullName #>, <#= DomainType.IdProperty.DataTypeString #>>(searchCriteria, this.SearchCriteriaTranslator);
+
+            return this.RetryPolicyFactory != null
+                ? this.RetryPolicyFactory.CreateRetryPolicy().ExecuteAction<<#= DomainType.FullName #>>(query.SingleOrDefault)
+                : query.SingleOrDefault();
+        }
+
+        public virtual IQueryable<<#= DomainType.FullName #>> GetQueryable()
+        {
+            var result = from o in this.DbSet
+                        select o;
+
+            result = this.ApplyDefaultSort(result);
+            return result;
+        }
+
+        protected virtual IQueryable<<#= DomainType.FullName #>> ApplyDefaultSort(IQueryable<<#= DomainType.FullName #>> query)
+        {
+            query = from o in query
+                         orderby o.Id
+                         select o;
+
+            return query;
+            //return new QueryableWrapper<<#= DomainType.FullName #>>(query, null);
+        }
+    }
+}
+<#+
+public bool ShouldTransform { get { return this.DomainType.IsPersistable; } }
+private string DataContextFullTypeName {get { return this.AsTransform().GetGeneratedTypeInfo<AppDataContext_cs>().FullTypeName; }}
+private string DataServiceInterfaceFullTypeName {get { return this.AsTransform().GetGeneratedTypeInfo<I_DT_DataService_cs>().FullTypeName; }}
+#>

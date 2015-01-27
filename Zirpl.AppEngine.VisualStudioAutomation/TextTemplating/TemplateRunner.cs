@@ -20,10 +20,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 if (sessionParameters != null)
                 {
                     var session = childTransform.Session;
-                    session.Clear();
+                    //session.Clear();
                     foreach (var pair in sessionParameters)
                     {
-                        session.Add(pair.Key, pair.Value);
+                        session[pair.Key] = pair.Value;
                     }
                 }
                 childTransform.Initialize();
@@ -44,16 +44,16 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
                     if (outputFile != null)
                     {
-                        var classNameProperty = template.Property<String>("ClassName");
+                        var typeNameProperty = template.Property<String>("TypeName");
                         var namespaceProperty = template.Property<String>("Namespace");
-                        var provider = new OutputInfoToClassInfoProvider(childTransform);
-                        if (classNameProperty.Exists)
+                        var provider = new GeneratedTypeInfo(childTransform);
+                        if (typeNameProperty.Exists)
                         {
-                            childTransform.Session.Add("ClassName", provider.GetClassName());
+                            childTransform.Session["TypeName"] = provider.TypeName;
                         }
                         if (namespaceProperty.Exists)
                         {
-                            childTransform.Session.Add("Namespace", provider.GetNamespace());
+                            childTransform.Session["Namespace"] = provider.Namespace;
                         }
                         childTransform.Initialize();
                     }

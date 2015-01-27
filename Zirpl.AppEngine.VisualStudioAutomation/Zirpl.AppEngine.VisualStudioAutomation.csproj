@@ -120,13 +120,44 @@
     <Compile Include="AppGeneration\Parsing\Json\IdJson.cs" />
     <Compile Include="AppGeneration\Parsing\Json\PropertyJson.cs" />
     <Compile Include="AppGeneration\Parsing\Json\RelationshipJson.cs" />
-    <Compile Include="AppGeneration\TextTemplating\OutputInfoToClassInfoProvider.cs" />
+    <Compile Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\AppDataContext_cs.cs">
+      <DependentUpon>AppDataContext_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\DataContextBase_cs.cs">
+      <DependentUpon>DataContextBase_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\I_DT_DataService_cs.cs">
+      <DependentUpon>I_DT_DataService_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\DT_DataService_cs.cs">
+      <DependentUpon>DT_DataService_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AppGeneration\Templates\Model\_templates\DT_cs.cs">
+      <DependentUpon>DT_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AppGeneration\Templates\Model\_templates\_Model\DT_Enum_cs.cs">
+      <DependentUpon>DT_Enum_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AppGeneration\TextTemplating\GeneratedTypeInfo.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateRunner.cs" />
     <Compile Include="AppGeneration\TextTemplating\OutputInfoProvider.cs" />
-    <Compile Include="AppGeneration\DefaultTemplateExporter.cs" />
+    <Compile Include="AppGeneration\TemplateExporter.cs" />
     <Compile Include="AppGeneration\SolutionBuilder.cs" />
-    <Compile Include="TextTemplating\IClassInfoProvider.cs" />
+    <Compile Include="AppGeneration\TextTemplating\TransformExtensions.cs" />
+    <Compile Include="TextTemplating\IGeneratedTypeInfo.cs" />
     <Compile Include="TextTemplating\ITransformHost.cs" />
     <Compile Include="TextTemplating\MasterTransform.cs" />
     <Compile Include="TextTemplating\TemplateRunner.cs" />
@@ -165,6 +196,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AppGeneration\Parsing\Json\sample domain.zae" />
+    <EmbeddedResource Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\AppDataContext_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AppDataContext_cs.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\DataContextBase_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataContextBase_cs.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\DT_DataService_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DT_DataService_cs.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppGeneration\Templates\Model\_templates\_Model\DT_Enum_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppGeneration\Templates\Model\_templates\DT_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DT_cs.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\I_DT_DataService_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>I_DT_DataService_cs.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

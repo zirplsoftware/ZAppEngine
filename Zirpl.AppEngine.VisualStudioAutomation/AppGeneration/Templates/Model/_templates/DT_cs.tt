@@ -3,7 +3,7 @@
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.DomainType" name="DomainType" #>
 <#@ parameter type="System.String" name="Namespace" #>
-<#@ parameter type="System.String" name="ClassName" #>
+<#@ parameter type="System.String" name="TypeName" #>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using Zirpl.AppEngine.Model.Extensibility;
 
 namespace <#= this.Namespace #>
 {
-	public <#= this.DomainType.IsAbstract ? "abstract" : "" #> partial class <#= this.ClassName #> : <#= this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : "" #>
+	public <#= this.DomainType.IsAbstract ? "abstract" : "" #> partial class <#= this.TypeName #> : <#= this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : "" #>
 			<#= this.DomainType.InheritsFrom != null ? "," : "" #> IMetadataDescribed
 <#
 		if (this.DomainType.IsPersistable
@@ -75,7 +75,7 @@ namespace <#= this.Namespace #>
         }
 #>
 	{
-		<#= this.DomainType.IsAbstract || this.DomainType.IsPersistable ? "protected" : "public" #> <#= this.ClassName #>()
+		<#= this.DomainType.IsAbstract || this.DomainType.IsPersistable ? "protected" : "public" #> <#= this.TypeName #>()
 		{
 <#
 		foreach (var collectionProperty in this.DomainType.Properties.GetCollectionProperties())
