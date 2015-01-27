@@ -120,11 +120,13 @@
     <Compile Include="AppGeneration\Parsing\Json\IdJson.cs" />
     <Compile Include="AppGeneration\Parsing\Json\PropertyJson.cs" />
     <Compile Include="AppGeneration\Parsing\Json\RelationshipJson.cs" />
+    <Compile Include="AppGeneration\TextTemplating\OutputInfoToClassInfoProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateRunner.cs" />
     <Compile Include="AppGeneration\TextTemplating\OutputInfoProvider.cs" />
     <Compile Include="AppGeneration\DefaultTemplateExporter.cs" />
     <Compile Include="AppGeneration\SolutionBuilder.cs" />
+    <Compile Include="TextTemplating\IClassInfoProvider.cs" />
     <Compile Include="TextTemplating\ITransformHost.cs" />
     <Compile Include="TextTemplating\MasterTransform.cs" />
     <Compile Include="TextTemplating\TemplateRunner.cs" />

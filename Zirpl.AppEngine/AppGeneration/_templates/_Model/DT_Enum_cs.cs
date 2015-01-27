@@ -24,10 +24,10 @@ namespace Zirpl.AppEngine.AppGeneration._templates._Model
         public virtual string TransformText()
         {
             this.Write("using System;\r\n\r\nnamespace ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Namespace));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Namespace));
             this.Write("\r\n{\r\n\tpublic enum ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
-            this.Write("Enum : ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
+            this.Write(" : ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
             this.Write("\r\n\t{\r\n");
 
@@ -75,6 +75,32 @@ private global::Zirpl.AppEngine.AppGeneration.DomainType DomainType
     }
 }
 
+private string _NamespaceField;
+
+/// <summary>
+/// Access the Namespace parameter of the template.
+/// </summary>
+private string Namespace
+{
+    get
+    {
+        return this._NamespaceField;
+    }
+}
+
+private string _ClassNameField;
+
+/// <summary>
+/// Access the ClassName parameter of the template.
+/// </summary>
+private string ClassName
+{
+    get
+    {
+        return this._ClassNameField;
+    }
+}
+
 
 /// <summary>
 /// Initialize the template
@@ -109,6 +135,34 @@ if ((DomainTypeValueAcquired == false))
     if ((data != null))
     {
         this._DomainTypeField = ((global::Zirpl.AppEngine.AppGeneration.DomainType)(data));
+    }
+}
+bool NamespaceValueAcquired = false;
+if (this.Session.ContainsKey("Namespace"))
+{
+    this._NamespaceField = ((string)(this.Session["Namespace"]));
+    NamespaceValueAcquired = true;
+}
+if ((NamespaceValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Namespace");
+    if ((data != null))
+    {
+        this._NamespaceField = ((string)(data));
+    }
+}
+bool ClassNameValueAcquired = false;
+if (this.Session.ContainsKey("ClassName"))
+{
+    this._ClassNameField = ((string)(this.Session["ClassName"]));
+    ClassNameValueAcquired = true;
+}
+if ((ClassNameValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ClassName");
+    if ((data != null))
+    {
+        this._ClassNameField = ((string)(data));
     }
 }
 

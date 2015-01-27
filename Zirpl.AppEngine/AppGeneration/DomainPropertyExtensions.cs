@@ -27,5 +27,29 @@ namespace Zirpl.AppEngine.AppGeneration
                     || (o.Relationship.Type == RelationshipTypeEnum.ManyToOne
                         && o.Relationship.NavigationPropertyOnTo == o)));
         }
+
+        public static IEnumerable<DomainProperty> GetNonInterfaceProperties(this IEnumerable<DomainProperty> properties)
+        {
+            return properties.Where(o =>
+                !o.IsForAuditableInterface
+                && !o.IsForExtendedEntityFieldValueInterface
+                && !o.IsForExtensibleInterface
+                && !o.IsForIsStaticLookupInterface
+                && !o.IsForMarkDeletedInterface
+                && !o.IsPrimaryKey
+                && !o.IsRowVersion);
+        }
+
+        public static IEnumerable<DomainProperty> GetInterfaceProperties(this IEnumerable<DomainProperty> properties)
+        {
+            return properties.Where(o =>
+                o.IsForAuditableInterface
+                || o.IsForExtendedEntityFieldValueInterface
+                || o.IsForExtensibleInterface
+                || o.IsForIsStaticLookupInterface
+                || o.IsForMarkDeletedInterface
+                || o.IsPrimaryKey
+                || o.IsRowVersion);
+        }
     }
 }

@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.AppGeneration._templates
+namespace Zirpl.AppEngine.AppGeneration.EntityFramework._templates._DataService
 {
     using System.Linq;
     using System;
@@ -16,224 +16,33 @@ namespace Zirpl.AppEngine.AppGeneration._templates
     /// Class to produce the template output
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class DT_cs : DT_csBase
+    public partial class AppDataContext_cs : AppDataContext_csBase
     {
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
-                    ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Metadata;\r\nusing Zirpl.AppEngine." +
-                    "Model.Extensibility;\r\n\r\nnamespace ");
+            this.Write("using System.Data.Entity;\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Namespace));
-            this.Write("\r\n{\r\n\tpublic ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IsAbstract ? "abstract" : ""));
-            this.Write(" partial class ");
+            this.Write("\r\n{\r\n    public partial class ");
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
             this.Write(" : ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : ""));
-            this.Write("\r\n\t\t\t");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.InheritsFrom != null ? "," : ""));
-            this.Write(" IMetadataDescribed\r\n");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Namespace));
+            this.Write(".DataContextBase\r\n    {\r\n");
 
-		if (this.DomainType.IsPersistable
-                && (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsPersistable))
-        {
+	foreach (var domainType in App.DomainTypes.Where(o => o.IsPersistable))
+    {
 
-            this.Write("\t\t\t, IPersistable<");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
-            this.Write(">\r\n");
-
-        } 
-		if (this.DomainType.IsAuditable
-                && (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsAuditable))
-        {
-
-            this.Write("\t\t\t, IAuditable\r\n");
-
-        } 
-		if (this.DomainType.IsExtensible
-                && (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsExtensible))
-        {
-
-            this.Write("\t\t\t, IExtensible<");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
-            this.Write(",");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.Name));
-            this.Write(",");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
-            this.Write(">\r\n");
-
-        }
-		if (this.DomainType.IsExtendedEntityFieldValue
-                && (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
-        {
-
-            this.Write("\t\t\t, IExtendedEntityFieldValue<");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
-            this.Write(",");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.Name));
-            this.Write(",");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
-            this.Write(">\r\n");
-
-        }
-		if (this.DomainType.IsMarkDeletable
-                && (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsMarkDeletable))
-        {
-
-            this.Write("\t\t\t, IsMarkDeletable\r\n");
-
-        }
-		if (this.DomainType.IsStaticLookup
-                && (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsStaticLookup))
-        {
-
-            this.Write("\t\t\t, IStaticLookup\r\n");
-
-        }
-		if (this.DomainType.IsStaticLookup
-                && (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsStaticLookup)
-				&& this.DomainType.EnumValues.Any())
-        {
-
-            this.Write("\t\t\t, IEnumDescribed<");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
-            this.Write(",");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.FullName));
-            this.Write("Enum>\r\n");
-
-        }
-
-            this.Write("\t{\r\n\t\t");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IsAbstract || this.DomainType.IsPersistable ? "protected" : "public"));
-            this.Write(" ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
-            this.Write("()\r\n\t\t{\r\n");
-
-		foreach (var collectionProperty in this.DomainType.Properties.GetCollectionProperties())
-        {
-
-            this.Write("\t\tthis.");
-            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.Name));
-            this.Write(" = this.");
-            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.Name));
-            this.Write(" ?? new ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.InitializationDataTypeString));
-            this.Write("();\r\n");
-
-        }
-
-            this.Write("\t\t}\r\n");
-
-		foreach (var property in this.DomainType.Properties.GetNonInterfaceProperties())
-		{
-
-            this.Write("\t\tpublic virtual ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
-            this.Write(" ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            this.Write("\t\tpublic DbSet<");
+            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.FullName));
+            this.Write("> ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(domainType.PluralName));
             this.Write(" { get; set; }\r\n");
 
-		}
+    }
 
-            this.Write("\r\n\t\t#region Interface implementations\r\n\r\n");
-
-		foreach (var property in this.DomainType.Properties.GetInterfaceProperties())
-		{
-
-            this.Write("\t\tpublic virtual ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
-            this.Write(" ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write(" { get; set; }\r\n");
-
-		}
-
-            this.Write("\r\n");
-
-		if (this.DomainType.IsPersistable
-			&& (this.DomainType.InheritsFrom == null
-				|| !this.DomainType.InheritsFrom.IsPersistable))
-		{
-
-            this.Write("\t\tpublic virtual Object GetId()\r\n        {\r\n            return Id;\r\n        }\r\n\r\n" +
-                    "        public virtual void SetId(Object id)\r\n        {\r\n            Id = (");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
-            this.Write(@")id;
-        }
-
-        public virtual bool IsPersisted
-        {
-            get { return this.EvaluateIsPersisted(); }
-        }
-
-		public override bool Equals(object other)
-        {
-            return this.EvaluateEquals(other);
-        }
-
-        public override int GetHashCode()
-        {
-            return this.EvaluateGetHashCode();
-        }
-");
-
-		}
-		
-		if (this.DomainType.IsExtensible
-				&& (this.DomainType.InheritsFrom == null
-					|| !this.DomainType.InheritsFrom.IsExtensible))
-		{
-
-            this.Write(@"		public virtual IList<IExtendedEntityFieldValue> GetExtendedFieldValues()
-		{
-            return this.ExtendedFieldValues.Cast<IExtendedEntityFieldValue>().ToList();
-		}
-        public virtual void SetExtendedFieldValues(IList<IExtendedEntityFieldValue> list)
-		{
-            this.ExtendedFieldValues.Clear();
-            this.ExtendedFieldValues.AddRange(list.Cast<");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.FullName));
-            this.Write(">());\r\n\t\t}\r\n");
-
-		}
-
-		if (this.DomainType.IsExtendedEntityFieldValue
-			&& (this.DomainType.InheritsFrom == null
-			|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
-		{
-
-            this.Write(@"        public virtual object GetExtendedEntityId()
-        {
-            return this.ExtendedEntityId;
-        }
-
-        public virtual IExtensible GetExtendedEntity()
-        {
-            return this.ExtendedEntity;
-        }
-
-        public virtual void SetExtendedEntityId(object id)
-        {
-            this.ExtendedEntityId = (");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
-            this.Write(")id;\r\n        }\r\n\r\n        public virtual void SetExtendedEntity(IExtensible enti" +
-                    "ty)\r\n        {\r\n            this.ExtendedEntity = (");
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.FullName));
-            this.Write(")entity;\r\n        }\r\n\t\t\r\n");
-
-		}
-
-            this.Write("\t\t#endregion\r\n\t}\r\n}");
+            this.Write("    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
 
@@ -247,19 +56,6 @@ private global::Zirpl.AppEngine.AppGeneration.App App
     get
     {
         return this._AppField;
-    }
-}
-
-private global::Zirpl.AppEngine.AppGeneration.DomainType _DomainTypeField;
-
-/// <summary>
-/// Access the DomainType parameter of the template.
-/// </summary>
-private global::Zirpl.AppEngine.AppGeneration.DomainType DomainType
-{
-    get
-    {
-        return this._DomainTypeField;
     }
 }
 
@@ -311,20 +107,6 @@ if ((AppValueAcquired == false))
         this._AppField = ((global::Zirpl.AppEngine.AppGeneration.App)(data));
     }
 }
-bool DomainTypeValueAcquired = false;
-if (this.Session.ContainsKey("DomainType"))
-{
-    this._DomainTypeField = ((global::Zirpl.AppEngine.AppGeneration.DomainType)(this.Session["DomainType"]));
-    DomainTypeValueAcquired = true;
-}
-if ((DomainTypeValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DomainType");
-    if ((data != null))
-    {
-        this._DomainTypeField = ((global::Zirpl.AppEngine.AppGeneration.DomainType)(data));
-    }
-}
 bool NamespaceValueAcquired = false;
 if (this.Session.ContainsKey("Namespace"))
 {
@@ -365,7 +147,7 @@ if ((ClassNameValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class DT_csBase
+    public class AppDataContext_csBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

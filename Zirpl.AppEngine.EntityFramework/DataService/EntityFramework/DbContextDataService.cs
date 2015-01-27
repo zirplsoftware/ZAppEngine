@@ -9,7 +9,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
 {
     public abstract class DbContextDataServiceBase<TContext, TEntity, TId> : IDataService
         where TEntity : class, IPersistable<TId>
-        where TContext : DbContextBase
+        where TContext : DbContext
         where TId : IEquatable<TId>
     {
         public TContext DataContext {get; set;}

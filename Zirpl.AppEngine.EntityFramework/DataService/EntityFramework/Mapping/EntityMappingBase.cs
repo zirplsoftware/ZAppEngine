@@ -6,7 +6,7 @@ using Zirpl.AppEngine.Model;
 
 namespace Zirpl.AppEngine.DataService.EntityFramework.Mapping
 {
-    public abstract class EntityMappingBase<TEntity, TId> : EntityTypeConfiguration<TEntity>, IEntityMapping
+    public abstract class EntityMappingBase<TEntity, TId> : EntityTypeConfiguration<TEntity>
         where TEntity : class, IPersistable<TId>
         where TId : IEquatable<TId>
     {
@@ -49,11 +49,6 @@ namespace Zirpl.AppEngine.DataService.EntityFramework.Mapping
         protected virtual Expression<Func<TEntity, TId>> GetKeyExpression()
         {
             return o => o.Id;
-        }
-
-        public void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(this);
         }
 
         protected virtual bool MapEntityBaseProperties

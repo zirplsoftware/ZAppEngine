@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Transactions;
 using Zirpl.AppEngine.DataService.EntityFramework;
@@ -10,10 +11,10 @@ namespace Zirpl.AppEngine.Service.EntityFramework
 {
     public class DbContextUnitOfWork :IUnitOfWork
     {
-        private DbContextBase dataContext;
+        private DbContext dataContext;
         private TransactionScope transactionScope;
 
-        public DbContextUnitOfWork(DbContextBase dataContext, TransactionScopeOption transactionScopeOption, IsolationLevel? isolationLevel = IsolationLevel.ReadCommitted, TimeSpan? timeout = null)
+        public DbContextUnitOfWork(DbContext dataContext, TransactionScopeOption transactionScopeOption, IsolationLevel? isolationLevel = IsolationLevel.ReadCommitted, TimeSpan? timeout = null)
         {
             if (dataContext == null)
             {

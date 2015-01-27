@@ -69,12 +69,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataService\EntityFramework\DbContextBase.cs" />
+    <Compile Include="AppGeneration\EntityFramework\_templates\_DataService\AppDataContext_cs.cs">
+      <DependentUpon>AppDataContext_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AppGeneration\EntityFramework\_templates\_DataService\DataContextBase_cs.cs">
+      <DependentUpon>DataContextBase_cs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="DataService\EntityFramework\DbContextCudHandler.cs" />
     <Compile Include="DataService\EntityFramework\DbContextDataService.cs" />
     <Compile Include="DataService\EntityFramework\Mapping\EntityMappingBase.cs" />
     <Compile Include="DataService\EntityFramework\IDbContextCudHandler.cs" />
-    <Compile Include="DataService\EntityFramework\Mapping\IEntityMapping.cs" />
     <Compile Include="DataService\EntityFramework\ISearchCriteriaTranslator.cs" />
     <Compile Include="DataService\EntityFramework\Mapping\MappingUtils.cs" />
     <Compile Include="DataService\EntityFramework\Migrations\AspNetMembershipMigratorBase.cs" />
@@ -124,6 +132,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DataService\EntityFramework\Migrations\SqlServer\SqlAzure\Tools\app.config" />
+    <EmbeddedResource Include="AppGeneration\EntityFramework\_templates\_DataService\DataContextBase_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataContextBase_cs.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppGeneration\EntityFramework\_templates\_DataService\AppDataContext_cs.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AppDataContext_cs.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -137,6 +153,9 @@
       <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
       <Name>Zirpl.Common %28Net40%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

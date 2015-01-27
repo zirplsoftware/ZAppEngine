@@ -1,0 +1,21 @@
+﻿<#@ template language="C#" linePragmas="false" #>
+<#@ import namespace="System.Linq" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="ClassName" #>
+using System.Data.Entity;
+
+namespace <#= this.Namespace #>
+{
+    public partial class <#= this.ClassName #> : <#= this.Namespace #>.DataContextBase
+    {
+<#
+	foreach (var domainType in App.DomainTypes.Where(o => o.IsPersistable))
+    {
+#>
+		public DbSet<<#= domainType.FullName #>> <#= domainType.PluralName #> { get; set; }
+<#
+    }
+#>
+    }
+}

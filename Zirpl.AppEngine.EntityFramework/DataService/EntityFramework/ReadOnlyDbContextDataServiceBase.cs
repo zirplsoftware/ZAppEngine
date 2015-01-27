@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using Zirpl.AppEngine.Model;
 using Zirpl.AppEngine.Model.Search;
 
@@ -7,7 +8,7 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
 {
     public abstract class ReadOnlyDbContextDataServiceBase<TContext, TEntity, TId> : DbContextDataServiceBase<TContext, TEntity, TId>, IReadOnlyDataService<TEntity, TId>
         where TEntity : class, IPersistable<TId>
-        where TContext : DbContextBase
+        where TContext : DbContext
         where TId : IEquatable<TId>
     {
         public override TEntity Create()

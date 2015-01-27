@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.FluentReflection;
 using Zirpl.Logging;
 using Zirpl.Reflection;
@@ -39,6 +40,22 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                         && outputFileProvider != null)
                     {
                         outputFile = outputFileProvider.GetOutputInfo(childTransform);
+                    }
+
+                    if (outputFile != null)
+                    {
+                        var classNameProperty = template.Property<String>("ClassName");
+                        var namespaceProperty = template.Property<String>("Namespace");
+                        var provider = new OutputInfoToClassInfoProvider(childTransform);
+                        if (classNameProperty.Exists)
+                        {
+                            childTransform.Session.Add("ClassName", provider.GetClassName());
+                        }
+                        if (namespaceProperty.Exists)
+                        {
+                            childTransform.Session.Add("Namespace", provider.GetNamespace());
+                        }
+                        childTransform.Initialize();
                     }
 
                     this.LogTransforming(childTransform);

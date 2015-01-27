@@ -1,20 +1,33 @@
-﻿using System;
+﻿<#@ template language="C#" linePragmas="false" #>
+<#@ import namespace="System.Linq" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="ClassName" #>
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Reflection;
+using Zirpl.AppEngine;
 using Zirpl.AppEngine.Model;
 using Zirpl.AppEngine.Session;
 using Zirpl.AppEngine.Validation;
+using Zirpl.Logging;
 
-namespace Zirpl.AppEngine.DataService.EntityFramework
+namespace <#= this.Namespace #>
 {
-    public abstract class DbContextBase :DbContext
+    public abstract partial class <#= this.ClassName #> : global::System.Data.Entity.DbContext
     {
         public IValidationHelper ValidationHelper { get; set; }
         public ICurrentUserKeyProvider CurrentUserKeyProvider { get; set; }
         public IRetryPolicyFactory RetryPolicyFactory { get; set; }
+
+		protected <#= this.ClassName #>()
+		{
+			this.Database.Log = s => this.GetLog().Debug(s);
+		}
         
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
@@ -23,7 +36,10 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
         //    this.GetObjectContext().Connection.Open();
         //}
 
-        protected abstract bool IsModifiable(Object obj);
+        protected virtual bool IsModifiable(Object obj)
+		{
+			return true;
+		}
     
         public override int SaveChanges()
         {
@@ -117,5 +133,16 @@ namespace Zirpl.AppEngine.DataService.EntityFramework
         {
             return ((IObjectContextAdapter) this).ObjectContext;
         }
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+            modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
+			
+			this.OnOnModelCreating(modelBuilder);
+
+            base.OnModelCreating(modelBuilder);
+		}
+
+		partial void OnOnModelCreating(DbModelBuilder modelBuilder);
     }
 }
