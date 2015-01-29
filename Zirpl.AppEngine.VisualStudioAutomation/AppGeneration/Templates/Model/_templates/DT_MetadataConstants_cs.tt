@@ -1,0 +1,129 @@
+﻿<#@ template language="C#" linePragmas="false" #>
+<#@ import namespace="Zirpl.AppEngine.Model.Metadata" #>
+<#@ import namespace="System.Linq" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.DomainType" name="DomainType" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="TypeName" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace <#= Namespace #>
+{
+    public<#= DomainType.IsAbstract ? " abstract" : "" #> partial class <#= TypeName #>
+    {
+<#
+		foreach (var property in DomainType.Properties)
+		{
+#>
+        public const string <#= property.Name #>_Name = "<#= property.Name #>";
+		public const bool <#= property.Name #>_IsRequired = <#= property.IsRequired.ToString().ToLowerInvariant() #>;
+<#
+			switch (property.DataType)
+            {
+				case DataTypeEnum.String:
+				case DataTypeEnum.EmailAddress:
+				case DataTypeEnum.Url:
+#>
+		public const bool <#= property.Name #>_IsMaxLength = <#= property.IsMaxLength.ToString().ToLowerInvariant() #>;
+        public const long <#= property.Name #>_MinLength = <#= property.MinLength #>;
+		public const long <#= property.Name #>_MaxLength = <#= property.MaxLength #>;
+<#
+						break;
+				case DataTypeEnum.Boolean:
+				case DataTypeEnum.Guid:
+				case DataTypeEnum.SByte:
+#>
+		public const sbyte <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "sbyte.MinValue" #>;
+        public const sbyte <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "sbyte.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.Byte:
+#>
+		public const byte <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "byte.MinValue" #>;
+        public const byte <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "byte.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.Short:
+#>
+		public const short <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "short.MinValue" #>;
+        public const short <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "short.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.UShort:
+#>
+		public const ushort <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "ushort.MinValue" #>;
+        public const ushort <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "ushort.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.Int:
+#>
+		public const int <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "int.MinValue" #>;
+        public const int <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "int.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.UInt:
+#>
+		public const unit <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "unit.MinValue" #>;
+        public const unit <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "unit.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.Long:
+#>
+		public const long <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "long.MinValue" #>;
+        public const long <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "long.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.ULong:
+#>
+		public const ulong <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "ulong.MinValue" #>;
+        public const ulong <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "ulong.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.Date:
+				case DataTypeEnum.Time:
+				case DataTypeEnum.DateTime:
+#>
+		// TODO: date-times
+<#
+					break;
+				case DataTypeEnum.Decimal:
+				case DataTypeEnum.Currency:
+				case DataTypeEnum.Percentage:
+#>
+		public const decimal <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue" #>;
+        public const decimal <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue" #>;
+		public const double <#= property.Name #>_MinValue_Double = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue" #>;
+        public const double <#= property.Name #>_MaxValue_Double = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue" #>;
+<#
+					break;
+				case DataTypeEnum.Double:
+#>
+		public const double <#= property.Name #>_MinValue = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue" #>;
+        public const double <#= property.Name #>_MaxValue = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue" #>;
+		public const decimal <#= property.Name #>_MinValue_Decimal = <#= !String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue" #>;
+        public const decimal <#= property.Name #>_MaxValue_Decimal = <#= !String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue" #>;
+<#				
+					break;
+				case DataTypeEnum.Image:
+				case DataTypeEnum.ByteArray:
+					// these cases don't have anything extra
+					break;
+				case DataTypeEnum.Relationship:
+
+#>
+		// TODO: relationships- ID's already taken care of by above
+<#
+					break;
+				case DataTypeEnum.Float:
+				case DataTypeEnum.Char:
+				case DataTypeEnum.Object:
+				case DataTypeEnum.None:
+				default:
+					throw new NotImplementedException("Unexpected Property DataType: " + property.DataType);
+            }
+        }
+#>
+	}
+}

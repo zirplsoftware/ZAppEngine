@@ -12,6 +12,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.DataSer
     using System.Linq;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
     using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+    using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.DataService._templates._DataService;
     using System;
     
     /// <summary>

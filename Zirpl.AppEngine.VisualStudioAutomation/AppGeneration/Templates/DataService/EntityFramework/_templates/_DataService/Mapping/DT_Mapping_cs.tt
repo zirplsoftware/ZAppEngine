@@ -1,0 +1,170 @@
+﻿<#@ template language="C#" linePragmas="false" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Zirpl.AppEngine.Model.Metadata" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
+<#@ parameter type="Zirpl.AppEngine.AppGeneration.DomainType" name="DomainType" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="TypeName" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Zirpl.AppEngine.Model;
+using Zirpl.AppEngine.Model.Metadata;
+using Zirpl.AppEngine.Model.Extensibility;
+
+namespace <#= this.Namespace #>
+{
+	public partial class <#= this.TypeName #>
+	{
+		public <#= this.TypeName #>()
+        {
+            this.ToTable(this.GetTableName());
+            //this.HasKey(this.GetKeyExpression());
+
+            this.MapProperties();
+
+            // ignore IsPersisted
+            this.Ignore(entity => entity.IsPersisted);
+        }
+
+        protected virtual void MapProperties()
+        {
+            if (this.MapEntityBaseProperties)
+            {
+                Type type = typeof(<#= this.DomainType.FullName #>);
+                if (typeof(IAuditable).IsAssignableFrom(type))
+                {
+                    this.Property(s => ((IAuditable)s).CreatedDate).IsRequired().IsDateTime();
+                    this.Property(s => ((IAuditable)s).CreatedUserId).IsRequired();
+                    this.Property(s => ((IAuditable)s).UpdatedDate).IsRequired().IsDateTime();
+                    this.Property(s => ((IAuditable)s).UpdatedUserId).IsRequired();
+                }
+                if (typeof(IVersionable).IsAssignableFrom(type))
+                {
+                    this.Property(s => ((IVersionable)s).RowVersion).IsRequired().IsRowVersion();
+                }
+                // TODO: map IExtensible
+            }
+
+<#
+		foreach (var property in DomainType.Properties)
+		{	
+			switch (property.DataType)
+            {
+				case DataTypeEnum.String:
+				case DataTypeEnum.EmailAddress:
+				case DataTypeEnum.Url:
+#>
+			this.Property(o => o.<#= property.Name #>)
+				.IsRequired(<#= MetadataConstantsFullTypeName #>.<#= property.Name #>_IsRequired)
+				.HasMaxLength(<#= MetadataConstantsFullTypeName #>.<#= property.Name #>_MaxLength, <#= MetadataConstantsFullTypeName #>.<#= property.Name #>_IsMaxLength);
+<#
+						break;
+				case DataTypeEnum.Boolean:
+				case DataTypeEnum.Guid:
+				case DataTypeEnum.SByte:
+				case DataTypeEnum.Byte:
+				case DataTypeEnum.Short:
+				case DataTypeEnum.UShort:
+				case DataTypeEnum.Int:
+				case DataTypeEnum.UInt:
+				case DataTypeEnum.Long:
+				case DataTypeEnum.ULong:
+#>
+			this.Property(o => o.<#= property.Name #>)
+				.IsRequired(<#= MetadataConstantsFullTypeName #>.<#= property.Name #>_IsRequired);
+<#
+					break;
+				case DataTypeEnum.Date:
+				case DataTypeEnum.Time:
+				case DataTypeEnum.DateTime:
+#>
+			this.Property(o => o.<#= property.Name #>)
+				.IsRequired(<#= MetadataConstantsFullTypeName #>.<#= property.Name #>_IsRequired)
+				.IsDateTime();
+<#
+					break;
+				case DataTypeEnum.Currency:
+#>
+			this.Property(o => o.<#= property.Name #>)
+				.IsRequired(<#= MetadataConstantsFullTypeName #>.<#= property.Name #>_IsRequired)
+				.IsCurrency();
+<#
+					break;
+				case DataTypeEnum.Float:
+				case DataTypeEnum.Percentage:
+				case DataTypeEnum.Double:
+				case DataTypeEnum.Decimal:
+#>
+			this.Property(o => o.<#= property.Name #>)
+				.IsRequired(<#= MetadataConstantsFullTypeName #>.<#= property.Name #>_IsRequired)<#= String.IsNullOrEmpty(property.Precision) ? "" : ".HasPrecision(" + property.Precision + ")" #>;
+<#				
+					break;
+				case DataTypeEnum.Image:
+#>
+			this.Property(o => o.<#= property.Name #>)
+				.IsRequired(<#= MetadataConstantsFullTypeName #>.<#= property.Name #>_IsRequired)
+				.HasColumnType("image");
+<#
+					break;
+				case DataTypeEnum.ByteArray:
+#>
+			this.Property(o => o.<#= property.Name #>)
+				.IsRequired(<#= MetadataConstantsFullTypeName #>.<#= property.Name #>_IsRequired);
+<#
+					break;
+				case DataTypeEnum.Relationship:
+					break;
+				case DataTypeEnum.Char:
+				case DataTypeEnum.Object:
+				case DataTypeEnum.None:
+				default:
+					throw new NotImplementedException("Unexpected Property DataType: " + property.DataType);
+            }
+        }
+
+
+//			if (property.IsCollection
+//				|| !property.MapProperty)
+//			{
+//				// ignore if collection or not supposed to map
+//			}
+//			else if (property.IsRelationship)
+//			{
+//				if (property.GenerateIdProperty)
+//                {
+//					var navigationPropertyString = String.IsNullOrEmpty(property.NavigationProperty) ? "" : ",\r\n										o => o." + property.NavigationProperty;
+//                }
+//			}
+#>
+
+			
+			this.OnMapProperties();
+        }
+		
+		partial void OnMapProperties();
+
+        private String GetTableName()
+        {
+            return typeof(<#= this.DomainType.FullName #>).Name;
+        }
+
+        //protected virtual Expression<Func<TEntity, TId>> GetKeyExpression()
+        //{
+        //    return o => o.Id;
+        //}
+
+        protected virtual bool MapEntityBaseProperties
+        {
+			// TODO: should be FALSE if base properties have already been mapped
+            get { return true; }
+        }
+	}
+}
+<#+
+public bool ShouldTransform { get { return this.DomainType.IsPersistable; } }
+private string MetadataConstantsFullTypeName {get { return this.AsTransform().GetGeneratedTypeInfo<DT_MetadataConstants_cs>().FullTypeName; }}
+#>

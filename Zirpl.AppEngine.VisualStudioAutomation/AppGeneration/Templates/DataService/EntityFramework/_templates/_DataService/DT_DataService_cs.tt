@@ -2,6 +2,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
+<#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.DataService._templates._DataService" #>
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.AppGeneration.DomainType" name="DomainType" #>
 <#@ parameter type="System.String" name="Namespace" #>
