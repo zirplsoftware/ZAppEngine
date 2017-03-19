@@ -1,7 +1,7 @@
 ﻿using System;
 using EnvDTE;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
+namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
 {
     public sealed class ProjectItemIndex
     {

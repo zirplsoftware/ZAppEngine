@@ -1,7 +1,7 @@
 ﻿using EnvDTE;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public static class TransformHostExtensions
     {

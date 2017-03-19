@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
-using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.FluentReflection;

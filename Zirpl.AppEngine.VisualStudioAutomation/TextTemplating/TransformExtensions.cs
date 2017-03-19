@@ -2,9 +2,8 @@
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TextTemplating;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public static class TransformExtensions
     {

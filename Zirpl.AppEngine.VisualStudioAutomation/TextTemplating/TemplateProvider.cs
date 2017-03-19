@@ -4,14 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.FluentReflection;
 
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
+namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     internal sealed class TemplateProvider : ITemplateProvider
     {
