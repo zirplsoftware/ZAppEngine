@@ -7,9 +7,9 @@ using System.Reflection;
 using System.Text;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.Collections;
 using Zirpl.FluentReflection;
-using Zirpl.Logging;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
@@ -145,10 +145,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                                     Source = defaultTemplates.Contains(o) ? "Default" : (otherTemplatesThatAreReplacingDefaultTemplates.Contains(o) ? "Replacement" : "Additional")
                                 };
 
-            this.GetLog().DebugFormat("Found templates:");
+            this.GetLog().Debug("Found templates:");
             foreach (var loggingInfo in loggingInfos.OrderBy(o => o.Name))
             {
-                this.GetLog().DebugFormat("   {0} ({1})", loggingInfo.Name, loggingInfo.Source);
+                this.GetLog().Debug($"   {loggingInfo.Name} ({loggingInfo.Source})");
             }
 
             return templatesToRun;

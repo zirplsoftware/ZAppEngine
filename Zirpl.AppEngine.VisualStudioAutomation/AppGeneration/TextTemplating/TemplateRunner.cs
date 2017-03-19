@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Zirpl.AppEngine.AppGeneration;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.FluentReflection;
-using Zirpl.Logging;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
@@ -70,7 +70,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         {
             if (childTransform.Template.Property<DomainType>("DomainType").Exists)
             {
-                this.GetLog().DebugFormat("   Not Transforming for {0}", ((DomainType)childTransform.Session["DomainType"]).FullName);
+                this.GetLog().Debug($"   Not Transforming for {((DomainType)childTransform.Session["DomainType"]).FullName}");
             }
             else
             {
@@ -82,7 +82,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
         {
             if (childTransform.Template.Property<DomainType>("DomainType").Exists)
             {
-                this.GetLog().DebugFormat("   Transforming for {0}", ((DomainType)childTransform.Session["DomainType"]).FullName);
+                this.GetLog().Debug($"   Transforming for {((DomainType)childTransform.Session["DomainType"]).FullName}");
             }
             else
             {

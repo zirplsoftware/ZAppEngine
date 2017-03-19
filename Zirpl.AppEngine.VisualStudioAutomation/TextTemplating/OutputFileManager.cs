@@ -6,8 +6,8 @@ using System.Text;
 using EnvDTE;
 using EnvDTE80;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.IO;
-using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {

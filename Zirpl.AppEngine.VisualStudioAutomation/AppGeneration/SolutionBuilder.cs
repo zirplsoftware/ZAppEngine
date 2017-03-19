@@ -4,7 +4,7 @@ using EnvDTE;
 using EnvDTE80;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
-using Zirpl.Logging;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 {
@@ -46,7 +46,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
                 }
                 else
                 {
-                    this.GetLog().DebugFormat("   Project already exists: {0}", projectName);
+                    this.GetLog().Debug($"   Project already exists: {projectName}");
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
         {
             var csTemplatePath = ((Solution2)transform.GetDTE().Solution).GetProjectTemplate("ClassLibrary.zip", "CSharp"); // "vbproj"
             var folder = Path.Combine(Path.GetDirectoryName(transform.GetDTE().Solution.FullName), projectName);
-            LogManager.GetLog().DebugFormat("Creating new project: {0} at {1}", projectName, folder);
+            LogManager.GetLog().Debug($"Creating new project: {projectName} at {folder}");
 
             // the project returned by this line is null for some strange reason
             //

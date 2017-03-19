@@ -9,8 +9,8 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSharp;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.IO;
-using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
 {
@@ -216,11 +216,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
                 {
                     try
                     {
-                        LogManager.GetLog().DebugFormat("Property {0}: {1}", property.Name, property.Value);
+                        LogManager.GetLog().Debug($"Property {property.Name}: {property.Value}");
                     }
                     catch (Exception ex)
                     {
-                        LogManager.GetLog().TryError(ex);
+                        LogManager.GetLog().Error(null, ex);
                     }
                 }
             }

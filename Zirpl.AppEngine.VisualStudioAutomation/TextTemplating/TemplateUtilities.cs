@@ -1,6 +1,5 @@
 ﻿using System;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
-using Zirpl.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
@@ -19,7 +18,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 var masterTransform = new MasterTransform(template);
                 if (!_initialized)
                 {
-                    LogFactory.Initialize((IServiceProvider)masterTransform.Host.Host);
+                    LogManager.Initialize((IServiceProvider)masterTransform.Host.Host);
                     _initialized = true;
                 }
                 //LogManager.GetLog(typeof(TemplateUtilities)).Debug("Template is Master");

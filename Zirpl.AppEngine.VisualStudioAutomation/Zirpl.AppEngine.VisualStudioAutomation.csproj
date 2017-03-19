@@ -103,10 +103,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Zirpl.FluentReflection.1.0.0.29-beta\lib\net451\Zirpl.FluentReflection.dll</HintPath>
     </Reference>
-    <Reference Include="Zirpl.Logging.Portable, Version=2.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Zirpl.Logging.2.1.4\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppGeneration\AppGenerator.cs">
@@ -174,8 +170,8 @@
     <Compile Include="TextTemplating\TemplateUtilities.cs" />
     <Compile Include="TextTemplating\TransformBase.cs" />
     <Compile Include="TextTemplating\TransformHost.cs" />
-    <Compile Include="VisualStudio\Logging\LogFactory.cs" />
-    <Compile Include="VisualStudio\Logging\OutputPaneLogWrapper.cs" />
+    <Compile Include="VisualStudio\Logging\LogManager.cs" />
+    <Compile Include="VisualStudio\Logging\VsOutputPaneLog.cs" />
     <Compile Include="TextTemplating\IOutputFileManager.cs" />
     <Compile Include="TextTemplating\IOutputInfoProvider.cs" />
     <Compile Include="TextTemplating\ITemplateProvider.cs" />

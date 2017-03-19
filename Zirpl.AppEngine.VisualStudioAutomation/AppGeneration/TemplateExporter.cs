@@ -5,8 +5,8 @@ using System.Reflection;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.IO;
-using Zirpl.Logging;
 using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
@@ -19,7 +19,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration
 
             foreach (var defaultTemplate in defaultTemplates)
             {
-                this.GetLog().DebugFormat("Found default template: {0}", defaultTemplate.FullName);
+                this.GetLog().Debug($"Found default template: {defaultTemplate.FullName}");
             }
             // every default template type should have a file as an embedded resource called TypeName.tt
             foreach (var type in defaultTemplates)
