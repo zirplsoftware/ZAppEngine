@@ -39,24 +39,6 @@
     <DocumentationFile>bin\Release\Zirpl.AppEngine.Portable.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Zirpl.AppEngine\AppGeneration\App.cs">
-      <Link>AppGeneration\App.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\AppGeneration\DomainProperty.cs">
-      <Link>AppGeneration\DomainProperty.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\AppGeneration\DomainPropertyExtensions.cs">
-      <Link>AppGeneration\DomainPropertyExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\AppGeneration\DomainType.cs">
-      <Link>AppGeneration\DomainType.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\AppGeneration\EnumValue.cs">
-      <Link>AppGeneration\EnumValue.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\AppGeneration\Relationship.cs">
-      <Link>AppGeneration\Relationship.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\DataService\Csv\EntityExporter.cs">
       <Link>DataService\Csv\EntityExporter.cs</Link>
     </Compile>
@@ -213,26 +195,11 @@
     <Compile Include="..\Zirpl.AppEngine\Model\Membership\IUserRegistrationRequest.cs">
       <Link>Model\Membership\IUserRegistrationRequest.cs</Link>
     </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\AutoGenerationBehaviorTypeEnum.cs">
-      <Link>Model\Metadata\AutoGenerationBehaviorTypeEnum.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\DataTypeEnum.cs">
-      <Link>Model\Metadata\DataTypeEnum.cs</Link>
-    </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Metadata\IMetadataDescribed.cs">
       <Link>Model\Metadata\IMetadataDescribed.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\Metadata\MetadataNotFoundException.cs">
       <Link>Model\Metadata\MetadataNotFoundException.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\RelationshipDeletionBehaviorTypeEnum.cs">
-      <Link>Model\Metadata\RelationshipDeletionBehaviorTypeEnum.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\RelationshipTypeEnum.cs">
-      <Link>Model\Metadata\RelationshipTypeEnum.cs</Link>
-    </Compile>
-    <Compile Include="..\Zirpl.AppEngine\Model\Metadata\UniquenessTypeEnum.cs">
-      <Link>Model\Metadata\UniquenessTypeEnum.cs</Link>
     </Compile>
     <Compile Include="..\Zirpl.AppEngine\Model\NonPersistedObjectException.cs">
       <Link>Model\NonPersistedObjectException.cs</Link>
@@ -447,11 +414,13 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AppGeneration\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

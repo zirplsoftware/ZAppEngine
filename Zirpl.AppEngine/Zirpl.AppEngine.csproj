@@ -75,12 +75,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppGeneration\App.cs" />
-    <Compile Include="AppGeneration\DomainProperty.cs" />
-    <Compile Include="AppGeneration\DomainPropertyExtensions.cs" />
-    <Compile Include="AppGeneration\DomainType.cs" />
-    <Compile Include="AppGeneration\EnumValue.cs" />
-    <Compile Include="AppGeneration\Relationship.cs" />
     <Compile Include="DataService\Csv\EntityExporter.cs" />
     <Compile Include="DataService\Csv\EntityPropertyDefinition.cs" />
     <Compile Include="DataService\Csv\PropertyType.cs" />
@@ -133,13 +127,8 @@
     <Compile Include="Model\Membership\ILogInRequest.cs" />
     <Compile Include="Model\Membership\IResetLostPasswordRequest.cs" />
     <Compile Include="Model\Membership\IUserRegistrationRequest.cs" />
-    <Compile Include="Model\Metadata\AutoGenerationBehaviorTypeEnum.cs" />
-    <Compile Include="Model\Metadata\DataTypeEnum.cs" />
     <Compile Include="Model\Metadata\IMetadataDescribed.cs" />
     <Compile Include="Model\Metadata\MetadataNotFoundException.cs" />
-    <Compile Include="Model\Metadata\RelationshipDeletionBehaviorTypeEnum.cs" />
-    <Compile Include="Model\Metadata\RelationshipTypeEnum.cs" />
-    <Compile Include="Model\Metadata\UniquenessTypeEnum.cs" />
     <Compile Include="Model\NonPersistedObjectException.cs" />
     <Compile Include="Model\PersistedObjectException.cs" />
     <Compile Include="Model\Search\DefaultSearchCriteria.cs" />
@@ -217,7 +206,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AppGeneration\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

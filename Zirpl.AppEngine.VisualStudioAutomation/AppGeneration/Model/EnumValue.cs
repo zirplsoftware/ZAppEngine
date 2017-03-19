@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zirpl.AppEngine.AppGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model
 {
     public class EnumValue
     {

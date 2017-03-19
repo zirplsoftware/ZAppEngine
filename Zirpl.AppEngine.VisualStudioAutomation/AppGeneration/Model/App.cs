@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Zirpl.AppEngine.AppGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model
 {
     public class App
     {

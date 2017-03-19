@@ -108,6 +108,17 @@
     <Compile Include="AppGeneration\AppGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AppGeneration\Model\App.cs" />
+    <Compile Include="AppGeneration\Model\AutoGenerationBehaviorTypeEnum.cs" />
+    <Compile Include="AppGeneration\Model\DataTypeEnum.cs" />
+    <Compile Include="AppGeneration\Model\DomainProperty.cs" />
+    <Compile Include="AppGeneration\Model\DomainPropertyExtensions.cs" />
+    <Compile Include="AppGeneration\Model\DomainType.cs" />
+    <Compile Include="AppGeneration\Model\EnumValue.cs" />
+    <Compile Include="AppGeneration\Model\Relationship.cs" />
+    <Compile Include="AppGeneration\Model\RelationshipDeletionBehaviorTypeEnum.cs" />
+    <Compile Include="AppGeneration\Model\RelationshipTypeEnum.cs" />
+    <Compile Include="AppGeneration\Model\UniquenessTypeEnum.cs" />
     <Compile Include="AppGeneration\Parsing\AppProvider.cs" />
     <Compile Include="AppGeneration\Parsing\ConfigFileException.cs" />
     <Compile Include="AppGeneration\Parsing\DomainFileParser.cs" />
@@ -128,16 +139,6 @@
     </Compile>
     <Compile Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\Mapping\DT_Mapping_cs.cs">
       <DependentUpon>DT_Mapping_cs.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="AppGeneration\Templates\DataService\_templates\_DataService\I_DT_DataService_cs.cs">
-      <DependentUpon>I_DT_DataService_cs.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\DT_DataService_cs.cs">
-      <DependentUpon>DT_DataService_cs.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -213,10 +214,6 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataContextBase_cs.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\DT_DataService_cs.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DT_DataService_cs.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="AppGeneration\Templates\Model\_templates\_Model\DT_Enum_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
@@ -224,10 +221,6 @@
     <EmbeddedResource Include="AppGeneration\Templates\Model\_templates\DT_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_cs.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AppGeneration\Templates\DataService\_templates\_DataService\I_DT_DataService_cs.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>I_DT_DataService_cs.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\Mapping\DT_Mapping_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

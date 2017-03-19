@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Zirpl.AppEngine.AppGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model
 {
     public class DomainType
     {

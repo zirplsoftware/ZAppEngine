@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Zirpl.AppEngine.AppGeneration;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;

@@ -1,5 +1,6 @@
 ﻿using System;
 using Zirpl.AppEngine.Model.Metadata;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing.Json
 {

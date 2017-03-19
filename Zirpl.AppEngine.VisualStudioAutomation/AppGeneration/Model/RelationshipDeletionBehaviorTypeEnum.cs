@@ -1,4 +1,4 @@
-﻿namespace Zirpl.AppEngine.Model.Metadata
+﻿namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model
 {
     public enum RelationshipDeletionBehaviorTypeEnum : byte
     {

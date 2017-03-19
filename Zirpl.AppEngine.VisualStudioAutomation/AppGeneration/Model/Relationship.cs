@@ -1,7 +1,6 @@
 ﻿using System;
-using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.AppGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model
 {
     public class Relationship
     {

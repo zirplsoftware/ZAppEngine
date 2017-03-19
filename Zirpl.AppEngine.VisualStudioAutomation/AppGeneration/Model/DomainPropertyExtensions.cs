@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Zirpl.AppEngine.Model.Metadata;
 
-namespace Zirpl.AppEngine.AppGeneration
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model
 {
     public static class DomainPropertyExtensions
     {

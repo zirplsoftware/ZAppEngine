@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Zirpl.AppEngine.AppGeneration;
+using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.FluentReflection;
