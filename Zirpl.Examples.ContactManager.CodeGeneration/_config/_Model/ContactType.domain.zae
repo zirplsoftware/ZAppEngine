@@ -1,7 +1,0 @@
-﻿{
-    "isStaticLookup": true,
-    "enumValues": [ 
-        { "id":  1, "name": "Person"},
-        { "id":  2, "name": "Company"}
-    ]
-}

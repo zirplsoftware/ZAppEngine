@@ -45,24 +45,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="_config\_Model\Email.domain.zae">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="_config\_Model\Contact.domain.zae">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="_config\_Model\ContactType.domain.zae">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zirpl.AppEngine.EntityFramework\Zirpl.AppEngine.EntityFramework.csproj">
+      <Project>{b23590ec-7c8d-4bd4-bfee-77c0f0d821a7}</Project>
+      <Name>Zirpl.AppEngine.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zirpl.AppEngine.VisualStudioAutomation\Zirpl.AppEngine.VisualStudioAutomation.csproj">
       <Project>{f8855f9a-35d1-4c30-bb53-1fd89a984989}</Project>
       <Name>Zirpl.AppEngine.VisualStudioAutomation</Name>
@@ -82,6 +71,10 @@
       <LastGenOutput>App.txt</LastGenOutput>
       <TransformOnBuild>False</TransformOnBuild>
     </None>
+    <None Include="_config\_Model\Common\Tag.domain.zae" />
+    <None Include="_config\_Model\ProjectUrl.domain.zae" />
+    <None Include="_config\_Model\ProjectImage.domain.zae" />
+    <None Include="_config\_Model\Project.domain.zae" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.txt">

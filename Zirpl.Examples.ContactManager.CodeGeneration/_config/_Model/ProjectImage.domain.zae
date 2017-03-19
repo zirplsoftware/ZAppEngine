@@ -1,0 +1,17 @@
+﻿{
+    "properties": [
+        { "name": "Image", "dataType": "Image", "isrequired": true },
+        { "name": "Caption", "dataType": "String", "maxLength": 2048 },
+        {
+            "name": "Project",
+            "dataType" :  "Relationship",
+            "relationship": {
+                "type": "ManyToOne",
+                "deletionBehavior": "CascadeDelete",
+                "to": "Project",
+                "toPropertyName": "Images",
+                "toPropertyIsRequired" :  true
+            }
+        }
+    ]
+}

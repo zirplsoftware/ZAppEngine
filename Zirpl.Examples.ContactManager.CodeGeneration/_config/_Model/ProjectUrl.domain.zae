@@ -1,0 +1,16 @@
+﻿{
+    "properties": [
+        { "name": "Url", "dataType": "Url", "isrequired": true, "maxLength": 2048 },
+        {
+            "name": "Project",
+            "dataType" :  "Relationship",
+            "relationship": {
+                "type": "ManyToOne",
+                "deletionBehavior": "CascadeDelete",
+                "to": "Project",
+                "toPropertyName": "Urls",
+                "toPropertyIsRequired" :  true
+            }
+        }
+    ]
+}

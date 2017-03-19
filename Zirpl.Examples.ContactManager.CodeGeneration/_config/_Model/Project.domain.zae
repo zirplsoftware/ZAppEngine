@@ -1,0 +1,20 @@
+﻿{
+    "isUpdatable": false,
+    "isInsertable" :  false,
+    "properties": [
+        { "name": "Title", "dataType": "String", "isrequired": true, "maxLength": 512, "uniqeness": "Unique" },
+        { "name": "SubTitle", "dataType": "String", "maxLength": 1024 },
+        { "name": "Year", "dataType": "UShort", "minValue": 1900 },
+        { "name": "Description", "dataType": "String", "isMaxLength": true },
+        { "name": "UrlSuffix", "dataType": "String", "maxLength": 1024, "uniqueness": "UniqueAmongNonNullValues" },
+        {
+            "name": "Tags",
+            "DataType": "Relationship",
+            "Relationship": {
+                "type": "ManyToMany",
+                "deletionBehavior": "CascadeDelete",
+                "to": "Tag"
+            }
+        }
+    ]
+}

@@ -41,12 +41,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_auto\Common\Tag.cs">
+      <DependentUpon>App.txt</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Common\TagMetadataConstants.cs">
+      <DependentUpon>App.txt</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\Project.cs">
+      <DependentUpon>App.txt</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\ProjectImage.cs">
+      <DependentUpon>App.txt</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\ProjectImageMetadataConstants.cs">
+      <DependentUpon>App.txt</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\ProjectMetadataConstants.cs">
+      <DependentUpon>App.txt</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\ProjectUrl.cs">
+      <DependentUpon>App.txt</DependentUpon>
+    </Compile>
+    <Compile Include="_auto\ProjectUrlMetadataConstants.cs">
+      <DependentUpon>App.txt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
       <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
       <Name>Zirpl.AppEngine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_auto\App.txt" />
+    <Content Include="_auto\Common\App.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

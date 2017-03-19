@@ -1,0 +1,6 @@
+﻿{
+	"properties" :  [
+		{ "name" : "Name", "dataType" : "String", "isrequired" : true, "maxLength" : 512, "uniqeness" : "Unique"},
+		{ "name" : "Description", "dataType" : "String", "maxLength" : 1024}
+	]
+}
