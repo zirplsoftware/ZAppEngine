@@ -9,8 +9,8 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSharp;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
-using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.VisualStudio
 {

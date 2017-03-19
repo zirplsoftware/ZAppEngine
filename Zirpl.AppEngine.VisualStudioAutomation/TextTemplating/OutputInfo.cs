@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Zirpl.FluentReflection;
-using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {

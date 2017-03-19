@@ -170,6 +170,13 @@
     <Compile Include="TextTemplating\TemplateUtilities.cs" />
     <Compile Include="TextTemplating\TransformBase.cs" />
     <Compile Include="TextTemplating\TransformHost.cs" />
+    <Compile Include="Utilities\ActionExtensions.cs" />
+    <Compile Include="Utilities\ActionRunner.cs" />
+    <Compile Include="Utilities\AssemblyExtensions.cs" />
+    <Compile Include="Utilities\IListExtensions.cs" />
+    <Compile Include="Utilities\PathUtilities.cs" />
+    <Compile Include="Utilities\StreamExtensions.cs" />
+    <Compile Include="Utilities\StringExtensions.cs" />
     <Compile Include="VisualStudio\Logging\LogManager.cs" />
     <Compile Include="VisualStudio\Logging\VsOutputPaneLog.cs" />
     <Compile Include="TextTemplating\IOutputFileManager.cs" />
@@ -194,10 +201,6 @@
     <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
       <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
       <Name>Zirpl.AppEngine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zirpl.Common\Zirpl.Common %28Net40%29.csproj">
-      <Project>{0402a91f-2a69-447c-bb2b-64d5af155105}</Project>
-      <Name>Zirpl.Common %28Net40%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

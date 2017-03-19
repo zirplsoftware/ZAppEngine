@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TextTemplating;
 using Zirpl.FluentReflection;
-using Zirpl.Reflection;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {

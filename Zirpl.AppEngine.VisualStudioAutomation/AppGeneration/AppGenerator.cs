@@ -4,6 +4,7 @@ using System.Reflection;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration

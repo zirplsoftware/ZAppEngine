@@ -3,6 +3,7 @@ using System.IO;
 using EnvDTE;
 using EnvDTE80;
 using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
+using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 

@@ -9,9 +9,8 @@ using Newtonsoft.Json;
 using Zirpl.AppEngine.AppGeneration;
 using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing.Json;
+using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
-using Zirpl.Collections;
-using Zirpl.IO;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing
 {
