@@ -10,8 +10,6 @@
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates._Model
 {
     using System.Linq;
-    using Zirpl.AppEngine.Model.Metadata;
-    using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
     using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model;

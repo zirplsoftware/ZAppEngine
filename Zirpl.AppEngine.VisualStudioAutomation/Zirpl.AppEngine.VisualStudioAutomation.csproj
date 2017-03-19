@@ -199,12 +199,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Zirpl.AppEngine\Zirpl.AppEngine.csproj">
-      <Project>{dd9bcb12-748c-4395-9a8e-a599a60a0caa}</Project>
-      <Name>Zirpl.AppEngine</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="AppGeneration\Parsing\Json\sample domain.zae" />
     <EmbeddedResource Include="AppGeneration\Templates\DataService\EntityFramework\_templates\_DataService\AppDataContext_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

@@ -6,7 +6,6 @@ using System.Linq;
 using EnvDTE;
 using EnvDTE80;
 using Newtonsoft.Json;
-using Zirpl.AppEngine.Model.Metadata;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Parsing.Json;
 using Zirpl.AppEngine.VisualStudioAutomation.Utilities;

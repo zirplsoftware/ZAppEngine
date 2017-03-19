@@ -1,6 +1,5 @@
 ﻿<#@ template language="C#" linePragmas="false" #>
 <#@ import namespace="System.Linq" #>
-<#@ import namespace="Zirpl.AppEngine.Model.Metadata" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
