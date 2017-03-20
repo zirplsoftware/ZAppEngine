@@ -190,18 +190,18 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 window.Close();
 
 
-                this._currentOutputInfo.ProjectItemIndex = item.GetIndex();
+                this._currentOutputInfo.ResultingProjectItemIndex = item.GetIndex();
 
                 // set VS properties for the ProjectItem
                 //
                 if (!String.IsNullOrWhiteSpace(this._currentOutputInfo.CustomTool))
                 {
-                    this._currentOutputInfo.ProjectItemIndex.ProjectItem.SetPropertyValue("CustomTool", this._currentOutputInfo.CustomTool);
+                    this._currentOutputInfo.ResultingProjectItemIndex.ProjectItem.SetPropertyValue("CustomTool", this._currentOutputInfo.CustomTool);
                 }
                 var buildActionString = this.GetBuildActionString(this._currentOutputInfo.BuildAction);
                 if (!String.IsNullOrWhiteSpace(buildActionString))
                 {
-                    this._currentOutputInfo.ProjectItemIndex.ProjectItem.SetPropertyValue("ItemType", buildActionString);
+                    this._currentOutputInfo.ResultingProjectItemIndex.ProjectItem.SetPropertyValue("ItemType", buildActionString);
                 }
 
                 this._completedFiles.Add(this._currentOutputInfo);
@@ -225,7 +225,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     {
                         foreach (var projectItem in placeHolderItem.ProjectItems.ToEnumerable())
                         {
-                            if (!this._completedFiles.Any(o => o.ProjectItemIndex.ProjectItem == projectItem))
+                            if (!this._completedFiles.Any(o => o.ResultingProjectItemIndex.ProjectItem == projectItem))
                             {
                                 this.GetLog().Debug("Deleting stale auto-generated file: " + projectItem.GetFullPath());
                                 projectItem.Delete();

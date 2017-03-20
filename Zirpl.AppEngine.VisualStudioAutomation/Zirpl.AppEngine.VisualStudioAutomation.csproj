@@ -163,7 +163,6 @@
     <Compile Include="AppGeneration\TextTemplating\OutputInfoProvider.cs" />
     <Compile Include="AppGeneration\TemplateExporter.cs" />
     <Compile Include="AppGeneration\SolutionBuilder.cs" />
-    <Compile Include="AppGeneration\TextTemplating\TransformExtensions.cs" />
     <Compile Include="TextTemplating\DotNetTypeOutputInfo.cs" />
     <Compile Include="TextTemplating\ITransformHost.cs" />
     <Compile Include="TextTemplating\MasterTransform.cs" />

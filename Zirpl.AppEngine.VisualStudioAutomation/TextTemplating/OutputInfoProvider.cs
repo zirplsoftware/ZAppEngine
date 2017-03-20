@@ -22,11 +22,40 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             outputFile.FileExtension = Path.GetExtension(fileName);
             outputFile.DestinationProjectFullName = destinationProject;
             outputFile.FolderPathWithinProject = folder;
+
+            if (outputFile is DotNetTypeOutputInfo)
+            {
+                SetNamespace(transform, (DotNetTypeOutputInfo) outputFile);
+            }
+
             outputFile.MatchBuildActionToFileExtension();
             return outputFile;
         }
 
-        protected virtual OutputInfo CreateOutputInfo(ITransform transform)
+        private void SetNamespace(ITransform transform, DotNetTypeOutputInfo outputInfo)
+        {
+            var project = transform.GetDTE()
+                    .GetAllProjects()
+                    .SingleOrDefault(
+                        o => o.FullName.EndsWith(outputInfo.DestinationProjectFullName + ".csproj", StringComparison.InvariantCultureIgnoreCase));
+            var namespaceBuilder = new StringBuilder();
+            if (project != null)
+            {
+                namespaceBuilder.Append(project.GetDefaultNamespace());
+            }
+            var folderPathWithinProject = outputInfo.FolderPathWithinProject;
+            if (!String.IsNullOrEmpty(folderPathWithinProject))
+            {
+                if (namespaceBuilder.Length > 0)
+                {
+                    namespaceBuilder.Append(".");
+                }
+                namespaceBuilder.Append(folderPathWithinProject.Replace(@"\", "."));
+            }
+            outputInfo.Namespace = namespaceBuilder.ToString();
+        }
+
+        private OutputInfo CreateOutputInfo(ITransform transform)
         {
             var templateName = transform.Template.GetType().Name;
             if (templateName.EndsWith("_cs"))

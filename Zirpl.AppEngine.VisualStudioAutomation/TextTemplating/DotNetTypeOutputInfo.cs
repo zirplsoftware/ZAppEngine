@@ -1,33 +1,8 @@
-﻿using System;
-using System.Text;
-using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
-
-namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
+﻿namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public class DotNetTypeOutputInfo : OutputInfo
     {
-        public string Namespace
-        {
-            get
-            {
-                var project = this.ProjectItemIndex.ProjectItem.ContainingProject;
-                var namespaceBuilder = new StringBuilder();
-                if (project != null)
-                {
-                    namespaceBuilder.Append(project.GetDefaultNamespace());
-                }
-                var folderPathWithinProject = FolderPathWithinProject;
-                if (!String.IsNullOrEmpty(folderPathWithinProject))
-                {
-                    if (namespaceBuilder.Length > 0)
-                    {
-                        namespaceBuilder.Append(".");
-                    }
-                    namespaceBuilder.Append(folderPathWithinProject.Replace(@"\", "."));
-                }
-                return namespaceBuilder.ToString();
-            }
-        }
+        public string Namespace { get; set; }
 
         public string TypeName => FileNameWithoutExtension;
 

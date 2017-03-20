@@ -224,7 +224,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.DataSer
         }
 
 public bool ShouldTransform { get { return this.DomainType.IsPersistable; } }
-private string MetadataConstantsFullTypeName {get { return ((DotNetTypeOutputInfo)this.AsTransform().GetGeneratedTypeInfo<DT_MetadataConstants_cs>()).FullTypeName; }}
+private string MetadataConstantsFullTypeName {get { return ((DotNetTypeOutputInfo)this.AsTransform().OutputInfoProvider.GetOutputInfo<DT_MetadataConstants_cs>(this.AsTransform())).FullTypeName; }}
 public string Namespace { get { return ((DotNetTypeOutputInfo)this.OutputInfo).Namespace; } }
 public string TypeName { get { return ((DotNetTypeOutputInfo)this.OutputInfo).TypeName; } }
 

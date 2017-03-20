@@ -26,26 +26,21 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     }
                 }
                 childTransform.Initialize();
-
+                this.GetLog().Trace("Pre-ShouldTransform check");
                 if (!template.Property<bool>("ShouldTransform").Exists
                     || template.Property<bool>("ShouldTransform").Value)
                 {
                     OutputInfo outputFile = null;
-                    if (template.Property<OutputInfo>("OutputFile").Exists)
+                    if (template.Property<OutputInfo>("OutputInfo").Exists)
                     {
-                        outputFile = template.Property<OutputInfo>("OutputFile").Value;
+                        outputFile = template.Property<OutputInfo>("OutputInfo").Value;
                     }
                     if (outputFile == null)
                     {
                         outputFile = transform.OutputInfoProvider.GetOutputInfo(childTransform);
                     }
-                    if (outputFile != null
-                        && template.Property<OutputInfo>("OutputFile").Exists
-                        && !template.Property<OutputInfo>("OutputFile").Exists)
-                    {
-                        childTransform.Session["OutputFile"] = outputFile;
-                        childTransform.Initialize();
-                    }
+                    childTransform.Session["OutputInfo"] = outputFile;
+                    childTransform.Initialize();
 
                     this.LogTransforming(childTransform);
                     if (outputFile != null)

@@ -24,17 +24,10 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         public bool AutoFormat { get; set; }
         public Encoding Encoding { get; set; }
 
-        public ProjectItemIndex ProjectItemIndex { get; internal set; }
+        public ProjectItemIndex ResultingProjectItemIndex { get; internal set; }
         public String FileName
         {
             get { return this.FileNameWithoutExtension + this.FileExtension; }
-        }
-
-        public OutputInfo AsCSharpFile()
-        {
-            FileExtension = ".cs";
-            BuildAction = BuildActionTypeEnum.Compile;
-            return this;
         }
 
         public OutputInfo MatchBuildActionToFileExtension()
