@@ -85,7 +85,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             }
             else
             {
-                base.LogShouldTransformAsFalse(childTransform);
+                base.LogTransforming(childTransform);
             }
         }
     }

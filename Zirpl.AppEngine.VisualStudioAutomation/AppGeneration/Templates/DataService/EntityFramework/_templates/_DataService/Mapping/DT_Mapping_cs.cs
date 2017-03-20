@@ -10,7 +10,7 @@
 namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.DataService.EntityFramework._templates._DataService.Mapping
 {
     using System.Linq;
-    using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates;
+    using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates._Model;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
     using Zirpl.AppEngine.VisualStudioAutomation.TextTemplating;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model;

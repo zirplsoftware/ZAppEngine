@@ -142,12 +142,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="AppGeneration\Templates\Model\_templates\DT_MetadataConstants_cs.cs">
+    <Compile Include="AppGeneration\Templates\Model\_templates\_Model\DT_MetadataConstants_cs.cs">
       <DependentUpon>DT_MetadataConstants_cs.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="AppGeneration\Templates\Model\_templates\DT_cs.cs">
+    <Compile Include="AppGeneration\Templates\Model\_templates\_Model\DT_cs.cs">
       <DependentUpon>DT_cs.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -211,7 +211,7 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_Enum_cs.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="AppGeneration\Templates\Model\_templates\DT_cs.tt">
+    <EmbeddedResource Include="AppGeneration\Templates\Model\_templates\_Model\DT_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_cs.cs</LastGenOutput>
     </EmbeddedResource>
@@ -219,7 +219,7 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_Mapping_cs.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="AppGeneration\Templates\Model\_templates\DT_MetadataConstants_cs.tt">
+    <EmbeddedResource Include="AppGeneration\Templates\Model\_templates\_Model\DT_MetadataConstants_cs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DT_MetadataConstants_cs.cs</LastGenOutput>
     </EmbeddedResource>

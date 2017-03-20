@@ -96,17 +96,20 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 
         protected override string GetProjectFullName(ITransform transform)
         {
+            var templateTypeNamespace = transform.Template.GetType().Namespace;
             DomainType domainType = null;
             if (transform.Template.Property<DomainType>("DomainType").Exists)
             {
                 domainType = (DomainType)transform.Session["DomainType"];
             }
-            if (domainType != null
-                && !string.IsNullOrEmpty(domainType.DestinationProjectFullName))
+            var subNamespace = (templateTypeNamespace + ".")
+            .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase);
+            if (subNamespace.StartsWith("_")
+                || domainType == null)
             {
-                return domainType.DestinationProjectFullName;
+                return base.GetProjectFullName(transform);
             }
-            return base.GetProjectFullName(transform);
+            return domainType.DestinationProjectFullName;
         }
 
         protected override string GetFolderPathWithinProject(ITransform transform)

@@ -35,10 +35,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         private void SetNamespace(ITransform transform, DotNetTypeOutputInfo outputInfo)
         {
-            var project = transform.GetDTE()
-                    .GetAllProjects()
-                    .SingleOrDefault(
-                        o => o.FullName.Equals(outputInfo.DestinationProjectFullName, StringComparison.InvariantCultureIgnoreCase));
+            var project = transform.GetDTE().GetAllProjects()
+                .SingleOrDefault(
+                    o => o.FullName.ToLowerInvariant() == outputInfo.DestinationProjectFullName.ToLowerInvariant());
             var namespaceBuilder = new StringBuilder();
             if (project != null)
             {
@@ -117,9 +116,9 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             var templateTypeNamespace = transform.Template.GetType().Namespace;
             var subNamespace = (templateTypeNamespace + ".")
-                .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase);
+                 .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase);
             if (subNamespace.StartsWith("_"))
-            { 
+            {
                 subNamespace = subNamespace
                     .SubstringAfterFirstInstanceOf("_")
                     .SubstringUntilFirstInstanceOf(".");
@@ -137,7 +136,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         protected virtual string GetFolderPathWithinProject(ITransform transform)
         {
-            var templateTypeNamespace = transform.Template.GetType().Name;
+            var templateTypeNamespace = transform.Template.GetType().Namespace;
             String immediateFolder;
             var subNamespace = (templateTypeNamespace + ".")
                 .SubstringAfterLastInstanceOf("_templates.", StringComparison.InvariantCultureIgnoreCase);

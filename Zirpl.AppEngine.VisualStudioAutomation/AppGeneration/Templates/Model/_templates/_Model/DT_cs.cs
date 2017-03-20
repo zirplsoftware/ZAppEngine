@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates
+namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._templates._Model
 {
     using System.Linq;
     using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
@@ -19,233 +19,224 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._
     /// Class to produce the template output
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public partial class DT_MetadataConstants_cs : DT_MetadataConstants_csBase
+    public partial class DT_cs : DT_csBase
     {
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\n\r\nna" +
-                    "mespace ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
-            this.Write("\r\n{\r\n    public");
-            this.Write(this.ToStringHelper.ToStringWithCulture(DomainType.IsAbstract ? " abstract" : ""));
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Zirpl" +
+                    ".AppEngine.Model;\r\nusing Zirpl.AppEngine.Model.Metadata;\r\nusing Zirpl.AppEngine." +
+                    "Model.Extensibility;\r\n\r\nnamespace ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Namespace));
+            this.Write("\r\n{\r\n\tpublic ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IsAbstract ? "abstract" : ""));
             this.Write(" partial class ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeName));
-            this.Write("\r\n    {\r\n");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TypeName));
+            this.Write(" : ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.InheritsFrom != null ? this.DomainType.InheritsFrom.FullName : ""));
+            this.Write("\r\n\t\t\t");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.InheritsFrom != null ? "," : ""));
+            this.Write(" IMetadataDescribed\r\n");
 
-		foreach (var property in DomainType.Properties)
-		{
+		if (this.DomainType.IsPersistable
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsPersistable))
+        {
 
-            this.Write("        public const string ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_Name = \"");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("\";\r\n\t\tpublic const bool ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_IsRequired = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.IsRequired.ToString().ToLowerInvariant()));
-            this.Write(";\r\n");
+            this.Write("\t\t\t, IPersistable<");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            this.Write(">\r\n");
 
-			switch (property.DataType)
-            {
-				case DataTypeEnum.String:
-				case DataTypeEnum.EmailAddress:
-				case DataTypeEnum.Url:
+        } 
+		if (this.DomainType.IsAuditable
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsAuditable))
+        {
 
-            this.Write("\t\tpublic const bool ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_IsMaxLength = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.IsMaxLength.ToString().ToLowerInvariant()));
-            this.Write(";\r\n        public const long ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinLength = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.MinLength));
-            this.Write(";\r\n\t\tpublic const long ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxLength = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.MaxLength));
-            this.Write(";\r\n");
+            this.Write("\t\t\t, IAuditable\r\n");
 
-						break;
-				case DataTypeEnum.Boolean:
-				case DataTypeEnum.Guid:
-				case DataTypeEnum.SByte:
+        } 
+		if (this.DomainType.IsExtensible
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsExtensible))
+        {
 
-            this.Write("\t\tpublic const sbyte ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "sbyte.MinValue"));
-            this.Write(";\r\n        public const sbyte ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "sbyte.MaxValue"));
-            this.Write(";\r\n");
+            this.Write("\t\t\t, IExtensible<");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
+            this.Write(",");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.Name));
+            this.Write(",");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            this.Write(">\r\n");
 
-					break;
-				case DataTypeEnum.Byte:
+        }
+		if (this.DomainType.IsExtendedEntityFieldValue
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
+        {
 
-            this.Write("\t\tpublic const byte ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "byte.MinValue"));
-            this.Write(";\r\n        public const byte ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "byte.MaxValue"));
-            this.Write(";\r\n");
+            this.Write("\t\t\t, IExtendedEntityFieldValue<");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Name));
+            this.Write(",");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.Name));
+            this.Write(",");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            this.Write(">\r\n");
 
-					break;
-				case DataTypeEnum.Short:
+        }
+		if (this.DomainType.IsMarkDeletable
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsMarkDeletable))
+        {
 
-            this.Write("\t\tpublic const short ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "short.MinValue"));
-            this.Write(";\r\n        public const short ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "short.MaxValue"));
-            this.Write(";\r\n");
+            this.Write("\t\t\t, IsMarkDeletable\r\n");
 
-					break;
-				case DataTypeEnum.UShort:
+        }
+		if (this.DomainType.IsStaticLookup
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsStaticLookup))
+        {
 
-            this.Write("\t\tpublic const ushort ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "ushort.MinValue"));
-            this.Write(";\r\n        public const ushort ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "ushort.MaxValue"));
-            this.Write(";\r\n");
+            this.Write("\t\t\t, IStaticLookup\r\n");
 
-					break;
-				case DataTypeEnum.Int:
+        }
+		if (this.DomainType.IsStaticLookup
+                && (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsStaticLookup)
+				&& this.DomainType.EnumValues.Any())
+        {
 
-            this.Write("\t\tpublic const int ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "int.MinValue"));
-            this.Write(";\r\n        public const int ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "int.MaxValue"));
-            this.Write(";\r\n");
+            this.Write("\t\t\t, IEnumDescribed<");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            this.Write(",");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.FullName));
+            this.Write("Enum>\r\n");
 
-					break;
-				case DataTypeEnum.UInt:
-
-            this.Write("\t\tpublic const unit ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "unit.MinValue"));
-            this.Write(";\r\n        public const unit ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "unit.MaxValue"));
-            this.Write(";\r\n");
-
-					break;
-				case DataTypeEnum.Long:
-
-            this.Write("\t\tpublic const long ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "long.MinValue"));
-            this.Write(";\r\n        public const long ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "long.MaxValue"));
-            this.Write(";\r\n");
-
-					break;
-				case DataTypeEnum.ULong:
-
-            this.Write("\t\tpublic const ulong ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue : "ulong.MinValue"));
-            this.Write(";\r\n        public const ulong ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue : "ulong.MaxValue"));
-            this.Write(";\r\n");
-
-					break;
-				case DataTypeEnum.Date:
-				case DataTypeEnum.Time:
-				case DataTypeEnum.DateTime:
-
-            this.Write("\t\t// TODO: date-times\r\n");
-
-					break;
-				case DataTypeEnum.Decimal:
-				case DataTypeEnum.Currency:
-				case DataTypeEnum.Percentage:
-
-            this.Write("\t\tpublic const decimal ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue"));
-            this.Write(";\r\n        public const decimal ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue"));
-            this.Write(";\r\n\t\tpublic const double ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue_Double = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue"));
-            this.Write(";\r\n        public const double ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue_Double = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue"));
-            this.Write(";\r\n");
-
-					break;
-				case DataTypeEnum.Double:
-
-            this.Write("\t\tpublic const double ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "D" : "double.MinValue"));
-            this.Write(";\r\n        public const double ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "D": "double.MaxValue"));
-            this.Write(";\r\n\t\tpublic const decimal ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MinValue_Decimal = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MinValue) ? property.MinValue + "m" : "decimal.MinValue"));
-            this.Write(";\r\n        public const decimal ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            this.Write("_MaxValue_Decimal = ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(!String.IsNullOrEmpty(property.MaxValue) ? property.MaxValue + "m": "decimal.MaxValue"));
-            this.Write(";\r\n");
-				
-					break;
-				case DataTypeEnum.Image:
-				case DataTypeEnum.ByteArray:
-					// these cases don't have anything extra
-					break;
-				case DataTypeEnum.Relationship:
-
-
-            this.Write("\t\t// TODO: relationships- ID\'s already taken care of by above\r\n");
-
-					break;
-				case DataTypeEnum.Float:
-				case DataTypeEnum.Char:
-				case DataTypeEnum.Object:
-				case DataTypeEnum.None:
-				default:
-					throw new NotImplementedException("Unexpected Property DataType: " + property.DataType);
-            }
         }
 
-            this.Write("\t}\r\n}\r\n");
+            this.Write("\t{\r\n\t\t");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IsAbstract || this.DomainType.IsPersistable ? "protected" : "public"));
+            this.Write(" ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TypeName));
+            this.Write("()\r\n\t\t{\r\n");
+
+		foreach (var collectionProperty in this.DomainType.Properties.GetCollectionProperties())
+        {
+
+            this.Write("\t\tthis.");
+            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.Name));
+            this.Write(" = this.");
+            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.Name));
+            this.Write(" ?? new ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(collectionProperty.InitializationDataTypeString));
+            this.Write("();\r\n");
+
+        }
+
+            this.Write("\t\t}\r\n");
+
+		foreach (var property in this.DomainType.Properties.GetNonInterfaceProperties())
+		{
+
+            this.Write("\t\tpublic virtual ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
+            this.Write(" ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            this.Write(" { get; set; }\r\n");
+
+		}
+
+            this.Write("\r\n\t\t#region Interface implementations\r\n\r\n");
+
+		foreach (var property in this.DomainType.Properties.GetInterfaceProperties())
+		{
+
+            this.Write("\t\tpublic virtual ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.DataTypeString));
+            this.Write(" ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            this.Write(" { get; set; }\r\n");
+
+		}
+
+            this.Write("\r\n");
+
+		if (this.DomainType.IsPersistable
+			&& (this.DomainType.InheritsFrom == null
+				|| !this.DomainType.InheritsFrom.IsPersistable))
+		{
+
+            this.Write("\t\tpublic virtual Object GetId()\r\n        {\r\n            return Id;\r\n        }\r\n\r\n" +
+                    "        public virtual void SetId(Object id)\r\n        {\r\n            Id = (");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            this.Write(@")id;
+        }
+
+        public virtual bool IsPersisted
+        {
+            get { return this.EvaluateIsPersisted(); }
+        }
+
+		public override bool Equals(object other)
+        {
+            return this.EvaluateEquals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.EvaluateGetHashCode();
+        }
+");
+
+		}
+		
+		if (this.DomainType.IsExtensible
+				&& (this.DomainType.InheritsFrom == null
+					|| !this.DomainType.InheritsFrom.IsExtensible))
+		{
+
+            this.Write(@"		public virtual IList<IExtendedEntityFieldValue> GetExtendedFieldValues()
+		{
+            return this.ExtendedFieldValues.Cast<IExtendedEntityFieldValue>().ToList();
+		}
+        public virtual void SetExtendedFieldValues(IList<IExtendedEntityFieldValue> list)
+		{
+            this.ExtendedFieldValues.Clear();
+            this.ExtendedFieldValues.AddRange(list.Cast<");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.ExtendedBy.FullName));
+            this.Write(">());\r\n\t\t}\r\n");
+
+		}
+
+		if (this.DomainType.IsExtendedEntityFieldValue
+			&& (this.DomainType.InheritsFrom == null
+			|| !this.DomainType.InheritsFrom.IsExtendedEntityFieldValue))
+		{
+
+            this.Write(@"        public virtual object GetExtendedEntityId()
+        {
+            return this.ExtendedEntityId;
+        }
+
+        public virtual IExtensible GetExtendedEntity()
+        {
+            return this.ExtendedEntity;
+        }
+
+        public virtual void SetExtendedEntityId(object id)
+        {
+            this.ExtendedEntityId = (");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.IdProperty.DataTypeString));
+            this.Write(")id;\r\n        }\r\n\r\n        public virtual void SetExtendedEntity(IExtensible enti" +
+                    "ty)\r\n        {\r\n            this.ExtendedEntity = (");
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.DomainType.Extends.FullName));
+            this.Write(")entity;\r\n        }\r\n\t\t\r\n");
+
+		}
+
+            this.Write("\t\t#endregion\r\n\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
 
@@ -354,7 +345,7 @@ if ((OutputInfoValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public class DT_MetadataConstants_csBase
+    public class DT_csBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
