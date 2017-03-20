@@ -3,7 +3,6 @@
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
 <#@ assembly name="$(SolutionDir)Zirpl.AppEngine.VisualStudioAutomation\bin\$(Configuration)\Zirpl.AppEngine.VisualStudioAutomation.dll" #>
-<#@ assembly name="$(SolutionDir)Zirpl.AppEngine\bin\$(Configuration)\Zirpl.AppEngine.dll" #>
 <#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
 <#
 //this.AsTransform().GenerateSolutionStructure();
