@@ -5,8 +5,7 @@
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model.App" name="App" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model.DomainType" name="DomainType" #>
-<#@ parameter type="System.String" name="Namespace" #>
-<#@ parameter type="System.String" name="TypeName" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.OutputInfo" name="OutputInfo" #>
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -129,3 +128,7 @@ namespace <#= Namespace #>
 #>
 	}
 }
+<#+
+public string Namespace { get { return ((DotNetTypeOutputInfo)this.OutputInfo).Namespace; } }
+public string TypeName { get { return ((DotNetTypeOutputInfo)this.OutputInfo).TypeName; } }
+#>

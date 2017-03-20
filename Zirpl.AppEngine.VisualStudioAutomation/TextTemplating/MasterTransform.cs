@@ -22,6 +22,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 session.Add("_IsMaster", true);
                 session.Add("_IsChild", false);
                 session.Add("_FileManager", new OutputFileManager(this));
+                session.Add("_OutputInfoProvider", new OutputInfoProvider());
                 session.Add("_Initialized", true);
             }
             else if ((bool)session["_IsChild"])
@@ -68,6 +69,14 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             {
                 return (IOutputFileManager)this.Session["_FileManager"];
             }
+        }
+        public override IOutputInfoProvider OutputInfoProvider
+        {
+            get
+            {
+                return (IOutputInfoProvider)this.Session["_OutputInfoProvider"];
+            }
+            set { this.Session["_OutputInfoProvider"] = value; }
         }
     }
 }

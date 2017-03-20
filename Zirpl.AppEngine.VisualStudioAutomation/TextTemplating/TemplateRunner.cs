@@ -8,7 +8,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
     public class TemplateRunner : ITemplateRunner
     {
-        public virtual void RunTemplate(ITransform transform, Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
+        public virtual void RunTemplate(ITransform transform, Object template, IDictionary<string, object> sessionParameters = null)
         {
             if (transform == null) throw new ArgumentNullException("transform");
             if (template == null) throw new ArgumentNullException("template");
@@ -35,25 +35,15 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                     {
                         outputFile = template.Property<OutputInfo>("OutputFile").Value;
                     }
-                    if (outputFile == null
-                        && outputFileProvider != null)
+                    if (outputFile == null)
                     {
-                        outputFile = outputFileProvider.GetOutputInfo(childTransform);
+                        outputFile = transform.OutputInfoProvider.GetOutputInfo(childTransform);
                     }
-
-                    if (outputFile != null)
+                    if (outputFile != null
+                        && template.Property<OutputInfo>("OutputFile").Exists
+                        && !template.Property<OutputInfo>("OutputFile").Exists)
                     {
-                        var typeNameProperty = template.Property<String>("TypeName");
-                        var namespaceProperty = template.Property<String>("Namespace");
-                        var provider = new GeneratedTypeInfo(childTransform);
-                        if (typeNameProperty.Exists)
-                        {
-                            childTransform.Session["TypeName"] = provider.TypeName;
-                        }
-                        if (namespaceProperty.Exists)
-                        {
-                            childTransform.Session["Namespace"] = provider.Namespace;
-                        }
+                        childTransform.Session["OutputFile"] = outputFile;
                         childTransform.Initialize();
                     }
 

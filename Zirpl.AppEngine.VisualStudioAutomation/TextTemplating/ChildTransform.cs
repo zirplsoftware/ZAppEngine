@@ -50,5 +50,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         {
             get { return this._host.HostTransform.FileManager; }
         }
+
+        public override IOutputInfoProvider OutputInfoProvider
+        {
+            get { return this._host.HostTransform.OutputInfoProvider; }
+            set { this._host.HostTransform.OutputInfoProvider = value; }
+        }
     }
 }

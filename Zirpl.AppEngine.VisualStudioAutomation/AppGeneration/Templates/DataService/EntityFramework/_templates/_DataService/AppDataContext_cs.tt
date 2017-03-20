@@ -4,8 +4,7 @@
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating" #>
 <#@ import namespace="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model" #>
 <#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model.App" name="App" #>
-<#@ parameter type="System.String" name="Namespace" #>
-<#@ parameter type="System.String" name="TypeName" #>
+<#@ parameter type="Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.OutputInfo" name="OutputInfo" #>
 using System;
 using System.Data.Entity;
 
@@ -43,3 +42,8 @@ namespace <#= this.Namespace #>
 #>
     }
 }
+
+<#+
+public string Namespace { get { return ((DotNetTypeOutputInfo)this.OutputInfo).Namespace; } }
+public string TypeName { get { return ((DotNetTypeOutputInfo)this.OutputInfo).TypeName; } }
+#>

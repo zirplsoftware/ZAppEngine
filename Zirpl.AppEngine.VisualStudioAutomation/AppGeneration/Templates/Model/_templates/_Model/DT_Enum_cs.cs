@@ -50,6 +50,8 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Templates.Model._
         }
 
 public bool ShouldTransform { get { return this.DomainType.IsStaticLookup && this.DomainType.EnumValues.Any(); } }
+public string Namespace { get { return ((DotNetTypeOutputInfo)this.OutputInfo).Namespace; } }
+public string TypeName { get { return ((DotNetTypeOutputInfo)this.OutputInfo).TypeName; } }
 
 
 private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model.App _AppField;
@@ -78,29 +80,16 @@ private global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model.Domai
     }
 }
 
-private string _NamespaceField;
+private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.OutputInfo _OutputInfoField;
 
 /// <summary>
-/// Access the Namespace parameter of the template.
+/// Access the OutputInfo parameter of the template.
 /// </summary>
-private string Namespace
+private global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.OutputInfo OutputInfo
 {
     get
     {
-        return this._NamespaceField;
-    }
-}
-
-private string _TypeNameField;
-
-/// <summary>
-/// Access the TypeName parameter of the template.
-/// </summary>
-private string TypeName
-{
-    get
-    {
-        return this._TypeNameField;
+        return this._OutputInfoField;
     }
 }
 
@@ -140,32 +129,18 @@ if ((DomainTypeValueAcquired == false))
         this._DomainTypeField = ((global::Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.Model.DomainType)(data));
     }
 }
-bool NamespaceValueAcquired = false;
-if (this.Session.ContainsKey("Namespace"))
+bool OutputInfoValueAcquired = false;
+if (this.Session.ContainsKey("OutputInfo"))
 {
-    this._NamespaceField = ((string)(this.Session["Namespace"]));
-    NamespaceValueAcquired = true;
+    this._OutputInfoField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.OutputInfo)(this.Session["OutputInfo"]));
+    OutputInfoValueAcquired = true;
 }
-if ((NamespaceValueAcquired == false))
+if ((OutputInfoValueAcquired == false))
 {
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Namespace");
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("OutputInfo");
     if ((data != null))
     {
-        this._NamespaceField = ((string)(data));
-    }
-}
-bool TypeNameValueAcquired = false;
-if (this.Session.ContainsKey("TypeName"))
-{
-    this._TypeNameField = ((string)(this.Session["TypeName"]));
-    TypeNameValueAcquired = true;
-}
-if ((TypeNameValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("TypeName");
-    if ((data != null))
-    {
-        this._TypeNameField = ((string)(data));
+        this._OutputInfoField = ((global::Zirpl.AppEngine.VisualStudioAutomation.TextTemplating.OutputInfo)(data));
     }
 }
 

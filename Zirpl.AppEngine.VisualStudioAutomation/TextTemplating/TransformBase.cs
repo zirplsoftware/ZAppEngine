@@ -26,6 +26,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 
         public abstract ITransformHost Host { get; }
         public abstract IOutputFileManager FileManager { get; }
+        public abstract IOutputInfoProvider OutputInfoProvider { get; set; }
 
         public ITransform GetChild(Object childTemplate)
         {
@@ -85,11 +86,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             return this._template.ToString();
         }
 
-        public void RunTemplates(ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplates(ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
-                RunTemplates(new TemplateRunner(), templateProvider, sessionParameters, outputInfoProvider);
+                RunTemplates(new TemplateRunner(), templateProvider, sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -97,11 +98,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplates(IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplates(IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
-                RunTemplate(new TemplateRunner(), templateTypes, sessionParameters, outputInfoProvider);
+                RunTemplate(new TemplateRunner(), templateTypes, sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -109,11 +110,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplate(Type templateType, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplate(Type templateType, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
-                RunTemplate(new TemplateRunner(), templateType, sessionParameters, outputInfoProvider);
+                RunTemplate(new TemplateRunner(), templateType, sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -121,11 +122,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplate<T>(IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplate<T>(IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
-                RunTemplate(new TemplateRunner(), typeof(T), sessionParameters, outputInfoProvider);
+                RunTemplate(new TemplateRunner(), typeof(T), sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -133,11 +134,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplates(IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplates(IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
-                RunTemplates(new TemplateRunner(), templates, sessionParameters, outputInfoProvider);
+                RunTemplates(new TemplateRunner(), templates, sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -145,11 +146,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplate(Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplate(Object template, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
-                RunTemplate(new TemplateRunner(), template, sessionParameters, outputInfoProvider);
+                RunTemplate(new TemplateRunner(), template, sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -157,7 +158,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplates(ITemplateRunner templateRunner, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplates(ITemplateRunner templateRunner, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
@@ -168,8 +169,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 RunTemplates(
                     templateRunner,
                     templateProvider.GetTemplateTypes(),
-                    sessionParameters,
-                    outputInfoProvider);
+                    sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -177,13 +177,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
                 foreach (var templateType in templateTypes)
                 {
-                    RunTemplate(templateRunner, templateType, sessionParameters, outputInfoProvider);
+                    RunTemplate(templateRunner, templateType, sessionParameters);
                 }
             })
             .GetRunner()
@@ -192,12 +192,12 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplate(ITemplateRunner templateRunner, Type templateType, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplate(ITemplateRunner templateRunner, Type templateType, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
                 var template = Activator.CreateInstance(templateType);
-                RunTemplate(templateRunner, template, sessionParameters, outputInfoProvider);
+                RunTemplate(templateRunner, template, sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -205,11 +205,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplate<T>(ITemplateRunner templateRunner, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplate<T>(ITemplateRunner templateRunner, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
-                RunTemplate(templateRunner, typeof(T), sessionParameters, outputInfoProvider);
+                RunTemplate(templateRunner, typeof(T), sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)
@@ -217,13 +217,13 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
                 foreach (var template in templates)
                 {
-                    RunTemplate(templateRunner, template, sessionParameters, outputInfoProvider);
+                    RunTemplate(templateRunner, template, sessionParameters);
                 }
             })
             .GetRunner()
@@ -232,11 +232,11 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             .Run();
         }
 
-        public void RunTemplate(ITemplateRunner templateRunner, Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null)
+        public void RunTemplate(ITemplateRunner templateRunner, Object template, IDictionary<string, object> sessionParameters = null)
         {
             new Action(() =>
             {
-                templateRunner.RunTemplate(this, template, sessionParameters, outputInfoProvider);
+                templateRunner.RunTemplate(this, template, sessionParameters);
             })
             .GetRunner()
             .OnError(HandleException)

@@ -18,7 +18,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
             this._app = app;
         }
 
-        public override void RunTemplate(ITransform transform, object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputFileProvider = null)
+        public override void RunTemplate(ITransform transform, object template, IDictionary<string, object> sessionParameters = null)
         {
             if (transform == null) throw new ArgumentNullException("transform");
             if (template == null) throw new ArgumentNullException("template");
@@ -42,7 +42,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                     }
                     session.Add("App", _app);
                     session.Add("DomainType", domainType);
-                    base.RunTemplate(transform, template, session, outputFileProvider);
+                    base.RunTemplate(transform, template, session);
                 }
             }
             else
@@ -61,7 +61,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
                     }
                 }
                 session.Add("App", _app);
-                base.RunTemplate(transform, template, session, outputFileProvider);
+                base.RunTemplate(transform, template, session);
             }
         }
 

@@ -157,14 +157,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="AppGeneration\TextTemplating\GeneratedTypeInfo.cs" />
+    <Compile Include="TextTemplating\OutputInfoProvider.cs" />
     <Compile Include="TextTemplating\TemplateProvider.cs" />
     <Compile Include="AppGeneration\TextTemplating\TemplateRunner.cs" />
     <Compile Include="AppGeneration\TextTemplating\OutputInfoProvider.cs" />
     <Compile Include="AppGeneration\TemplateExporter.cs" />
     <Compile Include="AppGeneration\SolutionBuilder.cs" />
     <Compile Include="AppGeneration\TextTemplating\TransformExtensions.cs" />
-    <Compile Include="TextTemplating\IGeneratedTypeInfo.cs" />
+    <Compile Include="TextTemplating\DotNetTypeOutputInfo.cs" />
     <Compile Include="TextTemplating\ITransformHost.cs" />
     <Compile Include="TextTemplating\MasterTransform.cs" />
     <Compile Include="TextTemplating\TemplateRunner.cs" />

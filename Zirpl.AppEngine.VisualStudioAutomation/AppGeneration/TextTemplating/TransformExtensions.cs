@@ -9,17 +9,17 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating
 {
     public static class TransformExtensions
     {
-        public static IGeneratedTypeInfo GetGeneratedTypeInfo(this ITransform transform, Type templateType)
+        public static OutputInfo GetGeneratedTypeInfo(this ITransform transform, Type templateType)
         {
-            var template = transform.Host.HostTransform.GetChild(Activator.CreateInstance(templateType));
+            var childTransform = transform.Host.HostTransform.GetChild(Activator.CreateInstance(templateType));
             foreach (var pair in transform.Session)
             {
-                template.Session[pair.Key] = pair.Value;
+                childTransform.Session[pair.Key] = pair.Value;
             }
-            template.Initialize();
-            return new GeneratedTypeInfo(template);
+            childTransform.Initialize();
+            return transform.OutputInfoProvider.GetOutputInfo(childTransform);
         }
-        public static IGeneratedTypeInfo GetGeneratedTypeInfo<T>(this ITransform transform) where T : class
+        public static OutputInfo GetGeneratedTypeInfo<T>(this ITransform transform) where T : class
         {
             return transform.GetGeneratedTypeInfo(typeof(T));
         }

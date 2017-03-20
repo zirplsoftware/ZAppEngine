@@ -7,6 +7,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
     public interface ITransform
     {
         IOutputFileManager FileManager { get; }
+        IOutputInfoProvider OutputInfoProvider { get; set; }
         ITransform GetChild(Object childTemplate);
         ITransformHost Host { get; }
         Object Template { get; }
@@ -15,19 +16,19 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
         void Initialize();
         String TransformText();
 
-        void RunTemplate(Type templateType, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplate(Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplate<T>(IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplate(ITemplateRunner templateRunner, Type templateType, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplate(ITemplateRunner templateRunner, Object template, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplate<T>(ITemplateRunner templateRunner, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
+        void RunTemplate(Type templateType, IDictionary<string, object> sessionParameters = null);
+        void RunTemplate(Object template, IDictionary<string, object> sessionParameters = null);
+        void RunTemplate<T>(IDictionary<string, object> sessionParameters = null);
+        void RunTemplate(ITemplateRunner templateRunner, Type templateType, IDictionary<string, object> sessionParameters = null);
+        void RunTemplate(ITemplateRunner templateRunner, Object template, IDictionary<string, object> sessionParameters = null);
+        void RunTemplate<T>(ITemplateRunner templateRunner, IDictionary<string, object> sessionParameters = null);
 
-        void RunTemplates(ITemplateRunner templateRunner, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplates(ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplates(IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
-        void RunTemplates(IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null, IOutputInfoProvider outputInfoProvider = null);
+        void RunTemplates(ITemplateRunner templateRunner, ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null);
+        void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null);
+        void RunTemplates(ITemplateRunner templateRunner, IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null);
+        void RunTemplates(ITemplateProvider templateProvider, IDictionary<string, object> sessionParameters = null);
+        void RunTemplates(IEnumerable<Type> templateTypes, IDictionary<string, object> sessionParameters = null);
+        void RunTemplates(IEnumerable<Object> templates, IDictionary<string, object> sessionParameters = null);
 
         #region items that are auto-generated that we might need later
 
