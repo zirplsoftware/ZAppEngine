@@ -389,23 +389,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.3.0\lib\portable-windows8+net40+wp8+wpa81+sl5+MonoAndroid+MonoTouch\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentValidation">
-      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\portable-win+net40+sl50+wp80+wpa81\FluentValidation.dll</HintPath>
-    </Reference>
-    <Reference Include="Zirpl.Logging.Portable">
-      <HintPath>..\packages\Zirpl.Logging.2.1.4\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Zirpl.Common.Portable\Zirpl.Common.Portable.csproj">
       <Project>{4f22a0b5-2fa7-42d2-b317-16ebf34782bd}</Project>
       <Name>Zirpl.Common.Portable</Name>
@@ -417,10 +400,31 @@
   <ItemGroup>
     <Folder Include="AppGeneration\" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=3.3.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\portable-windows8+net40+wp8+wpa81+sl5+MonoAndroid+MonoTouch\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\portable-win+net40+sl50+wp80+wpa81\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Zirpl.Logging.Portable, Version=2.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zirpl.Logging.2.1.4\lib\portable-windows8+net40+wp8+sl5+wpa81\Zirpl.Logging.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" />
+      <UserProperties ProjectLinkReference="dd9bcb12-748c-4395-9a8e-a599a60a0caa" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
