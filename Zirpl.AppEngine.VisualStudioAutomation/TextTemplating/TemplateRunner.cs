@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Zirpl.AppEngine.VisualStudioAutomation.AppGeneration.TextTemplating;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 using Zirpl.FluentReflection;
@@ -20,24 +21,27 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
                 {
                     var session = childTransform.Session;
                     //session.Clear();
-                    foreach (var pair in sessionParameters)
+                    foreach (var pair in sessionParameters.Where(o => !o.Key.Equals("OutputInfo")))
                     {
                         session[pair.Key] = pair.Value;
                     }
                 }
                 childTransform.Initialize();
-                this.GetLog().Trace("Pre-ShouldTransform check");
                 if (!template.Property<bool>("ShouldTransform").Exists
                     || template.Property<bool>("ShouldTransform").Value)
                 {
                     OutputInfo outputFile = null;
-                    if (template.Property<OutputInfo>("OutputInfo").Exists)
-                    {
-                        outputFile = template.Property<OutputInfo>("OutputInfo").Value;
-                    }
+                    //if (template.Property<OutputInfo>("OutputInfo").Exists)
+                    //{
+                    //    outputFile = template.Property<OutputInfo>("OutputInfo").Value;
+                    //}
                     if (outputFile == null)
                     {
                         outputFile = transform.OutputInfoProvider.GetOutputInfo(childTransform);
+                    }
+                    else
+                    {
+                        this.GetLog().Trace("Using existing output file");
                     }
                     childTransform.Session["OutputInfo"] = outputFile;
                     childTransform.Initialize();

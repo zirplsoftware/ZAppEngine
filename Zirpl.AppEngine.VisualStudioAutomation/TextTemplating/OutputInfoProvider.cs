@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Zirpl.AppEngine.VisualStudioAutomation.Utilities;
 using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio;
+using Zirpl.AppEngine.VisualStudioAutomation.VisualStudio.Logging;
 
 namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
 {
@@ -37,7 +38,7 @@ namespace Zirpl.AppEngine.VisualStudioAutomation.TextTemplating
             var project = transform.GetDTE()
                     .GetAllProjects()
                     .SingleOrDefault(
-                        o => o.FullName.EndsWith(outputInfo.DestinationProjectFullName + ".csproj", StringComparison.InvariantCultureIgnoreCase));
+                        o => o.FullName.Equals(outputInfo.DestinationProjectFullName, StringComparison.InvariantCultureIgnoreCase));
             var namespaceBuilder = new StringBuilder();
             if (project != null)
             {
